@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, #1b3a2b, #0a1a10 70%);
+  font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+  color: #f0f0f0;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.score-box {
+  background: rgba(0,0,0,0.35);
+  padding: 6px 18px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-label.blue { color: #4da6ff; }
+.team-label.red { color: #ff5c5c; }
+.dash { opacity: 0.6; }
+
+#timer {
+  background: rgba(0,0,0,0.35);
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+#field-wrap {
+  position: relative;
+  line-height: 0;
+}
+
+canvas {
+  background: #2e7d32;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 0 0 4px #ffffffaa;
+  touch-action: none;
+}
+
+#controls {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.75;
+  text-align: center;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 900px;
+  height: 560px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+#overlay.hidden {
+  display: none;
+}
+
+#overlay:not(.hidden) {
+  pointer-events: auto;
+}
+
+#overlay-text {
+  font-size: 36px;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+#restartBtn {
+  padding: 10px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4da6ff;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#restartBtn:hover {
+  background: #2f8ce0;
+}

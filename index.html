@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미니 축구 게임</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <h1>⚽ 미니 축구</h1>
+    <div id="hud">
+      <div class="score-box">
+        <span class="team-label blue">나</span>
+        <span id="scoreBlue">0</span>
+        <span class="dash">:</span>
+        <span id="scoreRed">0</span>
+        <span class="team-label red">CPU</span>
+      </div>
+      <div id="timer">02:00</div>
+    </div>
+    <div id="field-wrap">
+      <canvas id="field" width="900" height="560"></canvas>
+      <div id="overlay" class="hidden">
+        <div id="overlay-text"></div>
+        <button id="restartBtn">다시 시작</button>
+      </div>
+    </div>
+    <div id="controls">
+      방향키/WASD: 이동 &nbsp;|&nbsp; Space: 슛/패스(가까이 있을 때 자동 드리블) &nbsp;|&nbsp; P: 일시정지
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
