@@ -25,9 +25,22 @@
         <div id="overlay-text"></div>
         <button id="restartBtn">다시 시작</button>
       </div>
+      <div id="touch-controls">
+        <div id="dpad">
+          <button class="dpad-btn" id="btn-up" data-key="arrowup">▲</button>
+          <button class="dpad-btn" id="btn-left" data-key="arrowleft">◀</button>
+          <button class="dpad-btn" id="btn-right" data-key="arrowright">▶</button>
+          <button class="dpad-btn" id="btn-down" data-key="arrowdown">▼</button>
+        </div>
+        <div id="action-buttons">
+          <button class="action-btn" id="btn-sprint">스프린트</button>
+          <button class="action-btn shoot" id="btn-shoot">슛</button>
+        </div>
+      </div>
     </div>
     <div id="controls">
-      방향키/WASD: 이동 &nbsp;|&nbsp; Space: 슛/패스(가까이 있을 때 자동 드리블) &nbsp;|&nbsp; P: 일시정지
+      방향키/WASD: 이동 &nbsp;|&nbsp; Shift: 스프린트 &nbsp;|&nbsp; Space: 누르고 있다가 떼면 슛(길게 누를수록 강함, 공 없을 땐 근접 태클) &nbsp;|&nbsp; P: 일시정지<br>
+      <span class="mobile-hint">모바일: 왼쪽 방향 버튼으로 이동, 오른쪽 버튼으로 스프린트/슛</span>
     </div>
   </div>
   <script src="game.js"></script>

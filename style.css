@@ -59,9 +59,14 @@ h1 {
 #field-wrap {
   position: relative;
   line-height: 0;
+  width: 100%;
+  max-width: 900px;
 }
 
 canvas {
+  display: block;
+  width: 100%;
+  height: auto;
   background: #2e7d32;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 0 0 4px #ffffffaa;
@@ -75,6 +80,10 @@ canvas {
   text-align: center;
 }
 
+.mobile-hint {
+  display: none;
+}
+
 #overlay {
   position: absolute;
   top: 0;
@@ -84,8 +93,8 @@ canvas {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  width: 900px;
-  height: 560px;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.6);
   border-radius: 12px;
   pointer-events: none;
@@ -118,4 +127,83 @@ canvas {
 
 #restartBtn:hover {
   background: #2f8ce0;
+}
+
+#touch-controls {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+body.touch-enabled #touch-controls {
+  display: flex;
+}
+
+body.touch-enabled .mobile-hint {
+  display: inline;
+}
+
+#dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(2, 48px);
+  gap: 4px;
+  pointer-events: auto;
+}
+
+#btn-up { grid-column: 2; grid-row: 1; }
+#btn-left { grid-column: 1; grid-row: 2; }
+#btn-right { grid-column: 3; grid-row: 2; }
+#btn-down { grid-column: 2; grid-row: 2; }
+
+.dpad-btn, .action-btn {
+  border: none;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.45);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.dpad-btn {
+  width: 48px;
+  height: 48px;
+}
+
+.dpad-btn:active, .action-btn:active {
+  background: rgba(77,166,255,0.6);
+}
+
+#action-buttons {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.action-btn {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.action-btn.shoot {
+  width: 78px;
+  height: 78px;
+  background: rgba(255,77,77,0.55);
+  font-size: 18px;
+}
+
+.action-btn.shoot:active {
+  background: rgba(255,77,77,0.85);
 }
