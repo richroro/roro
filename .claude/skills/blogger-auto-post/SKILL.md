@@ -57,14 +57,31 @@ Claude 없이 예약작업이 도는 경로다. `scripts/daily_post.py` 가 "오
 
 1. **queue/ 폴더** — 미리 만들어 둔 글. 각 파일은
    `{"title": "...", "html": "...", "labels": ["..."]}` 형식의 `*.json`.
-   가장 오래된 파일부터 발행하고, 발행 후 `queue/posted/` 로 옮긴다.
-   → 사용자가 "이번 주 글 5개 미리 만들어놔줘" 라고 하면, Claude가 글들을 이
-   형식으로 `queue/` 에 저장해두면 된다. (가장 안정적이고 편집권도 유지됨)
+   가장 오래된 파일부터(FIFO) 발행하고, 발행 후 `queue/posted/` 로 옮긴다.
+   **API 키가 없어도 되는 기본 방식이다.**
 2. **topics.txt + Anthropic API** — queue가 비어 있고 `ANTHROPIC_API_KEY` 가
    설정돼 있으면, `topics.txt` 의 다음 주제로 `generate.py` 가 글을 자동 생성한다.
    `topics.example.txt` 를 `topics.txt` 로 복사해 주제를 채운다.
 
 성공/실패 모두 Slack DM으로 알린다(무인 실행이 조용히 깨지지 않게).
+큐 잔량이 적어지면(기본 2편 이하) "글 더 만들어달라"는 리필 알림도 Slack으로 보낸다.
+
+### 큐 채우기 (Claude가 리필하는 법)
+사용자가 "블로그 글 며칠치 만들어서 큐에 넣어줘" 라고 하면, 글마다 HTML 본문을
+파일로 쓴 뒤 `add_to_queue.py` 로 넣는다:
+```bash
+python .claude/skills/blogger-auto-post/scripts/add_to_queue.py \
+  --title "제목" --body-file "/경로/post.html" --labels "재테크,부업"
+```
+여러 편을 넣을 때는 위를 반복하면 되고, 파일명은 `queue/NNNN.json` 으로 자동
+번호가 매겨져 순서대로 발행된다. 주제는 `topics.example.txt` 의 풀을 참고한다.
+
+### 발행 전 미리보기 (dry-run)
+실제로 올리기 전에 다음에 나갈 글을 확인하려면:
+```bash
+python .claude/skills/blogger-auto-post/scripts/daily_post.py --dry-run
+```
+발행하지 않고 제목·라벨·본문 길이·큐 잔량만 보여준다.
 
 스케줄 등록 (PowerShell):
 ```powershell
@@ -84,8 +101,9 @@ Start-ScheduledTask -TaskName RichgogoBloggerDaily
 - `scripts/common.py` — 인증·Blogger 서비스·Slack 알림 공용 로직
 - `scripts/auth.py` — 최초 1회 OAuth 로그인 + 블로그 선택
 - `scripts/publish.py` — 글 하나 발행 + Slack 알림 (Claude가 대화 중 호출)
+- `scripts/add_to_queue.py` — 미리 쓴 글을 발행 큐에 넣기 (큐 리필용)
 - `scripts/generate.py` — 주제→글 자동 생성 (무인 스케줄 전용, API 키 필요)
-- `scripts/daily_post.py` — 무인 일일 발행 오케스트레이션
+- `scripts/daily_post.py` — 무인 일일 발행 오케스트레이션 (`--dry-run` 지원)
 - `scripts/install_daily_task.ps1` / `daily_post.bat` — Windows 예약작업
 - `references/google_setup.md` — 구글 클라우드/OAuth 최초 설정 가이드
 - `secrets/` — client_secret.json·token.json·config.json (git 제외)
