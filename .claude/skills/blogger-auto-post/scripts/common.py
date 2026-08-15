@@ -119,12 +119,29 @@ def _read_slack_env():
     return token, user
 
 
+def _resolve_slack_channel(env_user):
+    """DM target resolution: config.json's slack_user_id wins (kept in the
+    gitignored secrets/), then a valid-looking .env value. The .env in this
+    repo ships a placeholder (U0XXXXXXX), so config is the reliable source."""
+    cfg_user = load_config().get("slack_user_id")
+    if cfg_user:
+        return cfg_user
+    if env_user and env_user.startswith("U") and "X" not in env_user:
+        return env_user
+    return None
+
+
 def slack_notify(text):
     """Best-effort DM to the workspace owner. Never raises — a failed
     notification must not crash a successful publish."""
-    token, user = _read_slack_env()
+    token, env_user = _read_slack_env()
+    user = _resolve_slack_channel(env_user)
     if not token or not user:
-        print(f"[slack] 건너뜀 (토큰/사용자ID 없음): {SLACK_ENV_PATH}", file=sys.stderr)
+        print(
+            f"[slack] 건너뜀 (토큰 없음 또는 대상 미설정). "
+            f"secrets/config.json 의 slack_user_id 를 확인하세요.",
+            file=sys.stderr,
+        )
         return False
     payload = json.dumps({"channel": user, "text": text}).encode("utf-8")
     req = urllib.request.Request(
