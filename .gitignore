@@ -13,3 +13,19 @@ shorts_output/
 .claude/skills/blogger-auto-post/queue/
 .claude/skills/blogger-auto-post/scripts/daily_post.log
 .claude/skills/blogger-auto-post/scripts/__pycache__/
+
+# threads-auto-post: keep secrets and runtime artifacts out of git
+.claude/skills/threads-auto-post/secrets/
+.claude/skills/threads-auto-post/topics.txt
+.claude/skills/threads-auto-post/queue/
+!.claude/skills/threads-auto-post/queue/.gitkeep
+.claude/skills/threads-auto-post/scripts/daily_post.log
+.claude/skills/threads-auto-post/scripts/__pycache__/
+
+# General runtime artifacts (logs, caches, probe captures)
+__pycache__/
+*.pyc
+*.log
+*_stderr.log
+*_stdout.log
+probe_*.png

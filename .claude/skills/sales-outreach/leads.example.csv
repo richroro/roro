@@ -1,0 +1,4 @@
+name,email,company,niche,source,hook,status,added_at,contacted_at
+김가죽,hello@leathershop.example,수제가죽공방 로우,수제 가죽공방,인스타 프로필 링크,예약을 인스타 DM으로만 받고 있어 자동 예약·리마인드가 잘 맞음,new,2026-08-15 10:00:00,
+박컨설,contact@bizadvisor.example,박컨설팅,1인 경영 컨설턴트,블로그 문의란,견적서를 매번 수기로 만들고 있어 템플릿 자동화가 효과 큼,new,2026-08-15 10:05:00,
+이스토어,cs@mysmartstore.example,데일리샵,스마트스토어 잡화,스토어 소개 페이지,3개 채널 주문을 손으로 취합 중이라 자동 집계가 시급,new,2026-08-15 10:10:00,

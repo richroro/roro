@@ -37,12 +37,22 @@
   const DRIBBLE_RANGE = PLAYER_RADIUS + BALL_RADIUS + 12;
   const DRIBBLE_STRENGTH = 0.03;
   const TACKLE_RANGE = PLAYER_RADIUS + BALL_RADIUS + 16;
-  const CPU_KICK_COOLDOWN = 550;
+
+  const PASS_MIN_POWER = 7;
+  const PASS_MAX_POWER = 13;
+  const SHOOT_RANGE = 360;
 
   const GK_BASE_X_BLUE = 34;
   const GK_BASE_X_RED = W - 34;
   const GK_SPEED = 3.1;
-  const GK_STEP_OUT = 26;
+
+  const DIFFICULTY_PRESETS = {
+    easy: { cpuSpeedMult: 0.78, tackleSuccess: 0.72, kickCooldown: 750, gkStepOut: 16, shotPowerMult: 0.8 },
+    normal: { cpuSpeedMult: 0.92, tackleSuccess: 0.55, kickCooldown: 550, gkStepOut: 26, shotPowerMult: 1.0 },
+    hard: { cpuSpeedMult: 1.08, tackleSuccess: 0.35, kickCooldown: 380, gkStepOut: 34, shotPowerMult: 1.15 },
+  };
+  let difficulty = 'normal';
+  let cfg = DIFFICULTY_PRESETS[difficulty];
 
   let keys = {};
   let paused = false;
@@ -50,8 +60,8 @@
   let timeLeft = MATCH_SECONDS;
   let lastTick = performance.now();
 
-  // phase: 'countdown' | 'playing' | 'celebrate' | 'ended'
-  let phase = 'countdown';
+  // phase: 'menu' | 'countdown' | 'playing' | 'celebrate' | 'ended'
+  let phase = 'menu';
   let countdownMs = 0;
   let celebrateMs = 0;
   let celebrateScorer = null;
@@ -118,9 +128,11 @@
 
   function resetPositions() {
     state = {
-      player: makeOutfield(W * 0.30, H / 2, 'blue'),
+      player: makeOutfield(W * 0.30, H / 2 - 60, 'blue'),
+      teammate: makeOutfield(W * 0.24, H / 2 + 90, 'blue'),
       teammateGK: makeGK(GK_BASE_X_BLUE, H / 2, 'blue'),
-      cpu: makeOutfield(W * 0.68, H / 2, 'red'),
+      cpu: makeOutfield(W * 0.68, H / 2 + 60, 'red'),
+      cpuMate: makeOutfield(W * 0.74, H / 2 - 90, 'red'),
       cpuGK: makeGK(GK_BASE_X_RED, H / 2, 'red'),
       ball: { x: W / 2, y: H / 2, vx: 0, vy: 0, spin: 0 },
       scoreBlue: state ? state.scoreBlue : 0,
@@ -131,6 +143,11 @@
   function startCountdown() {
     phase = 'countdown';
     countdownMs = 3000;
+  }
+
+  function showDifficultyMenu() {
+    phase = 'menu';
+    document.getElementById('difficulty-menu').classList.remove('hidden');
   }
 
   function fullReset() {
@@ -166,9 +183,12 @@
     if (!keys[k] && k === ' ') {
       onSpaceDown();
     }
+    if (!keys[k] && k === 'e') {
+      onPassKey();
+    }
     keys[k] = true;
     if (e.key === ' ') e.preventDefault();
-    if (k === 'p' && !gameOver) {
+    if (k === 'p' && !gameOver && phase !== 'menu') {
       paused = !paused;
       if (paused) {
         showOverlay('일시정지');
@@ -185,6 +205,16 @@
   });
 
   restartBtn.addEventListener('click', fullReset);
+
+  document.querySelectorAll('.diff-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      ensureAudio();
+      difficulty = btn.dataset.difficulty;
+      cfg = DIFFICULTY_PRESETS[difficulty];
+      document.getElementById('difficulty-menu').classList.add('hidden');
+      fullReset();
+    });
+  });
 
   // ---------- touch controls ----------
   const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
@@ -220,6 +250,13 @@
     sprintBtn.addEventListener('pointerup', releaseSprint);
     sprintBtn.addEventListener('pointercancel', releaseSprint);
     sprintBtn.addEventListener('pointerleave', releaseSprint);
+
+    const passBtn = document.getElementById('btn-pass');
+    passBtn.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      ensureAudio();
+      onPassKey();
+    });
 
     const shootBtn = document.getElementById('btn-shoot');
     shootBtn.addEventListener('pointerdown', (e) => {
@@ -261,12 +298,15 @@
         playKick(power);
       }
     } else {
-      // not in possession: attempt a tackle if close to the ball while CPU also nearby
+      // not in possession: attempt a tackle if close to the ball while an opponent also nearby
       const d = Math.hypot(ball.x - p.x, ball.y - p.y);
       const cpuD = Math.hypot(ball.x - state.cpu.x, ball.y - state.cpu.y);
-      if (d < TACKLE_RANGE && cpuD < DRIBBLE_RANGE + 10) {
-        if (Math.random() < 0.55) {
-          const away = Math.atan2(ball.y - state.cpu.y, ball.x - state.cpu.x);
+      const cpuMateD = Math.hypot(ball.x - state.cpuMate.x, ball.y - state.cpuMate.y);
+      const opp = cpuD <= cpuMateD ? state.cpu : state.cpuMate;
+      const oppD = Math.min(cpuD, cpuMateD);
+      if (d < TACKLE_RANGE && oppD < DRIBBLE_RANGE + 10) {
+        if (Math.random() < cfg.tackleSuccess) {
+          const away = Math.atan2(ball.y - opp.y, ball.x - opp.x);
           ball.vx += Math.cos(away) * 4.5;
           ball.vy += Math.sin(away) * 4.5;
         }
@@ -275,16 +315,37 @@
     }
   }
 
+  function onPassKey() {
+    if (gameOver || paused || phase !== 'playing') return;
+    const p = state.player;
+    const mate = state.teammate;
+    const ball = state.ball;
+    const d = Math.hypot(ball.x - p.x, ball.y - p.y);
+    if (d < DRIBBLE_RANGE + 6) {
+      const vx = mate.x - p.x;
+      const vy = mate.y - p.y;
+      const l = Math.hypot(vx, vy) || 1;
+      const power = clamp(l * 0.045, PASS_MIN_POWER, PASS_MAX_POWER);
+      ball.vx = (vx / l) * power;
+      ball.vy = (vy / l) * power;
+      playKick(power * 0.7);
+    }
+  }
+
+  function clampToField(obj, radius) {
+    const inGoalMouthY = obj.y > GOAL_TOP + 6 && obj.y < GOAL_BOTTOM - 6;
+    if (!inGoalMouthY) {
+      obj.x = clamp(obj.x, radius, W - radius);
+    } else {
+      obj.x = clamp(obj.x, -GOAL_DEPTH + radius, W + GOAL_DEPTH - radius);
+    }
+    obj.y = clamp(obj.y, radius, H - radius);
+  }
+
   function moveEntityWithBall(entity) {
     entity.x += entity.vx;
     entity.y += entity.vy;
-    const inGoalMouthY = entity.y > GOAL_TOP + 6 && entity.y < GOAL_BOTTOM - 6;
-    if (!inGoalMouthY) {
-      entity.x = clamp(entity.x, entity.radius, W - entity.radius);
-    } else {
-      entity.x = clamp(entity.x, -GOAL_DEPTH + entity.radius, W + GOAL_DEPTH - entity.radius);
-    }
-    entity.y = clamp(entity.y, entity.radius, H - entity.radius);
+    clampToField(entity, entity.radius);
   }
 
   function updateFacing(entity) {
@@ -336,41 +397,87 @@
     }
   }
 
-  function updateCPU(now) {
-    const cpu = state.cpu;
+  function attackGoalX(side) {
+    return side === 'blue' ? W + 30 : -30;
+  }
+
+  function isMateBetterPlaced(entity, mate, side) {
+    const goalX = attackGoalX(side);
+    const entityDist = Math.abs(goalX - entity.x);
+    const mateDist = Math.abs(goalX - mate.x);
+    return mateDist < entityDist - 40;
+  }
+
+  // Drives one AI-controlled outfield player. `mate` is its teammate (may be
+  // the human player, e.g. when the blue teammate is deciding whether to
+  // chase or support). Whichever of the pair is closer to the ball chases it
+  // and looks to shoot or pass; the other holds a supporting position.
+  function updateAttackerAI(entity, mate, side, now) {
     const ball = state.ball;
+    const distSelf = Math.hypot(ball.x - entity.x, ball.y - entity.y);
+    const distMate = Math.hypot(ball.x - mate.x, ball.y - mate.y);
+    const isChaser = distSelf <= distMate;
+    const anchorX = side === 'blue' ? W * 0.32 : W * 0.68;
 
-    const toBallX = ball.x - cpu.x;
-    const toBallY = ball.y - cpu.y;
-    const dist = Math.hypot(toBallX, toBallY) || 1;
+    if (isChaser) {
+      let targetX = ball.x;
+      let targetY = ball.y;
+      if (distSelf > 260) {
+        targetX = ball.x + (anchorX - ball.x) * 0.3;
+      }
+      const dx = targetX - entity.x;
+      const dy = targetY - entity.y;
+      const len = Math.hypot(dx, dy) || 1;
+      entity.vx = (dx / len) * PLAYER_SPEED * cfg.cpuSpeedMult;
+      entity.vy = (dy / len) * PLAYER_SPEED * cfg.cpuSpeedMult;
+      updateFacing(entity);
 
-    let targetX = ball.x;
-    let targetY = ball.y;
-    if (dist > 260) {
-      targetX = ball.x + (W * 0.68 - ball.x) * 0.3;
-      targetY = ball.y;
-    }
+      if (distSelf < DRIBBLE_RANGE && now > entity.kickCooldownUntil) {
+        entity.kickCooldownUntil = now + cfg.kickCooldown;
+        const goalX = attackGoalX(side);
+        const distToGoal = Math.abs(goalX - entity.x);
+        const oppGK = side === 'blue' ? state.cpuGK : state.teammateGK;
+        const matePosBetter = isMateBetterPlaced(entity, mate, side);
 
-    const dx = targetX - cpu.x;
-    const dy = targetY - cpu.y;
-    const len = Math.hypot(dx, dy) || 1;
-    cpu.vx = (dx / len) * PLAYER_SPEED * 0.9;
-    cpu.vy = (dy / len) * PLAYER_SPEED * 0.9;
-    updateFacing(cpu);
-
-    if (dist < DRIBBLE_RANGE && now > cpu.kickCooldownUntil) {
-      cpu.kickCooldownUntil = now + CPU_KICK_COOLDOWN;
-      // aim for the post farther from the blue keeper's current position
-      const gkY = state.teammateGK.y;
-      const targetGoalY = gkY > H / 2 ? GOAL_TOP + 22 : GOAL_BOTTOM - 22;
-      const targetGoalX = -30;
-      const vx = targetGoalX - cpu.x;
-      const vy = targetGoalY - cpu.y;
-      const l = Math.hypot(vx, vy) || 1;
-      const power = SHOT_MIN_POWER + Math.random() * (SHOT_MAX_POWER - SHOT_MIN_POWER) * 0.75;
-      ball.vx = (vx / l) * power;
-      ball.vy = (vy / l) * power;
-      playKick(power);
+        if (distToGoal < SHOOT_RANGE && (!matePosBetter || Math.random() < 0.5)) {
+          const gkY = oppGK.y;
+          const targetGoalY = gkY > H / 2 ? GOAL_TOP + 22 : GOAL_BOTTOM - 22;
+          const vx = goalX - entity.x;
+          const vy = targetGoalY - entity.y;
+          const l = Math.hypot(vx, vy) || 1;
+          const power = (SHOT_MIN_POWER + Math.random() * (SHOT_MAX_POWER - SHOT_MIN_POWER) * 0.75) * cfg.shotPowerMult;
+          ball.vx = (vx / l) * power;
+          ball.vy = (vy / l) * power;
+          playKick(power);
+        } else if (matePosBetter) {
+          const vx = mate.x - entity.x;
+          const vy = mate.y - entity.y;
+          const l = Math.hypot(vx, vy) || 1;
+          const power = clamp(l * 0.045, PASS_MIN_POWER, PASS_MAX_POWER);
+          ball.vx = (vx / l) * power;
+          ball.vy = (vy / l) * power;
+          playKick(power * 0.7);
+        }
+      }
+    } else {
+      const teamNearBall = Math.min(distSelf, distMate) < 300;
+      const supportSide = ball.y < H / 2 ? 1 : -1;
+      let targetX, targetY;
+      if (teamNearBall) {
+        targetX = mate.x + (side === 'blue' ? 70 : -70);
+        targetY = clamp(H / 2 + supportSide * H * 0.22, 60, H - 60);
+      } else {
+        targetX = side === 'blue'
+          ? clamp(ball.x - 150, 70, W * 0.45)
+          : clamp(ball.x + 150, W * 0.55, W - 70);
+        targetY = clamp(ball.y, 80, H - 80);
+      }
+      const dx = targetX - entity.x;
+      const dy = targetY - entity.y;
+      const len = Math.hypot(dx, dy) || 1;
+      entity.vx = (dx / len) * PLAYER_SPEED * cfg.cpuSpeedMult * 0.85;
+      entity.vy = (dy / len) * PLAYER_SPEED * cfg.cpuSpeedMult * 0.85;
+      updateFacing(entity);
     }
   }
 
@@ -382,7 +489,7 @@
     const ballIsClose = isLeftSide ? ball.x < 190 : ball.x > W - 190;
     let targetX = baseX;
     if (ballIsClose) {
-      const offset = clamp((isLeftSide ? ball.x - baseX : baseX - ball.x), 0, GK_STEP_OUT);
+      const offset = clamp((isLeftSide ? ball.x - baseX : baseX - ball.x), 0, cfg.gkStepOut);
       targetX = isLeftSide ? baseX + offset : baseX - offset;
     }
 
@@ -405,6 +512,8 @@
       a.y -= ny * overlap;
       b.x += nx * overlap;
       b.y += ny * overlap;
+      clampToField(a, a.radius);
+      clampToField(b, b.radius);
     }
   }
 
@@ -419,6 +528,7 @@
       const ny = dy / dist;
       ball.x = entity.x + nx * minDist;
       ball.y = entity.y + ny * minDist;
+      clampToField(ball, BALL_RADIUS);
       const speed = Math.hypot(entity.vx, entity.vy);
       ball.vx = nx * (2 + speed * 0.6) + entity.vx * 0.3;
       ball.vy = ny * (2 + speed * 0.6) + entity.vy * 0.3;
@@ -678,7 +788,9 @@
     drawField();
     drawGK(state.teammateGK, '#2f6fd1');
     drawGK(state.cpuGK, '#d13f3f');
+    drawOutfield(state.cpuMate, '#ff9a80');
     drawOutfield(state.cpu, '#ff5c5c');
+    drawOutfield(state.teammate, '#8ecbff');
     drawOutfield(state.player, '#4da6ff');
     drawStaminaBar();
     drawBall();
@@ -713,24 +825,35 @@
       } else if (phase === 'playing') {
         const nowMs = performance.now();
         handlePlayerInput(dt);
-        updateCPU(nowMs);
+        updateAttackerAI(state.teammate, state.player, 'blue', nowMs);
+        updateAttackerAI(state.cpu, state.cpuMate, 'red', nowMs);
+        updateAttackerAI(state.cpuMate, state.cpu, 'red', nowMs);
         updateGoalkeeper(state.teammateGK, true);
         updateGoalkeeper(state.cpuGK, false);
 
         moveEntityWithBall(state.player);
+        moveEntityWithBall(state.teammate);
         moveEntityWithBall(state.cpu);
+        moveEntityWithBall(state.cpuMate);
         moveEntityWithBall(state.teammateGK);
         moveEntityWithBall(state.cpuGK);
 
         resolveEntityCollision(state.player, state.cpu);
+        resolveEntityCollision(state.player, state.cpuMate);
+        resolveEntityCollision(state.teammate, state.cpu);
+        resolveEntityCollision(state.teammate, state.cpuMate);
 
         resolveBallCollision(state.player);
+        resolveBallCollision(state.teammate);
         resolveBallCollision(state.cpu);
+        resolveBallCollision(state.cpuMate);
         resolveBallCollision(state.teammateGK);
         resolveBallCollision(state.cpuGK);
 
         applyDribblePull(state.player);
+        applyDribblePull(state.teammate);
         applyDribblePull(state.cpu);
+        applyDribblePull(state.cpuMate);
 
         updateBall(dt);
 
@@ -748,6 +871,9 @@
     requestAnimationFrame(tick);
   }
 
-  fullReset();
+  resetPositions();
+  updateScoreHUD();
+  timerEl.textContent = formatTime(timeLeft);
+  showDifficultyMenu();
   requestAnimationFrame(tick);
 })();
