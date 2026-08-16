@@ -292,6 +292,7 @@
 
     <div class="formbox">
       <form id="quoteForm">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="fg">
           <div>
             <label for="name">이름 / 회사명 *</label>
@@ -327,9 +328,15 @@
             <textarea id="detail" name="detail" required placeholder="예) 매일 오전 경쟁사 3곳의 상품 가격을 확인해 엑셀로 정리하고, 변동이 있으면 슬랙으로 알려주세요."></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-red">무료 진단 신청하기 →</button>
+        <button type="submit" id="submitBtn" class="btn btn-red">무료 진단 신청하기 →</button>
+        <p id="formMsg" style="display:none;text-align:center;margin-top:14px;font-weight:700"></p>
       </form>
-      <p class="contactline">버튼을 누르면 작성 내용이 담긴 메일 창이 열립니다 · 문의 📧 <b>from0731@naver.com</b></p>
+      <div id="formDone" style="display:none;text-align:center;padding:14px 4px">
+        <div style="font-size:44px">✅</div>
+        <h3 style="font-size:22px;font-weight:900;margin:10px 0 6px">접수 완료됐습니다!</h3>
+        <p style="color:var(--sub);font-weight:500">보내주신 내용을 확인하고 <b style="color:var(--ink)">24시간 이내</b>에 회신드리겠습니다.<br>감사합니다 🙌</p>
+      </div>
+      <p class="contactline">웹에서 바로 접수됩니다 · 문의 📧 <b>from0731@naver.com</b></p>
     </div>
   </div>
 </section>
@@ -365,19 +372,55 @@
 </div>
 
 <script>
+  // 이메일 없이 웹에서 바로 접수 (FormSubmit.co AJAX)
+  var ENDPOINT = 'https://formsubmit.co/ajax/from0731@naver.com';
+
   document.getElementById('quoteForm').addEventListener('submit', function(e){
     e.preventDefault();
     var f = e.target;
-    var subject = '[자동화 견적요청] ' + f.name.value.trim() + ' - ' + f.type.value;
-    var body =
-      '■ 이름/회사명: ' + f.name.value.trim() + '\n' +
-      '■ 연락처: ' + f.contact.value.trim() + '\n' +
-      '■ 자동화 종류: ' + f.type.value + '\n' +
-      '■ 예상 예산: ' + f.budget.value + '\n' +
-      '■ 자동화하고 싶은 업무:\n' + f.detail.value.trim() + '\n\n' +
-      '— 리치고고 오토메이션 무료 진단 신청 폼 —';
-    window.location.href = 'mailto:from0731@naver.com?subject='
-      + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    if (f._honey.value) return; // 스팸 봇 차단
+
+    var name = f.name.value.trim();
+    var contact = f.contact.value.trim();
+    var btn = document.getElementById('submitBtn');
+    var msg = document.getElementById('formMsg');
+
+    var payload = {
+      '이름/회사명': name,
+      '연락처': contact,
+      '자동화 종류': f.type.value,
+      '예상 예산': f.budget.value,
+      '자동화하고 싶은 업무': f.detail.value.trim(),
+      '_subject': '[자동화 견적요청] ' + name + ' - ' + f.type.value,
+      '_template': 'table',
+      '_captcha': 'false'
+    };
+
+    btn.disabled = true;
+    btn.textContent = '접수 중…';
+    msg.style.display = 'none';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data && (data.success === 'true' || data.success === true)) {
+        f.style.display = 'none';
+        document.getElementById('formDone').style.display = 'block';
+      } else {
+        throw new Error('fail');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false;
+      btn.textContent = '무료 진단 신청하기 →';
+      msg.style.display = 'block';
+      msg.style.color = '#FC1C49';
+      msg.innerHTML = '전송에 실패했어요. 잠시 후 다시 시도하시거나 <b>from0731@naver.com</b> 으로 보내주세요.';
+    });
   });
 </script>
 
