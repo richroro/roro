@@ -34,3 +34,23 @@ $resp = Invoke-RestMethod -Uri "https://slack.com/api/chat.postMessage" -Method 
 
 if (-not $resp.ok) { throw "Slack API error: $($resp.error)" }
 Write-Host "OK - sent to $channel at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') (ts=$($resp.ts))"
+
+# --- also send a condensed version to KakaoTalk (non-fatal on failure) ---
+try {
+    $kakaoTemplate = Join-Path $here "kakao_template.txt"
+    if (Test-Path $kakaoTemplate) {
+        $kText = [System.IO.File]::ReadAllText($kakaoTemplate, [System.Text.Encoding]::UTF8)
+        $kText = $kText.Replace("{DATE}", $today)
+        $tmp = Join-Path $env:TEMP ("kakao_daily_" + [guid]::NewGuid().ToString("N") + ".txt")
+        $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($tmp, $kText, $utf8NoBom)
+        $sender = Join-Path $repoRoot "kakao\send_kakao.py"
+        $py = "C:\Users\MiJin\AppData\Local\Programs\Python\Python312\python.exe"
+        if (-not (Test-Path $py)) { $py = "python" }
+        & $py $sender --file $tmp
+        Remove-Item $tmp -ErrorAction SilentlyContinue
+        Write-Host "OK - also sent to KakaoTalk"
+    }
+} catch {
+    Write-Host "WARN - KakaoTalk send failed: $($_.Exception.Message)"
+}

@@ -86,3 +86,28 @@ $resp = Invoke-RestMethod -Uri "https://slack.com/api/chat.postMessage" -Method 
 
 if (-not $resp.ok) { throw "Slack API error: $($resp.error)" }
 Write-Host "OK - sent to $channel (Day $dayNum, phase '$($phase.name)', pillar '$($pillar.name)') at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+
+# --- also send a condensed version to KakaoTalk (non-fatal on failure) ---
+# All Korean comes from roadmap.json values (already decoded as UTF-8); the glue
+# below is ASCII-only so this script needs no special file encoding.
+try {
+    $ksb = New-Object System.Text.StringBuilder
+    [void]$ksb.AppendLine("[" + $plan.meta.title + "] Day " + $dayNum + "/" + $totalDays + " (" + $pct + "%)")
+    [void]$ksb.AppendLine("")
+    [void]$ksb.AppendLine($phase.name)
+    [void]$ksb.AppendLine($pillar.emoji + " " + $pillar.name)
+    [void]$ksb.AppendLine($mission)
+    $kakaoText = $ksb.ToString()
+
+    $tmp = Join-Path $env:TEMP ("kakao_wealth_" + [guid]::NewGuid().ToString("N") + ".txt")
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($tmp, $kakaoText, $utf8NoBom)
+    $sender = Join-Path $repoRoot "kakao\send_kakao.py"
+    $py = "C:\Users\MiJin\AppData\Local\Programs\Python\Python312\python.exe"
+    if (-not (Test-Path $py)) { $py = "python" }
+    & $py $sender --file $tmp
+    Remove-Item $tmp -ErrorAction SilentlyContinue
+    Write-Host "OK - also sent to KakaoTalk"
+} catch {
+    Write-Host "WARN - KakaoTalk send failed: $($_.Exception.Message)"
+}

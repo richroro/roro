@@ -22,6 +22,9 @@ shorts_output/
 .claude/skills/threads-auto-post/scripts/daily_post.log
 .claude/skills/threads-auto-post/scripts/__pycache__/
 
+# kakao: keep tokens/secrets out of git
+kakao/secrets/
+
 # General runtime artifacts (logs, caches, probe captures)
 __pycache__/
 *.pyc
