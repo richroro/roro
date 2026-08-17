@@ -20,7 +20,7 @@ import sys
 import traceback
 from pathlib import Path
 
-from common import SKILL_DIR, load_config, save_config, slack_notify, now_str
+from common import SKILL_DIR, load_config, save_config, slack_notify, now_str, record_published
 from publish import publish_post
 
 QUEUE_DIR = SKILL_DIR / "queue"
@@ -100,6 +100,15 @@ def main(dry_run=False):
 
     published, cfg = publish_post(title, html, labels, is_draft=False)
     url = published.get("url", "")
+
+    # 실적 로그 + 조회수 스냅샷 (주제별 성과 추적용, 실패해도 발행에는 영향 없음)
+    record_published(title, labels, url, source=picked["source"])
+    try:
+        from stats import snapshot
+
+        snapshot()
+    except Exception as e:  # noqa: BLE001
+        print(f"[stats] 스냅샷 건너뜀: {e}", file=sys.stderr)
 
     # 발행 성공 후 뒷정리 (다음 실행 때 중복 발행 방지)
     remaining = None

@@ -13,6 +13,14 @@ import urllib.error
 from datetime import datetime
 from pathlib import Path
 
+# Windows 콘솔·로그는 기본 cp949 라서 한글/이모지 출력이 깨지거나 크래시난다.
+# 모든 스크립트가 common 을 임포트하므로 여기서 한 번 UTF-8 로 맞춰 준다.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except Exception:  # noqa: BLE001 - 구버전/리다이렉트 환경이면 조용히 통과
+        pass
+
 # .../richgogo/.claude/skills/blogger-auto-post
 SKILL_DIR = Path(__file__).resolve().parent.parent
 SECRETS_DIR = SKILL_DIR / "secrets"
@@ -24,12 +32,63 @@ TOKEN_PATH = SECRETS_DIR / "token.json"
 REPO_ROOT = SKILL_DIR.parents[2]
 SLACK_ENV_PATH = REPO_ROOT / "slackbot" / ".env"
 
+# Data files (gitignored, live under secrets/): what we published and how the
+# blog's traffic moved over time. Used to steer future content by demand.
+POSTED_LOG_PATH = SECRETS_DIR / "posted_log.json"
+STATS_HISTORY_PATH = SECRETS_DIR / "stats_history.json"
+
 # Blogger needs full scope to publish; readonly is not enough for posts.insert.
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
 
 
 def now_str():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def now_iso():
+    return datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def today_str():
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+# ---------------------------------------------------------------------------
+# Append-only JSON list helpers (for posted log + stats history)
+# ---------------------------------------------------------------------------
+def read_json_list(path):
+    if not Path(path).exists():
+        return []
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def append_json_list(path, entry):
+    SECRETS_DIR.mkdir(parents=True, exist_ok=True)
+    items = read_json_list(path)
+    items.append(entry)
+    Path(path).write_text(
+        json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return items
+
+
+def record_published(title, labels, url, source="manual"):
+    """Log a published post so stats.py can attribute traffic to topics."""
+    return append_json_list(
+        POSTED_LOG_PATH,
+        {
+            "date": today_str(),
+            "ts": now_iso(),
+            "title": title,
+            "labels": labels or [],
+            "url": url,
+            "source": source,
+        },
+    )
 
 
 # ---------------------------------------------------------------------------

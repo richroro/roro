@@ -16,7 +16,7 @@ Prints the published post URL on the last line (so a caller can capture it).
 import argparse
 import sys
 
-from common import get_service, load_config, slack_notify, now_str
+from common import get_service, load_config, slack_notify, now_str, record_published
 
 
 def publish_post(title, html, labels, is_draft=False):
@@ -64,6 +64,10 @@ def main():
     state = "초안 저장" if args.draft else "공개 발행"
     print(f"[{now_str()}] {state} 완료: {args.title}")
     print(f"post_id={post.get('id')}")
+
+    # 공개 발행만 실적 로그에 남긴다 (조회수-주제 연결용).
+    if not args.draft:
+        record_published(args.title, labels, url, source="manual")
 
     if not args.no_slack:
         label_str = ", ".join(labels) if labels else "-"

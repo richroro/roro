@@ -92,6 +92,17 @@ python .claude/skills/blogger-auto-post/scripts/daily_post.py --dry-run
 Start-ScheduledTask -TaskName RichgogoBloggerDaily
 ```
 
+## 조회수 확인 & 데이터 기반 주제 선정
+`stats.py` 는 블로거 API로 **전체 조회수**(전체/30일/7일)를 가져와 `secrets/stats_history.json`
+에 스냅샷으로 쌓고, 스냅샷 사이의 증가분을 그 기간에 발행한 글의 라벨에 배분해
+**주제별 성과를 추정**한다. 발행할 때마다 `secrets/posted_log.json` 에 제목·라벨·URL이
+기록되고, `daily_post.py` 는 발행 직후 조회수 스냅샷도 남긴다.
+
+블로거 API로는 **글별(per-post) 조회수가 안 나온다** — 전체 조회수만 제공한다.
+정확한 글별 데이터가 필요하면 Google Analytics 연동을 안내한다(`references/analytics_setup.md`).
+트래픽이 적을 때는 자체 조회수 신호가 약하므로, 콘텐츠 방향은 검색·트렌드 등
+**외부 수요**로 잡는다. 이 데이터→주제 전략은 `blog-manager` 에이전트가 담당한다.
+
 ## Slack 알림
 `slackbot/.env` 의 `SLACK_BOT_TOKEN` 과 `SLACK_ALLOWED_USER_ID` 를 재사용해 발행
 내역을 사용자 본인에게 DM으로 보낸다. 별도 설정 불필요. 토큰이 없으면 알림만
@@ -102,6 +113,8 @@ Start-ScheduledTask -TaskName RichgogoBloggerDaily
 - `scripts/auth.py` — 최초 1회 OAuth 로그인 + 블로그 선택
 - `scripts/publish.py` — 글 하나 발행 + Slack 알림 (Claude가 대화 중 호출)
 - `scripts/add_to_queue.py` — 미리 쓴 글을 발행 큐에 넣기 (큐 리필용)
+- `scripts/status.py` — 발행 완료·큐 잔량·다음 예정 요약
+- `scripts/stats.py` — 조회수(전체/30일/7일) 조회 + 이력 스냅샷 + 주제별 성과 추정
 - `scripts/generate.py` — 주제→글 자동 생성 (무인 스케줄 전용, API 키 필요)
 - `scripts/daily_post.py` — 무인 일일 발행 오케스트레이션 (`--dry-run` 지원)
 - `scripts/install_daily_task.ps1` / `daily_post.bat` — Windows 예약작업
