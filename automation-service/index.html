@@ -3,9 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cadence · 업무 자동화 스튜디오 | 반복 업무를 코드와 AI에게</title>
+<title>선웨이브 · 업무 자동화 스튜디오 | 반복 업무를 코드와 AI에게</title>
 <meta name="description" content="엑셀·데이터 수집·리포트·알림·콘텐츠 발행을 자동화해 드립니다. 착수금 없이 무료 진단·견적 먼저. 1~2주 내 결과물, 소스·사용법 제공, 납품 후 무상 수정." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FC1C49'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>C</text></svg>" />
+
+<!-- 카톡·SNS 공유 썸네일 (Open Graph) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cadence" />
+<meta property="og:title" content="Cadence · 반복 업무, 이제 코드와 AI에게 맡기세요" />
+<meta property="og:description" content="엑셀 정리·데이터 수집·리포트·알림까지 자동으로. 진단·견적 무료, 착수금 없음. 런칭 특가 5만원~" />
+<meta property="og:url" content="https://richroro.github.io/" />
+<meta property="og:image" content="https://richroro.github.io/og.png?v=1" />
+<meta property="og:image:secure_url" content="https://richroro.github.io/og.png?v=1" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Cadence 업무 자동화 스튜디오 - 반복 업무를 코드와 AI에게" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Cadence · 반복 업무, 이제 코드와 AI에게 맡기세요" />
+<meta name="twitter:description" content="엑셀 정리·데이터 수집·리포트·알림까지 자동으로. 진단·견적 무료, 착수금 없음." />
+<meta name="twitter:image" content="https://richroro.github.io/og.png?v=1" />
+<link rel="canonical" href="https://richroro.github.io/" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FC1C49'/><text x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>S</text></svg>" />
 <style>
   :root{
     --red:#FC1C49; --red-d:#d90f3a; --ink:#0d0d12; --sub:#5b6472; --line:#eaecf0;
@@ -218,6 +237,39 @@
   .contactline{text-align:center;margin-top:16px;font-size:14px;color:var(--sub)}
   .contactline b{color:var(--ink)}
 
+  /* GUIDE */
+  .guide-intro{max-width:720px;margin:34px auto 30px;text-align:center}
+  .guide-intro .lead{color:var(--sub);font-size:16px;font-weight:500;margin-top:12px}
+  .guide-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .guide-badges span{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:#3a4150}
+  .guide-wrap{max-width:820px;margin:0 auto;display:grid;gap:12px}
+  .gitem{border:1.5px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;transition:.18s}
+  .gitem[open]{border-color:var(--red);box-shadow:0 10px 30px rgba(0,0,0,.05)}
+  .gitem>summary{cursor:pointer;list-style:none;padding:19px 22px;font-weight:800;font-size:16.5px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .gitem>summary::-webkit-details-marker{display:none}
+  .gitem>summary::after{content:"+";color:var(--red);font-weight:900;font-size:22px;line-height:1;flex:none}
+  .gitem[open]>summary::after{content:"−"}
+  .gitem .gno{color:var(--red);font-weight:900;font-size:12.5px;margin-right:10px;letter-spacing:.4px}
+  .gbody{padding:2px 22px 24px;color:#2b3240;font-size:14.5px;font-weight:500;line-height:1.7}
+  .gbody p{margin:10px 0}
+  .gbody table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12.8px}
+  .gbody th,.gbody td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  .gbody th{background:var(--soft);font-weight:800}
+  .gbody code{background:var(--soft2);border-radius:6px;padding:2px 7px;font-size:12.5px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--red)}
+  .gbody pre{background:var(--dark);color:#e8eaf0;border-radius:10px;padding:14px 16px;overflow-x:auto;
+    font-size:12.5px;margin:12px 0;line-height:1.65;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .gbody ul{margin:10px 0 10px 20px}.gbody li{margin-bottom:6px}
+  .gbody .tip{background:rgba(255,212,59,.14);border-left:3px solid var(--yellow);border-radius:8px;
+    padding:12px 15px;font-size:13.5px;font-weight:600;margin:14px 0}
+  .gbody .warn{background:rgba(252,28,73,.07);border-left:3px solid var(--red);border-radius:8px;
+    padding:12px 15px;font-size:13px;font-weight:600;margin:14px 0;color:#a01331}
+  .guide-cta{max-width:600px;margin:34px auto 0;background:var(--soft);border:1px solid var(--line);
+    border-radius:18px;padding:30px 26px;text-align:center}
+  .guide-cta h3{font-size:20px;font-weight:900;margin-bottom:8px}
+  .guide-cta p{color:var(--sub);font-size:14.5px;font-weight:500;margin-bottom:18px}
+
   /* FAQ */
   .faq{max-width:760px;margin:40px auto 0}
   details{border-bottom:1px solid var(--line);padding:20px 4px}
@@ -249,12 +301,13 @@
 <header>
   <div class="wrap nav">
     <a href="#top" class="brand">
-      <span class="mark">C</span>
-      <span>Cadence<small>업무 자동화 · AI 워크플로우 스튜디오</small></span>
+      <span class="mark">S</span>
+      <span>선웨이브<small>업무 자동화 · AI 워크플로우 스튜디오</small></span>
     </a>
     <nav class="nav-menu">
       <a href="#services">서비스</a>
       <a href="#cases">사례</a>
+      <a href="#guide">무료 가이드</a>
       <a href="#process">진행</a>
       <a href="#faq">FAQ</a>
       <a href="#contact" class="btn btn-red btn-sm">무료 견적</a>
@@ -443,6 +496,157 @@
   </div>
 </section>
 
+<!-- GUIDE -->
+<section id="guide">
+  <div class="wrap">
+    <p class="eyebrow">무료 자동화 가이드</p>
+    <h2 class="title">엑셀 노가다 없애는 업무 자동화 세팅집</h2>
+    <div class="guide-intro">
+      <p class="lead">코딩을 배우라는 게 아닙니다. <b>"매주 반복하는 이 짓, 어떻게 없애지?"</b>에 대한 실전 답만 모았습니다.<br>복붙해서 바로 쓰는 수식·프롬프트·레시피로, 오늘 당장 반복업무 하나를 없애보세요.</p>
+      <div class="guide-badges">
+        <span>📊 반복업무 비용 진단</span>
+        <span>🧮 복붙 엑셀 수식</span>
+        <span>🕸️ 코딩 없는 크롤링</span>
+        <span>🤖 AI 업무 프롬프트</span>
+        <span>🗓️ 4주 실행 로드맵</span>
+      </div>
+    </div>
+
+    <div class="guide-wrap">
+
+      <details class="gitem" open>
+        <summary><span><span class="gno">CHAPTER 1</span>왜 당신의 하루는 엑셀에 잡아먹히는가</span></summary>
+        <div class="gbody">
+          <p>자동화를 안 하는 이유는 대부분 하나입니다. <b>"이거 그냥 5분이면 하는데 뭐."</b> 맞습니다. 한 번은 5분이죠. 문제는 그게 한 번이 아니라는 겁니다. 반복업무의 비용은 <b>한 번의 시간</b>이 아니라 <b>빈도 × 시간 × 남은 근속 기간</b>으로 계산해야 합니다.</p>
+          <pre>연간 소요 시간 = 1회 시간(분) × 주당 횟수 × 52주 ÷ 60
+연간 비용     = 연간 소요 시간 × 내 시급
+내 시급 ≈ 월급 ÷ 209   (예: 월 300만원 → 시급 약 14,400원)</pre>
+          <p>예시로 채워보면 이렇게 나옵니다. (아래는 예시 수치)</p>
+          <table>
+            <tr><th>반복업무</th><th>1회</th><th>주당</th><th>연간 시간</th><th>연간 비용</th></tr>
+            <tr><td>매출 데이터 취합</td><td>30분</td><td>5회</td><td>약 130시간</td><td>약 187만원</td></tr>
+            <tr><td>파일 여러 개 합치기</td><td>20분</td><td>3회</td><td>약 52시간</td><td>약 75만원</td></tr>
+            <tr><td>시세·경쟁사 확인</td><td>15분</td><td>5회</td><td>약 65시간</td><td>약 94만원</td></tr>
+            <tr><td>보고서 표 재작성</td><td>40분</td><td>2회</td><td>약 69시간</td><td>약 99만원</td></tr>
+            <tr><td><b>합계</b></td><td></td><td></td><td><b>약 316시간</b></td><td><b>약 455만원</b></td></tr>
+          </table>
+          <p><b>아무것도 안 바꾸면 내년에도 똑같이 316시간, 455만원어치의 인생이 반복 노동으로 증발합니다.</b> 이 중 절반만 자동화해도 연간 150시간, 근무일로 19일이 돌아옵니다.</p>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 2</span>자동화 진단: 무엇부터 없앨 것인가</span></summary>
+        <div class="gbody">
+          <p>초보가 실패하는 이유는 <b>어려운 걸 먼저 건드려서</b>입니다. 정답은 반대 — <b>쉽고 자주 하는 일부터</b> 없앱니다. 반복업무를 아래 표에 넣고 1~5점으로 매겨, 합계가 높은 것부터 자동화하세요.</p>
+          <table>
+            <tr><th>업무</th><th>빈도</th><th>시간</th><th>규칙 명확도</th><th>난이도(쉬울수록↑)</th><th>합계</th></tr>
+            <tr><td>매출 데이터 취합</td><td>5</td><td>3</td><td>5</td><td>4</td><td><b>17</b></td></tr>
+            <tr><td>파일 합치기</td><td>3</td><td>3</td><td>5</td><td>5</td><td><b>16</b></td></tr>
+            <tr><td>시세 확인</td><td>5</td><td>2</td><td>4</td><td>3</td><td><b>14</b></td></tr>
+          </table>
+          <div class="tip">💡 <b>판단 공식:</b> "이 일을 앞으로 10번 더 할 것 같은가?" 그렇다면 자동화 대상입니다. 세팅에 드는 시간보다 앞으로 아껴줄 시간이 크면 무조건 하세요.</div>
+          <p>1순위를 정했으면 그 일을 <b>단계별로 쪼갭니다.</b> 6단계 중 4단계만 자동화해도 시간의 70%가 사라집니다. 100%가 아니어도 됩니다.</p>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 3</span>엑셀 함수로 복붙·정리 노가다 없애기</span></summary>
+        <div class="gbody">
+          <p>대부분의 "엑셀 노가다"는 새 프로그램 없이 <b>함수 몇 개</b>로 사라집니다. 아래를 복붙하고 <code>[범위]</code>만 본인 것으로 바꾸세요.</p>
+          <table>
+            <tr><th>상황</th><th>복붙용 수식</th></tr>
+            <tr><td>다른 표에서 값 찾기</td><td><code>=XLOOKUP([찾을값],[찾을범위],[가져올범위],"없음")</code></td></tr>
+            <tr><td>조건 합계</td><td><code>=SUMIFS([합칠범위],[조건범위],[조건])</code></td></tr>
+            <tr><td>조건 개수</td><td><code>=COUNTIFS([범위],[조건])</code></td></tr>
+            <tr><td>중복 제거</td><td><code>=UNIQUE([범위])</code></td></tr>
+            <tr><td>공백 제거</td><td><code>=TRIM([셀])</code></td></tr>
+            <tr><td>에러 숨기기</td><td><code>=IFERROR([수식],"")</code></td></tr>
+          </table>
+          <div class="tip">💡 raw 데이터에 새 매출을 붙여넣기만 하면 <code>SUMIFS</code> 요약표가 <b>자동 갱신</b>됩니다. 손으로 더하는 일은 그날로 끝.</div>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 4</span>매크로·파워쿼리 — 클릭 반복 자동화</span></summary>
+        <div class="gbody">
+          <p><b>매크로</b>는 당신의 클릭·타이핑을 <b>녹화</b>해서 버튼 하나로 재생합니다. 코드를 몰라도 됩니다. (개발도구 → 매크로 기록 → 평소 작업 → 중지 → 버튼에 연결)</p>
+          <p><b>파워쿼리</b>(데이터 → 데이터 가져오기)는 한 번 정리 절차를 만들어두면, <b>원본만 바뀌어도 새로고침 한 번으로</b> 똑같이 정리해줍니다.</p>
+          <p><b>실전:</b> <code>raw</code> 시트 → 파워쿼리 정리 → <code>report</code> 시트 + 피벗/차트 연결. 매주 "붙여넣고 새로고침"만으로 리포트 완성.</p>
+          <div class="warn">⚠ 매크로가 포함된 파일은 <b>.xlsm</b>으로 저장해야 유지됩니다. 출처 모르는 매크로 파일은 열지 마세요(보안).</div>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 5</span>코딩 없이 웹 데이터 긁어오기</span></summary>
+        <div class="gbody">
+          <div class="warn">⚠ 크롤링 전 대상 사이트의 <b>이용약관·robots.txt</b>를 확인하고, 로그인·개인정보가 걸린 데이터는 수집하지 않습니다. 과도한 요청으로 서버에 부담을 주지 마세요.</div>
+          <p><b>방법 1 — 엑셀·구글시트 내장 기능</b> (가장 쉬움). 표·피드로 제공되는 데이터에 효과적:</p>
+          <pre>=IMPORTHTML("[URL]","table",1)   // 페이지의 첫 번째 표
+=IMPORTXML("[URL]","[XPath]")     // 특정 요소만
+=IMPORTFEED("[RSS주소]")          // 뉴스/블로그 피드</pre>
+          <p><b>방법 2 — AI에게 시키기</b> (형식이 지저분할 때): 복사한 텍스트를 AI에게 주고 "여기서 [상품명, 가격]만 뽑아 탭 구분 표로" 요청.</p>
+          <p><b>방법 3 — 파이썬</b> (매일 자동·대량):</p>
+          <pre>import pandas as pd
+df = pd.read_html("[URL]")[0]     # 페이지의 표 읽기
+df.to_excel("결과.xlsx", index=False)</pre>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 6</span>파일·시트 자동 병합과 리포트 생성</span></summary>
+        <div class="gbody">
+          <p>여러 지점·월별 파일을 매번 열어 복붙하는 게 가장 흔한 노가다입니다. 파워쿼리 <b>폴더 병합</b>이 이걸 없앱니다.</p>
+          <ul>
+            <li>합칠 파일들을 <b>한 폴더</b>에 모음 (형식 동일해야 함)</li>
+            <li>데이터 → 가져오기 → <b>폴더에서</b> → 결합 및 변환</li>
+            <li>다음 달: 폴더에 새 파일만 넣고 <b>새로고침</b> → 자동 추가</li>
+          </ul>
+          <p>대량이면 파이썬이 빠릅니다:</p>
+          <pre>import pandas as pd, glob
+files = glob.glob("데이터폴더/*.xlsx")
+merged = pd.concat([pd.read_excel(f) for f in files], ignore_index=True)
+merged.to_excel("전체합본.xlsx", index=False)</pre>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 7</span>AI에게 반복업무 시키기</span></summary>
+        <div class="gbody">
+          <p>분류·요약·초안 작성처럼 "규칙은 있는데 함수로는 안 되는" 일은 AI가 담당합니다. 핵심은 <b>재사용 가능한 프롬프트를 고정</b>하는 것. 좋은 프롬프트는 4요소를 갖춥니다:</p>
+          <pre>[역할] 너는 우리 회사의 데이터 정리 담당자야.
+[작업] 아래 고객 문의를 환불/배송/기타로 분류해줘.
+[형식] '원문 | 분류' 표로, 탭 구분 출력.
+[규칙] 애매하면 '기타'로. 추측 설명은 붙이지 마.
+[데이터] {여기에 붙여넣기}</pre>
+          <div class="warn">⚠ AI는 틀린 내용도 자신있게 말합니다. 대외 발송 전 <b>사람 검수는 필수</b>이며, 개인정보·계약·의료·법률 판단은 넣지 않습니다.</div>
+        </div>
+      </details>
+
+      <details class="gitem">
+        <summary><span><span class="gno">CHAPTER 8</span>4주 실행 로드맵과 유지·관리</span></summary>
+        <div class="gbody">
+          <p>한 번에 다 하려다 지치는 걸 막기 위해, <b>주당 하나씩</b> 완성합니다.</p>
+          <table>
+            <tr><th>주차</th><th>할 일</th><th>결과물</th></tr>
+            <tr><td>1주</td><td>진단표 작성 → 1순위를 함수·매크로로 자동화</td><td>첫 자동화 1개</td></tr>
+            <tr><td>2주</td><td>웹·외부 데이터 가져오기 세팅</td><td>자동 수집 파이프라인</td></tr>
+            <tr><td>3주</td><td>파일 병합 + 리포트 연결</td><td>"붙여넣고 새로고침" 리포트</td></tr>
+            <tr><td>4주</td><td>AI 텍스트 업무 자동화 + 전체 점검</td><td>반복업무 절반 제거</td></tr>
+          </table>
+          <div class="tip">💡 유지 원칙: ① 원본 형식 고정 ② 검증 셀 두기 ③ 대외 발송 전 사람 검토 1단계 유지 ④ 원본 백업. 자동화는 만들고 끝이 아니라, 조용히 틀리지 않게 관리하는 게 핵심입니다.</div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="guide-cta">
+      <h3>이걸 직접 하기엔 시간이 없다면?</h3>
+      <p>가이드대로 세팅해 드립니다. 반복 업무만 알려주시면 자동화 가능 여부와 견적을 <b>무료</b>로 진단해 드려요.</p>
+      <a href="#contact" class="btn btn-red">내 업무 무료로 진단받기 →</a>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section id="process" style="background:var(--soft)">
   <div class="wrap">
@@ -575,10 +779,10 @@
 </section>
 
 <footer>
-  <div class="fbrand">Cadence <span style="font-weight:600;font-size:13px;opacity:.7">케이던스</span></div>
+  <div class="fbrand">선웨이브 <span style="font-weight:600;font-size:13px;opacity:.7">Sunwave</span></div>
   반복 업무 자동화 · 데이터 수집 · AI 연동<br>
   문의 from0731@naver.com &nbsp;|&nbsp; 견적은 언제나 무료입니다<br>
-  <span style="opacity:.6;font-size:12px">© 2026 Cadence. All rights reserved.</span>
+  <span style="opacity:.6;font-size:12px">© 2026 선웨이브 (Sunwave). All rights reserved.</span>
 </footer>
 
 <!-- STICKY -->
@@ -604,7 +808,7 @@
       '자동화 종류': f.type.value,
       '예상 예산': f.budget.value,
       '자동화하고 싶은 업무': f.detail.value.trim(),
-      '_subject': '[Cadence 견적요청] ' + name + ' - ' + f.type.value,
+      '_subject': '[선웨이브 견적요청] ' + name + ' - ' + f.type.value,
       '_template': 'table',
       '_captcha': 'false'
     };
