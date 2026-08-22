@@ -158,6 +158,17 @@
   .pcard h3{font-size:16px;font-weight:800;margin-bottom:4px}
   .pcard p{font-size:14px;color:var(--sub);font-weight:500}
 
+  /* REVIEWS (틀만 준비 · 기본 숨김) */
+  .reviews{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);max-width:960px;margin:40px auto 0}
+  @media(max-width:820px){.reviews{grid-template-columns:1fr}}
+  .review{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px}
+  .review .stars{color:#ffb800;font-size:16px;letter-spacing:2px;margin-bottom:12px}
+  .review .quote{font-size:15px;font-weight:500;line-height:1.7;color:#2b3240}
+  .review .who{margin-top:16px;display:flex;align-items:center;gap:10px}
+  .review .who .av{width:38px;height:38px;border-radius:50%;background:var(--soft2);display:grid;place-items:center;font-weight:800;color:var(--sub);font-size:14px;flex:none}
+  .review .who b{font-size:14px;font-weight:800}
+  .review .who small{display:block;font-size:12px;color:var(--sub);font-weight:600}
+
   /* OFFER */
   .offer{background:linear-gradient(135deg,#0f1117,#20232e);border-radius:24px;color:#fff;
     max-width:640px;margin:0 auto;padding:40px 34px;text-align:center}
@@ -398,6 +409,40 @@
       <div class="pcard"><span class="ic">🛠️</span><div><h3>납품 후 무상 수정</h3><p>전달 후 일정 기간 발생하는 문제와 사소한 수정은 무상으로 지원합니다.</p></div></div>
       <div class="pcard"><span class="ic">📂</span><div><h3>소스·사용법 제공</h3><p>실행 파일과 사용 설명서, 필요 시 소스코드까지 함께 드립니다.</p></div></div>
       <div class="pcard"><span class="ic">🔒</span><div><h3>자료는 안전하게</h3><p>업무 자료는 작업 목적 외 사용하지 않으며, 요청 시 작업 후 폐기합니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!--
+  ============================================================
+  고객 후기 섹션 — "빈 틀"만 준비해 둔 상태입니다 (기본: 숨김)
+  ▶ 실제 후기가 생기면:
+     1) 아래 <section id="reviews" ... style="display:none"> 에서 style="display:none" 삭제 → 노출됨
+     2) 각 카드의 ★개수 / .quote 내용 / 이름·업종만 실제 내용으로 교체
+  ⚠ 없는 후기를 지어내지 마세요. 실제 받은 후기만 넣습니다.
+  ============================================================
+-->
+<section id="reviews" style="display:none">
+  <div class="wrap">
+    <p class="eyebrow">고객 후기</p>
+    <h2 class="title">실제로 이렇게 달라졌습니다</h2>
+    <p class="desc">작업을 맡겨주신 분들이 남겨주신 이야기입니다.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"여기에 실제 후기 내용을 넣으세요."</p>
+        <div class="who"><span class="av">OO</span><div><b>OOO 님</b><small>업종 · 자동화 종류</small></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"여기에 실제 후기 내용을 넣으세요."</p>
+        <div class="who"><span class="av">OO</span><div><b>OOO 님</b><small>업종 · 자동화 종류</small></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"여기에 실제 후기 내용을 넣으세요."</p>
+        <div class="who"><span class="av">OO</span><div><b>OOO 님</b><small>업종 · 자동화 종류</small></div></div>
+      </div>
     </div>
   </div>
 </section>
