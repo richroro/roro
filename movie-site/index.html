@@ -1,0 +1,1001 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘 뭐 보지</title>
+<meta name="description" content="볼 만한 영화 40편을 한 줄로 훑고, CGV·롯데시네마·메가박스·네이버 예매로 바로 넘어가는 영화 큐레이션 사이트.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="오늘 뭐 보지">
+<meta property="og:description" content="한 줄로 감 잡고, 그 자리에서 예매까지. 영화 40편 큐레이션 + 실시간 상영 정보.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
+
+<style>
+/* ─────────────────────────────────────────────
+   토큰 — 라이트(로비) 기본, 다크(영사실) 재정의
+   ───────────────────────────────────────────── */
+:root{
+  --ground:#EDEFF3;
+  --surface:#FFFFFF;
+  --surface-2:#E2E6EC;
+  --ink:#12151C;
+  --muted:#5C6472;
+  --line:rgba(18,21,28,.13);
+  --line-strong:rgba(18,21,28,.28);
+  --accent:#8E5A0C;
+  --accent-bright:#B9820F;
+  --velvet:#9C2F26;
+  --poster-l1:24%;
+  --poster-l2:44%;
+  --grain:.30;
+  --glow:.00;
+  --shadow:0 1px 2px rgba(18,21,28,.06), 0 12px 28px -14px rgba(18,21,28,.28);
+  --shadow-lift:0 2px 4px rgba(18,21,28,.08), 0 26px 46px -18px rgba(18,21,28,.36);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0A0C11;
+    --surface:#12151C;
+    --surface-2:#1A1F29;
+    --ink:#E9E6DF;
+    --muted:#8A93A3;
+    --line:rgba(233,230,223,.12);
+    --line-strong:rgba(233,230,223,.28);
+    --accent:#E8B04B;
+    --accent-bright:#F3CB84;
+    --velvet:#D2564A;
+    --poster-l1:14%;
+    --poster-l2:31%;
+    --grain:.42;
+    --glow:.55;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 30px -16px rgba(0,0,0,.8);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.55), 0 30px 54px -20px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0A0C11;
+  --surface:#12151C;
+  --surface-2:#1A1F29;
+  --ink:#E9E6DF;
+  --muted:#8A93A3;
+  --line:rgba(233,230,223,.12);
+  --line-strong:rgba(233,230,223,.28);
+  --accent:#E8B04B;
+  --accent-bright:#F3CB84;
+  --velvet:#D2564A;
+  --poster-l1:14%;
+  --poster-l2:31%;
+  --grain:.42;
+  --glow:.55;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 30px -16px rgba(0,0,0,.8);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.55), 0 30px 54px -20px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-weight:400;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:"Hahmlet","Nanum Myeongjo",serif;font-weight:700;text-wrap:balance;margin:0;line-height:1.22;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:2px}
+
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.688rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;
+}
+.wrap{width:min(1200px,100% - 2.5rem);margin-inline:auto}
+
+/* ── 마퀴 전구 띠 ─────────────────────────── */
+.marquee{
+  height:14px;
+  background:
+    radial-gradient(circle at 9px 7px, var(--accent) 0 2.6px, transparent 3.2px) repeat-x 0 0/18px 14px;
+  opacity:.85;
+  border-bottom:1px solid var(--line);
+}
+
+/* ── 헤더 ─────────────────────────────────── */
+.top{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid var(--line);
+}
+.top-in{display:flex;align-items:center;gap:1.25rem;padding:.7rem 0;min-height:60px}
+.brand{display:flex;align-items:baseline;gap:.55rem;text-decoration:none;flex:0 0 auto}
+.brand b{font-family:"Hahmlet",serif;font-weight:900;font-size:1.18rem;letter-spacing:-.02em}
+.brand span{font-family:"IBM Plex Mono",monospace;font-size:.625rem;letter-spacing:.18em;color:var(--muted)}
+.top-nav{display:flex;gap:1.1rem;margin-left:auto;align-items:center}
+.top-nav a{
+  text-decoration:none;font-size:.82rem;color:var(--muted);
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+}
+.top-nav a:hover{color:var(--ink);border-color:var(--accent)}
+.theme-btn{
+  border:1px solid var(--line-strong);border-radius:999px;padding:.3rem .75rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;color:var(--muted);
+  transition:color .2s,border-color .2s;
+}
+.theme-btn:hover{color:var(--ink);border-color:var(--accent)}
+
+/* ── 히어로 ───────────────────────────────── */
+.hero{position:relative;padding:5.5rem 0 3.5rem;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:-40% 20% auto 20%;height:80vh;
+  background:radial-gradient(ellipse at 50% 0%, rgba(232,176,75,.20), transparent 62%);
+  opacity:var(--glow);pointer-events:none;
+}
+.hero-in{position:relative;max-width:44rem}
+.hero h1{
+  font-size:clamp(2.7rem,7.4vw,5rem);font-weight:900;letter-spacing:-.035em;
+  margin:1rem 0 0;
+}
+.hero h1 em{font-style:normal;color:var(--accent);position:relative}
+.hero p.lead{
+  margin-top:1.35rem;font-size:1.05rem;color:var(--muted);max-width:34rem;font-weight:300;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.72rem 1.35rem;border-radius:2px;text-decoration:none;
+  font-size:.875rem;font-weight:500;letter-spacing:-.01em;
+  border:1px solid var(--line-strong);transition:transform .18s,background .18s,color .18s,border-color .18s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--accent);color:var(--ground);border-color:var(--accent)}
+.btn-solid:hover{background:var(--accent-bright);border-color:var(--accent-bright)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn .k{font-family:"IBM Plex Mono",monospace;font-size:.72rem;opacity:.7}
+
+/* 필름 스트립 장식 */
+.filmstrip{
+  margin-top:3.2rem;height:26px;border-block:1px solid var(--line);
+  background:repeating-linear-gradient(90deg,
+    var(--line-strong) 0 3px, transparent 3px 9px);
+  opacity:.5;
+}
+
+/* ── 섹션 ─────────────────────────────────── */
+section{padding:3.6rem 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.9rem}
+.sec-head h2{font-size:clamp(1.45rem,3vw,1.95rem);margin-top:.5rem}
+.sec-head p{color:var(--muted);font-size:.875rem;max-width:30rem;margin-top:.4rem}
+
+/* ── 실시간 예매 패널 ─────────────────────── */
+#live{border-block:1px solid var(--line);background:var(--surface)}
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border:1px solid var(--line)}
+.live-card{
+  padding:1.5rem 1.4rem;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;gap:.55rem;
+  transition:background .2s;
+}
+.live-card:last-child{border-right:0}
+.live-card:hover{background:var(--surface-2)}
+.live-card h3{font-size:1.05rem}
+.live-card .desc{font-size:.8rem;color:var(--muted);flex:1}
+.live-links{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.chip{
+  display:inline-block;padding:.34rem .7rem;border:1px solid var(--line-strong);border-radius:999px;
+  font-size:.72rem;text-decoration:none;color:var(--muted);
+  transition:color .18s,border-color .18s,background .18s;white-space:nowrap;
+}
+.chip:hover{color:var(--accent);border-color:var(--accent)}
+.chip.strong{color:var(--ink);border-color:var(--ink)}
+.chip.strong:hover{background:var(--accent);border-color:var(--accent);color:var(--ground)}
+
+/* ── 필터 바 ──────────────────────────────── */
+.tools{
+  position:sticky;top:60px;z-index:30;
+  background:color-mix(in srgb, var(--ground) 92%, transparent);
+  backdrop-filter:blur(12px);
+  border-block:1px solid var(--line);
+  padding:.75rem 0;
+}
+.tools-in{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.search{
+  position:relative;flex:1 1 250px;max-width:340px;
+}
+.search input{
+  width:100%;padding:.55rem .8rem .55rem 2.1rem;
+  background:var(--surface);color:var(--ink);
+  border:1px solid var(--line-strong);border-radius:2px;
+  font-family:inherit;font-size:.85rem;
+}
+.search input::placeholder{color:var(--muted)}
+.search svg{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2}
+.cats{display:flex;gap:.35rem;flex-wrap:wrap;overflow-x:auto;padding-bottom:2px}
+.cat{
+  padding:.42rem .85rem;border:1px solid var(--line);border-radius:999px;
+  font-size:.79rem;color:var(--muted);white-space:nowrap;
+  transition:color .18s,border-color .18s,background .18s;
+}
+.cat:hover{color:var(--ink);border-color:var(--line-strong)}
+.cat[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.count{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+/* ── 티켓 그리드 ──────────────────────────── */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+  gap:1.6rem;padding-top:2.2rem;
+}
+.ticket{
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1), box-shadow .24s, border-color .24s;
+}
+.ticket:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift);border-color:var(--line-strong)}
+.ticket.hide{display:none}
+
+.open-btn{display:block;width:100%;text-align:left;padding:0}
+
+/* 포스터 = 순수 타이포 타이틀 카드 */
+.poster{
+  position:relative;aspect-ratio:5/7;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, hsl(var(--h) 42% var(--poster-l2)) 0%, transparent 62%),
+    linear-gradient(163deg, hsl(var(--h) 30% var(--poster-l1)) 0%, hsl(calc(var(--h) + 22) 46% var(--poster-l2)) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.25rem 1.15rem 1.15rem;
+  isolation:isolate;
+}
+/* 필름 그레인 */
+.poster::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:var(--grain);mix-blend-mode:overlay;
+}
+/* 스프로킷 홀 (필름 구멍) */
+.poster::before{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    repeating-linear-gradient(180deg, rgba(0,0,0,.55) 0 7px, transparent 7px 17px) left  0/6px 100% no-repeat,
+    repeating-linear-gradient(180deg, rgba(0,0,0,.55) 0 7px, transparent 7px 17px) right 0/6px 100% no-repeat;
+  opacity:.5;
+}
+.poster-year{
+  position:absolute;top:-.28em;right:.24em;z-index:1;
+  font-family:"Hahmlet",serif;font-weight:900;font-size:5.6rem;line-height:1;
+  color:rgba(255,255,255,.085);letter-spacing:-.05em;user-select:none;
+}
+.poster-title{
+  position:relative;z-index:4;
+  font-size:clamp(1.35rem,2.3vw,1.72rem);font-weight:900;letter-spacing:-.035em;
+  color:#F6F2EA;text-shadow:0 2px 18px rgba(0,0,0,.5);
+}
+.poster-og{
+  position:relative;z-index:4;margin-top:.5rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;
+  color:rgba(246,242,234,.62);text-transform:uppercase;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.poster-rule{
+  position:relative;z-index:4;height:1px;background:rgba(246,242,234,.28);margin:.85rem 0 .6rem;
+}
+.poster-genre{
+  position:relative;z-index:4;
+  font-size:.72rem;color:rgba(246,242,234,.8);
+}
+
+/* 스텁(정보) */
+.stub{padding:1rem 1.15rem 1.05rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.stub .meta{font-family:"IBM Plex Mono",monospace;font-size:.688rem;color:var(--muted);letter-spacing:.02em}
+.stub .hook{font-size:.855rem;line-height:1.55;letter-spacing:-.012em}
+.badge{
+  align-self:flex-start;margin-top:.15rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.625rem;letter-spacing:.06em;
+  color:var(--velvet);border:1px solid currentColor;border-radius:2px;padding:.16rem .45rem;
+}
+
+/* 절취선 */
+.perf{position:relative;height:0;border-top:1px dashed var(--line-strong);margin:0 .5rem}
+.perf::before,.perf::after{
+  content:"";position:absolute;top:-9px;width:16px;height:16px;border-radius:50%;
+  background:var(--ground);border:1px solid var(--line);
+}
+.perf::before{left:-13px;clip-path:inset(0 0 0 50%)}
+.perf::after{right:-13px;clip-path:inset(0 50% 0 0)}
+
+/* 예매 줄 */
+.book{padding:.85rem 1.15rem 1.05rem;display:flex;flex-direction:column;gap:.5rem}
+.book-label{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.book-row{display:flex;gap:.3rem;flex-wrap:wrap}
+.bk{
+  flex:1 1 auto;text-align:center;text-decoration:none;
+  padding:.42rem .3rem;border:1px solid var(--line-strong);border-radius:2px;
+  font-size:.7rem;font-weight:500;color:var(--muted);
+  transition:background .16s,color .16s,border-color .16s;
+}
+.bk:hover{background:var(--accent);border-color:var(--accent);color:var(--ground)}
+.bk.primary{color:var(--ink);border-color:var(--ink);flex-basis:100%}
+.bk.primary:hover{background:var(--velvet);border-color:var(--velvet);color:#fff}
+
+.empty{padding:4rem 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+/* ── 상세 다이얼로그 ──────────────────────── */
+dialog{
+  border:0;padding:0;background:transparent;max-width:none;max-height:none;
+  width:100%;height:100%;
+}
+dialog::backdrop{background:rgba(4,5,8,.82);backdrop-filter:blur(4px)}
+.sheet-scroll{
+  height:100%;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;
+  padding:clamp(1rem,5vh,4rem) 1rem;
+}
+.sheet{
+  position:relative;width:min(760px,100%);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:3px;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.7);
+  animation:rise .3s cubic-bezier(.2,.7,.3,1);
+}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.sheet-top{
+  position:relative;padding:2.2rem 2rem 1.8rem;
+  background:
+    radial-gradient(110% 130% at 88% -10%, hsl(var(--h) 44% var(--poster-l2)) 0%, transparent 60%),
+    linear-gradient(150deg, hsl(var(--h) 30% var(--poster-l1)) 0%, hsl(calc(var(--h) + 22) 46% var(--poster-l2)) 100%);
+  color:#F6F2EA;overflow:hidden;
+}
+.sheet-top::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:var(--grain);mix-blend-mode:overlay;
+}
+.sheet-top h2{font-size:clamp(1.9rem,4.6vw,2.6rem);font-weight:900;letter-spacing:-.035em;position:relative;z-index:2}
+.sheet-top .og{
+  position:relative;z-index:2;margin-top:.6rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;
+  color:rgba(246,242,234,.66);text-transform:uppercase;
+}
+.sheet-top .facts{
+  position:relative;z-index:2;margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.35rem .5rem;
+}
+.fact{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;
+  border:1px solid rgba(246,242,234,.34);border-radius:2px;padding:.2rem .5rem;
+  color:rgba(246,242,234,.9);
+}
+.fact.award{border-color:rgba(246,242,234,.9);background:rgba(246,242,234,.14)}
+.close{
+  position:absolute;top:1rem;right:1rem;z-index:5;
+  width:34px;height:34px;border:1px solid rgba(246,242,234,.36);border-radius:50%;
+  color:#F6F2EA;font-size:1.05rem;line-height:1;display:grid;place-items:center;
+  transition:background .18s;
+}
+.close:hover{background:rgba(246,242,234,.2)}
+
+.sheet-body{padding:2rem}
+.blk + .blk{margin-top:1.9rem;padding-top:1.9rem;border-top:1px solid var(--line)}
+.blk h3{
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:.7rem;
+}
+.blk p{font-size:.95rem;line-height:1.8;max-width:60ch}
+.blk p.why{border-left:2px solid var(--velvet);padding-left:1rem;color:var(--ink)}
+.book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem}
+.bkbig{
+  display:flex;flex-direction:column;gap:.15rem;text-decoration:none;
+  padding:.85rem 1rem;border:1px solid var(--line-strong);border-radius:2px;
+  transition:background .18s,border-color .18s,transform .18s;
+}
+.bkbig:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface-2)}
+.bkbig b{font-size:.9rem;font-weight:600;letter-spacing:-.01em}
+.bkbig span{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:var(--muted);letter-spacing:.06em}
+.bkbig.hero-book{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 12%, transparent)}
+
+/* ── 지금 상영 중 (전광판) ────────────────── */
+.board{border:1px solid var(--line);background:var(--surface);overflow-x:auto}
+.board table{width:100%;border-collapse:collapse;min-width:640px}
+.board th{
+  font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;text-align:left;padding:.85rem 1rem;
+  border-bottom:1px solid var(--line-strong);white-space:nowrap;
+}
+.board td{padding:.8rem 1rem;border-bottom:1px solid var(--line);vertical-align:middle}
+.board tr:last-child td{border-bottom:0}
+.board tbody tr{transition:background .18s}
+.board tbody tr:hover{background:var(--surface-2)}
+.rk{font-family:"IBM Plex Mono",monospace;font-size:.95rem;color:var(--muted);width:2.4rem;font-variant-numeric:tabular-nums}
+.rk.top{color:var(--accent);font-weight:600}
+.nm{font-weight:500;letter-spacing:-.015em;font-size:.93rem}
+.nm .soon{
+  margin-left:.45rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.08em;
+  color:var(--velvet);border:1px solid currentColor;border-radius:2px;padding:.05rem .32rem;vertical-align:1px;
+}
+.share{display:flex;align-items:center;gap:.6rem;min-width:170px}
+.bar{flex:1;height:5px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.share b{font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:500;width:3.4rem;text-align:right;font-variant-numeric:tabular-nums}
+.acc{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.go{
+  display:inline-block;padding:.34rem .8rem;border:1px solid var(--line-strong);border-radius:2px;
+  font-size:.73rem;text-decoration:none;white-space:nowrap;transition:background .16s,border-color .16s,color .16s;
+}
+.go:hover{background:var(--accent);border-color:var(--accent);color:var(--ground)}
+.snap{
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  margin-top:.9rem;font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--muted);
+}
+.snap .dot{width:6px;height:6px;border-radius:50%;background:var(--velvet);flex:0 0 auto}
+
+/* ── 푸터 ─────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
+.foot{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:flex-start}
+.foot p{font-size:.78rem;color:var(--muted);max-width:42ch;line-height:1.75}
+.foot .brand b{font-size:1rem}
+
+@media (max-width:720px){
+  .top-nav a:not(.theme-btn){display:none}
+  .tools{top:60px}
+  .live-card{border-right:0;border-bottom:1px solid var(--line)}
+  .sheet-body,.sheet-top{padding:1.5rem 1.25rem}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .ticket:hover,.btn:hover,.bkbig:hover{transform:none}
+}
+</style>
+
+<div class="marquee" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#top"><b>오늘 뭐 보지</b><span class="mono">CINEMA INDEX</span></a>
+    <nav class="top-nav">
+      <a href="#now">지금 상영 중</a>
+      <a href="#live">예매처 바로가기</a>
+      <a href="#pick">작품 고르기</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="화면 밝기 전환">◐ 화면</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ── 히어로 ── -->
+  <div class="hero">
+    <div class="wrap hero-in">
+      <p class="eyebrow">고르는 데 30분 쓰지 말고</p>
+      <h1>불 꺼지기 전에<br><em>고르는</em> 40편.</h1>
+      <p class="lead">한 줄로 감을 잡고, 마음에 들면 그 자리에서 CGV·롯데시네마·메가박스·네이버로 바로 넘어갑니다. 예매창까지 두 번의 클릭.</p>
+      <div class="hero-cta">
+        <button class="btn btn-solid" id="randomBtn" type="button">오늘의 한 편 뽑기 <span class="k">↩</span></button>
+        <a class="btn btn-ghost" href="#now">지금 상영 중인 영화 보기</a>
+      </div>
+      <div class="filmstrip" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- ── 지금 상영 중 (실제 스냅샷) ── -->
+  <section id="now">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">CGV 무비차트 기준</p>
+          <h2>이번 주 극장에 걸린 것들</h2>
+          <p>예매율은 지금 사람들이 어디로 몰리는지를 가장 정확하게 보여주는 숫자입니다. 제목을 누르면 세 극장 시간표를 한 화면에서 비교할 수 있습니다.</p>
+        </div>
+        <a class="btn btn-ghost" href="https://cgv.co.kr" target="_blank" rel="noopener">실시간 무비차트 열기</a>
+      </div>
+
+      <div class="board">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">순위</th>
+              <th scope="col">작품</th>
+              <th scope="col">예매율</th>
+              <th scope="col">누적 관객</th>
+              <th scope="col"><span class="sr-only">예매</span>시간표</th>
+            </tr>
+          </thead>
+          <tbody id="board"></tbody>
+        </table>
+      </div>
+      <p class="snap"><span class="dot"></span> 2026년 8월 22일 확인한 값입니다. 예매율과 관객 수는 시시각각 바뀌니, 정확한 현재 수치는 위 무비차트에서 확인하세요.</p>
+    </div>
+  </section>
+
+  <!-- ── 실시간 예매 ── -->
+  <section id="live">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">실시간 · 공식 소스</p>
+          <h2>지금 극장에서 뭘 하는지</h2>
+          <p>상영 시간표와 좌석은 매일 바뀝니다. 이 사이트에 박제해두는 대신, 항상 최신인 공식 창구로 곧장 보냅니다.</p>
+        </div>
+      </div>
+
+      <div class="live-grid">
+        <div class="live-card">
+          <h3>박스오피스</h3>
+          <p class="desc">어제 몇 명이 봤는지, 지금 1위가 뭔지. 영진위 통합전산망이 원본 데이터입니다.</p>
+          <div class="live-links">
+            <a class="chip strong" href="https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do" target="_blank" rel="noopener">영진위 일별 순위</a>
+            <a class="chip" href="https://www.moviechart.co.kr/rank/realtime/index/image" target="_blank" rel="noopener">무비차트 실시간</a>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <h3>CGV</h3>
+          <p class="desc">전국 상영관 수가 가장 많은 체인. 아이맥스·4DX·스크린X는 여기.</p>
+          <div class="live-links">
+            <a class="chip strong" href="https://cgv.co.kr" target="_blank" rel="noopener">무비차트 · 예매</a>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <h3>롯데시네마</h3>
+          <p class="desc">수도권 밖 접근성이 좋은 편. 샤롯데·수퍼플렉스 상영관 보유.</p>
+          <div class="live-links">
+            <a class="chip strong" href="https://www.lottecinema.co.kr/NLCHS/Ticketing" target="_blank" rel="noopener">빠른 예매</a>
+            <a class="chip" href="https://www.lottecinema.co.kr/NLCHS/Movie/List?flag=1" target="_blank" rel="noopener">현재 상영작</a>
+            <a class="chip" href="https://www.lottecinema.co.kr/NLCHS/Ticketing/Schedule" target="_blank" rel="noopener">상영시간표</a>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <h3>메가박스</h3>
+          <p class="desc">돌비 시네마와 더 부티크가 강점. 사운드 좋은 관을 찾는다면.</p>
+          <div class="live-links">
+            <a class="chip strong" href="https://www.megabox.co.kr/booking" target="_blank" rel="noopener">빠른 예매</a>
+            <a class="chip" href="https://www.megabox.co.kr/movie" target="_blank" rel="noopener">현재 상영작</a>
+            <a class="chip" href="https://www.megabox.co.kr/booking/timetable" target="_blank" rel="noopener">상영시간표</a>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <h3>한 번에 비교</h3>
+          <p class="desc">세 곳 시간표를 한 화면에서 훑고 싶을 때는 포털 검색이 가장 빠릅니다.</p>
+          <div class="live-links">
+            <a class="chip strong" href="https://search.naver.com/search.naver?query=%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84" target="_blank" rel="noopener">네이버 영화</a>
+            <a class="chip" href="https://search.daum.net/search?q=%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84" target="_blank" rel="noopener">다음 영화</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 필터 ── -->
+  <div class="tools" id="pick">
+    <div class="wrap tools-in">
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="q" placeholder="제목 · 감독 · 장르로 찾기" aria-label="영화 검색">
+      </label>
+      <div class="cats" id="cats" role="group" aria-label="분위기별 분류"></div>
+      <span class="count mono" id="count"></span>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>찾는 작품이 없습니다. 다른 단어로 검색해 보세요.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="brand" href="#top"><b>오늘 뭐 보지</b><span class="mono">CINEMA INDEX</span></a>
+      <p style="margin-top:.8rem">작품 소개는 직접 정리한 큐레이션이고, 상영·예매 정보는 각 극장과 포털의 공식 페이지에서 확인합니다.</p>
+    </div>
+    <p>CGV·롯데시네마·메가박스는 작품별 주소를 외부에 공개하지 않아, 제목으로 바로 찾는 링크는 세 극장 시간표를 함께 보여주는 포털 검색으로 연결했습니다. 세 극장 버튼은 각자의 예매 화면으로 갑니다. 상영이 끝난 작품은 OTT 링크를 이용하세요. 시간·좌석·가격은 각 극장 공식 정보가 기준입니다.</p>
+  </div>
+</footer>
+
+<dialog id="sheet" aria-label="영화 상세">
+  <div class="sheet-scroll"><div class="sheet" id="sheetIn"></div></div>
+</dialog>
+
+<script>
+const CATS = [
+  {k:"all",   n:"전체"},
+  {k:"korea", n:"한국영화 자존심"},
+  {k:"thrill",n:"심장 쫄깃"},
+  {k:"brain", n:"뇌 풀가동"},
+  {k:"tear",  n:"눈물 버튼"},
+  {k:"blast", n:"팝콘 액션"},
+  {k:"anime", n:"애니메이션"}
+];
+
+const M = [
+{t:"기생충",o:"Parasite",y:2019,r:132,d:"봉준호",c:"한국",g:"드라마 · 스릴러",k:"korea",b:"칸 황금종려상 · 아카데미 4관왕",hue:12,
+ h:"반지하에서 시작된 계획이, 계단을 오를수록 이상해진다.",
+ s:"전원 백수인 기택네 장남이 명문가 박 사장 집 과외 자리를 얻으면서 두 가족의 삶이 겹치기 시작한다. 계획은 순조롭게 굴러가지만, 그 집 지하에는 아무도 몰랐던 것이 있었다.",
+ w:"장르가 30분마다 바뀌는 걸 실시간으로 겪고 싶을 때. 비 오는 날 계단을 내려가는 장면 하나로 이 영화가 무슨 이야기였는지 설명된다."},
+
+{t:"살인의 추억",o:"Memories of Murder",y:2003,r:131,d:"봉준호",c:"한국",g:"범죄 · 드라마",k:"korea",hue:40,
+ h:"범인을 못 잡은 이야기가, 왜 이렇게 오래 남을까.",
+ s:"1986년 경기도의 한 농촌에서 여성들이 같은 방식으로 살해당한다. 감으로 밀어붙이는 시골 형사와 서류로 파고드는 서울 형사가 함께 붙지만, 사건은 계속 손아귀를 빠져나간다.",
+ w:"마지막 1분, 카메라를 정면으로 보는 그 얼굴 때문에 20년 넘게 회자되는 영화. 다 보고 나면 한동안 아무 말도 못 하게 된다."},
+
+{t:"올드보이",o:"Oldboy",y:2003,r:120,d:"박찬욱",c:"한국",g:"미스터리 · 액션",k:"korea",b:"칸 심사위원대상",hue:350,
+ h:"15년을 가뒀으면, 이유는 알려줘야지.",
+ s:"이유도 모른 채 사설 감옥에 15년간 갇혔던 오대수가 어느 날 갑자기 풀려난다. 주어진 시간은 5일, 그 안에 자신을 가둔 사람과 그 이유를 찾아야 한다.",
+ w:"복도 장도리 롱테이크는 지금도 전 세계 액션 감독들이 참고하는 장면이다. 세지만, 세다는 말로는 부족하다."},
+
+{t:"헤어질 결심",o:"Decision to Leave",y:2022,r:138,d:"박찬욱",c:"한국",g:"멜로 · 미스터리",k:"korea",b:"칸 감독상",hue:200,
+ h:"형사가 용의자에게 품은 마음, 그걸 뭐라고 불러야 하나.",
+ s:"산에서 추락사한 남자의 사건을 맡은 형사 해준이 죽은 남자의 아내 서래를 만난다. 의심하려고 시작한 관찰이 점점 다른 것으로 변해가고, 해준의 잠은 사라진다.",
+ w:"직접적인 장면 하나 없이 가장 야한 멜로라는 평을 듣는 이유가 있다. 마지막 바닷가 장면의 여운이 며칠 간다."},
+
+{t:"아가씨",o:"The Handmaiden",y:2016,r:145,d:"박찬욱",c:"한국",g:"드라마 · 스릴러",k:"korea",hue:300,
+ h:"속이러 들어간 집에서, 진짜로 마음이 생겼다.",
+ s:"재산을 노린 사기꾼의 계획에 따라 귀족 아가씨의 하녀로 들어간 숙희. 계획은 완벽했지만, 그 저택 안의 세 사람 모두가 서로를 속이고 있었다.",
+ w:"같은 사건을 세 번 다시 보여주는데, 볼 때마다 완전히 다른 이야기가 된다. 미술과 의상만 봐도 본전 뽑는 영화."},
+
+{t:"곡성",o:"The Wailing",y:2016,r:156,d:"나홍진",c:"한국",g:"미스터리 · 공포",k:"korea",hue:100,
+ h:"뭣이 중헌디.",
+ s:"평화롭던 시골 마을에서 사람들이 미쳐 날뛰다 가족을 죽이는 일이 연달아 벌어진다. 외지인이 온 뒤부터라는 소문이 돌고, 딸까지 이상해진 경찰 종구가 진실을 쫓기 시작한다.",
+ w:"156분 내내 누구를 믿어야 할지 모르는 상태로 끌려다니고 싶을 때. 낮에 보길 권한다."},
+
+{t:"추격자",o:"The Chaser",y:2008,r:125,d:"나홍진",c:"한국",g:"범죄 · 스릴러",k:"korea",hue:20,
+ h:"범인은 30분 만에 잡힌다. 문제는 그다음이다.",
+ s:"전직 형사 출신 보도방 사장 중호가 사라진 여자들의 행방을 쫓다 한 남자를 붙잡는다. 그런데 경찰은 증거가 없다며 그를 풀어줄 준비를 하고, 시간은 계속 흐른다.",
+ w:"달리기만으로 이렇게 숨이 막힐 수 있다는 걸 증명한 영화. 골목 지형이 곧 서스펜스다."},
+
+{t:"부산행",o:"Train to Busan",y:2016,r:118,d:"연상호",c:"한국",g:"액션 · 스릴러",k:"korea",hue:5,
+ h:"서울에서 부산까지, 내릴 수 없는 두 시간.",
+ s:"딸을 데리고 부산행 KTX에 오른 펀드매니저 석우. 출발 직후 열차 안에서 정체불명의 감염이 퍼지고, 객차가 한 칸씩 무너져 간다.",
+ w:"좀비물인데 결국 남는 건 사람 이야기다. 마동석이 왜 마동석인지 확인하는 시간이기도 하다."},
+
+{t:"극한직업",o:"Extreme Job",y:2019,r:111,d:"이병헌",c:"한국",g:"코미디 · 액션",k:"korea",b:"관객 1,600만",hue:30,
+ h:"잠복하려고 차린 치킨집이 대박이 나버렸다.",
+ s:"해체 위기의 마약반 형사들이 잠복 수사를 위해 범죄조직 앞 치킨집을 인수한다. 그런데 맛이 너무 좋아 손님이 몰려들고, 수사는 자꾸 뒷전으로 밀린다.",
+ w:"웃다가 배가 아픈 경험이 필요할 때 실패 확률이 가장 낮은 선택. 대사 리듬이 전부 살아 있다."},
+
+{t:"범죄도시",o:"The Outlaws",y:2017,r:121,d:"강윤성",c:"한국",g:"범죄 · 액션",k:"korea",hue:210,
+ h:"나쁜 놈을 더 나쁜 놈이 잡는다.",
+ s:"가리봉동 일대를 장악한 신흥 범죄조직이 잔혹한 방식으로 세력을 넓혀간다. 맨손으로 조직을 상대하는 강력반 형사 마석도가 이들을 정리하러 나선다.",
+ w:"머리 비우고 시원하게 얻어맞는 장면만 보고 싶은 날. 이후 한국 액션 시리즈의 출발점이 된 작품."},
+
+{t:"신세계",o:"New World",y:2013,r:134,d:"박훈정",c:"한국",g:"범죄 · 느와르",k:"korea",hue:220,
+ h:"8년째 잠입 중인데, 이제 누가 진짜 나인지 모르겠다.",
+ s:"국내 최대 범죄조직에 잠입한 경찰 자성. 조직의 회장이 사망하며 후계 다툼이 벌어지고, 경찰은 그를 계속 조직 안에 두려 한다.",
+ w:"한국 느와르의 기준점. 마지막 엘리베이터 장면 하나로 이 영화는 자리를 얻었다."},
+
+{t:"버닝",o:"Burning",y:2018,r:148,d:"이창동",c:"한국",g:"미스터리 · 드라마",k:"korea",b:"칸 국제비평가연맹상",hue:25,
+ h:"그가 비닐하우스를 태운다고 했다. 진짜 태운 건 뭘까.",
+ s:"택배 일을 하는 종수가 어릴 적 동네 친구 해미를 다시 만나고, 그의 곁에 있는 부유한 남자 벤을 알게 된다. 어느 날 해미가 흔적도 없이 사라진다.",
+ w:"명확한 답을 주지 않는 영화가 며칠씩 머릿속에 남는 걸 좋아한다면. 노을 아래 춤추는 장면은 한국영화 최고의 장면 중 하나다."},
+
+{t:"세븐",o:"Se7en",y:1995,r:127,d:"데이비드 핀처",c:"미국",g:"스릴러 · 범죄",k:"thrill",hue:90,
+ h:"일곱 가지 죄, 일곱 개의 시체.",
+ s:"은퇴를 앞둔 노장 형사와 갓 부임한 젊은 형사가 7대 죄악을 본뜬 연쇄 살인을 수사한다. 비는 그치지 않고, 범인은 늘 한 발 앞서 있다.",
+ w:"결말의 무게로 30년째 회자되는 영화. 마지막 상자에 대해서는 절대 미리 검색하지 말 것."},
+
+{t:"곤 걸",o:"Gone Girl",y:2014,r:149,d:"데이비드 핀처",c:"미국",g:"스릴러 · 미스터리",k:"thrill",hue:195,
+ h:"아내가 사라졌다. 그리고 온 나라가 남편을 의심한다.",
+ s:"결혼기념일에 아내 에이미가 사라지고, 남편 닉이 유력한 용의자로 지목된다. 언론이 달려들수록 이 부부가 감춰온 것들이 하나씩 드러난다.",
+ w:"중반에 한 번 완전히 뒤집힌다. 부부 동반 관람은 신중히 결정하시길."},
+
+{t:"겟 아웃",o:"Get Out",y:2017,r:104,d:"조던 필",c:"미국",g:"공포 · 스릴러",k:"thrill",b:"아카데미 각본상",hue:130,
+ h:"여자친구 부모님 댁이 너무 친절해서 무섭다.",
+ s:"흑인 남성 크리스가 백인 여자친구의 가족을 만나러 교외 저택을 찾는다. 모두가 지나치게 다정하고, 그 집 사람들의 행동은 조금씩 어긋나 있다.",
+ w:"공포영화가 사회를 이렇게 정확히 찌를 수 있구나 싶어진다. 러닝타임도 짧아 부담 없다."},
+
+{t:"양들의 침묵",o:"The Silence of the Lambs",y:1991,r:118,d:"조너선 드미",c:"미국",g:"스릴러 · 범죄",k:"thrill",b:"아카데미 주요 5개 부문 석권",hue:55,
+ h:"괴물을 잡으려면, 다른 괴물에게 물어봐야 한다.",
+ s:"FBI 훈련생 클라리스가 연쇄살인범을 쫓기 위해 수감된 식인 정신과 의사 한니발 렉터를 찾아간다. 그는 정보를 주는 대가로 그녀의 과거를 요구한다.",
+ w:"대화만으로 사람을 얼어붙게 만드는 연기가 뭔지 보고 싶을 때. 유리벽 너머 첫 만남은 교과서다."},
+
+{t:"셔터 아일랜드",o:"Shutter Island",y:2010,r:138,d:"마틴 스코세이지",c:"미국",g:"미스터리 · 스릴러",k:"thrill",hue:205,
+ h:"섬에 들어온 순간부터, 나갈 방법이 없었다.",
+ s:"정신병원이 있는 외딴 섬에서 환자가 사라지고, 연방보안관 테디가 수사를 위해 들어간다. 병원은 협조하지 않고, 폭풍이 배를 묶어두는 동안 그의 기억도 흔들리기 시작한다.",
+ w:"다 보고 나면 처음부터 다시 보게 되는 종류의 영화. 두 번째 관람에서 모든 대사가 다르게 들린다."},
+
+{t:"유주얼 서스펙트",o:"The Usual Suspects",y:1995,r:106,d:"브라이언 싱어",c:"미국",g:"범죄 · 미스터리",k:"thrill",hue:35,
+ h:"카이저 소제가 누구냐고?",
+ s:"선박 폭발 사고의 유일한 생존자가 경찰서에서 진술을 시작한다. 다섯 명의 범죄자가 어떻게 모였고 그 배에서 무슨 일이 있었는지 — 그의 말대로라면.",
+ w:"반전 영화의 원조. 마지막 30초를 위해 존재하는 106분이고, 그 30초가 값을 다 한다."},
+
+{t:"인터스텔라",o:"Interstellar",y:2014,r:169,d:"크리스토퍼 놀란",c:"미국",g:"SF · 드라마",k:"brain",hue:215,
+ h:"1시간이 7년인 행성에서, 아빠는 딸을 기다리게 했다.",
+ s:"황폐해진 지구를 떠나 인류가 살 수 있는 새 행성을 찾는 탐사대에 전직 파일럿 쿠퍼가 합류한다. 웜홀 너머의 시간은 지구와 다르게 흐르고, 딸은 계속 나이를 먹는다.",
+ w:"과학과 부성애를 동시에 끝까지 밀어붙인다. 재개봉하면 아이맥스로 보는 게 맞다."},
+
+{t:"인셉션",o:"Inception",y:2010,r:148,d:"크리스토퍼 놀란",c:"미국",g:"SF · 액션",k:"brain",hue:235,
+ h:"훔치는 게 아니라, 심는 겁니다.",
+ s:"타인의 꿈에 들어가 정보를 빼내는 코브가 마지막 임무를 제안받는다. 이번엔 빼내는 게 아니라 생각 하나를 상대의 머릿속에 몰래 심어야 한다.",
+ w:"꿈 속의 꿈, 그 속의 꿈. 회전하는 복도 액션과 마지막 팽이는 아직도 논쟁 중이다."},
+
+{t:"컨택트",o:"Arrival",y:2016,r:116,d:"드니 빌뇌브",c:"미국",g:"SF · 드라마",k:"brain",hue:175,
+ h:"외계인과 싸우는 대신, 언어를 배우기로 했다.",
+ s:"12개의 거대한 비행물체가 지구 곳곳에 나타난다. 언어학자 루이스가 그들의 문자를 해독해 나가면서, 시간을 인식하는 방식 자체가 달라지기 시작한다.",
+ w:"SF의 외피를 썼지만 결국 삶을 어떻게 받아들일 것인가에 대한 이야기. 두 번째 볼 때 완전히 다른 영화가 된다."},
+
+{t:"듄",o:"Dune",y:2021,r:155,d:"드니 빌뇌브",c:"미국",g:"SF · 서사",k:"brain",b:"아카데미 6관왕",hue:30,
+ h:"모래 아래에 제국의 운명이 묻혀 있다.",
+ s:"우주에서 가장 귀한 자원 스파이스가 나는 사막 행성 아라키스. 그곳의 통치권을 넘겨받은 아트레이데스 가문의 후계자 폴이 거대한 음모에 휘말린다.",
+ w:"스케일과 사운드로 압도당하고 싶을 때. 한스 짐머의 음악 때문에라도 볼륨은 크게."},
+
+{t:"매트릭스",o:"The Matrix",y:1999,r:136,d:"워쇼스키",c:"미국",g:"SF · 액션",k:"brain",hue:145,
+ h:"빨간 약과 파란 약, 하나만 고르세요.",
+ s:"평범한 프로그래머 네오가 이 세계가 진짜가 아닐지도 모른다는 의심을 품는다. 모피어스가 나타나 두 개의 알약을 내밀고, 네오는 하나를 고른다.",
+ w:"1999년에 나온 액션인데 아직도 촌스럽지 않다. 이후 20년의 SF가 전부 여기서 갈라져 나왔다."},
+
+{t:"오펜하이머",o:"Oppenheimer",y:2023,r:180,d:"크리스토퍼 놀란",c:"미국",g:"드라마 · 전기",k:"brain",b:"아카데미 7관왕",hue:15,
+ h:"세상을 구하려고 만든 무기가, 세상을 끝낼 수 있게 됐다.",
+ s:"원자폭탄 개발을 이끈 물리학자 오펜하이머의 성공과 그 이후. 실험이 성공한 순간부터 그를 향한 진짜 재판이 시작된다.",
+ w:"폭발 장면보다 청문회 장면이 훨씬 무섭다는 걸 경험하게 된다. 3시간이 안 길게 느껴지는 편집."},
+
+{t:"블레이드 러너 2049",o:"Blade Runner 2049",y:2017,r:164,d:"드니 빌뇌브",c:"미국",g:"SF · 느와르",k:"brain",b:"아카데미 촬영상",hue:25,
+ h:"기억이 만들어진 것이라면, 나는 누구지.",
+ s:"복제인간을 추적하는 블레이드 러너 K가 오래 묻혀 있던 비밀을 발견한다. 단서를 따라가던 그는 30년 전 사라진 한 사람에게 닿는다.",
+ w:"화면 한 컷 한 컷이 그냥 사진 작품이다. 느린 호흡을 견딜 수 있다면 최고의 SF 중 하나."},
+
+{t:"이터널 선샤인",o:"Eternal Sunshine of the Spotless Mind",y:2004,r:108,d:"미셸 공드리",c:"미국",g:"멜로 · SF",k:"tear",b:"아카데미 각본상",hue:190,
+ h:"헤어진 연인의 기억을 지우다가, 도중에 마음이 바뀌었다.",
+ s:"연인 클레멘타인이 자신에 대한 기억을 지웠다는 걸 알게 된 조엘도 같은 시술을 신청한다. 기억이 하나씩 사라지는 동안, 그는 그 기억 안에 그녀를 숨기기 시작한다.",
+ w:"이별을 겪은 사람에게 가장 정확한 위로가 되는 영화. 눈 덮인 몬탁 해변 장면은 오래 남는다."},
+
+{t:"어바웃 타임",o:"About Time",y:2013,r:123,d:"리처드 커티스",c:"영국",g:"멜로 · 드라마",k:"tear",hue:20,
+ h:"시간을 되돌릴 수 있어도, 결국 오늘을 다시 사는 게 전부였다.",
+ s:"성인이 된 팀은 아버지에게서 집안 남자들은 시간을 되돌릴 수 있다는 이야기를 듣는다. 그 능력을 연애에 써먹다가, 결국 가장 중요한 곳에 쓰게 된다.",
+ w:"아버지와 마지막으로 해변을 걷는 장면에서 대부분 무너진다. 연말에 보기 좋은 영화."},
+
+{t:"그린 북",o:"Green Book",y:2018,r:130,d:"피터 패럴리",c:"미국",g:"드라마",k:"tear",b:"아카데미 작품상",hue:130,
+ h:"운전기사와 피아니스트, 제일 안 맞을 조합이 길을 떠난다.",
+ s:"1962년, 미국 남부 순회공연을 앞둔 흑인 피아니스트 돈 셜리가 거칠고 무례한 이탈리아계 운전기사 토니를 고용한다. 두 달간의 여정이 두 사람을 모두 바꿔놓는다.",
+ w:"따뜻한 걸 보고 싶은데 유치한 건 싫을 때. 두 배우의 호흡만으로 굴러가는 영화."},
+
+{t:"라라랜드",o:"La La Land",y:2016,r:128,d:"데이미언 셔젤",c:"미국",g:"뮤지컬 · 멜로",k:"tear",b:"아카데미 6관왕",hue:245,
+ h:"꿈을 이룬 두 사람이, 서로를 잃었다.",
+ s:"배우 지망생 미아와 재즈 피아니스트 세바스찬이 LA에서 만나 서로의 꿈을 밀어준다. 각자의 커리어가 자리를 잡아갈수록 두 사람의 거리는 멀어진다.",
+ w:"마지막 5분의 '만약에' 시퀀스 하나로 평생 기억에 남는다. 첫 곡부터 마지막 곡까지 버릴 게 없다."},
+
+{t:"매드맥스: 분노의 도로",o:"Mad Max: Fury Road",y:2015,r:120,d:"조지 밀러",c:"호주",g:"액션 · SF",k:"blast",b:"아카데미 6관왕",hue:20,
+ h:"두 시간 동안 도망치다가 유턴한다. 그게 전부인데 최고다.",
+ s:"물과 기름을 독점한 폭군이 지배하는 황무지. 사령관 퓨리오사가 여자들을 트럭에 태우고 탈출하고, 붙잡혀 있던 맥스도 그 트럭에 얹혀 사막을 가로지른다.",
+ w:"CG를 최소화한 실제 스턴트로 액션 영화의 상한선을 다시 그었다. 대사 없이 화면만으로 설명하는 연출의 정석."},
+
+{t:"탑건: 매버릭",o:"Top Gun: Maverick",y:2022,r:130,d:"조셉 코신스키",c:"미국",g:"액션 · 드라마",k:"blast",hue:200,
+ h:"36년 만의 속편이 원작을 넘어섰다.",
+ s:"여전히 시험비행 조종사로 남아 있는 매버릭이 불가능에 가까운 임무를 앞둔 최정예 후배들의 교관으로 복귀한다. 그중엔 옛 동료의 아들이 있다.",
+ w:"배우들이 실제 전투기에 탔고, 그 차이가 화면에 전부 보인다. 극장에서 봐야 하는 영화의 표본."},
+
+{t:"존 윅",o:"John Wick",y:2014,r:101,d:"채드 스타헬스키",c:"미국",g:"액션 · 느와르",k:"blast",hue:350,
+ h:"은퇴한 킬러의 강아지를 건드렸다.",
+ s:"아내를 잃고 조용히 살던 전직 청부업자 존 윅. 그의 집에 침입한 조직원들이 차를 훔치고 아내가 남긴 강아지를 죽이면서, 그는 마당에 묻어둔 총을 다시 꺼낸다.",
+ w:"카메라를 끊지 않고 보여주는 총격전. 이후 모든 액션 영화가 참고하게 된 안무의 교과서."},
+
+{t:"스파이더맨: 노 웨이 홈",o:"Spider-Man: No Way Home",y:2021,r:148,d:"존 왓츠",c:"미국",g:"액션 · 히어로",k:"blast",hue:355,
+ h:"정체가 들통난 뒤, 세상을 되돌리려다 문을 열어버렸다.",
+ s:"피터 파커의 정체가 전 세계에 공개되며 일상이 무너진다. 이를 되돌리려 마법을 부탁했다가 주문이 틀어지고, 다른 세계의 존재들이 넘어오기 시작한다.",
+ w:"극장 관객이 동시에 함성을 지른 몇 안 되는 순간이 들어 있다. 시리즈를 봐온 사람에게는 선물 같은 영화."},
+
+{t:"미션 임파서블: 폴아웃",o:"Mission: Impossible – Fallout",y:2018,r:147,d:"크리스토퍼 맥쿼리",c:"미국",g:"액션 · 첩보",k:"blast",hue:210,
+ h:"저 사람이 진짜로 저걸 한다는 게 제일 무섭다.",
+ s:"플루토늄 회수 임무가 틀어지며 이단 헌트 팀이 궁지에 몰린다. 파리 시내 추격전에서 히말라야 헬기 격돌까지, 실패를 만회할 시간은 얼마 없다.",
+ w:"시리즈 최고작으로 꼽히는 편. 헬기 시퀀스는 배우가 직접 조종해서 찍었다."},
+
+{t:"센과 치히로의 행방불명",o:"Spirited Away",y:2001,r:125,d:"미야자키 하야오",c:"일본",g:"애니메이션 · 판타지",k:"anime",b:"아카데미 장편애니상 · 베를린 황금곰상",hue:165,
+ h:"부모가 돼지가 됐다. 이름까지 뺏겼다.",
+ s:"이사 가던 길에 이상한 터널을 지난 치히로. 음식을 먹은 부모는 돼지가 되고, 소녀는 이름을 빼앗긴 채 신들이 드나드는 목욕탕에서 일하게 된다.",
+ w:"어릴 때 본 사람도 어른이 되어 다시 보면 완전히 다른 이야기가 된다. 기차 장면 하나로 설명이 끝난다."},
+
+{t:"너의 이름은.",o:"Your Name.",y:2016,r:106,d:"신카이 마코토",c:"일본",g:"애니메이션 · 멜로",k:"anime",hue:250,
+ h:"몸이 바뀐 채로, 만난 적 없는 사람을 좋아하게 됐다.",
+ s:"도쿄의 소년 타키와 산골 마을의 소녀 미츠하가 가끔씩 몸이 뒤바뀐다. 서로의 삶에 익숙해질 무렵, 연결이 갑자기 끊긴다.",
+ w:"빛 표현만으로 감정을 만들어내는 작화. 후반부 전개는 절대 미리 알고 가지 말 것."},
+
+{t:"코코",o:"Coco",y:2017,r:105,d:"리 언크리치",c:"미국",g:"애니메이션 · 가족",k:"anime",b:"아카데미 장편애니상",hue:285,
+ h:"잊히는 순간, 진짜로 사라진다.",
+ s:"음악이 금지된 집안의 소년 미겔이 우연히 죽은 자들의 세상으로 들어간다. 해가 뜨기 전에 돌아가지 않으면 그곳에 영영 남게 된다.",
+ w:"'Remember Me'가 흐르는 마지막 장면은 방어가 불가능하다. 가족과 같이 보기 가장 좋은 애니메이션."},
+
+{t:"인사이드 아웃",o:"Inside Out",y:2015,r:95,d:"피트 닥터",c:"미국",g:"애니메이션 · 가족",k:"anime",b:"아카데미 장편애니상",hue:45,
+ h:"슬픔이가 왜 필요한지, 이 영화가 알려준다.",
+ s:"이사로 낯선 도시에 온 열한 살 라일리의 머릿속. 감정 본부를 이끌던 기쁨이와 슬픔이가 밖으로 튕겨 나가면서 아이의 마음이 하나씩 무너지기 시작한다.",
+ w:"아이용이라 생각하고 틀었다가 어른이 더 많이 우는 영화. 빙봉을 기억하는 사람은 이미 안다."},
+
+{t:"소울",o:"Soul",y:2020,r:100,d:"피트 닥터",c:"미국",g:"애니메이션 · 드라마",k:"anime",b:"아카데미 장편애니상",hue:195,
+ h:"꿈을 이루기 직전에 죽었다. 근데 꿈이 전부가 아니었다.",
+ s:"재즈 피아니스트를 꿈꾸던 음악 교사 조가 인생 최고의 기회를 잡은 날 사고를 당한다. 태어나기 전 영혼들이 머무는 세계에서 그는 지구에 가기 싫어하는 22번을 만난다.",
+ w:"'무엇이 되고 싶은가'라는 질문에 지친 사람에게 필요한 100분. 낙엽 한 장으로 끝내는 마무리."},
+
+{t:"스파이더맨: 어크로스 더 유니버스",o:"Spider-Man: Across the Spider-Verse",y:2023,r:140,d:"호아킴 도스 산토스",c:"미국",g:"애니메이션 · 액션",k:"anime",hue:320,
+ h:"장면마다 그림체가 바뀐다. 그게 곧 이야기다.",
+ s:"마일스 모랄레스가 수많은 차원의 스파이더맨들이 모인 조직과 마주한다. 정해진 운명을 따라야 한다는 그들에게, 마일스는 다르게 답하기로 한다.",
+ w:"애니메이션이 여기까지 갈 수 있다는 걸 매 프레임 증명한다. 화면 정보량이 많아 두 번 봐야 다 보인다."}
+];
+
+/* ── 예매 링크 ───────────────────────────────────────────────
+   CGV·롯데·메가박스는 제목 딥링크(검색 URL)를 제공하지 않는다.
+   ( cgv.co.kr 은 루트 SPA 외 전 경로 404, 나머지 두 곳도 검색은 JS 레이어 )
+   → 제목별 조회는 포털이 담당하고, 3사는 실제 예매 화면으로 보낸다.
+   ─────────────────────────────────────────────────────────── */
+const enc = encodeURIComponent;
+const CHAIN = {
+  cgv:    {n:"CGV",      home:"https://cgv.co.kr",                                    book:"https://cgv.co.kr"},
+  lotte:  {n:"롯데시네마", home:"https://www.lottecinema.co.kr/NLCHS/Movie/List?flag=1", book:"https://www.lottecinema.co.kr/NLCHS/Ticketing"},
+  mega:   {n:"메가박스",   home:"https://www.megabox.co.kr/movie",                      book:"https://www.megabox.co.kr/booking"}
+};
+function links(m){
+  return [
+    {n:"네이버에서 예매",  d:"NAVER · 3사 시간표 한 번에", u:"https://search.naver.com/search.naver?query="+enc(m.t+" 영화 예매"), hero:true},
+    {n:"다음에서 예매",    d:"DAUM · 시간표 비교",        u:"https://search.daum.net/search?q="+enc(m.t+" 예매")},
+    {n:"CGV 예매",       d:"CGV.CO.KR",                u:CHAIN.cgv.book},
+    {n:"롯데시네마 예매",   d:"LOTTECINEMA",              u:CHAIN.lotte.book},
+    {n:"메가박스 예매",    d:"MEGABOX",                  u:CHAIN.mega.book},
+    {n:"예고편 보기",      d:"YOUTUBE",                  u:"https://www.youtube.com/results?search_query="+enc(m.t+" 예고편")},
+    {n:"OTT에서 찾기",    d:"WATCHA PEDIA",             u:"https://pedia.watcha.com/ko-KR/search?query="+enc(m.t)},
+    {n:"작품 정보 더보기",  d:"NAVER 영화",               u:"https://search.naver.com/search.naver?query="+enc(m.t+" 영화 "+m.y)}
+  ];
+}
+
+/* ── 지금 상영 중 ─────────────────────────────────────────────
+   2026-08-22 CGV 무비차트에서 확인한 스냅샷.
+   share = 예매율(%), acc = 누적 관객, soon = 개봉/재개봉 예정 표기
+   ─────────────────────────────────────────────────────────── */
+const NOW = [
+  {t:"오디세이",                                 share:73.2, acc:"604.9만"},
+  {t:"스파이더맨: 브랜드 뉴 데이",                  share:13.6, acc:"781.3만"},
+  {t:"인시디어스: 그들이 넘어왔다",                 share:1.9,  acc:"4.2만"},
+  {t:"사랑의 하츄핑: 고래보석의 전설",              share:1.8,  acc:"72.4만"},
+  {t:"경주기행",                                 share:1.6,  acc:"—", soon:"8/26 개봉"},
+  {t:"명탐정 코난: 하이웨이의 타천사",              share:1.4,  acc:"31.6만"},
+  {t:"오크 스트리트의 마지막 날",                   share:1.0,  acc:"—", soon:"8/26 개봉"},
+  {t:"오케이 마담2",                              share:1.0,  acc:"28만"},
+  {t:"마루 밑 아리에티",                           share:0.9,  acc:"107.7만"},
+  {t:"터치드 콘서트: 하이라이트 포 더 무비",          share:0.6,  acc:"—", soon:"8/26 개봉"},
+  {t:"위커 맨: 파이널 컷",                         share:0.3,  acc:"5,150"},
+  {t:"어떻게 해야 했을까",                          share:0.2,  acc:"7.9만"},
+  {t:"퍼피 구조대: 더 다이노 무비",                  share:0.2,  acc:"7.6만"},
+  {t:"극장판 귀멸의 칼날: 무한성편",                 share:0.2,  acc:"—", soon:"8/26 재개봉"},
+  {t:"에이티즈: 라이트 더 웨이 인 시네마",            share:0.2,  acc:"3,345"}
+];
+const topShare = Math.max(...NOW.map(n => n.share));
+document.getElementById("board").innerHTML = NOW.map((n, i) => {
+  const w = Math.max(3, Math.pow(n.share / topShare, .45) * 100);
+  const url = "https://search.naver.com/search.naver?query=" + enc(n.t + " 영화 예매");
+  return `<tr>
+    <td class="rk${i < 3 ? " top" : ""}">${String(i + 1).padStart(2, "0")}</td>
+    <td class="nm">${n.t}${n.soon ? `<span class="soon">${n.soon}</span>` : ""}</td>
+    <td><div class="share"><div class="bar"><i style="width:${w.toFixed(1)}%"></i></div><b>${n.share.toFixed(1)}%</b></div></td>
+    <td class="acc">${n.acc}</td>
+    <td><a class="go" href="${url}" target="_blank" rel="noopener">시간표 · 예매</a></td>
+  </tr>`;
+}).join("");
+
+/* ── 렌더 ────────────────────────────────── */
+const grid = document.getElementById("grid");
+const catsEl = document.getElementById("cats");
+const countEl = document.getElementById("count");
+const emptyEl = document.getElementById("empty");
+const qEl = document.getElementById("q");
+let active = "all";
+
+catsEl.innerHTML = CATS.map(c =>
+  `<button class="cat" type="button" data-k="${c.k}" aria-pressed="${c.k==="all"}">${c.n}</button>`
+).join("");
+
+grid.innerHTML = M.map((m,i) => `
+<article class="ticket" data-i="${i}" data-k="${m.k}" data-s="${(m.t+" "+m.o+" "+m.d+" "+m.g+" "+m.c).toLowerCase()}">
+  <button class="open-btn" type="button" aria-label="${m.t} 상세 보기">
+    <div class="poster" style="--h:${m.hue}">
+      <span class="poster-year mono" aria-hidden="true">${m.y}</span>
+      <h3 class="poster-title">${m.t}</h3>
+      <p class="poster-og">${m.o}</p>
+      <div class="poster-rule"></div>
+      <p class="poster-genre">${m.g}</p>
+    </div>
+  </button>
+  <div class="stub">
+    <p class="meta">${m.y} · ${m.r}분 · ${m.d}</p>
+    <p class="hook">${m.h}</p>
+    ${m.b ? `<span class="badge">${m.b}</span>` : ""}
+  </div>
+  <div class="perf"></div>
+  <div class="book">
+    <p class="book-label">이 작품 찾아보기</p>
+    <div class="book-row">
+      <a class="bk primary" href="https://search.naver.com/search.naver?query=${enc(m.t+" 영화 예매")}" target="_blank" rel="noopener">네이버에서 예매 · 시간표</a>
+    </div>
+    <div class="book-row">
+      <a class="bk" href="https://www.youtube.com/results?search_query=${enc(m.t+" 예고편")}" target="_blank" rel="noopener">예고편</a>
+      <a class="bk" href="https://pedia.watcha.com/ko-KR/search?query=${enc(m.t)}" target="_blank" rel="noopener">OTT 찾기</a>
+    </div>
+  </div>
+</article>`).join("");
+
+const cards = [...grid.children];
+
+function apply(){
+  const q = qEl.value.trim().toLowerCase();
+  let n = 0;
+  cards.forEach(el => {
+    const ok = (active === "all" || el.dataset.k === active) &&
+               (!q || el.dataset.s.includes(q));
+    el.classList.toggle("hide", !ok);
+    if (ok) n++;
+  });
+  countEl.textContent = n + " / " + M.length + "편";
+  emptyEl.hidden = n > 0;
+}
+
+catsEl.addEventListener("click", e => {
+  const b = e.target.closest(".cat");
+  if (!b) return;
+  active = b.dataset.k;
+  [...catsEl.children].forEach(c => c.setAttribute("aria-pressed", c === b));
+  apply();
+});
+qEl.addEventListener("input", apply);
+apply();
+
+/* ── 상세 시트 ───────────────────────────── */
+const dlg = document.getElementById("sheet");
+const sheetIn = document.getElementById("sheetIn");
+
+function open(i){
+  const m = M[i];
+  sheetIn.innerHTML = `
+    <div class="sheet-top" style="--h:${m.hue}">
+      <button class="close" type="button" aria-label="닫기">&times;</button>
+      <h2>${m.t}</h2>
+      <p class="og">${m.o}</p>
+      <div class="facts">
+        <span class="fact">${m.y}</span>
+        <span class="fact">${m.r}분</span>
+        <span class="fact">${m.c}</span>
+        <span class="fact">감독 ${m.d}</span>
+        <span class="fact">${m.g}</span>
+        ${m.b ? `<span class="fact award">${m.b}</span>` : ""}
+      </div>
+    </div>
+    <div class="sheet-body">
+      <div class="blk"><h3>한 줄 요약</h3><p style="font-size:1.12rem;font-family:Hahmlet,serif;font-weight:500">${m.h}</p></div>
+      <div class="blk"><h3>줄거리</h3><p>${m.s}</p></div>
+      <div class="blk"><h3>이럴 때 보세요</h3><p class="why">${m.w}</p></div>
+      <div class="blk">
+        <h3>예매하러 가기</h3>
+        <div class="book-grid">
+          ${links(m).map(l => `
+          <a class="bkbig${l.hero ? " hero-book" : ""}" href="${l.u}" target="_blank" rel="noopener">
+            <b>${l.n}</b><span>${l.d}</span>
+          </a>`).join("")}
+        </div>
+      </div>
+    </div>`;
+  dlg.showModal();
+  dlg.querySelector(".close").addEventListener("click", () => dlg.close());
+}
+
+grid.addEventListener("click", e => {
+  const b = e.target.closest(".open-btn");
+  if (b) open(+b.closest(".ticket").dataset.i);
+});
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+document.getElementById("randomBtn").addEventListener("click", () => {
+  const pool = cards.filter(c => !c.classList.contains("hide"));
+  const el = pool.length ? pool[Math.floor(Math.random() * pool.length)] : cards[Math.floor(Math.random() * cards.length)];
+  open(+el.dataset.i);
+});
+
+/* ── 테마 토글 ───────────────────────────── */
+const root = document.documentElement;
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = root.getAttribute("data-theme") || (dark ? "dark" : "light");
+  root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+});
+</script>
