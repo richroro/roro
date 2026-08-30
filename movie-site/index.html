@@ -1,11 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>오늘 뭐 보지</title>
-<meta name="description" content="볼 만한 영화 40편을 한 줄로 훑고, CGV·롯데시네마·메가박스·네이버 예매로 바로 넘어가는 영화 큐레이션 사이트.">
+<title>오늘 뭐 보지 — 영화 추천과 예매를 한 번에</title>
+<meta name="description" content="지금 극장에 걸린 오디세이·스파이더맨 브랜드 뉴 데이부터 인생영화 41편까지. 한 줄로 감 잡고 CGV·롯데시네마·메가박스·네이버 예매로 바로 넘어갑니다.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="오늘 뭐 보지">
-<meta property="og:description" content="한 줄로 감 잡고, 그 자리에서 예매까지. 영화 40편 큐레이션 + 실시간 상영 정보.">
+<meta name="author" content="오늘 뭐 보지">
+<link rel="canonical" href="https://richroro.github.io/roro/movie-site/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:site_name" content="오늘 뭐 보지">
+<meta property="og:locale" content="ko_KR">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://richroro.github.io/roro/movie-site/">
+<meta property="og:title" content="오늘 뭐 보지 — 영화 추천과 예매를 한 번에">
+<meta property="og:description" content="오디세이·스파이더맨 브랜드 뉴 데이 등 지금 상영작 예매율부터 인생영화 41편 큐레이션까지. 고르고 바로 예매하세요.">
+<meta property="og:image" content="https://richroro.github.io/roro/movie-site/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="오늘 뭐 보지 — 영화 큐레이션과 예매 연결">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="오늘 뭐 보지 — 영화 추천과 예매를 한 번에">
+<meta name="twitter:description" content="지금 상영작 예매율부터 인생영화 41편까지. 고르고 바로 예매하세요.">
+<meta name="twitter:image" content="https://richroro.github.io/roro/movie-site/og.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
@@ -298,6 +317,12 @@ section{padding:3.6rem 0}
   font-family:"IBM Plex Mono",monospace;font-size:.625rem;letter-spacing:.06em;
   color:var(--velvet);border:1px solid currentColor;border-radius:2px;padding:.16rem .45rem;
 }
+.badge.now{
+  color:var(--accent);background:color-mix(in srgb, var(--accent) 13%, transparent);
+  display:inline-flex;align-items:center;gap:.36rem;
+}
+.badge.now i{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.28}}
 
 /* 절취선 */
 .perf{position:relative;height:0;border-top:1px dashed var(--line-strong);margin:0 .5rem}
@@ -395,6 +420,56 @@ dialog::backdrop{background:rgba(4,5,8,.82);backdrop-filter:blur(4px)}
 .bkbig span{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:var(--muted);letter-spacing:.06em}
 .bkbig.hero-book{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 12%, transparent)}
 
+/* ── 화제작 피처 ──────────────────────────── */
+.feature{
+  display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);
+  border:1px solid var(--line);background:var(--surface);margin-bottom:1.6rem;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.feature-key{
+  position:relative;padding:1.8rem 1.5rem;min-height:250px;
+  display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;
+  background:
+    radial-gradient(120% 90% at 50% 0%, hsl(var(--h) 42% var(--poster-l2)) 0%, transparent 62%),
+    linear-gradient(163deg, hsl(var(--h) 30% var(--poster-l1)) 0%, hsl(calc(var(--h) + 22) 46% var(--poster-l2)) 100%);
+}
+.feature-key::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:var(--grain);mix-blend-mode:overlay;
+}
+.feature-key .rank{
+  position:absolute;top:-.18em;right:.1em;z-index:1;
+  font-family:"Hahmlet",serif;font-weight:900;font-size:7rem;line-height:1;
+  color:rgba(255,255,255,.09);user-select:none;
+}
+.feature-key h3{position:relative;z-index:3;color:#F6F2EA;font-size:2rem;font-weight:900;letter-spacing:-.035em}
+.feature-key .og{
+  position:relative;z-index:3;margin-top:.5rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.16em;
+  color:rgba(246,242,234,.62);text-transform:uppercase;
+}
+.feature-body{padding:1.8rem 1.7rem;display:flex;flex-direction:column;gap:1rem}
+.feature-body > p{font-size:.93rem;line-height:1.78;max-width:58ch}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:.9rem 1.2rem;margin:0}
+.specs div{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.specs dt{
+  font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+}
+.specs dd{margin:0;font-size:.86rem;font-weight:500;letter-spacing:-.01em}
+.feature-cta{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.2rem}
+.rel{font-size:.8rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.4rem;align-items:baseline}
+.rel button{
+  font-size:.8rem;color:var(--accent);border-bottom:1px solid currentColor;padding:0;
+  transition:opacity .18s;
+}
+.rel button:hover{opacity:.65}
+@media (max-width:760px){
+  .feature{grid-template-columns:1fr}
+  .feature-key{min-height:170px;padding:1.4rem 1.25rem}
+  .feature-body{padding:1.4rem 1.25rem}
+}
+
 /* ── 지금 상영 중 (전광판) ────────────────── */
 .board{border:1px solid var(--line);background:var(--surface);overflow-x:auto}
 .board table{width:100%;border-collapse:collapse;min-width:640px}
@@ -449,6 +524,46 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
 }
 </style>
 
+<!-- 정적 구조화 데이터: JS를 실행하지 않는 크롤러(네이버 등)도 읽을 수 있게 핵심만 HTML에 직접 넣는다 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://richroro.github.io/roro/movie-site/#website",
+      "name": "오늘 뭐 보지",
+      "url": "https://richroro.github.io/roro/movie-site/",
+      "inLanguage": "ko",
+      "description": "지금 상영작 예매율과 인생영화 큐레이션을 한 화면에서 보고, CGV·롯데시네마·메가박스·네이버 예매로 바로 이동하는 영화 안내 사이트."
+    },
+    {
+      "@type": "Movie",
+      "name": "오디세이",
+      "alternateName": "The Odyssey",
+      "url": "https://richroro.github.io/roro/movie-site/",
+      "datePublished": "2026",
+      "duration": "PT173M",
+      "inLanguage": "en",
+      "genre": ["액션", "어드벤처", "서사"],
+      "director": {"@type": "Person", "name": "크리스토퍼 놀란"},
+      "actor": [
+        {"@type": "Person", "name": "맷 데이먼"},
+        {"@type": "Person", "name": "앤 해서웨이"},
+        {"@type": "Person", "name": "톰 홀랜드"},
+        {"@type": "Person", "name": "젠데이아"},
+        {"@type": "Person", "name": "로버트 패틴슨"},
+        {"@type": "Person", "name": "루피타 뇽오"},
+        {"@type": "Person", "name": "샤를리즈 테론"}
+      ],
+      "description": "트로이 전쟁을 끝낸 이타카의 왕 오디세우스가 신과 괴물이 가로막는 뱃길을 뚫고 고향으로 돌아간다. 크리스토퍼 놀란이 오펜하이머 이후 3년 만에 내놓은 신작이자 영화사 최초로 전편을 아이맥스 70mm 필름으로 촬영한 작품."
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
 <div class="marquee" aria-hidden="true"></div>
 
 <header class="top">
@@ -490,6 +605,35 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
         </div>
         <a class="btn btn-ghost" href="https://cgv.co.kr" target="_blank" rel="noopener">실시간 무비차트 열기</a>
       </div>
+
+      <article class="feature" style="--h:200">
+        <div class="feature-key">
+          <span class="rank mono" aria-hidden="true">01</span>
+          <h3>오디세이</h3>
+          <p class="og">The Odyssey · 2026</p>
+        </div>
+        <div class="feature-body">
+          <p class="eyebrow">예매율 1위 · 누적 604.9만</p>
+          <p>크리스토퍼 놀란이 <strong>오펜하이머</strong> 이후 3년 만에 내놓은 신작으로, 호메로스의 서사시를 스크린에 옮겼습니다. 트로이 전쟁을 끝낸 이타카의 왕 오디세우스가 신과 괴물이 가로막는 뱃길을 뚫고 고향으로 돌아가는 동안, 이타카에서는 아내 페넬로페에게 구혼자들이 몰려들고 아들 텔레마코스는 아버지를 찾아 떠납니다. 영화사상 처음으로 <strong>전편을 아이맥스 70mm 필름</strong>으로 촬영해, 상영관 선택이 곧 관람 경험을 가르는 작품입니다.</p>
+          <dl class="specs">
+            <div><dt>감독</dt><dd>크리스토퍼 놀란</dd></div>
+            <div><dt>주연</dt><dd>맷 데이먼 · 앤 해서웨이</dd></div>
+            <div><dt>함께 출연</dt><dd>톰 홀랜드 · 젠데이아 · 로버트 패틴슨</dd></div>
+            <div><dt>러닝타임</dt><dd>173분</dd></div>
+            <div><dt>제작비</dt><dd>2억 5천만 달러</dd></div>
+            <div><dt>포맷</dt><dd>IMAX 70mm</dd></div>
+          </dl>
+          <div class="feature-cta">
+            <a class="btn btn-solid" href="https://search.naver.com/search.naver?query=%EC%98%A4%EB%94%94%EC%84%B8%EC%9D%B4%20%EC%98%81%ED%99%94%20%EC%98%88%EB%A7%A4" target="_blank" rel="noopener">오디세이 예매 · 시간표</a>
+            <a class="btn btn-ghost" href="https://www.youtube.com/results?search_query=%EC%98%A4%EB%94%94%EC%84%B8%EC%9D%B4%20%EC%98%88%EA%B3%A0%ED%8E%B8" target="_blank" rel="noopener">예고편</a>
+          </div>
+          <p class="rel">놀란 감독의 다른 작품:
+            <button type="button" data-open="오펜하이머">오펜하이머</button>
+            <button type="button" data-open="인터스텔라">인터스텔라</button>
+            <button type="button" data-open="인셉션">인셉션</button>
+          </p>
+        </div>
+      </article>
 
       <div class="board">
         <table>
@@ -616,6 +760,11 @@ const CATS = [
 ];
 
 const M = [
+{t:"오디세이",o:"The Odyssey",y:2026,r:173,d:"크리스토퍼 놀란",c:"미국",g:"액션 · 서사",k:"blast",b:"영화사 최초 IMAX 70mm 전편 촬영",hue:200,now:true,
+ h:"트로이는 끝났다. 이제 집으로 돌아가는 여정이 시작된다.",
+ s:"트로이 전쟁을 끝낸 이타카의 왕 오디세우스가 고향으로 향한다. 신과 괴물, 마녀와 폭풍이 번갈아 뱃길을 막는 사이 이타카에서는 아내 페넬로페에게 구혼자들이 몰려들고, 아들 텔레마코스는 아버지를 찾아 떠난다.",
+ w:"놀란이 오펜하이머 이후 3년 만에 내놓은 신작이자, 영화사 최초로 전편을 아이맥스 70mm 필름으로 찍은 작품. 맷 데이먼(오디세우스), 앤 해서웨이(페넬로페), 톰 홀랜드(텔레마코스), 젠데이아(아테나), 로버트 패틴슨, 루피타 뇽오, 샤를리즈 테론이 한 화면에 모였다. 제작비 2억 5천만 달러로 놀란 필모 최대 규모. 아이맥스관을 잡을 수 있으면 무조건 그쪽으로."},
+
 {t:"기생충",o:"Parasite",y:2019,r:132,d:"봉준호",c:"한국",g:"드라마 · 스릴러",k:"korea",b:"칸 황금종려상 · 아카데미 4관왕",hue:12,
  h:"반지하에서 시작된 계획이, 계단을 오를수록 이상해진다.",
  s:"전원 백수인 기택네 장남이 명문가 박 사장 집 과외 자리를 얻으면서 두 가족의 삶이 겹치기 시작한다. 계획은 순조롭게 굴러가지만, 그 집 지하에는 아무도 몰랐던 것이 있었다.",
@@ -901,6 +1050,7 @@ grid.innerHTML = M.map((m,i) => `
   <div class="stub">
     <p class="meta">${m.y} · ${m.r}분 · ${m.d}</p>
     <p class="hook">${m.h}</p>
+    ${m.now ? `<span class="badge now"><i></i>지금 상영 중</span>` : ""}
     ${m.b ? `<span class="badge">${m.b}</span>` : ""}
   </div>
   <div class="perf"></div>
@@ -958,6 +1108,7 @@ function open(i){
         <span class="fact">${m.c}</span>
         <span class="fact">감독 ${m.d}</span>
         <span class="fact">${m.g}</span>
+        ${m.now ? `<span class="fact award">지금 상영 중</span>` : ""}
         ${m.b ? `<span class="fact award">${m.b}</span>` : ""}
       </div>
     </div>
@@ -985,11 +1136,77 @@ grid.addEventListener("click", e => {
 });
 dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
+/* 피처 블록의 관련작 → 해당 상세 열기 */
+document.querySelectorAll("[data-open]").forEach(b => {
+  b.addEventListener("click", () => {
+    const i = M.findIndex(m => m.t === b.dataset.open);
+    if (i > -1) open(i);
+  });
+});
+
 document.getElementById("randomBtn").addEventListener("click", () => {
   const pool = cards.filter(c => !c.classList.contains("hide"));
   const el = pool.length ? pool[Math.floor(Math.random() * pool.length)] : cards[Math.floor(Math.random() * cards.length)];
   open(+el.dataset.i);
 });
+
+/* ── 구조화 데이터 (JSON-LD) ──────────────────────────────────
+   검색엔진이 실제로 파싱하는 부분. 큐레이션 목록은 ItemList +
+   Movie 로, 사이트 자체는 WebSite 로 기술한다.
+   ─────────────────────────────────────────────────────────── */
+(() => {
+  const BASE = "https://richroro.github.io/roro/movie-site/";
+  const movie = m => {
+    const o = {
+      "@type": "Movie",
+      name: m.t,
+      alternateName: m.o,
+      description: m.s,
+      datePublished: String(m.y),
+      director: {"@type": "Person", name: m.d},
+      genre: m.g.split(" · "),
+      duration: "PT" + m.r + "M",
+      countryOfOrigin: {"@type": "Country", name: m.c}
+    };
+    if (m.b) o.award = m.b;
+    return o;
+  };
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "오늘 뭐 보지",
+      alternateName: "오늘 뭐 보지 — 영화 추천과 예매",
+      url: BASE,
+      inLanguage: "ko",
+      description: "지금 상영작 예매율과 인생영화 큐레이션을 한 화면에서 보고, CGV·롯데시네마·메가박스·네이버 예매로 바로 이동하는 영화 안내 사이트."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "지금 극장에 걸린 영화",
+      description: "CGV 무비차트 기준 예매율 순위",
+      numberOfItems: NOW.length,
+      itemListElement: NOW.map((n, i) => ({
+        "@type": "ListItem", position: i + 1,
+        item: {"@type": "Movie", name: n.t}
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "볼 만한 영화 큐레이션",
+      numberOfItems: M.length,
+      itemListElement: M.map((m, i) => ({
+        "@type": "ListItem", position: i + 1, item: movie(m)
+      }))
+    }
+  ];
+  const s = document.createElement("script");
+  s.type = "application/ld+json";
+  s.textContent = JSON.stringify(ld);
+  document.head.appendChild(s);
+})();
 
 /* ── 테마 토글 ───────────────────────────── */
 const root = document.documentElement;
@@ -999,3 +1216,6 @@ document.getElementById("themeBtn").addEventListener("click", () => {
   root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
 });
 </script>
+
+</body>
+</html>
