@@ -1,0 +1,63 @@
+name: Blogger Daily Publish
+
+# 매일 09:00 KST(00:00 UTC)에 큐의 맨 앞 글을 블로거에 공개 발행하고
+# Slack DM으로 알린다. PC 전원과 무관하게 GitHub 클라우드에서 실행된다.
+# 발행 후 queue/ 이동과 data/ 갱신을 다시 커밋해 중복 발행을 막는다.
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 00:00 UTC = 09:00 KST
+  workflow_dispatch: {}    # 수동 실행(테스트)용
+
+permissions:
+  contents: write          # 발행 후 queue/data 변경을 push 하기 위함
+
+concurrency:
+  group: blogger-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: Restore credentials from secrets
+        env:
+          BLOGGER_TOKEN_JSON: ${{ secrets.BLOGGER_TOKEN_JSON }}
+          BLOGGER_CONFIG_JSON: ${{ secrets.BLOGGER_CONFIG_JSON }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          set -e
+          SKILL=.claude/skills/blogger-auto-post
+          mkdir -p "$SKILL/secrets" slackbot
+          printf '%s' "$BLOGGER_TOKEN_JSON"  > "$SKILL/secrets/token.json"
+          printf '%s' "$BLOGGER_CONFIG_JSON" > "$SKILL/secrets/config.json"
+          printf 'SLACK_BOT_TOKEN=%s\n' "$SLACK_BOT_TOKEN" > slackbot/.env
+          # sanity check (값은 출력하지 않음)
+          python -c "import json;json.load(open('$SKILL/secrets/token.json'));json.load(open('$SKILL/secrets/config.json'));print('secrets OK')"
+
+      - name: Publish next queued post
+        run: python .claude/skills/blogger-auto-post/scripts/daily_post.py
+
+      - name: Commit queue/data changes
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/blogger-auto-post/queue .claude/skills/blogger-auto-post/data
+          if git diff --cached --quiet; then
+            echo "커밋할 queue/data 변경 없음."
+          else
+            git commit -m "chore(blogger): daily publish [skip ci]"
+            git push
+          fi

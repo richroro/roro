@@ -32,10 +32,13 @@ TOKEN_PATH = SECRETS_DIR / "token.json"
 REPO_ROOT = SKILL_DIR.parents[2]
 SLACK_ENV_PATH = REPO_ROOT / "slackbot" / ".env"
 
-# Data files (gitignored, live under secrets/): what we published and how the
-# blog's traffic moved over time. Used to steer future content by demand.
-POSTED_LOG_PATH = SECRETS_DIR / "posted_log.json"
-STATS_HISTORY_PATH = SECRETS_DIR / "stats_history.json"
+# Data files: what we published and how the blog's traffic moved over time.
+# These live under data/ (git-TRACKED, not secret) so both the local machine
+# and the GitHub Actions runner share the same history and it persists across
+# CI runs. Content here (titles, URLs, view counts) is public, not sensitive.
+DATA_DIR = SKILL_DIR / "data"
+POSTED_LOG_PATH = DATA_DIR / "posted_log.json"
+STATS_HISTORY_PATH = DATA_DIR / "stats_history.json"
 
 # Blogger needs full scope to publish; readonly is not enough for posts.insert.
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
@@ -67,7 +70,7 @@ def read_json_list(path):
 
 
 def append_json_list(path, entry):
-    SECRETS_DIR.mkdir(parents=True, exist_ok=True)
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     items = read_json_list(path)
     items.append(entry)
     Path(path).write_text(

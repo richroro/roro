@@ -9,10 +9,10 @@ slackbot/.env
 slackbot/bot.log
 shorts_output/
 
-# blogger-auto-post: keep secrets and runtime artifacts out of git
+# blogger-auto-post: keep secrets and runtime artifacts out of git.
+# queue/ and data/ ARE tracked so GitHub Actions can publish from them.
 .claude/skills/blogger-auto-post/secrets/
 .claude/skills/blogger-auto-post/topics.txt
-.claude/skills/blogger-auto-post/queue/
 .claude/skills/blogger-auto-post/scripts/daily_post.log
 .claude/skills/blogger-auto-post/scripts/__pycache__/
 
