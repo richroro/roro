@@ -599,11 +599,11 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <p class="eyebrow">CGV 무비차트 기준</p>
+          <p class="eyebrow">영화진흥위원회 집계 · 매일 갱신</p>
           <h2>이번 주 극장에 걸린 것들</h2>
-          <p>예매율은 지금 사람들이 어디로 몰리는지를 가장 정확하게 보여주는 숫자입니다. 제목을 누르면 세 극장 시간표를 한 화면에서 비교할 수 있습니다.</p>
+          <p>전국 극장의 실제 발권 기록을 모으는 영화관입장권 통합전산망 집계입니다. 관객 점유율은 지금 사람들이 어디로 몰리는지를 그대로 보여줍니다. 제목을 누르면 세 극장 시간표를 한 화면에서 비교할 수 있습니다.</p>
         </div>
-        <a class="btn btn-ghost" href="https://cgv.co.kr" target="_blank" rel="noopener">실시간 무비차트 열기</a>
+        <a class="btn btn-ghost" href="https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do" target="_blank" rel="noopener">영진위 원본 보기</a>
       </div>
 
       <article class="feature" style="--h:200">
@@ -613,7 +613,7 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
           <p class="og">The Odyssey · 2026</p>
         </div>
         <div class="feature-body">
-          <p class="eyebrow">예매율 1위 · 누적 604.9만</p>
+          <p class="eyebrow">박스오피스 1위 · 누적 946만 관객</p>
           <p>크리스토퍼 놀란이 <strong>오펜하이머</strong> 이후 3년 만에 내놓은 신작으로, 호메로스의 서사시를 스크린에 옮겼습니다. 트로이 전쟁을 끝낸 이타카의 왕 오디세우스가 신과 괴물이 가로막는 뱃길을 뚫고 고향으로 돌아가는 동안, 이타카에서는 아내 페넬로페에게 구혼자들이 몰려들고 아들 텔레마코스는 아버지를 찾아 떠납니다. 영화사상 처음으로 <strong>전편을 아이맥스 70mm 필름</strong>으로 촬영해, 상영관 선택이 곧 관람 경험을 가르는 작품입니다.</p>
           <dl class="specs">
             <div><dt>감독</dt><dd>크리스토퍼 놀란</dd></div>
@@ -644,7 +644,7 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
             <tr>
               <th scope="col">순위</th>
               <th scope="col">작품</th>
-              <th scope="col">예매율</th>
+              <th scope="col" id="boardHead">점유율</th>
               <th scope="col">누적 관객</th>
               <th scope="col"><span class="sr-only">예매</span>시간표</th>
             </tr>
@@ -652,7 +652,7 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0 3.4rem;margin-top:2rem}
           <tbody id="board"></tbody>
         </table>
       </div>
-      <p class="snap"><span class="dot"></span> 2026년 8월 22일 확인한 값입니다. 예매율과 관객 수는 시시각각 바뀌니, 정확한 현재 수치는 위 무비차트에서 확인하세요.</p>
+      <p class="snap"><span class="dot"></span> <span id="snapNote">불러오는 중…</span></p>
     </div>
   </section>
 
@@ -1012,35 +1012,54 @@ function links(m){
    2026-08-22 CGV 무비차트에서 확인한 스냅샷.
    share = 예매율(%), acc = 누적 관객, soon = 개봉/재개봉 예정 표기
    ─────────────────────────────────────────────────────────── */
+const SNAP_DATE = "2026년 9월 4일";
 const NOW = [
-  {t:"오디세이",                                 share:73.2, acc:"604.9만"},
-  {t:"스파이더맨: 브랜드 뉴 데이",                  share:13.6, acc:"781.3만"},
-  {t:"인시디어스: 그들이 넘어왔다",                 share:1.9,  acc:"4.2만"},
-  {t:"사랑의 하츄핑: 고래보석의 전설",              share:1.8,  acc:"72.4만"},
-  {t:"경주기행",                                 share:1.6,  acc:"—", soon:"8/26 개봉"},
-  {t:"명탐정 코난: 하이웨이의 타천사",              share:1.4,  acc:"31.6만"},
-  {t:"오크 스트리트의 마지막 날",                   share:1.0,  acc:"—", soon:"8/26 개봉"},
-  {t:"오케이 마담2",                              share:1.0,  acc:"28만"},
-  {t:"마루 밑 아리에티",                           share:0.9,  acc:"107.7만"},
-  {t:"터치드 콘서트: 하이라이트 포 더 무비",          share:0.6,  acc:"—", soon:"8/26 개봉"},
-  {t:"위커 맨: 파이널 컷",                         share:0.3,  acc:"5,150"},
-  {t:"어떻게 해야 했을까",                          share:0.2,  acc:"7.9만"},
-  {t:"퍼피 구조대: 더 다이노 무비",                  share:0.2,  acc:"7.6만"},
-  {t:"극장판 귀멸의 칼날: 무한성편",                 share:0.2,  acc:"—", soon:"8/26 재개봉"},
-  {t:"에이티즈: 라이트 더 웨이 인 시네마",            share:0.2,  acc:"3,345"}
+  {rank:1,  t:"오디세이",                    share:58.9, acc:"946.7만"},
+  {rank:2,  t:"옵세션",                      share:12.3, acc:"7.8만"},
+  {rank:3,  t:"스파이더맨: 브랜드 뉴 데이",     share:8.8,  acc:"867.3만"},
+  {rank:4,  t:"경주기행",                     share:3.9,  acc:"26만"},
+  {rank:5,  t:"비광",                        share:3.4,  acc:"4.1만"},
+  {rank:6,  t:"싱 어게인",                    share:3.1,  acc:"3.1만"},
+  {rank:7,  t:"인턴",                        share:3.1,  acc:"8,610", soon:"9/16 개봉"},
+  {rank:8,  t:"오크 스트리트의 마지막 날",       share:0.8,  acc:"12.5만"},
+  {rank:9,  t:"명탐정 코난: 하이웨이의 타천사",   share:0.7,  acc:"41.5만"},
+  {rank:10, t:"인 더 그레이",                  share:0.4,  acc:"5,695"}
 ];
-const topShare = Math.max(...NOW.map(n => n.share));
-document.getElementById("board").innerHTML = NOW.map((n, i) => {
-  const w = Math.max(3, Math.pow(n.share / topShare, .45) * 100);
-  const url = "https://search.naver.com/search.naver?query=" + enc(n.t + " 영화 예매");
-  return `<tr>
-    <td class="rk${i < 3 ? " top" : ""}">${String(i + 1).padStart(2, "0")}</td>
-    <td class="nm">${n.t}${n.soon ? `<span class="soon">${n.soon}</span>` : ""}</td>
-    <td><div class="share"><div class="bar"><i style="width:${w.toFixed(1)}%"></i></div><b>${n.share.toFixed(1)}%</b></div></td>
-    <td class="acc">${n.acc}</td>
-    <td><a class="go" href="${url}" target="_blank" rel="noopener">시간표 · 예매</a></td>
-  </tr>`;
-}).join("");
+/* 관객 수를 "946.7만 / 7.8만 / 5,695" 처럼 읽기 좋게 */
+const fmtAudience = n =>
+  n >= 10000 ? (n / 10000).toFixed(1).replace(/\.0$/, "") + "만" : n.toLocaleString("ko-KR");
+
+function renderBoard(rows, meta) {
+  const top = Math.max(...rows.map(r => r.share)) || 1;
+  document.getElementById("board").innerHTML = rows.map((r, i) => {
+    const w = Math.max(3, Math.pow(r.share / top, .45) * 100);
+    const url = "https://search.naver.com/search.naver?query=" + enc(r.t + " 영화 예매");
+    return `<tr>
+      <td class="rk${i < 3 ? " top" : ""}">${String(r.rank ?? i + 1).padStart(2, "0")}</td>
+      <td class="nm">${r.t}${r.soon ? `<span class="soon">${r.soon}</span>` : ""}</td>
+      <td><div class="share"><div class="bar"><i style="width:${w.toFixed(1)}%"></i></div><b>${r.share.toFixed(1)}%</b></div></td>
+      <td class="acc">${r.acc}</td>
+      <td><a class="go" href="${url}" target="_blank" rel="noopener">시간표 · 예매</a></td>
+    </tr>`;
+  }).join("");
+  document.getElementById("snapNote").innerHTML = meta;
+}
+
+/* 먼저 내장 스냅샷으로 그려두고, data.json 이 오면 최신값으로 교체한다.
+   자동 갱신이 멈추거나 파일을 못 읽어도 화면은 비지 않는다. */
+renderBoard(NOW, `${SNAP_DATE} 기준입니다. 정확한 현재 수치는 위 무비차트에서 확인하세요.`);
+
+fetch("data.json", {cache: "no-cache"})
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(d => {
+    if (!d.rows || !d.rows.length) return;
+    renderBoard(
+      d.rows.map(r => ({rank: r.rank, t: r.title, share: r.share, acc: fmtAudience(r.total)})),
+      `<strong>${d.date}</strong> 집계 · ${d.source}. 매일 자동으로 갱신됩니다.`
+    );
+    document.getElementById("boardHead").textContent = "점유율";
+  })
+  .catch(() => { /* 스냅샷이 그대로 남는다 */ });
 
 /* ── 렌더 ────────────────────────────────── */
 const grid = document.getElementById("grid");

@@ -1,0 +1,43 @@
+name: Update movie-site box office
+
+# 영진위 일별 박스오피스는 전날 집계가 오전에 확정된다.
+# KST 09:20 (UTC 00:20) 에 받아 movie-site/data.json 을 갱신한다.
+on:
+  schedule:
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: movie-boxoffice
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: add-blogger-auto-post-skill
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch daily box office
+        run: python movie-site/scripts/fetch_boxoffice.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- movie-site/data.json; then
+            echo "변동 없음 — 커밋 생략"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          DATE=$(python -c "import json;print(json.load(open('movie-site/data.json',encoding='utf-8'))['date'])")
+          git add movie-site/data.json
+          git commit -m "Update movie-site box office for ${DATE}"
+          git push
