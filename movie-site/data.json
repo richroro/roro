@@ -1,6 +1,6 @@
 {
   "date": "2026-09-04",
-  "updated": "2026-09-05T05:48:39+00:00",
+  "updated": "2026-09-05T05:52:04+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -60,7 +60,7 @@
     },
     {
       "rank": 7,
-      "title": "인턴 New",
+      "title": "인턴",
       "open": "2026-09-16",
       "share": 3.1,
       "audience": 8610,
