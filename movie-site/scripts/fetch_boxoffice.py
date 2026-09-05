@@ -110,6 +110,17 @@ def main() -> int:
             print(f"[info] {day} 데이터 없음, 하루 더 거슬러 올라감", file=sys.stderr)
             continue
 
+        # 집계일과 순위가 그대로면 파일을 건드리지 않는다.
+        # updated 타임스탬프만 바뀌어 매일 빈 커밋이 쌓이는 걸 막는다.
+        if OUT.exists():
+            try:
+                old = json.loads(OUT.read_text(encoding="utf-8"))
+                if old.get("date") == day and old.get("rows") == rows:
+                    print(f"[skip] {day} 데이터가 이전과 동일 — 파일 유지")
+                    return 0
+            except (json.JSONDecodeError, OSError):
+                pass  # 깨진 파일이면 새로 쓴다
+
         payload = {
             "date": day,
             "updated": datetime.datetime.now(datetime.timezone.utc)
