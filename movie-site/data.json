@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-04",
+  "updated": "2026-09-05T05:52:53+00:00",
+  "source": "영화진흥위원회 영화관입장권 통합전산망",
+  "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
+  "rows": [
+    {
+      "rank": 1,
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 58.9,
+      "audience": 137408,
+      "total": 9467013,
+      "screens": 1701
+    },
+    {
+      "rank": 2,
+      "title": "옵세션",
+      "open": "2026-09-02",
+      "share": 12.3,
+      "audience": 31564,
+      "total": 78217,
+      "screens": 637
+    },
+    {
+      "rank": 3,
+      "title": "스파이더맨: 브랜드 뉴 데이",
+      "open": "2026-07-29",
+      "share": 8.8,
+      "audience": 28120,
+      "total": 8673477,
+      "screens": 705
+    },
+    {
+      "rank": 4,
+      "title": "경주기행",
+      "open": "2026-08-26",
+      "share": 3.9,
+      "audience": 11941,
+      "total": 260119,
+      "screens": 602
+    },
+    {
+      "rank": 5,
+      "title": "비광",
+      "open": "2026-09-02",
+      "share": 3.4,
+      "audience": 10542,
+      "total": 41099,
+      "screens": 634
+    },
+    {
+      "rank": 6,
+      "title": "싱 어게인",
+      "open": "2026-09-02",
+      "share": 3.1,
+      "audience": 9096,
+      "total": 30645,
+      "screens": 591
+    },
+    {
+      "rank": 7,
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 3.1,
+      "audience": 8610,
+      "total": 8610,
+      "screens": 38
+    },
+    {
+      "rank": 8,
+      "title": "오크 스트리트의 마지막 날",
+      "open": "2026-08-26",
+      "share": 0.8,
+      "audience": 2229,
+      "total": 125222,
+      "screens": 268
+    },
+    {
+      "rank": 9,
+      "title": "명탐정 코난: 하이웨이의 타천사",
+      "open": "2026-08-12",
+      "share": 0.7,
+      "audience": 1847,
+      "total": 414524,
+      "screens": 191
+    },
+    {
+      "rank": 10,
+      "title": "인 더 그레이",
+      "open": "2026-09-02",
+      "share": 0.4,
+      "audience": 1242,
+      "total": 5695,
+      "screens": 148
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "updatedAt": "2026-08-15T17:42:42.260666+09:00",
+  "indices": [
+    {
+      "symbol": "^KS11",
+      "name": "KOSPI",
+      "price": 6977.94,
+      "change": 164.6,
+      "changePercent": 2.42,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^KQ11",
+      "name": "KOSDAQ",
+      "price": 864.65,
+      "change": 3.28,
+      "changePercent": 0.38,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^DJI",
+      "name": "다우존스",
+      "price": 53732.41,
+      "change": -107.59,
+      "changePercent": -0.2,
+      "currency": "USD"
+    },
+    {
+      "symbol": "^IXIC",
+      "name": "나스닥",
+      "price": 26729.16,
+      "change": -73.86,
+      "changePercent": -0.28,
+      "currency": "USD"
+    }
+  ],
+  "fx": [
+    {
+      "symbol": "KRW=X",
+      "name": "USD/KRW",
+      "price": 1412.0,
+      "change": -6.13,
+      "changePercent": -0.43,
+      "currency": "KRW"
+    }
+  ],
+  "stocks": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "price": 274500.0,
+      "change": 6500.0,
+      "changePercent": 2.43,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "price": 1645000.0,
+      "change": 52000.0,
+      "changePercent": 3.26,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "price": 228000.0,
+      "change": 1500.0,
+      "changePercent": 0.66,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035720.KS",
+      "name": "카카오",
+      "price": 40000.0,
+      "change": -100.0,
+      "changePercent": -0.25,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "373220.KS",
+      "name": "LG에너지솔루션",
+      "price": 369500.0,
+      "change": 4000.0,
+      "changePercent": 1.09,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "price": 305.93,
+      "change": 0.67,
+      "changePercent": 0.22,
+      "currency": "USD"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "price": 342.27,
+      "change": 2.31,
+      "changePercent": 0.68,
+      "currency": "USD"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "price": 225.16,
+      "change": -0.14,
+      "changePercent": -0.06,
+      "currency": "USD"
+    }
+  ],
+  "news": [
+    {
+      "title": "\"아이폰만 쓰는 줄 알았는데\"…젠슨 황이 꺼낸 '이 폰'의 반전 [갤럭시 중간결산(下)]",
+      "link": "https://www.hankyung.com/article/202608141499g",
+      "pubDate": "Sat, 15 Aug 2026 16:14:18 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "서울시 이어 용산구도 \"용산공원 주택공급 검토 강력 반대\"",
+      "link": "https://www.yna.co.kr/view/AKR20260815034500004",
+      "pubDate": "Sat, 15 Aug 2026 14:45:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[동포의 창]\"한상 네트워크 활용해 韓 기업-파라과이 시장 연결\"",
+      "link": "https://www.yna.co.kr/view/AKR20260815034000371",
+      "pubDate": "Sat, 15 Aug 2026 14:32:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'최태원의 전략통'…SK하이닉스 AI 신사업 발굴 맡은 기타리스트 [강경주의 테크X]",
+      "link": "https://www.hankyung.com/article/2026081425646",
+      "pubDate": "Sat, 15 Aug 2026 14:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[부고] 박세혁(금융감독원 증권거래감독팀장)씨 모친상",
+      "link": "https://www.yna.co.kr/view/AKR20260815032200002",
+      "pubDate": "Sat, 15 Aug 2026 13:34:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성도 반했던 '엘리트 배우'였는데…광고계 줄줄이 '손절' [김소연의 주님픽톡]",
+      "link": "https://www.hankyung.com/article/202608138017g",
+      "pubDate": "Sat, 15 Aug 2026 13:00:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"그때 대통령 말 들을걸\"…삼전 30배·서울 집 3배 '탄식'",
+      "link": "https://www.hankyung.com/article/202608142023H",
+      "pubDate": "Sat, 15 Aug 2026 12:16:26 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "여한구 통상교섭본부장 직권면직…통상 사령탑 돌연 공석",
+      "link": "https://www.hankyung.com/article/202608153191i",
+      "pubDate": "Sat, 15 Aug 2026 11:51:33 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'통상 사령탑' 여한구 통상교섭본부장 전격 경질 [종합]",
+      "link": "https://www.hankyung.com/article/2026081531687",
+      "pubDate": "Sat, 15 Aug 2026 11:16:59 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "통상 사령탑 여한구 산업부 통상교섭본부장 경질(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260815020751003",
+      "pubDate": "Sat, 15 Aug 2026 10:44:39 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'한미 관세협상 수장' 여한구 통상교섭본부장 경질",
+      "link": "https://www.hankyung.com/article/2026081531347",
+      "pubDate": "Sat, 15 Aug 2026 10:33:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "기술수출·신약이 끌었다…제약·바이오 2분기 '호실적'",
+      "link": "https://www.yna.co.kr/view/AKR20260814115200017",
+      "pubDate": "Sat, 15 Aug 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20260815023800011",
+      "pubDate": "Sat, 15 Aug 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상반기 호실적에 하루 만에 6.1% 오른 DB손보",
+      "link": "https://www.hankyung.com/article/202608141821i",
+      "pubDate": "Sat, 15 Aug 2026 10:13:48 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"90세까지 연 1억씩 쓰고 싶다\"…대기업 임원의 은퇴 설계",
+      "link": "https://www.hankyung.com/article/202608139804i",
+      "pubDate": "Sat, 15 Aug 2026 10:13:33 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "AI에 잡아먹힌다더니...월가가 다시 베팅을 시작했다 [빈난새의 빈틈없이마켓]",
+      "link": "https://www.hankyung.com/article/202608142436i",
+      "pubDate": "Sat, 15 Aug 2026 10:00:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "中, 장쩌민 탄생 100주년 기념주화 발행…금·은화 등 4종",
+      "link": "https://www.yna.co.kr/view/AKR20260815021000083",
+      "pubDate": "Sat, 15 Aug 2026 09:52:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "통상 사령탑 여한구 산업부 통상교섭본부장 경질",
+      "link": "https://www.yna.co.kr/view/AKR20260815020700003",
+      "pubDate": "Sat, 15 Aug 2026 09:48:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[IPO챗] 인제니아·기도산업, 다음주 코스닥 입성",
+      "link": "https://www.yna.co.kr/view/AKR20260814117900008",
+      "pubDate": "Sat, 15 Aug 2026 09:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목",
+      "link": "https://www.yna.co.kr/view/AKR20260815011500002",
+      "pubDate": "Sat, 15 Aug 2026 08:54:19 +0900",
+      "source": "연합뉴스"
+    }
+  ]
+}
