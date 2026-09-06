@@ -1,0 +1,40 @@
+name: Update longterm data
+
+on:
+  schedule:
+    # 장기 데이터라 하루 두 번이면 충분하다 (KST 07:20 / 19:20)
+    - cron: "20 22 * * *"
+    - cron: "20 10 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 사이트와 스크립트는 이 브랜치에만 있다. 워크플로는 main 에서
+          # 실행되므로 대상 브랜치를 명시적으로 체크아웃해야 한다.
+          ref: add-blogger-auto-post-skill
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch long-term investing data
+        run: python scripts/update_longterm_data.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- longterm/data.json; then
+            echo "no changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add longterm/data.json
+          git commit -m "chore: update longterm data [skip ci]"
+          git push
