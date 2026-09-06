@@ -1,8 +1,10 @@
-name: Update market data
+name: Update longterm data
 
 on:
   schedule:
-    - cron: "5 * * * *" # 매시 5분에 실행 (KST 기준 시:05)
+    # 장기 데이터라 하루 두 번이면 충분하다 (KST 07:20 / 19:20)
+    - cron: "20 22 * * *"
+    - cron: "20 10 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -22,17 +24,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch news & stock data
-        run: python scripts/update_market_data.py
+      - name: Fetch long-term investing data
+        run: python scripts/update_longterm_data.py
 
       - name: Commit if changed
         run: |
-          if git diff --quiet -- market/data.json; then
+          if git diff --quiet -- longterm/data.json; then
             echo "no changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add market/data.json
-          git commit -m "chore: update market data [skip ci]"
+          git add longterm/data.json
+          git commit -m "chore: update longterm data [skip ci]"
           git push

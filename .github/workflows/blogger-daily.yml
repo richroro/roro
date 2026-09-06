@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # 사이트와 스크립트는 이 브랜치에만 있다. 워크플로는 main 에서
+          # 실행되므로 대상 브랜치를 명시적으로 체크아웃해야 한다.
+          ref: add-blogger-auto-post-skill
 
       - name: Set up Python
         uses: actions/setup-python@v5
