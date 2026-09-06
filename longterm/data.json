@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-06T22:43:43.122596+09:00",
+ "updatedAt": "2026-09-07T08:57:56.379361+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -310,8 +310,8 @@
    "fromHigh": -21.11,
    "week52": {
     "high": 9385.59,
-    "low": 3206.34,
-    "position": 56.3
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": null,
@@ -405,8 +405,8 @@
    "fromHigh": -31.8,
    "week52": {
     "high": 1229.42,
-    "low": 630.99,
-    "position": 30.5
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": null,
@@ -1046,7 +1046,6 @@
     "position": 96.6
    },
    "valuation": {
-    "per": 23.26,
     "marketCap": 101083611136,
     "beta": 0.98
    },
@@ -1586,8 +1585,8 @@
    "fromHigh": -23.71,
    "week52": {
     "high": 152455.0,
-    "low": 43440.0,
-    "position": 57.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 0.8,
@@ -1727,8 +1726,8 @@
    "fromHigh": -9.55,
    "week52": {
     "high": 26440.0,
-    "low": 20535.0,
-    "position": 52.2
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 2.03,
@@ -1836,8 +1835,8 @@
    "fromHigh": -13.68,
    "week52": {
     "high": 208900.0,
-    "low": 146065.0,
-    "position": 49.2
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 0.53,
@@ -1973,8 +1972,8 @@
    "fromHigh": -4.89,
    "week52": {
     "high": 15975.0,
-    "low": 11960.0,
-    "position": 74.8
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 2.89,
@@ -2077,7 +2076,7 @@
     "forwardPer": 33.42,
     "pbr": 43.47,
     "psr": 10.0,
-    "peg": 2.58,
+    "peg": 2.52,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 4669700046848,
@@ -2234,7 +2233,7 @@
     "forwardPer": 21.2,
     "pbr": 8.39,
     "psr": 11.18,
-    "peg": 1.66,
+    "peg": 1.62,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3710545297408,
@@ -2391,7 +2390,7 @@
     "forwardPer": 22.79,
     "pbr": 6.65,
     "psr": 9.28,
-    "peg": 1.24,
+    "peg": 1.25,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4139343675392,
@@ -2515,7 +2514,7 @@
     "forwardPer": 24.86,
     "pbr": 5.05,
     "psr": 3.59,
-    "peg": 1.52,
+    "peg": 1.51,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2788369891328,
@@ -2621,7 +2620,7 @@
     "forwardPer": 14.9,
     "pbr": 24.29,
     "psr": 18.36,
-    "peg": 0.58,
+    "peg": 0.59,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 5562502742016,
@@ -2884,7 +2883,7 @@
     "forwardPer": 22.36,
     "pbr": 7.8,
     "psr": 6.77,
-    "peg": 4.44,
+    "peg": 4.38,
     "roe": 25.74,
     "margin": 21.48,
     "marketCap": 663276421120,
@@ -3041,10 +3040,10 @@
     "forwardPer": 19.79,
     "pbr": 6.38,
     "psr": 3.91,
-    "peg": 3.76,
+    "peg": 3.75,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 340389986304,
+    "marketCap": 340132134912,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -3198,7 +3197,7 @@
     "forwardPer": 24.97,
     "pbr": 10.48,
     "psr": 7.56,
-    "peg": 4.03,
+    "peg": 4.0,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 378925481984,
@@ -3355,7 +3354,7 @@
     "forwardPer": 15.33,
     "pbr": 8.51,
     "psr": 1.94,
-    "peg": 1.43,
+    "peg": 1.41,
     "roe": 51.51,
     "margin": 10.79,
     "marketCap": 188002582528,
@@ -3511,7 +3510,7 @@
     "per": 20.79,
     "forwardPer": 18.29,
     "psr": 6.53,
-    "peg": 2.24,
+    "peg": 2.21,
     "margin": 31.72,
     "marketCap": 180936867840,
     "beta": 0.41,
@@ -3667,7 +3666,7 @@
     "forwardPer": 25.0,
     "pbr": 19.88,
     "psr": 15.74,
-    "peg": 1.69,
+    "peg": 1.7,
     "roe": 61.19,
     "margin": 50.78,
     "marketCap": 700273459200,
@@ -3824,7 +3823,7 @@
     "forwardPer": 14.34,
     "pbr": 2.7,
     "psr": 5.12,
-    "peg": 1.68,
+    "peg": 1.67,
     "roe": 17.79,
     "margin": 34.92,
     "marketCap": 953331941376,
@@ -3981,7 +3980,7 @@
     "forwardPer": 14.79,
     "pbr": 2.53,
     "psr": 1.82,
-    "peg": 1.39,
+    "peg": 1.37,
     "roe": 12.58,
     "margin": 9.07,
     "marketCap": 655726608384,
@@ -3989,7 +3988,7 @@
     "payout": 52.51,
     "avgYield5y": 3.7
    },
-   "dividendYield": 2.58,
+   "dividendYield": 2.54,
    "dividend": {
     "ttm": 4.12,
     "yieldTtm": 2.58,
@@ -4130,8 +4129,8 @@
    "fromHigh": -23.5,
    "week52": {
     "high": 374500.0,
-    "low": 69600.0,
-    "position": 61.0
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 3.68,
@@ -4285,8 +4284,8 @@
    "fromHigh": -37.85,
    "week52": {
     "high": 2987000.0,
-    "low": 274000.0,
-    "position": 50.6
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 3.5,
@@ -4440,8 +4439,8 @@
    "fromHigh": -46.96,
    "week52": {
     "high": 783000.0,
-    "low": 213000.0,
-    "position": 29.9
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 7.89,
@@ -4595,8 +4594,8 @@
    "fromHigh": -38.44,
    "week52": {
     "high": 212500.0,
-    "low": 100000.0,
-    "position": 23.6
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 5.31,
@@ -4746,8 +4745,8 @@
    "fromHigh": -45.05,
    "week52": {
     "high": 822000.0,
-    "low": 283000.0,
-    "position": 25.8
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 7.98,
@@ -4901,8 +4900,8 @@
    "fromHigh": -51.37,
    "week52": {
     "high": 304000.0,
-    "low": 181100.0,
-    "position": 26.4
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 14.48,
@@ -5052,8 +5051,8 @@
    "fromHigh": -69.74,
    "week52": {
     "high": 437500.0,
-    "low": 224000.0,
-    "position": 27.2
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 12.84,
@@ -5203,8 +5202,8 @@
    "fromHigh": -47.51,
    "week52": {
     "high": 542000.0,
-    "low": 258500.0,
-    "position": 27.7
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 11.55,
@@ -5358,8 +5357,8 @@
    "fromHigh": -0.75,
    "week52": {
     "high": 194500.0,
-    "low": 105800.0,
-    "position": 74.6
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 8.63,
@@ -5513,8 +5512,8 @@
    "fromHigh": 0.0,
    "week52": {
     "high": 115900.0,
-    "low": 63700.0,
-    "position": 89.3
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 8.02,
@@ -5668,8 +5667,8 @@
    "fromHigh": -7.78,
    "week52": {
     "high": 41500.0,
-    "low": 23750.0,
-    "position": 53.2
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 6.72,
@@ -5811,8 +5810,8 @@
    "fromHigh": -6.61,
    "week52": {
     "high": 192400.0,
-    "low": 129700.0,
-    "position": 68.3
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 12.35,
@@ -5966,8 +5965,8 @@
    "fromHigh": -8.05,
    "week52": {
     "high": 139500.0,
-    "low": 51400.0,
-    "position": 46.7
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 14.57,
@@ -6121,8 +6120,8 @@
    "fromHigh": -14.89,
    "week52": {
     "high": 69400.0,
-    "low": 48100.0,
-    "position": 29.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 8.45,
@@ -6255,10 +6254,64 @@
  ],
  "news": [
   {
+   "title": "210만원→100만원대…닉스·SK스퀘어 주가, 폭등 뒤 폭락 ‘한몸’",
+   "link": "https://www.mk.co.kr/news/stock/12145692",
+   "pubDate": "Mon, 07 Sep 2026 08:47:43 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“7000피 갈래, 6200피 갈래?”…이번주 코스피 ‘운명의 한주’",
+   "link": "https://www.mk.co.kr/news/stock/12145683",
+   "pubDate": "Mon, 07 Sep 2026 08:33:24 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“NHN, 목표가 8만원 간다”…한국투자증권, 27% 상향 조정 이유는",
+   "link": "https://www.mk.co.kr/news/stock/12145657",
+   "pubDate": "Mon, 07 Sep 2026 07:35:34 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "강력한 고용지표 뚫고 급등한 반도체 주가... 챗GPT ASTRA 마법의 시작인가",
+   "link": "https://www.mk.co.kr/news/stock/12145410",
+   "pubDate": "Mon, 07 Sep 2026 04:00:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "SK證 “K뷰티 미국·유럽 성장 이제 시작…주가는 부담\"",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/07/MI4TAYRQMIZGKMJVMI3GMNZXHE/",
+   "pubDate": "Sun, 06 Sep 2026 23:20:36 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "KB證 “CJ CGV, 국민성장펀드 투자 유치·강한 극장 수요…목표가↑”",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/07/MJQTCNJVMVSGEMBUGA4DAYJZGI/",
+   "pubDate": "Sun, 06 Sep 2026 23:00:33 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "원금 2.6배 불어나는 퇴직연금 국채… 예금 대신 담아볼까",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/07/K5DCPO3G5JH3BG6K3KRUFNF6OA/",
+   "pubDate": "Sun, 06 Sep 2026 21:59:42 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "추락하나했더니 ‘주가 재추진’…시총 2조달러 재입성한 스페이스X",
    "link": "https://www.mk.co.kr/news/stock/12145621",
    "pubDate": "Sun, 06 Sep 2026 21:42:49 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "역대 최대 실적 낸 은행들, 채용문 좁히고 알짜부동산 내놓는 이유",
+   "link": "https://www.chosun.com/economy/realty/realestate_finance/2026/09/07/HEYWMMRSMRSDEODCGRTDOMZVMI/",
+   "pubDate": "Sun, 06 Sep 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "해성에어로보틱스 사자마자 계열사 투자… 케이휴머스, 인수자금 회수 의혹",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/07/GFSDKMZXG5STSMLGGEZDOY3BMY/",
+   "pubDate": "Sun, 06 Sep 2026 21:00:00 +0000",
+   "source": "조선일보"
   },
   {
    "title": "AI 등장때 죽는다 했는데 … 美SW주 4대장 실적 살아있네",
@@ -6271,6 +6324,12 @@
    "link": "https://www.mk.co.kr/news/stock/12145588",
    "pubDate": "Sun, 06 Sep 2026 18:35:42 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "“연금만으론 빠듯”⋯ 73세까지 일해야 하는 한일 노인들 실상",
+   "link": "https://www.chosun.com/economy/2026/09/07/GAPK6EGHMFAQVHPYNBYIOTAFBM/",
+   "pubDate": "Sun, 06 Sep 2026 18:00:00 +0000",
+   "source": "조선일보"
   },
   {
    "title": "서학개미, 반도체株 팔고 '3배 ETF' 베팅",
@@ -6289,42 +6348,6 @@
    "link": "https://www.mk.co.kr/news/stock/12145451",
    "pubDate": "Sun, 06 Sep 2026 17:09:09 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "국민의힘, 김승원 낙마 공세…주가조작·비자금 의혹도 제기",
-   "link": "https://www.chosun.com/economy/economy_general/2026/09/06/GJSDCMRZGU2TAOLGMFRTSMTGGQ/",
-   "pubDate": "Sun, 06 Sep 2026 13:00:08 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "대미투자 협상 타결 임박?…산업부, 내일 민주당에 결과 보고",
-   "link": "https://www.chosun.com/economy/economy_general/2026/09/06/GFSTQY3EGE2GMMZTMRRTOOLDMQ/",
-   "pubDate": "Sun, 06 Sep 2026 06:36:05 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "두 달 만에 끝나는 펀드인데…10명 중 7명 ‘선취수수료’",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/HBSDQMLDGZRTANJZMI3DEYZQMI/",
-   "pubDate": "Sun, 06 Sep 2026 05:26:13 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "상폐 위기 종목 238社... 소액주주 300만명, 8조 보유",
-   "link": "https://www.chosun.com/economy/money/2026/09/06/EEXLS3JV6JCCZFJWZBXF47CTU4/",
-   "pubDate": "Sun, 06 Sep 2026 02:31:59 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "9월 반도체 대형주 대거 매도한 서학개미…레버리지 ETF는 순매수",
-   "link": "https://www.chosun.com/economy/money/2026/09/06/3RRMFZU6BVB6JFYFUTO24MKJYU/",
-   "pubDate": "Sun, 06 Sep 2026 01:45:41 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "반도체 호황 올라선 韓, 수출 역대 최대 실적 달성… “사상 첫 1조 달러 가시권”",
-   "link": "https://www.chosun.com/economy/industry-company/2026/09/06/KHTEZV3UHRE4PLNJITPT67TG4E/",
-   "pubDate": "Sun, 06 Sep 2026 01:24:10 +0000",
-   "source": "조선일보"
   },
   {
    "title": "“고금리 더 간다” 베팅한 서학개미…일주일 새 ‘이곳’에 1250억 ‘뭉칫돈’",
@@ -6372,30 +6395,6 @@
    "title": "[임성현의 특파원 인사이트] \"워시, 매파본색 드러냈지만 … 금리 인상 시기 두고 혼란만 키워\"",
    "link": "https://www.mk.co.kr/news/stock/12144677",
    "pubDate": "Fri, 04 Sep 2026 17:16:41 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "신한투자증권 ‘신한 프리미어 필름 페스타’ 수상작 5편 선정",
-   "link": "https://www.mk.co.kr/news/stock/12144513",
-   "pubDate": "Fri, 04 Sep 2026 15:34:10 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "KB증권, ‘퇴직연금형 개인투자용 국채’ 거래 서비스 출시",
-   "link": "https://www.mk.co.kr/news/stock/12144501",
-   "pubDate": "Fri, 04 Sep 2026 15:28:38 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“7000 간다더니 6600도 간당”…코스피 전망, 일주일 새 무슨 일?",
-   "link": "https://www.mk.co.kr/news/stock/12144361",
-   "pubDate": "Fri, 04 Sep 2026 12:54:51 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“이번에도 역시, 외국인은 이미 움직였네”…금리충격 전부터 ‘소·금·바’ 담았다",
-   "link": "https://www.mk.co.kr/news/stock/12144225",
-   "pubDate": "Fri, 04 Sep 2026 10:21:37 +09:00",
    "source": "매일경제 증권"
   }
  ]
