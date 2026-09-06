@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T06:13:24.218214+09:00",
+  "updatedAt": "2026-09-07T08:44:26.178299+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.5,
-      "change": -10.33,
-      "changePercent": -0.76,
+      "price": 1345.87,
+      "change": -0.12,
+      "changePercent": -0.01,
       "currency": "KRW"
     }
   ],
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "\"15억 미국 주식 올인합니다\"…20억 집 가진 부부 결국",
-      "link": "https://www.hankyung.com/article/2026090670997",
-      "pubDate": "Sun, 06 Sep 2026 21:27:10 +0900",
+      "title": "LVMH 시총 반토막…명품 소비층 6000만명 이탈",
+      "link": "https://www.hankyung.com/article/202609077346i",
+      "pubDate": "Mon, 07 Sep 2026 08:18:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "노량진서 암꽃게 1kg 사고 1만원 냈는데…'이게 맞아' 깜짝 [프라이스&]",
-      "link": "https://www.hankyung.com/article/202609066796i",
-      "pubDate": "Sun, 06 Sep 2026 21:00:01 +0900",
+      "title": "홈플러스 정상화 시험대…'식료품 전문' 체질개선, 점포 19곳 매각",
+      "link": "https://www.hankyung.com/article/202609077331g",
+      "pubDate": "Mon, 07 Sep 2026 08:17:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "힘 세진 소액주주…기업분할 철회도 속출",
-      "link": "https://www.hankyung.com/article/2026090669501",
-      "pubDate": "Sun, 06 Sep 2026 18:31:21 +0900",
+      "title": "[밤 사이 해외 뉴스 영상] 금리 인상 공포 속 LVMH '반토막'…소비 심리 급랭",
+      "link": "https://www.hankyung.com/article/202609077347i",
+      "pubDate": "Mon, 07 Sep 2026 08:16:21 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'경험부족' 5년 미만 감독관 급증…작년 사건 78% 아직 '수사중'",
-      "link": "https://www.hankyung.com/article/2026090669781",
-      "pubDate": "Sun, 06 Sep 2026 18:31:10 +0900",
+      "title": "[단독] \"전력기기 호황 10년은 더 간다…구조적 성장 국면 진입\"",
+      "link": "https://www.hankyung.com/article/2026090668811",
+      "pubDate": "Mon, 07 Sep 2026 08:10:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "192시간→12시간 신규 실습교육 축소",
-      "link": "https://www.hankyung.com/article/2026090669771",
-      "pubDate": "Sun, 06 Sep 2026 18:30:35 +0900",
+      "title": "[단독] LG전자 美자회사 베어로보틱스, 나스닥 상장 도전",
+      "link": "https://www.hankyung.com/article/2026090668751",
+      "pubDate": "Mon, 07 Sep 2026 08:10:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"中企 기술 베끼면 기업 생존 위협\"…100억 과징금에 연구개발비 물어내야",
-      "link": "https://www.hankyung.com/article/2026090669791",
-      "pubDate": "Sun, 06 Sep 2026 18:30:23 +0900",
+      "title": "2년 전 황당했던 'AI 5000억달러 투자'…빅테크는 이미 도달 [AI노스트라다무스⑤]",
+      "link": "https://www.hankyung.com/article/202609044446i",
+      "pubDate": "Mon, 07 Sep 2026 08:00:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "완성차·부품 이어 강판까지…현대차그룹, 美서 제조 밸류체인 완성",
-      "link": "https://www.hankyung.com/article/2026090669561",
-      "pubDate": "Sun, 06 Sep 2026 18:29:52 +0900",
+      "title": "\"일본은 옛말\" 글로벌 브랜드들, 이젠 한국이 진입 1순위 [장서우의 하입:hype]",
+      "link": "https://www.hankyung.com/article/202609067126i",
+      "pubDate": "Mon, 07 Sep 2026 08:00:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"美서 생산한 철강, 로봇·우주기업에도 공급\"",
-      "link": "https://www.hankyung.com/article/2026090669551",
-      "pubDate": "Sun, 06 Sep 2026 18:29:14 +0900",
+      "title": "[밤 사이 해외 뉴스] 美 '깜짝 고용'에 금리 인상론 재점화…흔들리는 글로벌 시장",
+      "link": "https://www.hankyung.com/article/202609077320i",
+      "pubDate": "Mon, 07 Sep 2026 07:57:26 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'철강 라이벌' 현대제철·포스코 원팀됐다",
-      "link": "https://www.hankyung.com/article/2026090669541",
-      "pubDate": "Sun, 06 Sep 2026 18:28:54 +0900",
+      "title": "OPEC+, 10월 생산량 동결…2027년 쿼터 재편이 변수",
+      "link": "https://www.hankyung.com/article/202609077316i",
+      "pubDate": "Mon, 07 Sep 2026 07:53:58 +0900",
       "source": "한국경제"
     },
     {
-      "title": "AI 열풍에…세계 4번째 '수출 1조달러 클럽' 보인다",
-      "link": "https://www.hankyung.com/article/2026090669271",
-      "pubDate": "Sun, 06 Sep 2026 18:26:57 +0900",
+      "title": "[단독] 대형마트가 마라톤까지…롯데마트, 업계 첫 3000명 '통큰런'",
+      "link": "https://www.hankyung.com/article/202609066759i",
+      "pubDate": "Mon, 07 Sep 2026 07:00:06 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"실업 청년 2명 중 1명 '번아웃' 경험…진로 불안 완화해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260906024000003",
-      "pubDate": "Mon, 7 Sep 2026 06:00:08 +0900",
+      "title": "맘스터치, 도쿄 신주쿠에 일본 사업 거점…현지 6호점 개점",
+      "link": "https://www.yna.co.kr/view/AKR20260907021000030",
+      "pubDate": "Mon, 7 Sep 2026 08:38:09 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "금감원, 21∼22일 부산·대구서 기업공시 설명회",
-      "link": "https://www.yna.co.kr/view/AKR20260905051500002",
-      "pubDate": "Mon, 7 Sep 2026 06:00:03 +0900",
+      "title": "GS25, '혜자로운 집밥' 신제품 출시…제육·치킨 중심으로 재편",
+      "link": "https://www.yna.co.kr/view/AKR20260907019100030",
+      "pubDate": "Mon, 7 Sep 2026 08:34:29 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "롯데온, 7∼8일 앱 전용 할인 행사 '퍼스트앱더블데이'",
-      "link": "https://www.yna.co.kr/view/AKR20260906038500030",
-      "pubDate": "Mon, 7 Sep 2026 06:00:02 +0900",
+      "title": "SK증권, 코스맥스 목표가↑…\"화장품 수출 호조 실적에 반영\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907021800008",
+      "pubDate": "Mon, 7 Sep 2026 08:33:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "롯데슈퍼, 쿠팡이츠와 손잡고 전국 170여개 점포서 퀵커머스",
-      "link": "https://www.yna.co.kr/view/AKR20260906036100030",
-      "pubDate": "Mon, 7 Sep 2026 06:00:01 +0900",
+      "title": "NH증권, 더마 제품 힘받은 아모레퍼시픽에 \"내년 매출 5조 회복\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907021100008",
+      "pubDate": "Mon, 7 Sep 2026 08:27:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "공짜 수수료로 반짝 흥행…알고보니 속 빈 '스테이블코인 잔치'",
-      "link": "https://www.yna.co.kr/view/AKR20260905041000002",
-      "pubDate": "Mon, 7 Sep 2026 05:57:00 +0900",
+      "title": "유안타증권 \"완성차, 환율 급락 타격 4분기에 본격화\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907020500008",
+      "pubDate": "Mon, 7 Sep 2026 08:26:25 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "상위 20개 저축銀 상반기 순이익 3배로↑…유동성비율 \"정상화\"",
-      "link": "https://www.yna.co.kr/view/AKR20260905040400002",
-      "pubDate": "Mon, 7 Sep 2026 05:55:00 +0900",
+      "title": "IBK증권, 디케이티 기업분석 개시…\"휴머노이드 탈중국 수혜주\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907019200008",
+      "pubDate": "Mon, 7 Sep 2026 08:21:15 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "AI 전문가 뽑는 은행들…신입 공채는 갈수록 '바늘구멍'",
-      "link": "https://www.yna.co.kr/view/AKR20260906012500002",
-      "pubDate": "Mon, 7 Sep 2026 05:53:00 +0900",
+      "title": "한투증권, S-Oil 목표가↑…\"정유가 상승에 실적 가시성 높아져\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907018900008",
+      "pubDate": "Mon, 7 Sep 2026 08:17:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "부동산 임대소득 올린 5세 이하 179명…기저귀도 못 뗀 아기도",
-      "link": "https://www.yna.co.kr/view/AKR20260904164400002",
-      "pubDate": "Mon, 7 Sep 2026 05:51:00 +0900",
+      "title": "부울경 일자리 사업 '광역이음 프로젝트' 출범…125억원 투입",
+      "link": "https://www.yna.co.kr/view/AKR20260907015100051",
+      "pubDate": "Mon, 7 Sep 2026 08:09:56 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "트럼프 \"美-캐나다 달러 불균형\"…관세 이어 환율 건드리나",
-      "link": "https://www.yna.co.kr/view/AKR20260907001200071",
-      "pubDate": "Mon, 7 Sep 2026 01:38:33 +0900",
+      "title": "[마켓뷰] 오픈AI발 호재에 美반도체 급등…코스피도 강세 기대",
+      "link": "https://www.yna.co.kr/view/AKR20260907016300008",
+      "pubDate": "Mon, 7 Sep 2026 08:05:19 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "주진우 \"김승원 자녀, 아내 원장인 기관 취업\"…金측 \"가족폄훼\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260906033552001",
-      "pubDate": "Sun, 6 Sep 2026 21:38:27 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20260907010200011",
+      "pubDate": "Mon, 7 Sep 2026 07:30:01 +0900",
       "source": "연합뉴스"
     }
   ]
