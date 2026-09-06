@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T21:05:53.812670+09:00",
+  "updatedAt": "2026-09-07T01:09:27.475361+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,18 @@
   ],
   "news": [
     {
+      "title": "\"15억 미국 주식 올인합니다\"…20억 집 가진 부부 결국",
+      "link": "https://www.hankyung.com/article/2026090670997",
+      "pubDate": "Sun, 06 Sep 2026 21:27:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "노량진서 암꽃게 1kg 사고 1만원 냈는데…'이게 맞아' 깜짝 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202609066796i",
+      "pubDate": "Sun, 06 Sep 2026 21:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "힘 세진 소액주주…기업분할 철회도 속출",
       "link": "https://www.hankyung.com/article/2026090669501",
       "pubDate": "Sun, 06 Sep 2026 18:31:21 +0900",
@@ -160,16 +172,10 @@
       "source": "한국경제"
     },
     {
-      "title": "집값 이대로 오르면 강북·금천·도봉 뺀 서울 전역에 종부세",
-      "link": "https://www.hankyung.com/article/2026090669261",
-      "pubDate": "Sun, 06 Sep 2026 18:26:13 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "다시 뜨는 SPA…유니클로·자라 올해 카드 결제액 '최대'",
-      "link": "https://www.hankyung.com/article/2026090669671",
-      "pubDate": "Sun, 06 Sep 2026 18:25:50 +0900",
-      "source": "한국경제"
+      "title": "주진우 \"김승원 자녀, 아내 원장인 기관 취업\"…金측 \"가족폄훼\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20260906033552001",
+      "pubDate": "Sun, 6 Sep 2026 21:38:27 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "[부고] 강윤진(재정경제부 개발금융국장)씨 부친상",
@@ -223,12 +229,6 @@
       "title": "\"국세청 해외계좌 미신고 제보포상 11년간 3건뿐\"(종합)",
       "link": "https://www.yna.co.kr/view/AKR20260905019151002",
       "pubDate": "Sun, 6 Sep 2026 12:52:34 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "지식재산처, 한국 상표 심사 노하우 아세안 11개국에 전수",
-      "link": "https://www.yna.co.kr/view/AKR20260904073500063",
-      "pubDate": "Sun, 6 Sep 2026 12:00:12 +0900",
       "source": "연합뉴스"
     }
   ]
