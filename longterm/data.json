@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-06T11:40:27.242329+09:00",
+ "updatedAt": "2026-09-06T22:43:43.122596+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -22,7 +22,7 @@
     "10y": 13.76
    },
    "mdd10y": -24.77,
-   "fromHigh": -0.38,
+   "fromHigh": 0.0,
    "week52": {
     "high": 7816.7,
     "low": 6316.91,
@@ -592,7 +592,7 @@
     "10y": 13.76
    },
    "mdd10y": -24.8,
-   "fromHigh": -0.38,
+   "fromHigh": 0.0,
    "week52": {
     "high": 716.39,
     "low": 578.46,
@@ -890,7 +890,7 @@
     "10y": 13.3
    },
    "mdd10y": -25.67,
-   "fromHigh": -0.32,
+   "fromHigh": 0.0,
    "week52": {
     "high": 385.12,
     "low": 310.4,
@@ -1039,13 +1039,14 @@
     "10y": 10.49
    },
    "mdd10y": -26.58,
-   "fromHigh": -0.02,
+   "fromHigh": 0.0,
    "week52": {
     "high": 162.71,
     "low": 133.65,
     "position": 96.6
    },
    "valuation": {
+    "per": 23.26,
     "marketCap": 101083611136,
     "beta": 0.98
    },
@@ -2065,7 +2066,7 @@
     "10y": 27.41
    },
    "mdd10y": -30.7,
-   "fromHigh": -2.51,
+   "fromHigh": 0.0,
    "week52": {
     "high": 344.57,
     "low": 225.95,
@@ -2390,7 +2391,7 @@
     "forwardPer": 22.79,
     "pbr": 6.65,
     "psr": 9.28,
-    "peg": 1.27,
+    "peg": 1.24,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4139343675392,
@@ -2872,7 +2873,7 @@
     "10y": 9.03
    },
    "mdd10y": -19.88,
-   "fromHigh": -1.15,
+   "fromHigh": 0.0,
    "week52": {
     "high": 281.07,
     "low": 173.33,
@@ -3043,7 +3044,7 @@
     "peg": 3.76,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 340132134912,
+    "marketCap": 340389986304,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -3186,7 +3187,7 @@
     "10y": 7.58
    },
    "mdd10y": -24.23,
-   "fromHigh": -0.83,
+   "fromHigh": -0.68,
    "week52": {
     "high": 92.49,
     "low": 65.35,
@@ -3812,7 +3813,7 @@
     "10y": 17.87
    },
    "mdd10y": -38.49,
-   "fromHigh": -0.94,
+   "fromHigh": 0.0,
    "week52": {
     "high": 366.5,
     "low": 279.1,
@@ -3988,7 +3989,7 @@
     "payout": 52.51,
     "avgYield5y": 3.7
    },
-   "dividendYield": 2.54,
+   "dividendYield": 2.58,
    "dividend": {
     "ttm": 4.12,
     "yieldTtm": 2.58,
@@ -6254,15 +6255,63 @@
  ],
  "news": [
   {
-   "title": "상폐기준 강화에 소액주주 300만명 영향권…보유액은 8조원 달해",
-   "link": "https://www.chosun.com/economy/money/2026/09/06/EEXLS3JV6JCCZFJWZBXF47CTU4/",
-   "pubDate": "Sun, 06 Sep 2026 02:31:59 +0000",
+   "title": "추락하나했더니 ‘주가 재추진’…시총 2조달러 재입성한 스페이스X",
+   "link": "https://www.mk.co.kr/news/stock/12145621",
+   "pubDate": "Sun, 06 Sep 2026 21:42:49 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI 등장때 죽는다 했는데 … 美SW주 4대장 실적 살아있네",
+   "link": "https://www.mk.co.kr/news/stock/12145597",
+   "pubDate": "Sun, 06 Sep 2026 19:19:25 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“이번 주 증시? 美 국채금리 5%에 달렸다”…금리 꺾이면 반도체부터 담아라",
+   "link": "https://www.mk.co.kr/news/stock/12145588",
+   "pubDate": "Sun, 06 Sep 2026 18:35:42 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "서학개미, 반도체株 팔고 '3배 ETF' 베팅",
+   "link": "https://www.mk.co.kr/news/stock/12145455",
+   "pubDate": "Sun, 06 Sep 2026 17:09:11 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "룰루레몬 주가 8년만에 최저 … 물타기하던 버리도 \"죽을맛\"",
+   "link": "https://www.mk.co.kr/news/stock/12145453",
+   "pubDate": "Sun, 06 Sep 2026 17:09:10 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "[미국 주식 돋보기] 스페이스X AI투자 통했다…2조클럽 재입성",
+   "link": "https://www.mk.co.kr/news/stock/12145451",
+   "pubDate": "Sun, 06 Sep 2026 17:09:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "국민의힘, 김승원 낙마 공세…주가조작·비자금 의혹도 제기",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/06/GJSDCMRZGU2TAOLGMFRTSMTGGQ/",
+   "pubDate": "Sun, 06 Sep 2026 13:00:08 +0000",
    "source": "조선일보"
   },
   {
-   "title": "코스피 주춤해도 ETF 사는 개인투자자…32개월째 순매수",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/MJQWEMDGMY2TSMLGGA3TGNJXGU/",
-   "pubDate": "Sun, 06 Sep 2026 02:00:02 +0000",
+   "title": "대미투자 협상 타결 임박?…산업부, 내일 민주당에 결과 보고",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/06/GFSTQY3EGE2GMMZTMRRTOOLDMQ/",
+   "pubDate": "Sun, 06 Sep 2026 06:36:05 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "두 달 만에 끝나는 펀드인데…10명 중 7명 ‘선취수수료’",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/HBSDQMLDGZRTANJZMI3DEYZQMI/",
+   "pubDate": "Sun, 06 Sep 2026 05:26:13 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "상폐 위기 종목 238社... 소액주주 300만명, 8조 보유",
+   "link": "https://www.chosun.com/economy/money/2026/09/06/EEXLS3JV6JCCZFJWZBXF47CTU4/",
+   "pubDate": "Sun, 06 Sep 2026 02:31:59 +0000",
    "source": "조선일보"
   },
   {
@@ -6278,58 +6327,10 @@
    "source": "조선일보"
   },
   {
-   "title": "코스피 강세에 주택도시기금 1.2조 수익… 여유자금은 5년 새 72% 급감",
-   "link": "https://www.chosun.com/economy/real_estate/2026/09/06/GVRGEZJTHA3TMMTDGUZTAZTDGQ/",
-   "pubDate": "Sun, 06 Sep 2026 00:41:39 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "상폐기준 강화에 소액주주 300만명 영향권…보유액 ‘7조8500억원’",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/GA3TOOJVMEZWEZLCGAZDCZLEGY/",
-   "pubDate": "Sun, 06 Sep 2026 00:15:42 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "“고금리 더 간다” 베팅한 서학개미…일주일 새 ‘이곳’에 1250억 ‘뭉칫돈’",
    "link": "https://www.mk.co.kr/news/economy/12145164",
    "pubDate": "Sat, 05 Sep 2026 22:37:41 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "[Why] “비만 관리는 장기전”…한미약품 ‘에페’ 디지털 결합하는 까닭은",
-   "link": "https://www.chosun.com/economy/science/2026/09/06/MJSGCZRVMVSTGOBQGQ3TOZJTMY/",
-   "pubDate": "Sat, 05 Sep 2026 22:00:11 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "케빈 워시의 딜레마…트럼프는 “금리 내려라”, 고용 지표는 “올려라”",
-   "link": "https://www.chosun.com/economy/int_economy/2026/09/06/Q6SIAI5IKBDI5FID2MVUNXSRCU/",
-   "pubDate": "Sat, 05 Sep 2026 21:55:46 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[경제 포커스] 주담대 금리 오름폭 절반 이상이 ‘보금자리론’… 국채금리 상승 직격탄",
-   "link": "https://www.chosun.com/economy/economy_general/2026/09/06/MM4TSOJSGUYDENJYMM3TIODDGE/",
-   "pubDate": "Sat, 05 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "가계 대출 조이니 年 최고 금리 19% 車담보 대출 급증",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/MU2GGYZQHFQTOZDDGBTGENBQGU/",
-   "pubDate": "Sat, 05 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[주간증시전망] 美 금리에 쏠리는 시선…바이백·물가지표 주목",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/GFSDOYJTG44WEZDGME3DONZVGQ/",
-   "pubDate": "Sat, 05 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "카카오게임즈 주가 추락에 고심 중인 FI… 태그얼롱 행사 여부 저울질",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/06/GNRWKMLEMNQWKNTBGVSTOMZRGU/",
-   "pubDate": "Sat, 05 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
   },
   {
    "title": "“금값 다시 5000달러 간다고?”…중앙은행까지 ‘사자’ 나서니 금ETF에 뭉칫돈",
