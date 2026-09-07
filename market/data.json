@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-07T08:44:26.178299+09:00",
+  "updatedAt": "2026-09-07T13:21:19.912928+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6687.21,
-      "change": 107.73,
-      "changePercent": 1.64,
+      "price": 6918.1,
+      "change": 230.89,
+      "changePercent": 3.45,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 813.5,
-      "change": 23.29,
-      "changePercent": 2.95,
+      "price": 821.81,
+      "change": 8.31,
+      "changePercent": 1.02,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.87,
-      "change": -0.12,
-      "changePercent": -0.01,
+      "price": 1347.54,
+      "change": 1.55,
+      "changePercent": 0.12,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 255500.0,
-      "change": 5500.0,
-      "changePercent": 2.2,
+      "price": 267000.0,
+      "change": 11500.0,
+      "changePercent": 4.5,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1647000.0,
-      "change": 51000.0,
-      "changePercent": 3.2,
+      "price": 1753500.0,
+      "change": 106500.0,
+      "changePercent": 6.47,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 213500.0,
-      "change": 6000.0,
-      "changePercent": 2.89,
+      "price": 216500.0,
+      "change": 3000.0,
+      "changePercent": 1.41,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 36200.0,
-      "change": 850.0,
-      "changePercent": 2.4,
+      "price": 36100.0,
+      "change": -100.0,
+      "changePercent": -0.28,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 358500.0,
-      "change": -7000.0,
-      "changePercent": -1.92,
+      "price": 359750.0,
+      "change": 1250.0,
+      "changePercent": 0.35,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "LVMH 시총 반토막…명품 소비층 6000만명 이탈",
-      "link": "https://www.hankyung.com/article/202609077346i",
-      "pubDate": "Mon, 07 Sep 2026 08:18:28 +0900",
+      "title": "모란은 화장품으로, 아자오는 간식으로…달라진 산둥 소비 지도 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202609055789i",
+      "pubDate": "Mon, 07 Sep 2026 12:19:51 +0900",
       "source": "한국경제"
     },
     {
-      "title": "홈플러스 정상화 시험대…'식료품 전문' 체질개선, 점포 19곳 매각",
-      "link": "https://www.hankyung.com/article/202609077331g",
-      "pubDate": "Mon, 07 Sep 2026 08:17:28 +0900",
+      "title": "\"산 하나 보러 왔다가 이틀 머문다\"…年 18조 벌어들인 비결 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202609055900i",
+      "pubDate": "Mon, 07 Sep 2026 11:54:55 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[밤 사이 해외 뉴스 영상] 금리 인상 공포 속 LVMH '반토막'…소비 심리 급랭",
-      "link": "https://www.hankyung.com/article/202609077347i",
-      "pubDate": "Mon, 07 Sep 2026 08:16:21 +0900",
+      "title": "JB금융그룹, 인니 부코핀파이낸스 인수한다...현지 당국 최종 승인",
+      "link": "https://www.hankyung.com/article/202609078403i",
+      "pubDate": "Mon, 07 Sep 2026 11:46:12 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] \"전력기기 호황 10년은 더 간다…구조적 성장 국면 진입\"",
-      "link": "https://www.hankyung.com/article/2026090668811",
-      "pubDate": "Mon, 07 Sep 2026 08:10:04 +0900",
+      "title": "\"줄 안 서도 된대\" 우르르…치폴레 앱도 하루 만에 '먹통'",
+      "link": "https://www.hankyung.com/article/202609078167g",
+      "pubDate": "Mon, 07 Sep 2026 11:20:35 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] LG전자 美자회사 베어로보틱스, 나스닥 상장 도전",
-      "link": "https://www.hankyung.com/article/2026090668751",
-      "pubDate": "Mon, 07 Sep 2026 08:10:01 +0900",
+      "title": "기술보증기금, 김남재 상임이사 신규 선임",
+      "link": "https://www.hankyung.com/article/202609078290i",
+      "pubDate": "Mon, 07 Sep 2026 11:16:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "2년 전 황당했던 'AI 5000억달러 투자'…빅테크는 이미 도달 [AI노스트라다무스⑤]",
-      "link": "https://www.hankyung.com/article/202609044446i",
-      "pubDate": "Mon, 07 Sep 2026 08:00:14 +0900",
+      "title": "\"이제 편의점서 만화책 주문까지\"…'덕질 성지' 됐다",
+      "link": "https://www.hankyung.com/article/202609077397g",
+      "pubDate": "Mon, 07 Sep 2026 11:11:31 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"일본은 옛말\" 글로벌 브랜드들, 이젠 한국이 진입 1순위 [장서우의 하입:hype]",
-      "link": "https://www.hankyung.com/article/202609067126i",
-      "pubDate": "Mon, 07 Sep 2026 08:00:07 +0900",
+      "title": "금투협·증권사 CEO, 유럽서 AI·디지털금융·우주 투자처 발굴",
+      "link": "https://www.hankyung.com/article/2026090782016",
+      "pubDate": "Mon, 07 Sep 2026 10:54:46 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[밤 사이 해외 뉴스] 美 '깜짝 고용'에 금리 인상론 재점화…흔들리는 글로벌 시장",
-      "link": "https://www.hankyung.com/article/202609077320i",
-      "pubDate": "Mon, 07 Sep 2026 07:57:26 +0900",
+      "title": "추석 돈 가뭄에 3조 풀린다…협력사 숨통 틔워준 '유통 빅3'",
+      "link": "https://www.hankyung.com/article/202609077446g",
+      "pubDate": "Mon, 07 Sep 2026 10:52:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "OPEC+, 10월 생산량 동결…2027년 쿼터 재편이 변수",
-      "link": "https://www.hankyung.com/article/202609077316i",
-      "pubDate": "Mon, 07 Sep 2026 07:53:58 +0900",
+      "title": "헥터 비자레알 GM한국사업장 사장, 수원서비스센터 현장점검",
+      "link": "https://www.hankyung.com/article/202609078135g",
+      "pubDate": "Mon, 07 Sep 2026 10:45:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 대형마트가 마라톤까지…롯데마트, 업계 첫 3000명 '통큰런'",
-      "link": "https://www.hankyung.com/article/202609066759i",
-      "pubDate": "Mon, 07 Sep 2026 07:00:06 +0900",
+      "title": "\"적금 부으면 MMA 간다\"…카뱅, 최고 연 6% 한달적금",
+      "link": "https://www.hankyung.com/article/202609078069i",
+      "pubDate": "Mon, 07 Sep 2026 10:31:33 +0900",
       "source": "한국경제"
     },
     {
-      "title": "맘스터치, 도쿄 신주쿠에 일본 사업 거점…현지 6호점 개점",
-      "link": "https://www.yna.co.kr/view/AKR20260907021000030",
-      "pubDate": "Mon, 7 Sep 2026 08:38:09 +0900",
+      "title": "[게시판] 강태영 NH농협은행장, 추석맞이 '윤리공감 우체통' 1호 손편지",
+      "link": "https://www.yna.co.kr/view/AKR20260907086900002",
+      "pubDate": "Mon, 7 Sep 2026 13:06:25 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "GS25, '혜자로운 집밥' 신제품 출시…제육·치킨 중심으로 재편",
-      "link": "https://www.yna.co.kr/view/AKR20260907019100030",
-      "pubDate": "Mon, 7 Sep 2026 08:34:29 +0900",
+      "title": "전남광주 산정지구 주민들 \"반도체 배후주거단지 조성 속도내야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907086500054",
+      "pubDate": "Mon, 7 Sep 2026 13:02:40 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "SK증권, 코스맥스 목표가↑…\"화장품 수출 호조 실적에 반영\"",
-      "link": "https://www.yna.co.kr/view/AKR20260907021800008",
-      "pubDate": "Mon, 7 Sep 2026 08:33:17 +0900",
+      "title": "미래에셋운용, S&P500·美단기국채 50%씩 담은 ETF 8일 상장",
+      "link": "https://www.yna.co.kr/view/AKR20260907084000008",
+      "pubDate": "Mon, 7 Sep 2026 13:00:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "NH증권, 더마 제품 힘받은 아모레퍼시픽에 \"내년 매출 5조 회복\"",
-      "link": "https://www.yna.co.kr/view/AKR20260907021100008",
-      "pubDate": "Mon, 7 Sep 2026 08:27:54 +0900",
+      "title": "이형일 후보자 \"이번주 추석 민생대책 추가 발표\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907065600002",
+      "pubDate": "Mon, 7 Sep 2026 13:00:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "유안타증권 \"완성차, 환율 급락 타격 4분기에 본격화\"",
-      "link": "https://www.yna.co.kr/view/AKR20260907020500008",
-      "pubDate": "Mon, 7 Sep 2026 08:26:25 +0900",
+      "title": "법무부·성평등부 이전 앞둔 세종시장 \"아파트 특공 재개돼야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907083500063",
+      "pubDate": "Mon, 7 Sep 2026 12:35:26 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "IBK증권, 디케이티 기업분석 개시…\"휴머노이드 탈중국 수혜주\"",
-      "link": "https://www.yna.co.kr/view/AKR20260907019200008",
-      "pubDate": "Mon, 7 Sep 2026 08:21:15 +0900",
+      "title": "성평등부, 기관 최초 시간선택제 공무원 사무관 승진",
+      "link": "https://www.yna.co.kr/view/AKR20260907034700530",
+      "pubDate": "Mon, 7 Sep 2026 12:00:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한투증권, S-Oil 목표가↑…\"정유가 상승에 실적 가시성 높아져\"",
-      "link": "https://www.yna.co.kr/view/AKR20260907018900008",
-      "pubDate": "Mon, 7 Sep 2026 08:17:16 +0900",
+      "title": "생보협회, 민원 관리·광고심의 AI 시스템 도입…서비스 고도화",
+      "link": "https://www.yna.co.kr/view/AKR20260907051100002",
+      "pubDate": "Mon, 7 Sep 2026 12:00:15 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "부울경 일자리 사업 '광역이음 프로젝트' 출범…125억원 투입",
-      "link": "https://www.yna.co.kr/view/AKR20260907015100051",
-      "pubDate": "Mon, 7 Sep 2026 08:09:56 +0900",
+      "title": "KDI \"AI 관련 투자 중심 개선 흐름 유지…소비 개선세는 완만\"",
+      "link": "https://www.yna.co.kr/view/AKR20260907057600002",
+      "pubDate": "Mon, 7 Sep 2026 12:00:12 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[마켓뷰] 오픈AI발 호재에 美반도체 급등…코스피도 강세 기대",
-      "link": "https://www.yna.co.kr/view/AKR20260907016300008",
-      "pubDate": "Mon, 7 Sep 2026 08:05:19 +0900",
+      "title": "대기업 공시 위반 과징금 세진다…반복 위반 땐 최대 50% 가중",
+      "link": "https://www.yna.co.kr/view/AKR20260907061500002",
+      "pubDate": "Mon, 7 Sep 2026 12:00:11 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
-      "link": "https://www.yna.co.kr/view/AKR20260907010200011",
-      "pubDate": "Mon, 7 Sep 2026 07:30:01 +0900",
+      "title": "금감원, 은행·상호금융 보이스피싱 대응 우수사례 포상",
+      "link": "https://www.yna.co.kr/view/AKR20260907066700002",
+      "pubDate": "Mon, 7 Sep 2026 12:00:10 +0900",
       "source": "연합뉴스"
     }
   ]
