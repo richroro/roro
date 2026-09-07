@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-05",
-  "updated": "2026-09-06T04:41:26+00:00",
+  "date": "2026-09-06",
+  "updated": "2026-09-07T04:43:59+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 61.8,
-      "audience": 301247,
-      "total": 9768255,
-      "screens": 1858
+      "share": 61.1,
+      "audience": 259741,
+      "total": 10027990,
+      "screens": 1841
     },
     {
       "rank": 2,
       "title": "스파이더맨: 브랜드 뉴 데이",
       "open": "2026-07-29",
-      "share": 9.9,
-      "audience": 63671,
-      "total": 8737145,
-      "screens": 720
+      "share": 9.8,
+      "audience": 54890,
+      "total": 8792035,
+      "screens": 725
     },
     {
       "rank": 3,
       "title": "옵세션",
       "open": "2026-09-02",
-      "share": 10.9,
-      "audience": 55420,
-      "total": 133637,
-      "screens": 702
+      "share": 11.7,
+      "audience": 51463,
+      "total": 185100,
+      "screens": 717
     },
     {
       "rank": 4,
       "title": "경주기행",
       "open": "2026-08-26",
-      "share": 3.5,
-      "audience": 19642,
-      "total": 279761,
-      "screens": 625
+      "share": 3.7,
+      "audience": 17834,
+      "total": 297594,
+      "screens": 612
     },
     {
       "rank": 5,
       "title": "비광",
       "open": "2026-09-02",
-      "share": 2.7,
-      "audience": 15879,
-      "total": 56978,
-      "screens": 621
+      "share": 2.9,
+      "audience": 14419,
+      "total": 71397,
+      "screens": 610
     },
     {
       "rank": 6,
       "title": "싱 어게인",
       "open": "2026-09-02",
-      "share": 2.3,
-      "audience": 13282,
-      "total": 43927,
-      "screens": 570
+      "share": 2.5,
+      "audience": 12004,
+      "total": 55931,
+      "screens": 556
     },
     {
       "rank": 7,
       "title": "사랑의 하츄핑: 고래보석의 전설",
       "open": "2026-08-05",
-      "share": 1.4,
-      "audience": 7944,
-      "total": 850675,
-      "screens": 346
+      "share": 1.6,
+      "audience": 8034,
+      "total": 858709,
+      "screens": 344
     },
     {
       "rank": 8,
-      "title": "인턴",
-      "open": "2026-09-16",
-      "share": 0.6,
-      "audience": 3379,
-      "total": 11989,
-      "screens": 19
-    },
-    {
-      "rank": 9,
       "title": "명탐정 코난: 하이웨이의 타천사",
       "open": "2026-08-12",
       "share": 0.6,
-      "audience": 3164,
-      "total": 417688,
-      "screens": 185
+      "audience": 2942,
+      "total": 420629,
+      "screens": 183
     },
     {
-      "rank": 10,
+      "rank": 9,
       "title": "오크 스트리트의 마지막 날",
       "open": "2026-08-26",
       "share": 0.5,
-      "audience": 2849,
-      "total": 128071,
-      "screens": 215
+      "audience": 2433,
+      "total": 130502,
+      "screens": 199
+    },
+    {
+      "rank": 10,
+      "title": "모모와 다락방의 수상한 요괴들",
+      "open": "2012-07-05",
+      "share": 0.4,
+      "audience": 2274,
+      "total": 310413,
+      "screens": 102
     }
   ]
 }
