@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T19:07:23.015313+09:00",
+  "updatedAt": "2026-09-08T01:23:08.533470+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.45,
-      "change": -0.54,
-      "changePercent": -0.04,
+      "price": 1345.88,
+      "change": -0.11,
+      "changePercent": -0.01,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,42 @@
   ],
   "news": [
     {
+      "title": "\"적금 부으면 다람쥐가 쑥쑥…한 달 만에 30만 모은 비결이죠\"",
+      "link": "https://www.hankyung.com/article/202609078679i",
+      "pubDate": "Mon, 07 Sep 2026 22:30:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"하루 5000원, 연 10% 준다\"…30만명 '우르르' 몰린 적금",
+      "link": "https://www.hankyung.com/article/2026090794611",
+      "pubDate": "Mon, 07 Sep 2026 21:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "술병 만드는 데만 1주일…요즘 日서 뜨는 '수백만원짜리 고급술'",
+      "link": "https://www.hankyung.com/article/202609043451g",
+      "pubDate": "Mon, 07 Sep 2026 21:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"성과급 6억 받으면서 70만원까지?\"…삼성 '발칵' 뒤집혔다",
+      "link": "https://www.hankyung.com/article/2026090797077",
+      "pubDate": "Mon, 07 Sep 2026 20:49:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "수억짜리 차 샀더니…\"딱 6명 초청\" 프라이빗 와인클래스 열렸다 [현장+]",
+      "link": "https://www.hankyung.com/article/202609078808g",
+      "pubDate": "Mon, 07 Sep 2026 20:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "경영권 분쟁 속 고려아연 주총 'D-2'…국민연금도 최윤범 회장 측 추천후보 '찬성'",
+      "link": "https://www.hankyung.com/article/202609079647g",
+      "pubDate": "Mon, 07 Sep 2026 19:45:29 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "나란히 과학기술 국가 훈장 받은 '삼전닉스' 연구진",
       "link": "https://www.hankyung.com/article/2026090795411",
       "pubDate": "Mon, 07 Sep 2026 18:36:13 +0900",
@@ -136,40 +172,10 @@
       "source": "한국경제"
     },
     {
-      "title": "LMR 배터리 난제 해결한 LG엔솔",
-      "link": "https://www.hankyung.com/article/2026090794541",
-      "pubDate": "Mon, 07 Sep 2026 18:06:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] LG디스플레이, 日 샤프에 OLED 독점 공급",
-      "link": "https://www.hankyung.com/article/2026090794511",
-      "pubDate": "Mon, 07 Sep 2026 18:05:39 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] 쏟아지는 빅테크 발주에…LS일렉 美공장 증설 검토",
-      "link": "https://www.hankyung.com/article/2026090794521",
-      "pubDate": "Mon, 07 Sep 2026 18:04:31 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "현대제철 \"美 철강 게임체인저 될 것…연 5조원 매출 목표\"",
-      "link": "https://www.hankyung.com/article/2026090794531",
-      "pubDate": "Mon, 07 Sep 2026 18:03:32 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "제네시스 마그마 레이싱팀…'론스타 르망'서 최고 성적 달성",
-      "link": "https://www.hankyung.com/article/2026090794561",
-      "pubDate": "Mon, 07 Sep 2026 18:02:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한화·현대로템·LIG, 동유럽 최대 방산전시회 총출동",
-      "link": "https://www.hankyung.com/article/2026090794581",
-      "pubDate": "Mon, 07 Sep 2026 18:02:19 +0900",
-      "source": "한국경제"
+      "title": "美 '엔저 시정 압박' 통했나…6개월만에 달러당 154엔대로 하락(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260907072651073",
+      "pubDate": "Mon, 7 Sep 2026 21:17:45 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "대미투자 1호 텍사스 가스발전소 유력…대형 원전 8기도 검토",
@@ -223,12 +229,6 @@
       "title": "[게시판] KDI, 9일 KSP 아프리카 지역세미나 개최",
       "link": "https://www.yna.co.kr/view/AKR20260907135600898",
       "pubDate": "Mon, 7 Sep 2026 17:02:27 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 농식품부, '2045, 농업·농촌의 미래를 그리다' 간담회",
-      "link": "https://www.yna.co.kr/view/AKR20260907109400030",
-      "pubDate": "Mon, 7 Sep 2026 17:00:01 +0900",
       "source": "연합뉴스"
     }
   ]
