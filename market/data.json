@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T01:23:08.533470+09:00",
+  "updatedAt": "2026-09-08T05:27:54.798934+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.88,
-      "change": -0.11,
-      "changePercent": -0.01,
+      "price": 1344.96,
+      "change": -1.03,
+      "changePercent": -0.08,
       "currency": "KRW"
     }
   ],
@@ -172,6 +172,12 @@
       "source": "한국경제"
     },
     {
+      "title": "美노동절 기름값 사상최고…\"이란전탓 소비자 135조원 추가부담\"",
+      "link": "https://www.yna.co.kr/view/AKR20260908001000071",
+      "pubDate": "Tue, 8 Sep 2026 02:13:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "美 '엔저 시정 압박' 통했나…6개월만에 달러당 154엔대로 하락(종합)",
       "link": "https://www.yna.co.kr/view/AKR20260907072651073",
       "pubDate": "Mon, 7 Sep 2026 21:17:45 +0900",
@@ -223,12 +229,6 @@
       "title": "무·배추·대파 가격 폭락 걱정 끝…정읍시, 차액 90% 보전",
       "link": "https://www.yna.co.kr/view/AKR20260907140900055",
       "pubDate": "Mon, 7 Sep 2026 17:10:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] KDI, 9일 KSP 아프리카 지역세미나 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260907135600898",
-      "pubDate": "Mon, 7 Sep 2026 17:02:27 +0900",
       "source": "연합뉴스"
     }
   ]
