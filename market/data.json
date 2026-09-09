@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T18:34:31.880694+09:00",
+  "updatedAt": "2026-09-09T23:23:37.167661+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52786.07,
-      "change": -628.13,
-      "changePercent": -1.18,
+      "price": 52392.22,
+      "change": -393.85,
+      "changePercent": -0.75,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26421.41,
-      "change": -85.58,
-      "changePercent": -0.32,
+      "price": 26278.97,
+      "change": -142.44,
+      "changePercent": -0.54,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1336.83,
-      "change": -3.09,
-      "changePercent": -0.23,
+      "price": 1336.95,
+      "change": -2.97,
+      "changePercent": -0.22,
       "currency": "KRW"
     }
   ],
@@ -88,91 +88,115 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 316.22,
-      "change": -3.75,
-      "changePercent": -1.17,
+      "price": 314.93,
+      "change": -1.29,
+      "changePercent": -0.41,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 368.16,
-      "change": 14.08,
-      "changePercent": 3.98,
+      "price": 371.76,
+      "change": 3.6,
+      "changePercent": 0.98,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 225.73,
-      "change": -4.63,
-      "changePercent": -2.01,
+      "price": 223.79,
+      "change": -1.94,
+      "changePercent": -0.86,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "동양생명 과징금, 1400억 → 70억 된 까닭",
-      "link": "https://www.hankyung.com/article/2026090947071",
-      "pubDate": "Wed, 09 Sep 2026 18:13:05 +0900",
+      "title": "구글, 핀란드에 23조원 투자 AI 데이터센터 구축",
+      "link": "https://www.hankyung.com/article/202609094965i",
+      "pubDate": "Wed, 09 Sep 2026 22:05:38 +0900",
       "source": "한국경제"
     },
     {
-      "title": "줄어드는 은행 자동화기기…더 많이 사라진 편의점 ATM",
-      "link": "https://www.hankyung.com/article/2026090947061",
-      "pubDate": "Wed, 09 Sep 2026 18:12:15 +0900",
+      "title": "최태원 제안에 키옥시아 '거절'…한일 낸드 동맹 '엇박자' [강경주의 테크X]",
+      "link": "https://www.hankyung.com/article/2026090944836",
+      "pubDate": "Wed, 09 Sep 2026 22:00:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "금감원 \"보험사 CEO 평가때…장래 손실 가능성도 고려해야\"",
-      "link": "https://www.hankyung.com/article/2026090947081",
-      "pubDate": "Wed, 09 Sep 2026 18:11:44 +0900",
+      "title": "베선트 \"내가 곧 하우스\"…엔 공매도 세력에 경고",
+      "link": "https://www.hankyung.com/article/202609094973i",
+      "pubDate": "Wed, 09 Sep 2026 21:29:16 +0900",
       "source": "한국경제"
     },
     {
-      "title": "수협은행장 2파전 유력…신학기 vs 이형주",
-      "link": "https://www.hankyung.com/article/2026090947091",
-      "pubDate": "Wed, 09 Sep 2026 18:11:27 +0900",
+      "title": "\"동네 편의점 탈탈 털었다\"…SNS서 난리난 '뜻밖의 디저트' [셀럽픽]",
+      "link": "https://www.hankyung.com/article/202609092819g",
+      "pubDate": "Wed, 09 Sep 2026 21:00:18 +0900",
       "source": "한국경제"
     },
     {
-      "title": "충청권 '우체국 대출' 이용 빈도 1위",
-      "link": "https://www.hankyung.com/article/2026090947101",
-      "pubDate": "Wed, 09 Sep 2026 18:10:42 +0900",
+      "title": "美, 캐나다 관세 부과→캐나다 보복관세→美 수입금지로 또 보복",
+      "link": "https://www.hankyung.com/article/202609094929i",
+      "pubDate": "Wed, 09 Sep 2026 20:32:10 +0900",
       "source": "한국경제"
     },
     {
-      "title": "K푸드 수출 늘어나는 중동…지난해 라면 수출 22% 증가",
-      "link": "https://www.hankyung.com/article/2026090947001",
-      "pubDate": "Wed, 09 Sep 2026 18:10:05 +0900",
+      "title": "\"피노누아 즐기는 50대에 딱\"…200년 셰리 명가의 '한정판\" [현장+]",
+      "link": "https://www.hankyung.com/article/202609093243g",
+      "pubDate": "Wed, 09 Sep 2026 20:00:09 +0900",
       "source": "한국경제"
     },
     {
-      "title": "아아 마시러 갔다가 초계국수…'식당'된 카페",
-      "link": "https://www.hankyung.com/article/2026090947031",
-      "pubDate": "Wed, 09 Sep 2026 18:09:47 +0900",
+      "title": "'AI가 10년내 전 인류 죽일 가능성 10%\"…앤트로픽 전 연구원 경고",
+      "link": "https://www.hankyung.com/article/202609094905i",
+      "pubDate": "Wed, 09 Sep 2026 19:46:22 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"탈팡 끝\"…쿠팡 결제액 6개월째 증가",
-      "link": "https://www.hankyung.com/article/2026090947021",
-      "pubDate": "Wed, 09 Sep 2026 18:09:21 +0900",
+      "title": "홍라희 삼전 지분 1.9조, 이재용 회장이 사들인다",
+      "link": "https://www.hankyung.com/article/2026090949171",
+      "pubDate": "Wed, 09 Sep 2026 19:41:20 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"중국산 김치 범람 막자\"…김치협회 '1사 5식당 캠페인'나섰다",
-      "link": "https://www.hankyung.com/article/202609080882i",
-      "pubDate": "Wed, 09 Sep 2026 18:09:20 +0900",
+      "title": "美·이란 공습 확대…브렌트유 또 100달러 넘었다.",
+      "link": "https://www.hankyung.com/article/202609094888i",
+      "pubDate": "Wed, 09 Sep 2026 19:08:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "코스맥스·로레알, 업무 협약…화장품·혁신 원료 공동 개발",
-      "link": "https://www.hankyung.com/article/2026090946991",
-      "pubDate": "Wed, 09 Sep 2026 18:08:39 +0900",
+      "title": "국민銀, '한손 한책' 동참…육군훈련소에 책 5400권 기증",
+      "link": "https://www.hankyung.com/article/2026090947541",
+      "pubDate": "Wed, 09 Sep 2026 18:47:34 +0900",
       "source": "한국경제"
     },
     {
-      "title": "김승원 의혹'에 들춰진 주식 불공정거래 실태…개미들 피눈물",
+      "title": "[부고] 장지연(건영씨앤피 대표)씨 모친상",
+      "link": "https://www.yna.co.kr/view/AKR20260909185200003",
+      "pubDate": "Wed, 9 Sep 2026 21:35:18 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "법원, 공정위의 '한화 내부거래' 조사중 자료제출명령 효력정지(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260909155551004",
+      "pubDate": "Wed, 9 Sep 2026 21:31:24 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금융위, 동양생명 '신정법 위반' 과징금 1천400억→70억 감경",
+      "link": "https://www.yna.co.kr/view/AKR20260909177700002",
+      "pubDate": "Wed, 9 Sep 2026 19:14:32 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] 공인중개사협회 '법정단체 출범·창립 40주년 기념식'",
+      "link": "https://www.yna.co.kr/view/AKR20260909175800003",
+      "pubDate": "Wed, 9 Sep 2026 18:43:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'김승원 의혹'에 들춰진 주식 불공정거래 실태…개미들 피눈물",
       "link": "https://www.yna.co.kr/view/AKR20260909159000008",
       "pubDate": "Wed, 9 Sep 2026 18:30:52 +0900",
       "source": "연합뉴스"
@@ -205,30 +229,6 @@
       "title": "일본서 상장된 '한국 반도체 톱10' ETF 첫날 3.1% 상승",
       "link": "https://www.yna.co.kr/view/AKR20260909164000008",
       "pubDate": "Wed, 9 Sep 2026 18:07:54 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260909160500011",
-      "pubDate": "Wed, 9 Sep 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "LH 노조, 분사안 반대 움직임…사측에 교섭 요구",
-      "link": "https://www.yna.co.kr/view/AKR20260909170600003",
-      "pubDate": "Wed, 9 Sep 2026 17:58:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "북극항로 시범운항 선박, 북극해 통과…12일 영국 도착",
-      "link": "https://www.yna.co.kr/view/AKR20260909170800051",
-      "pubDate": "Wed, 9 Sep 2026 17:58:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "바른손이앤에이, 26억3천만원 유증…엠아이컴퍼니 등에 3자 배정",
-      "link": "https://www.yna.co.kr/view/AKR20260909171100008",
-      "pubDate": "Wed, 9 Sep 2026 17:57:35 +0900",
       "source": "연합뉴스"
     }
   ]
