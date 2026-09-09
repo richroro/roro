@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-07",
-  "updated": "2026-09-08T04:38:51+00:00",
+  "date": "2026-09-08",
+  "updated": "2026-09-09T04:44:43+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 60.4,
-      "audience": 87382,
-      "total": 10115352,
-      "screens": 1560
+      "share": 57.2,
+      "audience": 76683,
+      "total": 10192025,
+      "screens": 1590
     },
     {
       "rank": 2,
       "title": "옵세션",
       "open": "2026-09-02",
-      "share": 17.1,
-      "audience": 28072,
-      "total": 213172,
-      "screens": 660
+      "share": 17.2,
+      "audience": 26369,
+      "total": 239529,
+      "screens": 681
     },
     {
       "rank": 3,
       "title": "스파이더맨: 브랜드 뉴 데이",
       "open": "2026-07-29",
-      "share": 7.2,
-      "audience": 13865,
-      "total": 8805891,
-      "screens": 655
+      "share": 7.3,
+      "audience": 13287,
+      "total": 8819175,
+      "screens": 669
     },
     {
       "rank": 4,
-      "title": "싱 어게인",
+      "title": "비광",
       "open": "2026-09-02",
-      "share": 3.2,
-      "audience": 5860,
-      "total": 61791,
+      "share": 3.5,
+      "audience": 6559,
+      "total": 82428,
       "screens": 552
     },
     {
       "rank": 5,
-      "title": "경주기행",
-      "open": "2026-08-26",
-      "share": 3.0,
-      "audience": 5805,
-      "total": 303399,
-      "screens": 539
+      "title": "싱 어게인",
+      "open": "2026-09-02",
+      "share": 3.2,
+      "audience": 5490,
+      "total": 67281,
+      "screens": 538
     },
     {
       "rank": 6,
-      "title": "비광",
-      "open": "2026-09-02",
-      "share": 2.3,
-      "audience": 4477,
-      "total": 75869,
-      "screens": 526
+      "title": "경주기행",
+      "open": "2026-08-26",
+      "share": 2.8,
+      "audience": 4926,
+      "total": 308324,
+      "screens": 537
     },
     {
       "rank": 7,
-      "title": "오크 스트리트의 마지막 날",
-      "open": "2026-08-26",
-      "share": 0.7,
-      "audience": 1089,
-      "total": 131591,
-      "screens": 167
+      "title": "왕과 사는 남자",
+      "open": "2026-02-04",
+      "share": 0.8,
+      "audience": 1825,
+      "total": 16924757,
+      "screens": 12
     },
     {
       "rank": 8,
-      "title": "명탐정 코난: 하이웨이의 타천사",
-      "open": "2026-08-12",
-      "share": 0.5,
-      "audience": 905,
-      "total": 421534,
-      "screens": 162
+      "title": "오크 스트리트의 마지막 날",
+      "open": "2026-08-26",
+      "share": 0.6,
+      "audience": 1032,
+      "total": 132622,
+      "screens": 163
     },
     {
       "rank": 9,
       "title": "인 더 그레이",
       "open": "2026-09-02",
-      "share": 0.4,
-      "audience": 820,
-      "total": 9200,
-      "screens": 129
+      "share": 0.5,
+      "audience": 1011,
+      "total": 10211,
+      "screens": 130
     },
     {
       "rank": 10,
-      "title": "왕과 사는 남자",
-      "open": "2026-02-04",
-      "share": 0.2,
-      "audience": 600,
-      "total": 16922932,
-      "screens": 3
+      "title": "사진의 얼굴",
+      "open": "2026-09-02",
+      "share": 0.4,
+      "audience": 801,
+      "total": 4831,
+      "screens": 60
     }
   ]
 }
