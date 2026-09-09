@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-09-09T09:01:26.002042+09:00",
+  "updatedAt": "2026-09-09T13:28:11.747604+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6954.52,
-      "change": -40.87,
-      "changePercent": -0.58,
+      "price": 7042.26,
+      "change": 87.74,
+      "changePercent": 1.26,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 811.88,
-      "change": -1.62,
-      "changePercent": -0.2,
+      "price": 825.69,
+      "change": 3.5,
+      "changePercent": 0.43,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52786.07,
-      "change": -628.18,
+      "change": -628.13,
       "changePercent": -1.18,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1337.18,
-      "change": -2.74,
-      "changePercent": -0.2,
+      "price": 1336.48,
+      "change": -3.44,
+      "changePercent": -0.26,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 269500.0,
-      "change": -500.0,
-      "changePercent": -0.19,
+      "price": 270250.0,
+      "change": 750.0,
+      "changePercent": 0.28,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1793000.0,
-      "change": 10000.0,
-      "changePercent": 0.56,
+      "price": 1853000.0,
+      "change": 60000.0,
+      "changePercent": 3.35,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 214500.0,
-      "change": -3500.0,
-      "changePercent": -1.61,
+      "price": 210250.0,
+      "change": -4250.0,
+      "changePercent": -1.98,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 35400.0,
-      "change": -1150.0,
-      "changePercent": -3.15,
+      "price": 35100.0,
+      "change": -300.0,
+      "changePercent": -0.85,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 348500.0,
-      "change": -14000.0,
-      "changePercent": -3.86,
+      "price": 359000.0,
+      "change": 10500.0,
+      "changePercent": 3.01,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "中 저금리에 위안화 차입 급증…발행액 1500억달러 육박",
-      "link": "https://www.hankyung.com/article/202609092706i",
-      "pubDate": "Wed, 09 Sep 2026 08:25:04 +0900",
+      "title": "자금 부족해 수출 포기했는데…사장님들 희소식 떴다",
+      "link": "https://www.hankyung.com/article/202609093724i",
+      "pubDate": "Wed, 09 Sep 2026 12:20:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "노바티스 120억달러 승부 흔들…핵심 근육질환 신약 좌초",
-      "link": "https://www.hankyung.com/article/202609092659i",
-      "pubDate": "Wed, 09 Sep 2026 08:17:34 +0900",
+      "title": "'판정 불가' 알림 덕에 살았다…심장 살린 '삼성 기술' 뭐길래",
+      "link": "https://www.hankyung.com/article/202609093548g",
+      "pubDate": "Wed, 09 Sep 2026 11:30:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "오픈AI·앤트로픽, 상장 뒤 회사채 시장 진입 채비",
-      "link": "https://www.hankyung.com/article/202609092634i",
-      "pubDate": "Wed, 09 Sep 2026 08:09:17 +0900",
+      "title": "\"지금이 골든타임\"…SK하이닉스가 꺼낸 '풀스택 AI 메모리' 승부수",
+      "link": "https://www.hankyung.com/article/202609093503g",
+      "pubDate": "Wed, 09 Sep 2026 11:17:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "생산상한 막힌 中 알루미늄…인니·카자흐로 확장",
-      "link": "https://www.hankyung.com/article/202609092569i",
-      "pubDate": "Wed, 09 Sep 2026 08:00:54 +0900",
+      "title": "두부 팔던 풀무원, 냉장고도 판다고?…'깜짝 행보' 이유 있었다 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609092694i",
+      "pubDate": "Wed, 09 Sep 2026 11:00:20 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"모비딕 수프 주세요\"…책 밖으로 걸어 나온 작품 속 요리들 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609043702g",
-      "pubDate": "Wed, 09 Sep 2026 08:00:06 +0900",
+      "title": "현대차, 국가유산청에 산업용 로봇 '엑스블 숄더' 기증",
+      "link": "https://www.hankyung.com/article/202609093430g",
+      "pubDate": "Wed, 09 Sep 2026 10:56:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "토스 검색 미션에 뿔난 소상공인들…\"약탈적 마케팅 중단하라\"",
-      "link": "https://www.hankyung.com/article/202609092548i",
-      "pubDate": "Wed, 09 Sep 2026 08:00:04 +0900",
+      "title": "\"경찰보다 먼저\"…독가스 찾고 폭발물 꺼내는 로봇개 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202609093280i",
+      "pubDate": "Wed, 09 Sep 2026 10:48:20 +0900",
       "source": "한국경제"
     },
     {
-      "title": "빵집 대신 '떡지순례'…트렌드 입은 떡에 MZ·외국인 줄섰다",
-      "link": "https://www.hankyung.com/article/202609081769g",
-      "pubDate": "Wed, 09 Sep 2026 07:04:14 +0900",
+      "title": "현대차그룹, 네팔·티베트 홍수 피해복구 성금 50만 달러 지원",
+      "link": "https://www.hankyung.com/article/202609093408g",
+      "pubDate": "Wed, 09 Sep 2026 10:44:15 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] \"1800만원이 끝이 아니었다\"…돌려차기 피해자 '울분' [불신 청구서]",
-      "link": "https://www.hankyung.com/article/202609080943H",
-      "pubDate": "Wed, 09 Sep 2026 07:02:01 +0900",
+      "title": "'원조 K과자' 뻥튀기의 재발견…하루 5000봉 팔리는 '아기 간식' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609093212i",
+      "pubDate": "Wed, 09 Sep 2026 10:15:58 +0900",
       "source": "한국경제"
     },
     {
-      "title": "일본 15조엔·인도 150억달러…'환율 전쟁'이 글로벌 금융시장 흔든다 [김주완의 글로벌 머니 X파일]",
-      "link": "https://www.hankyung.com/article/202609081439i",
-      "pubDate": "Wed, 09 Sep 2026 07:00:02 +0900",
+      "title": "거래액 86배 폭증 비법…\"배송 '직진'으로 바꿨다\"",
+      "link": "https://www.hankyung.com/article/202609093156g",
+      "pubDate": "Wed, 09 Sep 2026 10:08:32 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"급할 때 찾았는데\"…은행 이어 편의점 ATM까지 사라진다",
-      "link": "https://www.hankyung.com/article/202609092486i",
-      "pubDate": "Wed, 09 Sep 2026 06:38:28 +0900",
+      "title": "'교보문고맛' 다음은 '밀리의서재'…생크림빵의 끝없는 책사랑",
+      "link": "https://www.hankyung.com/article/202609092580g",
+      "pubDate": "Wed, 09 Sep 2026 10:01:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "노브랜드 버거, 복합시설 출점 확대…1년 만에 가맹점 2배 증가",
-      "link": "https://www.yna.co.kr/view/AKR20260909026100030",
-      "pubDate": "Wed, 9 Sep 2026 08:55:02 +0900",
+      "title": "약사회 \"비대면진료 약배송 전면 확대 시도 철회하라\"",
+      "link": "https://www.yna.co.kr/view/AKR20260909101000017",
+      "pubDate": "Wed, 9 Sep 2026 13:11:43 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "박홍근 \"빚은 감당할 수 있느냐가 더 중요…충분히 관리 가능\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909033700002",
-      "pubDate": "Wed, 9 Sep 2026 08:53:04 +0900",
+      "title": "캠코, 공공개발 부문 총괄이사에 김경재 씨 선임",
+      "link": "https://www.yna.co.kr/view/AKR20260909099900051",
+      "pubDate": "Wed, 9 Sep 2026 13:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "현대차증권 \"엔캐리, 급격한 청산 가능성 작다…알려진 위기\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909030600008",
-      "pubDate": "Wed, 9 Sep 2026 08:51:05 +0900",
+      "title": "[게시판] 농식품부, 2026 농식품 금융투자 로드쇼 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260909070500030",
+      "pubDate": "Wed, 9 Sep 2026 13:00:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 삼성증권, 퇴직연금 개인투자용 국채 이벤트",
-      "link": "https://www.yna.co.kr/view/AKR20260909029700008",
-      "pubDate": "Wed, 9 Sep 2026 08:44:08 +0900",
+      "title": "여야, 부동산 이견 여전…\"공공이 마중물\"·\"민간 고밀개발로\"",
+      "link": "https://www.yna.co.kr/view/AKR20260909097300001",
+      "pubDate": "Wed, 9 Sep 2026 12:12:11 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "키움증권, 미래과학기술지주와 모험자본 투자 확대 협약 체결",
-      "link": "https://www.yna.co.kr/view/AKR20260909029600008",
-      "pubDate": "Wed, 9 Sep 2026 08:43:38 +0900",
+      "title": "HUG, 든든전세 매입심사에 AI 도입…처리시간 93% 단축",
+      "link": "https://www.yna.co.kr/view/AKR20260909097600003",
+      "pubDate": "Wed, 9 Sep 2026 12:05:22 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "신한증권, 알테오젠 목표가↓…\"노바티스 신약 1개 3상 실패\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909030400008",
-      "pubDate": "Wed, 9 Sep 2026 08:43:38 +0900",
+      "title": "LH, 월드 스마트시티 엑스포에서 '미래 AI 도시' 선보여",
+      "link": "https://www.yna.co.kr/view/AKR20260909095900003",
+      "pubDate": "Wed, 9 Sep 2026 12:01:26 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "취업자 18만4천명 늘었지만…청년 고용한파 지속·내수도 위축(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260909020851002",
-      "pubDate": "Wed, 9 Sep 2026 08:38:52 +0900",
+      "title": "동물병원 피해구제 신청 급증…'검사 중 탈구' 등 진료과실 다수",
+      "link": "https://www.yna.co.kr/view/AKR20260908110000030",
+      "pubDate": "Wed, 9 Sep 2026 12:00:42 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "부산 8월 고용률 58.8%…1년 새 0.5%p 상승",
-      "link": "https://www.yna.co.kr/view/AKR20260909028100051",
-      "pubDate": "Wed, 9 Sep 2026 08:34:58 +0900",
+      "title": "2분기 기업 성장성·수익성 역대 최고…삼전·닉스 빼도 개선",
+      "link": "https://www.yna.co.kr/view/AKR20260909093500002",
+      "pubDate": "Wed, 9 Sep 2026 12:00:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "KB증권 \"AI 모델 경쟁 최대 수혜는 삼성전자·SK하이닉스\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909028300008",
-      "pubDate": "Wed, 9 Sep 2026 08:32:44 +0900",
+      "title": "인사처, 대전·전남광주서 공직박람회 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260909033100001",
+      "pubDate": "Wed, 9 Sep 2026 12:00:14 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "대신증권 \"심텍, 3분기 실적 컨센서스 상회…성장 기반 확보\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909027400008",
-      "pubDate": "Wed, 9 Sep 2026 08:32:30 +0900",
+      "title": "대한상공회의소 소플, '지역기업 이야기' 콘텐츠 연재",
+      "link": "https://www.yna.co.kr/view/AKR20260909030300003",
+      "pubDate": "Wed, 9 Sep 2026 12:00:10 +0900",
       "source": "연합뉴스"
     }
   ]
