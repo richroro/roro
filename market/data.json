@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T23:23:37.167661+09:00",
+  "updatedAt": "2026-09-10T03:29:41.382396+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52392.22,
-      "change": -393.85,
-      "changePercent": -0.75,
+      "price": 52471.8,
+      "change": -314.27,
+      "changePercent": -0.6,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26278.97,
-      "change": -142.44,
-      "changePercent": -0.54,
+      "price": 26262.37,
+      "change": -159.05,
+      "changePercent": -0.6,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1336.95,
-      "change": -2.97,
-      "changePercent": -0.22,
+      "price": 1339.31,
+      "change": -0.61,
+      "changePercent": -0.05,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,59 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 314.93,
-      "change": -1.29,
-      "changePercent": -0.41,
+      "price": 312.43,
+      "change": -3.79,
+      "changePercent": -1.2,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 371.76,
-      "change": 3.6,
-      "changePercent": 0.98,
+      "price": 369.63,
+      "change": 1.47,
+      "changePercent": 0.4,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 223.79,
-      "change": -1.94,
-      "changePercent": -0.86,
+      "price": 224.16,
+      "change": -1.57,
+      "changePercent": -0.7,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "美,\"장기국채 바이백 3배 확대\"…시장 실망에 국채수익률 오히려 상승",
+      "link": "https://www.hankyung.com/article/202609105070i",
+      "pubDate": "Thu, 10 Sep 2026 00:57:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 경제학자 70% \"9월 금리 동결\"…시장 예상과 반대",
+      "link": "https://www.hankyung.com/article/202609105067i",
+      "pubDate": "Thu, 10 Sep 2026 00:32:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"트럼프, 전쟁 기간 중 에너지주식 매매로 최대 59억 벌어\"",
+      "link": "https://www.hankyung.com/article/202609095058i",
+      "pubDate": "Wed, 09 Sep 2026 23:58:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "베선트, 금리는 \"나에게 베팅\"…엔화 강세에 발목 잡힌 반도체 [박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609095052i",
+      "pubDate": "Wed, 09 Sep 2026 23:44:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "100달러 넘어선 유가에 금리인상 우려…美증시 하락",
+      "link": "https://www.hankyung.com/article/202609095050i",
+      "pubDate": "Wed, 09 Sep 2026 23:31:49 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "구글, 핀란드에 23조원 투자 AI 데이터센터 구축",
       "link": "https://www.hankyung.com/article/202609094965i",
@@ -130,7 +160,7 @@
       "source": "한국경제"
     },
     {
-      "title": "\"동네 편의점 탈탈 털었다\"…SNS서 난리난 '뜻밖의 디저트' [셀럽픽]",
+      "title": "\"먹고 싶어서 편의점 싹 털었다\"…SNS 인증 쏟아진 '디저트' [셀럽픽]",
       "link": "https://www.hankyung.com/article/202609092819g",
       "pubDate": "Wed, 09 Sep 2026 21:00:18 +0900",
       "source": "한국경제"
@@ -139,36 +169,6 @@
       "title": "美, 캐나다 관세 부과→캐나다 보복관세→美 수입금지로 또 보복",
       "link": "https://www.hankyung.com/article/202609094929i",
       "pubDate": "Wed, 09 Sep 2026 20:32:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"피노누아 즐기는 50대에 딱\"…200년 셰리 명가의 '한정판\" [현장+]",
-      "link": "https://www.hankyung.com/article/202609093243g",
-      "pubDate": "Wed, 09 Sep 2026 20:00:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'AI가 10년내 전 인류 죽일 가능성 10%\"…앤트로픽 전 연구원 경고",
-      "link": "https://www.hankyung.com/article/202609094905i",
-      "pubDate": "Wed, 09 Sep 2026 19:46:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "홍라희 삼전 지분 1.9조, 이재용 회장이 사들인다",
-      "link": "https://www.hankyung.com/article/2026090949171",
-      "pubDate": "Wed, 09 Sep 2026 19:41:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美·이란 공습 확대…브렌트유 또 100달러 넘었다.",
-      "link": "https://www.hankyung.com/article/202609094888i",
-      "pubDate": "Wed, 09 Sep 2026 19:08:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "국민銀, '한손 한책' 동참…육군훈련소에 책 5400권 기증",
-      "link": "https://www.hankyung.com/article/2026090947541",
-      "pubDate": "Wed, 09 Sep 2026 18:47:34 +0900",
       "source": "한국경제"
     },
     {
