@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T18:34:31.028686+09:00",
+  "updatedAt": "2026-09-10T23:16:05.387669+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52380.66,
-      "change": -405.44,
-      "changePercent": -0.77,
+      "price": 52100.42,
+      "change": -280.24,
+      "changePercent": -0.54,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26253.34,
-      "change": -168.07,
-      "changePercent": -0.64,
+      "price": 26051.06,
+      "change": -202.28,
+      "changePercent": -0.77,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1341.18,
-      "change": 1.63,
-      "changePercent": 0.12,
+      "price": 1345.57,
+      "change": 6.02,
+      "changePercent": 0.45,
       "currency": "KRW"
     }
   ],
@@ -88,88 +88,112 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 315.34,
-      "change": -0.88,
-      "changePercent": -0.28,
+      "price": 319.25,
+      "change": 3.92,
+      "changePercent": 1.24,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 367.81,
-      "change": -0.35,
-      "changePercent": -0.1,
+      "price": 365.6,
+      "change": -2.21,
+      "changePercent": -0.6,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 223.67,
-      "change": -2.06,
-      "changePercent": -0.91,
+      "price": 218.01,
+      "change": -5.66,
+      "changePercent": -2.53,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "홈쇼핑 12개사 방미통위 재승인…현대홈쇼핑 평가점수 1위",
-      "link": "https://www.hankyung.com/article/202609107487g",
-      "pubDate": "Thu, 10 Sep 2026 18:23:53 +0900",
+      "title": "[속보] 美 30년물 국채금리 5.35%로 급등…2007년 이후 최고",
+      "link": "https://www.hankyung.com/article/2026091076667",
+      "pubDate": "Thu, 10 Sep 2026 22:21:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'금융 모른다' 우려 딛고…1년 만에 존재감 키운 이억원",
-      "link": "https://www.hankyung.com/article/2026091073491",
-      "pubDate": "Thu, 10 Sep 2026 18:15:15 +0900",
+      "title": "WTI 100달러 넘자 10년물 미국채 수익률 4.9% 돌파",
+      "link": "https://www.hankyung.com/article/202609107646i",
+      "pubDate": "Thu, 10 Sep 2026 22:15:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "예금금리 잇단 인상…5대銀 연 3.3% 넘어",
-      "link": "https://www.hankyung.com/article/2026091073511",
-      "pubDate": "Thu, 10 Sep 2026 18:13:36 +0900",
+      "title": "ECB 올해 두번째 금리 인상…\"중동전쟁 물가 압박 계속\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260910169652085",
+      "pubDate": "Thu, 10 Sep 2026 22:14:39 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 두바이·브렌트유 이어 WTI도 배럴당 100달러 돌파",
+      "link": "https://www.hankyung.com/article/2026091076407",
+      "pubDate": "Thu, 10 Sep 2026 21:46:20 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'착한 배달앱' 신한 땡겨요, 1000만 회원 눈앞",
-      "link": "https://www.hankyung.com/article/2026091073521",
-      "pubDate": "Thu, 10 Sep 2026 18:13:09 +0900",
+      "title": "美, 8월 생산자물가 0.4%p 상승…전년 대비 5.4%↑",
+      "link": "https://www.hankyung.com/article/202609107628i",
+      "pubDate": "Thu, 10 Sep 2026 21:43:48 +0900",
       "source": "한국경제"
     },
     {
-      "title": "KB금융, 블룸버그와 자본시장 역량강화 협약",
-      "link": "https://www.hankyung.com/article/2026091073501",
-      "pubDate": "Thu, 10 Sep 2026 18:12:30 +0900",
+      "title": "ECB, 전쟁 이후 두번째 0.25%p 금리 인상…기준금리 2.5%로",
+      "link": "https://www.hankyung.com/article/202609107631i",
+      "pubDate": "Thu, 10 Sep 2026 21:38:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "달라진 롯데…쿠팡과 손잡고, 외부 CEO 영입",
-      "link": "https://www.hankyung.com/article/2026091072851",
-      "pubDate": "Thu, 10 Sep 2026 18:11:30 +0900",
+      "title": "방산시장 갔다가…\"여보, 1000만원 아꼈어\" 이유 알고보니",
+      "link": "https://www.hankyung.com/article/2026091072421",
+      "pubDate": "Thu, 10 Sep 2026 21:00:02 +0900",
       "source": "한국경제"
     },
     {
-      "title": "무신사, 첫 뷰티 단독 점포…'독주' 올리브영에 도전장",
-      "link": "https://www.hankyung.com/article/2026091072861",
-      "pubDate": "Thu, 10 Sep 2026 18:10:00 +0900",
+      "title": "AI 인프라 수요 폭발…TSMC, 8월 매출도 53% 급증",
+      "link": "https://www.hankyung.com/article/202609107560i",
+      "pubDate": "Thu, 10 Sep 2026 20:01:52 +0900",
       "source": "한국경제"
     },
     {
-      "title": "농협, 877억원 투입…성수품 반값 할인",
-      "link": "https://www.hankyung.com/article/2026091072901",
-      "pubDate": "Thu, 10 Sep 2026 18:08:11 +0900",
+      "title": "TSMC 8월 매출 53% 증가…4달째 '역대 최대'",
+      "link": "https://www.hankyung.com/article/202609107098i",
+      "pubDate": "Thu, 10 Sep 2026 20:00:09 +0900",
       "source": "한국경제"
     },
     {
-      "title": "갤럭시 앞에서 '주름' 잡았지만…더 무겁고 비싼 '접는 아이폰'",
-      "link": "https://www.hankyung.com/article/2026091073271",
-      "pubDate": "Thu, 10 Sep 2026 18:03:30 +0900",
+      "title": "HBM 공급부족에…화웨이도 AI칩 가격 대폭 인상",
+      "link": "https://www.hankyung.com/article/202609107533i",
+      "pubDate": "Thu, 10 Sep 2026 19:32:55 +0900",
       "source": "한국경제"
     },
     {
-      "title": "화웨이·샤오미도 나란히 신제품 출시…中 폴더블폰 추격 거세",
-      "link": "https://www.hankyung.com/article/2026091073281",
-      "pubDate": "Thu, 10 Sep 2026 18:02:01 +0900",
+      "title": "송미령 \"농지조사, 투기는 엄정 조치…경미한 위반은 유연 대처\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910160900030",
+      "pubDate": "Thu, 10 Sep 2026 19:21:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "다급한 트럼프…\"중간선거 이기면 1인당 670만원 쏘겠다\"",
+      "link": "https://www.hankyung.com/article/202609107522i",
+      "pubDate": "Thu, 10 Sep 2026 19:03:53 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "부산 의료·교육 현장 찾은 박홍근 \"거점병원 확대가 균형발전\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260910147751002",
+      "pubDate": "Thu, 10 Sep 2026 18:58:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "농식품부 \"수입콩 부족분, 국산콩 할인으로 평년 수준 공급\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910159800030",
+      "pubDate": "Thu, 10 Sep 2026 18:36:21 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "국가공무원 5급·외교관 후보자 2차 필기시험에 483명 합격",
@@ -205,30 +229,6 @@
       "title": "춘천 기업혁신파크, '의료데이터 신뢰 생태계' 구축 모색",
       "link": "https://www.yna.co.kr/view/AKR20260910151800062",
       "pubDate": "Thu, 10 Sep 2026 17:20:23 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "검찰, '전쟁 틈타 수조원 담합' 석화업체 경영진 줄소환(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260910085651004",
-      "pubDate": "Thu, 10 Sep 2026 17:10:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "노란봉투법에 공공기관 이전도 영향…노동부 \"노사 협의 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910145200530",
-      "pubDate": "Thu, 10 Sep 2026 17:08:48 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리, 유가 100달러 돌파·美금리 여파에 상승(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260910143851008",
-      "pubDate": "Thu, 10 Sep 2026 17:05:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "제이앤티씨 \"종속회사 JNTC에 539억원 출자\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910148100008",
-      "pubDate": "Thu, 10 Sep 2026 17:03:31 +0900",
       "source": "연합뉴스"
     }
   ]
