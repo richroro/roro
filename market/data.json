@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T23:16:05.387669+09:00",
+  "updatedAt": "2026-09-11T03:17:58.284593+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52100.42,
-      "change": -280.24,
-      "changePercent": -0.54,
+      "price": 51995.51,
+      "change": -385.15,
+      "changePercent": -0.74,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26051.06,
-      "change": -202.28,
-      "changePercent": -0.77,
+      "price": 26078.4,
+      "change": -174.94,
+      "changePercent": -0.67,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.57,
-      "change": 6.02,
-      "changePercent": 0.45,
+      "price": 1346.29,
+      "change": 6.74,
+      "changePercent": 0.5,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,65 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 319.25,
-      "change": 3.92,
-      "changePercent": 1.24,
+      "price": 323.45,
+      "change": 8.11,
+      "changePercent": 2.57,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 365.6,
-      "change": -2.21,
-      "changePercent": -0.6,
+      "price": 365.55,
+      "change": -2.26,
+      "changePercent": -0.62,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 218.01,
-      "change": -5.66,
-      "changePercent": -2.53,
+      "price": 218.09,
+      "change": -5.58,
+      "changePercent": -2.49,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "[포토] 최태원, 울산서 AX 현장 경영",
+      "link": "https://www.hankyung.com/article/2026091076641",
+      "pubDate": "Fri, 11 Sep 2026 01:36:47 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "ECB 올해 두번째 금리 인상…유럽 국채금리 급등(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20260910169653085",
+      "pubDate": "Fri, 11 Sep 2026 01:27:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "엔비디아와 팔란티어, AI 연합군 결성…고유가 2029년까지 간다?[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609107697i",
+      "pubDate": "Fri, 11 Sep 2026 00:36:37 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"스카이넷 현실화되나\"…\"인류의 파멸 위험\"경고 늘어난다",
+      "link": "https://www.hankyung.com/article/202609107601i",
+      "pubDate": "Fri, 11 Sep 2026 00:28:29 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "사우디,8월 산유량 급감…26년만에 최저 수준",
+      "link": "https://www.hankyung.com/article/202609117705i",
+      "pubDate": "Fri, 11 Sep 2026 00:24:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "유가 급등·채권 수익률 급등에 S&P500 4일 연속 하락",
+      "link": "https://www.hankyung.com/article/202609107672i",
+      "pubDate": "Thu, 10 Sep 2026 23:04:59 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "[속보] 美 30년물 국채금리 5.35%로 급등…2007년 이후 최고",
       "link": "https://www.hankyung.com/article/2026091076667",
@@ -148,40 +184,10 @@
       "source": "한국경제"
     },
     {
-      "title": "방산시장 갔다가…\"여보, 1000만원 아꼈어\" 이유 알고보니",
-      "link": "https://www.hankyung.com/article/2026091072421",
-      "pubDate": "Thu, 10 Sep 2026 21:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI 인프라 수요 폭발…TSMC, 8월 매출도 53% 급증",
-      "link": "https://www.hankyung.com/article/202609107560i",
-      "pubDate": "Thu, 10 Sep 2026 20:01:52 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "TSMC 8월 매출 53% 증가…4달째 '역대 최대'",
-      "link": "https://www.hankyung.com/article/202609107098i",
-      "pubDate": "Thu, 10 Sep 2026 20:00:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HBM 공급부족에…화웨이도 AI칩 가격 대폭 인상",
-      "link": "https://www.hankyung.com/article/202609107533i",
-      "pubDate": "Thu, 10 Sep 2026 19:32:55 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "송미령 \"농지조사, 투기는 엄정 조치…경미한 위반은 유연 대처\"",
       "link": "https://www.yna.co.kr/view/AKR20260910160900030",
       "pubDate": "Thu, 10 Sep 2026 19:21:09 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "다급한 트럼프…\"중간선거 이기면 1인당 670만원 쏘겠다\"",
-      "link": "https://www.hankyung.com/article/202609107522i",
-      "pubDate": "Thu, 10 Sep 2026 19:03:53 +0900",
-      "source": "한국경제"
     },
     {
       "title": "부산 의료·교육 현장 찾은 박홍근 \"거점병원 확대가 균형발전\"(종합)",
@@ -223,12 +229,6 @@
       "title": "재경차관, 아프리카 진출 모색 韓기업 간담회…\"지원책 구체화\"",
       "link": "https://www.yna.co.kr/view/AKR20260910148700002",
       "pubDate": "Thu, 10 Sep 2026 17:22:20 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "춘천 기업혁신파크, '의료데이터 신뢰 생태계' 구축 모색",
-      "link": "https://www.yna.co.kr/view/AKR20260910151800062",
-      "pubDate": "Thu, 10 Sep 2026 17:20:23 +0900",
       "source": "연합뉴스"
     }
   ]
