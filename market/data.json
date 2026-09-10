@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-09-10T09:03:16.079759+09:00",
+  "updatedAt": "2026-09-10T13:30:14.041122+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 7051.64,
-      "change": 97.12,
-      "changePercent": 1.4,
+      "price": 6999.51,
+      "change": -52.13,
+      "changePercent": -0.74,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 830.37,
-      "change": 8.18,
-      "changePercent": 0.99,
+      "price": 829.93,
+      "change": 18.05,
+      "changePercent": 2.22,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52380.66,
-      "change": -405.41,
+      "change": -405.44,
       "changePercent": -0.77,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.48,
-      "change": 2.93,
-      "changePercent": 0.22,
+      "price": 1337.19,
+      "change": -2.36,
+      "changePercent": -0.18,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 269500.0,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 267250.0,
+      "change": -2250.0,
+      "changePercent": -0.83,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1856000.0,
-      "change": 63000.0,
-      "changePercent": 3.51,
+      "price": 1844000.0,
+      "change": -12000.0,
+      "changePercent": -0.65,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 210000.0,
-      "change": -4500.0,
-      "changePercent": -2.1,
+      "price": 207250.0,
+      "change": -2750.0,
+      "changePercent": -1.31,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 35050.0,
-      "change": -350.0,
-      "changePercent": -0.99,
+      "price": 34850.0,
+      "change": -200.0,
+      "changePercent": -0.57,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 371000.0,
-      "change": 22500.0,
-      "changePercent": 6.46,
+      "price": 362000.0,
+      "change": -9000.0,
+      "changePercent": -2.43,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "CJ제일제당 햇반, 뉴욕 타임스퀘어 전광판에…미국 공략 강화",
-      "link": "https://www.yna.co.kr/view/AKR20260910025900030",
-      "pubDate": "Thu, 10 Sep 2026 08:52:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "미래대응기금 지속기간은…박홍근 \"세입 확보에 따라 달라진다\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910028500002",
-      "pubDate": "Thu, 10 Sep 2026 08:51:13 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"한국 오면 꼭 사야\"…외국인들 쓸어 담는다는 이 과자",
-      "link": "https://www.hankyung.com/article/202609105274g",
-      "pubDate": "Thu, 10 Sep 2026 08:51:03 +0900",
+      "title": "'75만원 칫솔' 누가 살까 했는데…나오기도 전에 '완판'",
+      "link": "https://www.hankyung.com/article/202609106249i",
+      "pubDate": "Thu, 10 Sep 2026 12:56:02 +0900",
       "source": "한국경제"
     },
     {
-      "title": "DS증권 \"CJ CGV, 극장 관객수 증가…3분기 실적 성장 기대\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910029700008",
-      "pubDate": "Thu, 10 Sep 2026 08:49:31 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "은행권 정기예금 금리 줄인상…\"시장금리 상승 반영\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260910024551002",
-      "pubDate": "Thu, 10 Sep 2026 08:48:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "월급 그대로인데 물가는 28% 껑충…美 소비자 '부글'",
-      "link": "https://www.hankyung.com/article/202609105494i",
-      "pubDate": "Thu, 10 Sep 2026 08:46:33 +0900",
+      "title": "\"TSMC, 2년 뒤 21조\" 전망…내년 1.4나노 생산 돌입",
+      "link": "https://www.hankyung.com/article/2026091063057",
+      "pubDate": "Thu, 10 Sep 2026 12:21:52 +0900",
       "source": "한국경제"
     },
     {
-      "title": "소진공, 선양소주에 공로상 수여…\"착한소주로 골목상권 활성화\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910027200030",
-      "pubDate": "Thu, 10 Sep 2026 08:45:04 +0900",
+      "title": "로이터 설문조사…\"70%, 9월에 연준 금리동결 예상\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910084700009",
+      "pubDate": "Thu, 10 Sep 2026 12:10:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "유안타증권 \"증권주 조정 마무리 국면, 반등에 시간 필요…목표가↓\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910027400008",
-      "pubDate": "Thu, 10 Sep 2026 08:44:36 +0900",
+      "title": "공익직불 의무교육 30일 마감…미이수시 직불금 10% 감액",
+      "link": "https://www.yna.co.kr/view/AKR20260910082200030",
+      "pubDate": "Thu, 10 Sep 2026 12:00:27 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "스웨덴 사립학교 수익 논란…총선 핵심 쟁점 부상",
-      "link": "https://www.hankyung.com/article/202609105462i",
-      "pubDate": "Thu, 10 Sep 2026 08:41:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "식약처, 글루텐프리 제품 온라인 부당광고 20건 적발",
-      "link": "https://www.yna.co.kr/view/AKR20260910025400017",
-      "pubDate": "Thu, 10 Sep 2026 08:40:10 +0900",
+      "title": "중기부, 혁신 소상공 오디션 11곳 선정…최대 4천만원 추가 지원",
+      "link": "https://www.yna.co.kr/view/AKR20260910053300030",
+      "pubDate": "Thu, 10 Sep 2026 12:00:23 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "신한증권 \"오픈AI '아스트라' 출시로 사이버보안 ETF 수혜\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910026500008",
-      "pubDate": "Thu, 10 Sep 2026 08:40:07 +0900",
+      "title": "서울시, 런던서 글로벌 IB·자산운용사에 투자 매력 홍보",
+      "link": "https://www.yna.co.kr/view/AKR20260910046500004",
+      "pubDate": "Thu, 10 Sep 2026 12:00:22 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "구윤철 \"1인당 국민소득 4만달러 달성 가능성 더 커져\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910026100002",
-      "pubDate": "Thu, 10 Sep 2026 08:34:33 +0900",
+      "title": "'공공부문 채용 성별균형' 토크 콘서트 내일 신촌서 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260910040800530",
+      "pubDate": "Thu, 10 Sep 2026 12:00:21 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "앤트로픽 연구원 사퇴…초지능 경쟁에 '인류 멸종' 경고",
-      "link": "https://www.hankyung.com/article/202609105421i",
-      "pubDate": "Thu, 10 Sep 2026 08:30:52 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] 해군 1인자, 한화 필리조선소 찾았다…美함정 수주 속도내나",
-      "link": "https://www.hankyung.com/article/202609105341i",
-      "pubDate": "Thu, 10 Sep 2026 08:30:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "KB증권 \"가계자금, 증시 유입 둔화 조짐…정기예금으로 이동\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910025800008",
-      "pubDate": "Thu, 10 Sep 2026 08:29:26 +0900",
+      "title": "농협, 추석 맞아 농축산물 할인…사과·배 최대 반값",
+      "link": "https://www.yna.co.kr/view/AKR20260910031900030",
+      "pubDate": "Thu, 10 Sep 2026 12:00:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[밤 사이 해외뉴스 영상] 유가 100달러 재돌파…호르무즈 마비에 인플레 경고",
-      "link": "https://www.hankyung.com/article/202609105287i",
-      "pubDate": "Thu, 10 Sep 2026 08:27:16 +0900",
+      "title": "\"종부세 합산배제·과세특례, 30일까지 신청하세요\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910057100002",
+      "pubDate": "Thu, 10 Sep 2026 12:00:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "첫 해외IR 나선 이찬진 \"韓자본시장 믿고 투자할 환경 만들겠다\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910054700002",
+      "pubDate": "Thu, 10 Sep 2026 12:00:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "대출 조여도 집값·가계대출↑…한은 \"금융불균형 위험\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910048200002",
+      "pubDate": "Thu, 10 Sep 2026 12:00:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "버려지던 비지·술지게미…정부가 '대박' 찜한 기업들",
+      "link": "https://www.hankyung.com/article/202609105788i",
+      "pubDate": "Thu, 10 Sep 2026 12:00:11 +0900",
       "source": "한국경제"
     },
     {
-      "title": "딥시크 자금 조달 열풍…고액 수수료 '그림자 시장' 등장",
-      "link": "https://www.hankyung.com/article/202609105381i",
-      "pubDate": "Thu, 10 Sep 2026 08:22:42 +0900",
+      "title": "한은 \"글로벌 AI 투자, 상당 기간 증가 기대…지속 점검해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910038700002",
+      "pubDate": "Thu, 10 Sep 2026 12:00:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"나체 소동\" 루머에 104조 증발까지…세계 1위 배터리 '발칵'",
+      "link": "https://www.hankyung.com/article/2026091061017",
+      "pubDate": "Thu, 10 Sep 2026 11:28:36 +0900",
       "source": "한국경제"
     },
     {
-      "title": "호르무즈 원유량 '깜깜이'…유가에 불확실성 프리미엄",
-      "link": "https://www.hankyung.com/article/202609105299i",
-      "pubDate": "Thu, 10 Sep 2026 08:11:07 +0900",
+      "title": "히포팜텍, 아세안 스마트팜 시장 공략",
+      "link": "https://www.hankyung.com/article/202609106207i",
+      "pubDate": "Thu, 10 Sep 2026 11:25:49 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"무화과·송이·단호박에 치즈까지\"…외식업계 '가을의 맛' 경쟁 [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202609092909i",
-      "pubDate": "Thu, 10 Sep 2026 08:00:07 +0900",
+      "title": "대만에 밀리고 중국에 쫓겼다…삼성 파운드리, 2위 사수",
+      "link": "https://www.hankyung.com/article/202609105164g",
+      "pubDate": "Thu, 10 Sep 2026 11:03:35 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[밤 사이 해외뉴스] 아이폰이 2000달러? 애플 폴더블폰 공개",
-      "link": "https://www.hankyung.com/article/202609105270i",
-      "pubDate": "Thu, 10 Sep 2026 07:54:23 +0900",
+      "title": "자율주행 주차기능 통합제어기 등…'히어로' 선보인 현대모비스",
+      "link": "https://www.hankyung.com/article/202609105885g",
+      "pubDate": "Thu, 10 Sep 2026 11:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"애플이어도 이건 아니지\"…폴더블 아이폰 가격에 '화들짝' [영상]",
+      "link": "https://www.hankyung.com/article/202609105244g",
+      "pubDate": "Thu, 10 Sep 2026 10:48:31 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "유럽서 단숨에 1위 올라선 한국車…독일서 신차 공개",
+      "link": "https://www.hankyung.com/article/202609105740g",
+      "pubDate": "Thu, 10 Sep 2026 10:44:59 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한 달 일하고 평생 연금?…국민연금 추납 신청 2년 새 3배",
+      "link": "https://www.hankyung.com/article/202609105825H",
+      "pubDate": "Thu, 10 Sep 2026 10:32:51 +0900",
       "source": "한국경제"
     }
   ]
