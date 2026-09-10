@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T06:33:20.684829+09:00",
+  "updatedAt": "2026-09-11T08:59:24.368249+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1348.78,
-      "change": 9.23,
-      "changePercent": 0.69,
+      "price": 1349.04,
+      "change": -0.11,
+      "changePercent": -0.01,
       "currency": "KRW"
     }
   ],
@@ -112,16 +112,94 @@
   ],
   "news": [
     {
-      "title": "농식품부, 농어촌 기본소득 연계 사회연대경제 활성화 포럼 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260910128100030",
-      "pubDate": "Fri, 11 Sep 2026 06:00:07 +0900",
+      "title": "원주·태백·속초 수산시장서 구매액 30% 상품권 환급",
+      "link": "https://www.yna.co.kr/view/AKR20260911029100062",
+      "pubDate": "Fri, 11 Sep 2026 08:54:41 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "자산운용사 2분기 순익 2.7조 '역대급'…증권사 이어 고공행진",
-      "link": "https://www.yna.co.kr/view/AKR20260910166100002",
-      "pubDate": "Fri, 11 Sep 2026 06:00:00 +0900",
+      "title": "해외인프라공사, 한국형 스마트시티 후속 투자·협력 방안 논의",
+      "link": "https://www.yna.co.kr/view/AKR20260911027200003",
+      "pubDate": "Fri, 11 Sep 2026 08:50:47 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "신한증권 \"미용의료기기, 3분기 실적 확인 전까진 보수적 접근\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911026400008",
+      "pubDate": "Fri, 11 Sep 2026 08:49:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "고양시장, 능곡6지구·영상문화단지 주민 만나 현안 논의",
+      "link": "https://www.yna.co.kr/view/AKR20260911024700060",
+      "pubDate": "Fri, 11 Sep 2026 08:48:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "SK증권, 주가 하락에 LS 목표가↓…\"하반기 실적 개선은 지속\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911026900008",
+      "pubDate": "Fri, 11 Sep 2026 08:44:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "키움증권 \"인터로조, 뷰티렌즈 열풍에 재평가 기대\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911026200008",
+      "pubDate": "Fri, 11 Sep 2026 08:37:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] ASML코리아, '대한민국 일자리 으뜸기업' 5년 연속 선정",
+      "link": "https://www.yna.co.kr/view/AKR20260911024200003",
+      "pubDate": "Fri, 11 Sep 2026 08:34:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "NH증권 \"대우건설, 팀코리아 원전 수출 수혜 기대…목표가↑\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911025000008",
+      "pubDate": "Fri, 11 Sep 2026 08:34:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "파리바게뜨, 단체 주문용 '케이터링 박스' 50곳서 시범 운영",
+      "link": "https://www.yna.co.kr/view/AKR20260911022900030",
+      "pubDate": "Fri, 11 Sep 2026 08:33:32 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성E&A, 4.7조원 규모 사우디 비료 프로젝트 수주",
+      "link": "https://www.yna.co.kr/view/AKR20260911022700003",
+      "pubDate": "Fri, 11 Sep 2026 08:33:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "고작 0.5%p 격차…삼성, 파운드리 2위 자리도 '흔들'",
+      "link": "https://www.hankyung.com/article/202609107434i",
+      "pubDate": "Fri, 11 Sep 2026 07:00:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"삼성·SK 가자\" 대학생들 난리…떴다 하면 순식간에 '완판'",
+      "link": "https://www.hankyung.com/article/2026091073231",
+      "pubDate": "Fri, 11 Sep 2026 07:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "도산공원 옆 들어선 거대한 텐트…내부엔 '웨어러블 기어' 천국",
+      "link": "https://www.hankyung.com/article/202609107693i",
+      "pubDate": "Fri, 11 Sep 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "김정관, 美 도착…\"대미 투자 협상 마무리하기 위해 왔다\"",
+      "link": "https://www.hankyung.com/article/2026091177877",
+      "pubDate": "Fri, 11 Sep 2026 06:50:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"이러다 제주 경제 폭망한다\"…'범죄의 섬' 낙인에 '초비상' [불신 청구서]",
+      "link": "https://www.hankyung.com/article/202609107125H",
+      "pubDate": "Fri, 11 Sep 2026 06:30:07 +0900",
+      "source": "한국경제"
     },
     {
       "title": "[포토] 최태원, 울산서 AX 현장 경영",
@@ -130,25 +208,19 @@
       "source": "한국경제"
     },
     {
-      "title": "ECB 올해 두번째 금리 인상…유럽 국채금리 급등(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260910169653085",
-      "pubDate": "Fri, 11 Sep 2026 01:27:37 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "엔비디아와 팔란티어, AI 연합군 결성…고유가 2029년까지 간다?[박신영의 개장전 요것만]",
+      "title": "엔비디아와 팔란티어, AI 연합군 결성…고유가 2029년까지 간다? [박신영의 개장전 요것만]",
       "link": "https://www.hankyung.com/article/202609107697i",
       "pubDate": "Fri, 11 Sep 2026 00:36:37 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"스카이넷 현실화되나\"…\"인류의 파멸 위험\"경고 늘어난다",
+      "title": "\"스카이넷 현실화되나\"…\"인류의 파멸 위험\" 경고 늘어난다",
       "link": "https://www.hankyung.com/article/202609107601i",
       "pubDate": "Fri, 11 Sep 2026 00:28:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "사우디,8월 산유량 급감…26년만에 최저 수준",
+      "title": "사우디, 8월 산유량 급감…26년 만에 최저 수준",
       "link": "https://www.hankyung.com/article/202609117705i",
       "pubDate": "Fri, 11 Sep 2026 00:24:04 +0900",
       "source": "한국경제"
@@ -158,78 +230,6 @@
       "link": "https://www.hankyung.com/article/202609107672i",
       "pubDate": "Thu, 10 Sep 2026 23:04:59 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "[속보] 美 30년물 국채금리 5.35%로 급등…2007년 이후 최고",
-      "link": "https://www.hankyung.com/article/2026091076667",
-      "pubDate": "Thu, 10 Sep 2026 22:21:30 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "WTI 100달러 넘자 10년물 미국채 수익률 4.9% 돌파",
-      "link": "https://www.hankyung.com/article/202609107646i",
-      "pubDate": "Thu, 10 Sep 2026 22:15:14 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "ECB 올해 두번째 금리 인상…\"중동전쟁 물가 압박 계속\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260910169652085",
-      "pubDate": "Thu, 10 Sep 2026 22:14:39 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] 두바이·브렌트유 이어 WTI도 배럴당 100달러 돌파",
-      "link": "https://www.hankyung.com/article/2026091076407",
-      "pubDate": "Thu, 10 Sep 2026 21:46:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美, 8월 생산자물가 0.4%p 상승…전년 대비 5.4%↑",
-      "link": "https://www.hankyung.com/article/202609107628i",
-      "pubDate": "Thu, 10 Sep 2026 21:43:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "ECB, 전쟁 이후 두번째 0.25%p 금리 인상…기준금리 2.5%로",
-      "link": "https://www.hankyung.com/article/202609107631i",
-      "pubDate": "Thu, 10 Sep 2026 21:38:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "송미령 \"농지조사, 투기는 엄정 조치…경미한 위반은 유연 대처\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910160900030",
-      "pubDate": "Thu, 10 Sep 2026 19:21:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "부산 의료·교육 현장 찾은 박홍근 \"거점병원 확대가 균형발전\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260910147751002",
-      "pubDate": "Thu, 10 Sep 2026 18:58:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "농식품부 \"수입콩 부족분, 국산콩 할인으로 평년 수준 공급\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910159800030",
-      "pubDate": "Thu, 10 Sep 2026 18:36:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국가공무원 5급·외교관 후보자 2차 필기시험에 483명 합격",
-      "link": "https://www.yna.co.kr/view/AKR20260910025200001",
-      "pubDate": "Thu, 10 Sep 2026 18:00:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260910150800011",
-      "pubDate": "Thu, 10 Sep 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "HD현대오일뱅크, 에이치앤엘어드밴스드 주식 6천억원에 추가취득",
-      "link": "https://www.yna.co.kr/view/AKR20260910154500008",
-      "pubDate": "Thu, 10 Sep 2026 17:32:27 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
