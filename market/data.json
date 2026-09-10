@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-10T13:30:14.041122+09:00",
+  "updatedAt": "2026-09-10T18:34:31.028686+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6999.51,
-      "change": -52.13,
-      "changePercent": -0.74,
+      "price": 7033.92,
+      "change": -17.72,
+      "changePercent": -0.25,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 829.93,
-      "change": 18.05,
-      "changePercent": 2.22,
+      "price": 836.92,
+      "change": 25.04,
+      "changePercent": 3.08,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1337.19,
-      "change": -2.36,
-      "changePercent": -0.18,
+      "price": 1341.18,
+      "change": 1.63,
+      "changePercent": 0.12,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 267250.0,
-      "change": -2250.0,
-      "changePercent": -0.83,
+      "price": 269000.0,
+      "change": -500.0,
+      "changePercent": -0.19,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1844000.0,
-      "change": -12000.0,
-      "changePercent": -0.65,
+      "price": 1853000.0,
+      "change": -3000.0,
+      "changePercent": -0.16,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 207250.0,
-      "change": -2750.0,
-      "changePercent": -1.31,
+      "price": 208000.0,
+      "change": -2000.0,
+      "changePercent": -0.95,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 34850.0,
-      "change": -200.0,
-      "changePercent": -0.57,
+      "price": 34900.0,
+      "change": -150.0,
+      "changePercent": -0.43,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 362000.0,
-      "change": -9000.0,
-      "changePercent": -2.43,
+      "price": 365000.0,
+      "change": -6000.0,
+      "changePercent": -1.62,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "'75만원 칫솔' 누가 살까 했는데…나오기도 전에 '완판'",
-      "link": "https://www.hankyung.com/article/202609106249i",
-      "pubDate": "Thu, 10 Sep 2026 12:56:02 +0900",
+      "title": "홈쇼핑 12개사 방미통위 재승인…현대홈쇼핑 평가점수 1위",
+      "link": "https://www.hankyung.com/article/202609107487g",
+      "pubDate": "Thu, 10 Sep 2026 18:23:53 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"TSMC, 2년 뒤 21조\" 전망…내년 1.4나노 생산 돌입",
-      "link": "https://www.hankyung.com/article/2026091063057",
-      "pubDate": "Thu, 10 Sep 2026 12:21:52 +0900",
+      "title": "'금융 모른다' 우려 딛고…1년 만에 존재감 키운 이억원",
+      "link": "https://www.hankyung.com/article/2026091073491",
+      "pubDate": "Thu, 10 Sep 2026 18:15:15 +0900",
       "source": "한국경제"
     },
     {
-      "title": "로이터 설문조사…\"70%, 9월에 연준 금리동결 예상\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910084700009",
-      "pubDate": "Thu, 10 Sep 2026 12:10:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "공익직불 의무교육 30일 마감…미이수시 직불금 10% 감액",
-      "link": "https://www.yna.co.kr/view/AKR20260910082200030",
-      "pubDate": "Thu, 10 Sep 2026 12:00:27 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중기부, 혁신 소상공 오디션 11곳 선정…최대 4천만원 추가 지원",
-      "link": "https://www.yna.co.kr/view/AKR20260910053300030",
-      "pubDate": "Thu, 10 Sep 2026 12:00:23 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "서울시, 런던서 글로벌 IB·자산운용사에 투자 매력 홍보",
-      "link": "https://www.yna.co.kr/view/AKR20260910046500004",
-      "pubDate": "Thu, 10 Sep 2026 12:00:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'공공부문 채용 성별균형' 토크 콘서트 내일 신촌서 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260910040800530",
-      "pubDate": "Thu, 10 Sep 2026 12:00:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "농협, 추석 맞아 농축산물 할인…사과·배 최대 반값",
-      "link": "https://www.yna.co.kr/view/AKR20260910031900030",
-      "pubDate": "Thu, 10 Sep 2026 12:00:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"종부세 합산배제·과세특례, 30일까지 신청하세요\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910057100002",
-      "pubDate": "Thu, 10 Sep 2026 12:00:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "첫 해외IR 나선 이찬진 \"韓자본시장 믿고 투자할 환경 만들겠다\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910054700002",
-      "pubDate": "Thu, 10 Sep 2026 12:00:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대출 조여도 집값·가계대출↑…한은 \"금융불균형 위험\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910048200002",
-      "pubDate": "Thu, 10 Sep 2026 12:00:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "버려지던 비지·술지게미…정부가 '대박' 찜한 기업들",
-      "link": "https://www.hankyung.com/article/202609105788i",
-      "pubDate": "Thu, 10 Sep 2026 12:00:11 +0900",
+      "title": "예금금리 잇단 인상…5대銀 연 3.3% 넘어",
+      "link": "https://www.hankyung.com/article/2026091073511",
+      "pubDate": "Thu, 10 Sep 2026 18:13:36 +0900",
       "source": "한국경제"
     },
     {
-      "title": "한은 \"글로벌 AI 투자, 상당 기간 증가 기대…지속 점검해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260910038700002",
-      "pubDate": "Thu, 10 Sep 2026 12:00:08 +0900",
+      "title": "'착한 배달앱' 신한 땡겨요, 1000만 회원 눈앞",
+      "link": "https://www.hankyung.com/article/2026091073521",
+      "pubDate": "Thu, 10 Sep 2026 18:13:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "KB금융, 블룸버그와 자본시장 역량강화 협약",
+      "link": "https://www.hankyung.com/article/2026091073501",
+      "pubDate": "Thu, 10 Sep 2026 18:12:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "달라진 롯데…쿠팡과 손잡고, 외부 CEO 영입",
+      "link": "https://www.hankyung.com/article/2026091072851",
+      "pubDate": "Thu, 10 Sep 2026 18:11:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "무신사, 첫 뷰티 단독 점포…'독주' 올리브영에 도전장",
+      "link": "https://www.hankyung.com/article/2026091072861",
+      "pubDate": "Thu, 10 Sep 2026 18:10:00 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "농협, 877억원 투입…성수품 반값 할인",
+      "link": "https://www.hankyung.com/article/2026091072901",
+      "pubDate": "Thu, 10 Sep 2026 18:08:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "갤럭시 앞에서 '주름' 잡았지만…더 무겁고 비싼 '접는 아이폰'",
+      "link": "https://www.hankyung.com/article/2026091073271",
+      "pubDate": "Thu, 10 Sep 2026 18:03:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "화웨이·샤오미도 나란히 신제품 출시…中 폴더블폰 추격 거세",
+      "link": "https://www.hankyung.com/article/2026091073281",
+      "pubDate": "Thu, 10 Sep 2026 18:02:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "국가공무원 5급·외교관 후보자 2차 필기시험에 483명 합격",
+      "link": "https://www.yna.co.kr/view/AKR20260910025200001",
+      "pubDate": "Thu, 10 Sep 2026 18:00:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"나체 소동\" 루머에 104조 증발까지…세계 1위 배터리 '발칵'",
-      "link": "https://www.hankyung.com/article/2026091061017",
-      "pubDate": "Thu, 10 Sep 2026 11:28:36 +0900",
-      "source": "한국경제"
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20260910150800011",
+      "pubDate": "Thu, 10 Sep 2026 18:00:00 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "히포팜텍, 아세안 스마트팜 시장 공략",
-      "link": "https://www.hankyung.com/article/202609106207i",
-      "pubDate": "Thu, 10 Sep 2026 11:25:49 +0900",
-      "source": "한국경제"
+      "title": "HD현대오일뱅크, 에이치앤엘어드밴스드 주식 6천억원에 추가취득",
+      "link": "https://www.yna.co.kr/view/AKR20260910154500008",
+      "pubDate": "Thu, 10 Sep 2026 17:32:27 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "대만에 밀리고 중국에 쫓겼다…삼성 파운드리, 2위 사수",
-      "link": "https://www.hankyung.com/article/202609105164g",
-      "pubDate": "Thu, 10 Sep 2026 11:03:35 +0900",
-      "source": "한국경제"
+      "title": "부산 의료·교육 현장 찾은 박홍근 \"거점병원 확대가 균형발전\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910147700002",
+      "pubDate": "Thu, 10 Sep 2026 17:30:01 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "자율주행 주차기능 통합제어기 등…'히어로' 선보인 현대모비스",
-      "link": "https://www.hankyung.com/article/202609105885g",
-      "pubDate": "Thu, 10 Sep 2026 11:00:11 +0900",
-      "source": "한국경제"
+      "title": "재경차관, 아프리카 진출 모색 韓기업 간담회…\"지원책 구체화\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910148700002",
+      "pubDate": "Thu, 10 Sep 2026 17:22:20 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"애플이어도 이건 아니지\"…폴더블 아이폰 가격에 '화들짝' [영상]",
-      "link": "https://www.hankyung.com/article/202609105244g",
-      "pubDate": "Thu, 10 Sep 2026 10:48:31 +0900",
-      "source": "한국경제"
+      "title": "춘천 기업혁신파크, '의료데이터 신뢰 생태계' 구축 모색",
+      "link": "https://www.yna.co.kr/view/AKR20260910151800062",
+      "pubDate": "Thu, 10 Sep 2026 17:20:23 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "유럽서 단숨에 1위 올라선 한국車…독일서 신차 공개",
-      "link": "https://www.hankyung.com/article/202609105740g",
-      "pubDate": "Thu, 10 Sep 2026 10:44:59 +0900",
-      "source": "한국경제"
+      "title": "검찰, '전쟁 틈타 수조원 담합' 석화업체 경영진 줄소환(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260910085651004",
+      "pubDate": "Thu, 10 Sep 2026 17:10:57 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "한 달 일하고 평생 연금?…국민연금 추납 신청 2년 새 3배",
-      "link": "https://www.hankyung.com/article/202609105825H",
-      "pubDate": "Thu, 10 Sep 2026 10:32:51 +0900",
-      "source": "한국경제"
+      "title": "노란봉투법에 공공기관 이전도 영향…노동부 \"노사 협의 필요\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910145200530",
+      "pubDate": "Thu, 10 Sep 2026 17:08:48 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국고채 금리, 유가 100달러 돌파·美금리 여파에 상승(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260910143851008",
+      "pubDate": "Thu, 10 Sep 2026 17:05:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "제이앤티씨 \"종속회사 JNTC에 539억원 출자\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910148100008",
+      "pubDate": "Thu, 10 Sep 2026 17:03:31 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
