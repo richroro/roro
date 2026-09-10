@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T06:37:47.461080+09:00",
+  "updatedAt": "2026-09-10T09:03:16.079759+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1339.61,
-      "change": -0.31,
-      "changePercent": -0.02,
+      "price": 1342.48,
+      "change": 2.93,
+      "changePercent": 0.22,
       "currency": "KRW"
     }
   ],
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "끊이지 않는 설계공모 '로비' 논란…징계받고도 심사위원으로",
-      "link": "https://www.yna.co.kr/view/AKR20260909159700003",
-      "pubDate": "Thu, 10 Sep 2026 06:03:00 +0900",
+      "title": "CJ제일제당 햇반, 뉴욕 타임스퀘어 전광판에…미국 공략 강화",
+      "link": "https://www.yna.co.kr/view/AKR20260910025900030",
+      "pubDate": "Thu, 10 Sep 2026 08:52:25 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "검역본부, 아태 12개국 참여 동물질병 진단·항생제 내성 워크숍",
-      "link": "https://www.yna.co.kr/view/AKR20260909128800030",
-      "pubDate": "Thu, 10 Sep 2026 06:00:09 +0900",
+      "title": "미래대응기금 지속기간은…박홍근 \"세입 확보에 따라 달라진다\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910028500002",
+      "pubDate": "Thu, 10 Sep 2026 08:51:13 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 농식품부, 동물복지기본법 제정 토론회 내일 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260909118800030",
-      "pubDate": "Thu, 10 Sep 2026 06:00:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"국내 생산·청년 고용 늘리려면 세제지원 실효성 높여야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909142700003",
-      "pubDate": "Thu, 10 Sep 2026 06:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "2분기 증시 '불장'에…증권사 순이익 5조 돌파, 또 역대 최대",
-      "link": "https://www.yna.co.kr/view/AKR20260909180200002",
-      "pubDate": "Thu, 10 Sep 2026 06:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "토큰증권 시행 앞두고 '상품 부족' 풀릴까…與 법안 주목",
-      "link": "https://www.yna.co.kr/view/AKR20260909177000002",
-      "pubDate": "Thu, 10 Sep 2026 05:57:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"전세난·집값 불안\" 서울 생애최초 주택 구입 비중 역대 최대",
-      "link": "https://www.yna.co.kr/view/AKR20260909170300003",
-      "pubDate": "Thu, 10 Sep 2026 05:55:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금감원, 보험사 '분쟁 민원 관리' 현장점검…KB·DB손보 첫 타자",
-      "link": "https://www.yna.co.kr/view/AKR20260909186300002",
-      "pubDate": "Thu, 10 Sep 2026 05:55:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "2030대 8명 중 1명 \"주식·채권으로 노후준비\"…14년새 5배로↑",
-      "link": "https://www.yna.co.kr/view/AKR20260909155100002",
-      "pubDate": "Thu, 10 Sep 2026 05:53:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"사업자대출 받아 부동산 매매\"…용도 외 유용 5년여간 1천167건",
-      "link": "https://www.yna.co.kr/view/AKR20260909181800002",
-      "pubDate": "Thu, 10 Sep 2026 05:51:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "美,\"장기국채 바이백 3배 확대\"…시장 실망에 국채수익률 오히려 상승",
-      "link": "https://www.hankyung.com/article/202609105070i",
-      "pubDate": "Thu, 10 Sep 2026 00:57:39 +0900",
+      "title": "\"한국 오면 꼭 사야\"…외국인들 쓸어 담는다는 이 과자",
+      "link": "https://www.hankyung.com/article/202609105274g",
+      "pubDate": "Thu, 10 Sep 2026 08:51:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美 경제학자 70% \"9월 금리 동결\"…시장 예상과 반대",
-      "link": "https://www.hankyung.com/article/202609105067i",
-      "pubDate": "Thu, 10 Sep 2026 00:32:40 +0900",
+      "title": "DS증권 \"CJ CGV, 극장 관객수 증가…3분기 실적 성장 기대\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910029700008",
+      "pubDate": "Thu, 10 Sep 2026 08:49:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "은행권 정기예금 금리 줄인상…\"시장금리 상승 반영\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260910024551002",
+      "pubDate": "Thu, 10 Sep 2026 08:48:29 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "월급 그대로인데 물가는 28% 껑충…美 소비자 '부글'",
+      "link": "https://www.hankyung.com/article/202609105494i",
+      "pubDate": "Thu, 10 Sep 2026 08:46:33 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"트럼프, 전쟁 기간 중 에너지주식 매매로 최대 59억 벌어\"",
-      "link": "https://www.hankyung.com/article/202609095058i",
-      "pubDate": "Wed, 09 Sep 2026 23:58:40 +0900",
+      "title": "소진공, 선양소주에 공로상 수여…\"착한소주로 골목상권 활성화\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910027200030",
+      "pubDate": "Thu, 10 Sep 2026 08:45:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "유안타증권 \"증권주 조정 마무리 국면, 반등에 시간 필요…목표가↓\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910027400008",
+      "pubDate": "Thu, 10 Sep 2026 08:44:36 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "스웨덴 사립학교 수익 논란…총선 핵심 쟁점 부상",
+      "link": "https://www.hankyung.com/article/202609105462i",
+      "pubDate": "Thu, 10 Sep 2026 08:41:48 +0900",
       "source": "한국경제"
     },
     {
-      "title": "베선트, 금리는 \"나에게 베팅\"…엔화 강세에 발목 잡힌 반도체 [박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202609095052i",
-      "pubDate": "Wed, 09 Sep 2026 23:44:09 +0900",
+      "title": "식약처, 글루텐프리 제품 온라인 부당광고 20건 적발",
+      "link": "https://www.yna.co.kr/view/AKR20260910025400017",
+      "pubDate": "Thu, 10 Sep 2026 08:40:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신한증권 \"오픈AI '아스트라' 출시로 사이버보안 ETF 수혜\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910026500008",
+      "pubDate": "Thu, 10 Sep 2026 08:40:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "구윤철 \"1인당 국민소득 4만달러 달성 가능성 더 커져\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910026100002",
+      "pubDate": "Thu, 10 Sep 2026 08:34:33 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "앤트로픽 연구원 사퇴…초지능 경쟁에 '인류 멸종' 경고",
+      "link": "https://www.hankyung.com/article/202609105421i",
+      "pubDate": "Thu, 10 Sep 2026 08:30:52 +0900",
       "source": "한국경제"
     },
     {
-      "title": "100달러 넘어선 유가에 금리인상 우려…美증시 하락",
-      "link": "https://www.hankyung.com/article/202609095050i",
-      "pubDate": "Wed, 09 Sep 2026 23:31:49 +0900",
+      "title": "[단독] 해군 1인자, 한화 필리조선소 찾았다…美함정 수주 속도내나",
+      "link": "https://www.hankyung.com/article/202609105341i",
+      "pubDate": "Thu, 10 Sep 2026 08:30:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "구글, 핀란드에 23조원 투자 AI 데이터센터 구축",
-      "link": "https://www.hankyung.com/article/202609094965i",
-      "pubDate": "Wed, 09 Sep 2026 22:05:38 +0900",
+      "title": "KB증권 \"가계자금, 증시 유입 둔화 조짐…정기예금으로 이동\"",
+      "link": "https://www.yna.co.kr/view/AKR20260910025800008",
+      "pubDate": "Thu, 10 Sep 2026 08:29:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[밤 사이 해외뉴스 영상] 유가 100달러 재돌파…호르무즈 마비에 인플레 경고",
+      "link": "https://www.hankyung.com/article/202609105287i",
+      "pubDate": "Thu, 10 Sep 2026 08:27:16 +0900",
       "source": "한국경제"
     },
     {
-      "title": "최태원 제안에 키옥시아 '거절'…한일 낸드 동맹 '엇박자' [강경주의 테크X]",
-      "link": "https://www.hankyung.com/article/2026090944836",
-      "pubDate": "Wed, 09 Sep 2026 22:00:01 +0900",
+      "title": "딥시크 자금 조달 열풍…고액 수수료 '그림자 시장' 등장",
+      "link": "https://www.hankyung.com/article/202609105381i",
+      "pubDate": "Thu, 10 Sep 2026 08:22:42 +0900",
       "source": "한국경제"
     },
     {
-      "title": "베선트 \"내가 곧 하우스\"…엔 공매도 세력에 경고",
-      "link": "https://www.hankyung.com/article/202609094973i",
-      "pubDate": "Wed, 09 Sep 2026 21:29:16 +0900",
+      "title": "호르무즈 원유량 '깜깜이'…유가에 불확실성 프리미엄",
+      "link": "https://www.hankyung.com/article/202609105299i",
+      "pubDate": "Thu, 10 Sep 2026 08:11:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"먹고 싶어서 편의점 싹 털었다\"…SNS 인증 쏟아진 '디저트' [셀럽픽]",
-      "link": "https://www.hankyung.com/article/202609092819g",
-      "pubDate": "Wed, 09 Sep 2026 21:00:18 +0900",
+      "title": "\"무화과·송이·단호박에 치즈까지\"…외식업계 '가을의 맛' 경쟁 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609092909i",
+      "pubDate": "Thu, 10 Sep 2026 08:00:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美, 캐나다 관세 부과→캐나다 보복관세→美 수입금지로 또 보복",
-      "link": "https://www.hankyung.com/article/202609094929i",
-      "pubDate": "Wed, 09 Sep 2026 20:32:10 +0900",
+      "title": "[밤 사이 해외뉴스] 아이폰이 2000달러? 애플 폴더블폰 공개",
+      "link": "https://www.hankyung.com/article/202609105270i",
+      "pubDate": "Thu, 10 Sep 2026 07:54:23 +0900",
       "source": "한국경제"
     }
   ]
