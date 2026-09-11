@@ -1,6 +1,6 @@
 {
   "date": "2026-09-08",
-  "updated": "2026-09-09T04:44:43+00:00",
+  "updated": "2026-09-11T04:43:33+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -9,8 +9,8 @@
       "title": "오디세이",
       "open": "2026-08-05",
       "share": 57.2,
-      "audience": 76683,
-      "total": 10192025,
+      "audience": 76679,
+      "total": 10192014,
       "screens": 1590
     },
     {
@@ -18,8 +18,8 @@
       "title": "옵세션",
       "open": "2026-09-02",
       "share": 17.2,
-      "audience": 26369,
-      "total": 239529,
+      "audience": 26367,
+      "total": 239525,
       "screens": 681
     },
     {
@@ -28,7 +28,7 @@
       "open": "2026-07-29",
       "share": 7.3,
       "audience": 13287,
-      "total": 8819175,
+      "total": 8819166,
       "screens": 669
     },
     {
