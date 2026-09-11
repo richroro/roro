@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-11T13:24:05.135668+09:00",
+  "updatedAt": "2026-09-11T18:31:25.307675+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6856.67,
-      "change": -177.25,
-      "changePercent": -2.52,
+      "price": 6909.91,
+      "change": -124.01,
+      "changePercent": -1.76,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 818.01,
-      "change": -12.36,
-      "changePercent": -1.49,
+      "price": 820.64,
+      "change": -9.73,
+      "changePercent": -1.17,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.38,
-      "change": -5.77,
-      "changePercent": -0.43,
+      "price": 1342.58,
+      "change": -6.57,
+      "changePercent": -0.49,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 257500.0,
-      "change": -11500.0,
-      "changePercent": -4.28,
+      "price": 259500.0,
+      "change": -9500.0,
+      "changePercent": -3.53,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1781000.0,
-      "change": -72000.0,
-      "changePercent": -3.89,
+      "price": 1812000.0,
+      "change": -41000.0,
+      "changePercent": -2.21,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 204000.0,
-      "change": -4000.0,
-      "changePercent": -1.92,
+      "price": 206500.0,
+      "change": -1500.0,
+      "changePercent": -0.72,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 34450.0,
-      "change": -450.0,
-      "changePercent": -1.29,
+      "price": 34500.0,
+      "change": -400.0,
+      "changePercent": -1.15,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 353500.0,
-      "change": -11500.0,
-      "changePercent": -3.15,
+      "price": 360000.0,
+      "change": -5000.0,
+      "changePercent": -1.37,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "국고채 금리 일제히 상승…3년물 장중 연 4.018%",
-      "link": "https://www.yna.co.kr/view/AKR20260911078200008",
-      "pubDate": "Fri, 11 Sep 2026 12:33:04 +0900",
+      "title": "라포랩스 \"SK스토아 최다액출자자 변경승인 재신청\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911150700030",
+      "pubDate": "Fri, 11 Sep 2026 18:28:12 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 디벨로퍼협회·해외건설협회, 해외 개발사업 진출 활성화 협약",
-      "link": "https://www.yna.co.kr/view/AKR20260911079600003",
-      "pubDate": "Fri, 11 Sep 2026 12:00:34 +0900",
+      "title": "원안위, 고리 3·4호기-한빛 1·2호기 사고관리계획 재논의키로",
+      "link": "https://www.yna.co.kr/view/AKR20260911141100017",
+      "pubDate": "Fri, 11 Sep 2026 18:17:44 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "중기부, '도전의 IR 프로젝트' 추진…\"창업자·투자사 연결\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911063500030",
-      "pubDate": "Fri, 11 Sep 2026 12:00:01 +0900",
+      "title": "KB금융 '세대교체'에 방점…연임 대신 이재근호 깜짝 선택",
+      "link": "https://www.yna.co.kr/view/AKR20260911152500002",
+      "pubDate": "Fri, 11 Sep 2026 18:09:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 식품산업협회·에너지공단, 태양광·에너지효율 확산 협약",
-      "link": "https://www.yna.co.kr/view/AKR20260911077100030",
-      "pubDate": "Fri, 11 Sep 2026 11:54:11 +0900",
+      "title": "HSBC \"도시농민공 저축률 54%…9%p 낮추면 연127조원 소비 늘어\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911150400083",
+      "pubDate": "Fri, 11 Sep 2026 18:05:33 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "법인보험대리점 운영위험 등급 매긴다…불완전판매 비율 등 기준",
-      "link": "https://www.yna.co.kr/view/AKR20260911072100002",
-      "pubDate": "Fri, 11 Sep 2026 11:53:38 +0900",
+      "title": "용산구 \"용산공원에 청년주택 공급 반대…강력 대응할 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911152700004",
+      "pubDate": "Fri, 11 Sep 2026 18:04:42 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"배터리 만들지 마라\" 중국 '초강수' 이유가…'뜻밖의 상황' [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202609118764i",
-      "pubDate": "Fri, 11 Sep 2026 11:53:02 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20260911142400011",
+      "pubDate": "Fri, 11 Sep 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "MIT가 주목한 젊은 혁신가 서진영·정재원",
+      "link": "https://www.hankyung.com/article/2026091196941",
+      "pubDate": "Fri, 11 Sep 2026 17:57:22 +0900",
       "source": "한국경제"
     },
     {
-      "title": "카카오뱅크, 26주동안 '금모으기' 제휴 서비스",
-      "link": "https://www.yna.co.kr/view/AKR20260911078700002",
-      "pubDate": "Fri, 11 Sep 2026 11:48:33 +0900",
+      "title": "기업은행, 어린이 금융 직업체험관 개점",
+      "link": "https://www.hankyung.com/article/2026091196901",
+      "pubDate": "Fri, 11 Sep 2026 17:56:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "교보생명, 양육시설 아동 514명 교육",
+      "link": "https://www.hankyung.com/article/2026091196931",
+      "pubDate": "Fri, 11 Sep 2026 17:56:19 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'41년 장학사업' 귀뚜라미, UNIST에 1억 전달",
+      "link": "https://www.hankyung.com/article/2026091196971",
+      "pubDate": "Fri, 11 Sep 2026 17:56:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "HD현대사이트솔루션, 신임 공동대표에 박찬혁 부사장 내정",
+      "link": "https://www.hankyung.com/article/202609119700i",
+      "pubDate": "Fri, 11 Sep 2026 17:53:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "28일 '이스트포인트 서울'…글로벌 디지털자산 빅샷들 총출동",
+      "link": "https://www.hankyung.com/article/2026091196161",
+      "pubDate": "Fri, 11 Sep 2026 17:42:20 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[취재수첩] '거액 과징금'이 정의롭다는 오해",
+      "link": "https://www.hankyung.com/article/2026091196091",
+      "pubDate": "Fri, 11 Sep 2026 17:33:06 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "전쟁 장기화에 불안한 시장…코스피 내리고, 금리·환율 상승(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20260911135752008",
+      "pubDate": "Fri, 11 Sep 2026 17:23:24 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "도로 뛰던 러너들 산으로…'트레일 붐'에 신생 러닝화도 한국행",
-      "link": "https://www.hankyung.com/article/202609107114i",
-      "pubDate": "Fri, 11 Sep 2026 11:42:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "광진구 '자양4동 A구역' 재개발 조합설립인가…2천999세대 규모",
-      "link": "https://www.yna.co.kr/view/AKR20260911078000004",
-      "pubDate": "Fri, 11 Sep 2026 11:41:36 +0900",
+      "title": "KB금융 회장 후보에 이재근…\"과감한 변화·세대교체 필요\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260911144500002",
+      "pubDate": "Fri, 11 Sep 2026 17:23:12 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "국고채 3년물 장내 거래서 4%대로 급등…3년여만에 최고",
-      "link": "https://www.yna.co.kr/view/AKR20260911077500008",
-      "pubDate": "Fri, 11 Sep 2026 11:39:19 +0900",
+      "title": "금융위 \"추석 급전수요 노린 불법사금융 조심\"…예방수칙 안내",
+      "link": "https://www.yna.co.kr/view/AKR20260911143700002",
+      "pubDate": "Fri, 11 Sep 2026 17:21:08 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한국소비자원, 충북 농촌 마을 가전제품 안전사용 캠페인",
-      "link": "https://www.yna.co.kr/view/AKR20260911073100030",
-      "pubDate": "Fri, 11 Sep 2026 11:38:37 +0900",
+      "title": "[속보] KB금융, 이재근 회장 추천하며 \"과감한 변화·세대교체 필요\"",
+      "link": "https://www.yna.co.kr/view/AKR20260911143300002",
+      "pubDate": "Fri, 11 Sep 2026 17:16:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "공정위원장 \"가맹점주단체 등록 요건 하한 낮추는 방안 고민\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911069300030",
-      "pubDate": "Fri, 11 Sep 2026 11:37:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "오늘이 가장 싸다?…\"스마트폰 가격 계속 오를 것\" 전망 나온 이유",
-      "link": "https://www.hankyung.com/article/202609107464i",
-      "pubDate": "Fri, 11 Sep 2026 11:00:08 +0900",
+      "title": "[속보] KB금융 차기 회장 후보에 이재근…양종희 연임 실패",
+      "link": "https://www.hankyung.com/article/2026091195597",
+      "pubDate": "Fri, 11 Sep 2026 17:14:48 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"한국보다 60만원 싸다\"…폴더블 아이폰 가장 싼 '이 나라'",
-      "link": "https://www.hankyung.com/article/202609107699g",
-      "pubDate": "Fri, 11 Sep 2026 10:40:25 +0900",
+      "title": "설화수, 日 럭셔리뷰티 공략…이세탄 신주쿠점서 첫 팝업",
+      "link": "https://www.hankyung.com/article/2026091195551",
+      "pubDate": "Fri, 11 Sep 2026 17:13:51 +0900",
       "source": "한국경제"
     },
     {
-      "title": "26주간 금 모아볼까? 카뱅, 적립식 투자서비스 시작",
-      "link": "https://www.hankyung.com/article/202609118386i",
-      "pubDate": "Fri, 11 Sep 2026 10:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "농협은행, 주담대 금리 최대 0.45%P 인하…실수요자 지원",
-      "link": "https://www.hankyung.com/article/202609118380i",
-      "pubDate": "Fri, 11 Sep 2026 09:59:16 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"여권 잃어버렸다\"…일본 간 한국인들 '긴급 여권' 3배 급증",
-      "link": "https://www.hankyung.com/article/202609118369H",
-      "pubDate": "Fri, 11 Sep 2026 09:58:29 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "빙하 무너지자 발전소도 와르르…네팔 '수력발전 베팅' 흔들",
-      "link": "https://www.hankyung.com/article/202609118276i",
-      "pubDate": "Fri, 11 Sep 2026 09:43:35 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "치폴레가 서울에 지점 낸 이유…\"아시아 확장 전략 시험\"",
-      "link": "https://www.hankyung.com/article/202609118106g",
-      "pubDate": "Fri, 11 Sep 2026 09:37:34 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"레고처럼 조립\"…반도체 테스트 소켓 상식을 뒤집은 ISC",
-      "link": "https://www.hankyung.com/article/202609118238i",
-      "pubDate": "Fri, 11 Sep 2026 09:30:57 +0900",
+      "title": "홍천강 물로 빚는 '테라'…1분에 1000병씩 쏟아진다",
+      "link": "https://www.hankyung.com/article/2026091195541",
+      "pubDate": "Fri, 11 Sep 2026 17:13:22 +0900",
       "source": "한국경제"
     }
   ]
