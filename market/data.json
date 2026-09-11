@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T23:16:10.737950+09:00",
+  "updatedAt": "2026-09-12T03:22:12.643409+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52567.04,
-      "change": 502.94,
-      "changePercent": 0.97,
+      "price": 52626.58,
+      "change": 562.48,
+      "changePercent": 1.08,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26350.99,
-      "change": 269.26,
-      "changePercent": 1.03,
+      "price": 26365.89,
+      "change": 284.16,
+      "changePercent": 1.09,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1339.35,
-      "change": -9.8,
-      "changePercent": -0.73,
+      "price": 1340.22,
+      "change": -8.93,
+      "changePercent": -0.66,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,55 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 332.04,
-      "change": 5.47,
-      "changePercent": 1.67,
+      "price": 332.76,
+      "change": 6.19,
+      "changePercent": 1.9,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 364.3,
-      "change": 0.74,
-      "changePercent": 0.2,
+      "price": 365.35,
+      "change": 1.79,
+      "changePercent": 0.49,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 221.17,
-      "change": 2.81,
-      "changePercent": 1.29,
+      "price": 219.23,
+      "change": 0.87,
+      "changePercent": 0.4,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"삼전닉스는 돈방석인데\"…스마트폰 바꾸려던 직장인 '비명' [테크로그]",
+      "title": "마이크로소프트의 뒤늦은 후회[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609129941i",
+      "pubDate": "Sat, 12 Sep 2026 02:47:19 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "트럼프 투표 호소한 날 경윳값 사상최고…장바구니 민심 직격탄",
+      "link": "https://www.yna.co.kr/view/AKR20260912001400071",
+      "pubDate": "Sat, 12 Sep 2026 01:51:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[반론보도] 「중대재해 '볼모'로 정년연장 요구한 HL만도 노조」 등 4건 관련",
+      "link": "https://www.hankyung.com/article/202609119935i",
+      "pubDate": "Sat, 12 Sep 2026 00:00:29 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "서울 유일 신규택지 '삐걱'…염창공원 설명회, 주민 반발로 무산(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260911162351003",
+      "pubDate": "Fri, 11 Sep 2026 23:28:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성·SK는 역대급 호황인데…\"휴대폰 바꾸기 겁난다\" 비명 [테크로그]",
       "link": "https://www.hankyung.com/article/202609107691g",
       "pubDate": "Fri, 11 Sep 2026 21:00:05 +0900",
       "source": "한국경제"
@@ -184,12 +208,6 @@
       "source": "한국경제"
     },
     {
-      "title": "[단독] 풍산, 수입 의존하던 '소형 공격드론' 국산화길 열었다",
-      "link": "https://www.hankyung.com/article/2026091196761",
-      "pubDate": "Fri, 11 Sep 2026 18:34:59 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "KS인더스트리, 60억원 유상증자…상생제1호조합에 제3자배정",
       "link": "https://www.yna.co.kr/view/AKR20260911151700008",
       "pubDate": "Fri, 11 Sep 2026 18:32:05 +0900",
@@ -202,12 +220,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "미래기금에 교부세 뺏긴 지자체…\"재정 어려워, 우리몫 더 달라\"",
-      "link": "https://www.hankyung.com/article/2026091196551",
-      "pubDate": "Fri, 11 Sep 2026 18:27:11 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "원안위, 고리 3·4호기-한빛 1·2호기 사고관리계획 재논의키로",
       "link": "https://www.yna.co.kr/view/AKR20260911141100017",
       "pubDate": "Fri, 11 Sep 2026 18:17:44 +0900",
@@ -217,18 +229,6 @@
       "title": "KB금융 '세대교체'에 방점…연임 대신 이재근호 깜짝 선택",
       "link": "https://www.yna.co.kr/view/AKR20260911152500002",
       "pubDate": "Fri, 11 Sep 2026 18:09:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "HSBC \"도시농민공 저축률 54%…9%p 낮추면 연127조원 소비 늘어\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911150400083",
-      "pubDate": "Fri, 11 Sep 2026 18:05:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "용산구 \"용산공원에 청년주택 공급 반대…강력 대응할 것\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911152700004",
-      "pubDate": "Fri, 11 Sep 2026 18:04:42 +0900",
       "source": "연합뉴스"
     }
   ]
