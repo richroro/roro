@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T18:31:25.307675+09:00",
+  "updatedAt": "2026-09-11T23:16:10.737950+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52064.1,
-      "change": -316.6,
-      "changePercent": -0.6,
+      "price": 52567.04,
+      "change": 502.94,
+      "changePercent": 0.97,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26081.72,
-      "change": -171.62,
-      "changePercent": -0.65,
+      "price": 26350.99,
+      "change": 269.26,
+      "changePercent": 1.03,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.58,
-      "change": -6.57,
-      "changePercent": -0.49,
+      "price": 1339.35,
+      "change": -9.8,
+      "changePercent": -0.73,
       "currency": "KRW"
     }
   ],
@@ -88,34 +88,124 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 326.57,
-      "change": 11.23,
-      "changePercent": 3.56,
+      "price": 332.04,
+      "change": 5.47,
+      "changePercent": 1.67,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 363.56,
-      "change": -4.25,
-      "changePercent": -1.16,
+      "price": 364.3,
+      "change": 0.74,
+      "changePercent": 0.2,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 218.36,
-      "change": -5.31,
-      "changePercent": -2.37,
+      "price": 221.17,
+      "change": 2.81,
+      "changePercent": 1.29,
       "currency": "USD"
     }
   ],
   "news": [
     {
+      "title": "\"삼전닉스는 돈방석인데\"…스마트폰 바꾸려던 직장인 '비명' [테크로그]",
+      "link": "https://www.hankyung.com/article/202609107691g",
+      "pubDate": "Fri, 11 Sep 2026 21:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "농협경제지주, 하나로유통 흡수합병 추진…12년 만에 통합",
+      "link": "https://www.yna.co.kr/view/AKR20260911162400030",
+      "pubDate": "Fri, 11 Sep 2026 20:52:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "키움증권 미 자회사, 현지서 국내 반도체 ETF 상장",
+      "link": "https://www.yna.co.kr/view/AKR20260911164500008",
+      "pubDate": "Fri, 11 Sep 2026 20:48:56 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "염창공원 공공주택 1천가구 공급 설명회, 주민 거센 반발에 무산",
+      "link": "https://www.yna.co.kr/view/AKR20260911162300003",
+      "pubDate": "Fri, 11 Sep 2026 20:12:50 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'반값에 또 반값' 실화냐…주부들 하루 몇 번씩 찾는 '득템 성지'",
+      "link": "https://www.hankyung.com/article/2026091195531",
+      "pubDate": "Fri, 11 Sep 2026 20:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"미래기금 국채상환 기준 도입해야…현·미래세대 계정은 따로\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260911133451002",
+      "pubDate": "Fri, 11 Sep 2026 19:07:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"물 들어올 때 노 젓자\"…투자금 쓸어담는 우량 스타트업",
+      "link": "https://www.hankyung.com/article/2026091196841",
+      "pubDate": "Fri, 11 Sep 2026 18:38:54 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "삼성E&A, 사우디서 4.7조 비료 플랜트 '잭팟'",
+      "link": "https://www.hankyung.com/article/2026091196741",
+      "pubDate": "Fri, 11 Sep 2026 18:37:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "삼성, 33만t 하수처리수 반도체 공장 활용",
+      "link": "https://www.hankyung.com/article/2026091196791",
+      "pubDate": "Fri, 11 Sep 2026 18:37:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "HD현대重 노조, 노동부 지침 어긴채 파업",
+      "link": "https://www.hankyung.com/article/2026091196751",
+      "pubDate": "Fri, 11 Sep 2026 18:36:41 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "대한항공·아시아나 \"하늘서 무료 와이파이 쓰세요\"",
+      "link": "https://www.hankyung.com/article/2026091196771",
+      "pubDate": "Fri, 11 Sep 2026 18:36:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[포토] 국내서 공개된 '제네시스 GV90'",
+      "link": "https://www.hankyung.com/article/2026091196781",
+      "pubDate": "Fri, 11 Sep 2026 18:36:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[단독] 풍산, 수입 의존하던 '소형 공격드론' 국산화길 열었다",
+      "link": "https://www.hankyung.com/article/2026091196761",
+      "pubDate": "Fri, 11 Sep 2026 18:34:59 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "KS인더스트리, 60억원 유상증자…상생제1호조합에 제3자배정",
+      "link": "https://www.yna.co.kr/view/AKR20260911151700008",
+      "pubDate": "Fri, 11 Sep 2026 18:32:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "라포랩스 \"SK스토아 최다액출자자 변경승인 재신청\"",
       "link": "https://www.yna.co.kr/view/AKR20260911150700030",
       "pubDate": "Fri, 11 Sep 2026 18:28:12 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "미래기금에 교부세 뺏긴 지자체…\"재정 어려워, 우리몫 더 달라\"",
+      "link": "https://www.hankyung.com/article/2026091196551",
+      "pubDate": "Fri, 11 Sep 2026 18:27:11 +0900",
+      "source": "한국경제"
     },
     {
       "title": "원안위, 고리 3·4호기-한빛 1·2호기 사고관리계획 재논의키로",
@@ -140,96 +230,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260911152700004",
       "pubDate": "Fri, 11 Sep 2026 18:04:42 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260911142400011",
-      "pubDate": "Fri, 11 Sep 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "MIT가 주목한 젊은 혁신가 서진영·정재원",
-      "link": "https://www.hankyung.com/article/2026091196941",
-      "pubDate": "Fri, 11 Sep 2026 17:57:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "기업은행, 어린이 금융 직업체험관 개점",
-      "link": "https://www.hankyung.com/article/2026091196901",
-      "pubDate": "Fri, 11 Sep 2026 17:56:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "교보생명, 양육시설 아동 514명 교육",
-      "link": "https://www.hankyung.com/article/2026091196931",
-      "pubDate": "Fri, 11 Sep 2026 17:56:19 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'41년 장학사업' 귀뚜라미, UNIST에 1억 전달",
-      "link": "https://www.hankyung.com/article/2026091196971",
-      "pubDate": "Fri, 11 Sep 2026 17:56:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HD현대사이트솔루션, 신임 공동대표에 박찬혁 부사장 내정",
-      "link": "https://www.hankyung.com/article/202609119700i",
-      "pubDate": "Fri, 11 Sep 2026 17:53:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "28일 '이스트포인트 서울'…글로벌 디지털자산 빅샷들 총출동",
-      "link": "https://www.hankyung.com/article/2026091196161",
-      "pubDate": "Fri, 11 Sep 2026 17:42:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[취재수첩] '거액 과징금'이 정의롭다는 오해",
-      "link": "https://www.hankyung.com/article/2026091196091",
-      "pubDate": "Fri, 11 Sep 2026 17:33:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "전쟁 장기화에 불안한 시장…코스피 내리고, 금리·환율 상승(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260911135752008",
-      "pubDate": "Fri, 11 Sep 2026 17:23:24 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "KB금융 회장 후보에 이재근…\"과감한 변화·세대교체 필요\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260911144500002",
-      "pubDate": "Fri, 11 Sep 2026 17:23:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융위 \"추석 급전수요 노린 불법사금융 조심\"…예방수칙 안내",
-      "link": "https://www.yna.co.kr/view/AKR20260911143700002",
-      "pubDate": "Fri, 11 Sep 2026 17:21:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] KB금융, 이재근 회장 추천하며 \"과감한 변화·세대교체 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911143300002",
-      "pubDate": "Fri, 11 Sep 2026 17:16:54 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] KB금융 차기 회장 후보에 이재근…양종희 연임 실패",
-      "link": "https://www.hankyung.com/article/2026091195597",
-      "pubDate": "Fri, 11 Sep 2026 17:14:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "설화수, 日 럭셔리뷰티 공략…이세탄 신주쿠점서 첫 팝업",
-      "link": "https://www.hankyung.com/article/2026091195551",
-      "pubDate": "Fri, 11 Sep 2026 17:13:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "홍천강 물로 빚는 '테라'…1분에 1000병씩 쏟아진다",
-      "link": "https://www.hankyung.com/article/2026091195541",
-      "pubDate": "Fri, 11 Sep 2026 17:13:22 +0900",
-      "source": "한국경제"
     }
   ]
 }
