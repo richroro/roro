@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T14:36:34.037362+09:00",
+  "updatedAt": "2026-09-12T19:35:44.228740+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,10 +112,52 @@
   ],
   "news": [
     {
+      "title": "\"중국 추격 허용하는 꼴\"…반도체 업계 또 '시끌' [김대영의 노무스쿨]",
+      "link": "https://www.hankyung.com/article/202609119493g",
+      "pubDate": "Sat, 12 Sep 2026 18:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"공장이 모자랄 정도\"…반년 만에 1200만개 팔린 '이 맥주' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609119880i",
+      "pubDate": "Sat, 12 Sep 2026 18:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[동포의 창] \"학교 밖 중도 입국 청소년 체계적 지원 필요\"",
+      "link": "https://www.yna.co.kr/view/AKR20260912036500371",
+      "pubDate": "Sat, 12 Sep 2026 17:15:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "농식품부 송미령 장관, 추석 성수품 공급·유통 점검",
+      "link": "https://www.yna.co.kr/view/AKR20260912036000030",
+      "pubDate": "Sat, 12 Sep 2026 16:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "미국은 왜 '엔화 약세'를 막으려 할까…월가가 엔화를 두려워하는 진짜 이유",
+      "link": "https://www.hankyung.com/article/202609106701i",
+      "pubDate": "Sat, 12 Sep 2026 15:49:20 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "반품 전자기기 971대 사라졌다…9억 빼돌린 범인 정체가",
+      "link": "https://www.hankyung.com/article/2026091202657",
+      "pubDate": "Sat, 12 Sep 2026 14:31:31 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "HS화성 반려동물 특화상품, '굿 디자인 코리아'에 선정",
       "link": "https://www.yna.co.kr/view/AKR20260912029600053",
       "pubDate": "Sat, 12 Sep 2026 14:19:40 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "\"이게 그렇게 맛있나\"…'품절 대란' 280만캔 팔린 술 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609119876i",
+      "pubDate": "Sat, 12 Sep 2026 14:00:08 +0900",
+      "source": "한국경제"
     },
     {
       "title": "손흥민·뷔 썼더니 대박?…\"아메리카노 50잔 더 팔아야\" [김소연의 얼굴전략]",
@@ -160,24 +202,6 @@
       "source": "한국경제"
     },
     {
-      "title": "'웃돈 5배 줘도 못 구한다'…삼전닉스에 목줄 잡힌 中 [강경주의 테크X]",
-      "link": "https://www.hankyung.com/article/2026091194276",
-      "pubDate": "Sat, 12 Sep 2026 09:30:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"사장님, AI가 일 다 하는데요?\"…삼전닉스 '행복한 비명' [홍민성의 테토남]",
-      "link": "https://www.hankyung.com/article/202609118801g",
-      "pubDate": "Sat, 12 Sep 2026 09:00:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"더이상 못 버텨\"…中 1위 배달앱, 하늘로 눈 돌렸다",
-      "link": "https://www.hankyung.com/article/202608277911i",
-      "pubDate": "Sat, 12 Sep 2026 09:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "한국기술교육대 \"수시 경쟁률 비수도권 국·사립대 중 1위\"",
       "link": "https://www.yna.co.kr/view/AKR20260912017400063",
       "pubDate": "Sat, 12 Sep 2026 08:53:44 +0900",
@@ -202,33 +226,9 @@
       "source": "연합뉴스"
     },
     {
-      "title": "中 CXMT, 2분기 영업이익률 하이닉스보다 높았다…왜?",
-      "link": "https://www.hankyung.com/article/202609119755i",
-      "pubDate": "Sat, 12 Sep 2026 08:00:16 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "글로벌 톱100 진입한 기업 어디…美·유럽·동남아 뚫는 K-방산",
-      "link": "https://www.hankyung.com/article/202609119743i",
-      "pubDate": "Sat, 12 Sep 2026 08:00:11 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "부산 청년들, '굿잡 버스' 타고 선도기업 취업 문 두드린다",
       "link": "https://www.yna.co.kr/view/AKR20260911053600051",
       "pubDate": "Sat, 12 Sep 2026 08:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "주유소 기름값 17주째 하락…국제유가 상승에도 1천800원대",
-      "link": "https://www.yna.co.kr/view/AKR20260911118000003",
-      "pubDate": "Sat, 12 Sep 2026 07:05:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[르포] 추석연휴 10여일 앞둔 대구 서문시장…상인들 \"예전 대목만 못해\"",
-      "link": "https://www.yna.co.kr/view/AKR20260911084500053",
-      "pubDate": "Sat, 12 Sep 2026 07:01:00 +0900",
       "source": "연합뉴스"
     }
   ]
