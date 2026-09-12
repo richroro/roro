@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T04:09:01.221820+09:00",
+  "updatedAt": "2026-09-13T07:10:20.353237+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,72 @@
   ],
   "news": [
     {
+      "title": "경기경제청, 시흥배곧지구 종근당 지식산업센터 건립 의결",
+      "link": "https://www.yna.co.kr/view/AKR20260911120400061",
+      "pubDate": "Sun, 13 Sep 2026 07:01:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "김해공항 이용객 역대 최대에도 은행 유치 난항…수익성 악화",
+      "link": "https://www.yna.co.kr/view/AKR20260911065300051",
+      "pubDate": "Sun, 13 Sep 2026 07:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "대중음악 파고든 인공지능…가요계, AI 탐지 프로그램 공동 도입",
+      "link": "https://www.yna.co.kr/view/AKR20260912037800005",
+      "pubDate": "Sun, 13 Sep 2026 07:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "경기도, '부동산 콘퍼런스' 15일 개최…AI 활용 등 논의",
+      "link": "https://www.yna.co.kr/view/AKR20260911115700061",
+      "pubDate": "Sun, 13 Sep 2026 07:00:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[마켓스토리] '전쟁·유가·금리' 삼중고…외인 셀코리아 어쩌나",
+      "link": "https://www.yna.co.kr/view/AKR20260911118800008",
+      "pubDate": "Sun, 13 Sep 2026 07:00:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[현장in] 하남-남양주 잇는 '한강 출렁다리'…남양주시 재검토에 제동?",
+      "link": "https://www.yna.co.kr/view/AKR20260911117200061",
+      "pubDate": "Sun, 13 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "양재∼올림픽대로 지하도로 뚫는다…7.65㎞ 구간에 양방향 터널",
+      "link": "https://www.yna.co.kr/view/AKR20260912020600004",
+      "pubDate": "Sun, 13 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "AI 활용곡이 멜론 톱100…조선힙합 \"저비용으로 세대 공감 가능\"",
+      "link": "https://www.yna.co.kr/view/AKR20260912026000005",
+      "pubDate": "Sun, 13 Sep 2026 07:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[빈집의 재탄생] 사람 떠난 빈집이 호텔로…경주 옛 도심에 다시 사람이 온다",
+      "link": "https://www.yna.co.kr/view/AKR20260910138300053",
+      "pubDate": "Sun, 13 Sep 2026 06:45:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "채권시장 덮친 '유가 쇼크'…한은의 선제적 인상, 방파제되나",
+      "link": "https://www.yna.co.kr/view/AKR20260912024200008",
+      "pubDate": "Sun, 13 Sep 2026 06:35:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'나이키의 굴욕' 한국에서도 현실로…3년째 매출 감소",
+      "link": "https://www.hankyung.com/article/202609120483H",
+      "pubDate": "Sun, 13 Sep 2026 06:30:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "2030 여성들 몰리더니…프로야구 1100만 '신기록' 세웠다",
       "link": "https://www.hankyung.com/article/2026091204577",
       "pubDate": "Sat, 12 Sep 2026 20:56:07 +0900",
@@ -154,18 +220,6 @@
       "source": "한국경제"
     },
     {
-      "title": "[동포의 창] \"학교 밖 중도 입국 청소년 체계적 지원 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20260912036500371",
-      "pubDate": "Sat, 12 Sep 2026 17:15:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "농식품부 송미령 장관, 추석 성수품 공급·유통 점검",
-      "link": "https://www.yna.co.kr/view/AKR20260912036000030",
-      "pubDate": "Sat, 12 Sep 2026 16:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "미국은 왜 '엔화 약세'를 막으려 할까…월가가 엔화를 두려워하는 진짜 이유",
       "link": "https://www.hankyung.com/article/202609106701i",
       "pubDate": "Sat, 12 Sep 2026 15:49:20 +0900",
@@ -176,60 +230,6 @@
       "link": "https://www.hankyung.com/article/2026091202657",
       "pubDate": "Sat, 12 Sep 2026 14:31:31 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "HS화성 반려동물 특화상품, '굿 디자인 코리아'에 선정",
-      "link": "https://www.yna.co.kr/view/AKR20260912029600053",
-      "pubDate": "Sat, 12 Sep 2026 14:19:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"이게 그렇게 맛있나\"…'품절 대란' 280만캔 팔린 술 [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202609119876i",
-      "pubDate": "Sat, 12 Sep 2026 14:00:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "북극항로 시범운항 선박, 부산 출항 21일 만에 영국 도착",
-      "link": "https://www.yna.co.kr/view/AKR20260912026900051",
-      "pubDate": "Sat, 12 Sep 2026 12:38:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20260912021000011",
-      "pubDate": "Sat, 12 Sep 2026 10:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한국기술교육대 \"수시 경쟁률 비수도권 국·사립대 중 1위\"",
-      "link": "https://www.yna.co.kr/view/AKR20260912017400063",
-      "pubDate": "Sat, 12 Sep 2026 08:53:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[다음주 경제] 수출입·생산자물가 변화는…이형일 후보자 인사청문회",
-      "link": "https://www.yna.co.kr/view/AKR20260912016600002",
-      "pubDate": "Sat, 12 Sep 2026 08:30:42 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "공교롭게도 또 9·11에 뉴욕으로 간 산업장관…러트닉 설득할까",
-      "link": "https://www.yna.co.kr/view/AKR20260911153000003",
-      "pubDate": "Sat, 12 Sep 2026 08:15:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'기업에 긴급 수혈'…평택시, 120억원 규모 기업안정 기금 추진",
-      "link": "https://www.yna.co.kr/view/AKR20260911108100061",
-      "pubDate": "Sat, 12 Sep 2026 08:01:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "부산 청년들, '굿잡 버스' 타고 선도기업 취업 문 두드린다",
-      "link": "https://www.yna.co.kr/view/AKR20260911053600051",
-      "pubDate": "Sat, 12 Sep 2026 08:00:05 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
