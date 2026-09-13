@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T04:18:35.682849+09:00",
+  "updatedAt": "2026-09-14T07:20:07.286043+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1341.05,
-      "change": -8.1,
-      "changePercent": -0.6,
+      "price": 1342.97,
+      "change": -6.18,
+      "changePercent": -0.46,
       "currency": "KRW"
     }
   ],
@@ -112,27 +112,63 @@
   ],
   "news": [
     {
-      "title": "트럼프 \"美, 연준 공식과 상관 없이 세계 최저금리 적용받아야\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260913061851071",
-      "pubDate": "Mon, 14 Sep 2026 01:09:17 +0900",
+      "title": "무릎 인공관절 10개 중 8개 수입산…발목·팔꿈치는 전량",
+      "link": "https://www.yna.co.kr/view/AKR20260911024800017",
+      "pubDate": "Mon, 14 Sep 2026 07:00:07 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "트럼프 \"중간선거 직후 이란 전쟁 끝날 것…어쩌면 그 전에\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913061800071",
-      "pubDate": "Mon, 14 Sep 2026 00:01:14 +0900",
+      "title": "농약 24배·항균제 11배…수입식품 안전 논란 되풀이",
+      "link": "https://www.yna.co.kr/view/AKR20260911088300017",
+      "pubDate": "Mon, 14 Sep 2026 06:13:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"최고가격제 시행 6개월, 국내 석유수급 안정 지속\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913015900003",
-      "pubDate": "Mon, 14 Sep 2026 00:00:01 +0900",
+      "title": "현대차 하이브리드 대미수출 70%↑…기아는 유럽 전기차 45%↑",
+      "link": "https://www.yna.co.kr/view/AKR20260913058600003",
+      "pubDate": "Mon, 14 Sep 2026 06:05:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[부고] 안성진(한국산업은행 심사평가부문 부행장)씨 부친상",
-      "link": "https://www.yna.co.kr/view/AKR20260913056000002",
-      "pubDate": "Sun, 13 Sep 2026 19:48:20 +0900",
+      "title": "이소영 \"AI로 中企 성장잠재력 측정…성장기업 중심 지원\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913047800030",
+      "pubDate": "Mon, 14 Sep 2026 06:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "외식업 식재료비·인건비 비중 첫 70% 돌파…수익성 '빨간불'",
+      "link": "https://www.yna.co.kr/view/AKR20260913025000030",
+      "pubDate": "Mon, 14 Sep 2026 06:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "재산 은닉 조사 사실 '황당' 통지…예보·코인거래소 공조실패",
+      "link": "https://www.yna.co.kr/view/AKR20260912032800002",
+      "pubDate": "Mon, 14 Sep 2026 06:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[소셜＋] 공무원·로스쿨마저 '토익 쏠림'…\"비싼 독주 언제까지\"",
+      "link": "https://www.yna.co.kr/view/AKR20260909132700505",
+      "pubDate": "Mon, 14 Sep 2026 06:00:18 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] 농식품부, 2026 동남아·중국 K-스마트팜 로드쇼 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260911142200030",
+      "pubDate": "Mon, 14 Sep 2026 06:00:18 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "8월 서울 토지거래허가신청 3천12건…작년 10월 이래 최저",
+      "link": "https://www.yna.co.kr/view/AKR20260912034200004",
+      "pubDate": "Mon, 14 Sep 2026 06:00:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "전자담배 무인매장 청소년 출입·고용 금지된다",
+      "link": "https://www.yna.co.kr/view/AKR20260913011600530",
+      "pubDate": "Mon, 14 Sep 2026 06:00:15 +0900",
       "source": "연합뉴스"
     },
     {
@@ -194,42 +230,6 @@
       "link": "https://www.hankyung.com/article/2026091312721",
       "pubDate": "Sun, 13 Sep 2026 18:44:27 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "북극항로 시범운항 선박, 부산 출항 22일 만에 로테르담 도착",
-      "link": "https://www.yna.co.kr/view/AKR20260913017500051",
-      "pubDate": "Sun, 13 Sep 2026 18:05:06 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일 \"금투세 도입 여부, 시장 충분히 안정된 후 검토\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260912044351002",
-      "pubDate": "Sun, 13 Sep 2026 17:55:41 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일 \"레버리지 국정조사 필요 여부는 국회 판단 존중\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913047700002",
-      "pubDate": "Sun, 13 Sep 2026 17:51:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일 \"2022년 이후 공급부진이 주택 매수심리·투기수요 자극\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260912044451002",
-      "pubDate": "Sun, 13 Sep 2026 17:49:35 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일 \"미래대응기금, 재정안정화 장치로 기능할 것\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913047200002",
-      "pubDate": "Sun, 13 Sep 2026 17:47:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일 \"법인세 인하 검토 안 해…지역별 차등은 신중해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913046200002",
-      "pubDate": "Sun, 13 Sep 2026 17:45:09 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
