@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-12T22:38:48.780921+09:00",
+ "updatedAt": "2026-09-13T09:01:45.882295+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2879,7 +2879,7 @@
     "position": 85.6
    },
    "valuation": {
-    "per": 30.88,
+    "per": 30.77,
     "forwardPer": 21.33,
     "pbr": 7.53,
     "psr": 6.54,
@@ -3507,7 +3507,7 @@
     "position": 0.4
    },
    "valuation": {
-    "per": 20.58,
+    "per": 20.53,
     "forwardPer": 18.07,
     "psr": 6.45,
     "peg": 2.19,
@@ -6254,6 +6254,66 @@
  ],
  "news": [
   {
+   "title": "[마켓스토리] '전쟁·유가·금리' 삼중고…외인 셀코리아 어쩌나",
+   "link": "https://www.yna.co.kr/view/AKR20260911118800008",
+   "pubDate": "Sun, 13 Sep 2026 07:00:11 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "대미 투자 합의 임박…건설주, 수주 기대감에 이달 상승률 1위",
+   "link": "https://www.yna.co.kr/view/AKR20260912017800008",
+   "pubDate": "Sun, 13 Sep 2026 06:25:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "유가 등 중동 악재에 눌린 코스피, 美 FOMC 금리결정 주시",
+   "link": "https://www.yna.co.kr/view/AKR20260912001200008",
+   "pubDate": "Sun, 13 Sep 2026 06:00:08 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "첫 대미투자 프로젝트 발표 임박…MOU 속 안전장치 유지될까",
+   "link": "https://www.yna.co.kr/view/AKR20260912028600003",
+   "pubDate": "Sun, 13 Sep 2026 06:00:02 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "3분기 원화 절상률 1위, 엔화의 3배…미·일 금리 결정에 주목",
+   "link": "https://www.yna.co.kr/view/AKR20260912043500002",
+   "pubDate": "Sun, 13 Sep 2026 05:53:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "미 연준 금리 올릴까 긴장 고조…당국, F4 회의 등 대응 착수",
+   "link": "https://www.yna.co.kr/view/AKR20260912039000002",
+   "pubDate": "Sun, 13 Sep 2026 05:52:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "3%대 중반 넘긴 시중은행 예금 금리…대출 증가세는 꺾여",
+   "link": "https://www.yna.co.kr/view/AKR20260912049900002",
+   "pubDate": "Sun, 13 Sep 2026 05:45:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "\"韓 전략형 국부펀드, 내년 투자가능 현금성 자산은 1조 수준\"",
+   "link": "https://www.yna.co.kr/view/AKR20260912044500002",
+   "pubDate": "Sun, 13 Sep 2026 05:30:04 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "메드팩토 매각 장기전…‘백토서팁·MP010’ 반전 카드 될까",
+   "link": "https://www.chosun.com/economy/science/2026/09/13/G5RGMYZXMQ3TIMRRGE3TKZRSMI/",
+   "pubDate": "Sat, 12 Sep 2026 21:00:01 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[주간증시전망] 유가 100달러·美 10년물 금리 5% 돌파… FOMC도 대기",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/13/HA3DCYLFGM4GCZLFGQZDOYZZGA/",
+   "pubDate": "Sat, 12 Sep 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "코리아에셋투자증권, 아동복지시설에 ‘희망의 계단’ 선물",
    "link": "https://www.mk.co.kr/news/stock/12151042",
    "pubDate": "Sat, 12 Sep 2026 12:52:48 +09:00",
@@ -6308,64 +6368,10 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "전쟁 장기화에 불안한 시장…코스피 내리고, 금리·환율 상승(종합2보)",
-   "link": "https://www.yna.co.kr/view/AKR20260911135752008",
-   "pubDate": "Fri, 11 Sep 2026 17:23:24 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "\"미래기금, 단기사업보다 인프라 투자에 집중…운용원칙 명확히\"",
-   "link": "https://www.yna.co.kr/view/AKR20260911133400002",
-   "pubDate": "Fri, 11 Sep 2026 17:16:35 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "원주시, 지역 기업 재투자로 지역경제 선순환…196억원 투자(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20260911125851062",
-   "pubDate": "Fri, 11 Sep 2026 17:03:03 +0900",
-   "source": "연합뉴스"
-  },
-  {
    "title": "국민연금, AI로 환율 분석한다…LG AI연구원과 MOU",
    "link": "https://www.mk.co.kr/news/economy/12150469",
    "pubDate": "Fri, 11 Sep 2026 17:00:00 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "유가·美국채금리에 국고채 금리 급등…3년물 3년만에 4%대(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20260911135751008",
-   "pubDate": "Fri, 11 Sep 2026 16:57:38 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 상승…3년물 연 4.014%",
-   "link": "https://www.yna.co.kr/view/AKR20260911135700008",
-   "pubDate": "Fri, 11 Sep 2026 16:41:04 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "고유가·미 금리인상 우려에…환율, 6.7원 오른 1,345.9원",
-   "link": "https://www.yna.co.kr/view/AKR20260911125100002",
-   "pubDate": "Fri, 11 Sep 2026 16:32:03 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "한국첨단소재 \"루센트 투자조합 주식 147억원에 추가취득\"",
-   "link": "https://www.yna.co.kr/view/AKR20260911126600008",
-   "pubDate": "Fri, 11 Sep 2026 16:15:50 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "'에이전틱AI 관련 美기업 투자 패시브' 등 ETF 4종 상장",
-   "link": "https://www.yna.co.kr/view/AKR20260911126400008",
-   "pubDate": "Fri, 11 Sep 2026 16:06:09 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "원주시, 지역 기업 재투자로 지역경제 선순환…196억원 투자",
-   "link": "https://www.yna.co.kr/view/AKR20260911125800062",
-   "pubDate": "Fri, 11 Sep 2026 16:04:13 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "“다시 7000피 밑으로”…코스피 1.7% 하락 마감, 코스닥도 내려",
@@ -6389,12 +6395,6 @@
    "title": "ETF 열풍·고유계정 운용 호조…운용사 2분기 순익 2.7조 역대 최대",
    "link": "https://www.mk.co.kr/news/stock/12150442",
    "pubDate": "Fri, 11 Sep 2026 14:45:33 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“반도체만 보다가 놓칠뻔”…9월 ETF 순위 치고 올라온 ‘이것’",
-   "link": "https://www.mk.co.kr/news/stock/12150387",
-   "pubDate": "Fri, 11 Sep 2026 13:54:35 +09:00",
    "source": "매일경제 증권"
   }
  ]
