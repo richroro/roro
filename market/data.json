@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T01:07:07.901620+09:00",
+  "updatedAt": "2026-09-14T04:18:35.682849+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 26333.03,
-      "change": 251.31,
+      "change": 251.33,
       "changePercent": 0.96,
       "currency": "USD"
     }
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.4,
-      "change": -6.75,
-      "changePercent": -0.5,
+      "price": 1341.05,
+      "change": -8.1,
+      "changePercent": -0.6,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,12 @@
   ],
   "news": [
     {
+      "title": "트럼프 \"美, 연준 공식과 상관 없이 세계 최저금리 적용받아야\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260913061851071",
+      "pubDate": "Mon, 14 Sep 2026 01:09:17 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "트럼프 \"중간선거 직후 이란 전쟁 끝날 것…어쩌면 그 전에\"",
       "link": "https://www.yna.co.kr/view/AKR20260913061800071",
       "pubDate": "Mon, 14 Sep 2026 00:01:14 +0900",
@@ -142,7 +148,7 @@
       "source": "한국경제"
     },
     {
-      "title": "환율·채권, 엇갈린 환율 전망 속 美·日 금리 촉각",
+      "title": "환율·채권, 주춤한 원·달러 환율 다시 오르나",
       "link": "https://www.hankyung.com/article/2026091313171",
       "pubDate": "Sun, 13 Sep 2026 19:12:34 +0900",
       "source": "한국경제"
@@ -223,12 +229,6 @@
       "title": "이형일 \"법인세 인하 검토 안 해…지역별 차등은 신중해야\"",
       "link": "https://www.yna.co.kr/view/AKR20260913046200002",
       "pubDate": "Sun, 13 Sep 2026 17:45:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20260913034000011",
-      "pubDate": "Sun, 13 Sep 2026 15:00:00 +0900",
       "source": "연합뉴스"
     }
   ]
