@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T20:39:01.780457+09:00",
+  "updatedAt": "2026-09-14T01:07:07.901620+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,18 @@
   ],
   "news": [
     {
+      "title": "트럼프 \"중간선거 직후 이란 전쟁 끝날 것…어쩌면 그 전에\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913061800071",
+      "pubDate": "Mon, 14 Sep 2026 00:01:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"최고가격제 시행 6개월, 국내 석유수급 안정 지속\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913015900003",
+      "pubDate": "Mon, 14 Sep 2026 00:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "[부고] 안성진(한국산업은행 심사평가부문 부행장)씨 부친상",
       "link": "https://www.yna.co.kr/view/AKR20260913056000002",
       "pubDate": "Sun, 13 Sep 2026 19:48:20 +0900",
@@ -154,7 +166,7 @@
       "source": "한국경제"
     },
     {
-      "title": "그 많던 동네 문구점은 어디로 갔을까",
+      "title": "\"어른이 무슨 일로?\"…문구점 사장님도 놀랄 '뜻밖의 인기'",
       "link": "https://www.hankyung.com/article/2026091312731",
       "pubDate": "Sun, 13 Sep 2026 18:44:49 +0900",
       "source": "한국경제"
@@ -217,18 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
       "link": "https://www.yna.co.kr/view/AKR20260913034000011",
       "pubDate": "Sun, 13 Sep 2026 15:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "민주노총, 서울 도심서 이주노동자대회…\"차별 철폐·권리 보장\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913034200004",
-      "pubDate": "Sun, 13 Sep 2026 14:51:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[부고] 문용준(새마을금고중앙회 대외협력홍보부문 차장)씨 빙부상",
-      "link": "https://www.yna.co.kr/view/AKR20260913032100002",
-      "pubDate": "Sun, 13 Sep 2026 14:00:27 +0900",
       "source": "연합뉴스"
     }
   ]
