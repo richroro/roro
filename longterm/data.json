@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-13T09:01:45.882295+09:00",
+ "updatedAt": "2026-09-13T23:28:09.275806+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -1046,6 +1046,7 @@
     "position": 90.5
    },
    "valuation": {
+    "per": 23.01,
     "marketCap": 101670690816,
     "beta": 0.98
    },
@@ -2076,7 +2077,7 @@
     "forwardPer": 34.7,
     "pbr": 45.15,
     "psr": 10.39,
-    "peg": 2.48,
+    "peg": 2.61,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 4849207869440,
@@ -2233,7 +2234,7 @@
     "forwardPer": 21.03,
     "pbr": 8.32,
     "psr": 11.09,
-    "peg": 1.6,
+    "peg": 1.61,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3680323239936,
@@ -2390,7 +2391,7 @@
     "forwardPer": 22.76,
     "pbr": 6.65,
     "psr": 9.28,
-    "peg": 1.22,
+    "peg": 1.21,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4139833098240,
@@ -2514,7 +2515,7 @@
     "forwardPer": 24.68,
     "pbr": 5.02,
     "psr": 3.57,
-    "peg": 1.48,
+    "peg": 1.5,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2769709432832,
@@ -2620,7 +2621,7 @@
     "forwardPer": 14.02,
     "pbr": 23.02,
     "psr": 17.4,
-    "peg": 0.59,
+    "peg": 0.46,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 5271048421376,
@@ -2883,7 +2884,7 @@
     "forwardPer": 21.33,
     "pbr": 7.53,
     "psr": 6.54,
-    "peg": 4.26,
+    "peg": 2.78,
     "roe": 25.74,
     "margin": 21.48,
     "marketCap": 640020840448,
@@ -2891,7 +2892,7 @@
     "payout": 60.79,
     "avgYield5y": 2.75
    },
-   "dividendYield": 2.02,
+   "dividendYield": 2.01,
    "dividend": {
     "ttm": 5.28,
     "yieldTtm": 1.99,
@@ -3040,15 +3041,15 @@
     "forwardPer": 19.63,
     "pbr": 6.33,
     "psr": 3.88,
-    "peg": 3.65,
+    "peg": 3.72,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 337414619136,
+    "marketCap": 337670406144,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
    },
-   "dividendYield": 3.05,
+   "dividendYield": 3.0,
    "dividend": {
     "ttm": 4.292,
     "yieldTtm": 2.95,
@@ -3197,7 +3198,7 @@
     "forwardPer": 25.04,
     "pbr": 10.51,
     "psr": 7.58,
-    "peg": 3.98,
+    "peg": 4.01,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 379872051200,
@@ -3362,7 +3363,7 @@
     "payout": 75.33,
     "avgYield5y": 3.03
    },
-   "dividendYield": 4.34,
+   "dividendYield": 4.33,
    "dividend": {
     "ttm": 5.806,
     "yieldTtm": 4.26,
@@ -3510,14 +3511,14 @@
     "per": 20.53,
     "forwardPer": 18.07,
     "psr": 6.45,
-    "peg": 2.19,
+    "peg": 2.18,
     "margin": 31.72,
     "marketCap": 178700713984,
     "beta": 0.41,
     "payout": 59.71,
     "avgYield5y": 2.24
    },
-   "dividendYield": 2.95,
+   "dividendYield": 2.94,
    "dividend": {
     "ttm": 7.44,
     "yieldTtm": 2.95,
@@ -3666,7 +3667,7 @@
     "forwardPer": 24.69,
     "pbr": 19.63,
     "psr": 15.55,
-    "peg": 1.66,
+    "peg": 1.68,
     "roe": 61.19,
     "margin": 50.78,
     "marketCap": 691647676416,
@@ -3674,7 +3675,7 @@
     "payout": 22.13,
     "avgYield5y": 0.71
    },
-   "dividendYield": 0.72,
+   "dividendYield": 0.73,
    "dividend": {
     "ttm": 2.68,
     "yieldTtm": 0.72,
@@ -3823,7 +3824,7 @@
     "forwardPer": 14.26,
     "pbr": 2.68,
     "psr": 5.08,
-    "peg": 1.65,
+    "peg": 1.66,
     "roe": 17.79,
     "margin": 34.92,
     "marketCap": 946925731840,
@@ -3831,7 +3832,7 @@
     "payout": 25.71,
     "avgYield5y": 2.39
    },
-   "dividendYield": 1.68,
+   "dividendYield": 1.7,
    "dividend": {
     "ttm": 6.0,
     "yieldTtm": 1.68,
@@ -3980,7 +3981,7 @@
     "forwardPer": 15.38,
     "pbr": 2.63,
     "psr": 1.89,
-    "peg": 1.41,
+    "peg": 1.42,
     "roe": 12.58,
     "margin": 9.07,
     "marketCap": 682536271872,
@@ -4133,7 +4134,7 @@
     "position": 61.5
    },
    "valuation": {
-    "forwardPer": 3.67,
+    "forwardPer": 3.69,
     "psr": 3.51,
     "peg": 0.12,
     "roe": 30.79,
@@ -4288,9 +4289,9 @@
     "position": 55.9
    },
    "valuation": {
-    "forwardPer": 3.84,
+    "forwardPer": 3.85,
     "psr": 6.8,
-    "peg": 0.2,
+    "peg": 0.19,
     "roe": 354.06,
     "margin": 85.62,
     "marketCap": 1286257074241536,
@@ -6254,63 +6255,99 @@
  ],
  "news": [
   {
-   "title": "[마켓스토리] '전쟁·유가·금리' 삼중고…외인 셀코리아 어쩌나",
-   "link": "https://www.yna.co.kr/view/AKR20260911118800008",
-   "pubDate": "Sun, 13 Sep 2026 07:00:11 +0900",
+   "title": "오라클 AI 투자에 … 델·HPE 12% 급등",
+   "link": "https://www.mk.co.kr/news/stock/12151492",
+   "pubDate": "Sun, 13 Sep 2026 17:42:11 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "'중복상장 규제' 틈새 노리는 홍콩거래소 … 韓기업유치 나서",
+   "link": "https://www.mk.co.kr/news/stock/12151482",
+   "pubDate": "Sun, 13 Sep 2026 17:41:12 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI와 함께 배당주 골라볼까?…꼼꼼히 검증 안하면 착시 빠진다 [최병일의 금융 리터러시 2.0]",
+   "link": "https://www.mk.co.kr/news/economy/12151466",
+   "pubDate": "Sun, 13 Sep 2026 17:30:22 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "빚만 168조원인데 주가 반등?…오라클의 ‘AI 도박’ 통해야 삼전닉스도 산다 [플러스 관심종목]",
+   "link": "https://www.mk.co.kr/news/stock/12151458",
+   "pubDate": "Sun, 13 Sep 2026 17:29:59 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI 모멘텀이 디딤돌 … 금리 불안은 걸림돌",
+   "link": "https://www.mk.co.kr/news/stock/12151415",
+   "pubDate": "Sun, 13 Sep 2026 16:55:07 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“일단은 좀 두고 봅시다”…원화 강세 속 외국인 수급에 방향 달린 코스피",
+   "link": "https://www.mk.co.kr/news/stock/12151410",
+   "pubDate": "Sun, 13 Sep 2026 16:53:43 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "재테크 혼돈기 한 줄기 빛 … 10월 2일 김승호의 투자전망에 초대합니다",
+   "link": "https://www.mk.co.kr/news/stock/12151346",
+   "pubDate": "Sun, 13 Sep 2026 14:50:17 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“전쟁에 엘니뇨까지, 미리 움직인 그들 웃었다”…6개월새 13% 뛴 농산물ETF [원자재로 살아남기]",
+   "link": "https://www.mk.co.kr/news/stock/12151315",
+   "pubDate": "Sun, 13 Sep 2026 13:02:07 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "하나은행, 우즈벡 투자산업통상부와 투자·금융 협력 업무협약",
+   "link": "https://www.yna.co.kr/view/AKR20260913024800002",
+   "pubDate": "Sun, 13 Sep 2026 11:24:44 +0900",
    "source": "연합뉴스"
   },
   {
-   "title": "대미 투자 합의 임박…건설주, 수주 기대감에 이달 상승률 1위",
-   "link": "https://www.yna.co.kr/view/AKR20260912017800008",
-   "pubDate": "Sun, 13 Sep 2026 06:25:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "유가 등 중동 악재에 눌린 코스피, 美 FOMC 금리결정 주시",
-   "link": "https://www.yna.co.kr/view/AKR20260912001200008",
-   "pubDate": "Sun, 13 Sep 2026 06:00:08 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "첫 대미투자 프로젝트 발표 임박…MOU 속 안전장치 유지될까",
-   "link": "https://www.yna.co.kr/view/AKR20260912028600003",
-   "pubDate": "Sun, 13 Sep 2026 06:00:02 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "3분기 원화 절상률 1위, 엔화의 3배…미·일 금리 결정에 주목",
-   "link": "https://www.yna.co.kr/view/AKR20260912043500002",
-   "pubDate": "Sun, 13 Sep 2026 05:53:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "미 연준 금리 올릴까 긴장 고조…당국, F4 회의 등 대응 착수",
-   "link": "https://www.yna.co.kr/view/AKR20260912039000002",
-   "pubDate": "Sun, 13 Sep 2026 05:52:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "3%대 중반 넘긴 시중은행 예금 금리…대출 증가세는 꺾여",
-   "link": "https://www.yna.co.kr/view/AKR20260912049900002",
-   "pubDate": "Sun, 13 Sep 2026 05:45:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "\"韓 전략형 국부펀드, 내년 투자가능 현금성 자산은 1조 수준\"",
-   "link": "https://www.yna.co.kr/view/AKR20260912044500002",
-   "pubDate": "Sun, 13 Sep 2026 05:30:04 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "메드팩토 매각 장기전…‘백토서팁·MP010’ 반전 카드 될까",
-   "link": "https://www.chosun.com/economy/science/2026/09/13/G5RGMYZXMQ3TIMRRGE3TKZRSMI/",
-   "pubDate": "Sat, 12 Sep 2026 21:00:01 +0000",
+   "title": "정부, 中 투자자 상대 ISDS 승소… 李 대통령 “부당한 청구 단호히 대응”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/13/MNSTGMBSGY2TKMBYMI2TANDFMM/",
+   "pubDate": "Sun, 13 Sep 2026 11:04:55 +0000",
    "source": "조선일보"
   },
   {
-   "title": "[주간증시전망] 유가 100달러·美 10년물 금리 5% 돌파… FOMC도 대기",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/13/HA3DCYLFGM4GCZLFGQZDOYZZGA/",
-   "pubDate": "Sat, 12 Sep 2026 21:00:00 +0000",
+   "title": "한국투자증권, 뉴욕에서 ‘KIS Night in New York’",
+   "link": "https://www.mk.co.kr/news/stock/12151276",
+   "pubDate": "Sun, 13 Sep 2026 11:04:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“삼전닉스 ETF 팔고 금·원전 샀다”…조정장에 눈 돌린 개미들",
+   "link": "https://www.mk.co.kr/news/stock/12151267",
+   "pubDate": "Sun, 13 Sep 2026 10:27:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "대미투자 협상 막판 조율… 김정관 “2000억달러·연 200억달러 상한 유지”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/13/HFSGMYLCMY3TEMJVGVSDSZJXGI/",
+   "pubDate": "Sun, 13 Sep 2026 10:15:15 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "美서 못 끝낸 대미투자 협상… 김정관 “이번주에 추가 화상회의”",
+   "link": "https://www.chosun.com/economy/industry-company/2026/09/13/JUE4GZ7JBFBMDHZRY4M7BDRQ5Q/",
+   "pubDate": "Sun, 13 Sep 2026 09:45:50 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "엔비디아, 앤스로픽 IPO에 최대 13조4000억원 투자 검토",
+   "link": "https://www.chosun.com/economy/tech_it/2026/09/13/ZS4YKLTHFFEWJHMXN4JA22MAXU/",
+   "pubDate": "Sun, 13 Sep 2026 06:07:14 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "이자·배당으로 1년에 2000만원 이상 번 미성년자 1606명",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/13/GZTDIMRVHFTDGMLBGQ2WGOBTGU/",
+   "pubDate": "Sun, 13 Sep 2026 05:35:25 +0000",
    "source": "조선일보"
   },
   {
@@ -6330,12 +6367,6 @@
    "link": "https://www.mk.co.kr/news/stock/12151017",
    "pubDate": "Sat, 12 Sep 2026 10:08:14 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "키움증권 미 자회사, 현지서 국내 반도체 ETF 상장",
-   "link": "https://www.yna.co.kr/view/AKR20260911164500008",
-   "pubDate": "Fri, 11 Sep 2026 20:48:56 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "“매년 880만원 아끼는데 안해요?”…파이어족 다들 한다는데 [이번주 찜할 ETF]",
@@ -6365,36 +6396,6 @@
    "title": "34개월만에 4% 뚫은 韓 국채 3년물 금리",
    "link": "https://www.mk.co.kr/news/stock/12150653",
    "pubDate": "Fri, 11 Sep 2026 17:38:00 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "국민연금, AI로 환율 분석한다…LG AI연구원과 MOU",
-   "link": "https://www.mk.co.kr/news/economy/12150469",
-   "pubDate": "Fri, 11 Sep 2026 17:00:00 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“다시 7000피 밑으로”…코스피 1.7% 하락 마감, 코스닥도 내려",
-   "link": "https://www.mk.co.kr/news/stock/12150503",
-   "pubDate": "Fri, 11 Sep 2026 15:45:16 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "유가·물가 압박에… 美 국채금리 급등",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/12/MBL32TE2SJFJDI2J4OJSIGKDQA/",
-   "pubDate": "Fri, 11 Sep 2026 15:34:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "빚만 168조원인데 주가 반등? … 오라클의 ‘AI 도박’ 통해야 삼전닉스도 산다",
-   "link": "https://www.mk.co.kr/news/business/12150465",
-   "pubDate": "Fri, 11 Sep 2026 14:56:51 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "ETF 열풍·고유계정 운용 호조…운용사 2분기 순익 2.7조 역대 최대",
-   "link": "https://www.mk.co.kr/news/stock/12150442",
-   "pubDate": "Fri, 11 Sep 2026 14:45:33 +09:00",
    "source": "매일경제 증권"
   }
  ]
