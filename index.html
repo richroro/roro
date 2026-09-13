@@ -21,6 +21,14 @@
     </div>
     <div id="field-wrap">
       <canvas id="field" width="900" height="560"></canvas>
+      <div id="difficulty-menu">
+        <div id="difficulty-title">난이도를 선택하세요</div>
+        <div id="difficulty-buttons">
+          <button class="diff-btn" data-difficulty="easy">쉬움</button>
+          <button class="diff-btn" data-difficulty="normal">보통</button>
+          <button class="diff-btn" data-difficulty="hard">어려움</button>
+        </div>
+      </div>
       <div id="overlay" class="hidden">
         <div id="overlay-text"></div>
         <button id="restartBtn">다시 시작</button>
@@ -34,13 +42,15 @@
         </div>
         <div id="action-buttons">
           <button class="action-btn" id="btn-sprint">스프린트</button>
+          <button class="action-btn" id="btn-pass">패스</button>
           <button class="action-btn shoot" id="btn-shoot">슛</button>
         </div>
       </div>
     </div>
     <div id="controls">
-      방향키/WASD: 이동 &nbsp;|&nbsp; Shift: 스프린트 &nbsp;|&nbsp; Space: 누르고 있다가 떼면 슛(길게 누를수록 강함, 공 없을 땐 근접 태클) &nbsp;|&nbsp; P: 일시정지<br>
-      <span class="mobile-hint">모바일: 왼쪽 방향 버튼으로 이동, 오른쪽 버튼으로 스프린트/슛</span>
+      방향키/WASD: 이동 &nbsp;|&nbsp; Shift: 스프린트 &nbsp;|&nbsp; Space: 누르고 있다가 떼면 슛(길게 누를수록 강함, 공 없을 땐 근접 태클) &nbsp;|&nbsp; E: 팀원에게 패스 &nbsp;|&nbsp; P: 일시정지<br>
+      2:2 팀 경기 - AI 팀원과 함께 패스하며 골을 노려보세요.<br>
+      <span class="mobile-hint">모바일: 왼쪽 방향 버튼으로 이동, 오른쪽 버튼으로 스프린트/패스/슛</span>
     </div>
   </div>
   <script src="game.js"></script>

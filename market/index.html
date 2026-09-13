@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마켓 브리핑 - 경제 뉴스 &amp; 증시 한눈에</title>
+<meta name="description" content="코스피·코스닥·환율·주요 종목 시세와 최신 경제 뉴스를 한 페이지에서 확인하세요.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <h1>📈 마켓 브리핑</h1>
+      <p class="subtitle">경제 뉴스와 증시 시세를 한눈에</p>
+    </div>
+    <div class="update-info">
+      <span id="updatedAt">불러오는 중...</span>
+      <button id="refreshBtn" title="새로고침">↻</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="indices" class="section">
+      <h2>지수 &amp; 환율</h2>
+      <div id="indicesGrid" class="ticker-grid"></div>
+    </section>
+
+    <section id="stocks" class="section">
+      <h2>관심 종목</h2>
+      <div id="stocksGrid" class="ticker-grid"></div>
+    </section>
+
+    <section id="news" class="section">
+      <h2>최신 경제 뉴스</h2>
+      <div id="newsList" class="news-list"></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>시세: Yahoo Finance · 뉴스: 연합뉴스, 한국경제 RSS · 데이터는 GitHub Actions가 주기적으로 갱신합니다.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

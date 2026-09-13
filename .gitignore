@@ -1,3 +1,36 @@
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+!.claude/agents/
+!.claude/agents/**
 portfolio/
 webcam_preview.py
+slackbot/.env
+slackbot/bot.log
+shorts_output/
+
+# blogger-auto-post: keep secrets and runtime artifacts out of git.
+# queue/ and data/ ARE tracked so GitHub Actions can publish from them.
+.claude/skills/blogger-auto-post/secrets/
+.claude/skills/blogger-auto-post/topics.txt
+.claude/skills/blogger-auto-post/scripts/daily_post.log
+.claude/skills/blogger-auto-post/scripts/__pycache__/
+
+# threads-auto-post: keep secrets and runtime artifacts out of git
+.claude/skills/threads-auto-post/secrets/
+.claude/skills/threads-auto-post/topics.txt
+.claude/skills/threads-auto-post/queue/
+!.claude/skills/threads-auto-post/queue/.gitkeep
+.claude/skills/threads-auto-post/scripts/daily_post.log
+.claude/skills/threads-auto-post/scripts/__pycache__/
+
+# kakao: keep tokens/secrets out of git
+kakao/secrets/
+
+# General runtime artifacts (logs, caches, probe captures)
+__pycache__/
+*.pyc
+*.log
+*_stderr.log
+*_stdout.log
+probe_*.png
