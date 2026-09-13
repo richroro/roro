@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-10",
-  "updated": "2026-09-12T04:38:10+00:00",
+  "date": "2026-09-11",
+  "updated": "2026-09-13T04:50:46+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 47.5,
-      "audience": 64835,
-      "total": 10333241,
-      "screens": 1465
+      "share": 48.8,
+      "audience": 93255,
+      "total": 10426494,
+      "screens": 1537
     },
     {
       "rank": 2,
       "title": "옵세션",
       "open": "2026-09-02",
-      "share": 17.5,
-      "audience": 27617,
-      "total": 298339,
-      "screens": 719
+      "share": 19.3,
+      "audience": 41928,
+      "total": 340267,
+      "screens": 776
     },
     {
       "rank": 3,
       "title": "스파이더맨: 브랜드 뉴 데이",
       "open": "2026-07-29",
-      "share": 6.5,
-      "audience": 12880,
-      "total": 8845693,
-      "screens": 614
+      "share": 6.2,
+      "audience": 17806,
+      "total": 8863499,
+      "screens": 666
     },
     {
       "rank": 4,
       "title": "더 드라마",
       "open": "2026-09-09",
-      "share": 4.3,
-      "audience": 7242,
-      "total": 24119,
-      "screens": 596
+      "share": 3.4,
+      "audience": 7964,
+      "total": 32083,
+      "screens": 589
     },
     {
       "rank": 5,
       "title": "호프",
       "open": "2026-07-15",
-      "share": 3.2,
-      "audience": 4468,
-      "total": 4551486,
-      "screens": 89
+      "share": 3.4,
+      "audience": 6870,
+      "total": 4558356,
+      "screens": 94
     },
     {
       "rank": 6,
-      "title": "이누야샤 극장판: 시대를 초월한 마음",
-      "open": "2026-09-09",
-      "share": 2.9,
-      "audience": 4083,
-      "total": 8894,
-      "screens": 135
+      "title": "싱 어게인",
+      "open": "2026-09-02",
+      "share": 1.9,
+      "audience": 4813,
+      "total": 78935,
+      "screens": 324
     },
     {
       "rank": 7,
       "title": "경주기행",
       "open": "2026-08-26",
-      "share": 2.2,
-      "audience": 3954,
-      "total": 315754,
-      "screens": 416
+      "share": 1.8,
+      "audience": 4514,
+      "total": 320268,
+      "screens": 419
     },
     {
       "rank": 8,
-      "title": "싱 어게인",
-      "open": "2026-09-02",
-      "share": 1.8,
-      "audience": 3235,
-      "total": 74122,
-      "screens": 297
+      "title": "이누야샤 극장판: 시대를 초월한 마음",
+      "open": "2026-09-09",
+      "share": 2.0,
+      "audience": 3755,
+      "total": 12649,
+      "screens": 129
     },
     {
       "rank": 9,
-      "title": "비광",
-      "open": "2026-09-02",
-      "share": 1.3,
-      "audience": 2473,
-      "total": 87393,
-      "screens": 325
+      "title": "오아시스: 돈 룩 백 인 앵거",
+      "open": "2026-09-09",
+      "share": 1.4,
+      "audience": 2877,
+      "total": 9719,
+      "screens": 129
     },
     {
       "rank": 10,
-      "title": "오아시스: 돈 룩 백 인 앵거",
+      "title": "아가미",
       "open": "2026-09-09",
-      "share": 1.5,
-      "audience": 2297,
-      "total": 6842,
-      "screens": 134
+      "share": 1.0,
+      "audience": 2573,
+      "total": 8459,
+      "screens": 198
     }
   ]
 }
