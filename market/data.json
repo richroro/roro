@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T14:56:16.322283+09:00",
+  "updatedAt": "2026-09-13T20:39:01.780457+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
+      "title": "[부고] 안성진(한국산업은행 심사평가부문 부행장)씨 부친상",
+      "link": "https://www.yna.co.kr/view/AKR20260913056000002",
+      "pubDate": "Sun, 13 Sep 2026 19:48:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "교사 10명 중 7명 \"학생 경제지식 부족\"",
+      "link": "https://www.hankyung.com/article/2026091313301",
+      "pubDate": "Sun, 13 Sep 2026 19:36:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "금통위 의사록 공개…2연속 금리인상 속내는",
+      "link": "https://www.hankyung.com/article/2026091313181",
+      "pubDate": "Sun, 13 Sep 2026 19:15:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "환율·채권, 엇갈린 환율 전망 속 美·日 금리 촉각",
+      "link": "https://www.hankyung.com/article/2026091313171",
+      "pubDate": "Sun, 13 Sep 2026 19:12:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "크리스토퍼 뉴커크 \"계좌이체 많은 韓기업, 결제 디지털화 시급\"",
+      "link": "https://www.hankyung.com/article/2026091312981",
+      "pubDate": "Sun, 13 Sep 2026 18:58:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "대전에 롯데 x KAIST R&D센터 준공",
+      "link": "https://www.hankyung.com/article/2026091313941",
+      "pubDate": "Sun, 13 Sep 2026 18:46:55 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "유럽 재무장 가속페달…K2 전차·천무 검색 쑥",
+      "link": "https://www.hankyung.com/article/2026091312801",
+      "pubDate": "Sun, 13 Sep 2026 18:45:26 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "그 많던 동네 문구점은 어디로 갔을까",
+      "link": "https://www.hankyung.com/article/2026091312731",
+      "pubDate": "Sun, 13 Sep 2026 18:44:49 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'복붙' 편의점 시대 끝…특화 매장 매출 2배 껑충",
+      "link": "https://www.hankyung.com/article/2026091312761",
+      "pubDate": "Sun, 13 Sep 2026 18:44:42 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "서촌·북촌 몰려가는 스포츠 브랜드",
+      "link": "https://www.hankyung.com/article/2026091312741",
+      "pubDate": "Sun, 13 Sep 2026 18:44:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이인섭 \"정품 '헐값 유통'이 K브랜드 흔든다\"",
+      "link": "https://www.hankyung.com/article/2026091312721",
+      "pubDate": "Sun, 13 Sep 2026 18:44:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "북극항로 시범운항 선박, 부산 출항 22일 만에 로테르담 도착",
+      "link": "https://www.yna.co.kr/view/AKR20260913017500051",
+      "pubDate": "Sun, 13 Sep 2026 18:05:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이형일 \"금투세 도입 여부, 시장 충분히 안정된 후 검토\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260912044351002",
+      "pubDate": "Sun, 13 Sep 2026 17:55:41 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이형일 \"레버리지 국정조사 필요 여부는 국회 판단 존중\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913047700002",
+      "pubDate": "Sun, 13 Sep 2026 17:51:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이형일 \"2022년 이후 공급부진이 주택 매수심리·투기수요 자극\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260912044451002",
+      "pubDate": "Sun, 13 Sep 2026 17:49:35 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이형일 \"미래대응기금, 재정안정화 장치로 기능할 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913047200002",
+      "pubDate": "Sun, 13 Sep 2026 17:47:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이형일 \"법인세 인하 검토 안 해…지역별 차등은 신중해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260913046200002",
+      "pubDate": "Sun, 13 Sep 2026 17:45:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
+      "link": "https://www.yna.co.kr/view/AKR20260913034000011",
+      "pubDate": "Sun, 13 Sep 2026 15:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "민주노총, 서울 도심서 이주노동자대회…\"차별 철폐·권리 보장\"",
       "link": "https://www.yna.co.kr/view/AKR20260913034200004",
       "pubDate": "Sun, 13 Sep 2026 14:51:10 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "'주택공급 검토' 용산기지 인근서 '기준치 335배' 발암물질 검출",
-      "link": "https://www.hankyung.com/article/202609131106i",
-      "pubDate": "Sun, 13 Sep 2026 14:43:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "롯데, KAIST R&D센터 준공…신동빈 “실패 두려워 않도록 든든한 동반자 될것”",
-      "link": "https://www.hankyung.com/article/202609131133i",
-      "pubDate": "Sun, 13 Sep 2026 14:41:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'농심 3세' 신상열 부사장 오늘 결혼…상대는",
-      "link": "https://www.hankyung.com/article/2026091311057",
-      "pubDate": "Sun, 13 Sep 2026 14:09:03 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "[부고] 문용준(새마을금고중앙회 대외협력홍보부문 차장)씨 빙부상",
       "link": "https://www.yna.co.kr/view/AKR20260913032100002",
       "pubDate": "Sun, 13 Sep 2026 14:00:27 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "시진핑, 브릭스서 탈달러·AI 협력 전면에…다극화 질서 드라이브",
-      "link": "https://www.hankyung.com/article/202609131037i",
-      "pubDate": "Sun, 13 Sep 2026 13:28:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성증권, 글로벌 금융그룹 BNY와 포괄적 업무협약 체결",
-      "link": "https://www.yna.co.kr/view/AKR20260913030500008",
-      "pubDate": "Sun, 13 Sep 2026 13:10:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "우주청, '스페이스 해커톤' 연다…위성 활용 아이디어 발굴",
-      "link": "https://www.yna.co.kr/view/AKR20260911097800017",
-      "pubDate": "Sun, 13 Sep 2026 12:00:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중기중앙회, '노란우산 가족사랑 동시·그림 대회' 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260912030600030",
-      "pubDate": "Sun, 13 Sep 2026 12:00:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 금감원, '2026 테크파인더 쇼케이스' 참가기업 모집",
-      "link": "https://www.yna.co.kr/view/AKR20260912026100002",
-      "pubDate": "Sun, 13 Sep 2026 12:00:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 14일부터 3분기 혁신금융서비스 지정 정기 신청",
-      "link": "https://www.yna.co.kr/view/AKR20260912033800002",
-      "pubDate": "Sun, 13 Sep 2026 12:00:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "점심·저녁 밥값 10% 돌려주는 '이 카드'…직장인들 관심",
-      "link": "https://www.hankyung.com/article/202609119022i",
-      "pubDate": "Sun, 13 Sep 2026 12:00:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한은 \"미중 분절 속 공급망 재구성…韓, 아세안 경유 확대\"",
-      "link": "https://www.yna.co.kr/view/AKR20260912038500002",
-      "pubDate": "Sun, 13 Sep 2026 12:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "추석연휴 소상공인에 103조원 자금공급…연휴 상환만기 자동연장",
-      "link": "https://www.yna.co.kr/view/AKR20260912045300002",
-      "pubDate": "Sun, 13 Sep 2026 12:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "성과급 등 대기업 노사갈등 예방교육 강화…삼성전자 등 참여",
-      "link": "https://www.yna.co.kr/view/AKR20260911141400530",
-      "pubDate": "Sun, 13 Sep 2026 12:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"서울대 기술, 中 시장과 연결한다\"…KIC중국과 기술사업화 동맹",
-      "link": "https://www.hankyung.com/article/202609130988i",
-      "pubDate": "Sun, 13 Sep 2026 11:38:33 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'퍼주기 원조' 지고 '개발금융' 뜬다…韓, 제안형 ODA 선점 나서야",
-      "link": "https://www.hankyung.com/article/202609130985i",
-      "pubDate": "Sun, 13 Sep 2026 11:31:58 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"금값 비싸도 불티나게 팔리는데\"…금은방 줄폐업 하는 이유 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202609118623i",
-      "pubDate": "Sun, 13 Sep 2026 11:30:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이제 막 돌인데 '年 4000만원'\"…역대급 금수저들의 정체",
-      "link": "https://www.hankyung.com/article/2026091309557",
-      "pubDate": "Sun, 13 Sep 2026 11:17:16 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"올 추석엔 전복 실컷 먹겠네\"…마트 갔다가 '깜짝' [박상경의 영수증 리뷰]",
-      "link": "https://www.hankyung.com/article/202609118947g",
-      "pubDate": "Sun, 13 Sep 2026 11:00:04 +0900",
-      "source": "한국경제"
     }
   ]
 }
