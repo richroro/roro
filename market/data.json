@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-14T15:03:33.918553+09:00",
+  "updatedAt": "2026-09-14T21:35:22.089858+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6677.15,
-      "change": -232.76,
-      "changePercent": -3.37,
+      "price": 6684.37,
+      "change": -225.54,
+      "changePercent": -3.26,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 807.16,
-      "change": -13.48,
-      "changePercent": -1.64,
+      "price": 806.79,
+      "change": -13.85,
+      "changePercent": -1.69,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.97,
-      "change": 4.92,
-      "changePercent": 0.37,
+      "price": 1346.28,
+      "change": 5.23,
+      "changePercent": 0.39,
       "currency": "KRW"
     }
   ],
@@ -48,17 +48,17 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 249250.0,
-      "change": -10250.0,
-      "changePercent": -3.95,
+      "price": 249000.0,
+      "change": -10500.0,
+      "changePercent": -4.05,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1699000.0,
-      "change": -113000.0,
-      "changePercent": -6.24,
+      "price": 1697000.0,
+      "change": -115000.0,
+      "changePercent": -6.35,
       "currency": "KRW"
     },
     {
@@ -72,17 +72,17 @@
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 34575.0,
-      "change": 75.0,
-      "changePercent": 0.22,
+      "price": 34650.0,
+      "change": 150.0,
+      "changePercent": 0.43,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 350000.0,
-      "change": -10000.0,
-      "changePercent": -2.78,
+      "price": 351500.0,
+      "change": -8500.0,
+      "changePercent": -2.36,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "전북건설협회 \"새만금 남북3축도로 예타면제로 신속 건설\"",
-      "link": "https://www.yna.co.kr/view/AKR20260914114100055",
-      "pubDate": "Mon, 14 Sep 2026 14:56:51 +0900",
+      "title": "KRX 애프터마켓 첫선…개장 첫날 7천224만주·1조8천억원 거래",
+      "link": "https://www.yna.co.kr/view/AKR20260914110500008",
+      "pubDate": "Mon, 14 Sep 2026 21:04:46 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "마이다스에셋자산운용 전주사무소 개소…국민연금과 협력 강화",
-      "link": "https://www.yna.co.kr/view/AKR20260914113100055",
-      "pubDate": "Mon, 14 Sep 2026 14:47:45 +0900",
+      "title": "프리마켓서 대형 증권사 잇단 전산장애…\"SOR 시스템 오류\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20260914027352008",
+      "pubDate": "Mon, 14 Sep 2026 21:00:57 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"은둔청년 지원은 사회적 투자…회복·자립 체계적 지원해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260914112000003",
-      "pubDate": "Mon, 14 Sep 2026 14:44:39 +0900",
+      "title": "스페이스X,이달말 나스닥100지수 비중 1.28%→2.82%로↑",
+      "link": "https://www.hankyung.com/article/202609144160i",
+      "pubDate": "Mon, 14 Sep 2026 20:16:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"이건희 회장이 봤다면 눈물\"…삼성 노노 갈등 '선 넘었다'",
+      "link": "https://www.hankyung.com/article/2026091441587",
+      "pubDate": "Mon, 14 Sep 2026 19:52:22 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"AI 위험 통제 필요\" 거물들 경고에…美·中 정부 동시 비난",
+      "link": "https://www.hankyung.com/article/202609144058i",
+      "pubDate": "Mon, 14 Sep 2026 19:16:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "26년 핀테크 한우물 \"제2의 네·카·토 탄생 돕겠다\"",
+      "link": "https://www.hankyung.com/article/2026091440061",
+      "pubDate": "Mon, 14 Sep 2026 18:42:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "JT저축銀, 스마일런 마라톤대회 후원",
+      "link": "https://www.hankyung.com/article/2026091440031",
+      "pubDate": "Mon, 14 Sep 2026 18:40:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "우리금융, 저소득 조손가정에 추석선물",
+      "link": "https://www.hankyung.com/article/2026091440041",
+      "pubDate": "Mon, 14 Sep 2026 18:39:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "고영철 신협중앙회장, 아시아신협연합회장 선출",
+      "link": "https://www.hankyung.com/article/2026091439961",
+      "pubDate": "Mon, 14 Sep 2026 18:35:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[포토] 오뚜기, 고(故) 함태호 명예회장 10주기 추모식",
+      "link": "https://www.hankyung.com/article/2026091439971",
+      "pubDate": "Mon, 14 Sep 2026 18:34:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "넥스트증권, MTS 공식 출시 앞두고 오픈API로 거래서비스 검증",
+      "link": "https://www.yna.co.kr/view/AKR20260914162000008",
+      "pubDate": "Mon, 14 Sep 2026 18:29:48 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "울주군, 국토정보 챌린지 지적·드론측량 경진대회 우수상",
-      "link": "https://www.yna.co.kr/view/AKR20260914110200057",
-      "pubDate": "Mon, 14 Sep 2026 14:43:21 +0900",
+      "title": "하나은행, 하반기 신입 행원 230명 채용",
+      "link": "https://www.yna.co.kr/view/AKR20260914160800002",
+      "pubDate": "Mon, 14 Sep 2026 18:25:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "정읍제일고, '전북반도체고'로 전환…도내 첫 반도체 특성화고",
-      "link": "https://www.yna.co.kr/view/AKR20260914111500055",
-      "pubDate": "Mon, 14 Sep 2026 14:38:59 +0900",
+      "title": "HS효성, 울산에 1.2조 투자…실리콘 음극재 공장 구축",
+      "link": "https://www.hankyung.com/article/2026091440261",
+      "pubDate": "Mon, 14 Sep 2026 18:14:14 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"주문 쏟아진다\"…한 번에 1조6000억 '잭팟' 터진 이 회사",
+      "link": "https://www.hankyung.com/article/2026091440311",
+      "pubDate": "Mon, 14 Sep 2026 18:13:38 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20260914149600011",
+      "pubDate": "Mon, 14 Sep 2026 18:00:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 미래에셋, 공기업 퇴직연금 경쟁력 강화 릴레이 세미나",
-      "link": "https://www.yna.co.kr/view/AKR20260914111200008",
-      "pubDate": "Mon, 14 Sep 2026 14:38:44 +0900",
+      "title": "대한건설협회, 통영·거제시 수해복구 성금 1억원 지원",
+      "link": "https://www.yna.co.kr/view/AKR20260914157700003",
+      "pubDate": "Mon, 14 Sep 2026 17:55:48 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "서금원 10주년 맞아 '금융안전·경제적 자립의 동반자' 비전선포",
-      "link": "https://www.yna.co.kr/view/AKR20260914106300002",
-      "pubDate": "Mon, 14 Sep 2026 14:36:36 +0900",
+      "title": "기아, 대형 전동화 PBV 'PV7' 첫선…1회 충전으로 460㎞ 달린다",
+      "link": "https://www.yna.co.kr/view/AKR20260914137800003",
+      "pubDate": "Mon, 14 Sep 2026 17:50:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "현대캐피탈, 중소 렌터카업계 상생 지원…할부원금 6개월 유예",
-      "link": "https://www.yna.co.kr/view/AKR20260914085100002",
-      "pubDate": "Mon, 14 Sep 2026 14:34:31 +0900",
+      "title": "멕아이씨에스, 9억9천만원 유상증자…에스지헬스케어에 제3자배정",
+      "link": "https://www.yna.co.kr/view/AKR20260914155900008",
+      "pubDate": "Mon, 14 Sep 2026 17:44:35 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "전북은행, 중소기업에 추석 특별운전자금 5천억원 지원",
-      "link": "https://www.yna.co.kr/view/AKR20260914107900055",
-      "pubDate": "Mon, 14 Sep 2026 14:30:42 +0900",
+      "title": "'재판소원 1호' 녹십자 과징금 사건 변론기일, 내달 23일로 변경",
+      "link": "https://www.yna.co.kr/view/AKR20260914154900004",
+      "pubDate": "Mon, 14 Sep 2026 17:41:15 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
-      "link": "https://www.yna.co.kr/view/AKR20260914104300011",
-      "pubDate": "Mon, 14 Sep 2026 14:30:00 +0900",
+      "title": "與 \"오세훈 시정으로 공급절벽…재개발 권한 구청장 이양해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260914151500001",
+      "pubDate": "Mon, 14 Sep 2026 17:41:10 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "1만원 하던 게 4만원…\"가을이 제철인데\" 마트서 자취 감춘 '전어' [박상경의 영수증 리뷰]",
-      "link": "https://www.hankyung.com/article/202609142349g",
-      "pubDate": "Mon, 14 Sep 2026 14:12:58 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"여행 대신 고향 갑니다\"…추석 앞두고 한숨 깊어진 이유",
-      "link": "https://www.hankyung.com/article/202609143064g",
-      "pubDate": "Mon, 14 Sep 2026 14:02:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"5조 풀겠다\"던 삼성, 추석에도 통 크게 쏜다",
-      "link": "https://www.hankyung.com/article/202609142164g",
-      "pubDate": "Mon, 14 Sep 2026 14:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "백화점에 들어온 '힙한 지역문화'…현대百, 외국인 정조준",
-      "link": "https://www.hankyung.com/article/202609143039i",
-      "pubDate": "Mon, 14 Sep 2026 13:36:59 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"치킨 나누고 한국 문화 알린다\"…교촌, 3년째 이주배경 청소년 지원",
-      "link": "https://www.hankyung.com/article/202609143041g",
-      "pubDate": "Mon, 14 Sep 2026 13:33:49 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "같은 피아노 불황인데…두 '피아노 명가' 운명 가른 것은?",
-      "link": "https://www.hankyung.com/article/202609093768i",
-      "pubDate": "Mon, 14 Sep 2026 13:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성SDI·LG엔솔 만난 휘트머 美 미시간 주지사…\"韓기업과 협력 기대\"",
-      "link": "https://www.hankyung.com/article/202609142124i",
-      "pubDate": "Mon, 14 Sep 2026 12:00:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"접히는 아이폰 드디어 나왔는데\" 화들짝…불만 쏟아진 이유",
-      "link": "https://www.hankyung.com/article/202609142112g",
-      "pubDate": "Mon, 14 Sep 2026 11:23:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"'이것' 잡으면 카타르 수출량 2배 번다\"…韓업계 '새 돈줄'",
-      "link": "https://www.hankyung.com/article/202609131267i",
-      "pubDate": "Mon, 14 Sep 2026 11:20:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[포토] 한·중앙아 5개국 산업장관회의 개최",
-      "link": "https://www.hankyung.com/article/202609142758i",
-      "pubDate": "Mon, 14 Sep 2026 11:15:29 +0900",
-      "source": "한국경제"
     }
   ]
 }
