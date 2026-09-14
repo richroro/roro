@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-11",
-  "updated": "2026-09-13T04:50:46+00:00",
+  "date": "2026-09-13",
+  "updated": "2026-09-14T04:59:04+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 48.8,
-      "audience": 93255,
-      "total": 10426494,
-      "screens": 1537
+      "share": 52.7,
+      "audience": 165108,
+      "total": 10782718,
+      "screens": 1615
     },
     {
       "rank": 2,
       "title": "옵세션",
       "open": "2026-09-02",
-      "share": 19.3,
-      "audience": 41928,
-      "total": 340267,
-      "screens": 776
+      "share": 18.5,
+      "audience": 61864,
+      "total": 474818,
+      "screens": 844
     },
     {
       "rank": 3,
       "title": "스파이더맨: 브랜드 뉴 데이",
       "open": "2026-07-29",
-      "share": 6.2,
-      "audience": 17806,
-      "total": 8863499,
-      "screens": 666
+      "share": 7.4,
+      "audience": 31225,
+      "total": 8930412,
+      "screens": 689
     },
     {
       "rank": 4,
       "title": "더 드라마",
       "open": "2026-09-09",
-      "share": 3.4,
-      "audience": 7964,
-      "total": 32083,
-      "screens": 589
+      "share": 2.8,
+      "audience": 9799,
+      "total": 53631,
+      "screens": 615
     },
     {
       "rank": 5,
-      "title": "호프",
-      "open": "2026-07-15",
-      "share": 3.4,
-      "audience": 6870,
-      "total": 4558356,
-      "screens": 94
+      "title": "경주기행",
+      "open": "2026-08-26",
+      "share": 1.8,
+      "audience": 6591,
+      "total": 332960,
+      "screens": 386
     },
     {
       "rank": 6,
       "title": "싱 어게인",
       "open": "2026-09-02",
-      "share": 1.9,
-      "audience": 4813,
-      "total": 78935,
-      "screens": 324
+      "share": 1.4,
+      "audience": 5288,
+      "total": 89399,
+      "screens": 279
     },
     {
       "rank": 7,
-      "title": "경주기행",
-      "open": "2026-08-26",
-      "share": 1.8,
-      "audience": 4514,
-      "total": 320268,
-      "screens": 419
+      "title": "비광",
+      "open": "2026-09-02",
+      "share": 1.1,
+      "audience": 4113,
+      "total": 97145,
+      "screens": 301
     },
     {
       "rank": 8,
-      "title": "이누야샤 극장판: 시대를 초월한 마음",
-      "open": "2026-09-09",
-      "share": 2.0,
-      "audience": 3755,
-      "total": 12649,
-      "screens": 129
+      "title": "사랑의 하츄핑: 고래보석의 전설",
+      "open": "2026-08-05",
+      "share": 1.1,
+      "audience": 4112,
+      "total": 867933,
+      "screens": 248
     },
     {
       "rank": 9,
-      "title": "오아시스: 돈 룩 백 인 앵거",
-      "open": "2026-09-09",
-      "share": 1.4,
-      "audience": 2877,
-      "total": 9719,
-      "screens": 129
+      "title": "호프",
+      "open": "2026-07-15",
+      "share": 1.2,
+      "audience": 3883,
+      "total": 4566205,
+      "screens": 103
     },
     {
       "rank": 10,
-      "title": "아가미",
+      "title": "이누야샤 극장판: 시대를 초월한 마음",
       "open": "2026-09-09",
-      "share": 1.0,
-      "audience": 2573,
-      "total": 8459,
-      "screens": 198
+      "share": 0.9,
+      "audience": 3334,
+      "total": 19829,
+      "screens": 119
     }
   ]
 }
