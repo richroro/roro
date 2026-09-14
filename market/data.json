@@ -1,6 +1,14 @@
 {
-  "updatedAt": "2026-09-15T03:31:03.363904+09:00",
+  "updatedAt": "2026-09-15T07:24:37.713900+09:00",
   "indices": [
+    {
+      "symbol": "^KS11",
+      "name": "KOSPI",
+      "price": 6684.37,
+      "change": -225.54,
+      "changePercent": -3.26,
+      "currency": "KRW"
+    },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
@@ -12,9 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52427.25,
-      "change": -146.04,
-      "changePercent": -0.28,
+      "price": 52421.2,
+      "change": -152.09,
+      "changePercent": -0.29,
+      "currency": "USD"
+    },
+    {
+      "symbol": "^IXIC",
+      "name": "나스닥",
+      "price": 26186.41,
+      "change": -146.62,
+      "changePercent": -0.56,
       "currency": "USD"
     }
   ],
@@ -22,8 +38,8 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1346.28,
-      "change": 5.23,
+      "price": 1346.32,
+      "change": 5.27,
       "changePercent": 0.39,
       "currency": "KRW"
     }
@@ -72,33 +88,111 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 332.27,
-      "change": 5.7,
-      "changePercent": 1.75,
+      "price": 333.08,
+      "change": 0.81,
+      "changePercent": 0.24,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 365.44,
-      "change": 1.88,
-      "changePercent": 0.52,
+      "price": 358.97,
+      "change": -6.47,
+      "changePercent": -1.77,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 218.29,
-      "change": -0.07,
-      "changePercent": -0.03,
+      "price": 210.96,
+      "change": -7.33,
+      "changePercent": -3.36,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "美10년물 국채금리 '심리적 저항선' 5% 돌파…2023년 후 처음(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260914175352072",
-      "pubDate": "Tue, 15 Sep 2026 00:46:08 +0900",
+      "title": "[현장in] 개항기 최초 외국인묘지 터에 변전소…\"역사성 보존해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260914148900065",
+      "pubDate": "Tue, 15 Sep 2026 07:17:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[우분투칼럼] 현장서 체감한 아프리카 비즈니스…문화적 맥락과 상생의 지혜",
+      "link": "https://www.yna.co.kr/view/AKR20260818031800898",
+      "pubDate": "Tue, 15 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[반려동물] 산책 넘어 코어 운동까지…'도그 피트니스'가 뜬다",
+      "link": "https://www.yna.co.kr/view/AKR20260914128800030",
+      "pubDate": "Tue, 15 Sep 2026 07:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"동학농민혁명 유족에 50만원\"…빚더미에도 돈 푸는 이유",
+      "link": "https://www.hankyung.com/article/2026091439081",
+      "pubDate": "Tue, 15 Sep 2026 07:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한병도 \"학자금 대출 장기연체자 10명 중 8명이 30대 이상\"",
+      "link": "https://www.yna.co.kr/view/AKR20260914149800001",
+      "pubDate": "Tue, 15 Sep 2026 06:50:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "그림·한우 넘어 채권·펀드로…토큰증권, 내년 2월부터 판 커진다 [분석+]",
+      "link": "https://www.hankyung.com/article/2026091436246",
+      "pubDate": "Tue, 15 Sep 2026 06:30:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[팩트체크] 14만원 탁구채 논란…'환불불가' 표시 있다면 환불 안된다?",
+      "link": "https://www.yna.co.kr/view/AKR20260914146000518",
+      "pubDate": "Tue, 15 Sep 2026 06:30:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"자율주행 최강자\"라더니…뒤통수 맞은 테슬라 차주들 [이슈+]",
+      "link": "https://www.hankyung.com/article/202609142445g",
+      "pubDate": "Tue, 15 Sep 2026 06:00:17 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "서울시, 9월분 재산세 4조8천억원 확정…30일까지 납부해야",
+      "link": "https://www.yna.co.kr/view/AKR20260914152400004",
+      "pubDate": "Tue, 15 Sep 2026 06:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"윤아 운동화 주세요\"…'효도템' 불티나더니 2년 만에 '대박' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609143529i",
+      "pubDate": "Tue, 15 Sep 2026 06:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "금융위 \"생산적금융 면책 방안도 추가 마련할 것…내재화 중요\"",
+      "link": "https://www.yna.co.kr/view/AKR20260914150000002",
+      "pubDate": "Tue, 15 Sep 2026 06:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한국잡월드 누적 방문객 1천만명 돌파…기념 이벤트 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260914162400530",
+      "pubDate": "Tue, 15 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상반기 자동차보험 총손익 37.7%↓…보험손익 6년만 적자전환",
+      "link": "https://www.yna.co.kr/view/AKR20260914162300002",
+      "pubDate": "Tue, 15 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "재취업지원서비스 우수기업 7곳 선정…최우수상 백송의료재단",
+      "link": "https://www.yna.co.kr/view/AKR20260914163300530",
+      "pubDate": "Tue, 15 Sep 2026 06:00:04 +0900",
       "source": "연합뉴스"
     },
     {
@@ -108,31 +202,19 @@
       "source": "한국경제"
     },
     {
-      "title": "월가에 몰아치는 3가지 폭풍[박신영의 개장전 요것만]",
+      "title": "월가에 몰아치는 3가지 폭풍 [박신영의 개장전 요것만]",
       "link": "https://www.hankyung.com/article/202609144293i",
       "pubDate": "Tue, 15 Sep 2026 00:05:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "트럼프,\"AI속도조절 불필요.똑똑한 대통령이 안전장치\"주장",
+      "title": "트럼프 \"AI 속도 조절 불필요…똑똑한 대통령이 안전장치\"",
       "link": "https://www.hankyung.com/article/202609144296i",
       "pubDate": "Tue, 15 Sep 2026 00:01:00 +0900",
       "source": "한국경제"
     },
     {
-      "title": "우주위험 대응 빨라진다…기본계획 주기 10년→5년",
-      "link": "https://www.yna.co.kr/view/AKR20260914104500017",
-      "pubDate": "Tue, 15 Sep 2026 00:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "美 10년물 국채 금리 5.00% 돌파…2023년 이후 처음",
-      "link": "https://www.yna.co.kr/view/AKR20260914175351072",
-      "pubDate": "Mon, 14 Sep 2026 23:40:48 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보]10년물 미국채 수익률 5% 돌파…2023년10월이후 처음",
+      "title": "[속보] 10년물 미국채 수익률 5% 돌파…2023년 10월 이후 처음",
       "link": "https://www.hankyung.com/article/202609144289i",
       "pubDate": "Mon, 14 Sep 2026 23:27:23 +0900",
       "source": "한국경제"
@@ -148,72 +230,6 @@
       "link": "https://www.hankyung.com/article/202609144265i",
       "pubDate": "Mon, 14 Sep 2026 22:36:24 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "16일 FOMC 향방…최근 경제 지표는 인상 시사",
-      "link": "https://www.hankyung.com/article/202609144246i",
-      "pubDate": "Mon, 14 Sep 2026 22:16:49 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "일본 몰려가던 중국인들 '돌변'…1년 만에 완전히 뒤집혔다",
-      "link": "https://www.hankyung.com/article/2026091442217",
-      "pubDate": "Mon, 14 Sep 2026 21:37:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "KRX 애프터마켓 첫선…개장 첫날 7천224만주·1조8천억원 거래",
-      "link": "https://www.yna.co.kr/view/AKR20260914110500008",
-      "pubDate": "Mon, 14 Sep 2026 21:04:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "프리마켓서 대형 증권사 잇단 전산장애…\"SOR 시스템 오류\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260914027352008",
-      "pubDate": "Mon, 14 Sep 2026 21:00:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"마라탕 먹으러 여기 가요\"…2030 우르르 몰린 '의외의 장소'",
-      "link": "https://www.hankyung.com/article/202609143087g",
-      "pubDate": "Mon, 14 Sep 2026 21:00:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "스페이스X,이달말 나스닥100지수 비중 1.28%→2.82%로↑",
-      "link": "https://www.hankyung.com/article/202609144160i",
-      "pubDate": "Mon, 14 Sep 2026 20:16:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "넥스트증권, MTS 공식 출시 앞두고 오픈API로 거래서비스 검증",
-      "link": "https://www.yna.co.kr/view/AKR20260914162000008",
-      "pubDate": "Mon, 14 Sep 2026 18:29:48 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "하나은행, 하반기 신입 행원 230명 채용",
-      "link": "https://www.yna.co.kr/view/AKR20260914160800002",
-      "pubDate": "Mon, 14 Sep 2026 18:25:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260914149600011",
-      "pubDate": "Mon, 14 Sep 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대한건설협회, 통영·거제시 수해복구 성금 1억원 지원",
-      "link": "https://www.yna.co.kr/view/AKR20260914157700003",
-      "pubDate": "Mon, 14 Sep 2026 17:55:48 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "기아, 대형 전동화 PBV 'PV7' 첫선…1회 충전으로 460㎞ 달린다",
-      "link": "https://www.yna.co.kr/view/AKR20260914137800003",
-      "pubDate": "Mon, 14 Sep 2026 17:50:01 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
