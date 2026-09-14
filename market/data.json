@@ -1,14 +1,6 @@
 {
-  "updatedAt": "2026-09-14T21:35:22.089858+09:00",
+  "updatedAt": "2026-09-15T03:31:03.363904+09:00",
   "indices": [
-    {
-      "symbol": "^KS11",
-      "name": "KOSPI",
-      "price": 6684.37,
-      "change": -225.54,
-      "changePercent": -3.26,
-      "currency": "KRW"
-    },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
@@ -20,17 +12,9 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52573.29,
-      "change": 509.19,
-      "changePercent": 0.98,
-      "currency": "USD"
-    },
-    {
-      "symbol": "^IXIC",
-      "name": "나스닥",
-      "price": 26333.03,
-      "change": 251.33,
-      "changePercent": 0.96,
+      "price": 52427.25,
+      "change": -146.04,
+      "changePercent": -0.28,
       "currency": "USD"
     }
   ],
@@ -112,6 +96,72 @@
   ],
   "news": [
     {
+      "title": "美10년물 국채금리 '심리적 저항선' 5% 돌파…2023년 후 처음(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260914175352072",
+      "pubDate": "Tue, 15 Sep 2026 00:46:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "MS,AI 개발지침 발표\"사람이 AI보다 중요하다\"대원칙",
+      "link": "https://www.hankyung.com/article/202609154304i",
+      "pubDate": "Tue, 15 Sep 2026 00:46:00 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "월가에 몰아치는 3가지 폭풍[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609144293i",
+      "pubDate": "Tue, 15 Sep 2026 00:05:43 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "트럼프,\"AI속도조절 불필요.똑똑한 대통령이 안전장치\"주장",
+      "link": "https://www.hankyung.com/article/202609144296i",
+      "pubDate": "Tue, 15 Sep 2026 00:01:00 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "우주위험 대응 빨라진다…기본계획 주기 10년→5년",
+      "link": "https://www.yna.co.kr/view/AKR20260914104500017",
+      "pubDate": "Tue, 15 Sep 2026 00:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美 10년물 국채 금리 5.00% 돌파…2023년 이후 처음",
+      "link": "https://www.yna.co.kr/view/AKR20260914175351072",
+      "pubDate": "Mon, 14 Sep 2026 23:40:48 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보]10년물 미국채 수익률 5% 돌파…2023년10월이후 처음",
+      "link": "https://www.hankyung.com/article/202609144289i",
+      "pubDate": "Mon, 14 Sep 2026 23:27:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 증시, AI 감속 우려에 유가 급등…반도체주 일제히 하락",
+      "link": "https://www.hankyung.com/article/202609144281i",
+      "pubDate": "Mon, 14 Sep 2026 23:18:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "사우디, 핵심송유관 폐쇄…브렌트유 108달러 돌파",
+      "link": "https://www.hankyung.com/article/202609144265i",
+      "pubDate": "Mon, 14 Sep 2026 22:36:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "16일 FOMC 향방…최근 경제 지표는 인상 시사",
+      "link": "https://www.hankyung.com/article/202609144246i",
+      "pubDate": "Mon, 14 Sep 2026 22:16:49 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "일본 몰려가던 중국인들 '돌변'…1년 만에 완전히 뒤집혔다",
+      "link": "https://www.hankyung.com/article/2026091442217",
+      "pubDate": "Mon, 14 Sep 2026 21:37:48 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "KRX 애프터마켓 첫선…개장 첫날 7천224만주·1조8천억원 거래",
       "link": "https://www.yna.co.kr/view/AKR20260914110500008",
       "pubDate": "Mon, 14 Sep 2026 21:04:46 +0900",
@@ -124,51 +174,15 @@
       "source": "연합뉴스"
     },
     {
+      "title": "\"마라탕 먹으러 여기 가요\"…2030 우르르 몰린 '의외의 장소'",
+      "link": "https://www.hankyung.com/article/202609143087g",
+      "pubDate": "Mon, 14 Sep 2026 21:00:06 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "스페이스X,이달말 나스닥100지수 비중 1.28%→2.82%로↑",
       "link": "https://www.hankyung.com/article/202609144160i",
       "pubDate": "Mon, 14 Sep 2026 20:16:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이건희 회장이 봤다면 눈물\"…삼성 노노 갈등 '선 넘었다'",
-      "link": "https://www.hankyung.com/article/2026091441587",
-      "pubDate": "Mon, 14 Sep 2026 19:52:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"AI 위험 통제 필요\" 거물들 경고에…美·中 정부 동시 비난",
-      "link": "https://www.hankyung.com/article/202609144058i",
-      "pubDate": "Mon, 14 Sep 2026 19:16:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "26년 핀테크 한우물 \"제2의 네·카·토 탄생 돕겠다\"",
-      "link": "https://www.hankyung.com/article/2026091440061",
-      "pubDate": "Mon, 14 Sep 2026 18:42:21 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "JT저축銀, 스마일런 마라톤대회 후원",
-      "link": "https://www.hankyung.com/article/2026091440031",
-      "pubDate": "Mon, 14 Sep 2026 18:40:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "우리금융, 저소득 조손가정에 추석선물",
-      "link": "https://www.hankyung.com/article/2026091440041",
-      "pubDate": "Mon, 14 Sep 2026 18:39:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "고영철 신협중앙회장, 아시아신협연합회장 선출",
-      "link": "https://www.hankyung.com/article/2026091439961",
-      "pubDate": "Mon, 14 Sep 2026 18:35:15 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[포토] 오뚜기, 고(故) 함태호 명예회장 10주기 추모식",
-      "link": "https://www.hankyung.com/article/2026091439971",
-      "pubDate": "Mon, 14 Sep 2026 18:34:02 +0900",
       "source": "한국경제"
     },
     {
@@ -182,18 +196,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260914160800002",
       "pubDate": "Mon, 14 Sep 2026 18:25:02 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "HS효성, 울산에 1.2조 투자…실리콘 음극재 공장 구축",
-      "link": "https://www.hankyung.com/article/2026091440261",
-      "pubDate": "Mon, 14 Sep 2026 18:14:14 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"주문 쏟아진다\"…한 번에 1조6000억 '잭팟' 터진 이 회사",
-      "link": "https://www.hankyung.com/article/2026091440311",
-      "pubDate": "Mon, 14 Sep 2026 18:13:38 +0900",
-      "source": "한국경제"
     },
     {
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
@@ -211,24 +213,6 @@
       "title": "기아, 대형 전동화 PBV 'PV7' 첫선…1회 충전으로 460㎞ 달린다",
       "link": "https://www.yna.co.kr/view/AKR20260914137800003",
       "pubDate": "Mon, 14 Sep 2026 17:50:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "멕아이씨에스, 9억9천만원 유상증자…에스지헬스케어에 제3자배정",
-      "link": "https://www.yna.co.kr/view/AKR20260914155900008",
-      "pubDate": "Mon, 14 Sep 2026 17:44:35 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'재판소원 1호' 녹십자 과징금 사건 변론기일, 내달 23일로 변경",
-      "link": "https://www.yna.co.kr/view/AKR20260914154900004",
-      "pubDate": "Mon, 14 Sep 2026 17:41:15 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "與 \"오세훈 시정으로 공급절벽…재개발 권한 구청장 이양해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260914151500001",
-      "pubDate": "Mon, 14 Sep 2026 17:41:10 +0900",
       "source": "연합뉴스"
     }
   ]
