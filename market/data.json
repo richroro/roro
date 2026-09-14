@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-14T07:20:07.286043+09:00",
+  "updatedAt": "2026-09-14T09:55:07.287854+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
       "price": 6909.91,
-      "change": -124.01,
-      "changePercent": -1.76,
+      "change": 0.0,
+      "changePercent": 0.0,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 820.64,
-      "change": -16.28,
-      "changePercent": -1.95,
+      "price": 805.54,
+      "change": -15.1,
+      "changePercent": -1.84,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.97,
-      "change": -6.18,
-      "changePercent": -0.46,
+      "price": 1343.78,
+      "change": 2.73,
+      "changePercent": 0.2,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 259500.0,
-      "change": -9500.0,
-      "changePercent": -3.53,
+      "price": 252000.0,
+      "change": -7500.0,
+      "changePercent": -2.89,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1812000.0,
-      "change": -41000.0,
-      "changePercent": -2.21,
+      "price": 1719000.0,
+      "change": -93000.0,
+      "changePercent": -5.13,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 206500.0,
-      "change": -1500.0,
-      "changePercent": -0.72,
+      "price": 203000.0,
+      "change": -3500.0,
+      "changePercent": -1.69,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 34500.0,
-      "change": -400.0,
-      "changePercent": -1.15,
+      "price": 34200.0,
+      "change": -300.0,
+      "changePercent": -0.87,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 360000.0,
-      "change": -5000.0,
-      "changePercent": -1.37,
+      "price": 352000.0,
+      "change": -8000.0,
+      "changePercent": -2.22,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "무릎 인공관절 10개 중 8개 수입산…발목·팔꿈치는 전량",
-      "link": "https://www.yna.co.kr/view/AKR20260911024800017",
-      "pubDate": "Mon, 14 Sep 2026 07:00:07 +0900",
+      "title": "IPARK현산, 서울도림초교에 친환경 공간 '심포니 교실숲' 조성",
+      "link": "https://www.yna.co.kr/view/AKR20260914036600003",
+      "pubDate": "Mon, 14 Sep 2026 09:52:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "농약 24배·항균제 11배…수입식품 안전 논란 되풀이",
-      "link": "https://www.yna.co.kr/view/AKR20260911088300017",
-      "pubDate": "Mon, 14 Sep 2026 06:13:00 +0900",
+      "title": "고농축 대마류 들여와 국내 유통 시도한 스리랑카인 2명 검거",
+      "link": "https://www.yna.co.kr/view/AKR20260914045000051",
+      "pubDate": "Mon, 14 Sep 2026 09:51:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "현대차 하이브리드 대미수출 70%↑…기아는 유럽 전기차 45%↑",
-      "link": "https://www.yna.co.kr/view/AKR20260913058600003",
-      "pubDate": "Mon, 14 Sep 2026 06:05:00 +0900",
+      "title": "LH, 군포 산본 9-2구역 시공자 선정 착수…3천376가구 재건축",
+      "link": "https://www.yna.co.kr/view/AKR20260914039200003",
+      "pubDate": "Mon, 14 Sep 2026 09:50:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "이소영 \"AI로 中企 성장잠재력 측정…성장기업 중심 지원\"",
-      "link": "https://www.yna.co.kr/view/AKR20260913047800030",
-      "pubDate": "Mon, 14 Sep 2026 06:01:01 +0900",
+      "title": "[게시판] NH농협캐피탈, 건설기계사업자협의회에 우리 쌀 전달",
+      "link": "https://www.yna.co.kr/view/AKR20260914045600002",
+      "pubDate": "Mon, 14 Sep 2026 09:50:36 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "외식업 식재료비·인건비 비중 첫 70% 돌파…수익성 '빨간불'",
-      "link": "https://www.yna.co.kr/view/AKR20260913025000030",
-      "pubDate": "Mon, 14 Sep 2026 06:01:01 +0900",
+      "title": "고영철 회장, 아시아신협연합회 신임 회장 선출",
+      "link": "https://www.yna.co.kr/view/AKR20260914043600002",
+      "pubDate": "Mon, 14 Sep 2026 09:49:58 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "재산 은닉 조사 사실 '황당' 통지…예보·코인거래소 공조실패",
-      "link": "https://www.yna.co.kr/view/AKR20260912032800002",
-      "pubDate": "Mon, 14 Sep 2026 06:01:00 +0900",
+      "title": "[테크스냅] 카카오페이, 간편결제 최초 서울페이플러스 도입",
+      "link": "https://www.yna.co.kr/view/AKR20260914043200017",
+      "pubDate": "Mon, 14 Sep 2026 09:49:34 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[소셜＋] 공무원·로스쿨마저 '토익 쏠림'…\"비싼 독주 언제까지\"",
-      "link": "https://www.yna.co.kr/view/AKR20260909132700505",
-      "pubDate": "Mon, 14 Sep 2026 06:00:18 +0900",
+      "title": "KB국민은행, 정기예금 금리 0.6%p 인상…최고 연 3.4%",
+      "link": "https://www.yna.co.kr/view/AKR20260914045500002",
+      "pubDate": "Mon, 14 Sep 2026 09:49:23 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 농식품부, 2026 동남아·중국 K-스마트팜 로드쇼 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260911142200030",
-      "pubDate": "Mon, 14 Sep 2026 06:00:18 +0900",
+      "title": "평창군의회 임시회 개회…7천813억원 추경안 심사",
+      "link": "https://www.yna.co.kr/view/AKR20260914041900062",
+      "pubDate": "Mon, 14 Sep 2026 09:49:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "8월 서울 토지거래허가신청 3천12건…작년 10월 이래 최저",
-      "link": "https://www.yna.co.kr/view/AKR20260912034200004",
-      "pubDate": "Mon, 14 Sep 2026 06:00:16 +0900",
+      "title": "[게시판] 키움증권, 개별주식선물 거래 대상 이벤트",
+      "link": "https://www.yna.co.kr/view/AKR20260914043400008",
+      "pubDate": "Mon, 14 Sep 2026 09:47:19 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "전자담배 무인매장 청소년 출입·고용 금지된다",
-      "link": "https://www.yna.co.kr/view/AKR20260913011600530",
-      "pubDate": "Mon, 14 Sep 2026 06:00:15 +0900",
+      "title": "두나무·서울대 경영대, 'SNU x 업비트 스타트업 스튜디오' 출범",
+      "link": "https://www.yna.co.kr/view/AKR20260914042300002",
+      "pubDate": "Mon, 14 Sep 2026 09:45:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "교사 10명 중 7명 \"학생 경제지식 부족\"",
-      "link": "https://www.hankyung.com/article/2026091313301",
-      "pubDate": "Sun, 13 Sep 2026 19:36:34 +0900",
+      "title": "\"독일 맥주 다 모였네\"…현지 느낌 물씬 '옥토버페스트 서울' 가보니 [영상]",
+      "link": "https://www.hankyung.com/article/202609141770g",
+      "pubDate": "Mon, 14 Sep 2026 09:12:25 +0900",
       "source": "한국경제"
     },
     {
-      "title": "금통위 의사록 공개…2연속 금리인상 속내는",
-      "link": "https://www.hankyung.com/article/2026091313181",
-      "pubDate": "Sun, 13 Sep 2026 19:15:46 +0900",
+      "title": "美 중앙은행, 3년 만에 금리 올리나…“한 번으로 안 끝날 것”",
+      "link": "https://www.hankyung.com/article/202609142084i",
+      "pubDate": "Mon, 14 Sep 2026 09:02:34 +0900",
       "source": "한국경제"
     },
     {
-      "title": "환율·채권, 주춤한 원·달러 환율 다시 오르나",
-      "link": "https://www.hankyung.com/article/2026091313171",
-      "pubDate": "Sun, 13 Sep 2026 19:12:34 +0900",
+      "title": "고점에 기업 산 사모펀드…“최대 90% 목표수익률 미달”",
+      "link": "https://www.hankyung.com/article/202609141936i",
+      "pubDate": "Mon, 14 Sep 2026 08:35:22 +0900",
       "source": "한국경제"
     },
     {
-      "title": "크리스토퍼 뉴커크 \"계좌이체 많은 韓기업, 결제 디지털화 시급\"",
-      "link": "https://www.hankyung.com/article/2026091312981",
-      "pubDate": "Sun, 13 Sep 2026 18:58:45 +0900",
+      "title": "\"강한 냄새에 멀미와 두통\"…우버 차량 방향제에 승객들 질색",
+      "link": "https://www.hankyung.com/article/202609141971i",
+      "pubDate": "Mon, 14 Sep 2026 08:33:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "대전에 롯데 x KAIST R&D센터 준공",
-      "link": "https://www.hankyung.com/article/2026091313941",
-      "pubDate": "Sun, 13 Sep 2026 18:46:55 +0900",
+      "title": "'전기료 25조' 미리 내달라는 한전…삼전닉스 대답은 \"NO\"",
+      "link": "https://www.hankyung.com/article/2026091418997",
+      "pubDate": "Mon, 14 Sep 2026 08:25:11 +0900",
       "source": "한국경제"
     },
     {
-      "title": "유럽 재무장 가속페달…K2 전차·천무 검색 쑥",
-      "link": "https://www.hankyung.com/article/2026091312801",
-      "pubDate": "Sun, 13 Sep 2026 18:45:26 +0900",
+      "title": "\"한 끼에 20만원도 아깝지 않아요\"…혼밥족들 푹 빠진 메뉴",
+      "link": "https://www.hankyung.com/article/202609141892g",
+      "pubDate": "Mon, 14 Sep 2026 08:24:59 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"어른이 무슨 일로?\"…문구점 사장님도 놀랄 '뜻밖의 인기'",
-      "link": "https://www.hankyung.com/article/2026091312731",
-      "pubDate": "Sun, 13 Sep 2026 18:44:49 +0900",
+      "title": "미군, 호르무즈 항공 엄호 축소…지속 가능한 방어로 전환",
+      "link": "https://www.hankyung.com/article/202609141925i",
+      "pubDate": "Mon, 14 Sep 2026 08:21:52 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'복붙' 편의점 시대 끝…특화 매장 매출 2배 껑충",
-      "link": "https://www.hankyung.com/article/2026091312761",
-      "pubDate": "Sun, 13 Sep 2026 18:44:42 +0900",
+      "title": "트럼프, AI 개발 제동론 거부…“중국에 앞서야 한다”",
+      "link": "https://www.hankyung.com/article/202609141895i",
+      "pubDate": "Mon, 14 Sep 2026 08:13:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "서촌·북촌 몰려가는 스포츠 브랜드",
-      "link": "https://www.hankyung.com/article/2026091312741",
-      "pubDate": "Sun, 13 Sep 2026 18:44:34 +0900",
+      "title": "사우디 송유관 멈췄다…세계 원유 4% 추가 공급차질 위기",
+      "link": "https://www.hankyung.com/article/202609141812i",
+      "pubDate": "Mon, 14 Sep 2026 08:04:42 +0900",
       "source": "한국경제"
     },
     {
-      "title": "이인섭 \"정품 '헐값 유통'이 K브랜드 흔든다\"",
-      "link": "https://www.hankyung.com/article/2026091312721",
-      "pubDate": "Sun, 13 Sep 2026 18:44:27 +0900",
+      "title": "같은 10마리인데 '25만원 vs 5만원'…가성비 추석 선물 정체 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202609130814i",
+      "pubDate": "Mon, 14 Sep 2026 08:00:13 +0900",
       "source": "한국경제"
     }
   ]
