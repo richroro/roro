@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T16:36:35.687203+09:00",
+  "updatedAt": "2026-09-15T22:26:00.329568+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1359.08,
-      "change": 12.26,
-      "changePercent": 0.91,
+      "price": 1358.6,
+      "change": 11.78,
+      "changePercent": 0.87,
       "currency": "KRW"
     }
   ],
@@ -112,63 +112,63 @@
   ],
   "news": [
     {
-      "title": "[단독] 환율 급락에…기업들 사업전략 다시 짠다",
-      "link": "https://www.hankyung.com/article/202609155954i",
-      "pubDate": "Tue, 15 Sep 2026 15:43:20 +0900",
+      "title": "'성과급' 파업 리스크 여기까지…노사 갈등 폭발에 '초비상'",
+      "link": "https://www.hankyung.com/article/2026091566091",
+      "pubDate": "Tue, 15 Sep 2026 21:00:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "재생에너지용 금융 상품 나왔다…H에너지, 연 9% 태양광 투자 상품 출시",
-      "link": "https://www.hankyung.com/article/202609156127i",
-      "pubDate": "Tue, 15 Sep 2026 15:41:11 +0900",
+      "title": "'호카 국내총판' 갈등…조이웍스 \"공정경쟁 맞나\" vs 이랜드 \"답변사안 아냐\"",
+      "link": "https://www.hankyung.com/article/202609156172g",
+      "pubDate": "Tue, 15 Sep 2026 20:50:54 +0900",
       "source": "한국경제"
     },
     {
-      "title": "기업은행, 변동형 주담대 재개…대출제한 조치 속속 풀린다",
-      "link": "https://www.hankyung.com/article/202609155955i",
-      "pubDate": "Tue, 15 Sep 2026 15:33:40 +0900",
+      "title": "교보생명, 디지털보험 자회사 교보라이프플래닛 흡수합병",
+      "link": "https://www.hankyung.com/article/2026091567871",
+      "pubDate": "Tue, 15 Sep 2026 20:11:15 +0900",
       "source": "한국경제"
     },
     {
-      "title": "SK인텔릭스 '나무엑스', 말레이시아 진출…글로벌 웰니스 로봇 시장 공략 본격화",
-      "link": "https://www.hankyung.com/article/202609156102i",
-      "pubDate": "Tue, 15 Sep 2026 15:33:34 +0900",
+      "title": "금융지주 자회사 인사 앞두고…이찬진 \"CEO 승계절차 미흡\"",
+      "link": "https://www.hankyung.com/article/2026091567851",
+      "pubDate": "Tue, 15 Sep 2026 20:09:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"치킨은 반찬이죠\"…베트남서 '치밥'으로 승부수 띄운 BHC",
-      "link": "https://www.hankyung.com/article/202609154912g",
-      "pubDate": "Tue, 15 Sep 2026 15:32:10 +0900",
+      "title": "골드만삭스, 글로벌·아시아 사모펀드로 117억달러 조성",
+      "link": "https://www.hankyung.com/article/2026091568187",
+      "pubDate": "Tue, 15 Sep 2026 20:09:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "청국장 '손맛'에 IoT 입혔더니…전통 장류 공장의 '대반전'",
-      "link": "https://www.hankyung.com/article/202609155746i",
-      "pubDate": "Tue, 15 Sep 2026 15:01:02 +0900",
+      "title": "\"파전집, 대박날 줄 알았는데\"…비오는 날 '우르르' 몰린 곳이 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609155706g",
+      "pubDate": "Tue, 15 Sep 2026 20:02:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "신현송 총재 \"AI發 지역경제 성장, 보완적 혁신이 좌우\"",
-      "link": "https://www.hankyung.com/article/202609155916i",
-      "pubDate": "Tue, 15 Sep 2026 14:56:44 +0900",
+      "title": "'노벨상' 한강 작가도 떠났다…브랜드가 탐낸 '서촌의 비극'",
+      "link": "https://www.hankyung.com/article/2026091566251",
+      "pubDate": "Tue, 15 Sep 2026 20:00:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "요즘 핫한 중국茶의 '반전'…국산 말차 산지와 손 잡았다 [현장+]",
-      "link": "https://www.hankyung.com/article/202609155105g",
-      "pubDate": "Tue, 15 Sep 2026 14:55:01 +0900",
+      "title": "상속설계, 첫 상속보다 두 번째 상속이 중요하다 [가온의 패밀리오피스 리포트]",
+      "link": "https://www.hankyung.com/article/202609142132i",
+      "pubDate": "Tue, 15 Sep 2026 20:00:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"혼자 해킹하고 미사일 개발\"…상상만 하던 일이 현실 됐다 [이슈+]",
-      "link": "https://www.hankyung.com/article/202609155040g",
-      "pubDate": "Tue, 15 Sep 2026 14:45:45 +0900",
+      "title": "\"미술관인 줄\" 놀라운 변신…故 김수미 잠든 곳 가보니 '깜짝' [현장+]",
+      "link": "https://www.hankyung.com/article/202609154871H",
+      "pubDate": "Tue, 15 Sep 2026 19:46:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "5대 은행장 임기 만료 앞두고…이찬진 \"CEO 승계 투명성 강화해야\"",
-      "link": "https://www.hankyung.com/article/2026091558937",
-      "pubDate": "Tue, 15 Sep 2026 14:40:31 +0900",
+      "title": "美 금리 인상시 엔화 반짝 강세 도루묵…\"달러당 157엔까지 떨어질 것\"",
+      "link": "https://www.hankyung.com/article/202609156774i",
+      "pubDate": "Tue, 15 Sep 2026 19:31:29 +0900",
       "source": "한국경제"
     }
   ]
