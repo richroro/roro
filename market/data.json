@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-16T16:35:29.547151+09:00",
+  "updatedAt": "2026-09-16T22:25:07.191195+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,8 +20,8 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52093.1,
-      "change": -328.1,
+      "price": 52093.11,
+      "change": -328.09,
       "changePercent": -0.63,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1362.89,
-      "change": -0.16,
-      "changePercent": -0.01,
+      "price": 1368.18,
+      "change": 5.13,
+      "changePercent": 0.38,
       "currency": "KRW"
     }
   ],
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "경남도, 중국과 AI·관광 협력 강화…상하이·쑤저우 방문",
-      "link": "https://www.yna.co.kr/view/AKR20260916149100052",
-      "pubDate": "Wed, 16 Sep 2026 16:21:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "고마운 분께, 그리운 분께…보름달 같은 情 듬뿍 담아 드립니다",
-      "link": "https://www.hankyung.com/article/2026091677271",
-      "pubDate": "Wed, 16 Sep 2026 16:14:00 +0900",
+      "title": "BYD 추격 나선 지리차…브라질 현지생산으로 승부수 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202609169603i",
+      "pubDate": "Wed, 16 Sep 2026 21:00:54 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"건설업, 구조적 자금회수 지연…부산·광주·제주 고위험군\"",
-      "link": "https://www.yna.co.kr/view/AKR20260916146600008",
-      "pubDate": "Wed, 16 Sep 2026 16:12:17 +0900",
+      "title": "제지·밀가루에 내린 공정위 '가격 재결정 명령', 법원서 제동(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260916179151004",
+      "pubDate": "Wed, 16 Sep 2026 20:05:40 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "90년 전통 천안 '할머니학화호도과자'…던킨 도넛과 만나 새로운 K디저트 변신",
-      "link": "https://www.hankyung.com/article/2026091677361",
-      "pubDate": "Wed, 16 Sep 2026 16:10:20 +0900",
+      "title": "성장 한계 부딪힌 에버랜드·롯데월드의 고민",
+      "link": "https://www.hankyung.com/article/2026091692701",
+      "pubDate": "Wed, 16 Sep 2026 20:00:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "50조 웃돌던 코스피 일평균 거래대금, 20조로 뚝…올해 최저(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260916070851008",
-      "pubDate": "Wed, 16 Sep 2026 16:10:12 +0900",
+      "title": "AI 문어발 오픈AI, IPO 미루고 대규모 자금 유치 추진",
+      "link": "https://www.hankyung.com/article/202609169537i",
+      "pubDate": "Wed, 16 Sep 2026 19:59:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "미래에셋證 노조 \"금감원 고강도 검사 우려…정상적 업무 차질\"",
+      "link": "https://www.yna.co.kr/view/AKR20260916182700008",
+      "pubDate": "Wed, 16 Sep 2026 19:54:42 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "LG생활건강, 숨37°·더후·오휘…프리미엄 화장품으로 시간을 되돌려 드리세요",
-      "link": "https://www.hankyung.com/article/2026091677351",
-      "pubDate": "Wed, 16 Sep 2026 16:09:00 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "현대모비스, 2·3차 협력사에 금융지원…상생보증 협약",
-      "link": "https://www.hankyung.com/article/202609168988i",
-      "pubDate": "Wed, 16 Sep 2026 16:07:53 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "동원F&B, 고단백·저당·웰니스 참치…BTS 진부터 라인프렌즈까지 만난다",
-      "link": "https://www.hankyung.com/article/2026091677341",
-      "pubDate": "Wed, 16 Sep 2026 16:07:49 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "롯데칠성음료, 82년 전통 차례주 '백화수복'…원컵으로 MZ 술자리 공략한다",
-      "link": "https://www.hankyung.com/article/2026091677471",
-      "pubDate": "Wed, 16 Sep 2026 16:05:56 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "고유가·미 국채금리 급등에…환율 1,370원대 터치(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260916074551002",
-      "pubDate": "Wed, 16 Sep 2026 16:04:03 +0900",
+      "title": "앤트로픽·스페이스X 투자한 한투파트너스, 평가이익 기대",
+      "link": "https://www.yna.co.kr/view/AKR20260916182500008",
+      "pubDate": "Wed, 16 Sep 2026 19:52:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "이란전이 끌어올린 유가…미국인들 추가부담 1천억달러 돌파",
-      "link": "https://www.yna.co.kr/view/AKR20260916145400009",
-      "pubDate": "Wed, 16 Sep 2026 16:03:21 +0900",
+      "title": "제지업체에 내린 공정위 '가격 재결정 명령', 법원서 제동",
+      "link": "https://www.yna.co.kr/view/AKR20260916179100004",
+      "pubDate": "Wed, 16 Sep 2026 19:14:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "KGC, \"추석엔 부모님 기력 채워드리세요\"…천녹, 27일까지 할인 행사",
-      "link": "https://www.hankyung.com/article/2026091677461",
-      "pubDate": "Wed, 16 Sep 2026 16:03:14 +0900",
+      "title": "증선위, 공개매수·양수도 미공개정보 이용 4건 檢 고발·통보",
+      "link": "https://www.yna.co.kr/view/AKR20260916177700002",
+      "pubDate": "Wed, 16 Sep 2026 19:13:29 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "역대급 성과급에 해외 안 간다 … 삼전닉스 '인재 쟁탈전'",
+      "link": "https://www.hankyung.com/article/2026091693261",
+      "pubDate": "Wed, 16 Sep 2026 19:00:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "외국인 팔고, 기관은 사고…삼성전자 2%·하이닉스 4% 상승(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260916041951008",
-      "pubDate": "Wed, 16 Sep 2026 16:02:47 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정식품, 젊은층엔 고단백, 어르신엔 고칼슘…'베지밀·그린비아' 맞춤선물 내놔",
-      "link": "https://www.hankyung.com/article/2026091677411",
-      "pubDate": "Wed, 16 Sep 2026 16:01:55 +0900",
+      "title": "미국 경제의 조용한 암살자, 인플레이션 [박신영의 월가 아나토미]",
+      "link": "https://www.hankyung.com/article/202609169507i",
+      "pubDate": "Wed, 16 Sep 2026 18:58:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "노동장관 \"작업장 안전한 길 직관적으로 찾을 수 있게 해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260916079800530",
-      "pubDate": "Wed, 16 Sep 2026 16:00:00 +0900",
+      "title": "인천 강화 소 농장서 구제역 확진…올해 12번째 발생",
+      "link": "https://www.yna.co.kr/view/AKR20260916177200030",
+      "pubDate": "Wed, 16 Sep 2026 18:57:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "도산공원에 뜬 '헬리녹스 웨어'…해외 관광객 발길 잡는다",
-      "link": "https://www.hankyung.com/article/2026091677701",
-      "pubDate": "Wed, 16 Sep 2026 15:59:58 +0900",
+      "title": "\"100억짜리가 33억에도 안 팔려요\"…텅텅 빈 대학가에 무슨 일이",
+      "link": "https://www.hankyung.com/article/2026091693741",
+      "pubDate": "Wed, 16 Sep 2026 18:54:32 +0900",
       "source": "한국경제"
     },
     {
-      "title": "정선군, 공무직 정년 만 65세까지 단계적 연장…강원 최초",
-      "link": "https://www.yna.co.kr/view/AKR20260916144200062",
-      "pubDate": "Wed, 16 Sep 2026 15:58:23 +0900",
+      "title": "증선위, 해태제과에 감사인지정 등 조치…회계처리 위반",
+      "link": "https://www.yna.co.kr/view/AKR20260916175800002",
+      "pubDate": "Wed, 16 Sep 2026 18:53:49 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "켄싱턴호텔앤리조트, 온천 이용권·축구 클래스…휴식보다 객실 밖 체험을 즐긴다",
-      "link": "https://www.hankyung.com/article/2026091677521",
-      "pubDate": "Wed, 16 Sep 2026 15:56:45 +0900",
+      "title": "우리금융, 과천서 사회공헌콘서트 '모모콘'",
+      "link": "https://www.hankyung.com/article/2026091693561",
+      "pubDate": "Wed, 16 Sep 2026 18:43:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[게시판] 계룡건설, '나라사랑 보금자리 사업' 1억원 후원",
-      "link": "https://www.yna.co.kr/view/AKR20260916145300003",
-      "pubDate": "Wed, 16 Sep 2026 15:54:14 +0900",
+      "title": "중기중앙회, 백승보 조달청장 초청 간담회",
+      "link": "https://www.hankyung.com/article/2026091693571",
+      "pubDate": "Wed, 16 Sep 2026 18:41:56 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "잦은 신용사면·부동산 침체…부실채권 못 털어낸 금융권 '연체 폭탄'",
+      "link": "https://www.hankyung.com/article/2026091693141",
+      "pubDate": "Wed, 16 Sep 2026 18:17:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "비투엔 \"앤씨앤 주식 63억원어치 취득…지분율 27.7%\"",
+      "link": "https://www.yna.co.kr/view/AKR20260916172800008",
+      "pubDate": "Wed, 16 Sep 2026 18:16:38 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 부영그룹, 추석 맞아 경로당·협력업체에 선물",
-      "link": "https://www.yna.co.kr/view/AKR20260916144400003",
-      "pubDate": "Wed, 16 Sep 2026 15:52:33 +0900",
+      "title": "앤씨앤, 100억원 유상증자…주식회사 비투엔 등에 3자 배정",
+      "link": "https://www.yna.co.kr/view/AKR20260916172700008",
+      "pubDate": "Wed, 16 Sep 2026 18:16:22 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "STX, 670억원 유상증자…범한산업 주식회사에 제3자배정",
+      "link": "https://www.yna.co.kr/view/AKR20260916170300008",
+      "pubDate": "Wed, 16 Sep 2026 18:15:43 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금리 뛰자 다시 연체…NPL 당분간 더 쌓인다",
+      "link": "https://www.hankyung.com/article/2026091693111",
+      "pubDate": "Wed, 16 Sep 2026 18:13:24 +0900",
+      "source": "한국경제"
     }
   ]
 }
