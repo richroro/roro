@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17T03:07:33.381589+09:00",
+  "updatedAt": "2026-09-17T07:02:56.763084+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52104.46,
-      "change": 11.35,
-      "changePercent": 0.02,
+      "price": 51461.9,
+      "change": -631.21,
+      "changePercent": -1.21,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26196.27,
-      "change": 214.7,
-      "changePercent": 0.83,
+      "price": 25978.42,
+      "change": -3.15,
+      "changePercent": -0.01,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1366.25,
-      "change": 3.2,
-      "changePercent": 0.23,
+      "price": 1377.15,
+      "change": 14.1,
+      "changePercent": 1.03,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,97 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 334.13,
-      "change": 2.79,
-      "changePercent": 0.84,
+      "price": 332.41,
+      "change": 1.07,
+      "changePercent": 0.32,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 362.43,
-      "change": 5.85,
-      "changePercent": 1.64,
+      "price": 358.08,
+      "change": 1.5,
+      "changePercent": 0.42,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 216.16,
-      "change": 3.99,
-      "changePercent": 1.88,
+      "price": 213.9,
+      "change": 1.73,
+      "changePercent": 0.82,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "세계최고수익률 국부펀드,\"미국증시 조정 가능성\"경고",
+      "title": "내한 공연 뒤 탈세 먹튀?…\"국세청, 39명 조사해 55억원 추징\"",
+      "link": "https://www.yna.co.kr/view/AKR20260916180000001",
+      "pubDate": "Thu, 17 Sep 2026 06:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美기준금리 0.25%p 인상, 3년만에 긴축…연내 추가인상 시사(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20260917002453071",
+      "pubDate": "Thu, 17 Sep 2026 06:19:44 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "트럼프 \"美 금리 1%이거나 그보다 낮아야\"…Fed 금리인상 맹공",
+      "link": "https://www.hankyung.com/article/2026091797877",
+      "pubDate": "Thu, 17 Sep 2026 06:12:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "LH 매입임대 보수·하자 매년 16만건…90일 이상 방치도 389건",
+      "link": "https://www.yna.co.kr/view/AKR20260916175200003",
+      "pubDate": "Thu, 17 Sep 2026 06:05:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[만나보니] 구글 아태 총괄 \"동남아 잡으면 세계서 통한다\"",
+      "link": "https://www.yna.co.kr/view/AKR20260916178300017",
+      "pubDate": "Thu, 17 Sep 2026 06:00:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"농협銀, 보이스피싱 대응 인력·예산 확대에도 피해액 2배\"",
+      "link": "https://www.yna.co.kr/view/AKR20260916112000001",
+      "pubDate": "Thu, 17 Sep 2026 06:00:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "검역본부, 아프리카돼지열병 백신 개발 국제 심포지엄 개최",
+      "link": "https://www.yna.co.kr/view/AKR20260916125700030",
+      "pubDate": "Thu, 17 Sep 2026 06:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "성평등부·IBK기업은행, 미혼·한부모가정 자립지원 업무협약",
+      "link": "https://www.yna.co.kr/view/AKR20260916159600530",
+      "pubDate": "Thu, 17 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신세계그룹, 2027년 신입사원 공개채용…10개 계열사 참여",
+      "link": "https://www.yna.co.kr/view/AKR20260916158800030",
+      "pubDate": "Thu, 17 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"동남아는 하나가 아니다\"…K-앱·게임 '원빌드 착각' 깨라",
+      "link": "https://www.yna.co.kr/view/AKR20260916176700017",
+      "pubDate": "Thu, 17 Sep 2026 06:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "산업부, 중앙아 5개국과 양·다자 협력 9건…민간 MOU도 116건",
+      "link": "https://www.yna.co.kr/view/AKR20260916186600003",
+      "pubDate": "Thu, 17 Sep 2026 06:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "세계최고수익률 국부펀드 \"미국증시 조정 가능성\" 경고",
       "link": "https://www.hankyung.com/article/202609179698i",
       "pubDate": "Thu, 17 Sep 2026 00:44:09 +0900",
       "source": "한국경제"
@@ -154,12 +220,6 @@
       "source": "한국경제"
     },
     {
-      "title": "제지·밀가루에 내린 공정위 '가격 재결정 명령', 법원서 제동(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260916179151004",
-      "pubDate": "Wed, 16 Sep 2026 20:05:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "성장 한계 부딪힌 에버랜드·롯데월드의 고민",
       "link": "https://www.hankyung.com/article/2026091692701",
       "pubDate": "Wed, 16 Sep 2026 20:00:01 +0900",
@@ -170,66 +230,6 @@
       "link": "https://www.hankyung.com/article/202609169537i",
       "pubDate": "Wed, 16 Sep 2026 19:59:21 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "미래에셋證 노조 \"금감원 고강도 검사 우려…정상적 업무 차질\"",
-      "link": "https://www.yna.co.kr/view/AKR20260916182700008",
-      "pubDate": "Wed, 16 Sep 2026 19:54:42 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "앤트로픽·스페이스X 투자한 한투파트너스, 평가이익 기대",
-      "link": "https://www.yna.co.kr/view/AKR20260916182500008",
-      "pubDate": "Wed, 16 Sep 2026 19:52:54 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "제지업체에 내린 공정위 '가격 재결정 명령', 법원서 제동",
-      "link": "https://www.yna.co.kr/view/AKR20260916179100004",
-      "pubDate": "Wed, 16 Sep 2026 19:14:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "증선위, 공개매수·양수도 미공개정보 이용 4건 檢 고발·통보",
-      "link": "https://www.yna.co.kr/view/AKR20260916177700002",
-      "pubDate": "Wed, 16 Sep 2026 19:13:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "역대급 성과급에 해외 안 간다…삼전닉스 '인재 쟁탈전'",
-      "link": "https://www.hankyung.com/article/2026091693261",
-      "pubDate": "Wed, 16 Sep 2026 19:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "인천 강화 소 농장서 구제역 확진…올해 12번째 발생",
-      "link": "https://www.yna.co.kr/view/AKR20260916177200030",
-      "pubDate": "Wed, 16 Sep 2026 18:57:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "증선위, 해태제과에 감사인지정 등 조치…회계처리 위반",
-      "link": "https://www.yna.co.kr/view/AKR20260916175800002",
-      "pubDate": "Wed, 16 Sep 2026 18:53:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "비투엔 \"앤씨앤 주식 63억원어치 취득…지분율 27.7%\"",
-      "link": "https://www.yna.co.kr/view/AKR20260916172800008",
-      "pubDate": "Wed, 16 Sep 2026 18:16:38 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "앤씨앤, 100억원 유상증자…주식회사 비투엔 등에 3자 배정",
-      "link": "https://www.yna.co.kr/view/AKR20260916172700008",
-      "pubDate": "Wed, 16 Sep 2026 18:16:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "STX, 670억원 유상증자…범한산업 주식회사에 제3자배정",
-      "link": "https://www.yna.co.kr/view/AKR20260916170300008",
-      "pubDate": "Wed, 16 Sep 2026 18:15:43 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
