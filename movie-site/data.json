@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-14",
-  "updated": "2026-09-15T04:57:01+00:00",
+  "date": "2026-09-15",
+  "updated": "2026-09-16T04:51:13+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 50.1,
-      "audience": 51637,
-      "total": 10834337,
-      "screens": 1388
+      "share": 45.5,
+      "audience": 45840,
+      "total": 10880175,
+      "screens": 1406
     },
     {
       "rank": 2,
       "title": "옵세션",
       "open": "2026-09-02",
-      "share": 21.2,
-      "audience": 25689,
-      "total": 500507,
-      "screens": 730
+      "share": 20.2,
+      "audience": 24256,
+      "total": 524755,
+      "screens": 741
     },
     {
       "rank": 3,
       "title": "스파이더맨: 브랜드 뉴 데이",
       "open": "2026-07-29",
-      "share": 5.5,
-      "audience": 8414,
-      "total": 8938826,
-      "screens": 594
+      "share": 5.2,
+      "audience": 7916,
+      "total": 8946738,
+      "screens": 604
     },
     {
       "rank": 4,
       "title": "더 드라마",
       "open": "2026-09-09",
-      "share": 3.4,
-      "audience": 4409,
-      "total": 58040,
-      "screens": 519
+      "share": 4.2,
+      "audience": 5626,
+      "total": 63666,
+      "screens": 528
     },
     {
       "rank": 5,
-      "title": "호프",
-      "open": "2026-07-15",
-      "share": 3.5,
-      "audience": 3886,
-      "total": 4570091,
-      "screens": 112
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 2.7,
+      "audience": 3855,
+      "total": 9655,
+      "screens": 20
     },
     {
       "rank": 6,
-      "title": "싱 어게인",
-      "open": "2026-09-02",
-      "share": 1.8,
-      "audience": 2488,
-      "total": 91887,
-      "screens": 264
+      "title": "호프",
+      "open": "2026-07-15",
+      "share": 3.4,
+      "audience": 3842,
+      "total": 4573933,
+      "screens": 112
     },
     {
       "rank": 7,
-      "title": "경주기행",
-      "open": "2026-08-26",
-      "share": 1.7,
-      "audience": 2419,
-      "total": 335379,
-      "screens": 347
+      "title": "싱 어게인",
+      "open": "2026-09-02",
+      "share": 2.1,
+      "audience": 2908,
+      "total": 94795,
+      "screens": 269
     },
     {
       "rank": 8,
-      "title": "타짜: 벨제붑의 노래",
-      "open": "2026-09-23",
-      "share": 1.2,
-      "audience": 1689,
-      "total": 5800,
-      "screens": 10
+      "title": "경주기행",
+      "open": "2026-08-26",
+      "share": 1.9,
+      "audience": 2708,
+      "total": 338091,
+      "screens": 361
     },
     {
       "rank": 9,
-      "title": "비광",
-      "open": "2026-09-02",
-      "share": 1.0,
-      "audience": 1544,
-      "total": 98689,
-      "screens": 221
+      "title": "딥 워터",
+      "open": "2026-09-09",
+      "share": 1.1,
+      "audience": 2273,
+      "total": 15045,
+      "screens": 126
     },
     {
       "rank": 10,
-      "title": "오아시스: 돈 룩 백 인 앵거",
-      "open": "2026-09-09",
+      "title": "비광",
+      "open": "2026-09-02",
       "share": 0.9,
-      "audience": 1043,
-      "total": 17173,
-      "screens": 115
+      "audience": 1351,
+      "total": 100040,
+      "screens": 216
     }
   ]
 }
