@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T01:49:24.551921+09:00",
+  "updatedAt": "2026-09-18T05:10:04.064330+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51828.38,
-      "change": 366.48,
-      "changePercent": 0.71,
+      "price": 51778.04,
+      "change": 316.14,
+      "changePercent": 0.61,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26400.4,
-      "change": 421.98,
-      "changePercent": 1.62,
+      "price": 26418.3,
+      "change": 439.88,
+      "changePercent": 1.69,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1380.99,
-      "change": 3.6,
-      "changePercent": 0.26,
+      "price": 1380.28,
+      "change": 2.89,
+      "changePercent": 0.21,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 335.28,
-      "change": 2.87,
-      "changePercent": 0.86,
+      "price": 337.0,
+      "change": 4.59,
+      "changePercent": 1.38,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 366.72,
-      "change": 8.64,
-      "changePercent": 2.41,
+      "price": 366.2,
+      "change": 8.12,
+      "changePercent": 2.27,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 219.04,
-      "change": 5.14,
-      "changePercent": 2.4,
+      "price": 219.34,
+      "change": 5.44,
+      "changePercent": 2.54,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "국제유가, 사우디 공급 우려 완화에 소폭 하락…WTI 101달러대",
+      "link": "https://www.yna.co.kr/view/AKR20260918004300072",
+      "pubDate": "Fri, 18 Sep 2026 05:04:35 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "오픈웨이트AI 모델 주의보…암호화폐 해킹 1년새 440%급증",
       "link": "https://www.hankyung.com/article/202609182447i",
@@ -223,12 +229,6 @@
       "title": "대미투자 막판 진통…원전 이견에 '100억불 선납' 압박 겹쳤나(종합)",
       "link": "https://www.yna.co.kr/view/AKR20260917088651003",
       "pubDate": "Thu, 17 Sep 2026 18:46:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "일하는 여성 목소리 듣는다…노동부, 여성고용노동포럼 첫 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260917188600530",
-      "pubDate": "Thu, 17 Sep 2026 18:43:28 +0900",
       "source": "연합뉴스"
     }
   ]
