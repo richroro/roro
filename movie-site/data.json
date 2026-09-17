@@ -1,98 +1,98 @@
 {
-  "date": "2026-09-15",
-  "updated": "2026-09-16T04:51:13+00:00",
+  "date": "2026-09-16",
+  "updated": "2026-09-17T04:55:08+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
     {
       "rank": 1,
-      "title": "오디세이",
-      "open": "2026-08-05",
-      "share": 45.5,
-      "audience": 45840,
-      "total": 10880175,
-      "screens": 1406
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 31.5,
+      "audience": 61038,
+      "total": 82566,
+      "screens": 1473
     },
     {
       "rank": 2,
-      "title": "옵세션",
-      "open": "2026-09-02",
-      "share": 20.2,
-      "audience": 24256,
-      "total": 524755,
-      "screens": 741
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 28.8,
+      "audience": 41322,
+      "total": 10921483,
+      "screens": 1100
     },
     {
       "rank": 3,
-      "title": "스파이더맨: 브랜드 뉴 데이",
-      "open": "2026-07-29",
-      "share": 5.2,
-      "audience": 7916,
-      "total": 8946738,
-      "screens": 604
+      "title": "옵세션",
+      "open": "2026-09-02",
+      "share": 13.8,
+      "audience": 23902,
+      "total": 548655,
+      "screens": 651
     },
     {
       "rank": 4,
-      "title": "더 드라마",
-      "open": "2026-09-09",
-      "share": 4.2,
-      "audience": 5626,
-      "total": 63666,
-      "screens": 528
+      "title": "스파이더맨: 브랜드 뉴 데이",
+      "open": "2026-07-29",
+      "share": 2.8,
+      "audience": 6019,
+      "total": 8952757,
+      "screens": 484
     },
     {
       "rank": 5,
-      "title": "타짜: 벨제붑의 노래",
-      "open": "2026-09-23",
-      "share": 2.7,
-      "audience": 3855,
-      "total": 9655,
-      "screens": 20
+      "title": "시간을 달리는 소녀",
+      "open": "2007-06-14",
+      "share": 3.5,
+      "audience": 5816,
+      "total": 117481,
+      "screens": 155
     },
     {
       "rank": 6,
-      "title": "호프",
-      "open": "2026-07-15",
-      "share": 3.4,
-      "audience": 3842,
-      "total": 4573933,
-      "screens": 112
+      "title": "디지몬 어드벤처 : 운명적 만남 & 우리들의 워 게임!",
+      "open": "2026-09-16",
+      "share": 2.5,
+      "audience": 4286,
+      "total": 4286,
+      "screens": 184
     },
     {
       "rank": 7,
-      "title": "싱 어게인",
-      "open": "2026-09-02",
-      "share": 2.1,
-      "audience": 2908,
-      "total": 94795,
-      "screens": 269
+      "title": "더 드라마",
+      "open": "2026-09-09",
+      "share": 1.9,
+      "audience": 3903,
+      "total": 67567,
+      "screens": 291
     },
     {
       "rank": 8,
-      "title": "경주기행",
-      "open": "2026-08-26",
-      "share": 1.9,
-      "audience": 2708,
-      "total": 338091,
-      "screens": 361
+      "title": "아이유 콘서트 : 더 위닝",
+      "open": "2025-01-24",
+      "share": 2.7,
+      "audience": 2762,
+      "total": 78634,
+      "screens": 36
     },
     {
       "rank": 9,
-      "title": "딥 워터",
-      "open": "2026-09-09",
-      "share": 1.1,
-      "audience": 2273,
-      "total": 15045,
-      "screens": 126
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 1.2,
+      "audience": 2529,
+      "total": 12184,
+      "screens": 12
     },
     {
       "rank": 10,
-      "title": "비광",
-      "open": "2026-09-02",
-      "share": 0.9,
-      "audience": 1351,
-      "total": 100040,
-      "screens": 216
+      "title": "철들 무렵",
+      "open": "2026-09-16",
+      "share": 0.6,
+      "audience": 1305,
+      "total": 3341,
+      "screens": 54
     }
   ]
 }
