@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T05:10:04.064330+09:00",
+  "updatedAt": "2026-09-18T08:29:37.029356+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1380.28,
-      "change": 2.89,
-      "changePercent": 0.21,
+      "price": 1380.37,
+      "change": 0.42,
+      "changePercent": 0.03,
       "currency": "KRW"
     }
   ],
@@ -112,13 +112,85 @@
   ],
   "news": [
     {
-      "title": "국제유가, 사우디 공급 우려 완화에 소폭 하락…WTI 101달러대",
-      "link": "https://www.yna.co.kr/view/AKR20260918004300072",
-      "pubDate": "Fri, 18 Sep 2026 05:04:35 +0900",
+      "title": "[마켓뷰] 美증시 긴축 소화하며 반등…코스피도 이어받을까",
+      "link": "https://www.yna.co.kr/view/AKR20260918018900008",
+      "pubDate": "Fri, 18 Sep 2026 08:06:33 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "오픈웨이트AI 모델 주의보…암호화폐 해킹 1년새 440%급증",
+      "title": "유류세 인하 11월 말까지 두 달 연장…\"국민 유류비 부담 경감\"",
+      "link": "https://www.yna.co.kr/view/AKR20260917196400002",
+      "pubDate": "Fri, 18 Sep 2026 08:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[가보니] 약 챙기고 안부 묻고…국가유공자 찾아간 약사들",
+      "link": "https://www.yna.co.kr/view/AKR20260917170600017",
+      "pubDate": "Fri, 18 Sep 2026 08:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20260918012300011",
+      "pubDate": "Fri, 18 Sep 2026 07:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[반려동물] 본업 살려 유기견 돕는다…기업 동물복지 활동 다변화",
+      "link": "https://www.yna.co.kr/view/AKR20260917178400030",
+      "pubDate": "Fri, 18 Sep 2026 07:00:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"80만원인데 찾는다고?\"…비싼데도 불티 난 '명품 한우'의 비밀 [현장+]",
+      "link": "https://www.hankyung.com/article/202609171542g",
+      "pubDate": "Fri, 18 Sep 2026 07:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "물가 꺾여도 금리는 더 오른다?…Fed 점도표에 숨은 '내년 추가 인상' 신호 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609171629i",
+      "pubDate": "Fri, 18 Sep 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[만나보니] 캐런 티오 구글 부사장 \"누구나 앱 만드는 시대…품질이 승부\"",
+      "link": "https://www.yna.co.kr/view/AKR20260917185000017",
+      "pubDate": "Fri, 18 Sep 2026 06:00:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "입법조사처 \"CPTPP 가입 시 마사회·aT 규범 충돌 가능성\"",
+      "link": "https://www.yna.co.kr/view/AKR20260917141000030",
+      "pubDate": "Fri, 18 Sep 2026 06:00:15 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울 아파트값 7월에도 상승세 지속…1년 새 15% 상승",
+      "link": "https://www.yna.co.kr/view/AKR20260917177800004",
+      "pubDate": "Fri, 18 Sep 2026 06:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금융정보분석원, 타지키스탄 국립은행과 자금세탁방지 대응 협력",
+      "link": "https://www.yna.co.kr/view/AKR20260917181900002",
+      "pubDate": "Fri, 18 Sep 2026 06:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울 소상공인 매장서 카드 쓰면 추첨 통해 최대 5만원 상품권",
+      "link": "https://www.yna.co.kr/view/AKR20260917184100004",
+      "pubDate": "Fri, 18 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"달아서 안 먹었는데…\" 2030 '해장템'으로 대박 난 정체 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609171684g",
+      "pubDate": "Fri, 18 Sep 2026 06:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "오픈웨이트AI 모델 주의보…암호화폐 해킹 1년새 440% 급증",
       "link": "https://www.hankyung.com/article/202609182447i",
       "pubDate": "Fri, 18 Sep 2026 00:52:19 +0900",
       "source": "한국경제"
@@ -158,78 +230,6 @@
       "link": "https://www.hankyung.com/article/202609179876g",
       "pubDate": "Thu, 17 Sep 2026 22:00:01 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "삼표그룹, 서울국제어린이영화제 후원…영유아 상영관에 1100명 몰려",
-      "link": "https://www.hankyung.com/article/202609172394i",
-      "pubDate": "Thu, 17 Sep 2026 21:47:58 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "카니 \"EU와 동맹 긍정적\"…트럼프와의 전쟁서 우군 얻어",
-      "link": "https://www.hankyung.com/article/202609172362i",
-      "pubDate": "Thu, 17 Sep 2026 21:47:50 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한솔제지, 美 라벨시장 공략…접착제 덜 쓰는 '백배리어' 기술 공개",
-      "link": "https://www.hankyung.com/article/202609172385i",
-      "pubDate": "Thu, 17 Sep 2026 21:35:21 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "영국 금리 동결했지만…BOE 총재 \"금리 인상 가능성\" 시사(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260917195852085",
-      "pubDate": "Thu, 17 Sep 2026 21:29:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "민주노총, 메가특구 사회적 대화 참여키로…코로나19 이후 6년만",
-      "link": "https://www.yna.co.kr/view/AKR20260917102700530",
-      "pubDate": "Thu, 17 Sep 2026 20:56:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[2보] 영국, 금리 3.75%로 동결…BOE 총재 \"금리 인상 가능성\"",
-      "link": "https://www.yna.co.kr/view/AKR20260917195851085",
-      "pubDate": "Thu, 17 Sep 2026 20:14:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "신한은행 인천시 1금고 수성…\"지역 발전에 최선\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260917192151002",
-      "pubDate": "Thu, 17 Sep 2026 19:54:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "네오사피엔스, 코스닥 시장 신규상장",
-      "link": "https://www.yna.co.kr/view/AKR20260917192000008",
-      "pubDate": "Thu, 17 Sep 2026 19:39:47 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "가짜 근로자 모집해 실업급여 5억8천만원 부정수급 사업주 구속",
-      "link": "https://www.yna.co.kr/view/AKR20260917191100530",
-      "pubDate": "Thu, 17 Sep 2026 19:20:30 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'연간 17조원' 인천시 1금고에 신한은행…20년 연속 금고지기",
-      "link": "https://www.yna.co.kr/view/AKR20260917192100002",
-      "pubDate": "Thu, 17 Sep 2026 19:15:51 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "업비트서 스테이블코인 상장 직후 190%대 이례적 급등",
-      "link": "https://www.yna.co.kr/view/AKR20260917189700002",
-      "pubDate": "Thu, 17 Sep 2026 18:56:48 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대미투자 막판 진통…원전 이견에 '100억불 선납' 압박 겹쳤나(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260917088651003",
-      "pubDate": "Thu, 17 Sep 2026 18:46:19 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
