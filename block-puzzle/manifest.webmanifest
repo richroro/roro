@@ -1,0 +1,15 @@
+{
+  "name": "블록 퍼즐",
+  "short_name": "블록 퍼즐",
+  "description": "블록을 끌어다 놓고 줄을 완성해 지우는 느긋한 퍼즐 게임",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b132b",
+  "theme_color": "#0b132b",
+  "lang": "ko",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
