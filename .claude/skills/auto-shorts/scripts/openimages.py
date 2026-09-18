@@ -31,7 +31,7 @@ from pathlib import Path
 from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import SKILL_DIR, download, http_get, log, write_json  # noqa: E402
+from common import SKILL_DIR, download, http_get, log, reserve, write_json  # noqa: E402
 
 STAGE = "openimages"
 CACHE = Path(__import__("os").environ.get("AUTO_SHORTS_OPENIMAGES_DIR", str(SKILL_DIR / "cache" / "openimages")))
@@ -191,7 +191,7 @@ def pick(query: str, used: Optional[set] = None, index: Optional[dict] = None) -
     주제와 어긋난 사진이 걸리기 쉬운데, 촬영자가 붙인 제목에 검색어가 들어 있으면 대개 정확하다.
     """
     index = index or load_index()
-    used = used or set()
+    used = set() if used is None else used     # 빈 set 은 falsy 라 'or' 를 쓰면 버려진다
     words = [_stem(w) for w in _norm(query).split() if len(w) > 2]
     if not words:
         raise LookupError("검색어가 비어 있음")
@@ -224,7 +224,7 @@ def pick(query: str, used: Optional[set] = None, index: Optional[dict] = None) -
 
     for entry, score, why in sorted(best.values(), key=lambda t: (-t[1], t[0]["id"])):
         page = entry.get("page") or entry["id"]
-        if page in used:
+        if not reserve(used, page):
             continue
         url = IMAGE_URL.format(subset=entry["subset"], image_id=entry["id"])
         lic = "CC BY 2.0" if "/by/2.0" in entry.get("license", "") else entry.get("license", "CC")

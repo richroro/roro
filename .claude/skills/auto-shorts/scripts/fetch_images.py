@@ -40,7 +40,7 @@ from typing import Iterable, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (CAPTION_FONT_FILE, HEIGHT, WIDTH, Unreachable, env_key, http_get,  # noqa: E402
-                    http_json, log, qs, warn, write_json)
+                    http_json, log, qs, reserve, warn, write_json)
 
 STAGE = "image"
 
@@ -79,8 +79,40 @@ def _open_image(data: bytes):
     return img
 
 
+def _best_offset(img, window: int, axis: str) -> int:
+    """9:16 으로 자를 때 어느 위치를 남길지 고른다.
+
+    가운데 고정으로 자르면 가로 사진에서 피사체가 잘리거나 하늘·테이블 같은 밋밋한 면만 남아
+    켄 번즈로 확대했을 때 단색 화면이 된다. 가장자리 검출 에너지가 큰(=디테일이 많은) 창을 고른다.
+    실패하면 가운데로 돌아간다.
+    """
+    try:
+        import numpy as np  # type: ignore
+        from PIL import ImageFilter  # type: ignore
+    except ImportError:
+        return -1
+    try:
+        w, h = img.size
+        scale = 256 / max(w, h)
+        sw, sh = max(8, int(w * scale)), max(8, int(h * scale))
+        arr = np.asarray(img.convert("L").resize((sw, sh)).filter(ImageFilter.FIND_EDGES), dtype=float)
+        energy = arr.sum(axis=0) if axis == "x" else arr.sum(axis=1)
+        span = sw if axis == "x" else sh
+        win = max(1, min(span, round(window * scale)))
+        if win >= span:
+            return -1
+        cum = np.concatenate([[0.0], np.cumsum(energy)])
+        sums = cum[win:] - cum[:-win]
+        # 동점이면 가운데에 가까운 쪽을 고른다(구도가 덜 튄다)
+        centers = np.abs(np.arange(len(sums)) + win / 2 - span / 2)
+        best = int(np.lexsort((centers, -sums))[0])
+        return int(round(best / scale))
+    except Exception:  # noqa: BLE001
+        return -1
+
+
 def normalize_to_vertical(img, out: Path, quality: int = 92) -> None:
-    """가운데 기준 커버 크롭 → 1080x1920 JPEG."""
+    """9:16 커버 크롭(디테일이 많은 쪽 우선) → 1080x1920 JPEG."""
     from PIL import Image, ImageOps  # type: ignore
 
     img = ImageOps.exif_transpose(img).convert("RGB")
@@ -88,10 +120,14 @@ def normalize_to_vertical(img, out: Path, quality: int = 92) -> None:
     target = WIDTH / HEIGHT
     if w / h > target:
         nw = int(h * target)
-        img = img.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+        x = _best_offset(img, nw, "x")
+        x = (w - nw) // 2 if x < 0 else max(0, min(w - nw, x))
+        img = img.crop((x, 0, x + nw, h))
     else:
         nh = int(w / target)
-        img = img.crop((0, (h - nh) // 2, w, (h - nh) // 2 + nh))
+        y = _best_offset(img, nh, "y")
+        y = (h - nh) // 2 if y < 0 else max(0, min(h - nh, y))
+        img = img.crop((0, y, w, y + nh))
     if img.size != (WIDTH, HEIGHT):
         img = img.resize((WIDTH, HEIGHT), Image.LANCZOS)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -144,7 +180,7 @@ def p_pexels(keywords: str, used: set, **_) -> tuple[bytes, dict]:
                 src = ph.get("src", {})
                 url = src.get("portrait") or src.get("large2x") or src.get("original")
                 page = ph.get("url")
-                if not url or (page or url) in used:
+                if not url or not reserve(used, page or url):
                     continue
                 return http_get(url, timeout=90, stage=STAGE), {
                     "provider": "pexels", "url": page, "query": q, "license": "Pexels License",
@@ -164,7 +200,7 @@ def p_unsplash(keywords: str, used: set, **_) -> tuple[bytes, dict]:
             for ph in res.get("results", []):
                 raw = (ph.get("urls") or {}).get("raw")
                 page = (ph.get("links") or {}).get("html")
-                if not raw or (page or raw) in used:
+                if not raw or not reserve(used, page or raw):
                     continue
                 sep = "&" if "?" in raw else "?"
                 data = http_get(f"{raw}{sep}w={WIDTH}&h={HEIGHT}&fit=crop&q=85", timeout=90, stage=STAGE)
@@ -191,7 +227,7 @@ def p_pixabay(keywords: str, used: set, **_) -> tuple[bytes, dict]:
             for hit in res.get("hits", []):
                 url = hit.get("largeImageURL")
                 page = hit.get("pageURL")
-                if not url or (page or url) in used:
+                if not url or not reserve(used, page or url):
                     continue
                 return http_get(url, timeout=90, stage=STAGE), {
                     "provider": "pixabay", "url": page, "query": q, "license": "Pixabay Content License",
@@ -208,7 +244,7 @@ def p_openverse(keywords: str, used: set, **_) -> tuple[bytes, dict]:
             for r in res.get("results", []):
                 url = r.get("url")
                 page = r.get("foreign_landing_url") or url
-                if not url or page in used:
+                if not url or not reserve(used, page):
                     continue
                 tried += 1
                 if tried > 8:
@@ -241,7 +277,7 @@ def p_wikimedia(keywords: str, used: set, **_) -> tuple[bytes, dict]:
             ii = (p.get("imageinfo") or [{}])[0]
             url = ii.get("thumburl") or ii.get("url")
             page = ii.get("descriptionurl")
-            if not url or (page or url) in used or ii.get("width", 0) < 600:
+            if not url or ii.get("width", 0) < 600 or not reserve(used, page or url):
                 continue
             try:
                 data = http_get(url, timeout=60, retries=1, stage=STAGE)
@@ -466,7 +502,7 @@ def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, provid
             if name in PHOTO_PROVIDERS:
                 _check_quality(img)
             normalize_to_vertical(img, out)
-            used.add(info.get("url") or info.get("credit") or "")
+            reserve(used, info.get("url") or info.get("credit") or "")
             info["keywords"] = keywords
             info["prompt"] = prompt
             write_json(out.with_suffix(".json"), info)

@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -172,6 +173,25 @@ def has_audio_stream(path: str | Path) -> bool:
         capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     return "Audio:" in proc.stderr
+
+
+# ---------------------------------------------------------------- 중복 방지
+_RESERVE_LOCK = threading.Lock()
+
+
+def reserve(used: set, key: str) -> bool:
+    """아직 안 쓴 항목이면 표시하고 True. 이미 쓴 것이면 False.
+
+    이미지 수집은 여러 씬을 동시에 처리하므로, '고르고 나서 내려받은 뒤 표시'하면 같은 사진이
+    두 씬에 들어간다. 고르는 순간 원자적으로 선점해야 한다.
+    """
+    if not key:
+        return True
+    with _RESERVE_LOCK:
+        if key in used:
+            return False
+        used.add(key)
+        return True
 
 
 # ---------------------------------------------------------------- HTTP
