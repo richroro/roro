@@ -13,9 +13,13 @@ project.json ─▶ TTS(edge-tts, 단어 타이밍) ─▶ 씬 이미지(무료 
 ```
 
 산출물: `final.mp4`(1080x1920, 30fps, H.264/AAC), `thumbnail.jpg`, `preview.jpg`(검수용 프레임 그리드),
-`meta.md`(제목·설명·해시태그·출처 표기). 모든 외부 자원은 **무료·키 불필요**가 기본이고, 키를 넣으면
-품질 좋은 스톡/음악 제공자가 앞순위로 추가된다. 전부 막혀도 로컬 합성(그라디언트 카드·합성 BGM)으로
-**절대 실패하지 않는다.**
+`meta.md`(제목·설명·해시태그·출처 표기·Threads 게시글 초안). 모든 외부 자원은 **무료·키 불필요**가 기본이고,
+키를 넣으면 품질 좋은 스톡/음악 제공자가 앞순위로 추가된다. 인터넷이 막혀도 **음성은 오프라인 엔진**(sherpa-onnx
+한국어 VITS, 첫 실행 때 모델 자동 다운로드), **BGM 은 로컬 시퀀서**(드럼·베이스·코드·멜로디, 무드 5종),
+**이미지는 이모지 카드**로 완성되므로 절대 실패하지 않는다.
+
+나레이션 엔진 순서(`--tts-engine auto`): edge-tts(가장 자연스러움, 단어 타이밍 제공) → gTTS → local(오프라인).
+Edge 가 되는 환경에서는 항상 Edge 가 쓰인다.
 
 ## 0단계. 환경 준비 (프로젝트당 한 번)
 
@@ -74,6 +78,7 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   "scenes": [
     { "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",   // 씬당 1~2문장
       "headline": "심장이 3개?!",             // (선택) 씬 상단 큰 글씨, 12자 이내
+      "emoji": "🐙",                          // (선택) 이미지 확보 실패 시 카드에 크게 그릴 이모지 1개 — 항상 넣어 두면 폴백도 보기 좋다
       "keywords": "octopus underwater",       // 스톡 검색용 영어 2~4단어
       "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",  // AI 생성용
       "sfx": "riser" }                        // (선택) riser|boom|pop|ding|whoosh
@@ -110,7 +115,9 @@ python .claude/skills/auto-shorts/scripts/make_shorts.py shorts_output/<slug>/pr
   **다시 실행하면 바뀐 것만 다시 만든다** — 대본 한 줄만 고치면 그 씬의 TTS·클립만 재생성된다.
 - 유용한 옵션: `--offline`(네트워크 없이 무음·카드로 구성 미리보기), `--force`(전부 재생성),
   `--image-providers pollinations,pexels,card`, `--bgm-providers jamendo,synth`, `--no-bgm`, `--no-sfx`,
-  `--tts-engine gtts`, `--stage images`(그 단계까지만).
+  `--tts-engine local`(오프라인 음성) / `silent`, `--stage images`(그 단계까지만).
+- 로그의 `[tts] 완료: local/…` 이면 Edge 가 막혀 오프라인 음성이 쓰인 것 — 결과에 알려 주고, 가능하면 Edge 가
+  되는 환경에서 `--tts-engine edge --force` 로 다시 뽑기를 권한다(품질 차이가 크다).
 - 로그의 `[images] 완료: 1:pollinations, 2:card …` 줄로 어떤 제공자가 쓰였는지 본다. `card` 가
   섞여 있으면 그 씬은 이미지 확보에 실패한 것 — 4단계에서 처리.
 
@@ -154,7 +161,8 @@ python .claude/skills/auto-shorts/scripts/make_shorts.py shorts_output/<slug>/pr
 
 - **품질**: AI 이미지는 씬마다 다른 구도, 한 영상 안에서는 `image_style` 로 톤 통일. 켄 번즈 방향이 씬마다
   자동으로 바뀌고(줌인/아웃/팬), 전환은 0.4초. 자막은 78px Pretendard ExtraBold, 현재 어절만 노랑 강조.
-  BGM 은 나레이션에 맞춰 자동 덕킹, 최종 2패스 loudnorm 으로 -14 LUFS(유튜브 기준)에 맞춘다.
+  BGM 은 나레이션에 맞춰 자동 덕킹, 최종 2패스 loudnorm 으로 -14 LUFS(유튜브 기준)에 맞춘다. 웹 BGM 이 없으면
+  `scripts/synth_bgm.py` 가 무드·시드별로 다른 곡(드럼·베이스·일렉피아노 코드·펜타토닉 멜로디·리버브)을 만든다.
 - **저작권**: Pollinations 생성 이미지·합성 BGM/SFX 는 출처 표기 불필요. Openverse/위키미디어/Jamendo/
   Freesound 자료는 CC 라이선스라 `meta.md` 의 출처 표기를 설명란에 넣으라고 안내한다.
   실존 인물·브랜드·타인의 음원은 쓰지 않는다.

@@ -91,7 +91,7 @@ def main() -> None:
     ap.add_argument("--out", default="shorts_output", help="출력 루트 폴더 (기본 ./shorts_output)")
     ap.add_argument("--force", action="store_true", help="캐시 무시하고 전부 다시 생성")
     ap.add_argument("--stage", default="all", help="all 또는 " + "|".join(STAGES) + " (해당 단계까지만 실행)")
-    ap.add_argument("--tts-engine", default="auto", choices=["auto", "edge", "gtts", "silent"])
+    ap.add_argument("--tts-engine", default="auto", choices=["auto", "edge", "gtts", "local", "silent"])
     ap.add_argument("--offline", action="store_true",
                     help="네트워크 없이 무음 나레이션·텍스트 카드·합성 BGM 으로 구성만 미리보기")
     ap.add_argument("--image-providers", default=None, help="쉼표 구분, 예: pollinations,pexels,card")
@@ -191,7 +191,7 @@ def main() -> None:
         info = fetch_images.fetch_image(
             prompt=sc.get("image_prompt", ""), keywords=sc.get("keywords", ""), out=out, providers=providers,
             seed=int(project.get("seed", 7)) * 100 + i + 1,   # 씬마다 다른 고정 시드(카드 색·AI 생성 재현성)
-            style=style["image_style"], card_text="",
+            style=style["image_style"], card_text="", emoji=sc.get("emoji", ""),
             used=used_urls, local=sc.get("image"))
         sigs.mark(out, sig)
         return info
@@ -212,7 +212,7 @@ def main() -> None:
         if sigs.stale(bgm_file, sig, args.force):
             bgm_info = fetch_audio.fetch_bgm(query=bgm_cfg.get("query", ""), mood=bgm_cfg.get("mood", "playful"),
                                              duration=max(30.0, total), out=bgm_file, providers=bprov,
-                                             local=bgm_cfg.get("file"))
+                                             local=bgm_cfg.get("file"), seed=int(project.get("seed", 7)))
             sigs.mark(bgm_file, sig)
         else:
             bgm_info = read_json(bgm_file.with_suffix(".json"), {"provider": "cache"})

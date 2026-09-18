@@ -8,7 +8,8 @@
 | 엔진 | 키 | 품질 | 비고 |
 |---|---|---|---|
 | **edge-tts** (기본) | 불필요 | 뉴럴, 매우 자연스러움 | Microsoft Edge 의 온라인 읽어주기 서비스. 단어 타이밍 제공 → 자막 강조에 사용. |
-| gTTS (폴백) | 불필요 | 기계음 느낌 | 구글 번역 TTS. edge 가 막혔을 때만. 단어 타이밍 없음(글자 수로 추정). |
+| gTTS (폴백) | 불필요 | 무난 | 구글 번역 TTS. edge 가 막혔을 때. 단어 타이밍 없음(글자 수로 추정). |
+| local (폴백) | 불필요·오프라인 | 알아듣기 쉬우나 억양 단조 | sherpa-onnx + 한국어 VITS(mimic3 KSS). `pip install sherpa-onnx`, 모델은 GitHub 릴리스에서 첫 실행 때 자동 다운로드(67MB, `models/`). 숫자는 한글로 적을 것. |
 | silent | — | 무음 | `--offline` 구성 확인용. |
 
 한국어 보이스 프리셋: `female`=ko-KR-SunHiNeural(밝음, 기본) / `male`=ko-KR-InJoonNeural(차분) /
@@ -40,7 +41,7 @@
 | Jamendo | 필요(무료) | CC 인스트루멘털 음악, 검색 품질 좋음 | https://devportal.jamendo.com/ | `JAMENDO_CLIENT_ID` | 필요(자동 기록) |
 | Freesound | 필요(무료) | CC0/CC-BY 루프·음악·효과음(HQ 미리듣기 사용) | https://freesound.org/apiv2/apply/ | `FREESOUND_API_KEY` | CC-BY 면 필요(자동 기록) |
 | Openverse | 불필요 | Jamendo/Freesound 모아 검색 | — | — | 필요(자동 기록) |
-| synth | — | ffmpeg 로 합성한 코드 패드+아르페지오 루프(무드 5종) | — | — | 불필요 |
+| synth | — | numpy 시퀀서(드럼·베이스·일렉피아노 코드·멜로디·리버브, 무드 5종, seed 마다 다른 곡). numpy 가 없으면 ffmpeg 앰비언트 루프 | — | — | 불필요 |
 
 - BGM 은 `loudnorm(-20 LUFS)` 로 맞춘 뒤 `bgm.volume` 을 곱하고, 나레이션이 나올 때 자동으로 약 8dB 줄인다.
 - 효과음은 기본 로컬 합성(whoosh/pop/ding/riser/boom). `FREESOUND_API_KEY` 가 있으면

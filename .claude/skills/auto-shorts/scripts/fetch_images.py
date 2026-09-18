@@ -223,7 +223,26 @@ PALETTES = [
 ]
 
 
-def draw_card(text: str, out: Path, seed: int = 0, subtitle: str = "", watermark: str = "") -> dict:
+EMOJI_FONTS = [
+    "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf",
+    "C:/Windows/Fonts/seguiemj.ttf",
+    "/System/Library/Fonts/Apple Color Emoji.ttc",
+]
+
+
+def _emoji_font():
+    from PIL import ImageFont  # type: ignore
+
+    for f in EMOJI_FONTS:
+        if Path(f).exists():
+            try:
+                return ImageFont.truetype(f, 109)   # NotoColorEmoji 는 109px 비트맵만 지원
+            except Exception:  # noqa: BLE001
+                continue
+    return None
+
+
+def draw_card(text: str, out: Path, seed: int = 0, subtitle: str = "", watermark: str = "", emoji: str = "") -> dict:
     """그라디언트 배경 (+ 큰 텍스트 / 은은한 워터마크) 카드. 네트워크 없이도 항상 만들어진다.
 
     파이프라인에서는 text 를 비우고 watermark(영문 키워드)만 넣는다 — 헤드라인/자막이
@@ -261,6 +280,25 @@ def draw_card(text: str, out: Path, seed: int = 0, subtitle: str = "", watermark
             wd.text((60, y), wtxt, font=wfont, fill=(255, 255, 255, 26))
             y += 180
         img = Image.alpha_composite(img.convert("RGBA"), wm).convert("RGB")
+    if emoji:
+        ef = _emoji_font()
+        if ef is not None:
+            # 109px 로 그린 뒤 크게 확대(비트맵 이모지) → 은은한 그림자와 함께 중앙 위쪽에 배치
+            layer = Image.new("RGBA", (128 * len(emoji[:2]), 128), (0, 0, 0, 0))
+            ImageDraw.Draw(layer).text((8, 4), emoji[:2], font=ef, embedded_color=True)
+            bbox = layer.getbbox()
+            if bbox:
+                layer = layer.crop(bbox)
+                scale = min(520 / layer.width, 520 / layer.height)
+                layer = layer.resize((int(layer.width * scale), int(layer.height * scale)), Image.LANCZOS)
+                shadow = Image.new("RGBA", layer.size, (0, 0, 0, 0))
+                shadow.paste((0, 0, 0, 110), mask=layer.split()[3])
+                shadow = shadow.filter(ImageFilter.GaussianBlur(18))
+                x, y = (WIDTH - layer.width) // 2, int(HEIGHT * 0.42) - layer.height // 2
+                base = img.convert("RGBA")
+                base.alpha_composite(shadow, (x + 6, y + 14))
+                base.alpha_composite(layer, (x, y))
+                img = base.convert("RGB")
     draw = ImageDraw.Draw(img)
     text = (text or "").strip()
     if not text:
@@ -324,7 +362,7 @@ PROVIDERS = {
 # ---------------------------------------------------------------- 공개 API
 def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, providers: Optional[list[str]] = None,
                 seed: Optional[int] = None, style: str = "", card_text: str = "", used: Optional[set] = None,
-                local: Optional[str] = None) -> dict:
+                local: Optional[str] = None, emoji: str = "") -> dict:
     """씬 하나의 이미지를 확보해 out(1080x1920 JPEG)에 저장하고 출처 정보를 돌려준다."""
     out = Path(out)
     used = used if used is not None else set()
@@ -367,7 +405,7 @@ def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, provid
         except Exception as e:  # noqa: BLE001
             warn(STAGE, f"{name} 실패: {e.__class__.__name__}: {str(e)[:160]}")
 
-    info = draw_card(card_text, out, seed=seed, watermark=keywords)
+    info = draw_card(card_text, out, seed=seed, watermark=keywords, emoji=emoji)
     info["keywords"] = keywords
     write_json(out.with_suffix(".json"), info)
     if providers and providers[0] == "card":
@@ -396,10 +434,12 @@ def main() -> None:
     ap.add_argument("--style", default="", help="모든 프롬프트 뒤에 붙일 스타일 문구")
     ap.add_argument("--card-text", default="", help="텍스트 카드 폴백에 쓸 문구")
     ap.add_argument("--local", default=None, help="직접 지정한 이미지 파일")
+    ap.add_argument("--emoji", default="", help="카드 폴백에 그릴 이모지(1~2개)")
     args = ap.parse_args()
     info = fetch_image(prompt=args.prompt, keywords=args.keywords, out=args.out,
                        providers=[p.strip() for p in args.providers.split(",") if p.strip()],
-                       seed=args.seed, style=args.style, card_text=args.card_text, local=args.local)
+                       seed=args.seed, style=args.style, card_text=args.card_text, local=args.local,
+                       emoji=args.emoji)
     print(json.dumps(info, ensure_ascii=False))
 
 

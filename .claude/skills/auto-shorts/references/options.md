@@ -12,7 +12,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `lang` | `ko` / `en` / `ja` — TTS 언어 | `ko` |
 | `voice` | `female` `male` `male2` `en-female` `en-male` `ja-female` `ja-male` 또는 Edge 보이스 ID | 언어별 기본 |
 | `rate` / `pitch` | 말 속도 `"+8%"`, 피치 `"+0Hz"` | `+0%` / `+0Hz` |
-| `seed` | 씬별 AI 이미지 시드·카드 색의 기준(재현성) | `7` |
+| `seed` | 씬별 AI 이미지 시드·카드 색·합성 BGM 곡의 기준(재현성). 바꾸면 다른 곡/이미지가 나온다 | `7` |
 | `cta` | 마지막 3초 상단 문구(이모지 금지) | 없음 |
 | `category` | 성과 분석용 분류: `animals` `body` `space` `food` `history` `psychology` `language` `money` `science` `ranking` `whatif` `tech` … | `unknown` |
 | `hook_type` | 성과 분석용: `question` `contradiction` `number` `warning` `comparison` `challenge` | 첫 문장에서 추정 |
@@ -65,6 +65,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `keywords` | 스톡 검색용 영어 2~4단어 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
 | `sfx` | `riser` `boom` `pop` `ding` `whoosh` (씬 시작에 재생) |
+| `emoji` | 이미지 확보 실패 시 카드에 크게 그릴 이모지(1~2개). 컬러 이모지 폰트(Noto Color Emoji / Segoe UI Emoji / Apple Color Emoji)가 있는 환경에서 렌더 |
 | `motion` | `in` `out` `pan_left` `pan_right` `pan_up` `pan_down` `static` (기본: 씬 순서대로 순환) |
 | `min_duration` | 씬 최소 길이(초) — 이미지를 오래 보여 주고 싶을 때 |
 
@@ -76,7 +77,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `--force` | 캐시 무시, 전부 재생성(성공한 AI 이미지도 다시 만드니 신중히) |
 | `--stage tts|plan|images|audio|subs|video|mix|extras` | 그 단계까지만 |
 | `--offline` | 무음 나레이션 + 카드 + 합성 BGM (구성 미리보기) |
-| `--tts-engine auto|edge|gtts|silent` | TTS 엔진 |
+| `--tts-engine auto|edge|gtts|local|silent` | TTS 엔진. auto = edge → gtts → local 순. local 은 sherpa-onnx 오프라인(첫 실행 때 모델 다운로드) |
 | `--image-providers a,b,c` / `--bgm-providers a,b` | 제공자 순서 덮어쓰기 |
 | `--no-bgm` / `--no-sfx` | 트랙 제외 |
 | `--jobs N` | 이미지 병렬 수집 수 (기본 3, 429 나면 1) |

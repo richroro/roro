@@ -80,7 +80,8 @@ def main() -> None:
     print("[packages]")
     for mod, pipname, need in [("edge_tts", "edge-tts", True), ("PIL", "Pillow", True),
                                ("requests", "requests", False), ("gtts", "gTTS", False),
-                               ("imageio_ffmpeg", "imageio-ffmpeg", False)]:
+                               ("imageio_ffmpeg", "imageio-ffmpeg", False), ("numpy", "numpy", False),
+                               ("sherpa_onnx", "sherpa-onnx", False)]:
         try:
             importlib.import_module(mod)
             ok(pipname)

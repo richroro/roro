@@ -26,36 +26,42 @@
       "headline": "심장이 3개?!",
       "keywords": "octopus underwater",
       "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",
-      "sfx": "riser"
+      "sfx": "riser",
+      "emoji": "🐙"
     },
     {
       "narration": "두 개는 아가미로 피를 보내고, 나머지 하나가 온몸으로 피를 돌립니다.",
       "keywords": "octopus gills anatomy",
-      "image_prompt": "scientific illustration of an octopus with three glowing hearts visible, dark background"
+      "image_prompt": "scientific illustration of an octopus with three glowing hearts visible, dark background",
+      "emoji": "🫀"
     },
     {
       "narration": "그런데 문어가 헤엄칠 때는 온몸용 심장이 멈춰 버려요.",
       "headline": "헤엄치면 심장이 멈춘다",
       "keywords": "octopus swimming",
       "image_prompt": "an octopus jetting through open water, motion blur, dramatic light rays",
-      "sfx": "boom"
+      "sfx": "boom",
+      "emoji": "🌊"
     },
     {
       "narration": "그래서 문어는 헤엄치는 걸 싫어하고, 바닥을 기어다니는 걸 더 좋아하죠.",
       "keywords": "octopus crawling seabed",
-      "image_prompt": "an octopus crawling on a rocky seabed, tentacles spread wide, natural light"
+      "image_prompt": "an octopus crawling on a rocky seabed, tentacles spread wide, natural light",
+      "emoji": "🪨"
     },
     {
       "narration": "피 색깔도 파란색인데, 철 대신 구리로 산소를 나르기 때문입니다.",
       "headline": "피는 파란색",
       "keywords": "blue liquid macro",
-      "image_prompt": "abstract luminous blue liquid swirling, macro photography"
+      "image_prompt": "abstract luminous blue liquid swirling, macro photography",
+      "emoji": "💙"
     },
     {
       "narration": "이 정도면 외계 생물이라 불려도 할 말 없겠죠?",
       "keywords": "octopus eye closeup",
       "image_prompt": "an octopus looking straight at the camera with a curious expression, alien-like, cinematic",
-      "sfx": "pop"
+      "sfx": "pop",
+      "emoji": "👽"
     }
   ],
   "meta": {

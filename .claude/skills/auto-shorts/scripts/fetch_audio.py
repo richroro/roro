@@ -121,9 +121,23 @@ def _select_by_block(exprs: list[str], block: float) -> str:
             f"if(lt(mod(t,{cyc}),{block * 3}),{exprs[2]},{exprs[3]})))")
 
 
-def synth_bgm(mood: str, duration: float, out: Path) -> dict:
-    """ffmpeg aevalsrc 로 코드 패드 + 아르페지오 + 베이스를 합성해 앰비언트 루프를 만든다."""
+def synth_bgm(mood: str, duration: float, out: Path, seed: int = 0) -> dict:
+    """로컬 BGM 합성. numpy 가 있으면 synth_bgm.py(드럼·베이스·코드·멜로디 시퀀서)로,
+    없으면 ffmpeg aevalsrc 로 단순 앰비언트 루프를 만든다."""
     mood = _mood_norm(mood)
+    try:
+        import numpy  # noqa: F401  (설치 여부 확인)
+        import synth_bgm
+
+        wav = out.with_suffix(".synth.wav")
+        synth_bgm.write_wav(wav, synth_bgm.render(mood, duration, seed))
+        out.parent.mkdir(parents=True, exist_ok=True)
+        run_ffmpeg(["-i", str(wav), "-c:a", "libmp3lame", "-q:a", "2", str(out)], stage=STAGE)
+        wav.unlink(missing_ok=True)
+        return {"provider": "synth", "title": f"generated {mood} track (seed {seed})", "artist": "auto-shorts",
+                "url": None, "license": "generated", "credit": f"generated {mood} track (no copyright)"}
+    except ImportError:
+        warn(STAGE, "numpy 가 없어 단순 앰비언트 루프로 합성합니다 (pip install numpy 권장)")
     chords, block, arp_step, lp = _MOOD_DEF[mood]
     swell = f"(0.55+0.45*sin(PI*mod(t,{block})/{block}))"          # 코드마다 부풀었다 잦아드는 포락선
     pad = _select_by_block([_chord_sum(c, 0.22) for c in chords], block) + f"*{swell}"
@@ -189,7 +203,7 @@ def fetch_sfx(name: str, out: Path, provider: str = "synth") -> dict:
 
 # ---------------------------------------------------------------- 공개 API
 def fetch_bgm(*, query: str = "", mood: str = "playful", duration: float = 60.0, out: str | Path,
-              providers: Optional[list[str]] = None, local: Optional[str] = None) -> dict:
+              providers: Optional[list[str]] = None, local: Optional[str] = None, seed: int = 0) -> dict:
     """BGM 하나를 확보해 out(mp3)에 저장하고 출처 정보를 돌려준다."""
     out = Path(out)
     providers = providers or DEFAULT_BGM_PROVIDERS
@@ -228,9 +242,9 @@ def fetch_bgm(*, query: str = "", mood: str = "playful", duration: float = 60.0,
         except Exception as e:  # noqa: BLE001
             warn(STAGE, f"{name} 실패: {e.__class__.__name__}: {str(e)[:160]}")
 
-    info = synth_bgm(mood, duration, out)
+    info = synth_bgm(mood, duration, out, seed=seed)
     write_json(out.with_suffix(".json"), info)
-    log(STAGE, f"웹 BGM 없음 → 로컬 합성 루프({_mood_norm(mood)}) 사용")
+    log(STAGE, f"웹 BGM 없음 → 로컬 합성 트랙({_mood_norm(mood)}, seed {seed}) 사용")
     return info
 
 
@@ -244,6 +258,7 @@ def main() -> None:
     b.add_argument("--out", required=True)
     b.add_argument("--providers", default=",".join(DEFAULT_BGM_PROVIDERS))
     b.add_argument("--local", default=None)
+    b.add_argument("--seed", type=int, default=0)
     s = sub.add_parser("sfx")
     s.add_argument("--name", required=True, help=", ".join(SFX_FILTERS))
     s.add_argument("--out", required=True)
@@ -251,7 +266,8 @@ def main() -> None:
     args = ap.parse_args()
     if args.cmd == "bgm":
         info = fetch_bgm(query=args.query, mood=args.mood, duration=args.duration, out=args.out,
-                         providers=[p.strip() for p in args.providers.split(",") if p.strip()], local=args.local)
+                         providers=[p.strip() for p in args.providers.split(",") if p.strip()], local=args.local,
+                         seed=args.seed)
     else:
         info = fetch_sfx(args.name, Path(args.out), args.provider)
     print(json.dumps(info, ensure_ascii=False))

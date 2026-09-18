@@ -3,8 +3,12 @@
 
 기본 엔진은 Microsoft Edge 뉴럴 보이스(edge-tts, 무료·키 불필요·온라인).
 단어 단위 타임스탬프(WordBoundary)를 함께 받아서 자막 하이라이트에 쓴다.
-Edge 가 막히면 gTTS(구글 번역 TTS, 무료·키 불필요)로 내려가되, 이때는
-단어 타이밍이 없으므로 글자 수 비례로 추정한다.
+Edge 가 막히면 gTTS(구글 번역 TTS, 무료·키 불필요) → local(sherpa-onnx + 한국어 VITS 모델,
+완전 오프라인) 순으로 내려간다. 이때는 단어 타이밍이 없으므로 글자 수 비례로 추정한다.
+
+local 엔진: `pip install sherpa-onnx` 후 처음 쓸 때 GitHub 릴리스에서 한국어 모델
+(vits-mimic3-ko_KO-kss_low, 약 67MB)을 models/ 에 내려받는다. 품질은 Edge 보다 낮지만
+인터넷이 막힌 환경에서도 진짜 음성 나레이션이 나온다. 숫자는 한글로 적는 편이 안전하다.
 
 CLI:
     python tts.py --text "문어는 심장이 세 개예요." --out nar_01.mp3
@@ -171,6 +175,73 @@ def synth_silent(text: str, out_mp3: Path, chars_per_sec: float = 5.2) -> None:
                 "-c:a", "libmp3lame", "-q:a", "5", str(out_mp3)], stage="tts")
 
 
+# ---------------------------------------------------------------- local (sherpa-onnx)
+LOCAL_MODELS = {
+    "ko": ("vits-mimic3-ko_KO-kss_low", "ko_KO-kss_low.onnx"),
+    "en": ("vits-piper-en_US-amy-low", "en_US-amy-low.onnx"),
+}
+LOCAL_MODEL_URL = "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{name}.tar.bz2"
+
+
+def _ensure_local_model(lang: str) -> tuple[Path, str]:
+    from common import SKILL_DIR, download, log
+
+    name, onnx = LOCAL_MODELS.get(lang, LOCAL_MODELS["ko"])
+    mdir = SKILL_DIR / "models" / name
+    if not (mdir / onnx).exists():
+        log("tts", f"오프라인 음성 모델 내려받는 중: {name} (약 60~70MB, 최초 1회)")
+        import tarfile
+
+        tmp = SKILL_DIR / "models" / f"{name}.tar.bz2"
+        download(LOCAL_MODEL_URL.format(name=name), tmp, timeout=600, min_bytes=1_000_000, stage="tts")
+        with tarfile.open(tmp, "r:bz2") as tf:
+            tf.extractall(SKILL_DIR / "models")
+        tmp.unlink(missing_ok=True)
+    return mdir, onnx
+
+
+def synth_local(text: str, out_mp3: Path, lang: str, speed: float = 1.0) -> None:
+    """sherpa-onnx VITS 로 완전 오프라인 합성. 결과는 22.05kHz mono → mp3."""
+    import sherpa_onnx  # type: ignore
+    import wave
+
+    from common import run_ffmpeg
+
+    mdir, onnx = _ensure_local_model(lang)
+    cfg = sherpa_onnx.OfflineTtsConfig(
+        model=sherpa_onnx.OfflineTtsModelConfig(
+            vits=sherpa_onnx.OfflineTtsVitsModelConfig(
+                model=str(mdir / onnx), tokens=str(mdir / "tokens.txt"), data_dir=str(mdir / "espeak-ng-data")),
+            num_threads=2, provider="cpu"),
+        max_num_sentences=1)
+    if not cfg.validate():
+        raise RuntimeError(f"sherpa-onnx 모델 설정이 유효하지 않습니다: {mdir}")
+    tts = sherpa_onnx.OfflineTts(cfg)
+    audio = tts.generate(text, sid=0, speed=speed)
+    if not audio.samples:
+        raise RuntimeError("sherpa-onnx 가 오디오를 만들지 못했습니다")
+    wav = out_mp3.with_suffix(".wav")
+    import array
+
+    pcm = array.array("h", (int(max(-1.0, min(1.0, x)) * 32767) for x in audio.samples))
+    with wave.open(str(wav), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(audio.sample_rate)
+        w.writeframes(pcm.tobytes())
+    # 문장 뒤 여백을 살짝 다듬고 mp3 로
+    run_ffmpeg(["-i", str(wav), "-af", "silenceremove=stop_periods=-1:stop_duration=0.5:stop_threshold=-45dB,apad=pad_dur=0.12",
+                "-c:a", "libmp3lame", "-q:a", "3", str(out_mp3)], stage="tts")
+    wav.unlink(missing_ok=True)
+
+
+def _rate_to_speed(rate: str) -> float:
+    try:
+        return max(0.6, min(1.6, 1.0 + float(rate.strip().rstrip("%")) / 100.0))
+    except ValueError:
+        return 1.0
+
+
 # ---------------------------------------------------------------- gTTS
 def synth_gtts(text: str, out_mp3: Path, lang: str) -> None:
     from gtts import gTTS  # type: ignore
@@ -182,7 +253,7 @@ def synth_gtts(text: str, out_mp3: Path, lang: str) -> None:
 def synthesize(text: str, out_mp3: str | Path, *, voice: str | None = None, lang: str = "ko",
                rate: str = "+0%", pitch: str = "+0Hz", volume: str = "+0%",
                engine: str = "auto") -> dict:
-    """텍스트 → mp3 + 타이밍 dict. engine: auto | edge | gtts | silent(무음, 오프라인 확인용)"""
+    """텍스트 → mp3 + 타이밍 dict. engine: auto | edge | gtts | local | silent(무음, 오프라인 확인용)"""
     out_mp3 = Path(out_mp3)
     out_mp3.parent.mkdir(parents=True, exist_ok=True)
     text = re.sub(r"\s+", " ", text).strip()
@@ -210,13 +281,32 @@ def synthesize(text: str, out_mp3: str | Path, *, voice: str | None = None, lang
                     die("tts", f"{e}")
                 warn("tts", f"edge-tts 실패 → gTTS 로 대체: {e}")
 
-    if used is None:
+    if used is None and engine in ("auto", "gtts"):
         try:
             from gtts import gTTS  # noqa: F401  (설치 여부 확인용)
         except ImportError:
-            die("tts", f"edge-tts 실패({err}) 이고 gTTS 도 없습니다:  pip install gTTS")
-        synth_gtts(text, out_mp3, lang)
-        used = "gtts"
+            if engine == "gtts":
+                die("tts", "gTTS 가 없습니다:  pip install gTTS")
+        else:
+            try:
+                synth_gtts(text, out_mp3, lang)
+                used = "gtts"
+            except Exception as e:  # noqa: BLE001
+                err = e
+                if engine == "gtts":
+                    die("tts", f"gTTS 실패: {e}")
+                warn("tts", f"gTTS 실패 → 오프라인 엔진(local)으로 대체: {e.__class__.__name__}")
+
+    if used is None and engine in ("auto", "local"):
+        try:
+            import sherpa_onnx  # noqa: F401  (설치 여부 확인용)
+        except ImportError:
+            die("tts", f"온라인 TTS 실패({err}) 이고 오프라인 엔진도 없습니다:  pip install sherpa-onnx  (또는 --tts-engine silent)")
+        synth_local(text, out_mp3, lang, speed=_rate_to_speed(rate))
+        used = "local"
+
+    if used is None:
+        die("tts", f"TTS 엔진 '{engine}' 으로 합성하지 못했습니다: {err}")
 
     duration = media_duration(out_mp3)
     words = _merge_boundaries_to_words(text, events) if events else []
@@ -257,7 +347,7 @@ def main() -> None:
     ap.add_argument("--rate", default="+0%", help='말 속도, 예 "+10%%"')
     ap.add_argument("--pitch", default="+0Hz")
     ap.add_argument("--volume", default="+0%")
-    ap.add_argument("--engine", default="auto", choices=["auto", "edge", "gtts", "silent"])
+    ap.add_argument("--engine", default="auto", choices=["auto", "edge", "gtts", "local", "silent"])
     ap.add_argument("--list-voices", metavar="PREFIX", help="예: ko 또는 en-US")
     args = ap.parse_args()
 
