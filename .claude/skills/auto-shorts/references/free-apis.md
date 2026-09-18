@@ -68,9 +68,35 @@ python scripts/openimages.py --find "bee flower"         # 어떤 분류·사진
 | Jamendo | 필요(무료) | CC 인스트루멘털 음악, 검색 품질 좋음 | https://devportal.jamendo.com/ | `JAMENDO_CLIENT_ID` | 필요(자동 기록) |
 | Freesound | 필요(무료) | CC0/CC-BY 루프·음악·효과음(HQ 미리듣기 사용) | https://freesound.org/apiv2/apply/ | `FREESOUND_API_KEY` | CC-BY 면 필요(자동 기록) |
 | Openverse | 불필요 | Jamendo/Freesound 모아 검색 | — | — | 필요(자동 기록) |
-| synth | — | numpy 시퀀서(드럼·베이스·일렉피아노 코드·멜로디·리버브, 무드 5종, seed 마다 다른 곡). numpy 가 없으면 ffmpeg 앰비언트 루프 | — | — | 불필요 |
+| synth | — | **실제 악기 샘플 연주**(FluidR3_GM: 피아노·일렉피아노·베이스·스트링·마림바 + 합성 드럼). 무드 5종 × seed 마다 다른 곡, 인트로→본절 구성, 킥 펌핑·리버브 | — | — | 불필요(MIT 음원) |
 
 - BGM 은 `loudnorm(-20 LUFS)` 로 맞춘 뒤 `bgm.volume` 을 곱하고, 나레이션이 나올 때 자동으로 약 8dB 줄인다.
+
+### 로컬 BGM 생성기 (`scripts/synth_bgm.py`)
+
+음 하나씩 mp3 로 공개된 FluidR3_GM 사운드폰트(MIT)를 받아 **실제 악기 음색**으로 연주한다. 첫 곡에서 필요한
+음만 `cache/soundfont/` 로 내려받으며(2MB 안팎), 그 뒤로는 오프라인에서도 돈다. 샘플을 못 받으면 예전의
+사인파 합성으로 자동으로 내려간다.
+
+```bash
+python scripts/synth_bgm.py --mood lofi --duration 40 --seed 3 --out bgm.wav
+python scripts/synth_bgm.py --mood epic --duration 40 --out bgm.wav --engine synth   # 샘플 없이
+```
+
+| 무드 | 편성 | 쓰임 |
+|---|---|---|
+| `playful` | 일렉피아노 + 어쿠스틱 베이스 + 마림바 + 드럼 104BPM | 잡학·동물·음식 |
+| `lofi` | 로즈 + 베이스 + 비브라폰 + 스윙 드럼 + 바이닐 노이즈 82BPM | 감성·일상 |
+| `calm` | 따뜻한 패드 + 피아노, 드럼 없음 72BPM | 설명·힐링 |
+| `mysterious` | 스트링 패드 + 저역 피아노 88BPM | 미스터리·우주 |
+| `epic` | 스트링 + 피아노 + 강한 드럼 100BPM | 역사·스케일 |
+
+`seed`(프로젝트의 `seed`)를 바꾸면 코드 진행은 같아도 멜로디·리듬·보이싱이 달라져 매번 다른 곡이 된다.
+
+**인기곡을 넣고 싶다면**: 저작권 곡을 mp4 에 넣으면 Content ID 로 수익이 원저작자에게 가거나 음소거·차단된다.
+합법적인 선택지는 (1) 유튜브 쇼츠·릴스 **앱 편집기에서 플랫폼 제공 음원**을 얹기(업로드 후, 나레이션과 볼륨 조절 가능),
+(2) Jamendo·Freesound·Pixabay Music·유튜브 오디오 보관함 같은 **무료 라이선스 음원**(이 스킬이 이미 앞순위로 시도),
+(3) 이 생성기처럼 **직접 만든 곡**. AI 작곡 서비스(Suno·Udio)는 유료 API 라 기본 경로에 넣지 않았다.
 - 효과음은 기본 로컬 합성(whoosh/pop/ding/riser/boom). `FREESOUND_API_KEY` 가 있으면
   `python scripts/fetch_audio.py sfx --name whoosh --provider freesound --out work/sfx_whoosh.wav` 로 교체 가능.
 

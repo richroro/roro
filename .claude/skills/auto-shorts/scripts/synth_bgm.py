@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""로컬 BGM 합성기 (auto-shorts) — numpy 로 드럼·베이스·코드·멜로디를 실제로 시퀀싱한다.
+"""BGM 생성기 (auto-shorts).
 
-웹 BGM(Jamendo/Freesound/Openverse)을 못 쓸 때의 폴백이지만, 저작권 걱정이 없고 무드별로
-매번 다른 곡이 나오므로(seed) 기본 BGM 으로도 쓸 만하게 만들었다. 구성:
+**실제 악기 샘플**(FluidR3_GM, MIT)로 연주한다. 피아노·일렉피아노·베이스·스트링·마림바 음을
+음 하나씩 받아 코드·베이스·멜로디를 배치하고, 드럼은 numpy 로 합성한다. 샘플을 못 받는 환경에서는
+예전의 순수 합성(사인파 기반)으로 자동으로 내려간다.
 
-    드럼   킥(사인 피치 드롭) · 스네어(노이즈 밴드패스) · 하이햇(노이즈 하이패스, 벨로시티 변화)
-    베이스 루트음 8분 패턴, 사인+2배음
-    코드   일렉피아노풍 플럭(배음 3개, 각각 다른 감쇠) + 디튠 패드(저역 필터)
-    멜로디 펜타토닉 랜덤워크(시드 고정), 마디마다 확률적으로 쉼
-    마스터 소프트 리미터 + 슈뢰더 리버브 + 무드별 로우패스 · lofi 는 바이닐 노이즈·워블
+    무드 5종(playful·lofi·calm·mysterious·epic) × seed 마다 다른 곡
+    구성: 인트로(드럼 없이) → 본절 → 후반 → 페이드아웃
+    마스터: 킥에 맞춘 펌핑, 리버브, 소프트 리미터
 
-CLI:  python synth_bgm.py --mood playful --duration 60 --seed 3 --out bgm.wav
+웹 BGM(Jamendo/Freesound/Openverse)을 쓸 수 있으면 그쪽이 우선이고, 이건 폴백 겸 기본값이다.
+저작권 걱정이 없고 영상마다 다른 곡이 나온다.
+
+CLI:  python synth_bgm.py --mood lofi --duration 40 --seed 3 --out bgm.wav
+      python synth_bgm.py --mood lofi --duration 40 --out bgm.wav --engine synth   # 샘플 없이
 """
 from __future__ import annotations
 
@@ -85,7 +88,8 @@ def hat(vel: float = 1.0, rng=None, open_: bool = False) -> np.ndarray:
     n = int((0.25 if open_ else 0.06) * SR)
     t = np.arange(n) / SR
     noise = (rng or np.random).uniform(-1, 1, n)
-    return vel * highpass(noise, 7000) * np.exp(-t * (14 if open_ else 60))
+    # 7kHz 하이패스만 쓰면 쇳소리가 전체 대역을 덮는다. 위쪽도 잘라 낸다.
+    return vel * bandpass(noise, 6000, 11000) * np.exp(-t * (14 if open_ else 60))
 
 
 def pluck(freq: float, dur: float, vel: float = 1.0) -> np.ndarray:
@@ -195,7 +199,7 @@ def soft_limit(x: np.ndarray, drive: float = 1.0) -> np.ndarray:
 
 
 # ---------------------------------------------------------------- 시퀀서
-def render(mood: str, duration: float, seed: int = 0) -> np.ndarray:
+def _render_synth(mood: str, duration: float, seed: int = 0) -> np.ndarray:
     m = MOODS.get(mood, MOODS["playful"])
     rng = np.random.default_rng(seed)
     bpm = m["bpm"]
@@ -302,8 +306,203 @@ def render(mood: str, duration: float, seed: int = 0) -> np.ndarray:
     return mix
 
 
-def write_wav(path: Path, mono: np.ndarray, stereo_width: float = 0.12) -> None:
-    """살짝 넓힌 스테레오로 저장 (좌우에 아주 짧은 지연 차)."""
+# ---------------------------------------------------------------- 샘플 기반 연주
+# 무드별 편성. 이름은 FluidR3_GM 악기 이름이다.
+BANDS = {
+    "playful":    dict(bpm=104, chord="electric_piano_1", bass="acoustic_bass", lead="marimba",
+                       pad=None, drums=0.85, swing=0.0, chord_oct=0, lead_oct=12),
+    "lofi":       dict(bpm=82, chord="electric_piano_1", bass="acoustic_bass", lead="vibraphone",
+                       pad=None, drums=0.55, swing=0.18, chord_oct=0, lead_oct=12, vinyl=True),
+    "calm":       dict(bpm=72, chord="acoustic_grand_piano", bass="acoustic_bass", lead=None,
+                       pad="pad_2_warm", drums=0.0, swing=0.0, chord_oct=0, lead_oct=12),
+    "mysterious": dict(bpm=88, chord="acoustic_grand_piano", bass="acoustic_bass", lead=None,
+                       pad="string_ensemble_1", drums=0.4, swing=0.0, chord_oct=-12, lead_oct=0),
+    "epic":       dict(bpm=100, chord="string_ensemble_1", bass="acoustic_bass", lead="acoustic_grand_piano",
+                       pad="string_ensemble_1", drums=1.0, swing=0.0, chord_oct=0, lead_oct=12),
+}
+
+
+def _midi(name: str, octave: int) -> int:
+    return NAMES.index(name) + (octave + 1) * 12
+
+
+def _chord_midis(root: str, kind: str, octave: int = 4) -> list[int]:
+    base = _midi(root, octave)
+    return [base + i for i in CHORD_INTERVALS[kind]]
+
+
+def _render_sampled(mood: str, duration: float, seed: int = 0) -> np.ndarray | None:
+    """실제 악기 샘플로 연주. 샘플을 못 쓰면 None."""
+    import music_samples as ms
+
+    band = BANDS.get(mood, BANDS["playful"])
+    if not ms.available(band["chord"]):
+        return None
+    m = MOODS.get(mood, MOODS["playful"])
+    rng = np.random.default_rng(seed)
+    beat = 60 / band["bpm"]
+    bar = beat * 4
+    n_total = int((duration + 3) * SR)
+    mix = np.zeros((n_total, 2), dtype=np.float32)
+    kick_env = np.zeros(n_total, dtype=np.float32)      # 펌핑(사이드체인)용
+
+    prog = m["prog"]
+    n_bars = int(math.ceil((duration + 2) / bar))
+    minor = prog[0][1].startswith("min")
+    scale = pentatonic(prog[0][0], minor)
+    swing = band["swing"]
+
+    def add(sig, t0, gain=1.0):
+        if sig is None:
+            return
+        i = int(t0 * SR)
+        if i >= n_total or i < 0:
+            return
+        j = min(n_total, i + len(sig))
+        mix[i:j] += sig[: j - i] * gain
+
+    def add_mono(sig, t0, gain=1.0):
+        if sig is None:
+            return
+        i = int(t0 * SR)
+        if i >= n_total or i < 0:
+            return
+        j = min(n_total, i + len(sig))
+        seg = sig[: j - i] * gain
+        mix[i:j, 0] += seg
+        mix[i:j, 1] += seg
+
+    # 필요한 음을 미리 받아 둔다
+    need: dict[str, set[int]] = {}
+    for b in range(n_bars):
+        root, kind = prog[b % len(prog)]
+        cm = _chord_midis(root, kind, 4)
+        need.setdefault(band["chord"], set()).update(x + band["chord_oct"] for x in cm)
+        need.setdefault(band["bass"], set()).add(cm[0] - 24)
+        if band["pad"]:
+            need.setdefault(band["pad"], set()).update(x - 12 for x in cm)
+    if band["lead"]:
+        need.setdefault(band["lead"], set()).update(
+            _midi(NAMES[p], 4) + band["lead_oct"] + o for p in scale for o in (0, 12))
+    for inst, midis in need.items():
+        for x in sorted(midis):
+            ms.load(inst, x)
+
+    lead_idx = 0
+    for b in range(n_bars):
+        root, kind = prog[b % len(prog)]
+        t_bar = b * bar
+        cm = _chord_midis(root, kind, 4)
+        intro = b == 0                      # 첫 마디는 드럼 없이 열어 훅 나레이션을 가리지 않는다
+        # --- 패드 (2마디마다)
+        if band["pad"] and b % 2 == 0:
+            for x in cm:
+                add(ms.play(band["pad"], x - 12, bar * 2, 0.5 * m["pad"], release=1.2), t_bar)
+        # --- 코드
+        positions = [0, 1.5, 2, 3.5] if mood == "playful" else [0, 2] if mood in ("epic", "mysterious") else [0.5, 2.5]
+        for pos in positions:
+            for k, x in enumerate(cm):
+                vel = (0.5 if pos else 0.62) * rng.uniform(0.85, 1.0) * (0.75 if intro else 1.0)
+                add(ms.play(band["chord"], x + band["chord_oct"], beat * 1.8, vel),
+                    t_bar + pos * beat + rng.uniform(0, 0.012) + (0.01 * k))
+        # --- 베이스
+        for e in range(8):
+            if mood == "calm" and e % 4 != 0:
+                continue
+            if mood == "mysterious" and e % 2 != 0:
+                continue
+            x = cm[0] - 24
+            if e in (3, 7) and mood in ("playful", "epic", "lofi") and rng.random() < 0.45:
+                x += 7 if e == 3 else 12
+            sw = swing * beat / 2 if e % 2 else 0
+            add(ms.play(band["bass"], x, beat * 0.55, (0.95 if e % 2 == 0 else 0.7) * (0.8 if intro else 1.0)),
+                t_bar + e * beat / 2 + sw)
+        # --- 드럼(합성)
+        if band["drums"] > 0 and not intro:
+            for e in range(8):
+                t0 = t_bar + e * beat / 2 + (swing * beat / 2 if e % 2 else 0)
+                if e in (0, 4) or (e == 6 and mood in ("playful", "epic") and rng.random() < 0.3):
+                    k = kick(0.85 * band["drums"])
+                    add_mono(k, t0)
+                    i = int(t0 * SR)
+                    if i < n_total:
+                        j = min(n_total, i + len(k))
+                        kick_env[i:j] = np.maximum(kick_env[i:j], np.abs(k[: j - i]))
+                if e in (2, 6):
+                    add_mono(snare(0.33 * band["drums"], rng), t0)
+                add_mono(hat((0.17 if e % 2 == 0 else 0.10) * band["drums"] * rng.uniform(0.7, 1.0),
+                             rng, open_=(e == 7 and rng.random() < 0.25)), t0)
+        # --- 멜로디 (2마디부터, 드문드문)
+        if band["lead"] and b >= 1 and rng.random() < m["melody"]:
+            for pos in sorted(rng.choice(np.arange(0, 8), size=int(rng.integers(2, 4)), replace=False)):
+                lead_idx = max(0, min(len(scale) * 2 - 1, lead_idx + int(rng.integers(-2, 3))))
+                x = _midi(NAMES[scale[lead_idx % len(scale)]], 4) + band["lead_oct"] + 12 * (lead_idx // len(scale))
+                add(ms.play(band["lead"], x, beat * (0.6 if rng.random() < 0.6 else 1.1),
+                            0.42 * rng.uniform(0.8, 1.0)), t_bar + pos * beat / 2)
+
+    # --- 마스터: 킥 펌핑 → 리버브 → 리미터
+    if kick_env.any():
+        duck = 1.0 - 0.35 * np.clip(_smooth(kick_env, int(0.12 * SR)), 0, 1)
+        mix *= duck[:, None]
+    mono_rev = reverb(mix.mean(axis=1), mix=0.2 if mood in ("calm", "mysterious", "epic") else 0.12)
+    mix = mix * 0.85 + np.stack([mono_rev, mono_rev], axis=1) * 0.3
+    if band.get("vinyl"):
+        crackle = rng.uniform(-1, 1, n_total) * (rng.random(n_total) < 0.0006) * 0.5
+        hiss = lowpass(rng.uniform(-1, 1, n_total), 4500) * 0.006
+        mix += np.stack([crackle + hiss, crackle + hiss], axis=1)
+    mix = lowpass_stereo(mix, m["lp"])
+    peak = float(np.abs(mix).max()) or 1.0
+    mix = soft_limit(mix / peak * 1.25, 1.35) * 0.9
+
+    out_n = int(duration * SR)
+    mix = mix[:out_n]
+    fin = int(0.6 * SR)
+    mix[:fin] *= np.linspace(0, 1, fin, dtype=np.float32)[:, None]
+    fout = int(min(2.5, duration / 4) * SR)
+    mix[-fout:] *= np.linspace(1, 0, fout, dtype=np.float32)[:, None]
+    return mix
+
+
+def _smooth(x: np.ndarray, win: int) -> np.ndarray:
+    if win < 2:
+        return x
+    k = np.ones(win, dtype=np.float32) / win
+    return np.convolve(x, k, mode="same")
+
+
+def lowpass_stereo(x: np.ndarray, fc: float) -> np.ndarray:
+    return np.stack([lowpass(x[:, 0], fc), lowpass(x[:, 1], fc)], axis=1)
+
+
+def render(mood: str, duration: float, seed: int = 0, engine: str = "auto") -> np.ndarray:
+    """BGM 한 곡. engine: auto(샘플 우선) | samples | synth"""
+    if engine in ("auto", "samples"):
+        try:
+            out = _render_sampled(mood, duration, seed)
+        except Exception as e:  # noqa: BLE001
+            from common import warn as _warn
+
+            _warn("bgm", f"샘플 연주 실패 → 합성으로 대체: {e.__class__.__name__}: {e}")
+            out = None
+        if out is not None:
+            return out
+        if engine == "samples":
+            raise RuntimeError("악기 샘플을 쓸 수 없습니다")
+    return _render_synth(mood, duration, seed)
+
+
+def write_wav(path: Path, audio: np.ndarray, stereo_width: float = 0.12) -> None:
+    """wav 로 저장. 모노면 살짝 넓혀 스테레오로 만든다."""
+    if audio.ndim == 2:
+        pcm = (np.clip(audio, -1, 1) * 32767).astype("<i2")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with wave.open(str(path), "wb") as w:
+            w.setnchannels(2)
+            w.setsampwidth(2)
+            w.setframerate(SR)
+            w.writeframes(pcm.tobytes())
+        return
+    mono = audio
     d = int(0.0007 * SR)
     left = mono
     right = np.concatenate([np.zeros(d), mono[:-d]]) if d else mono
@@ -325,9 +524,10 @@ def main() -> None:
     ap.add_argument("--duration", type=float, default=60)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--engine", default="auto", choices=["auto", "samples", "synth"])
     a = ap.parse_args()
-    write_wav(Path(a.out), render(a.mood, a.duration, a.seed))
-    print(f"[bgm] {a.mood} {a.duration:.0f}s seed={a.seed} → {a.out}")
+    write_wav(Path(a.out), render(a.mood, a.duration, a.seed, a.engine))
+    print(f"[bgm] {a.mood} {a.duration:.0f}s seed={a.seed} engine={a.engine} → {a.out}")
 
 
 if __name__ == "__main__":

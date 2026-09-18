@@ -26,7 +26,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | 키 | 설명 | 기본값 |
 |---|---|---|
 | `query` | 웹 검색어(영어 3~4단어) | mood |
-| `mood` | `playful` `calm` `lofi` `mysterious` `epic` (합성 루프의 코드 진행도 이걸로 정함) | `playful` |
+| `mood` | `playful` `calm` `lofi` `mysterious` `epic` — 생성 BGM 의 편성·템포·코드 진행을 정한다 | `playful` |
 | `volume` | 나레이션 대비 BGM 크기. 0.25~0.45 권장 | `0.35` |
 | `duck` | 나레이션 중 자동 감쇠(사이드체인) | `true` |
 | `file` | 직접 고른 음악 파일 경로(제공자 건너뜀) | 없음 |
