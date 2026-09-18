@@ -276,19 +276,25 @@ class CrowdWorld(private val seed: Int = 1) {
         mutableEnemies.clear()
         // Squads are spread evenly along the lane (one per zone), kept clear of gates, alternate
         // sides, and grow with how far along the lane they stand.
-        val zoneStart = 26f
+        val zoneStart = 40f
         val zoneEnd = length - 22f
         val zoneLen = (zoneEnd - zoneStart) / enemyCount
         for (i in 0 until enemyCount) {
-            var ez = zoneStart + zoneLen * (i + 0.35f + random.next() * 0.3f)
-            repeat(2) {
-                for (g in mutableGates) {
-                    if (abs(ez - g.z) < ENEMY_GATE_CLEARANCE) {
-                        ez = if (ez > g.z) g.z + ENEMY_GATE_CLEARANCE else g.z - ENEMY_GATE_CLEARANCE
+            val preferred = (zoneStart + zoneLen * (i + 0.35f + random.next() * 0.3f)).coerceIn(LANE_MIN_Z, length - 12f)
+            // Walk outwards from the preferred spot until the squad stands clear of every gate.
+            var ez = Float.NaN
+            var offset = 0f
+            while (offset <= zoneLen + ENEMY_GATE_CLEARANCE && ez.isNaN()) {
+                for (candidate in floatArrayOf(preferred + offset, preferred - offset)) {
+                    if (candidate < LANE_MIN_Z || candidate > length - 12f) continue
+                    if (mutableGates.all { abs(it.z - candidate) >= ENEMY_GATE_CLEARANCE }) {
+                        ez = candidate
+                        break
                     }
                 }
+                offset += 1f
             }
-            ez = ez.coerceIn(22f, length - 12f)
+            if (ez.isNaN()) continue
             val progress = ez / length
             val expected = expectedCountAt(ez)
             val shotsInRange = fireRateFor(expected) * (BULLET_RANGE / speed)
@@ -558,9 +564,9 @@ class CrowdWorld(private val seed: Int = 1) {
         const val PLAYER_BASE_RADIUS = 0.12f
         const val PLAYER_RADIUS_GROWTH = 0.018f
         const val PLAYER_MAX_RADIUS = 0.42f
-        const val BASE_SPEED = 6f
-        const val SPEED_PER_LEVEL = 0.4f
-        const val MAX_SPEED = 12f
+        const val BASE_SPEED = 4.4f
+        const val SPEED_PER_LEVEL = 0.28f
+        const val MAX_SPEED = 8.5f
         const val BASE_LENGTH = 110f
         const val LENGTH_PER_LEVEL = 12f
         const val BASE_GATES = 5
@@ -585,8 +591,9 @@ class CrowdWorld(private val seed: Int = 1) {
         const val BOSS_SHOOT_FACTOR = 0.5f
         const val ENEMY_SHOOT_FACTOR = 0.10f
         const val ENEMY_GATE_CLEARANCE = 7f
-        const val ENEMY_MARCH_SPEED = 1.2f
-        const val ENEMY_MARCH_RANGE = 35f
+        const val LANE_MIN_Z = 24f
+        const val ENEMY_MARCH_SPEED = 0.7f
+        const val ENEMY_MARCH_RANGE = 30f
         const val MIN_ENEMY = 2
 
         const val ITEM_RADIUS = 0.22f

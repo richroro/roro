@@ -496,8 +496,12 @@ class CrowdView @JvmOverloads constructor(
 
     // ---- projection helpers -------------------------------------------------------------
 
-    /** Scale factor for something [d] metres ahead of the crowd. */
-    private fun factor(d: Float): Float = 1f / (1f + max(0f, d) * DEPTH_K)
+    /**
+     * Scale factor for something [d] metres ahead of the crew. Negative distances are allowed so
+     * the road, ruts and fences carry on past the crew to the bottom edge of the screen instead of
+     * stopping short on the grass.
+     */
+    private fun factor(d: Float): Float = 1f / (1f + max(-NEAR_OVERSHOOT, d) * DEPTH_K)
 
     private fun screenY(f: Float): Float {
         val h = height.toFloat()
@@ -569,7 +573,7 @@ class CrowdView @JvmOverloads constructor(
         canvas.drawRect(0f, hz, w, h, grassPaint)
 
         val farF = factor(VIEW_DISTANCE)
-        val nearF = factor(-3f)
+        val nearF = factor(-NEAR_OVERSHOOT)
         val farY = screenY(farF)
         val nearY = screenY(nearF)
         path.reset()
@@ -582,7 +586,7 @@ class CrowdView @JvmOverloads constructor(
         for (rx in floatArrayOf(-0.45f, 0.45f)) {
             canvas.drawLine(screenX(rx, nearF), nearY, screenX(rx, farF), farY, rutPaint)
         }
-        var z = -(world.z % 5f)
+        var z = -(world.z % 5f) - 5f
         while (z < VIEW_DISTANCE) {
             val f = factor(z)
             val k = ((z + world.z) / 5f).toInt()
@@ -609,7 +613,7 @@ class CrowdView @JvmOverloads constructor(
         // fence rails and posts
         for (side in floatArrayOf(-1f, 1f)) {
             canvas.drawLine(screenX(side * 1.06f, nearF), nearY - w * 0.035f, screenX(side * 1.06f, farF), farY - w * 0.035f * farF, fencePaint)
-            var fz = -(world.z % 6f)
+            var fz = -(world.z % 6f) - 6f
             while (fz < VIEW_DISTANCE) {
                 val f = factor(fz)
                 val px = screenX(side * 1.06f, f)
@@ -920,6 +924,7 @@ class CrowdView @JvmOverloads constructor(
         private const val BASE_Y = 0.86f
         private const val LANE_HALF_PX = 0.5f
         private const val VIEW_DISTANCE = 60f
+        private const val NEAR_OVERSHOOT = 3.4f
         private const val STRIPE_SPACING = 4f
         private const val WALL_HEIGHT = 0.035f
         private const val MAX_DRAWN_UNITS = 64

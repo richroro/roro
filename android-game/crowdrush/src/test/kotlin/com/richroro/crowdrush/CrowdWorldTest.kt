@@ -205,7 +205,7 @@ class CrowdWorldTest {
             val world = CrowdWorld(seed = seed).apply { start() }
             for (e in world.enemies) {
                 assertTrue("seed $seed enemy at ${e.z} too close to a gate", world.gates.all { abs(it.z - e.z) >= CrowdWorld.ENEMY_GATE_CLEARANCE - 1e-3f })
-                assertTrue(e.z >= 22f && e.z <= world.length - 12f)
+                assertTrue(e.z >= CrowdWorld.LANE_MIN_Z && e.z <= world.length - 12f)
                 assertTrue(abs(e.x) + CrowdWorld.ENEMY_HALF_WIDTH <= CrowdWorld.LANE_HALF + 0.05f)
                 assertTrue(e.count >= CrowdWorld.MIN_ENEMY)
             }
