@@ -259,9 +259,9 @@ MONSTERS = {
     "ogre": {"body": (0x5B, 0xA6, 0x3C), "light": (0x8A, 0xD1, 0x5E), "dark": (0x3C, 0x75, 0x27), "belly": (0xC9, 0xE0, 0x8C),
              "eye_w": (0xFF, 0xF3, 0xC4), "iris": (0xB9, 0x1C, 0x1C), "accent": (0xE8, 0xD8, 0xB0), "accent_dark": (0xB8, 0xA5, 0x7A),
              "weapon": (0x7C, 0x4A, 0x1E), "weapon_dark": (0x54, 0x30, 0x12), "cloth": (0x6B, 0x4A, 0x2E)},
-    "troll": {"body": (0x6F, 0x8A, 0xA8), "light": (0x9C, 0xB6, 0xCF), "dark": (0x46, 0x5D, 0x78), "belly": (0xB9, 0xC9, 0xD9),
-              "eye_w": (0xFF, 0xF7, 0xD6), "iris": (0xF5, 0x9E, 0x0B), "accent": (0x2B, 0x2F, 0x3A), "accent_dark": (0x15, 0x18, 0x20),
-              "weapon": (0x8A, 0x8F, 0x99), "weapon_dark": (0x55, 0x5A, 0x63), "cloth": (0x3F, 0x52, 0x3A)},
+    "troll": {"body": (0xC9, 0xA3, 0x3E), "light": (0xE8, 0xC9, 0x63), "dark": (0x8E, 0x6D, 0x1E), "belly": (0xF0, 0xDC, 0x9A),
+              "eye_w": (0xFF, 0xF7, 0xD6), "iris": (0x2B, 0x2F, 0x3A), "accent": (0x3A, 0x2E, 0x18), "accent_dark": (0x1F, 0x18, 0x0C),
+              "weapon": (0xD4, 0xAF, 0x37), "weapon_dark": (0x9A, 0x7B, 0x1E), "cloth": (0x2E, 0x2A, 0x3A)},
     "golem": {"body": (0x8C, 0x7B, 0x66), "light": (0xB3, 0xA3, 0x8A), "dark": (0x5E, 0x50, 0x40), "belly": (0xA3, 0x92, 0x7A),
               "eye_w": (0xFF, 0xB0, 0x2E), "iris": (0xFF, 0x62, 0x00), "accent": (0xFF, 0x8A, 0x1F), "accent_dark": (0xC2, 0x50, 0x00),
               "weapon": (0x6F, 0x62, 0x50), "weapon_dark": (0x46, 0x3C, 0x30), "cloth": (0x4A, 0x40, 0x34)},
@@ -383,6 +383,52 @@ def _monster_head(c, t, cx, O, eyes, horns, tusks, hair=False, brow=True):
         c.polygon([(fx - 4, 76), (fx + 4, 76), (fx, 66)], MON_TOOTH)
 
 
+def _prop_necktie(c, cx, O):
+    """Stage 1: the boss's red necktie and staff lanyard."""
+    c.polygon([(cx - 8, 82), (cx + 8, 82), (cx + 4, 92), (cx - 4, 92)], OUTLINE)
+    c.polygon([(cx - 6, 83), (cx + 6, 83), (cx + 3, 91), (cx - 3, 91)], (0xC0, 0x1E, 0x2E))
+    c.polygon([(cx - 9, 92), (cx + 9, 92), (cx + 5, 124), (cx, 132), (cx - 5, 124)], OUTLINE)
+    c.polygon([(cx - 7, 93), (cx + 7, 93), (cx + 4, 123), (cx, 129), (cx - 4, 123)], (0xD6, 0x2E, 0x3E))
+    c.polygon([(cx - 7, 93), (cx - 1, 93), (cx - 2, 122), (cx - 4, 123)], (0xE8, 0x5C, 0x66))
+    for side in (-1, 1):                                                     # lanyard
+        c.rot_rect(cx + side * 20, 96, 4, 40, side * 16, (0x1F, 0x2A, 0x44))
+    c.rrect(cx - 12, 112, cx + 12, 130, 2, (0xF1, 0xF5, 0xF9), outline=1.5)  # staff badge
+    c.rrect(cx - 9, 116, cx + 9, 119, 0.5, (0x94, 0xA3, 0xB8))
+    c.rrect(cx - 9, 122, cx + 4, 125, 0.5, (0x94, 0xA3, 0xB8))
+
+
+def _prop_gold(c, cx, O):
+    """Stage 2: the friend who married rich — crown, chains, gold watch."""
+    c.polygon([(cx - 26, 18), (cx - 18, -2), (cx - 8, 12), (cx, -6), (cx + 8, 12), (cx + 18, -2), (cx + 26, 18)], OUTLINE)
+    c.polygon([(cx - 23, 17), (cx - 16, 1), (cx - 8, 14), (cx, -3), (cx + 8, 14), (cx + 16, 1), (cx + 23, 17)], (0xF5, 0xD0, 0x4A))
+    c.rrect(cx - 24, 16, cx + 24, 23, 2, (0xD4, 0xAF, 0x37), outline=1.5)
+    for k in (-1, 0, 1):
+        c.circle(cx + k * 12, 19, 3, (0xE8, 0x3D, 0x6B), outline=1)           # jewels
+    for k in range(7):                                                        # gold chain
+        c.circle(cx - 27 + k * 9, 86 + abs(k - 3) * 3, 5, (0xF5, 0xD0, 0x4A), outline=1.5)
+    c.circle(cx, 104, 9, (0xF5, 0xD0, 0x4A), outline=1.5)                     # pendant
+    c.polygon([(cx - 4, 100), (cx + 4, 100), (cx, 110)], (0xFF, 0xF2, 0xB0))
+    c.rrect(cx + 52, 120, cx + 76, 132, 3, (0xF5, 0xD0, 0x4A), outline=1.5)   # wrist watch
+    c.circle(cx + 64, 126, 9, (0xFF, 0xF2, 0xB0), outline=1.5)
+    c.rot_rect(cx + 64, 124, 2, 8, 20, (0x3A, 0x2E, 0x18))
+
+
+def _prop_perm(c, cx, O):
+    """Stage 3: the nagging aunt — tight perm and round glasses."""
+    for k in range(9):                                                        # perm curls
+        ang = math.pi + k * (math.pi / 8)
+        px = cx + math.cos(ang) * 40
+        py = 44 + math.sin(ang) * 36
+        c.circle(px, py, 9, (0x6B, 0x46, 0x2B), outline=1.6)
+        c.circle(px - 2, py - 2, 4, (0x8A, 0x5E, 0x3C))
+    for side in (-1, 1):                                                      # round glasses
+        c.circle(cx + side * 15, 44, 13, (0x2B, 0x2F, 0x3A), outline=0)
+        c.circle(cx + side * 15, 44, 10.5, (0xE8, 0xF4, 0xFF))
+        c.circle(cx + side * 15 - 4, 40, 3.5, (0xFF, 0xFF, 0xFF))
+        c.circle(cx + side * 15 + 1, 45, 5, (0x1A, 0x1A, 0x1A))
+    c.rrect(cx - 6, 42, cx + 6, 45, 1, (0x2B, 0x2F, 0x3A))                    # bridge
+
+
 def draw_monster(c: Canvas, kind: str, frame: int):
     """Hulking monsters facing the camera, 160x200. frame 0/1 = stomping walk cycle."""
     t = MONSTERS[kind]
@@ -405,13 +451,15 @@ def draw_monster(c: Canvas, kind: str, frame: int):
         c.rot_rect(cx + 20, 92, 22, 3, 30, t["dark"])                                      # scar
         _monster_head(c, t, cx, O, eyes=1, horns="straight", tusks=False)
         c.rot_rect(cx + 22, 38, 16, 3, 40, t["dark"])                                      # head scar
+        _prop_necktie(c, cx, O)
     elif kind == "troll":
         for (sx_, sy) in ((cx - 34, 92), (cx + 30, 82), (cx - 20, 124)):                  # stone-like spots
             c.ellipse(sx_, sy, 6, 4, t["dark"])
-        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=True, hair=True)
+        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=True, hair=False)
         c.ellipse(cx, 56, 11, 8, t["light"], outline=O)                                    # big nose
         c.circle(cx - 4, 58, 2, t["dark"])
         c.circle(cx + 4, 58, 2, t["dark"])
+        _prop_gold(c, cx, O)
     elif kind == "golem":
         # stone plates and glowing cracks
         for (px, py, pw, ph) in ((cx - 36, 70, 26, 20), (cx + 8, 66, 30, 22), (cx - 20, 96, 34, 26), (cx + 18, 100, 24, 20)):
@@ -419,11 +467,7 @@ def draw_monster(c: Canvas, kind: str, frame: int):
         for (x0, y0, x1, y1) in ((cx - 10, 84, cx + 6, 96), (cx + 6, 96, cx - 2, 112)):
             c.rot_rect((x0 + x1) / 2, (y0 + y1) / 2, 4, math.hypot(x1 - x0, y1 - y0), math.degrees(math.atan2(y1 - y0, x1 - x0)) - 90, t["accent"])
         _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=False, brow=False)
-        c.rrect(cx - 24, 22, cx + 24, 34, 4, t["light"], outline=1.5)                      # brow plate
-        for k in range(3):                                                                 # rock spikes on the head
-            sx_ = cx - 20 + k * 20
-            c.polygon([(sx_ - 8, 18), (sx_ + 8, 18), (sx_, 2)], OUTLINE)
-            c.polygon([(sx_ - 6, 18), (sx_ + 6, 18), (sx_, 5)], t["light"])
+        _prop_perm(c, cx, O)
     elif kind == "demon":
         _monster_head(c, t, cx, O, eyes=2, horns="curved", tusks=False)
         for k in range(4):                                                                 # flames on the crown

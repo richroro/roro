@@ -1,31 +1,30 @@
 <resources>
-    <string name="app_name">고블린 헌터</string>
-    <string name="how_to_play">레인저 부대가 자동으로 사격합니다.
-룬 게이트를 쏴서 숫자를 키우고 고블린 무리를 물리치고
+    <string name="app_name">빌런 러시</string>
+    <string name="how_to_play">동료들이 알아서 사격합니다.
+게이트를 쏴서 동료를 늘리고 자잘한 것들을 걷어내고
 아이템(⚡연사 🛡방어막 ✚증원 💣폭탄)을 모아
-길 끝에서 기다리는 오우거를 쓰러뜨리세요</string>
+오늘의 빌런을 쓰러뜨리세요</string>
     <string name="tap_to_start">탭해서 시작</string>
-    <string name="tap_next_level">탭해서 다음 레벨</string>
+    <string name="tap_next_level">탭해서 다음 스테이지</string>
     <string name="tap_to_retry">탭해서 다시 하기</string>
     <string name="game_over">게임 오버</string>
     <string name="level_label">레벨 %1$d</string>
     <string name="best_label">최고 %1$d</string>
-    <string name="level_clear">레벨 %1$d 클리어!</string>
-    <string name="remaining">남은 병력 %1$d</string>
-    <string name="remaining_and_kills">남은 병력 %1$d · 사살 %2$d</string>
     <string name="reached_level">레벨 %1$d 도달</string>
-    <string name="msg_wiped">레인저가 모두 쓰러졌습니다</string>
-    <string name="msg_lost_to_squad">고블린 %1$d마리에게 패배</string>
-    <string name="msg_boss_beaten">%1$s 격파! (HP %2$d)</string>
-    <string name="msg_lost_to_boss">%1$s에게 패배 (HP %2$d 남음)</string>
+    <string name="msg_wiped">버틸 사람이 하나도 남지 않았다</string>
+    <string name="msg_lost_to_squad">%1$d개에 파묻혔다</string>
+    <string name="msg_boss_beaten">%1$s 격파!</string>
+    <string name="msg_lost_to_boss">%1$s에게 졌다 (HP %2$d 남음)</string>
     <string name="item_rapid">연사</string>
     <string name="item_shield">방어막</string>
     <string name="item_reinforce">증원</string>
     <string name="item_bomb">폭탄</string>
     <string name="shield_blocked">🛡 방어!</string>
-    <string name="monster_ogre">오우거</string>
-    <string name="monster_troll">트롤</string>
-    <string name="monster_golem">바위 골렘</string>
-    <string name="monster_demon">화염 마귀</string>
-    <string name="monster_appears">%1$s 출현!</string>
+    <string name="monster_appears">%1$s 등장!</string>
+    <string name="stage_label">STAGE %1$d</string>
+    <string name="stage_season_label">STAGE %1$d · 시즌 %2$d</string>
+    <string name="stage_cleared">STAGE %1$d 클리어</string>
+    <string name="clear_title">%1$s 격파!</string>
+    <string name="crew_left">남은 동료 %1$d · 처치 %2$d</string>
+    <string name="next_up">다음 상대 %1$s · %2$s</string>
 </resources>

@@ -1,31 +1,30 @@
 <resources>
-    <string name="app_name">Goblin Hunters</string>
-    <string name="how_to_play">Your rangers fire automatically.
-Shoot rune gates to raise their numbers, cut down goblin packs,
-grab items (⚡ rapid fire, 🛡 shield, ✚ reinforcements, 💣 bomb)
-and bring down the ogre waiting at the end of the road</string>
+    <string name="app_name">Villain Rush</string>
+    <string name="how_to_play">Your crew fires on its own.
+Shoot the gates to grow the crowd, clear the small stuff,
+grab items (⚡ rapid fire, 🛡 shield, ✚ backup, 💣 bomb)
+and take down the villain waiting at the end of the day</string>
     <string name="tap_to_start">Tap to start</string>
-    <string name="tap_next_level">Tap for next level</string>
+    <string name="tap_next_level">Tap for the next stage</string>
     <string name="tap_to_retry">Tap to play again</string>
     <string name="game_over">GAME OVER</string>
     <string name="level_label">LEVEL %1$d</string>
     <string name="best_label">Best %1$d</string>
-    <string name="level_clear">LEVEL %1$d CLEAR!</string>
-    <string name="remaining">%1$d troops left</string>
-    <string name="remaining_and_kills">%1$d troops left · %2$d kills</string>
     <string name="reached_level">Reached level %1$d</string>
-    <string name="msg_wiped">Your rangers were wiped out</string>
-    <string name="msg_lost_to_squad">Overrun by a pack of %1$d goblins</string>
-    <string name="msg_boss_beaten">%1$s defeated! (HP %2$d)</string>
-    <string name="msg_lost_to_boss">Devoured by the %1$s (HP %2$d left)</string>
+    <string name="msg_wiped">Nobody was left standing</string>
+    <string name="msg_lost_to_squad">Buried under %1$d of them</string>
+    <string name="msg_boss_beaten">%1$s defeated!</string>
+    <string name="msg_lost_to_boss">%1$s beat you (HP %2$d left)</string>
     <string name="item_rapid">Rapid fire</string>
     <string name="item_shield">Shield</string>
     <string name="item_reinforce">Reinforcements</string>
     <string name="item_bomb">Bomb</string>
     <string name="shield_blocked">🛡 Blocked!</string>
-    <string name="monster_ogre">Ogre</string>
-    <string name="monster_troll">Troll</string>
-    <string name="monster_golem">Rock Golem</string>
-    <string name="monster_demon">Fire Demon</string>
     <string name="monster_appears">%1$s appears!</string>
+    <string name="stage_label">STAGE %1$d</string>
+    <string name="stage_season_label">STAGE %1$d · Season %2$d</string>
+    <string name="stage_cleared">STAGE %1$d CLEARED</string>
+    <string name="clear_title">%1$s defeated!</string>
+    <string name="crew_left">%1$d crew left · %2$d cleared</string>
+    <string name="next_up">Next up: %1$s · %2$s</string>
 </resources>

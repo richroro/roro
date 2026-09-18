@@ -133,7 +133,7 @@ class CrowdView @JvmOverloads constructor(
     private val gateGoodPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_good) }
     private val gateBadPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_bad) }
     private val gateUsedPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_used) }
-    private val overlayPaint = Paint().apply { color = color(R.color.overlay) }
+    private val overlayPaint = Paint().apply { color = color(R.color.overlay_story) }
     private val barBackPaint = Paint().apply { color = 0x590F172A }
     private val barPaint = Paint().apply { color = color(R.color.gold) }
     private val bulletPaint = Paint().apply { color = color(R.color.bullet) }
@@ -280,7 +280,7 @@ class CrowdView @JvmOverloads constructor(
                 play(sndBuzz, 3, 150, 0.7f)
             }
             CrowdWorld.Event.Type.CONTACT -> {
-                floatText("-" + e.value, e.x, e.z, sparkBad)
+                floatText("-" + e.value + " " + stageMobs[stageIndex(world.level)], e.x, e.z, sparkBad)
                 sparks(e.x, e.z, 14, color(R.color.spark_enemy), 0.4f)
                 play(sndBuzz, 3, 150, 0.7f)
             }
@@ -300,14 +300,20 @@ class CrowdView @JvmOverloads constructor(
         }
     }
 
-    private fun monsterName(kind: Int): String = context.getString(
-        when (kind) {
-            1 -> R.string.monster_troll
-            2 -> R.string.monster_golem
-            3 -> R.string.monster_demon
-            else -> R.string.monster_ogre
-        },
-    )
+    // ---- stage stories (res/values/arrays.xml): each stage is an everyday-villain vignette ----
+    private val stagePlaces: Array<String> = resources.getStringArray(R.array.stage_place)
+    private val stageVillains: Array<String> = resources.getStringArray(R.array.stage_villain)
+    private val stageTags: Array<String> = resources.getStringArray(R.array.stage_tag)
+    private val stageStories: Array<String> = resources.getStringArray(R.array.stage_story)
+    private val stageMobs: Array<String> = resources.getStringArray(R.array.stage_mob)
+    private val stageClears: Array<String> = resources.getStringArray(R.array.stage_clear)
+    private val stageFails: Array<String> = resources.getStringArray(R.array.stage_fail)
+
+    private fun stageIndex(level: Int): Int = (level - 1).mod(stageVillains.size)
+
+    private fun seasonOf(level: Int): Int = (level - 1) / stageVillains.size + 1
+
+    private fun monsterName(kind: Int): String = stageVillains[kind.coerceIn(0, stageVillains.size - 1)]
 
     private fun itemGlyph(kind: CrowdWorld.ItemKind): String = when (kind) {
         CrowdWorld.ItemKind.RAPID -> "⚡"
@@ -839,43 +845,63 @@ class CrowdView @JvmOverloads constructor(
         val n = parts.getOrNull(1)?.toIntOrNull() ?: 0
         return when (parts[0]) {
             "wiped" -> context.getString(R.string.msg_wiped)
-            "squad" -> context.getString(R.string.msg_lost_to_squad, n)
-            "boss_beaten" -> context.getString(R.string.msg_boss_beaten, monsterName(world.boss?.kind ?: 0), n)
+            "squad" -> context.getString(R.string.msg_lost_to_squad, n) + " (" + stageMobs[stageIndex(world.level)] + ")"
+            "boss_beaten" -> context.getString(R.string.msg_boss_beaten, monsterName(world.boss?.kind ?: 0))
             "boss_lost" -> context.getString(R.string.msg_lost_to_boss, monsterName(world.boss?.kind ?: 0), n)
             else -> ""
         }
     }
 
     private fun drawOverlay(canvas: Canvas, w: Float, h: Float) {
+        val stage = stageIndex(world.level)
+        val season = seasonOf(world.level)
+        val stageTag = if (season > 1) {
+            context.getString(R.string.stage_season_label, world.level, season)
+        } else {
+            context.getString(R.string.stage_label, world.level)
+        } + " · " + stagePlaces[stage]
+
+        val pre: String
         val title: String
         val body: String
         val accent: String
         when (world.state) {
             CrowdWorld.State.READY -> {
-                title = context.getString(R.string.app_name)
-                body = context.getString(R.string.how_to_play)
+                pre = stageTag
+                title = context.getString(R.string.monster_appears, stageVillains[stage])
+                body = stageStories[stage]
                 accent = context.getString(R.string.tap_to_start)
             }
             CrowdWorld.State.LEVEL_CLEAR -> {
-                title = context.getString(R.string.level_clear, world.level)
-                body = localizedMessage() + "\n" + context.getString(R.string.remaining_and_kills, world.count, world.kills)
+                val next = stageIndex(world.level + 1)
+                pre = context.getString(R.string.stage_cleared, world.level)
+                title = context.getString(R.string.clear_title, stageVillains[stage])
+                body = stageClears[stage] + "\n\n" +
+                    context.getString(R.string.crew_left, world.count, world.kills) + "\n" +
+                    context.getString(R.string.next_up, stageVillains[next], stageTags[next])
                 accent = context.getString(R.string.tap_next_level)
             }
             CrowdWorld.State.GAME_OVER -> {
+                pre = stageTag
                 title = context.getString(R.string.game_over)
-                body = localizedMessage() + "\n" + context.getString(R.string.reached_level, world.level)
+                body = localizedMessage() + "\n" + stageFails[stage]
                 accent = context.getString(R.string.tap_to_retry)
             }
             CrowdWorld.State.RUNNING -> return
         }
+
         canvas.drawRect(0f, 0f, w, h, overlayPaint)
-        label(canvas, title, w / 2f, h * 0.40f, w * 0.10f, Color.WHITE, color(R.color.gate_post_good))
-        var y = h * 0.40f + w * 0.13f
+        var y = h * 0.3f
+        label(canvas, pre, w / 2f, y, w * 0.042f, color(R.color.spark_good), color(R.color.text_stroke))
+        y += w * 0.09f
+        label(canvas, title, w / 2f, y, w * 0.1f, Color.WHITE, color(R.color.gate_post_good))
+        y += w * 0.1f
+        bodyPaint.textSize = w * 0.044f
         for (line in body.split('\n')) {
             canvas.drawText(line, w / 2f, y, bodyPaint)
-            y += w * 0.065f
+            y += w * 0.062f
         }
-        label(canvas, accent, w / 2f, y + w * 0.08f, w * 0.065f, color(R.color.gold), color(R.color.gold_stroke))
+        label(canvas, accent, w / 2f, y + w * 0.06f, w * 0.06f, color(R.color.gold), color(R.color.gold_stroke))
     }
 
     private fun color(resId: Int): Int = context.getColor(resId)

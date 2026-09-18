@@ -1,0 +1,44 @@
+<resources>
+    <string-array name="stage_place">
+        <item>월요일 오전 9시 · 사무실</item>
+        <item>10년 만의 동창회 · 호텔 뷔페</item>
+        <item>추석 당일 · 큰집 거실</item>
+        <item>이사 첫날 밤 11시 · 새 아파트</item>
+    </string-array>
+    <string-array name="stage_villain">
+        <item>김부장</item>
+        <item>황금수저</item>
+        <item>잔소리 이모</item>
+        <item>층간소음 마왕</item>
+    </string-array>
+    <string-array name="stage_tag">
+        <item>왕년엔 말이야</item>
+        <item>재벌집 사위</item>
+        <item>30년째 같은 질문</item>
+        <item>윗집</item>
+    </string-array>
+    <string-array name="stage_story">
+        <item>주간회의 5분 전.\n부장님이 내 기획안을 들고 오시더니\n"이거 내가 말했던 거잖아?" 라고 하신다.</item>
+        <item>"야 난 그냥 쉬어~\n장인어른이 건물 하나 주셔서."\n오늘만 벌써 세 번째로 차 키를 꺼낸다.</item>
+        <item>전을 채 삼키기도 전에 시작된다.\n"취직은? 결혼은?\n옆집 애는 벌써 둘째라던데."</item>
+        <item>분명 조용한 동네라고 했는데.\n천장에서 드리블 소리가 들린다.\n심지어 리듬까지 탄다.</item>
+    </string-array>
+    <string-array name="stage_mob">
+        <item>갑자기 잡힌 회의</item>
+        <item>은근한 자랑</item>
+        <item>잔소리</item>
+        <item>쿵쿵</item>
+    </string-array>
+    <string-array name="stage_clear">
+        <item>부장님, 다음 주 휴가 가신다고 합니다.</item>
+        <item>그가 2차를 쐈다.\n오늘은 내가 이겼다.</item>
+        <item>이모가 드라마 보러 가셨다.\n지금이 기회다.</item>
+        <item>윗집이 매트를 깔았다.\n마침내 평화가 왔다.</item>
+    </string-array>
+    <string-array name="stage_fail">
+        <item>내 기획안은 부장님 이름으로 올라갔다.</item>
+        <item>집에 오는 길에 전세 계약서를 다시 읽었다.</item>
+        <item>설날 예고편이 벌써 떴다. "그때 보자."</item>
+        <item>새벽 3시. 나는 천장을 보며 눈을 떴다.</item>
+    </string-array>
+</resources>
