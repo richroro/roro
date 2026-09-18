@@ -1,0 +1,115 @@
+name: Shorts Daily Render
+
+# 매일 18:00 KST(09:00 UTC) 에 auto-shorts 큐의 맨 앞 대본으로 세로 쇼츠 1편을 렌더한다.
+#  - YOUTUBE_TOKEN_JSON 이 있으면 유튜브 쇼츠에 업로드
+#  - SLACK_BOT_TOKEN 이 있으면 완성 mp4 + 캡션을 DM 으로 전송 (틱톡/클립/릴스는 폰에서 업로드)
+#  - 결과물은 항상 워크플로 Artifacts 에도 7일간 보관
+#  - 처리한 대본은 queue/posted/ 로 옮겨 커밋 → 중복 제작 방지
+on:
+  schedule:
+    - cron: "0 9 * * *"        # 09:00 UTC = 18:00 KST
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "이번 실행에서 만들 편수"
+        default: "1"
+      tts:
+        description: "edge(실제 TTS) / silent(무음 테스트)"
+        default: "edge"
+      no_upload:
+        description: "유튜브 업로드 생략 (true/false)"
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shorts-daily
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 스킬(.claude/skills/auto-shorts)이 있는 브랜치를 체크아웃한다.
+          # 기본은 이 워크플로 파일이 있는 브랜치. 스킬을 다른 브랜치에 두면
+          # 다른 워크플로처럼 ref: <브랜치명> 으로 고정할 것.
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg + Korean fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-nanum > /dev/null
+          ffmpeg -version | head -1
+          fc-list | grep -i nanum | head -2
+
+      - name: Install Python dependencies
+        run: pip install --quiet -r .claude/skills/auto-shorts/requirements.txt
+
+      - name: Restore secrets
+        env:
+          AUTO_SHORTS_CONFIG_JSON: ${{ secrets.AUTO_SHORTS_CONFIG_JSON }}
+          YOUTUBE_TOKEN_JSON: ${{ secrets.YOUTUBE_TOKEN_JSON }}
+        run: |
+          set -e
+          SKILL=.claude/skills/auto-shorts
+          mkdir -p "$SKILL/secrets"
+          if [ -n "$AUTO_SHORTS_CONFIG_JSON" ]; then
+            printf '%s' "$AUTO_SHORTS_CONFIG_JSON" > "$SKILL/secrets/config.json"
+            python -c "import json;json.load(open('$SKILL/secrets/config.json'));print('config OK')"
+          else
+            echo "AUTO_SHORTS_CONFIG_JSON 없음 — Slack 대상 미설정 (알림 생략)"
+          fi
+          if [ -n "$YOUTUBE_TOKEN_JSON" ]; then
+            printf '%s' "$YOUTUBE_TOKEN_JSON" > "$SKILL/secrets/youtube_token.json"
+            python -c "import json;json.load(open('$SKILL/secrets/youtube_token.json'));print('youtube token OK')"
+          else
+            echo "YOUTUBE_TOKEN_JSON 없음 — 유튜브 업로드 생략"
+          fi
+
+      - name: Render (and upload) next queued short
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SHORTS_OUTPUT_DIR: ${{ github.workspace }}/shorts_output
+        run: |
+          set -e
+          ARGS="--count ${{ github.event.inputs.count || '1' }} --tts ${{ github.event.inputs.tts || 'edge' }}"
+          if [ "${{ github.event.inputs.no_upload }}" = "true" ]; then ARGS="$ARGS --no-upload"; fi
+          python .claude/skills/auto-shorts/scripts/daily_shorts.py $ARGS
+
+      - name: Upload rendered files as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-${{ github.run_id }}
+          path: |
+            shorts_output/**/final.mp4
+            shorts_output/**/cover.png
+            shorts_output/**/caption.txt
+            shorts_output/**/captions.srt
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Commit queue/data changes
+        if: always()
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/auto-shorts/queue .claude/skills/auto-shorts/data
+          if git diff --cached --quiet; then
+            echo "변동 없음 — 커밋 생략"
+            exit 0
+          fi
+          git commit -m "chore(auto-shorts): advance queue after daily render [skip ci]"
+          git push

@@ -1,3 +1,22 @@
-.claude/
+# .claude 는 기본 무시하되, 스킬/에이전트는 추적한다 (add-blogger-auto-post-skill 브랜치와 동일 규칙)
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+!.claude/agents/
+!.claude/agents/**
 portfolio/
 webcam_preview.py
+slackbot/.env
+slackbot/bot.log
+
+# auto-shorts: 비밀·결과물은 git 밖. queue/ 와 data/ 는 추적한다 (Actions 가 거기서 읽고 커밋).
+shorts_output/
+.claude/skills/auto-shorts/secrets/
+.claude/skills/auto-shorts/topics.txt
+.claude/skills/auto-shorts/assets/*.mp3
+.claude/skills/auto-shorts/assets/*.wav
+
+# 공통 런타임 찌꺼기
+__pycache__/
+*.pyc
+*.log

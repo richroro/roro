@@ -1,0 +1,8 @@
+# auto-shorts: 렌더 + TTS + 유튜브 업로드
+pillow
+edge-tts
+google-api-python-client
+google-auth-oauthlib
+google-auth-httplib2
+# ffmpeg 가 PATH 에 없을 때의 폴백 (ffprobe 는 포함되지 않음)
+imageio-ffmpeg
