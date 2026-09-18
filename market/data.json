@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T18:35:18.000870+09:00",
+  "updatedAt": "2026-09-18T23:20:29.827548+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51778.04,
-      "change": 316.14,
-      "changePercent": 0.61,
+      "price": 51605.91,
+      "change": -172.13,
+      "changePercent": -0.33,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26418.3,
-      "change": 439.88,
-      "changePercent": 1.69,
+      "price": 26389.06,
+      "change": -29.24,
+      "changePercent": -0.11,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1385.68,
-      "change": 5.73,
-      "changePercent": 0.42,
+      "price": 1389.71,
+      "change": 9.76,
+      "changePercent": 0.71,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,71 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 337.0,
-      "change": 4.59,
-      "changePercent": 1.38,
+      "price": 333.35,
+      "change": -3.65,
+      "changePercent": -1.08,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 366.2,
-      "change": 8.12,
-      "changePercent": 2.27,
+      "price": 362.7,
+      "change": -3.5,
+      "changePercent": -0.96,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 219.34,
-      "change": 5.44,
-      "changePercent": 2.54,
+      "price": 220.44,
+      "change": 1.1,
+      "changePercent": 0.5,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"이번엔 일본 안 가요\"…'이 나라' 1150만명 몰리자 벌어진 일 [플라잇톡]",
+      "link": "https://www.hankyung.com/article/202609183926g",
+      "pubDate": "Fri, 18 Sep 2026 22:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"설립 2년 만에 7500억 회사 됐다\"…투자자들 몰린 '이 기술'",
+      "link": "https://www.hankyung.com/article/2026091844761",
+      "pubDate": "Fri, 18 Sep 2026 20:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'품절, 품절, 또 품절'…99만개 팔린 빵, 매장 가도 없는 이유 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609183061g",
+      "pubDate": "Fri, 18 Sep 2026 20:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "韓총리, 태릉지구 방문…\"국민신뢰 가늠자, 차질없이 추진\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918180500001",
+      "pubDate": "Fri, 18 Sep 2026 19:38:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "키움증권, 창사 이후 첫 신종자본증권 발행…4천억원 규모",
+      "link": "https://www.yna.co.kr/view/AKR20260918180400008",
+      "pubDate": "Fri, 18 Sep 2026 19:24:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "케이비제34호·한국제17호 스팩, 22일 코스닥 신규 상장",
+      "link": "https://www.yna.co.kr/view/AKR20260918176600008",
+      "pubDate": "Fri, 18 Sep 2026 19:07:15 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한국 가입 디지털경제협정 외연 확대…코스타리카 가입 발효",
+      "link": "https://www.yna.co.kr/view/AKR20260918176800003",
+      "pubDate": "Fri, 18 Sep 2026 18:53:38 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "靑 \"李대통령 '평탄화' 발언, 가격 변동 추이에 대한 설명\"",
       "link": "https://www.yna.co.kr/view/AKR20260918171600001",
@@ -184,51 +226,9 @@
       "source": "한국경제"
     },
     {
-      "title": "의무공개매수제까지…'겹규제'에 묶인 M&A",
-      "link": "https://www.hankyung.com/article/2026091845751",
-      "pubDate": "Fri, 18 Sep 2026 17:40:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "당진 석탄발전, LNG로 전환…호남팹 전력 댄다",
-      "link": "https://www.hankyung.com/article/2026091845741",
-      "pubDate": "Fri, 18 Sep 2026 17:40:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"구글이 수만대 주문했다\"…현대차가 미국서 만드는 '이 차'",
-      "link": "https://www.hankyung.com/article/2026091844851",
-      "pubDate": "Fri, 18 Sep 2026 17:37:29 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "박홍근 \"2045전략, 국민 가슴 뛰게해야\"…'전국민참여형' 추진",
       "link": "https://www.yna.co.kr/view/AKR20260918164300002",
       "pubDate": "Fri, 18 Sep 2026 17:36:13 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "저작권보호원, 해외 K-콘텐츠 불법게시물 19만여 건 삭제",
-      "link": "https://www.yna.co.kr/view/AKR20260918166200005",
-      "pubDate": "Fri, 18 Sep 2026 17:34:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "일본은행, 3개월만에 또 금리인상…1.25%로 31년만에 최고(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260918089052073",
-      "pubDate": "Fri, 18 Sep 2026 17:33:55 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "코퍼스코리아 \"에피소드미디어 주식 40억원에 취득\"",
-      "link": "https://www.yna.co.kr/view/AKR20260918163600008",
-      "pubDate": "Fri, 18 Sep 2026 17:18:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'SK그룹 상장사 투자' 등 ETF 4종 22일 신규 상장",
-      "link": "https://www.yna.co.kr/view/AKR20260918156800008",
-      "pubDate": "Fri, 18 Sep 2026 17:07:36 +0900",
       "source": "연합뉴스"
     }
   ]
