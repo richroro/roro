@@ -15,7 +15,7 @@ name: Android Release
 
 on:
   push:
-    branches: [main]
+    branches: [main, "claude/**"]
     tags: ["android-v*"]
     paths:
       - "android-game/**"
