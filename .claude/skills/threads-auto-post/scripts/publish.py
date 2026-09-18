@@ -15,7 +15,7 @@ Prints the post permalink on the last line (so a caller can capture it).
 import argparse
 import sys
 
-from common import publish_thread, load_config, slack_notify, now_str, MAX_CHARS
+from common import publish_thread, load_config, slack_notify, now_str, scrub, MAX_CHARS
 
 
 def main():
@@ -68,5 +68,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:  # noqa: BLE001
-        print(f"게시 실패: {e}", file=sys.stderr)
+        print(f"게시 실패: {scrub(e)}", file=sys.stderr)
         sys.exit(1)

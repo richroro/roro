@@ -10,11 +10,12 @@ Only third-party dependency is `requests` (see requirements.txt). Slack uses
 urllib so a missing token never crashes a successful publish.
 """
 import json
+import re
 import sys
 import time
 import urllib.request
 import urllib.error
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -47,6 +48,20 @@ MAX_CHARS = 500  # Threads' hard per-post text limit.
 
 # Refresh the long-lived token when it's within this many days of expiry.
 REFRESH_BEFORE_DAYS = 10
+# Threads long-lived tokens last ~60 days. Used when a record has no expiry.
+LONG_LIVED_SECONDS = 60 * 86400
+
+_SECRET_QUERY = re.compile(r"(access_token|client_secret)=[^&\s)'\"]+")
+
+
+def scrub(obj):
+    """Return str(obj) with access_token= / client_secret= query values hidden.
+
+    requests/urllib3 put the full request URL, query string included, into
+    connection-level error messages. Those messages end up in scheduled-task
+    logs and in public GitHub Actions logs, so never print an exception from
+    a Graph call without passing it through here."""
+    return _SECRET_QUERY.sub(r"\1=***", str(obj))
 
 
 def now_str():
@@ -136,8 +151,15 @@ def get_access_token(auto_refresh=True):
             f"(token.json 예상 경로: {TOKEN_PATH})"
         )
 
-    if auto_refresh and tok.get("expires_at"):
-        remaining = tok["expires_at"] - int(time.time())
+    # Records written by older auth.py runs (--no-exchange) carry
+    # expires_at=null. Assume the 60-day lifetime from obtained_at so the
+    # refresh window still triggers instead of the token dying silently.
+    expires_at = tok.get("expires_at")
+    if not expires_at and tok.get("obtained_at"):
+        expires_at = int(tok["obtained_at"]) + LONG_LIVED_SECONDS
+
+    if auto_refresh and expires_at:
+        remaining = expires_at - int(time.time())
         age = int(time.time()) - tok.get("obtained_at", 0)
         # Only attempt refresh if near expiry AND the token is old enough
         # (Threads rejects refresh on tokens younger than 24h).
@@ -147,7 +169,10 @@ def get_access_token(auto_refresh=True):
                 save_token(new_tok)
                 return new_tok["access_token"]
             except Exception as e:  # noqa: BLE001 - keep using current token
-                print(f"[token] 갱신 실패(기존 토큰 계속 사용): {e}", file=sys.stderr)
+                print(
+                    f"[token] 갱신 실패(기존 토큰 계속 사용): {scrub(e)}",
+                    file=sys.stderr,
+                )
     return access
 
 
@@ -206,17 +231,62 @@ def publish_thread(text, link=None, image_url=None):
     #    retry a few times on the transient "not ready" error.
     last_err = None
     for attempt in range(6):
-        pr = requests.post(
-            f"{GRAPH}/{API_VERSION}/{user_id}/threads_publish",
-            params={"creation_id": creation_id, "access_token": token},
-            timeout=60,
-        )
+        try:
+            pr = requests.post(
+                f"{GRAPH}/{API_VERSION}/{user_id}/threads_publish",
+                params={"creation_id": creation_id, "access_token": token},
+                timeout=60,
+            )
+        except requests.RequestException as e:
+            # The request may have reached Threads and been committed even
+            # though the response was lost. Failing here would leave the post
+            # at the head of the queue and publish it again tomorrow, so look
+            # for it before giving up. `from None` keeps the raw URL (with the
+            # token) out of the chained traceback.
+            found = _find_recent_post(user_id, text, token)
+            if found:
+                print("[publish] 응답 유실 후 게시 확인됨 (중복 게시 방지)", file=sys.stderr)
+                return found
+            raise RuntimeError(f"발행 요청 실패(네트워크): {scrub(e)}") from None
         if pr.status_code < 400:
             media_id = pr.json()["id"]
             return {"id": media_id, "permalink": _permalink(media_id, token)}
         last_err = _graph_error(pr)
         time.sleep(5)
     raise RuntimeError(f"발행 실패(컨테이너 처리 지연): {last_err}")
+
+
+def _find_recent_post(user_id, text, token, window_minutes=15):
+    """Best effort: {"id", "permalink"} of a post with identical text published
+    in the last few minutes, else None. Used only after a lost response."""
+    try:
+        r = requests.get(
+            f"{GRAPH}/{API_VERSION}/{user_id}/threads",
+            params={
+                "fields": "id,text,permalink,timestamp",
+                "limit": 5,
+                "access_token": token,
+            },
+            timeout=30,
+        )
+        if r.status_code >= 400:
+            return None
+        cutoff = datetime.now(timezone.utc) - timedelta(minutes=window_minutes)
+        for item in r.json().get("data", []):
+            if (item.get("text") or "").strip() != text.strip():
+                continue
+            ts = item.get("timestamp")
+            try:
+                # Threads timestamps look like 2026-09-18T23:00:12+0000
+                when = datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S%z")
+                if when < cutoff:
+                    continue
+            except (TypeError, ValueError):
+                pass  # unknown timestamp format: trust the text match
+            return {"id": item.get("id"), "permalink": item.get("permalink", "")}
+    except Exception:  # noqa: BLE001 - lookup is best effort
+        pass
+    return None
 
 
 def _permalink(media_id, token):

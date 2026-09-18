@@ -26,6 +26,8 @@ from common import (
     slack_notify,
     now_str,
     publish_thread,
+    get_access_token,
+    scrub,
 )
 import json
 
@@ -74,6 +76,12 @@ def _next_from_topics():
 
 
 def main(dry_run=False):
+    if not dry_run:
+        # Touch the token on every real run so a near-expiry token gets
+        # refreshed even on days with nothing to post. (The cloud workflow
+        # notices the changed token.json and persists it.)
+        get_access_token()
+
     picked = _next_from_queue() or _next_from_topics()
     if not picked:
         msg = (
@@ -154,10 +162,11 @@ if __name__ == "__main__":
     try:
         main(dry_run=args.dry_run)
     except Exception as e:  # noqa: BLE001
-        err = f"{e}\n{traceback.format_exc()}"
+        # scrub(): never let a request URL with access_token= reach the log.
+        err = scrub(f"{e}\n{traceback.format_exc()}")
         print(err, file=sys.stderr)
         if not args.dry_run:
             slack_notify(
-                f"⚠️ 스레드 자동 게시 실패\n• 사유: {e}\n• 시간: {now_str()}"
+                f"⚠️ 스레드 자동 게시 실패\n• 사유: {scrub(e)}\n• 시간: {now_str()}"
             )
         sys.exit(1)

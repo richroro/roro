@@ -28,10 +28,9 @@ from common import (
     BLOGGER_CONFIG_PATH,
     CONFIG_PATH,
     TOKEN_PATH,
+    LONG_LIVED_SECONDS,
+    scrub,
 )
-
-# Threads long-lived tokens last ~60 days. Used when the expiry is unknown.
-LONG_LIVED_SECONDS = 60 * 86400
 
 
 def main():
@@ -54,9 +53,15 @@ def main():
         try:
             tok = exchange_for_long_lived(args.token, args.app_secret)
         except Exception as e:  # noqa: BLE001
-            # The dashboard's token generator often hands out a token that is
-            # already long-lived, and Meta rejects exchanging those. Keep it.
-            print(f"  교환 실패 → 이미 장기 토큰으로 보고 그대로 저장합니다. ({e})")
+            # Do not guess. A wrong app secret, a network error and an
+            # already-long-lived dashboard token all fail here; only the user
+            # can tell which, so stop and say what to check.
+            raise RuntimeError(
+                f"장기 토큰 교환 실패: {scrub(e)}\n"
+                "  - 대시보드 'Generate access token' 으로 받은 토큰은 이미 장기 토큰일 수\n"
+                "    있습니다. 그 경우 --no-exchange 를 붙여 다시 실행하세요.\n"
+                "  - 그 외에는 --app-secret 값(App settings > Basic 의 App secret)을 확인하세요."
+            ) from None
     if tok is None:
         # Expiry unknown: assume the 60-day long-lived lifetime so the
         # auto-refresh in common.get_access_token still kicks in near the end.
@@ -103,5 +108,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:  # noqa: BLE001
-        print(f"설정 실패: {e}", file=sys.stderr)
+        print(f"설정 실패: {scrub(e)}", file=sys.stderr)
         sys.exit(1)

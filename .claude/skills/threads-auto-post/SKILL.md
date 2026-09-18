@@ -16,9 +16,15 @@ blogger-auto-post 스킬과 동일한 구조라, 큐/스케줄/Slack 방식이 �
 - "스레드 올라가면 슬랙으로 알려줘" — 게시 내역 Slack DM 알림 (기본 내장)
 
 ## 최초 1회 설정 (안 되어 있으면 먼저 안내)
-게시에는 스레드 액세스 토큰이 필요하다. `secrets/config.json` 과 `secrets/token.json`
-이 없으면 아직 설정 전이다. 이때는 **곧바로 스크립트를 돌리지 말고** 사용자에게
-`references/threads_setup.md` 순서를 안내한다. 핵심만:
+**게시**(`publish.py`, `daily_post.py` 실제 실행, `auth.py`)에는 스레드 액세스 토큰이
+필요하다. `secrets/config.json` 과 `secrets/token.json` 이 없으면 이 컴퓨터에서는
+게시할 수 없으니, **게시 스크립트를 돌리지 말고** 사용자에게
+`references/threads_setup.md` 순서를 안내한다.
+
+단, 토큰은 GitHub Secrets 에도 있어서 클라우드 러너가 게시한다. 사용자 PC 가 아닌
+세션(원격 Claude 세션 등)에는 `secrets/` 가 없는 게 정상이며, **큐 채우기**
+(`add_to_queue.py`, `queue/*.json` 직접 작성, `daily_post.py --dry-run`)는 토큰 없이
+동작한다. 그런 세션에서는 설정 안내 대신 큐를 채우고 커밋·푸시하면 된다. 핵심만:
 
 1. 라이브러리 설치: `pip install -r .claude/skills/threads-auto-post/requirements.txt`
 2. Meta 개발자 앱 생성(Threads API 사용 사례) + 본인 계정을 tester 로 연결.
@@ -78,7 +84,11 @@ python .claude/skills/threads-auto-post/scripts/add_to_queue.py \
 여러 편을 넣을 때는 위를 반복한다. 파일명은 `queue/NNNN.json` 으로 자동 번호가
 매겨져 순서대로 게시된다. 소재는 `topics.example.txt` 의 풀을 참고한다.
 `queue/` 는 git 에 추적되므로, GitHub Actions 스케줄을 쓴다면 큐를 채운 뒤
-**커밋·푸시까지 해야** 클라우드 러너가 새 글을 볼 수 있다.
+**커밋·푸시까지 해야** 클라우드 러너가 새 글을 볼 수 있다. 러너는
+**`add-blogger-auto-post-skill` 브랜치만** 읽으므로 다른 브랜치(main, `claude/*`)에
+푸시한 큐는 보이지 않는다. 그 브랜치에 직접 푸시하거나 그 브랜치로 머지하고,
+`git log origin/add-blogger-auto-post-skill -- .claude/skills/threads-auto-post/queue`
+로 반영됐는지 확인한다.
 
 ### 게시 전 미리보기 (dry-run)
 실제로 올리기 전에 다음에 나갈 글을 확인하려면:
@@ -97,7 +107,11 @@ python .claude/skills/threads-auto-post/scripts/daily_post.py --dry-run
   main 에도 등록돼 있어야 한다.
 - Secrets 를 아직 등록하지 않았으면 워크플로는 실패하지 않고 경고만 남기고 건너뛴다.
   등록하는 순간부터 다음 스케줄에 자동으로 게시가 시작된다.
-- 수동 실행/테스트: GitHub → Actions → "Threads Daily Publish" → Run workflow.
+- 테스트: GitHub → Actions → "Threads Daily Publish" → Run workflow 에서
+  **dry_run 을 켜면** 게시 없이 설정·다음 글만 확인한다. dry_run 을 끄고 실행하면
+  큐의 첫 글이 **실제로 게시**된다.
+- 매일 실행 자체가 토큰을 갱신하므로(큐가 비어 있어도), 러너가 매일 돌면 토큰은
+  만료되지 않는다.
 
 ### 스케줄 B — Windows 예약작업 (PC가 켜져 있을 때만)
 ```powershell
@@ -107,7 +121,12 @@ python .claude/skills/threads-auto-post/scripts/daily_post.py --dry-run
 ```powershell
 Start-ScheduledTask -TaskName RichgogoThreadsDaily
 ```
-A 와 B 를 동시에 켜면 하루 두 편이 나간다. 하나만 쓴다.
+A 와 B 를 동시에 켜면 **같은 글이 두 번 올라간다** (둘 다 08:00 KST 에 각자의 큐
+사본에서 맨 앞 글을 집고, 로컬 큐는 러너가 옮긴 파일을 pull 하기 전까지 그대로다).
+A 로 전환할 때는 B 를 반드시 해제한다:
+```powershell
+Unregister-ScheduledTask -TaskName RichgogoThreadsDaily -Confirm:$false
+```
 
 ## Slack 알림
 `slackbot/.env` 의 `SLACK_BOT_TOKEN` 을 재사용하고, DM 대상은 이 스킬 config →
@@ -121,6 +140,8 @@ blogger 스킬 config 순으로 자동 인식한다. 별도 설정 불필요. �
 - GitHub Actions 러너에서는 `GH_PAT` secret 이 있으면 갱신된 토큰을
   `THREADS_TOKEN_JSON` secret 에 자동 저장한다. 없으면 Slack 으로 "secret 을 다시
   등록하라"는 알림이 오고, 기존 토큰 만료(최대 10일)까지 다시 등록해야 한다.
+갱신은 `daily_post.py` 가 실행될 때마다(큐가 비어 있어도) 시도되고, 예전 `auth.py` 가
+남긴 만료일 없는 token.json 도 발급 시점 기준 60일로 간주해 갱신한다.
 60일 넘게 한 번도 안 돌려 만료됐다면, `references/threads_setup.md` 4단계로 토큰만
 다시 발급해 `auth.py` 를 재실행하고(클라우드면 secret 도 갱신) 된다.
 

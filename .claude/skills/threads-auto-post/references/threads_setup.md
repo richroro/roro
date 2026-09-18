@@ -31,7 +31,7 @@ Threads의 OAuth 리다이렉트는 HTTPS만 허용해서 로컬 스크립트로
    버튼을 찾는다. (테스터로 추가한 본인 계정 옆)
 2. 버튼을 누르면 스레드 로그인/동의 화면이 뜨고, 끝나면 **액세스 토큰 문자열**을
    보여준다. 이 값을 복사한다. (단기 토큰일 수도, 이미 60일 장기 토큰일 수도
-   있다. 어느 쪽이든 `auth.py` 가 알아서 처리한다.)
+   있다. 5단계에서 교환이 실패하면 `--no-exchange` 로 다시 실행한다.)
 
 > 대시보드에 생성 버튼이 안 보이면, Graph API 방식으로 아래 URL을 브라우저에
 > 직접 넣어 로그인 → 리다이렉트된 주소의 `code` 로 토큰을 받는 방법도 있다.
@@ -51,8 +51,10 @@ python .claude/skills/threads-auto-post/scripts/auth.py \
 
 성공하면 `secrets/token.json` 과 `secrets/config.json` 이 생성된다. 이후 게시는
 저장된 장기 토큰으로 조용히 동작하고, 만료가 가까워지면 자동으로 갱신한다.
-(교환에 실패하면 이미 장기 토큰인 것으로 보고 그대로 저장한다. 만료일을 알 수
-없으면 60일로 가정한다.)
+교환에 실패하면 스크립트가 멈추고 이유를 출력한다. 대시보드 버튼으로 받은 토큰은
+이미 장기 토큰이라 교환이 거부될 수 있는데, 그 경우에만 `--no-exchange` 를 붙여
+다시 실행한다(만료일은 60일로 가정). 앱 시크릿을 잘못 넣은 경우도 같은 실패가
+나므로, 먼저 `--app-secret` 값을 확인한다.
 
 여기까지 하면 **로컬 게시**(`publish.py`, Windows 예약작업)는 끝이다. PC를 꺼 둬도
 매일 올라가게 하려면 6단계로 간다.
@@ -68,16 +70,29 @@ New repository secret** 에서 하나씩 등록한다.
 | `THREADS_TOKEN_JSON` | `.claude/skills/threads-auto-post/secrets/token.json` 파일 내용 전체 |
 | `THREADS_CONFIG_JSON` | `.claude/skills/threads-auto-post/secrets/config.json` 파일 내용 전체 |
 | `SLACK_BOT_TOKEN` | 블로거 워크플로와 공용. 이미 등록돼 있으면 생략 |
+| `BLOGGER_CONFIG_JSON` | 블로거 워크플로와 공용. Slack DM 대상(`slack_user_id`)을 여기서 재사용한다 |
 
 파일 내용은 메모장으로 열어 전체 복사하면 된다. 값은 절대 git 에 커밋하지 않는다.
+Slack DM 을 받으려면 `config.json`(스레드 또는 블로거) 안에 `"slack_user_id": "U..."`
+가 있어야 한다. 없으면 러너가 "Slack DM 대상을 찾을 수 없음" 경고를 남기고 알림 없이
+게시만 한다.
 Secrets 가 없는 동안에는 워크플로가 매일 "설정 전이라 건너뜀" 경고만 남기고 끝나므로,
 먼저 등록해 둬도 실패 알림이 쌓이지 않는다.
 
-체크리스트:
+체크리스트 (순서대로):
+- [ ] **Windows 예약작업 해제** (안 하면 클라우드와 PC 가 08:00 에 같은 글을 두 번 올린다):
+      `Unregister-ScheduledTask -TaskName RichgogoThreadsDaily -Confirm:$false`
+      확인: `Get-ScheduledTask -TaskName RichgogoThreadsDaily` 가 오류(없음)를 내면 된다.
 - [ ] 위 Secrets 등록
-- [ ] `queue/` 에 글이 들어 있고 커밋·푸시됨 (러너는 git 에 있는 큐만 본다)
+- [ ] `queue/` 에 글이 들어 있고 **`add-blogger-auto-post-skill` 브랜치에** 커밋·푸시됨
+      (러너는 그 브랜치의 큐만 본다). 이전에 PC 에서 큐에 넣어 둔 파일이 있으면
+      `git pull` 이 "untracked files would be overwritten" 으로 거부될 수 있다. 그때는
+      로컬 `queue/*.json` 을 다른 폴더로 옮겨 두고 pull 한 뒤, 아직 안 올라간 글만
+      `add_to_queue.py` 로 다시 넣고(번호가 이어서 붙는다) 커밋·푸시한다.
 - [ ] 워크플로 파일이 **main 브랜치**에 등록돼 있음 (스케줄은 기본 브랜치에서만 돈다)
-- [ ] Actions 탭 → "Threads Daily Publish" → **Run workflow** 로 1회 수동 테스트
+- [ ] Actions 탭 → "Threads Daily Publish" → **Run workflow** 에서 `dry_run` 을 켜고
+      1회 실행. 초록색으로 끝나고 로그에 다음 글이 보이면 설정 완료.
+      (`dry_run` 을 끄고 실행하면 큐의 첫 글이 그 자리에서 실제로 게시된다.)
 
 ## 7. (선택) 갱신된 토큰 자동 저장용 `GH_PAT`
 장기 토큰은 60일마다 갱신되고 갱신하면 새 토큰이 나온다. 러너가 갱신한 토큰을
@@ -97,8 +112,9 @@ Secret 에 다시 써 넣으려면 쓰기 권한이 있는 토큰이 필요하�
 ## 참고 / 제약
 - 텍스트 게시글은 **최대 500자**.
 - 게시는 2단계다: 컨테이너 생성 → 발행. 스크립트가 알아서 처리한다.
-- 장기 토큰은 약 60일 유효하고, 24시간 지난 뒤부터 갱신 가능하다. 스킬이 만료
-  10일 전부터 자동 갱신을 시도하며, 갱신 결과는 새 토큰이다. **60일 넘게 한 번도
-  안 돌리면 만료**되므로, 그럴 땐 4단계부터 토큰만 다시 발급해 `auth.py` 를
-  재실행하면 된다(클라우드를 쓰면 `THREADS_TOKEN_JSON` secret 도 다시 등록).
+- 장기 토큰은 약 60일 유효하고, 24시간 지난 뒤부터 갱신 가능하다. `daily_post.py` 가
+  실행될 때마다(큐가 비어 있어도) 만료 10일 전부터 자동 갱신을 시도하며, 갱신 결과는
+  새 토큰이다. **60일 넘게 한 번도 안 돌리면 만료**되므로, 그럴 땐 4단계부터 토큰만
+  다시 발급해 `auth.py` 를 재실행하면 된다(클라우드를 쓰면 `THREADS_TOKEN_JSON`
+  secret 도 다시 등록).
 - 이미지 게시는 **공개적으로 접근 가능한 이미지 URL**이 필요하다(로컬 파일 불가).
