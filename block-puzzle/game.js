@@ -427,8 +427,10 @@
     const vw = Math.min(document.documentElement.clientWidth || window.innerWidth, 560);
     const vh = window.innerHeight;
     const above = boardWrap.getBoundingClientRect().top + window.scrollY;
+    // 홈 화면 앱 등에서 루트에 안전 영역 여백이 잡히면 그만큼 뺀다.
+    const padBottom = parseFloat(getComputedStyle(document.documentElement).paddingBottom) || 0;
     const byWidth = (vw - 32) / SIZE;
-    const byHeight = (vh - above - 110) / 12.5;
+    const byHeight = (vh - above - padBottom - 110) / 12.5;
     const cell = clamp(Math.floor(Math.min(byWidth, byHeight)), 24, 52);
     document.documentElement.style.setProperty('--cell', `${cell}px`);
     FX.resize();
