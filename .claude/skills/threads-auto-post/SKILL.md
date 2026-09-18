@@ -12,7 +12,7 @@ blogger-auto-post 스킬과 동일한 구조라, 큐/스케줄/Slack 방식이 �
 ## 언제 이 스킬을 쓰는가
 - "업무 자동화 관련 글 스레드에 올려줘" — Claude가 500자 이내 글을 쓰고 바로 게시
 - "이 문구 스레드에 게시해줘" — 완성된 문구를 게시만
-- "매일 스레드에 자동으로 올라가게 해줘" — Windows 예약작업으로 무인 게시 구성
+- "매일 스레드에 자동으로 올라가게 해줘" — GitHub Actions(클라우드) 또는 Windows 예약작업으로 무인 게시 구성
 - "스레드 올라가면 슬랙으로 알려줘" — 게시 내역 Slack DM 알림 (기본 내장)
 
 ## 최초 1회 설정 (안 되어 있으면 먼저 안내)
@@ -53,8 +53,9 @@ blogger-auto-post 스킬과 동일한 구조라, 큐/스케줄/Slack 방식이 �
 호출한다. 500자를 넘으면 게시가 거부되므로 줄여서 다시 시도한다.
 
 ## 매일 자동 게시 (무인 스케줄)
-Claude 없이 예약작업이 도는 경로다. `scripts/daily_post.py` 가 "오늘 뭘 올릴지"를
-아래 우선순위로 고른다:
+Claude 없이 스케줄러가 `scripts/daily_post.py` 를 하루 한 번 돌리는 경로다.
+스케줄러는 **GitHub Actions(권장, PC 꺼져 있어도 됨)** 또는 Windows 예약작업
+중 하나를 쓴다(아래 참고). 스크립트는 "오늘 뭘 올릴지"를 아래 우선순위로 고른다:
 
 1. **queue/ 폴더** — 미리 만들어 둔 글. 각 파일은
    `{"text": "...", "link": "...", "image_url": "..."}` 형식의 `*.json`(text 만 필수).
@@ -76,6 +77,8 @@ python .claude/skills/threads-auto-post/scripts/add_to_queue.py \
 ```
 여러 편을 넣을 때는 위를 반복한다. 파일명은 `queue/NNNN.json` 으로 자동 번호가
 매겨져 순서대로 게시된다. 소재는 `topics.example.txt` 의 풀을 참고한다.
+`queue/` 는 git 에 추적되므로, GitHub Actions 스케줄을 쓴다면 큐를 채운 뒤
+**커밋·푸시까지 해야** 클라우드 러너가 새 글을 볼 수 있다.
 
 ### 게시 전 미리보기 (dry-run)
 실제로 올리기 전에 다음에 나갈 글을 확인하려면:
@@ -84,7 +87,17 @@ python .claude/skills/threads-auto-post/scripts/daily_post.py --dry-run
 ```
 게시하지 않고 본문·글자 수·큐 잔량만 보여준다.
 
-스케줄 등록 (PowerShell):
+### 스케줄 A — GitHub Actions (권장, PC 전원과 무관)
+`.github/workflows/threads-daily.yml` 이 매일 08:00 KST(23:00 UTC)에 클라우드에서
+`daily_post.py` 를 실행하고, 게시 후 `queue/posted/` 이동을 직접 커밋한다.
+- 필요한 저장소 Secrets(한 번만): `THREADS_TOKEN_JSON`, `THREADS_CONFIG_JSON`,
+  `SLACK_BOT_TOKEN`(블로거와 공용), `GH_PAT`(선택, 갱신된 토큰 자동 저장용).
+  등록 방법은 `references/threads_setup.md` 6~7단계.
+- 스케줄은 **main 브랜치의 워크플로 파일**로 돈다. 블로거와 같은 방식으로 이 파일이
+  main 에도 등록돼 있어야 한다.
+- 수동 실행/테스트: GitHub → Actions → "Threads Daily Publish" → Run workflow.
+
+### 스케줄 B — Windows 예약작업 (PC가 켜져 있을 때만)
 ```powershell
 .\.claude\skills\threads-auto-post\scripts\install_daily_task.ps1
 ```
@@ -92,6 +105,7 @@ python .claude/skills/threads-auto-post/scripts/daily_post.py --dry-run
 ```powershell
 Start-ScheduledTask -TaskName RichgogoThreadsDaily
 ```
+A 와 B 를 동시에 켜면 하루 두 편이 나간다. 하나만 쓴다.
 
 ## Slack 알림
 `slackbot/.env` 의 `SLACK_BOT_TOKEN` 을 재사용하고, DM 대상은 이 스킬 config →
@@ -100,8 +114,13 @@ blogger 스킬 config 순으로 자동 인식한다. 별도 설정 불필요. �
 
 ## 토큰 수명 관리
 장기 토큰은 약 60일 유효하고, 만료 10일 전부터 게시 시 **자동 갱신**을 시도한다
-(24시간 이상 지난 토큰만 갱신 가능). 60일 넘게 한 번도 안 돌려 만료됐다면,
-`references/threads_setup.md` 4단계로 토큰만 다시 발급해 `auth.py` 를 재실행한다.
+(24시간 이상 지난 토큰만 갱신 가능). 갱신하면 **새 토큰 문자열**이 나온다.
+- 로컬(Windows)에서는 `secrets/token.json` 에 바로 덮어써서 끝.
+- GitHub Actions 러너에서는 `GH_PAT` secret 이 있으면 갱신된 토큰을
+  `THREADS_TOKEN_JSON` secret 에 자동 저장한다. 없으면 Slack 으로 "secret 을 다시
+  등록하라"는 알림이 오고, 기존 토큰 만료(최대 10일)까지 다시 등록해야 한다.
+60일 넘게 한 번도 안 돌려 만료됐다면, `references/threads_setup.md` 4단계로 토큰만
+다시 발급해 `auth.py` 를 재실행하고(클라우드면 secret 도 갱신) 된다.
 
 ## 파일 구조
 - `scripts/common.py` — 토큰·설정·Threads API(컨테이너 생성→발행)·Slack 공용 로직
@@ -111,5 +130,7 @@ blogger 스킬 config 순으로 자동 인식한다. 별도 설정 불필요. �
 - `scripts/generate.py` — 소재→글 자동 생성 (무인 스케줄 전용, API 키 필요)
 - `scripts/daily_post.py` — 무인 일일 게시 오케스트레이션 (`--dry-run` 지원)
 - `scripts/install_daily_task.ps1` / `daily_post.bat` — Windows 예약작업
-- `references/threads_setup.md` — Meta 개발자 앱/토큰 최초 설정 가이드
+- `.github/workflows/threads-daily.yml` — GitHub Actions 무인 게시 (저장소 루트)
+- `references/threads_setup.md` — Meta 개발자 앱/토큰/Secrets 최초 설정 가이드
+- `queue/` — 게시 대기 글(git 추적, 클라우드 러너가 읽음), `queue/posted/` 게시 완료분
 - `secrets/` — token.json·config.json (git 제외)

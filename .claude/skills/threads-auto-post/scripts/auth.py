@@ -30,6 +30,9 @@ from common import (
     TOKEN_PATH,
 )
 
+# Threads long-lived tokens last ~60 days. Used when the expiry is unknown.
+LONG_LIVED_SECONDS = 60 * 86400
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -45,12 +48,19 @@ def main():
     )
     args = ap.parse_args()
 
+    tok = None
     if args.app_secret and not args.no_exchange:
         print("단기 토큰 → 장기 토큰 교환 중...")
-        tok = exchange_for_long_lived(args.token, args.app_secret)
-    else:
-        # Store as-is; expires_in unknown so refresh logic will be conservative.
-        tok = _token_record(args.token, None)
+        try:
+            tok = exchange_for_long_lived(args.token, args.app_secret)
+        except Exception as e:  # noqa: BLE001
+            # The dashboard's token generator often hands out a token that is
+            # already long-lived, and Meta rejects exchanging those. Keep it.
+            print(f"  교환 실패 → 이미 장기 토큰으로 보고 그대로 저장합니다. ({e})")
+    if tok is None:
+        # Expiry unknown: assume the 60-day long-lived lifetime so the
+        # auto-refresh in common.get_access_token still kicks in near the end.
+        tok = _token_record(args.token, LONG_LIVED_SECONDS)
 
     me = fetch_me(tok["access_token"])
     save_token(tok)
@@ -81,9 +91,12 @@ def main():
         from datetime import datetime
 
         print(f"  만료 예정 = {datetime.fromtimestamp(exp):%Y-%m-%d}")
-    else:
-        print("  만료 정보 없음 (장기 토큰 여부 미상 — 필요시 --app-secret 로 교환 권장)")
     print("\n이제 publish.py 로 스레드에 글을 올릴 수 있습니다.")
+    print(
+        "PC 를 꺼 둬도 매일 올라가게 하려면(GitHub Actions) 위 token.json / config.json\n"
+        "내용을 저장소 Secrets(THREADS_TOKEN_JSON / THREADS_CONFIG_JSON)에 등록하세요.\n"
+        "→ references/threads_setup.md 6단계"
+    )
 
 
 if __name__ == "__main__":

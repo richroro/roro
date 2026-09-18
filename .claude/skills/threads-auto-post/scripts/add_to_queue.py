@@ -20,6 +20,21 @@ from pathlib import Path
 from common import SKILL_DIR, load_config, save_config, MAX_CHARS
 
 QUEUE_DIR = SKILL_DIR / "queue"
+POSTED_DIR = QUEUE_DIR / "posted"
+
+
+def _max_existing_number():
+    """큐/게시완료 폴더의 가장 큰 NNNN 번호. 없으면 0."""
+    biggest = 0
+    for d in (QUEUE_DIR, POSTED_DIR):
+        if not d.exists():
+            continue
+        for p in d.glob("*.json"):
+            try:
+                biggest = max(biggest, int(p.stem))
+            except ValueError:
+                continue
+    return biggest
 
 
 def add_post(text, link=None, image_url=None):
@@ -32,7 +47,9 @@ def add_post(text, link=None, image_url=None):
         )
     QUEUE_DIR.mkdir(parents=True, exist_ok=True)
     cfg = load_config()
-    seq = int(cfg.get("queue_seq", 1))
+    # 카운터가 실제 파일과 어긋나도(다른 PC에서 추가, 러너가 옮긴 뒤 pull 등)
+    # 기존 글을 덮어쓰지 않도록, 카운터와 '실제 최대 번호+1' 중 큰 값을 쓴다.
+    seq = max(int(cfg.get("queue_seq", 1)), _max_existing_number() + 1)
     path = QUEUE_DIR / f"{seq:04d}.json"
     post = {"text": text}
     if link:
