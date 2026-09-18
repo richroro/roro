@@ -9,9 +9,12 @@ import android.graphics.LightingColorFilter
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.RadialGradient
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.Typeface
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.os.Build
 import android.util.AttributeSet
 import android.view.Choreographer
@@ -35,6 +38,39 @@ class CrowdView @JvmOverloads constructor(
     private val world = CrowdWorld(seed = (System.currentTimeMillis() % 1_000_000L).toInt() + 1)
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private var bestLevel = prefs.getInt(KEY_BEST_LEVEL, 0)
+    private var muted = prefs.getBoolean(KEY_MUTED, false)
+
+    // ---- sound (short WAVs from tools/generate_sounds.py, played through SoundPool) ----
+    private val soundPool: SoundPool = SoundPool.Builder()
+        .setMaxStreams(8)
+        .setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build(),
+        )
+        .build()
+    private val sndShot = soundPool.load(context, R.raw.sfx_shot, 1)
+    private val sndHit = soundPool.load(context, R.raw.sfx_hit, 1)
+    private val sndDing = soundPool.load(context, R.raw.sfx_ding, 1)
+    private val sndBuzz = soundPool.load(context, R.raw.sfx_buzz, 1)
+    private val sndClear = soundPool.load(context, R.raw.sfx_clear, 1)
+    private val sndOver = soundPool.load(context, R.raw.sfx_over, 1)
+    private val lastPlayedNanos = LongArray(6)
+
+    // ---- visual effects ----
+    private class Particle(var x: Float, var z: Float, var dy: Float, var vy: Float, var vx: Float, var vz: Float, var life: Float, val maxLife: Float, val color: Int, val size: Float)
+    private class FloatText(val text: String, val x: Float, val z: Float, var life: Float, val maxLife: Float, val color: Int)
+    private val particles = ArrayList<Particle>()
+    private val floatTexts = ArrayList<FloatText>()
+    private val events = ArrayList<CrowdWorld.Event>()
+    private var muzzleTimer = 0f
+    private var muzzleX = 0f
+    private val fxRandom = java.util.Random()
+    private val particlePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val muzzlePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val muteBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x590F172A }
+    private val muteRect = RectF()
 
     private var running = false
     private var lastFrameNanos = 0L
@@ -93,6 +129,10 @@ class CrowdView @JvmOverloads constructor(
             runTime += dt
             val before = world.state
             world.update(dt)
+            world.drainEvents(events)
+            for (event in events) handleEvent(event)
+            events.clear()
+            updateFx(dt)
             if (before == CrowdWorld.State.RUNNING && world.state != CrowdWorld.State.RUNNING) onRunEnded()
             invalidate()
             Choreographer.getInstance().postFrameCallback(this)
@@ -124,7 +164,141 @@ class CrowdView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         pause()
+        soundPool.release()
         super.onDetachedFromWindow()
+    }
+
+    // ---- effects & sound -------------------------------------------------------------------
+
+    private fun play(id: Int, slot: Int, minIntervalMs: Long, volume: Float, rateJitter: Float = 0f) {
+        if (muted) return
+        val now = System.nanoTime()
+        if (now - lastPlayedNanos[slot] < minIntervalMs * 1_000_000L) return
+        lastPlayedNanos[slot] = now
+        val rate = 1f + (fxRandom.nextFloat() * 2f - 1f) * rateJitter
+        soundPool.play(id, volume, volume, 1, 0, rate)
+    }
+
+    private fun sparks(x: Float, z: Float, n: Int, color: Int, spread: Float) {
+        repeat(n) {
+            particles.add(
+                Particle(
+                    x = x + (fxRandom.nextFloat() - 0.5f) * spread, z = z, dy = 0.04f,
+                    vy = 0.08f + fxRandom.nextFloat() * 0.14f, vx = (fxRandom.nextFloat() - 0.5f) * 0.9f,
+                    vz = (fxRandom.nextFloat() - 0.3f) * 4f, life = 0.35f + fxRandom.nextFloat() * 0.2f, maxLife = 0.5f,
+                    color = color, size = 0.008f + fxRandom.nextFloat() * 0.006f,
+                ),
+            )
+        }
+    }
+
+    private fun floatText(text: String, x: Float, z: Float, color: Int) {
+        floatTexts.add(FloatText(text, x, z, 0.8f, 0.8f, color))
+    }
+
+    private fun handleEvent(e: CrowdWorld.Event) {
+        val sparkGood = color(R.color.spark_good)
+        val sparkBad = color(R.color.spark_bad)
+        val gold = color(R.color.bullet)
+        when (e.type) {
+            CrowdWorld.Event.Type.SHOT -> {
+                muzzleTimer = 0.06f
+                muzzleX = e.x
+                play(sndShot, 0, 70, 0.6f, 0.12f)
+            }
+            CrowdWorld.Event.Type.HIT_GATE -> {
+                val good = e.value == 1
+                sparks(e.x, e.z, 3, if (good) sparkGood else sparkBad, 0.05f)
+                if (e.flag) {
+                    floatText(e.label, if (e.x < 0f) -0.5f else 0.5f, e.z, if (good) gold else sparkBad)
+                    play(sndDing, 2, 80, 0.5f)
+                } else {
+                    play(sndHit, 1, 50, 0.3f, 0.2f)
+                }
+            }
+            CrowdWorld.Event.Type.HIT_ENEMY, CrowdWorld.Event.Type.HIT_BOSS -> {
+                sparks(e.x, e.z, if (e.flag) 10 else 3, sparkBad, 0.15f)
+                if (e.flag) play(sndDing, 2, 80, 0.5f) else play(sndHit, 1, 50, 0.3f, 0.2f)
+            }
+            CrowdWorld.Event.Type.GATE_GOOD -> {
+                floatText(e.label, e.x, e.z, gold)
+                sparks(e.x, e.z, 12, sparkGood, 0.4f)
+                play(sndDing, 2, 80, 0.7f)
+            }
+            CrowdWorld.Event.Type.GATE_BAD -> {
+                floatText(e.label, e.x, e.z, sparkBad)
+                play(sndBuzz, 3, 150, 0.7f)
+            }
+            CrowdWorld.Event.Type.CONTACT -> {
+                floatText("-" + e.value, e.x, e.z, sparkBad)
+                sparks(e.x, e.z, 14, sparkBad, 0.4f)
+                play(sndBuzz, 3, 150, 0.7f)
+            }
+            CrowdWorld.Event.Type.LEVEL_CLEAR -> play(sndClear, 4, 0, 0.8f)
+            CrowdWorld.Event.Type.GAME_OVER -> play(sndOver, 5, 0, 0.8f)
+        }
+    }
+
+    private fun updateFx(dt: Float) {
+        muzzleTimer = max(0f, muzzleTimer - dt)
+        val pi = particles.iterator()
+        while (pi.hasNext()) {
+            val p = pi.next()
+            p.life -= dt
+            if (p.life <= 0f) { pi.remove(); continue }
+            p.x += p.vx * dt
+            p.z += p.vz * dt
+            p.dy += p.vy * dt
+            p.vy -= 0.5f * dt
+        }
+        val ti = floatTexts.iterator()
+        while (ti.hasNext()) {
+            val t = ti.next()
+            t.life -= dt
+            if (t.life <= 0f) ti.remove()
+        }
+    }
+
+    private fun drawFx(canvas: Canvas, w: Float) {
+        for (p in particles) {
+            val d = p.z - world.z
+            if (d < -4f || d > VIEW_DISTANCE) continue
+            val f = factor(d)
+            particlePaint.color = p.color
+            particlePaint.alpha = (255f * (p.life / p.maxLife).coerceIn(0f, 1f)).toInt()
+            canvas.drawCircle(screenX(p.x, f), screenY(f) - p.dy * w * f * 2.2f, max(1.5f, p.size * w * f * 2f), particlePaint)
+        }
+        for (t in floatTexts) {
+            val d = t.z - world.z
+            if (d < -4f || d > VIEW_DISTANCE) continue
+            val f = factor(d)
+            val k = 1f - t.life / t.maxLife
+            val alpha = (255f * min(1f, t.life / 0.3f)).toInt()
+            fillPaint.alpha = alpha
+            strokePaint.alpha = alpha
+            label(canvas, t.text, screenX(t.x, f), screenY(f) - w * (0.12f + k * 0.12f) * f - w * 0.02f, max(10f, w * 0.07f * f), t.color, color(R.color.text_stroke))
+            fillPaint.alpha = 255
+            strokePaint.alpha = 255
+        }
+        if (muzzleTimer > 0f) {
+            val f = factor(0f)
+            val rpx = w * LANE_HALF_PX * world.playerRadius
+            val mx = screenX(muzzleX, f)
+            val my = screenY(f) - rpx * 0.2f - rpx * 0.55f - w * 0.02f
+            val r = w * 0.03f * (0.6f + muzzleTimer / 0.06f)
+            muzzlePaint.shader = RadialGradient(
+                mx, my, r,
+                intArrayOf(0xF2FFFFDC.toInt(), 0xCCFDE047.toInt(), 0x00F97316),
+                floatArrayOf(0f, 0.4f, 1f), Shader.TileMode.CLAMP,
+            )
+            canvas.drawCircle(mx, my, r, muzzlePaint)
+        }
+    }
+
+    private fun toggleMute() {
+        muted = !muted
+        prefs.edit().putBoolean(KEY_MUTED, muted).apply()
+        if (!muted) play(sndDing, 2, 0, 0.5f)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -152,6 +326,11 @@ class CrowdView @JvmOverloads constructor(
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 lastTouchX = event.x
+                if (muteRect.contains(event.x, event.y)) {
+                    toggleMute()
+                    performClick()
+                    return true
+                }
                 when (world.state) {
                     CrowdWorld.State.READY, CrowdWorld.State.GAME_OVER -> world.start()
                     CrowdWorld.State.LEVEL_CLEAR -> world.nextLevel()
@@ -227,6 +406,7 @@ class CrowdView @JvmOverloads constructor(
         for (item in drawables) item.second()
 
         drawPlayer(canvas, w)
+        drawFx(canvas, w)
         drawHud(canvas, w, h)
         drawOverlay(canvas, w, h)
     }
@@ -297,8 +477,11 @@ class CrowdView @JvmOverloads constructor(
         fillPaint.textSize = size
         strokePaint.textSize = size
         strokePaint.strokeWidth = max(2f, size * 0.16f)
+        val alpha = fillPaint.alpha
         fillPaint.color = fill
         strokePaint.color = stroke
+        fillPaint.alpha = alpha
+        strokePaint.alpha = alpha
         val baseline = y + size * 0.35f
         canvas.drawText(text, x, baseline, strokePaint)
         canvas.drawText(text, x, baseline, fillPaint)
@@ -383,6 +566,11 @@ class CrowdView @JvmOverloads constructor(
         val top = insetTop + h * 0.03f
         label(canvas, context.getString(R.string.level_label, world.level), w * 0.18f, top + w * 0.03f, w * 0.055f, Color.WHITE, color(R.color.text_stroke))
         label(canvas, context.getString(R.string.best_label, max(bestLevel, world.bestLevel)), w * 0.82f, top + w * 0.03f, w * 0.045f, Color.WHITE, color(R.color.text_stroke))
+        // mute toggle, under the "best" label on the right
+        val size = w * 0.09f
+        muteRect.set(w - w * 0.05f - size, top + w * 0.09f, w - w * 0.05f, top + w * 0.09f + size)
+        canvas.drawRoundRect(muteRect, size * 0.25f, size * 0.25f, muteBgPaint)
+        label(canvas, if (muted) "🔇" else "🔊", muteRect.centerX(), muteRect.centerY(), size * 0.6f, Color.WHITE, 0x00000000)
         if (world.state != CrowdWorld.State.READY) {
             val barTop = top + w * 0.012f
             canvas.drawRect(w * 0.3f, barTop, w * 0.7f, barTop + h * 0.018f, barBackPaint)
@@ -440,6 +628,7 @@ class CrowdView @JvmOverloads constructor(
     companion object {
         private const val PREFS_NAME = "crowdrush"
         private const val KEY_BEST_LEVEL = "best_level"
+        private const val KEY_MUTED = "muted"
 
         private const val DEPTH_K = 0.065f
         private const val HORIZON = 0.30f

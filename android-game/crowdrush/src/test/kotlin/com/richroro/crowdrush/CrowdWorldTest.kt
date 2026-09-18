@@ -170,4 +170,31 @@ class CrowdWorldTest {
         assertEquals(CrowdWorld.State.LEVEL_CLEAR, world.state)
         assertEquals(2, world.count)
     }
+
+    @Test
+    fun `events are queued for shots and gate passes and drained once`() {
+        val world = CrowdWorld(seed = 5).apply { start() }
+        repeat(20) { world.update(0.05f) } // 1 second: at least one shot
+        val drained = ArrayList<CrowdWorld.Event>()
+        world.drainEvents(drained)
+        assertTrue(drained.any { it.type == CrowdWorld.Event.Type.SHOT })
+        val again = ArrayList<CrowdWorld.Event>()
+        world.drainEvents(again)
+        assertTrue(again.isEmpty())
+
+        val gate = world.gates.first()
+        world.setForTest(count = 3, playerX = if (gate.left.isGood) -0.5f else 0.5f, z = gate.z - 0.1f)
+        world.update(0.05f)
+        val afterGate = ArrayList<CrowdWorld.Event>()
+        world.drainEvents(afterGate)
+        assertTrue(afterGate.any { it.type == CrowdWorld.Event.Type.GATE_GOOD })
+    }
+
+    @Test
+    fun `gate hit reports whether the number changed`() {
+        val side = CrowdWorld.GateSide(CrowdWorld.Op.ADD, 1)
+        val results = (1..CrowdWorld.GATE_HITS_PER_STEP).map { side.hit() }
+        assertEquals(CrowdWorld.GATE_HITS_PER_STEP - 1, results.count { !it })
+        assertTrue(results.last())
+    }
 }

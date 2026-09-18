@@ -32,12 +32,16 @@ android-game/
 │  │  └─ MainActivity.kt
 │  └─ src/test/…/CrowdWorldTest.kt
 ├─ tools/generate_sprites.py           # 병사 스프라이트(PNG) 생성기 → crowdrush/src/main/res/drawable-nodpi/
+├─ tools/generate_sounds.py            # 효과음(WAV) 합성기 → crowdrush/src/main/res/raw/
 └─ store/                              # Play Console 등록용 이미지 + 생성 스크립트
 ```
 
 Crowd Rush 의 병사 이미지는 외부 에셋 없이 `tools/generate_sprites.py` 가 그려서 만든 64×80 PNG 입니다
 (`soldier_blue_back.png` = 아군, 뒷모습 / `soldier_red_front.png` = 적군, 정면). 다른 그림으로 바꾸려면
 같은 파일 이름으로 `crowdrush/src/main/res/drawable-nodpi/` 에 PNG 를 덮어쓰면 됩니다.
+효과음(총성 `sfx_shot`, 피격 `sfx_hit`, 숫자 상승 `sfx_ding`, 손해 `sfx_buzz`, 클리어 `sfx_clear`, 게임 오버 `sfx_over`)도
+`tools/generate_sounds.py` 로 합성한 WAV 라서 `crowdrush/src/main/res/raw/` 의 같은 이름 파일로 교체할 수 있습니다.
+화면 오른쪽 위 스피커 아이콘으로 소리를 끄고 켤 수 있습니다.
 
 ### Crowd Rush 규칙
 

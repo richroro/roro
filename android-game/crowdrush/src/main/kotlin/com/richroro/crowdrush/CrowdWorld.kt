@@ -37,17 +37,21 @@ class CrowdWorld(private val seed: Int = 1) {
                 Op.DIV -> "÷$value"
             }
 
-        /** A bullet hit improves the side: +N grows, −N shrinks and flips to +1, ÷2 flips to +1 after enough hits. */
-        internal fun hit() {
+        /**
+         * A bullet hit improves the side: +N grows, −N shrinks and flips to +1, ÷2 flips to +1 after
+         * enough hits. Returns true when the displayed value changed.
+         */
+        internal fun hit(): Boolean {
             hits++
-            when (op) {
-                Op.ADD -> if (hits % GATE_HITS_PER_STEP == 0) value++
-                Op.MUL -> if (hits % MUL_HITS_PER_STEP == 0) value++
+            return when (op) {
+                Op.ADD -> if (hits % GATE_HITS_PER_STEP == 0) { value++; true } else false
+                Op.MUL -> if (hits % MUL_HITS_PER_STEP == 0) { value++; true } else false
                 Op.SUB -> if (hits % GATE_HITS_PER_STEP == 0) {
                     value--
                     if (value <= 0) flipToPlusOne()
-                }
-                Op.DIV -> if (hits >= DIV_HITS_TO_FLIP) flipToPlusOne()
+                    true
+                } else false
+                Op.DIV -> if (hits >= DIV_HITS_TO_FLIP) { flipToPlusOne(); true } else false
             }
         }
 
@@ -99,6 +103,11 @@ class CrowdWorld(private val seed: Int = 1) {
             internal set
     }
 
+    /** Something the renderer may want to show or play. Drained once per frame via [drainEvents]. */
+    class Event(val type: Type, val x: Float = 0f, val z: Float = 0f, val value: Int = 0, val flag: Boolean = false, val label: String = "") {
+        enum class Type { SHOT, HIT_GATE, HIT_ENEMY, HIT_BOSS, GATE_GOOD, GATE_BAD, CONTACT, LEVEL_CLEAR, GAME_OVER }
+    }
+
     var level: Int = 1
         private set
     var bestLevel: Int = 0
@@ -132,6 +141,13 @@ class CrowdWorld(private val seed: Int = 1) {
     val bullets: List<Bullet> get() = mutableBullets
     private var fireAccumulator = 0f
     private val shotRandom = Mulberry32(seed)
+    private val pendingEvents = ArrayList<Event>()
+
+    /** Moves all queued events into [into] and clears the queue. */
+    fun drainEvents(into: MutableList<Event>) {
+        into.addAll(pendingEvents)
+        pendingEvents.clear()
+    }
     var boss: Boss? = null
         private set
 
@@ -163,6 +179,7 @@ class CrowdWorld(private val seed: Int = 1) {
         kills = 0
         fireAccumulator = 0f
         mutableBullets.clear()
+        pendingEvents.clear()
 
         val gateCount = min(MAX_GATES, BASE_GATES + GATES_PER_LEVEL * (newLevel - 1))
         val spacing = (length - 20f) / gateCount
@@ -247,9 +264,11 @@ class CrowdWorld(private val seed: Int = 1) {
                 count = apply(count, side)
                 flash = FLASH_SECONDS
                 lastGateGood = side.isGood
+                pendingEvents.add(Event(if (side.isGood) Event.Type.GATE_GOOD else Event.Type.GATE_BAD, playerX, g.z, label = side.label))
                 if (count <= 0) {
                     state = State.GAME_OVER
                     message = MSG_WIPED
+                    pendingEvents.add(Event(Event.Type.GAME_OVER))
                     return
                 }
             }
@@ -261,10 +280,12 @@ class CrowdWorld(private val seed: Int = 1) {
                 count -= e.count
                 flash = FLASH_SECONDS
                 lastGateGood = false
+                pendingEvents.add(Event(Event.Type.CONTACT, e.x, e.z, value = e.count))
                 if (count <= 0) {
                     count = 0
                     state = State.GAME_OVER
                     message = MSG_LOST_TO_SQUAD.format(e.count)
+                    pendingEvents.add(Event(Event.Type.GAME_OVER))
                     return
                 }
             }
@@ -280,10 +301,12 @@ class CrowdWorld(private val seed: Int = 1) {
                 state = State.LEVEL_CLEAR
                 bestLevel = max(bestLevel, level)
                 message = MSG_BOSS_BEATEN.format(b.maxCount)
+                pendingEvents.add(Event(Event.Type.LEVEL_CLEAR))
             } else {
                 count = 0
                 state = State.GAME_OVER
                 message = MSG_LOST_TO_BOSS.format(remaining)
+                pendingEvents.add(Event(Event.Type.GAME_OVER))
             }
         }
     }
@@ -295,7 +318,9 @@ class CrowdWorld(private val seed: Int = 1) {
         while (fireAccumulator >= 1f) {
             fireAccumulator -= 1f
             val spread = playerRadius * 0.8f
-            mutableBullets.add(Bullet(playerX + (shotRandom.next() * 2f - 1f) * spread, z + 1f))
+            val bx = playerX + (shotRandom.next() * 2f - 1f) * spread
+            mutableBullets.add(Bullet(bx, z + 1f))
+            pendingEvents.add(Event(Event.Type.SHOT, bx, z))
         }
         val b = boss
         for (bullet in mutableBullets) {
@@ -307,8 +332,10 @@ class CrowdWorld(private val seed: Int = 1) {
             }
             for (g in mutableGates) {
                 if (!g.used && g.z > prevBz && g.z <= bullet.z) {
-                    (if (bullet.x < 0f) g.left else g.right).hit()
+                    val side = if (bullet.x < 0f) g.left else g.right
+                    val stepped = side.hit()
                     bullet.alive = false
+                    pendingEvents.add(Event(Event.Type.HIT_GATE, bullet.x, g.z, flag = stepped, label = side.label, value = if (side.isGood) 1 else 0))
                     break
                 }
             }
@@ -318,6 +345,7 @@ class CrowdWorld(private val seed: Int = 1) {
                     e.shot()
                     kills++
                     bullet.alive = false
+                    pendingEvents.add(Event(Event.Type.HIT_ENEMY, bullet.x, e.z, flag = !e.alive))
                     break
                 }
             }
@@ -326,6 +354,7 @@ class CrowdWorld(private val seed: Int = 1) {
                 b.shot()
                 kills++
                 bullet.alive = false
+                pendingEvents.add(Event(Event.Type.HIT_BOSS, bullet.x, b.z, flag = !b.alive))
             }
         }
         mutableBullets.removeAll { !it.alive }
