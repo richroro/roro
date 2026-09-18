@@ -27,7 +27,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 |---|---|---|
 | `query` | 웹 검색어(영어 3~4단어) | mood |
 | `mood` | `playful` `calm` `lofi` `mysterious` `epic` (합성 루프의 코드 진행도 이걸로 정함) | `playful` |
-| `volume` | 나레이션 대비 BGM 크기. 0.2~0.4 권장 | `0.3` |
+| `volume` | 나레이션 대비 BGM 크기. 0.25~0.45 권장 | `0.35` |
 | `duck` | 나레이션 중 자동 감쇠(사이드체인) | `true` |
 | `file` | 직접 고른 음악 파일 경로(제공자 건너뜀) | 없음 |
 
@@ -37,7 +37,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 |---|---|---|
 | `image_style` | 모든 AI 이미지 프롬프트 뒤에 붙는 톤 문구 | `""` |
 | `transition` | `fade` `mix`(fade/smoothleft/zoomin/smoothup 순환) `smoothleft` `zoomin` `wipeleft` … `none` | `fade` |
-| `transition_duration` | 전환 길이(초) | `0.4` |
+| `transition_duration` | 전환 길이(초) | `0.3` |
 | `ken_burns` | 이미지 줌/팬 모션 | `true` |
 | `vignette` | 가장자리 어둡게(집중감) | `true` |
 | `look` | `cinematic`(대비·채도 살짝 상승) 또는 `""` | `""` |

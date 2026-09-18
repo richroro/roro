@@ -6,16 +6,20 @@
   "category": "animals",
   "hook_type": "question",
   "voice": "female",
-  "rate": "+8%",
+  "rate": "+12%",
   "style": {
-    "image_style": "cinematic photo, dramatic lighting, high detail, vertical 9:16, no text",
+    "image_style": "stylized 3d illustration, bold colors, single clear subject, dramatic lighting, vertical 9:16, no text",
     "transition": "mix",
-    "transition_duration": 0.4,
+    "transition_duration": 0.3,
     "auto_transition_sfx": false,
     "vignette": true
   },
-  "bgm": { "query": "playful curious ukulele", "mood": "playful", "volume": 0.3 },
-  "cta": "더 신기한 사실은 구독",
+  "bgm": {
+    "query": "playful curious ukulele",
+    "mood": "playful",
+    "volume": 0.35
+  },
+  "cta": "모르는 친구한테 보내기",
   "scenes": [
     {
       "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",
@@ -56,6 +60,11 @@
   ],
   "meta": {
     "description": "문어의 심장은 세 개! 헤엄칠 때 멈추는 심장과 파란 피의 비밀.",
-    "hashtags": ["문어", "신기한사실", "동물상식", "shorts"]
+    "hashtags": [
+      "문어",
+      "신기한사실",
+      "동물상식",
+      "shorts"
+    ]
   }
 }

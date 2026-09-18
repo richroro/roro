@@ -265,6 +265,16 @@ def validate_project(p: dict) -> None:
         errs.append("title 이 없습니다")
     if errs:
         die("project", "프로젝트 검증 실패:\n  - " + "\n  - ".join(errs))
+    # 플레이북 규칙 경고(막지는 않는다)
+    first = p["scenes"][0]
+    opener = str(first.get("narration", "")).strip()
+    if any(opener.startswith(k) for k in ("안녕하세요", "안녕", "오늘은", "여러분 안녕", "제가")):
+        warn("project", f"첫 문장이 인사/예고로 시작합니다 → 결론이나 구체적 질문으로 바로 시작하세요: '{opener[:30]}…'")
+    if not first.get("headline"):
+        warn("project", "첫 씬에 headline 이 없습니다 — 첫 프레임의 텍스트 훅은 조회수에 가장 큰 영향을 줍니다(12자 이내로 넣으세요)")
+    chars = sum(len(str(s.get("narration", ""))) for s in p["scenes"])
+    if chars > 260:
+        warn("project", f"나레이션 {chars}자 — 45초를 넘길 수 있습니다. 페이오프 뒤는 잘라내세요(권장 150~230자)")
 
 
 def slugify(text: str) -> str:

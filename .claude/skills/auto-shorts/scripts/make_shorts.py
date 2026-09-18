@@ -42,7 +42,7 @@ STAGES = ["tts", "plan", "images", "audio", "subs", "video", "mix", "extras"]
 DEFAULT_STYLE = {
     "image_style": "",            # 모든 이미지 프롬프트 뒤에 붙는 스타일 문구
     "transition": "fade",         # fade | mix | smoothleft | zoomin | ... | none
-    "transition_duration": 0.4,
+    "transition_duration": 0.3,
     "ken_burns": True,
     "vignette": True,
     "look": "",                   # "" | cinematic
@@ -277,7 +277,7 @@ def main() -> None:
     tracks = [nar_wav]
     if bgm_file:
         music_wav = work / "music.wav"
-        vol = float(bgm_cfg.get("volume", 0.30))
+        vol = float(bgm_cfg.get("volume", 0.35))
         duck = bool(bgm_cfg.get("duck", True))
         sig = sig_of(bgm_file, nar_wav, total, vol, duck)
         if sigs.stale(music_wav, sig, args.force):

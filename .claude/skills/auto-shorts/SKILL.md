@@ -45,7 +45,8 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   카테고리에서 구체 후보 3개를 훅 문장까지 붙여 제안**하고 하나 고르게 한다(질문 도구가 있으면 그걸로,
   없으면 채팅으로). 질문은 이 한 번뿐. 답을 받을 수 없는 자율 실행 상황이면 가장 반전이 큰 후보로 바로
   진행하고 결과에 그렇게 골랐다고 적는다.
-- 길이·톤 기본값: **45~55초, 씬 6~9개, 밝고 빠른 정보성 톤, 한국어, 여성 보이스 +8%**.
+- 길이·톤 기본값: **30~45초(사실 하나면 25~35초, 랭킹·서사는 55초까지), 씬 5~8개, 밝고 빠른 정보성 톤,
+  한국어, 여성 보이스 +12%**. 페이오프가 끝나면 채우지 말고 끝낸다(완주율이 길이보다 중요 — `playbook.md` §3).
   사용자가 다르게 말한 것만 바꾼다.
 - 사실이 애매한 주제는 피한다. 검증 안 된 수치를 지어내지 말고, 널리 알려진 사실만 쓰거나
   "~로 알려져 있어요"로 완충한다.
@@ -61,15 +62,15 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   "slug": "octopus-three-hearts",          // 영문 소문자-하이픈. 출력 폴더 이름
   "title": "문어는 심장이 3개다?!",           // 업로드 제목 = 훅. 썸네일에도 들어감
   "thumbnail_text": "심장이 3개?!",          // (선택) 썸네일용 더 짧은 문구
-  "lang": "ko", "voice": "female", "rate": "+8%",   // voice: female|male|male2|<edge 보이스 ID>
+  "lang": "ko", "voice": "female", "rate": "+12%",  // voice: female|male|male2|<edge 보이스 ID>. 편마다 보이스·훅 유형을 돌려 쓴다
   "style": {
-    "image_style": "cinematic photo, dramatic lighting, vertical 9:16, no text",  // 모든 이미지 톤 통일
+    "image_style": "stylized 3d illustration, bold colors, single clear subject, vertical 9:16, no text",  // 채널 고정 아트스타일. 실존 인물·장소의 포토리얼은 피한다(AI 자동 라벨·삭제 지문)
     "transition": "mix",                    // fade | mix | smoothleft | zoomin | none
     "auto_transition_sfx": false,           // true 면 씬 전환마다 whoosh (과하면 촌스러움)
     "vignette": true
   },
-  "bgm": { "query": "playful curious ukulele", "mood": "playful", "volume": 0.3 },  // mood: playful|calm|lofi|mysterious|epic
-  "cta": "더 신기한 사실은 구독",            // 마지막 3초 상단 문구 (이모지 금지)
+  "bgm": { "query": "playful curious ukulele", "mood": "playful", "volume": 0.35 },  // mood: playful|calm|lofi|mysterious|epic
+  "cta": "모르는 친구한테 보내기",            // 마지막 3초 상단 문구 (이모지 금지). '보내기/공유' 유도가 구독 요청보다 배급 신호에 유리
   "scenes": [
     { "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",   // 씬당 1~2문장
       "headline": "심장이 3개?!",             // (선택) 씬 상단 큰 글씨, 12자 이내
@@ -86,12 +87,15 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 성과 분석용 `category`/`hook_type` 은 `references/options.md` 에 있다 — 품질을 더 조이고 싶을 때 읽는다.
 
 **대본 체크리스트 (쓰고 나서 반드시 스스로 검사)**
-- 첫 씬 첫 문장이 질문·반전·숫자 중 하나로 시작하는 훅인가? 제목과 같은 궁금증인가?
-- 나레이션 총 글자 수 **220~260자**(공백 포함)면 여백 포함 45~55초. 씬마다 약 0.45초 여백이 붙으므로
+- 첫 씬 첫 문장이 결론·반전·구체적 질문으로 바로 시작하는가? 인사말·"오늘은 ~알아볼게요"는 금지. 제목·첫 씬 `headline`(필수)과
+  같은 궁금증을 가리키는가? 훅이 약속한 사실이 10초 안에 나오는가?
+- 나레이션 총 글자 수 **150~230자**(공백 포함, +12% 속도)면 여백 포함 30~45초. 씬마다 약 0.45초 여백이 붙으므로
   280자를 넘기면 60초를 넘길 수 있다(`references/options.md` 의 길이 계산 참고).
 - 한 문장 45자 이내, 구어체, 같은 종결어미 3번 연속 금지(~요/~죠/~입니다 섞기).
 - 씬마다 새 정보 하나. 마지막 씬은 반전이나 여운 있는 질문으로 끝내고, 구독 유도는 `cta` 에만.
-- 헤드라인은 훅 씬 + 핵심 반전 씬 2~3개에만. 효과음은 2~4개만(riser=훅, boom=반전, pop=가벼운 강조, ding=정답).
+- 헤드라인은 훅 씬(필수, 첫 프레임부터) + 핵심 반전 씬 1~3개에만. 효과음은 2~4개만(riser=훅, boom=반전, pop=가벼운 강조, ding=정답).
+- 편마다 다르게: 훅 유형·이미지 스타일·보이스가 직전 편들과 똑같으면 바꾼다(`report.py` 의 반복 경고). 유튜브
+  '비진정성 콘텐츠' 정책은 같은 템플릿의 TTS 슬라이드쇼를 명시적 위반 예시로 든다(`playbook.md` §6).
 - 이미지 프롬프트는 영어, `피사체 + 행동/구도 + 배경 + 조명`, 씬마다 구도를 바꾼다(클로즈업↔와이드).
   실존 인물 얼굴·브랜드 로고·저작권 캐릭터·글자 포함 요청은 하지 않는다.
 - 자막에 들어가는 모든 문구(narration/headline/cta)에 이모지 없음 — 자막 폰트에 없어 깨진다.
