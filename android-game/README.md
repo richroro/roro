@@ -1,4 +1,4 @@
-# Android 게임 모음 — Sky Dodge · Crowd Rush
+# Android 게임 모음 — Sky Dodge · Goblin Hunters
 
 하나의 Gradle 프로젝트에 두 개의 독립 앱이 들어 있습니다. 둘 다 외부 라이브러리 없이
 Kotlin + Android 프레임워크(Canvas)만으로 만들어져 APK 가 매우 작습니다.
@@ -6,7 +6,7 @@ Kotlin + Android 프레임워크(Canvas)만으로 만들어져 APK 가 매우 �
 | 앱 (모듈) | 장르 | applicationId |
 | --- | --- | --- |
 | **Sky Dodge · 스카이 닷지** (`:app`) | 떨어지는 블록을 좌우 드래그로 피하고 별을 모으는 한 손 캐주얼 | `com.richroro.skydodge` |
-| **Crowd Rush · 군단 러시** (`:crowdrush`) | 군단을 이끌고 달리며 +N/×2 게이트로 병력을 불려 보스 군단과 숫자 대결하는 크라우드 러너 | `com.richroro.crowdrush` |
+| **Goblin Hunters · 고블린 헌터** (`:crowdrush`) | 레인저 부대를 이끌고 시골길을 달리며 룬 게이트를 쏴 병력을 불리고, 고블린 무리와 길 끝의 오우거를 물리치는 사격 러너 | `com.richroro.crowdrush` |
 
 | 공통 항목 | 값 |
 | --- | --- |
@@ -25,7 +25,7 @@ android-game/
 │  │  ├─ GameView.kt      # Canvas 렌더링 + Choreographer 프레임 루프 + 터치 입력
 │  │  └─ MainActivity.kt  # 전체화면(immersive) Activity
 │  └─ src/test/…/GameWorldTest.kt
-├─ crowdrush/                          # Crowd Rush
+├─ crowdrush/                          # Goblin Hunters (모듈/패키지 이름은 초기 이름 crowdrush 유지)
 │  ├─ src/main/kotlin/com/richroro/crowdrush/
 │  │  ├─ CrowdWorld.kt    # 레인·게이트·적 군단·보스 시뮬레이션, 시드 기반 결정적 레벨 생성
 │  │  ├─ CrowdView.kt     # 유사 3D(원근 투영) Canvas 렌더링 + 터치 입력
@@ -36,22 +36,22 @@ android-game/
 └─ store/                              # Play Console 등록용 이미지 + 생성 스크립트
 ```
 
-Crowd Rush 의 병사 이미지는 외부 에셋 없이 `tools/generate_sprites.py` 가 그려서 만든 64×80 PNG 입니다
-(`soldier_blue_back_0/1.png` = 아군 뒷모습 걷기 2프레임 / `soldier_red_front_0/1.png` = 적군 정면 2프레임, 96×120 / `monster.png` = 괴물 160×200).
+Goblin Hunters 의 캐릭터 이미지는 외부 에셋 없이 `tools/generate_sprites.py` 가 그려서 만든 PNG 입니다
+(`ranger_back_0/1.png` = 레인저 뒷모습 걷기 2프레임 / `goblin_front_0/1.png` = 고블린 정면 2프레임, 96×120 / `monster.png` = 오우거 160×200).
 다른 그림으로 바꾸려면 같은 파일 이름으로 `crowdrush/src/main/res/drawable-nodpi/` 에 PNG 를 덮어쓰면 됩니다.
 효과음(총성 `sfx_shot`, 피격 `sfx_hit`, 숫자 상승 `sfx_ding`, 손해 `sfx_buzz`, 클리어 `sfx_clear`, 게임 오버 `sfx_over`)도
 `tools/generate_sounds.py` 로 합성한 WAV 라서 `crowdrush/src/main/res/raw/` 의 같은 이름 파일로 교체할 수 있습니다.
 화면 오른쪽 위 스피커 아이콘으로 소리를 끄고 켤 수 있습니다.
 
-### Crowd Rush 규칙
+### Goblin Hunters 규칙
 
-- 군단은 자동으로 전진하며 **자동으로 사격**합니다. 병사 수(최대 40명)에 비례해 초당 발사 수가 늘어납니다. 좌우 드래그로 레인 안에서 이동합니다.
+- 레인저 부대는 자동으로 전진하며 **자동으로 사격**합니다. 인원(최대 40명)에 비례해 초당 발사 수가 늘어납니다. 좌우 드래그로 길 안에서 이동합니다.
 - 게이트는 좌/우 한 쌍으로 나오며 지나간 쪽의 연산이 적용됩니다: `+N`, `×2/×3`(파란색, 이득) / `−N`, `÷2`(빨간색, 손해).
 - 총알이 게이트에 맞으면 그 쪽이 좋아집니다: `+N` 은 3발마다 +1, `−N` 은 3발마다 −1 이고 0 이 되면 `+1` 로 뒤집힘, `÷2` 는 15발 맞으면 `+1` 로 뒤집힘, `×N` 은 20발마다 +1.
-- 빨간 적 군단은 레인을 따라 구역별로 하나씩 고르게 배치되고(게이트와 7m 이상 떨어짐, 좌우 번갈아), 뒤로 갈수록 커집니다. 35m 안으로 들어오면 아군 쪽으로 천천히 전진합니다.
-- 적 군단은 총알 1발에 1명씩 줄고 0 이면 사라집니다. 부딪히면 남은 숫자만큼 병력이 줄고, 0 이하가 되면 게임 오버입니다.
+- 고블린 무리는 길을 따라 구역별로 하나씩 고르게 배치되고(게이트와 7m 이상 떨어짐, 좌우 번갈아), 뒤로 갈수록 커집니다. 35m 안으로 들어오면 아군 쪽으로 천천히 전진합니다.
+- 고블린은 총알 1발에 1마리씩 줄고 0 이면 사라집니다. 부딪히면 남은 숫자만큼 병력이 줄고, 0 이하가 되면 게임 오버입니다.
 - 아이템 4종이 레인에 떠 있고 지나가면 획득합니다: ⚡ 연사(6초간 발사 속도 2배), 🛡 방어막(다음 손해 게이트 또는 적 접촉을 무효화, 접촉한 적은 전멸), ✚ 증원(병력 +30%, 최소 3명), 💣 폭탄(40m 안 적 군단 전멸, 보스 10% 감소). 게이트·적 군단과 5m 이상 떨어져 놓입니다.
-- 레인 끝에는 **괴물** 한 마리가 기다립니다. 사격으로 HP 를 깎을 수 있고, 도달했을 때 남은 HP 보다 병력이 많으면 레벨 클리어. HP 는 "최선 경로 병력의 60% + 최선 경로 군단이 사거리 안에서 쏠 수 있는 탄수의 50%" 라서 잘 고르고 잘 쏘면 항상 이길 수 있습니다.
+- 길 끝에는 **오우거** 한 마리가 기다립니다. 사격으로 HP 를 깎을 수 있고, 도달했을 때 남은 HP 보다 병력이 많으면 레벨 클리어. HP 는 "최선 경로 병력의 60% + 최선 경로 군단이 사거리 안에서 쏠 수 있는 탄수의 50%" 라서 잘 고르고 잘 쏘면 항상 이길 수 있습니다.
 - 병사 크기는 화면 원근에만 따르고 인원수와 무관합니다. 군단이 커지면 넓게 퍼질 뿐입니다. 64명이 넘는 적 군단은 남은 비율만큼 그려지는 인원이 줄어듭니다.
 - 레벨이 오를수록 속도·레인 길이·게이트 수·적 군단 수가 늘어납니다.
 
@@ -107,7 +107,7 @@ base64 -w0 skydodge-upload.jks > skydodge-upload.jks.b64   # macOS: base64 -i sk
 ### 3. Google Play Console 에 앱 만들기 (앱마다 최초 1회, 수동)
 
 1. https://play.google.com/console 에서 개발자 계정 등록 (1회 등록비 US$25).
-2. **앱 만들기** → 이름 `Sky Dodge` 또는 `Crowd Rush`, 기본 언어 한국어, 앱/게임 → 게임, 무료.
+2. **앱 만들기** → 이름 `Sky Dodge` 또는 `Goblin Hunters`, 기본 언어 한국어, 앱/게임 → 게임, 무료.
 3. **대시보드**의 설정 항목 완료:
    - 앱 액세스: 특별한 액세스 불필요
    - 광고: 광고 없음
@@ -117,7 +117,7 @@ base64 -w0 skydodge-upload.jks > skydodge-upload.jks.b64   # macOS: base64 -i sk
    - 개인정보처리방침 URL: 데이터 미수집이어도 입력을 요구할 수 있음 → 간단한 페이지(GitHub Pages 등) 링크
 4. **스토어 등록정보**: `store/<앱>-icon-512.png`(앱 아이콘), `store/<앱>-feature-graphic-1024x500.png`(그래픽 이미지),
    휴대전화 스크린샷 2장 이상(에뮬레이터/기기에서 캡처), 짧은 설명·자세한 설명.
-5. **테스트 → 내부 테스트 → 새 버전 만들기** 에서 Actions 아티팩트(또는 GitHub Release)의 `SkyDodge-*.aab` / `CrowdRush-*.aab` 를
+5. **테스트 → 내부 테스트 → 새 버전 만들기** 에서 Actions 아티팩트(또는 GitHub Release)의 `SkyDodge-*.aab` / `GoblinHunters-*.aab` 를
    업로드하고 저장. Play 앱 서명 등록을 수락하면 첫 업로드 완료.
    *첫 AAB 는 반드시 콘솔에서 직접 올려야 하며, 그 후부터 API 업로드가 가능합니다.*
 

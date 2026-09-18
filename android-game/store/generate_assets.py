@@ -181,14 +181,16 @@ def _wordmark(c: Canvas, x0, y0, cell=11, gap=3):
 
 # ---------------------------------------------------------------- Crowd Rush
 
-CR_BG = (0x1D, 0x4E, 0xD8)
-CR_SKY_TOP = (0x38, 0xBD, 0xF8)
-CR_SKY_BOTTOM = (0xBA, 0xE6, 0xFD)
-CR_ROAD = (0xD1, 0xD5, 0xDB)
-CR_GATE = (0x60, 0xA5, 0xFA)
-CR_GATE_DARK = (0x1E, 0x3A, 0x8A)
-CR_ALLY = (0x3B, 0x82, 0xF6)
-CR_ENEMY = (0xEF, 0x44, 0x44)
+CR_BG = (0x0B, 0x5E, 0x56)
+CR_SKY_TOP = (0x5E, 0xB8, 0xF5)
+CR_SKY_BOTTOM = (0xD6, 0xEE, 0xFF)
+CR_GRASS = (0x5D, 0xB8, 0x5B)
+CR_ROAD = (0xC9, 0xA5, 0x6B)
+CR_GATE = (0xF5, 0x9E, 0x0B)
+CR_GATE_BAD = (0x7C, 0x3A, 0xED)
+CR_GATE_DARK = (0x78, 0x35, 0x0F)
+CR_ALLY = (0x14, 0xB8, 0xA6)
+CR_ENEMY = (0x84, 0xCC, 0x16)
 CR_HEAD = (0xFD, 0xE6, 0x8A)
 
 
@@ -222,24 +224,30 @@ def make_crowd_icon(path):
 def make_crowd_feature_graphic(path):
     c = Canvas(1024, 500)
     c.fill_vertical_gradient(CR_SKY_TOP, CR_SKY_BOTTOM)
+    c.rounded_rect(0, 150, 1024, 500, 0, CR_GRASS)
     # road trapezoid
     c.polygon([(120, 500), (904, 500), (640, 150), (384, 150)], CR_ROAD)
     # gates receding along the road
     for (y, w, h, label_w) in [(420, 300, 70, 1.0), (300, 200, 46, 0.66), (215, 120, 28, 0.4)]:
         cx = 512
         c.rounded_rect(cx - w, y - h, cx - 6, y, 6, CR_GATE)
-        c.rounded_rect(cx + 6, y - h, cx + w, y, 6, CR_ENEMY)
+        c.rounded_rect(cx + 6, y - h, cx + w, y, 6, CR_GATE_BAD)
         draw_plus(c, cx - w / 2, y - h / 2, 10 * label_w, 5 * label_w, (255, 255, 255))
         c.rounded_rect(cx + w / 2 - 10 * label_w, y - h / 2 - 2.5 * label_w, cx + w / 2 + 10 * label_w, y - h / 2 + 2.5 * label_w, 2, (255, 255, 255))
     # enemy horde at the far end
     draw_crowd(c, 512, 175, 60, 110, CR_ENEMY, 7)
     # player crowd in front
     draw_crowd(c, 512, 470, 30, 80, CR_ALLY, 13)
-    _wordmark_generic(c, "CROWD RUSH", 60, 60, cell=11, gap=3)
+    _wordmark_generic(c, "GOBLIN HUNTERS", 40, 50, cell=10, gap=3)
     c.save(path)
 
 
 _GLYPHS.update({
+    "B": ["1110", "1001", "1110", "1001", "1110"],
+    "L": ["1000", "1000", "1000", "1000", "1111"],
+    "I": ["111", "010", "010", "010", "111"],
+    "N": ["1001", "1101", "1011", "1001", "1001"],
+    "T": ["11111", "00100", "00100", "00100", "00100"],
     "C": ["0111", "1000", "1000", "1000", "0111"],
     "R": ["1110", "1001", "1110", "1010", "1001"],
     "W": ["10001", "10001", "10101", "10101", "01010"],
@@ -265,6 +273,6 @@ if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     make_icon(os.path.join(here, "skydodge-icon-512.png"))
     make_feature_graphic(os.path.join(here, "skydodge-feature-graphic-1024x500.png"))
-    make_crowd_icon(os.path.join(here, "crowdrush-icon-512.png"))
-    make_crowd_feature_graphic(os.path.join(here, "crowdrush-feature-graphic-1024x500.png"))
-    print("wrote skydodge-* and crowdrush-* icon/feature images")
+    make_crowd_icon(os.path.join(here, "goblinhunters-icon-512.png"))
+    make_crowd_feature_graphic(os.path.join(here, "goblinhunters-feature-graphic-1024x500.png"))
+    print("wrote skydodge-* and goblinhunters-* icon/feature images")

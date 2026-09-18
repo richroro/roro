@@ -3,8 +3,9 @@
 
 Each sprite is 96x120 RGBA with a dark outline, two-tone shading and two walk frames.
 Outputs into crowdrush/src/main/res/drawable-nodpi/:
-  soldier_<team>_<view>_<frame>.png   team = blue|red, view = front|back, frame = 0|1
-  monster.png                          the end-of-lane monster (160x200)
+  ranger_back_<frame>.png    the player's rangers (teal coat, wide-brim hat), seen from behind, frame = 0|1
+  goblin_front_<frame>.png   enemy goblins facing the camera, frame = 0|1
+  monster.png                the ogre chieftain at the end of the lane (160x200)
 
 Run:  python3 android-game/tools/generate_sprites.py [out_dir]
 """
@@ -38,10 +39,19 @@ PACK = (0x5E, 0x5A, 0x54)
 PACK_LIGHT = (0x7A, 0x76, 0x6F)
 BUCKLE = (0xD4, 0xAF, 0x37)
 
-TEAMS = {
-    "blue": {"uni": (0x2E, 0x6B, 0xE6), "uni_light": (0x5B, 0x91, 0xF5), "uni_dark": (0x1F, 0x46, 0xA3), "helmet": (0x1E, 0x4F, 0xC2), "helmet_light": (0x4C, 0x7F, 0xE8), "helmet_dark": (0x15, 0x36, 0x86)},
-    "red": {"uni": (0xE0, 0x3E, 0x3E), "uni_light": (0xF0, 0x6F, 0x6F), "uni_dark": (0xA3, 0x25, 0x25), "helmet": (0xC0, 0x2B, 0x2B), "helmet_light": (0xE6, 0x5C, 0x5C), "helmet_dark": (0x82, 0x1B, 0x1B)},
-}
+RANGER = {"uni": (0x0F, 0x8A, 0x7E), "uni_light": (0x2D, 0xB5, 0xA6), "uni_dark": (0x0B, 0x5E, 0x56), "hat": (0x7C, 0x4A, 0x1E), "hat_light": (0x9C, 0x64, 0x2E), "hat_dark": (0x55, 0x30, 0x12), "band": (0xD9, 0x8E, 0x2B)}
+
+GOB_SKIN = (0x6D, 0xBB, 0x3A)
+GOB_SKIN_LIGHT = (0x93, 0xD6, 0x5C)
+GOB_SKIN_DARK = (0x47, 0x86, 0x25)
+GOB_EYE = (0xF5, 0xD0, 0x2E)
+GOB_PUPIL = (0x1B, 0x1F, 0x2E)
+GOB_TUNIC = (0x8B, 0x5A, 0x2B)
+GOB_TUNIC_LIGHT = (0xA8, 0x74, 0x3E)
+GOB_TUNIC_DARK = (0x5E, 0x3A, 0x18)
+GOB_SHORTS = (0x3E, 0x3A, 0x4A)
+GOB_TOOTH = (0xFF, 0xFF, 0xF0)
+GOB_CLUB = (0x6B, 0x45, 0x22)
 
 
 class Canvas:
@@ -155,7 +165,7 @@ def _inside(x, y, pts):
     return inside
 
 
-def draw_soldier(c: Canvas, t: dict, front: bool, frame: int):
+def draw_ranger(c: Canvas, t: dict, front: bool, frame: int):
     O = 1.6  # outline width
     cx = 48
     step = 4 if frame == 1 else 0  # walk cycle: one leg forward, one back
@@ -227,15 +237,15 @@ def draw_soldier(c: Canvas, t: dict, front: bool, frame: int):
         for side in (-1, 1):
             c.circle(cx + side * 15, 33, 3.5, SKIN_SHADE, outline=O)
 
-    # ---- helmet
-    c.ellipse(cx, 28, 20, 18, t["helmet"], outline=O, top_only=True)
-    c.ellipse(cx - 6, 20, 9, 6, t["helmet_light"])                               # highlight
-    c.rrect(cx - 21, 25, cx + 21, 31, 3, t["helmet"], outline=O)                 # brim
-    c.rrect(cx - 21, 29, cx + 21, 31, 1, t["helmet_dark"])                       # brim shadow
-    c.rrect(cx - 21, 22, cx + 21, 25, 1, t["helmet_dark"])                       # band
-    if front:
-        c.rrect(cx - 16, 31, cx - 14, 42, 0.5, STRAP)                            # chin straps
-        c.rrect(cx + 14, 31, cx + 16, 42, 0.5, STRAP)
+    # ---- wide-brim leather hat
+    c.ellipse(cx, 27, 30, 8, t["hat"], outline=O)                                # brim
+    c.ellipse(cx, 25, 30, 6, t["hat_light"])
+    c.ellipse(cx, 17, 17, 13, t["hat"], outline=O)                               # crown
+    c.rrect(cx - 17, 17, cx + 17, 28, 4, t["hat"], outline=O)
+    c.ellipse(cx - 6, 10, 8, 4, t["hat_light"])
+    c.rrect(cx - 17, 21, cx + 17, 26, 1, t["band"])                              # hat band
+    c.ellipse(cx, 27, 30, 8, t["hat_dark"], top_only=False) if False else None
+    c.rrect(cx - 30, 27, cx + 30, 30, 2, t["hat_dark"])                          # brim underside
 
 
 MON_BODY = (0x5B, 0xA6, 0x3C)
@@ -310,26 +320,73 @@ def draw_monster(c: Canvas):
         c.polygon([(fx - 4, 76), (fx + 4, 76), (fx, 66)], MON_TOOTH)
 
 
+def draw_goblin(c: Canvas, frame: int):
+    """A scrappy goblin facing the camera: big ears, yellow eyes, ragged tunic, club."""
+    O = 1.6
+    cx = 48
+    step = 4 if frame == 1 else 0
+    # legs (bare) + feet
+    for i, side in enumerate((-1, 1)):
+        lx = cx + side * 9
+        dy = -step if i == 0 else step
+        c.rrect(lx - 6, 80 + dy * 0.5, lx + 6, 102 + dy, 4, GOB_SKIN_DARK, outline=O)
+        c.rrect(lx - 6, 80 + dy * 0.5, lx - 1, 94 + dy, 3, GOB_SKIN)
+        c.ellipse(lx + side * 2, 106 + dy, 10, 5, GOB_SKIN, outline=O)          # foot
+        c.circle(lx + side * 9, 105 + dy, 2.2, GOB_TOOTH)                         # toe claw
+    # shorts + tunic
+    c.rrect(cx - 15, 74, cx + 15, 86, 4, GOB_SHORTS, outline=O)
+    c.polygon([(cx - 18, 52), (cx + 18, 52), (cx + 20, 80), (cx + 8, 76), (cx, 82), (cx - 8, 76), (cx - 20, 80)], OUTLINE)
+    c.polygon([(cx - 16, 54), (cx + 16, 54), (cx + 18, 78), (cx + 8, 74), (cx, 80), (cx - 8, 74), (cx - 18, 78)], GOB_TUNIC)
+    c.polygon([(cx - 16, 54), (cx - 4, 54), (cx - 6, 76), (cx - 18, 78)], GOB_TUNIC_LIGHT)
+    c.rrect(cx - 16, 66, cx + 16, 70, 1, GOB_TUNIC_DARK)                          # rope belt
+    # arms
+    for side in (-1, 1):
+        ax = cx + side * 22
+        c.rot_rect(ax, 64, 9, 26, side * 20, GOB_SKIN, outline=O)
+        c.circle(ax + side * 5, 76, 5, GOB_SKIN_DARK, outline=O)                  # hands
+    # club in the right hand
+    c.rot_rect(cx + 34, 62, 6, 40, -15, GOB_CLUB, outline=O)
+    c.circle(cx + 40, 42, 8, GOB_CLUB, outline=O)
+    for k in range(3):
+        c.circle(cx + 36 + k * 4, 37 + k * 3, 2, GOB_TOOTH, outline=1)
+    # head
+    c.rrect(cx - 5, 44, cx + 5, 56, 3, GOB_SKIN_DARK, outline=O)                  # neck
+    c.ellipse(cx, 32, 18, 17, GOB_SKIN, outline=O)
+    c.ellipse(cx - 6, 24, 10, 6, GOB_SKIN_LIGHT)
+    for side in (-1, 1):                                                          # big pointy ears
+        pts = [(cx + side * 14, 30), (cx + side * 34, 18), (cx + side * 16, 40)]
+        c.polygon([(x + side * 1.5, y) for x, y in pts], OUTLINE)
+        c.polygon(pts, GOB_SKIN)
+        c.polygon([(cx + side * 17, 30), (cx + side * 29, 22), (cx + side * 18, 37)], GOB_SKIN_DARK)
+    for side in (-1, 1):                                                          # eyes
+        c.ellipse(cx + side * 7, 31, 5, 4, GOB_EYE, outline=1.2)
+        c.ellipse(cx + side * 7, 31, 1.5, 3.2, GOB_PUPIL)
+        c.rot_rect(cx + side * 7, 25, 9, 2.5, side * 18, GOB_SKIN_DARK)           # angry brows
+    c.rrect(cx - 9, 39, cx + 9, 44, 2, OUTLINE)                                   # grin
+    c.polygon([(cx - 6, 39), (cx - 2, 39), (cx - 4, 44)], GOB_TOOTH)
+    c.polygon([(cx + 2, 39), (cx + 6, 39), (cx + 4, 44)], GOB_TOOTH)
+    c.circle(cx, 36, 2.2, GOB_SKIN_DARK)                                          # nose
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "crowdrush", "src", "main", "res", "drawable-nodpi")
     os.makedirs(out, exist_ok=True)
-    # remove the old single-frame sprites if present
-    for old in ("soldier_blue_back.png", "soldier_blue_front.png", "soldier_red_front.png", "soldier_red_back.png"):
-        try:
+    # remove sprites from earlier iterations if present
+    for old in os.listdir(out):
+        if old.startswith("soldier_"):
             os.remove(os.path.join(out, old))
-        except OSError:
-            pass
-    for name, team in TEAMS.items():
-        for view in ("front", "back"):
-            for frame in (0, 1):
-                c = Canvas(W, H)
-                draw_soldier(c, team, front=(view == "front"), frame=frame)
-                c.save(os.path.join(out, f"soldier_{name}_{view}_{frame}.png"))
+    for frame in (0, 1):
+        c = Canvas(W, H)
+        draw_ranger(c, RANGER, front=False, frame=frame)
+        c.save(os.path.join(out, f"ranger_back_{frame}.png"))
+        g = Canvas(W, H)
+        draw_goblin(g, frame)
+        g.save(os.path.join(out, f"goblin_front_{frame}.png"))
     m = Canvas(160, 200)
     draw_monster(m)
     m.save(os.path.join(out, "monster.png"))
-    print("wrote soldier and monster sprites to", os.path.abspath(out))
+    print("wrote ranger, goblin and monster sprites to", os.path.abspath(out))
 
 
 if __name__ == "__main__":

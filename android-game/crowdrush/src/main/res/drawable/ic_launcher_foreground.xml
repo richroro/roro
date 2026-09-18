@@ -4,18 +4,21 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- gate panel with +1 -->
+    <!-- amber rune gate -->
     <path
-        android:fillColor="#60A5FA"
-        android:pathData="M28,30 h52 a4,4 0 0 1 4,4 v18 a4,4 0 0 1 -4,4 h-52 a4,4 0 0 1 -4,-4 v-18 a4,4 0 0 1 4,-4 z" />
+        android:fillColor="#F59E0B"
+        android:pathData="M28,40 q26,-10 52,0 v18 a4,4 0 0 1 -4,4 h-44 a4,4 0 0 1 -4,-4 z" />
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M50,36 h8 v6 h6 v8 h-6 v6 h-8 v-6 h-6 v-8 h6 z" />
-    <!-- crowd of cones -->
-    <path android:fillColor="#FBBF24" android:pathData="M42,64 l8,20 h-16 z" />
-    <path android:fillColor="#FBBF24" android:pathData="M54,60 l8,20 h-16 z" />
-    <path android:fillColor="#FBBF24" android:pathData="M66,64 l8,20 h-16 z" />
-    <path android:fillColor="#FDE68A" android:pathData="M42,66 m-3,0 a3,3 0 1 1 6,0 a3,3 0 1 1 -6,0" />
-    <path android:fillColor="#FDE68A" android:pathData="M54,62 m-3,0 a3,3 0 1 1 6,0 a3,3 0 1 1 -6,0" />
-    <path android:fillColor="#FDE68A" android:pathData="M66,66 m-3,0 a3,3 0 1 1 6,0 a3,3 0 1 1 -6,0" />
+        android:fillColor="#FDE68A"
+        android:pathData="M50,44 h8 v6 h6 v8 h-6 v6 h-8 v-6 h-6 v-8 h6 z" />
+    <!-- wooden posts -->
+    <path android:fillColor="#8B5A2B" android:pathData="M24,34 h5 v30 h-5 z" />
+    <path android:fillColor="#8B5A2B" android:pathData="M79,34 h5 v30 h-5 z" />
+    <!-- rangers with hats -->
+    <path android:fillColor="#14B8A6" android:pathData="M42,72 l8,16 h-16 z" />
+    <path android:fillColor="#14B8A6" android:pathData="M54,68 l8,16 h-16 z" />
+    <path android:fillColor="#14B8A6" android:pathData="M66,72 l8,16 h-16 z" />
+    <path android:fillColor="#7C4A1E" android:pathData="M35,73 h14 v3 h-14 z M39,68 h6 v5 h-6 z" />
+    <path android:fillColor="#7C4A1E" android:pathData="M47,69 h14 v3 h-14 z M51,64 h6 v5 h-6 z" />
+    <path android:fillColor="#7C4A1E" android:pathData="M59,73 h14 v3 h-14 z M63,68 h6 v5 h-6 z" />
 </vector>

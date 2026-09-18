@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">군단 러시</string>
-    <string name="how_to_play">군단이 자동으로 사격합니다.\n게이트를 쏴서 숫자를 키우고 적 군단을 깎고\n아이템(⚡연사 🛡방어막 ✚증원 💣폭탄)을 모아\n끝에서 기다리는 괴물을 쓰러뜨리세요</string>
+    <string name="app_name">고블린 헌터</string>
+    <string name="how_to_play">레인저 부대가 자동으로 사격합니다.
+룬 게이트를 쏴서 숫자를 키우고 고블린 무리를 물리치고
+아이템(⚡연사 🛡방어막 ✚증원 💣폭탄)을 모아
+길 끝에서 기다리는 오우거를 쓰러뜨리세요</string>
     <string name="tap_to_start">탭해서 시작</string>
     <string name="tap_next_level">탭해서 다음 레벨</string>
     <string name="tap_to_retry">탭해서 다시 하기</string>
@@ -11,10 +14,10 @@
     <string name="remaining">남은 병력 %1$d</string>
     <string name="remaining_and_kills">남은 병력 %1$d · 사살 %2$d</string>
     <string name="reached_level">레벨 %1$d 도달</string>
-    <string name="msg_wiped">병력이 모두 사라졌습니다</string>
-    <string name="msg_lost_to_squad">적 군단 %1$d명에게 패배</string>
-    <string name="msg_boss_beaten">괴물 격파! (HP %1$d)</string>
-    <string name="msg_lost_to_boss">괴물에게 패배 (HP %1$d 남음)</string>
+    <string name="msg_wiped">레인저가 모두 쓰러졌습니다</string>
+    <string name="msg_lost_to_squad">고블린 %1$d마리에게 패배</string>
+    <string name="msg_boss_beaten">오우거 격파! (HP %1$d)</string>
+    <string name="msg_lost_to_boss">오우거에게 패배 (HP %1$d 남음)</string>
     <string name="item_rapid">연사</string>
     <string name="item_shield">방어막</string>
     <string name="item_reinforce">증원</string>

@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Crowd Rush</string>
-    <string name="how_to_play">Your army fires automatically.\nShoot gates to raise their numbers, thin out enemy squads,\ngrab items (⚡ rapid fire, 🛡 shield, ✚ reinforcements, 💣 bomb)\nand bring down the monster waiting at the end</string>
+    <string name="app_name">Goblin Hunters</string>
+    <string name="how_to_play">Your rangers fire automatically.
+Shoot rune gates to raise their numbers, cut down goblin packs,
+grab items (⚡ rapid fire, 🛡 shield, ✚ reinforcements, 💣 bomb)
+and bring down the ogre waiting at the end of the road</string>
     <string name="tap_to_start">Tap to start</string>
     <string name="tap_next_level">Tap for next level</string>
     <string name="tap_to_retry">Tap to play again</string>
@@ -11,10 +14,10 @@
     <string name="remaining">%1$d troops left</string>
     <string name="remaining_and_kills">%1$d troops left · %2$d kills</string>
     <string name="reached_level">Reached level %1$d</string>
-    <string name="msg_wiped">Your army was wiped out</string>
-    <string name="msg_lost_to_squad">Defeated by a squad of %1$d</string>
-    <string name="msg_boss_beaten">Monster defeated! (HP %1$d)</string>
-    <string name="msg_lost_to_boss">Devoured by the monster (HP %1$d left)</string>
+    <string name="msg_wiped">Your rangers were wiped out</string>
+    <string name="msg_lost_to_squad">Overrun by a pack of %1$d goblins</string>
+    <string name="msg_boss_beaten">Ogre defeated! (HP %1$d)</string>
+    <string name="msg_lost_to_boss">Devoured by the ogre (HP %1$d left)</string>
     <string name="item_rapid">Rapid fire</string>
     <string name="item_shield">Shield</string>
     <string name="item_reinforce">Reinforcements</string>

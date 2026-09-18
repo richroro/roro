@@ -1,6 +1,6 @@
 name: Android Release
 
-# android-game/ 의 두 앱(Sky Dodge :app, Crowd Rush :crowdrush) 빌드·테스트·서명 파이프라인.
+# android-game/ 의 두 앱(Sky Dodge :app, Goblin Hunters :crowdrush) 빌드·테스트·서명 파이프라인.
 #  - PR / main push : 빌드 + 단위 테스트 + 서명된 APK/AAB 아티팩트 업로드
 #  - android-v* 태그 : 위 작업 + GitHub Release 생성(APK/AAB 첨부)
 #  - 수동 실행       : 옵션으로 GitHub Release 생성, Google Play 트랙 업로드
@@ -135,9 +135,9 @@ jobs:
           cp app/build/outputs/apk/release/app-release.apk "dist/SkyDodge-${VERSION_NAME}.apk"
           cp app/build/outputs/bundle/release/app-release.aab "dist/SkyDodge-${VERSION_NAME}.aab"
           cp app/build/outputs/mapping/release/mapping.txt "dist/SkyDodge-${VERSION_NAME}-mapping.txt"
-          cp crowdrush/build/outputs/apk/release/crowdrush-release.apk "dist/CrowdRush-${VERSION_NAME}.apk"
-          cp crowdrush/build/outputs/bundle/release/crowdrush-release.aab "dist/CrowdRush-${VERSION_NAME}.aab"
-          cp crowdrush/build/outputs/mapping/release/mapping.txt "dist/CrowdRush-${VERSION_NAME}-mapping.txt"
+          cp crowdrush/build/outputs/apk/release/crowdrush-release.apk "dist/GoblinHunters-${VERSION_NAME}.apk"
+          cp crowdrush/build/outputs/bundle/release/crowdrush-release.aab "dist/GoblinHunters-${VERSION_NAME}.aab"
+          cp crowdrush/build/outputs/mapping/release/mapping.txt "dist/GoblinHunters-${VERSION_NAME}-mapping.txt"
           ls -la dist
 
       - name: Upload build artifacts
@@ -177,12 +177,12 @@ jobs:
             dist/*.apk
             dist/*.aab
           body: |
-            **Sky Dodge · Crowd Rush** ${{ needs.build.outputs.version_name }} (versionCode ${{ github.run_number }})
+            **Sky Dodge · Goblin Hunters** ${{ needs.build.outputs.version_name }} (versionCode ${{ github.run_number }})
 
             | 앱 | 설치용 APK | Play 업로드용 AAB |
             | --- | --- | --- |
             | Sky Dodge (스카이 닷지) | `SkyDodge-*.apk` | `SkyDodge-*.aab` |
-            | Crowd Rush (군단 러시) | `CrowdRush-*.apk` | `CrowdRush-*.aab` |
+            | Goblin Hunters (고블린 헌터) | `GoblinHunters-*.apk` | `GoblinHunters-*.aab` |
 
             ${{ needs.build.outputs.store_ready == 'true' && '릴리스 키로 서명됨 (Play Console 업로드 가능).' || '⚠️ 디버그 키로 서명됨. Play 업로드용 서명은 저장소 Secrets 에 키스토어를 등록한 뒤 다시 빌드하세요 (android-game/README.md 참고).' }}
 
@@ -215,7 +215,7 @@ jobs:
         run: |
           if [ "$PLAY_APP" = "crowdrush" ]; then
             echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
-            echo "prefix=CrowdRush" >> "$GITHUB_OUTPUT"
+            echo "prefix=GoblinHunters" >> "$GITHUB_OUTPUT"
           else
             echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
             echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"

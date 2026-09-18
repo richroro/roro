@@ -84,19 +84,31 @@ class CrowdView @JvmOverloads constructor(
     private var lastTouchX = 0f
 
     private val skyPaint = Paint()
-    private val groundPaint = Paint().apply { color = color(R.color.ground) }
-    private val roadPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.road) }
-    private val wallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.wall) }
-    private val stripePaint = Paint().apply { color = 0x59FFFFFF; strokeWidth = 1f }
-    // Soldier sprites (64x80 PNGs drawn by tools/generate_sprites.py). The player army is seen
-    // from behind; enemies face the camera.
+    private val cloudPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.cloud) }
+    private val grassPaint = Paint()
+    private val roadPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val rutPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.road_rut); style = Paint.Style.STROKE }
+    private val pebblePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.pebble) }
+    private val fencePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.fence); style = Paint.Style.STROKE }
+    private val fencePostPaint = Paint().apply { color = color(R.color.fence_post) }
+    private val trunkPaint = Paint().apply { color = color(R.color.tree_trunk) }
+    private val canopyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.tree_canopy) }
+    private val canopyLightPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.tree_canopy_light) }
+    private val woodDarkPaint = Paint().apply { color = color(R.color.wood_dark) }
+    private val woodPaint = Paint().apply { color = color(R.color.wood) }
+    private val woodLightPaint = Paint().apply { color = color(R.color.wood_light) }
+    private val gateEdgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE }
+    private class Tree(val z: Float, val side: Float, val x: Float, val r: Float)
+    private val trees = Array(40) { i -> Tree(i * 9f + ((i * 37) % 5), if (i % 2 == 0) -1f else 1f, 1.35f + ((i * 53) % 7) / 10f, 0.8f + ((i * 29) % 5) / 10f) }
+    private val clouds = arrayOf(floatArrayOf(0.12f, 0.06f, 0.09f), floatArrayOf(0.38f, 0.11f, 0.07f), floatArrayOf(0.7f, 0.05f, 0.1f), floatArrayOf(0.9f, 0.13f, 0.06f))
+    // Sprites drawn by tools/generate_sprites.py: rangers seen from behind, goblins facing the camera.
     private val allyFrames: Array<Bitmap> = arrayOf(
-        BitmapFactory.decodeResource(resources, R.drawable.soldier_blue_back_0),
-        BitmapFactory.decodeResource(resources, R.drawable.soldier_blue_back_1),
+        BitmapFactory.decodeResource(resources, R.drawable.ranger_back_0),
+        BitmapFactory.decodeResource(resources, R.drawable.ranger_back_1),
     )
     private val enemyFrames: Array<Bitmap> = arrayOf(
-        BitmapFactory.decodeResource(resources, R.drawable.soldier_red_front_0),
-        BitmapFactory.decodeResource(resources, R.drawable.soldier_red_front_1),
+        BitmapFactory.decodeResource(resources, R.drawable.goblin_front_0),
+        BitmapFactory.decodeResource(resources, R.drawable.goblin_front_1),
     )
     private val monsterSprite: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.monster)
     private val monsterHitPaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
@@ -111,11 +123,9 @@ class CrowdView @JvmOverloads constructor(
         colorFilter = LightingColorFilter(0xFFFFB366.toInt(), 0x00331100)
     }
     private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x40000000 }
-    private val gateGoodPaint = Paint().apply { color = color(R.color.gate_good) }
-    private val gateBadPaint = Paint().apply { color = color(R.color.gate_bad) }
-    private val gateUsedPaint = Paint().apply { color = color(R.color.gate_used) }
-    private val gatePostGoodPaint = Paint().apply { color = color(R.color.gate_post_good) }
-    private val gatePostBadPaint = Paint().apply { color = color(R.color.gate_post_bad) }
+    private val gateGoodPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_good) }
+    private val gateBadPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_bad) }
+    private val gateUsedPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.gate_used) }
     private val overlayPaint = Paint().apply { color = color(R.color.overlay) }
     private val barBackPaint = Paint().apply { color = 0x590F172A }
     private val barPaint = Paint().apply { color = color(R.color.gold) }
@@ -235,7 +245,7 @@ class CrowdView @JvmOverloads constructor(
                 }
             }
             CrowdWorld.Event.Type.HIT_ENEMY -> {
-                sparks(e.x, e.z, if (e.flag) 10 else 3, sparkBad, 0.15f)
+                sparks(e.x, e.z, if (e.flag) 10 else 3, color(R.color.spark_enemy), 0.15f)
                 if (e.flag) play(sndDing, 2, 80, 0.5f) else play(sndHit, 1, 50, 0.3f, 0.2f)
             }
             CrowdWorld.Event.Type.HIT_BOSS -> {
@@ -254,7 +264,7 @@ class CrowdView @JvmOverloads constructor(
             }
             CrowdWorld.Event.Type.CONTACT -> {
                 floatText("-" + e.value, e.x, e.z, sparkBad)
-                sparks(e.x, e.z, 14, sparkBad, 0.4f)
+                sparks(e.x, e.z, 14, color(R.color.spark_enemy), 0.4f)
                 play(sndBuzz, 3, 150, 0.7f)
             }
             CrowdWorld.Event.Type.ITEM -> {
@@ -384,6 +394,18 @@ class CrowdView @JvmOverloads constructor(
             color(R.color.sky_top), color(R.color.sky_bottom),
             Shader.TileMode.CLAMP,
         )
+        grassPaint.shader = LinearGradient(
+            0f, h * HORIZON, 0f, h.toFloat(),
+            color(R.color.grass_far), color(R.color.grass_near),
+            Shader.TileMode.CLAMP,
+        )
+        roadPaint.shader = LinearGradient(
+            0f, h * HORIZON, 0f, h * BASE_Y,
+            color(R.color.road_far), color(R.color.road_near),
+            Shader.TileMode.CLAMP,
+        )
+        rutPaint.strokeWidth = max(1f, w * 0.012f)
+        fencePaint.strokeWidth = max(1f, w * 0.006f)
         bodyPaint.textSize = w * 0.045f
     }
 
@@ -491,13 +513,25 @@ class CrowdView @JvmOverloads constructor(
     }
 
     private fun drawLane(canvas: Canvas, w: Float, h: Float) {
-        canvas.drawRect(0f, 0f, w, h * HORIZON + 1f, skyPaint)
-        canvas.drawRect(0f, h * HORIZON, w, h, groundPaint)
+        val hz = h * HORIZON
+        canvas.drawRect(0f, 0f, w, hz + 1f, skyPaint)
+        for (c in clouds) {
+            val x = ((c[0] * w + runTime * 6f) % (w * 1.2f)) - w * 0.1f
+            val y = c[1] * h
+            val r = c[2] * w
+            rect.set(x - r, y - r * 0.45f, x + r, y + r * 0.45f)
+            canvas.drawOval(rect, cloudPaint)
+            rect.set(x - r * 1.2f, y + r * 0.1f - r * 0.35f, x, y + r * 0.1f + r * 0.35f)
+            canvas.drawOval(rect, cloudPaint)
+            rect.set(x + r * 0.05f, y + r * 0.12f - r * 0.32f, x + r * 1.15f, y + r * 0.12f + r * 0.32f)
+            canvas.drawOval(rect, cloudPaint)
+        }
+        canvas.drawRect(0f, hz, w, h, grassPaint)
+
         val farF = factor(VIEW_DISTANCE)
         val nearF = factor(-3f)
         val farY = screenY(farF)
         val nearY = screenY(nearF)
-
         path.reset()
         path.moveTo(screenX(-1f, nearF), nearY)
         path.lineTo(screenX(1f, nearF), nearY)
@@ -505,23 +539,44 @@ class CrowdView @JvmOverloads constructor(
         path.lineTo(screenX(-1f, farF), farY)
         path.close()
         canvas.drawPath(path, roadPaint)
-
-        var z = -(world.z % STRIPE_SPACING)
+        for (rx in floatArrayOf(-0.45f, 0.45f)) {
+            canvas.drawLine(screenX(rx, nearF), nearY, screenX(rx, farF), farY, rutPaint)
+        }
+        var z = -(world.z % 5f)
         while (z < VIEW_DISTANCE) {
             val f = factor(z)
-            val y = screenY(f)
-            canvas.drawLine(screenX(-1f, f), y, screenX(1f, f), y, stripePaint)
-            z += STRIPE_SPACING
+            val k = ((z + world.z) / 5f).toInt()
+            val px = screenX(((k * 71) % 17) / 17f * 1.6f - 0.8f, f)
+            val py = screenY(f)
+            rect.set(px - w * 0.012f * f, py - w * 0.006f * f, px + w * 0.012f * f, py + w * 0.006f * f)
+            canvas.drawOval(rect, pebblePaint)
+            z += 5f
         }
-
+        // trees beyond the fence, far to near
+        for (i in trees.indices.reversed()) {
+            val t = trees[i]
+            var d = t.z - (world.z % 360f)
+            if (d < -4f) d += 360f
+            if (d > VIEW_DISTANCE) continue
+            val f = factor(d)
+            val tx = screenX(t.side * t.x, f)
+            val ty = screenY(f)
+            val th = w * 0.2f * t.r * f
+            canvas.drawRect(tx - th * 0.06f, ty - th * 0.45f, tx + th * 0.06f, ty, trunkPaint)
+            canvas.drawCircle(tx, ty - th * 0.7f, th * 0.32f, canopyPaint)
+            canvas.drawCircle(tx - th * 0.1f, ty - th * 0.78f, th * 0.22f, canopyLightPaint)
+        }
+        // fence rails and posts
         for (side in floatArrayOf(-1f, 1f)) {
-            path.reset()
-            path.moveTo(screenX(side, nearF), nearY)
-            path.lineTo(screenX(side, farF), farY)
-            path.lineTo(screenX(side, farF), farY - 6f * farF)
-            path.lineTo(screenX(side, nearF), nearY - w * WALL_HEIGHT)
-            path.close()
-            canvas.drawPath(path, wallPaint)
+            canvas.drawLine(screenX(side * 1.06f, nearF), nearY - w * 0.035f, screenX(side * 1.06f, farF), farY - w * 0.035f * farF, fencePaint)
+            var fz = -(world.z % 6f)
+            while (fz < VIEW_DISTANCE) {
+                val f = factor(fz)
+                val px = screenX(side * 1.06f, f)
+                val ph = w * 0.05f * f
+                canvas.drawRect(px - w * 0.006f * f, screenY(f) - ph, px + w * 0.006f * f, screenY(f), fencePostPaint)
+                fz += 6f
+            }
         }
     }
 
@@ -601,26 +656,41 @@ class CrowdView @JvmOverloads constructor(
         if (f < 0.05f) return
         val w = width.toFloat()
         val y = screenY(f)
-        val gh = w * 0.16f * f
-        drawGateSide(canvas, g.left, g.used, -1f, 0f, f, y, gh, w)
-        drawGateSide(canvas, g.right, g.used, 0f, 1f, f, y, gh, w)
+        val gh = w * 0.15f * f
+        val postW = max(2f, w * 0.03f * f)
+        drawGateSide(canvas, g.left, g.used, -1f, 0f, f, y, gh, postW, w)
+        drawGateSide(canvas, g.right, g.used, 0f, 1f, f, y, gh, postW, w)
+        for (gx in floatArrayOf(-1f, 0f, 1f)) {
+            val px = screenX(gx, f)
+            canvas.drawRect(px - postW / 2f - 1f, y - gh * 1.3f, px + postW / 2f + 1f, y, woodDarkPaint)
+            canvas.drawRect(px - postW / 2f, y - gh * 1.3f, px + postW / 2f, y, woodPaint)
+            canvas.drawRect(px - postW / 2f, y - gh * 1.3f, px - postW / 2f + postW * 0.4f, y, woodLightPaint)
+            canvas.drawRect(px - postW * 0.8f, y - gh * 1.34f, px + postW * 0.8f, y - gh * 1.26f, woodDarkPaint)
+        }
     }
 
     private fun drawGateSide(
         canvas: Canvas, side: CrowdWorld.GateSide, used: Boolean,
-        xFrom: Float, xTo: Float, f: Float, y: Float, gh: Float, w: Float,
+        xFrom: Float, xTo: Float, f: Float, y: Float, gh: Float, postW: Float, w: Float,
     ) {
-        val x0 = screenX(xFrom, f) + 4f * f
-        val x1 = screenX(xTo, f) - 4f * f
+        val x0 = screenX(xFrom, f) + postW
+        val x1 = screenX(xTo, f) - postW
+        val y0 = y - gh * 1.15f
+        val y1 = y - gh * 0.15f
+        path.reset()
+        path.moveTo(x0, y0 + gh * 0.12f)
+        path.quadTo((x0 + x1) / 2f, y0 - gh * 0.12f, x1, y0 + gh * 0.12f)
+        path.lineTo(x1, y1)
+        path.lineTo(x0, y1)
+        path.close()
         val panel = if (used) gateUsedPaint else if (side.isGood) gateGoodPaint else gateBadPaint
-        canvas.drawRect(x0, y - gh, x1, y, panel)
-        val post = if (side.isGood) gatePostGoodPaint else gatePostBadPaint
-        val postW = 3f * f + 1f
-        canvas.drawRect(x0, y - gh, x0 + postW, y, post)
-        canvas.drawRect(x1 - postW, y - gh, x1, y, post)
+        canvas.drawPath(path, panel)
+        gateEdgePaint.strokeWidth = max(1f, w * 0.005f * f)
+        gateEdgePaint.color = if (used) color(R.color.gate_edge_used) else if (side.isGood) color(R.color.gate_edge_good) else color(R.color.gate_edge_bad)
+        canvas.drawPath(path, gateEdgePaint)
         label(
-            canvas, side.label, (x0 + x1) / 2f, y - gh / 2f, max(8f, w * 0.075f * f),
-            Color.WHITE, if (side.isGood) color(R.color.gate_post_good) else color(R.color.gate_post_bad),
+            canvas, side.label, (x0 + x1) / 2f, (y0 + y1) / 2f + gh * 0.04f, max(8f, w * 0.075f * f),
+            Color.WHITE, if (side.isGood) color(R.color.gate_stroke_good) else color(R.color.gate_stroke_bad),
         )
     }
 
@@ -773,7 +843,7 @@ class CrowdView @JvmOverloads constructor(
     private fun color(resId: Int): Int = context.getColor(resId)
 
     companion object {
-        private const val PREFS_NAME = "crowdrush"
+        private const val PREFS_NAME = "goblinhunters"
         private const val KEY_BEST_LEVEL = "best_level"
         private const val KEY_MUTED = "muted"
 
