@@ -127,26 +127,34 @@ class Post:
 
     def to_plain_text(self, with_tags: bool = True) -> str:
         lines = [self.title, ""]
+        prev = None
         for b in self.blocks:
+            if prev == "bullet" and b.kind != "bullet":
+                lines.append("")  # 글머리 묶음이 끝나면 빈 줄
             if b.kind == "heading":
                 lines += [b.text, ""]
             elif b.kind == "bullet":
                 lines.append(f"• {b.text}")
             else:
                 lines += [b.text, ""]
+            prev = b.kind
         if with_tags and self.tags:
             lines += ["", " ".join(f"#{t}" for t in self.tags)]
         return "\n".join(lines).strip() + "\n"
 
     def to_markdown(self) -> str:
         lines = [f"# {self.title}", ""]
+        prev = None
         for b in self.blocks:
+            if prev == "bullet" and b.kind != "bullet":
+                lines.append("")
             if b.kind == "heading":
                 lines += [f"## {b.text}", ""]
             elif b.kind == "bullet":
                 lines.append(f"- {b.text}")
             else:
                 lines += [b.text, ""]
+            prev = b.kind
         if self.tags:
             lines += ["", "태그: " + ", ".join(self.tags)]
         return "\n".join(lines).strip() + "\n"
