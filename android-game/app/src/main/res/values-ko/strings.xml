@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">스카이 닷지</string>
+    <string name="tap_to_start">화면을 탭해서 시작</string>
+    <string name="how_to_play">좌우로 드래그해서 블록을 피하고 별을 모으세요</string>
+    <string name="paused">일시정지 · 탭해서 계속</string>
+    <string name="game_over">게임 오버</string>
+    <string name="tap_to_retry">탭해서 다시 하기</string>
+    <string name="score_label">점수 %1$d</string>
+    <string name="best_label">최고 %1$d</string>
+    <string name="new_best">신기록!</string>
+</resources>

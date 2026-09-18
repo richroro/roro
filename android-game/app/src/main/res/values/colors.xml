@@ -1,0 +1,12 @@
+<resources>
+    <color name="sky_top">#0F172A</color>
+    <color name="sky_bottom">#312E81</color>
+    <color name="player">#22D3EE</color>
+    <color name="player_glow">#4022D3EE</color>
+    <color name="block">#F43F5E</color>
+    <color name="block_edge">#FB7185</color>
+    <color name="star">#FBBF24</color>
+    <color name="hud_text">#F8FAFC</color>
+    <color name="overlay">#99020617</color>
+    <color name="ic_launcher_background">#1E1B4B</color>
+</resources>
