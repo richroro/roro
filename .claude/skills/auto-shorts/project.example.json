@@ -1,0 +1,59 @@
+{
+  "slug": "octopus-three-hearts",
+  "title": "문어는 심장이 3개다?!",
+  "thumbnail_text": "심장이 3개?!",
+  "lang": "ko",
+  "voice": "female",
+  "rate": "+8%",
+  "style": {
+    "image_style": "cinematic photo, dramatic lighting, high detail, vertical 9:16, no text",
+    "transition": "mix",
+    "transition_duration": 0.4,
+    "auto_transition_sfx": false,
+    "vignette": true
+  },
+  "bgm": { "query": "playful curious ukulele", "mood": "playful", "volume": 0.3 },
+  "cta": "더 신기한 사실은 구독",
+  "scenes": [
+    {
+      "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",
+      "headline": "심장이 3개?!",
+      "keywords": "octopus underwater",
+      "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",
+      "sfx": "riser"
+    },
+    {
+      "narration": "두 개는 아가미로 피를 보내고, 나머지 하나가 온몸으로 피를 돌립니다.",
+      "keywords": "octopus gills anatomy",
+      "image_prompt": "scientific illustration of an octopus with three glowing hearts visible, dark background"
+    },
+    {
+      "narration": "그런데 문어가 헤엄칠 때는 온몸용 심장이 멈춰 버려요.",
+      "headline": "헤엄치면 심장이 멈춘다",
+      "keywords": "octopus swimming",
+      "image_prompt": "an octopus jetting through open water, motion blur, dramatic light rays",
+      "sfx": "boom"
+    },
+    {
+      "narration": "그래서 문어는 헤엄치는 걸 싫어하고, 바닥을 기어다니는 걸 더 좋아하죠.",
+      "keywords": "octopus crawling seabed",
+      "image_prompt": "an octopus crawling on a rocky seabed, tentacles spread wide, natural light"
+    },
+    {
+      "narration": "피 색깔도 파란색인데, 철 대신 구리로 산소를 나르기 때문입니다.",
+      "headline": "피는 파란색",
+      "keywords": "blue liquid macro",
+      "image_prompt": "abstract luminous blue liquid swirling, macro photography"
+    },
+    {
+      "narration": "이 정도면 외계 생물이라 불려도 할 말 없겠죠?",
+      "keywords": "octopus eye closeup",
+      "image_prompt": "an octopus looking straight at the camera with a curious expression, alien-like, cinematic",
+      "sfx": "pop"
+    }
+  ],
+  "meta": {
+    "description": "문어의 심장은 세 개! 헤엄칠 때 멈추는 심장과 파란 피의 비밀.",
+    "hashtags": ["문어", "신기한사실", "동물상식", "shorts"]
+  }
+}

@@ -1,3 +1,15 @@
-.claude/
+# Claude 로컬 설정은 무시하되, 스킬은 저장소에 포함한다 (GitHub Actions·다른 PC에서도 쓰기 위해)
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+.claude/skills/auto-shorts/.env
 portfolio/
 webcam_preview.py
+
+# auto-shorts 산출물(영상·중간 파일)은 커밋하지 않는다
+shorts_output/
+
+# 일반 런타임 잔재
+__pycache__/
+*.pyc
+*.log

@@ -1,0 +1,6 @@
+# auto-shorts 의존성.  설치:  pip install -r requirements.txt
+edge-tts>=7.0          # Microsoft Edge 뉴럴 TTS (무료, 키 불필요, 단어 타이밍 제공)
+Pillow>=10.0           # 이미지 정규화·텍스트 카드·썸네일
+requests>=2.31         # 무료 웹 API 호출
+gTTS>=2.5              # edge-tts 가 막혔을 때의 TTS 폴백 (구글 번역 TTS)
+imageio-ffmpeg>=0.5    # ffmpeg 정적 바이너리 (시스템에 ffmpeg 가 없어도 동작하게 함)
