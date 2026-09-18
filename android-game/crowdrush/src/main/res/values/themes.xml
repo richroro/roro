@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.GoblinHunters" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/sky_top</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+</resources>

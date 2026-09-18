@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Villain Rush</string>
+    <string name="how_to_play">Your crew fires on its own.
+Shoot the gates to grow the crowd, clear the small stuff,
+grab items (⚡ rapid fire, 🛡 shield, ✚ backup, 💣 bomb)
+and take down the villain waiting at the end of the day</string>
+    <string name="tap_to_start">Tap to start</string>
+    <string name="tap_next_level">Tap for the next stage</string>
+    <string name="tap_to_retry">Tap to play again</string>
+    <string name="game_over">GAME OVER</string>
+    <string name="level_label">LEVEL %1$d</string>
+    <string name="best_label">Best %1$d</string>
+    <string name="reached_level">Reached level %1$d</string>
+    <string name="msg_wiped">Nobody was left standing</string>
+    <string name="msg_lost_to_squad">Buried under %1$d of them</string>
+    <string name="msg_boss_beaten">%1$s defeated!</string>
+    <string name="msg_lost_to_boss">%1$s beat you (HP %2$d left)</string>
+    <string name="item_rapid">Rapid fire</string>
+    <string name="item_shield">Shield</string>
+    <string name="item_reinforce">Reinforcements</string>
+    <string name="item_bomb">Bomb</string>
+    <string name="shield_blocked">🛡 Blocked!</string>
+    <string name="monster_appears">%1$s appears!</string>
+    <string name="stage_label">STAGE %1$d</string>
+    <string name="stage_season_label">STAGE %1$d · Season %2$d</string>
+    <string name="stage_cleared">STAGE %1$d CLEARED</string>
+    <string name="clear_title">%1$s defeated!</string>
+    <string name="crew_left">%1$d crew left · %2$d cleared</string>
+    <string name="next_up">Next up: %1$s · %2$s</string>
+</resources>

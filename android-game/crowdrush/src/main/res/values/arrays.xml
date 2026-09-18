@@ -1,0 +1,45 @@
+<resources>
+    <!-- Each stage is a small everyday-villain story; the monster at the end of the road is the villain. -->
+    <string-array name="stage_place">
+        <item>Monday 9 a.m. · the office</item>
+        <item>Class reunion · hotel buffet</item>
+        <item>Holiday dinner · the family house</item>
+        <item>Moving day, 11 p.m. · new flat</item>
+    </string-array>
+    <string-array name="stage_villain">
+        <item>The Boss</item>
+        <item>Mr. Married-Rich</item>
+        <item>Auntie Nag</item>
+        <item>Upstairs Demon</item>
+    </string-array>
+    <string-array name="stage_tag">
+        <item>"Back in my day…"</item>
+        <item>married into money</item>
+        <item>same question for 30 years</item>
+        <item>the ceiling never sleeps</item>
+    </string-array>
+    <string-array name="stage_story">
+        <item>Five minutes before the weekly meeting,\nhe walks in holding your proposal:\n"Wasn\'t this my idea first?"</item>
+        <item>"Oh, I don\'t really work anymore —\nmy father-in-law gave us a building."\nThat\'s the third time he\'s flashed his car key.</item>
+        <item>She starts before you can swallow.\n"Got a job yet? Married yet?\nThe neighbour\'s kid has two kids already."</item>
+        <item>They swore it was a quiet building.\nSomeone is dribbling on your ceiling,\nand they are keeping the beat.</item>
+    </string-array>
+    <string-array name="stage_mob">
+        <item>surprise meetings</item>
+        <item>humble brags</item>
+        <item>nagging</item>
+        <item>thumps</item>
+    </string-array>
+    <string-array name="stage_clear">
+        <item>The boss is off on holiday next week.</item>
+        <item>He paid for the second round.\nYou win tonight.</item>
+        <item>Auntie left for her evening drama.\nThis is your chance.</item>
+        <item>They finally put down a floor mat.\nPeace at last.</item>
+    </string-array>
+    <string-array name="stage_fail">
+        <item>Your proposal went up under his name.</item>
+        <item>On the way home you reread your lease.</item>
+        <item>The Lunar New Year trailer just dropped.</item>
+        <item>3 a.m. You are staring at the ceiling.</item>
+    </string-array>
+</resources>
