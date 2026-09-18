@@ -1,0 +1,23 @@
+<resources>
+    <color name="sky_top">#38BDF8</color>
+    <color name="sky_bottom">#BAE6FD</color>
+    <color name="ground">#6B7280</color>
+    <color name="road">#D1D5DB</color>
+    <color name="wall">#9CA3AF</color>
+    <color name="ally">#3B82F6</color>
+    <color name="hit">#F59E0B</color>
+    <color name="enemy">#EF4444</color>
+    <color name="boss_band">#B91C1C</color>
+    <color name="head">#FDE68A</color>
+    <color name="gate_good">#D93B82F6</color>
+    <color name="gate_bad">#D9EF4444</color>
+    <color name="gate_used">#8094A3B8</color>
+    <color name="gate_post_good">#1E3A8A</color>
+    <color name="gate_post_bad">#7F1D1D</color>
+    <color name="gold">#FACC15</color>
+    <color name="gold_stroke">#78350F</color>
+    <color name="text">#F8FAFC</color>
+    <color name="text_stroke">#0F172A</color>
+    <color name="overlay">#8C0F172A</color>
+    <color name="ic_launcher_background">#1D4ED8</color>
+</resources>

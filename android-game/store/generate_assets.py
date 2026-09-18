@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Generate the Google Play listing images for Sky Dodge with the standard library only.
+"""Generate the Google Play listing images for both apps with the standard library only.
 
-Outputs (next to this script):
-  icon-512.png              512x512 app icon (Play Console "App icon")
-  feature-graphic-1024x500.png  Feature graphic (Play Console "Feature graphic")
+Outputs (next to this script), one pair per app:
+  <app>-icon-512.png                 512x512 app icon (Play Console "App icon")
+  <app>-feature-graphic-1024x500.png Feature graphic (Play Console "Feature graphic")
 
 Run:  python3 android-game/store/generate_assets.py
 """
@@ -179,8 +179,92 @@ def _wordmark(c: Canvas, x0, y0, cell=11, gap=3):
         x += len(rows[0]) * (cell + gap) + cell
 
 
+# ---------------------------------------------------------------- Crowd Rush
+
+CR_BG = (0x1D, 0x4E, 0xD8)
+CR_SKY_TOP = (0x38, 0xBD, 0xF8)
+CR_SKY_BOTTOM = (0xBA, 0xE6, 0xFD)
+CR_ROAD = (0xD1, 0xD5, 0xDB)
+CR_GATE = (0x60, 0xA5, 0xFA)
+CR_GATE_DARK = (0x1E, 0x3A, 0x8A)
+CR_ALLY = (0x3B, 0x82, 0xF6)
+CR_ENEMY = (0xEF, 0x44, 0x44)
+CR_HEAD = (0xFD, 0xE6, 0x8A)
+
+
+def draw_cone(c: Canvas, x, y, size, body):
+    c.polygon([(x, y - size * 1.6), (x + size * 0.75, y + size * 0.7), (x - size * 0.75, y + size * 0.7)], body)
+    c.circle(x, y - size * 0.55, size * 0.32, CR_HEAD)
+
+
+def draw_crowd(c: Canvas, cx, cy, n, radius, body, unit):
+    for i in range(n):
+        a = i * 2.39996
+        r = radius * math.sqrt((i + 0.5) / max(n, 6)) * 0.95
+        draw_cone(c, cx + math.cos(a) * r, cy + math.sin(a) * r * 0.55, unit, body)
+
+
+def draw_plus(c: Canvas, cx, cy, arm, thick, color):
+    c.rounded_rect(cx - arm, cy - thick / 2, cx + arm, cy + thick / 2, thick / 4, color)
+    c.rounded_rect(cx - thick / 2, cy - arm, cx + thick / 2, cy + arm, thick / 4, color)
+
+
+def make_crowd_icon(path):
+    c = Canvas(512, 512)
+    c.fill_vertical_gradient(CR_BG, CR_BG)
+    s = 512 / 108
+    c.rounded_rect(24 * s, 30 * s, 84 * s, 56 * s, 4 * s, CR_GATE)
+    draw_plus(c, 54 * s, 43 * s, 8 * s, 4 * s, (255, 255, 255))
+    draw_crowd(c, 54 * s, 76 * s, 14, 20 * s, CR_ALLY, 5 * s)
+    c.save(path)
+
+
+def make_crowd_feature_graphic(path):
+    c = Canvas(1024, 500)
+    c.fill_vertical_gradient(CR_SKY_TOP, CR_SKY_BOTTOM)
+    # road trapezoid
+    c.polygon([(120, 500), (904, 500), (640, 150), (384, 150)], CR_ROAD)
+    # gates receding along the road
+    for (y, w, h, label_w) in [(420, 300, 70, 1.0), (300, 200, 46, 0.66), (215, 120, 28, 0.4)]:
+        cx = 512
+        c.rounded_rect(cx - w, y - h, cx - 6, y, 6, CR_GATE)
+        c.rounded_rect(cx + 6, y - h, cx + w, y, 6, CR_ENEMY)
+        draw_plus(c, cx - w / 2, y - h / 2, 10 * label_w, 5 * label_w, (255, 255, 255))
+        c.rounded_rect(cx + w / 2 - 10 * label_w, y - h / 2 - 2.5 * label_w, cx + w / 2 + 10 * label_w, y - h / 2 + 2.5 * label_w, 2, (255, 255, 255))
+    # enemy horde at the far end
+    draw_crowd(c, 512, 175, 60, 110, CR_ENEMY, 7)
+    # player crowd in front
+    draw_crowd(c, 512, 470, 30, 80, CR_ALLY, 13)
+    _wordmark_generic(c, "CROWD RUSH", 60, 60, cell=11, gap=3)
+    c.save(path)
+
+
+_GLYPHS.update({
+    "C": ["0111", "1000", "1000", "1000", "0111"],
+    "R": ["1110", "1001", "1110", "1010", "1001"],
+    "W": ["10001", "10001", "10101", "10101", "01010"],
+    "U": ["1001", "1001", "1001", "1001", "0110"],
+    "H": ["1001", "1001", "1111", "1001", "1001"],
+})
+
+
+def _wordmark_generic(c: Canvas, text, x0, y0, cell=11, gap=3):
+    x = x0
+    for ch in text:
+        rows = _GLYPHS[ch]
+        for r, row in enumerate(rows):
+            for col, bit in enumerate(row):
+                if bit == "1":
+                    cx = x + col * (cell + gap)
+                    cy = y0 + r * (cell + gap)
+                    c.rounded_rect(cx, cy, cx + cell, cy + cell, 4, WHITE)
+        x += len(rows[0]) * (cell + gap) + cell
+
+
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
-    make_icon(os.path.join(here, "icon-512.png"))
-    make_feature_graphic(os.path.join(here, "feature-graphic-1024x500.png"))
-    print("wrote icon-512.png and feature-graphic-1024x500.png")
+    make_icon(os.path.join(here, "skydodge-icon-512.png"))
+    make_feature_graphic(os.path.join(here, "skydodge-feature-graphic-1024x500.png"))
+    make_crowd_icon(os.path.join(here, "crowdrush-icon-512.png"))
+    make_crowd_feature_graphic(os.path.join(here, "crowdrush-feature-graphic-1024x500.png"))
+    print("wrote skydodge-* and crowdrush-* icon/feature images")

@@ -1,0 +1,422 @@
+package com.richroro.crowdrush
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
+import android.graphics.Shader
+import android.graphics.Typeface
+import android.os.Build
+import android.util.AttributeSet
+import android.view.Choreographer
+import android.view.HapticFeedbackConstants
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowInsets
+import kotlin.math.cos
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.sin
+import kotlin.math.sqrt
+
+/** Pseudo-3D renderer for [CrowdWorld] on a plain Canvas. */
+class CrowdView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+) : View(context, attrs) {
+
+    private val world = CrowdWorld(seed = (System.currentTimeMillis() % 1_000_000L).toInt() + 1)
+    private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private var bestLevel = prefs.getInt(KEY_BEST_LEVEL, 0)
+
+    private var running = false
+    private var lastFrameNanos = 0L
+    private var runTime = 0f
+    private var insetTop = 0f
+    private var lastTouchX = 0f
+
+    private val skyPaint = Paint()
+    private val groundPaint = Paint().apply { color = color(R.color.ground) }
+    private val roadPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.road) }
+    private val wallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.wall) }
+    private val stripePaint = Paint().apply { color = 0x59FFFFFF; strokeWidth = 1f }
+    private val allyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.ally) }
+    private val hitPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.hit) }
+    private val enemyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.enemy) }
+    private val bossBandPaint = Paint().apply { color = color(R.color.boss_band) }
+    private val headPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.head) }
+    private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x40000000 }
+    private val gateGoodPaint = Paint().apply { color = color(R.color.gate_good) }
+    private val gateBadPaint = Paint().apply { color = color(R.color.gate_bad) }
+    private val gateUsedPaint = Paint().apply { color = color(R.color.gate_used) }
+    private val gatePostGoodPaint = Paint().apply { color = color(R.color.gate_post_good) }
+    private val gatePostBadPaint = Paint().apply { color = color(R.color.gate_post_bad) }
+    private val overlayPaint = Paint().apply { color = color(R.color.overlay) }
+    private val barBackPaint = Paint().apply { color = 0x590F172A }
+    private val barPaint = Paint().apply { color = color(R.color.gold) }
+    private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        typeface = Typeface.DEFAULT_BOLD
+        textAlign = Paint.Align.CENTER
+    }
+    private val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        typeface = Typeface.DEFAULT_BOLD
+        textAlign = Paint.Align.CENTER
+        style = Paint.Style.STROKE
+        strokeJoin = Paint.Join.ROUND
+    }
+    private val bodyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = color(R.color.text)
+        textAlign = Paint.Align.CENTER
+    }
+
+    private val path = Path()
+    private val rect = RectF()
+
+    private val frameCallback = object : Choreographer.FrameCallback {
+        override fun doFrame(frameTimeNanos: Long) {
+            if (!running) return
+            val dt = if (lastFrameNanos == 0L) 0f else (frameTimeNanos - lastFrameNanos) / 1_000_000_000f
+            lastFrameNanos = frameTimeNanos
+            runTime += dt
+            val before = world.state
+            world.update(dt)
+            if (before == CrowdWorld.State.RUNNING && world.state != CrowdWorld.State.RUNNING) onRunEnded()
+            invalidate()
+            Choreographer.getInstance().postFrameCallback(this)
+        }
+    }
+
+    init {
+        isFocusable = true
+        isClickable = true
+    }
+
+    fun resume() {
+        if (running) return
+        running = true
+        lastFrameNanos = 0L
+        Choreographer.getInstance().postFrameCallback(frameCallback)
+    }
+
+    fun pause() {
+        running = false
+        Choreographer.getInstance().removeFrameCallback(frameCallback)
+        invalidate()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        resume()
+    }
+
+    override fun onDetachedFromWindow() {
+        pause()
+        super.onDetachedFromWindow()
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        if (w == 0 || h == 0) return
+        skyPaint.shader = LinearGradient(
+            0f, 0f, 0f, h * HORIZON,
+            color(R.color.sky_top), color(R.color.sky_bottom),
+            Shader.TileMode.CLAMP,
+        )
+        bodyPaint.textSize = w * 0.045f
+    }
+
+    override fun onApplyWindowInsets(insets: WindowInsets): WindowInsets {
+        insetTop = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            insets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()).top.toFloat()
+        } else {
+            @Suppress("DEPRECATION")
+            insets.systemWindowInsetTop.toFloat()
+        }
+        return super.onApplyWindowInsets(insets)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                lastTouchX = event.x
+                when (world.state) {
+                    CrowdWorld.State.READY, CrowdWorld.State.GAME_OVER -> world.start()
+                    CrowdWorld.State.LEVEL_CLEAR -> world.nextLevel()
+                    CrowdWorld.State.RUNNING -> Unit
+                }
+                if (!running) resume()
+                performClick()
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (world.state == CrowdWorld.State.RUNNING && width > 0) {
+                    world.movePlayerBy((event.x - lastTouchX) / (width * LANE_HALF_PX))
+                }
+                lastTouchX = event.x
+            }
+        }
+        return true
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
+    }
+
+    private fun onRunEnded() {
+        if (world.bestLevel > bestLevel) {
+            bestLevel = world.bestLevel
+            prefs.edit().putInt(KEY_BEST_LEVEL, bestLevel).apply()
+        }
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+    }
+
+    // ---- projection helpers -------------------------------------------------------------
+
+    /** Scale factor for something [d] metres ahead of the crowd. */
+    private fun factor(d: Float): Float = 1f / (1f + max(0f, d) * DEPTH_K)
+
+    private fun screenY(f: Float): Float {
+        val h = height.toFloat()
+        return h * HORIZON + (h * BASE_Y - h * HORIZON) * f
+    }
+
+    private fun screenX(x: Float, f: Float): Float = width / 2f + x * width * LANE_HALF_PX * f
+
+    // ---- drawing ------------------------------------------------------------------------
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        val w = width.toFloat()
+        val h = height.toFloat()
+        if (w == 0f || h == 0f) return
+
+        drawLane(canvas, w, h)
+
+        // far-to-near painter's order
+        val drawables = ArrayList<Pair<Float, () -> Unit>>()
+        for (g in world.gates) {
+            val d = g.z - world.z
+            if (d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawGate(canvas, g, d) })
+        }
+        for (e in world.enemies) {
+            val d = e.z - world.z
+            if (e.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawEnemy(canvas, e, d) })
+        }
+        world.boss?.let { b ->
+            val d = b.z - world.z
+            if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawBoss(canvas, b, d) })
+        }
+        drawables.sortByDescending { it.first }
+        for (item in drawables) item.second()
+
+        drawPlayer(canvas, w)
+        drawHud(canvas, w, h)
+        drawOverlay(canvas, w, h)
+    }
+
+    private fun drawLane(canvas: Canvas, w: Float, h: Float) {
+        canvas.drawRect(0f, 0f, w, h * HORIZON + 1f, skyPaint)
+        canvas.drawRect(0f, h * HORIZON, w, h, groundPaint)
+        val farF = factor(VIEW_DISTANCE)
+        val nearF = factor(-3f)
+        val farY = screenY(farF)
+        val nearY = screenY(nearF)
+
+        path.reset()
+        path.moveTo(screenX(-1f, nearF), nearY)
+        path.lineTo(screenX(1f, nearF), nearY)
+        path.lineTo(screenX(1f, farF), farY)
+        path.lineTo(screenX(-1f, farF), farY)
+        path.close()
+        canvas.drawPath(path, roadPaint)
+
+        var z = -(world.z % STRIPE_SPACING)
+        while (z < VIEW_DISTANCE) {
+            val f = factor(z)
+            val y = screenY(f)
+            canvas.drawLine(screenX(-1f, f), y, screenX(1f, f), y, stripePaint)
+            z += STRIPE_SPACING
+        }
+
+        for (side in floatArrayOf(-1f, 1f)) {
+            path.reset()
+            path.moveTo(screenX(side, nearF), nearY)
+            path.lineTo(screenX(side, farF), farY)
+            path.lineTo(screenX(side, farF), farY - 6f * farF)
+            path.lineTo(screenX(side, nearF), nearY - w * WALL_HEIGHT)
+            path.close()
+            canvas.drawPath(path, wallPaint)
+        }
+    }
+
+    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, count: Int, radiusPx: Float, bodyPaint: Paint) {
+        val n = min(count, MAX_DRAWN_UNITS)
+        val unit = max(3f, radiusPx * 0.34f)
+        for (i in 0 until n) {
+            val angle = i * GOLDEN_ANGLE
+            val r = radiusPx * sqrt((i + 0.5f) / max(n, 6).toFloat()) * 0.95f
+            val bob = sin(runTime * 14f + i) * unit * 0.25f
+            val x = cx + cos(angle) * r
+            val y = cy + sin(angle) * r * 0.55f + bob
+            rect.set(x - unit * 0.8f, y + unit * 0.6f, x + unit * 0.8f, y + unit * 1.2f)
+            canvas.drawOval(rect, shadowPaint)
+            path.reset()
+            path.moveTo(x, y - unit * 1.6f)
+            path.lineTo(x + unit * 0.75f, y + unit * 0.7f)
+            path.lineTo(x - unit * 0.75f, y + unit * 0.7f)
+            path.close()
+            canvas.drawPath(path, bodyPaint)
+            canvas.drawCircle(x, y - unit * 0.55f, unit * 0.32f, headPaint)
+        }
+    }
+
+    private fun label(canvas: Canvas, text: String, x: Float, y: Float, size: Float, fill: Int, stroke: Int) {
+        fillPaint.textSize = size
+        strokePaint.textSize = size
+        strokePaint.strokeWidth = max(2f, size * 0.16f)
+        fillPaint.color = fill
+        strokePaint.color = stroke
+        val baseline = y + size * 0.35f
+        canvas.drawText(text, x, baseline, strokePaint)
+        canvas.drawText(text, x, baseline, fillPaint)
+    }
+
+    private fun drawGate(canvas: Canvas, g: CrowdWorld.Gate, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val y = screenY(f)
+        val gh = w * 0.16f * f
+        drawGateSide(canvas, g.left, g.used, -1f, 0f, f, y, gh, w)
+        drawGateSide(canvas, g.right, g.used, 0f, 1f, f, y, gh, w)
+    }
+
+    private fun drawGateSide(
+        canvas: Canvas, side: CrowdWorld.GateSide, used: Boolean,
+        xFrom: Float, xTo: Float, f: Float, y: Float, gh: Float, w: Float,
+    ) {
+        val x0 = screenX(xFrom, f) + 4f * f
+        val x1 = screenX(xTo, f) - 4f * f
+        val panel = if (used) gateUsedPaint else if (side.isGood) gateGoodPaint else gateBadPaint
+        canvas.drawRect(x0, y - gh, x1, y, panel)
+        val post = if (side.isGood) gatePostGoodPaint else gatePostBadPaint
+        val postW = 3f * f + 1f
+        canvas.drawRect(x0, y - gh, x0 + postW, y, post)
+        canvas.drawRect(x1 - postW, y - gh, x1, y, post)
+        label(
+            canvas, side.label, (x0 + x1) / 2f, y - gh / 2f, max(8f, w * 0.075f * f),
+            Color.WHITE, if (side.isGood) color(R.color.gate_post_good) else color(R.color.gate_post_bad),
+        )
+    }
+
+    private fun drawEnemy(canvas: Canvas, e: CrowdWorld.Enemy, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val y = screenY(f)
+        val rpx = w * LANE_HALF_PX * f * (CrowdWorld.ENEMY_HALF_WIDTH * 0.9f)
+        val cx = screenX(e.x, f)
+        drawCrowd(canvas, cx, y - rpx * 0.3f, e.count, rpx, enemyPaint)
+        label(canvas, e.count.toString(), cx, y - rpx * 0.3f - rpx * 1.1f - w * 0.03f * f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
+    }
+
+    private fun drawBoss(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val y = screenY(f)
+        val rpx = w * LANE_HALF_PX * f * 0.9f
+        canvas.drawRect(screenX(-1f, f), y - rpx * 1.2f, screenX(1f, f), y, bossBandPaint)
+        drawCrowd(canvas, screenX(0f, f), y - rpx * 0.25f, b.count, rpx, enemyPaint)
+        label(canvas, b.count.toString(), screenX(0f, f), y - rpx * 1.2f - w * 0.05f * f, max(10f, w * 0.11f * f), Color.WHITE, color(R.color.gate_post_bad))
+    }
+
+    private fun drawPlayer(canvas: Canvas, w: Float) {
+        val f = factor(0f)
+        val y = screenY(f)
+        val rpx = w * LANE_HALF_PX * world.playerRadius
+        val px = screenX(world.playerX, f)
+        val paint = if (world.flash > 0f && !world.lastGateGood) hitPaint else allyPaint
+        drawCrowd(canvas, px, y - rpx * 0.2f, world.count, rpx, paint)
+        label(
+            canvas, world.count.toString(), px, y - rpx * 0.2f - rpx * 0.9f - w * 0.05f, w * 0.09f,
+            if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),
+        )
+    }
+
+    private fun drawHud(canvas: Canvas, w: Float, h: Float) {
+        val top = insetTop + h * 0.03f
+        label(canvas, context.getString(R.string.level_label, world.level), w * 0.18f, top + w * 0.03f, w * 0.055f, Color.WHITE, color(R.color.text_stroke))
+        label(canvas, context.getString(R.string.best_label, max(bestLevel, world.bestLevel)), w * 0.82f, top + w * 0.03f, w * 0.045f, Color.WHITE, color(R.color.text_stroke))
+        if (world.state != CrowdWorld.State.READY) {
+            val barTop = top + w * 0.012f
+            canvas.drawRect(w * 0.3f, barTop, w * 0.7f, barTop + h * 0.018f, barBackPaint)
+            canvas.drawRect(w * 0.3f, barTop, w * 0.3f + w * 0.4f * world.progress, barTop + h * 0.018f, barPaint)
+        }
+    }
+
+    private fun localizedMessage(): String {
+        val m = world.message
+        val parts = m.split(':')
+        val n = parts.getOrNull(1)?.toIntOrNull() ?: 0
+        return when (parts[0]) {
+            "wiped" -> context.getString(R.string.msg_wiped)
+            "squad" -> context.getString(R.string.msg_lost_to_squad, n)
+            "boss_beaten" -> context.getString(R.string.msg_boss_beaten, n)
+            "boss_lost" -> context.getString(R.string.msg_lost_to_boss, n)
+            else -> ""
+        }
+    }
+
+    private fun drawOverlay(canvas: Canvas, w: Float, h: Float) {
+        val title: String
+        val body: String
+        val accent: String
+        when (world.state) {
+            CrowdWorld.State.READY -> {
+                title = context.getString(R.string.app_name)
+                body = context.getString(R.string.how_to_play)
+                accent = context.getString(R.string.tap_to_start)
+            }
+            CrowdWorld.State.LEVEL_CLEAR -> {
+                title = context.getString(R.string.level_clear, world.level)
+                body = localizedMessage() + "\n" + context.getString(R.string.remaining, world.count)
+                accent = context.getString(R.string.tap_next_level)
+            }
+            CrowdWorld.State.GAME_OVER -> {
+                title = context.getString(R.string.game_over)
+                body = localizedMessage() + "\n" + context.getString(R.string.reached_level, world.level)
+                accent = context.getString(R.string.tap_to_retry)
+            }
+            CrowdWorld.State.RUNNING -> return
+        }
+        canvas.drawRect(0f, 0f, w, h, overlayPaint)
+        label(canvas, title, w / 2f, h * 0.40f, w * 0.10f, Color.WHITE, color(R.color.gate_post_good))
+        var y = h * 0.40f + w * 0.13f
+        for (line in body.split('\n')) {
+            canvas.drawText(line, w / 2f, y, bodyPaint)
+            y += w * 0.065f
+        }
+        label(canvas, accent, w / 2f, y + w * 0.08f, w * 0.065f, color(R.color.gold), color(R.color.gold_stroke))
+    }
+
+    private fun color(resId: Int): Int = context.getColor(resId)
+
+    companion object {
+        private const val PREFS_NAME = "crowdrush"
+        private const val KEY_BEST_LEVEL = "best_level"
+
+        private const val DEPTH_K = 0.065f
+        private const val HORIZON = 0.30f
+        private const val BASE_Y = 0.86f
+        private const val LANE_HALF_PX = 0.5f
+        private const val VIEW_DISTANCE = 60f
+        private const val STRIPE_SPACING = 4f
+        private const val WALL_HEIGHT = 0.035f
+        private const val MAX_DRAWN_UNITS = 64
+        private const val GOLDEN_ANGLE = 2.39996f
+    }
+}

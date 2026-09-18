@@ -1,6 +1,6 @@
 name: Android Release
 
-# Sky Dodge(android-game/) 빌드·테스트·서명 파이프라인.
+# android-game/ 의 두 앱(Sky Dodge :app, Crowd Rush :crowdrush) 빌드·테스트·서명 파이프라인.
 #  - PR / main push : 빌드 + 단위 테스트 + 서명된 APK/AAB 아티팩트 업로드
 #  - android-v* 태그 : 위 작업 + GitHub Release 생성(APK/AAB 첨부)
 #  - 수동 실행       : 옵션으로 GitHub Release 생성, Google Play 트랙 업로드
@@ -39,6 +39,11 @@ on:
         type: choice
         options: [none, internal, alpha, beta, production]
         default: none
+      play_app:
+        description: "Google Play 에 올릴 앱"
+        type: choice
+        options: [skydodge, crowdrush]
+        default: skydodge
 
 permissions:
   contents: write
@@ -125,13 +130,16 @@ jobs:
           mkdir -p dist
           cp app/build/outputs/apk/release/app-release.apk "dist/SkyDodge-${VERSION_NAME}.apk"
           cp app/build/outputs/bundle/release/app-release.aab "dist/SkyDodge-${VERSION_NAME}.aab"
-          cp app/build/outputs/mapping/release/mapping.txt "dist/mapping-${VERSION_NAME}.txt"
+          cp app/build/outputs/mapping/release/mapping.txt "dist/SkyDodge-${VERSION_NAME}-mapping.txt"
+          cp crowdrush/build/outputs/apk/release/crowdrush-release.apk "dist/CrowdRush-${VERSION_NAME}.apk"
+          cp crowdrush/build/outputs/bundle/release/crowdrush-release.aab "dist/CrowdRush-${VERSION_NAME}.aab"
+          cp crowdrush/build/outputs/mapping/release/mapping.txt "dist/CrowdRush-${VERSION_NAME}-mapping.txt"
           ls -la dist
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: skydodge-${{ steps.version.outputs.version_name }}-build${{ github.run_number }}
+          name: android-apps-${{ steps.version.outputs.version_name }}-build${{ github.run_number }}
           path: android-game/dist/*
           if-no-files-found: error
 
@@ -152,23 +160,25 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: skydodge-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
+          name: android-apps-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
           path: dist
 
       - name: Create or update release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: android-v${{ needs.build.outputs.version_name }}
-          name: Sky Dodge ${{ needs.build.outputs.version_name }}
+          name: Android games ${{ needs.build.outputs.version_name }}
           prerelease: ${{ needs.build.outputs.store_ready != 'true' }}
           files: |
             dist/*.apk
             dist/*.aab
           body: |
-            **Sky Dodge** ${{ needs.build.outputs.version_name }} (versionCode ${{ github.run_number }})
+            **Sky Dodge · Crowd Rush** ${{ needs.build.outputs.version_name }} (versionCode ${{ github.run_number }})
 
-            - `SkyDodge-*.apk` : 휴대폰에서 직접 설치(사이드로드)용
-            - `SkyDodge-*.aab` : Google Play Console 업로드용 App Bundle
+            | 앱 | 설치용 APK | Play 업로드용 AAB |
+            | --- | --- | --- |
+            | Sky Dodge (스카이 닷지) | `SkyDodge-*.apk` | `SkyDodge-*.aab` |
+            | Crowd Rush (군단 러시) | `CrowdRush-*.apk` | `CrowdRush-*.aab` |
 
             ${{ needs.build.outputs.store_ready == 'true' && '릴리스 키로 서명됨 (Play Console 업로드 가능).' || '⚠️ 디버그 키로 서명됨. Play 업로드용 서명은 저장소 Secrets 에 키스토어를 등록한 뒤 다시 빌드하세요 (android-game/README.md 참고).' }}
 
@@ -181,7 +191,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: skydodge-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
+          name: android-apps-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
           path: dist
 
       - name: Check Play service account secret
@@ -193,12 +203,26 @@ jobs:
             exit 1
           fi
 
+      - name: Pick app
+        id: pick
+        env:
+          PLAY_APP: ${{ inputs.play_app }}
+          VERSION_NAME: ${{ needs.build.outputs.version_name }}
+        run: |
+          if [ "$PLAY_APP" = "crowdrush" ]; then
+            echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
+            echo "prefix=CrowdRush" >> "$GITHUB_OUTPUT"
+          else
+            echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
+            echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Upload AAB to Play track
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.richroro.skydodge
-          releaseFiles: dist/*.aab
-          mappingFile: dist/mapping-${{ needs.build.outputs.version_name }}.txt
+          packageName: ${{ steps.pick.outputs.package }}
+          releaseFiles: dist/${{ steps.pick.outputs.prefix }}-${{ needs.build.outputs.version_name }}.aab
+          mappingFile: dist/${{ steps.pick.outputs.prefix }}-${{ needs.build.outputs.version_name }}-mapping.txt
           track: ${{ inputs.play_track }}
           status: completed
