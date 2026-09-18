@@ -78,6 +78,10 @@ jobs:
 
       - name: Set up Gradle (with cache)
         uses: gradle/actions/setup-gradle@v4
+        with:
+          # Let feature-branch builds populate the cache too, so fewer Maven Central
+          # downloads are needed per run (the registry rate-limits at times).
+          cache-read-only: false
 
       - name: Install Android SDK components
         run: |
