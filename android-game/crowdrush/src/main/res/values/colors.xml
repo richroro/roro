@@ -15,6 +15,8 @@
     <color name="gate_post_good">#1E3A8A</color>
     <color name="gate_post_bad">#7F1D1D</color>
     <color name="gold">#FACC15</color>
+    <color name="bullet">#FDE047</color>
+    <color name="bullet_edge">#F97316</color>
     <color name="gold_stroke">#78350F</color>
     <color name="text">#F8FAFC</color>
     <color name="text_stroke">#0F172A</color>

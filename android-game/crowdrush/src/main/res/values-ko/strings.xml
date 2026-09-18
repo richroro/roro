@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">군단 러시</string>
-    <string name="how_to_play">파란 게이트를 지나 병력을 불리고\n빨간 보스 군단보다 많은 숫자로 돌파하세요</string>
+    <string name="how_to_play">군단이 자동으로 사격합니다.\n게이트를 쏴서 숫자를 키우고 적 군단을 깎은 뒤\n빨간 보스 군단보다 많은 숫자로 돌파하세요</string>
     <string name="tap_to_start">탭해서 시작</string>
     <string name="tap_next_level">탭해서 다음 레벨</string>
     <string name="tap_to_retry">탭해서 다시 하기</string>
@@ -9,6 +9,7 @@
     <string name="best_label">최고 %1$d</string>
     <string name="level_clear">레벨 %1$d 클리어!</string>
     <string name="remaining">남은 병력 %1$d</string>
+    <string name="remaining_and_kills">남은 병력 %1$d · 사살 %2$d</string>
     <string name="reached_level">레벨 %1$d 도달</string>
     <string name="msg_wiped">병력이 모두 사라졌습니다</string>
     <string name="msg_lost_to_squad">적 군단 %1$d명에게 패배</string>

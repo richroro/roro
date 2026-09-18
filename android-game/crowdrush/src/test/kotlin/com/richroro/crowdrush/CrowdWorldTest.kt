@@ -21,9 +21,10 @@ class CrowdWorldTest {
         assertEquals(a.gates.map { it.z to it.left.label + it.right.label }, b.gates.map { it.z to it.left.label + it.right.label })
         assertEquals(a.boss!!.count, b.boss!!.count)
         assertTrue(a.gates.isNotEmpty())
-        // The boss is sized from the best-path count so a perfect run always wins.
+        // The boss is sized from the best-path count plus roughly half the shots a best-path army lands.
         val best = a.expectedCountAt(Float.MAX_VALUE)
-        assertTrue(a.boss!!.count < best)
+        val shots = CrowdWorld.fireRateFor(best) * (CrowdWorld.BULLET_RANGE / a.speed)
+        assertTrue(a.boss!!.count <= best * CrowdWorld.BOSS_FACTOR + shots * CrowdWorld.BOSS_SHOOT_FACTOR)
         // Every gate offers exactly one "good" side.
         assertTrue(a.gates.all { it.left.isGood != it.right.isGood || (it.left.isGood && it.right.isGood) })
     }
@@ -100,5 +101,73 @@ class CrowdWorldTest {
         world.setForTest(count = 400, playerX = 0f, z = 0f)
         assertTrue(world.playerRadius > smallRadius)
         assertTrue(world.playerRadius <= CrowdWorld.PLAYER_MAX_RADIUS)
+    }
+
+    @Test
+    fun `the crowd fires bullets while running and more soldiers fire faster`() {
+        val world = CrowdWorld(seed = 5).apply { start() }
+        world.update(0.05f)
+        assertTrue(world.bullets.isEmpty()) // 1 soldier fires 1.2 shots per second, nothing yet after 50 ms
+        repeat(20) { world.update(0.05f) } // 1 second
+        assertTrue(world.bullets.isNotEmpty())
+        assertEquals(CrowdWorld.SHOTS_PER_SHOOTER, CrowdWorld.fireRateFor(1), 1e-6f)
+        assertEquals(CrowdWorld.MAX_SHOOTERS * CrowdWorld.SHOTS_PER_SHOOTER, CrowdWorld.fireRateFor(1000), 1e-6f)
+    }
+
+    @Test
+    fun `bullets raise a plus gate and flip a minus gate`() {
+        val plus = CrowdWorld.GateSide(CrowdWorld.Op.ADD, 2)
+        repeat(CrowdWorld.GATE_HITS_PER_STEP) { plus.hit() }
+        assertEquals(3, plus.value)
+
+        val minus = CrowdWorld.GateSide(CrowdWorld.Op.SUB, 1)
+        repeat(CrowdWorld.GATE_HITS_PER_STEP) { minus.hit() }
+        assertEquals(CrowdWorld.Op.ADD, minus.op)
+        assertEquals(1, minus.value)
+        assertTrue(minus.isGood)
+
+        val div = CrowdWorld.GateSide(CrowdWorld.Op.DIV, 2)
+        repeat(CrowdWorld.DIV_HITS_TO_FLIP) { div.hit() }
+        assertEquals(CrowdWorld.Op.ADD, div.op)
+    }
+
+    @Test
+    fun `a bullet crossing a gate hits the side it is on`() {
+        val world = CrowdWorld(seed = 9).apply { start() }
+        val gate = world.gates.first()
+        val before = gate.left.hits
+        world.setForTest(count = 1, playerX = 0f, z = gate.z - 30f) // far enough that no gate is crossed by the crowd
+        world.addBulletForTest(x = -0.5f, z = gate.z - 0.5f)
+        world.update(0.05f) // bullet travels 1.4 m
+        assertEquals(before + 1, gate.left.hits)
+        assertEquals(0, gate.right.hits)
+    }
+
+    @Test
+    fun `bullets thin out an enemy squad and kill it at zero`() {
+        val world = CrowdWorld(seed = 9).apply { start() }
+        val enemy = world.enemies.first()
+        world.setForTest(count = 1, playerX = 0f, z = enemy.z - 30f)
+        val n = enemy.count
+        repeat(n) { world.addBulletForTest(x = enemy.x, z = enemy.z - 0.5f) }
+        world.update(0.05f)
+        assertEquals(0, enemy.count)
+        assertTrue(!enemy.alive)
+        assertEquals(n, world.kills)
+    }
+
+    @Test
+    fun `shooting the boss down to zero clears the level without losing troops`() {
+        val world = CrowdWorld(seed = 13).apply { start() }
+        val boss = world.boss!!
+        world.setForTest(count = 2, playerX = 0f, z = boss.z - 3f)
+        repeat(boss.count) { world.addBulletForTest(x = 0f, z = boss.z - 0.5f) }
+        world.update(0.05f) // bullets land; crowd moves only 0.3 m
+        assertEquals(0, boss.count)
+        assertTrue(!boss.alive)
+        world.setForTest(count = 2, playerX = 0f, z = boss.z - 0.1f)
+        world.update(0.05f)
+        assertEquals(CrowdWorld.State.LEVEL_CLEAR, world.state)
+        assertEquals(2, world.count)
     }
 }

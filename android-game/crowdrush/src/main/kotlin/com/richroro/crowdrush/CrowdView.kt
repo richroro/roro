@@ -57,6 +57,8 @@ class CrowdView @JvmOverloads constructor(
     private val overlayPaint = Paint().apply { color = color(R.color.overlay) }
     private val barBackPaint = Paint().apply { color = 0x590F172A }
     private val barPaint = Paint().apply { color = color(R.color.gold) }
+    private val bulletPaint = Paint().apply { color = color(R.color.bullet) }
+    private val bulletEdgePaint = Paint().apply { color = color(R.color.bullet_edge) }
     private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         typeface = Typeface.DEFAULT_BOLD
         textAlign = Paint.Align.CENTER
@@ -209,6 +211,10 @@ class CrowdView @JvmOverloads constructor(
             val d = b.z - world.z
             if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawBoss(canvas, b, d) })
         }
+        for (bullet in world.bullets) {
+            val d = bullet.z - world.z
+            if (d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawBullet(canvas, bullet, d) })
+        }
         drawables.sortByDescending { it.first }
         for (item in drawables) item.second()
 
@@ -323,6 +329,18 @@ class CrowdView @JvmOverloads constructor(
         label(canvas, e.count.toString(), cx, y - rpx * 0.3f - rpx * 1.1f - w * 0.03f * f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
+    private fun drawBullet(canvas: Canvas, bullet: CrowdWorld.Bullet, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val bw = max(2f, w * 0.012f * f)
+        val bh = max(4f, w * 0.035f * f)
+        val x = screenX(bullet.x, f)
+        val y = screenY(f) - w * 0.06f * f
+        canvas.drawRect(x - bw / 2f - 1f, y - bh - 1f, x + bw / 2f + 1f, y + 1f, bulletEdgePaint)
+        canvas.drawRect(x - bw / 2f, y - bh, x + bw / 2f, y, bulletPaint)
+    }
+
     private fun drawBoss(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
         val f = factor(d)
         if (f < 0.05f) return
@@ -383,7 +401,7 @@ class CrowdView @JvmOverloads constructor(
             }
             CrowdWorld.State.LEVEL_CLEAR -> {
                 title = context.getString(R.string.level_clear, world.level)
-                body = localizedMessage() + "\n" + context.getString(R.string.remaining, world.count)
+                body = localizedMessage() + "\n" + context.getString(R.string.remaining_and_kills, world.count, world.kills)
                 accent = context.getString(R.string.tap_next_level)
             }
             CrowdWorld.State.GAME_OVER -> {

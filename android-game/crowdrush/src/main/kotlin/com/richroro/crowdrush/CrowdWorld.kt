@@ -19,7 +19,15 @@ class CrowdWorld(private val seed: Int = 1) {
 
     enum class Op { ADD, MUL, SUB, DIV }
 
-    data class GateSide(val op: Op, val value: Int) {
+    /** One half of a gate. Bullets mutate it, so it is a mutable class rather than a data class. */
+    class GateSide(op: Op, value: Int) {
+        var op: Op = op
+            private set
+        var value: Int = value
+            private set
+        var hits: Int = 0
+            private set
+
         val isGood: Boolean get() = op == Op.ADD || op == Op.MUL
         val label: String
             get() = when (op) {
@@ -28,6 +36,26 @@ class CrowdWorld(private val seed: Int = 1) {
                 Op.SUB -> "−$value"
                 Op.DIV -> "÷$value"
             }
+
+        /** A bullet hit improves the side: +N grows, −N shrinks and flips to +1, ÷2 flips to +1 after enough hits. */
+        internal fun hit() {
+            hits++
+            when (op) {
+                Op.ADD -> if (hits % GATE_HITS_PER_STEP == 0) value++
+                Op.MUL -> if (hits % MUL_HITS_PER_STEP == 0) value++
+                Op.SUB -> if (hits % GATE_HITS_PER_STEP == 0) {
+                    value--
+                    if (value <= 0) flipToPlusOne()
+                }
+                Op.DIV -> if (hits >= DIV_HITS_TO_FLIP) flipToPlusOne()
+            }
+        }
+
+        private fun flipToPlusOne() {
+            op = Op.ADD
+            value = 1
+            hits = 0
+        }
     }
 
     class Gate(val z: Float, val left: GateSide, val right: GateSide) {
@@ -35,12 +63,38 @@ class CrowdWorld(private val seed: Int = 1) {
             internal set
     }
 
-    class Enemy(val z: Float, val x: Float, val count: Int) {
+    class Enemy(val z: Float, val x: Float, count: Int) {
+        var count: Int = count
+            private set
         var alive: Boolean = true
             internal set
+
+        internal fun shot() {
+            count--
+            if (count <= 0) {
+                count = 0
+                alive = false
+            }
+        }
     }
 
-    class Boss(val z: Float, val count: Int) {
+    class Boss(val z: Float, count: Int) {
+        val maxCount: Int = count
+        var count: Int = count
+            private set
+        var alive: Boolean = true
+            internal set
+
+        internal fun shot() {
+            count--
+            if (count <= 0) {
+                count = 0
+                alive = false
+            }
+        }
+    }
+
+    class Bullet(val x: Float, var z: Float) {
         var alive: Boolean = true
             internal set
     }
@@ -67,11 +121,17 @@ class CrowdWorld(private val seed: Int = 1) {
         private set
     var lastGateGood: Boolean = true
         private set
+    var kills: Int = 0
+        private set
 
     private val mutableGates = ArrayList<Gate>()
     private val mutableEnemies = ArrayList<Enemy>()
+    private val mutableBullets = ArrayList<Bullet>()
     val gates: List<Gate> get() = mutableGates
     val enemies: List<Enemy> get() = mutableEnemies
+    val bullets: List<Bullet> get() = mutableBullets
+    private var fireAccumulator = 0f
+    private val shotRandom = Mulberry32(seed)
     var boss: Boss? = null
         private set
 
@@ -80,6 +140,10 @@ class CrowdWorld(private val seed: Int = 1) {
 
     val progress: Float
         get() = if (length <= 0f) 0f else min(1f, z / length)
+
+    /** Bullets per second for a crowd of [count]; every soldier up to [MAX_SHOOTERS] fires. */
+    val fireRate: Float
+        get() = fireRateFor(count)
 
     fun start() = startLevel(1)
 
@@ -96,6 +160,9 @@ class CrowdWorld(private val seed: Int = 1) {
         flash = 0f
         message = ""
         lastGateGood = true
+        kills = 0
+        fireAccumulator = 0f
+        mutableBullets.clear()
 
         val gateCount = min(MAX_GATES, BASE_GATES + GATES_PER_LEVEL * (newLevel - 1))
         val spacing = (length - 20f) / gateCount
@@ -139,11 +206,15 @@ class CrowdWorld(private val seed: Int = 1) {
         for (i in 0 until enemyCount) {
             val ez = 24f + random.next() * (length - 40f)
             val expected = expectedCountAt(ez)
-            val n = max(1, floor(expected * (0.15f + random.next() * 0.35f)).toInt())
+            val shotsInRange = fireRateFor(expected) * (BULLET_RANGE / speed)
+            val n = max(1, floor(expected * (0.15f + random.next() * 0.35f) + shotsInRange * ENEMY_SHOOT_FACTOR).toInt())
             mutableEnemies.add(Enemy(ez, -0.55f + random.next() * 1.1f, n))
         }
 
-        boss = Boss(length, max(3, floor(best * BOSS_FACTOR).toInt()))
+        // The boss is sized so a best-path army wins even while landing only half its shots.
+        val bossShots = fireRateFor(best) * (BULLET_RANGE / speed)
+        boss = Boss(length, max(3, floor(best * BOSS_FACTOR + bossShots * BOSS_SHOOT_FACTOR).toInt()))
+        bossResolved = false
         state = State.RUNNING
     }
 
@@ -167,6 +238,7 @@ class CrowdWorld(private val seed: Int = 1) {
         val prevZ = z
         z += speed * dt
         flash = max(0f, flash - dt)
+        updateShooting(dt)
 
         for (g in mutableGates) {
             if (!g.used && g.z > prevZ && g.z <= z) {
@@ -199,19 +271,64 @@ class CrowdWorld(private val seed: Int = 1) {
         }
 
         val b = boss
-        if (b != null && b.alive && b.z <= z) {
+        if (b != null && b.z <= z && !bossResolved) {
+            bossResolved = true
+            val remaining = if (b.alive) b.count else 0
             b.alive = false
-            count -= b.count
+            count -= remaining
             if (count > 0) {
                 state = State.LEVEL_CLEAR
                 bestLevel = max(bestLevel, level)
-                message = MSG_BOSS_BEATEN.format(b.count)
+                message = MSG_BOSS_BEATEN.format(b.maxCount)
             } else {
                 count = 0
                 state = State.GAME_OVER
-                message = MSG_LOST_TO_BOSS.format(b.count)
+                message = MSG_LOST_TO_BOSS.format(remaining)
             }
         }
+    }
+
+    private var bossResolved = false
+
+    private fun updateShooting(dt: Float) {
+        fireAccumulator += fireRate * dt
+        while (fireAccumulator >= 1f) {
+            fireAccumulator -= 1f
+            val spread = playerRadius * 0.8f
+            mutableBullets.add(Bullet(playerX + (shotRandom.next() * 2f - 1f) * spread, z + 1f))
+        }
+        val b = boss
+        for (bullet in mutableBullets) {
+            val prevBz = bullet.z
+            bullet.z += BULLET_SPEED * dt
+            if (bullet.z - z > BULLET_RANGE) {
+                bullet.alive = false
+                continue
+            }
+            for (g in mutableGates) {
+                if (!g.used && g.z > prevBz && g.z <= bullet.z) {
+                    (if (bullet.x < 0f) g.left else g.right).hit()
+                    bullet.alive = false
+                    break
+                }
+            }
+            if (!bullet.alive) continue
+            for (e in mutableEnemies) {
+                if (e.alive && e.z > prevBz && e.z <= bullet.z && abs(e.x - bullet.x) < ENEMY_HALF_WIDTH) {
+                    e.shot()
+                    kills++
+                    bullet.alive = false
+                    break
+                }
+            }
+            if (!bullet.alive) continue
+            if (b != null && b.alive && b.z > prevBz && b.z <= bullet.z) {
+                b.shot()
+                kills++
+                bullet.alive = false
+            }
+        }
+        mutableBullets.removeAll { !it.alive }
     }
 
     /** Test hook: put the crowd at a lane position and distance without generating a level. */
@@ -219,6 +336,11 @@ class CrowdWorld(private val seed: Int = 1) {
         this.count = count
         this.playerX = playerX
         this.z = z
+    }
+
+    /** Test hook: place a bullet directly. */
+    internal fun addBulletForTest(x: Float, z: Float) {
+        mutableBullets.add(Bullet(x, z))
     }
 
     /** Small deterministic PRNG shared with the browser build so levels match across ports. */
@@ -255,6 +377,18 @@ class CrowdWorld(private val seed: Int = 1) {
         const val START_COUNT = 1
         const val MAX_FRAME_DT = 0.05f
         const val FLASH_SECONDS = 0.25f
+
+        const val MAX_SHOOTERS = 40
+        const val SHOTS_PER_SHOOTER = 1.2f
+        const val BULLET_SPEED = 28f
+        const val BULLET_RANGE = 48f
+        const val GATE_HITS_PER_STEP = 3
+        const val MUL_HITS_PER_STEP = 20
+        const val DIV_HITS_TO_FLIP = 15
+        const val BOSS_SHOOT_FACTOR = 0.5f
+        const val ENEMY_SHOOT_FACTOR = 0.15f
+
+        fun fireRateFor(count: Int): Float = min(count, MAX_SHOOTERS) * SHOTS_PER_SHOOTER
 
         const val MSG_WIPED = "wiped"
         const val MSG_LOST_TO_SQUAD = "squad:%d"
