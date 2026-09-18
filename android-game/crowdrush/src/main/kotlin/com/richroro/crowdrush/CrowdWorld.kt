@@ -76,6 +76,11 @@ class CrowdWorld(private val seed: Int = 1) {
         internal fun march(dz: Float) {
             z -= dz
         }
+
+        internal fun wipe() {
+            count = 0
+            alive = false
+        }
         var alive: Boolean = true
             internal set
 
@@ -102,6 +107,17 @@ class CrowdWorld(private val seed: Int = 1) {
                 alive = false
             }
         }
+
+        /** Removes up to [amount] soldiers; returns how many were actually removed. */
+        internal fun damage(amount: Int): Int {
+            val removed = min(amount, count)
+            count -= removed
+            if (count <= 0) {
+                count = 0
+                alive = false
+            }
+            return removed
+        }
     }
 
     class Bullet(val x: Float, var z: Float) {
@@ -109,9 +125,16 @@ class CrowdWorld(private val seed: Int = 1) {
             internal set
     }
 
+    enum class ItemKind { RAPID, SHIELD, REINFORCE, BOMB }
+
+    class Item(val z: Float, val x: Float, val kind: ItemKind) {
+        var alive: Boolean = true
+            internal set
+    }
+
     /** Something the renderer may want to show or play. Drained once per frame via [drainEvents]. */
-    class Event(val type: Type, val x: Float = 0f, val z: Float = 0f, val value: Int = 0, val flag: Boolean = false, val label: String = "") {
-        enum class Type { SHOT, HIT_GATE, HIT_ENEMY, HIT_BOSS, GATE_GOOD, GATE_BAD, CONTACT, LEVEL_CLEAR, GAME_OVER }
+    class Event(val type: Type, val x: Float = 0f, val z: Float = 0f, val value: Int = 0, val flag: Boolean = false, val label: String = "", val item: ItemKind? = null) {
+        enum class Type { SHOT, HIT_GATE, HIT_ENEMY, HIT_BOSS, GATE_GOOD, GATE_BAD, CONTACT, LEVEL_CLEAR, GAME_OVER, ITEM, SHIELD_USED }
     }
 
     var level: Int = 1
@@ -142,9 +165,19 @@ class CrowdWorld(private val seed: Int = 1) {
     private val mutableGates = ArrayList<Gate>()
     private val mutableEnemies = ArrayList<Enemy>()
     private val mutableBullets = ArrayList<Bullet>()
+    private val mutableItems = ArrayList<Item>()
     val gates: List<Gate> get() = mutableGates
     val enemies: List<Enemy> get() = mutableEnemies
     val bullets: List<Bullet> get() = mutableBullets
+    val items: List<Item> get() = mutableItems
+
+    /** Seconds of rapid fire left; 0 when inactive. */
+    var rapidTimer: Float = 0f
+        private set
+
+    /** True while a shield is held; it absorbs the next bad gate or squad contact. */
+    var shield: Boolean = false
+        private set
     private var fireAccumulator = 0f
     private val shotRandom = Mulberry32(seed)
     private val pendingEvents = ArrayList<Event>()
@@ -163,9 +196,9 @@ class CrowdWorld(private val seed: Int = 1) {
     val progress: Float
         get() = if (length <= 0f) 0f else min(1f, z / length)
 
-    /** Bullets per second for a crowd of [count]; every soldier up to [MAX_SHOOTERS] fires. */
+    /** Bullets per second right now: every soldier up to [MAX_SHOOTERS] fires, doubled by rapid fire. */
     val fireRate: Float
-        get() = fireRateFor(count)
+        get() = fireRateFor(count) * (if (rapidTimer > 0f) RAPID_MULT else 1f)
 
     fun start() = startLevel(1)
 
@@ -186,6 +219,9 @@ class CrowdWorld(private val seed: Int = 1) {
         fireAccumulator = 0f
         mutableBullets.clear()
         pendingEvents.clear()
+        mutableItems.clear()
+        rapidTimer = 0f
+        shield = false
 
         val gateCount = min(MAX_GATES, BASE_GATES + GATES_PER_LEVEL * (newLevel - 1))
         val spacing = (length - 20f) / gateCount
@@ -249,6 +285,39 @@ class CrowdWorld(private val seed: Int = 1) {
             mutableEnemies.add(Enemy(ez, ex, n))
         }
 
+        // Items: one per zone, clear of gates and squads, random kind.
+        val itemCount = min(MAX_ITEMS, BASE_ITEMS + ((newLevel - 1) / 2) * ITEMS_PER_TWO_LEVELS)
+        val izStart = 20f
+        val izEnd = length - 16f
+        val izLen = (izEnd - izStart) / itemCount
+        for (i in 0 until itemCount) {
+            val preferred = (izStart + izLen * (i + 0.2f + random.next() * 0.6f)).coerceIn(16f, length - 10f)
+            // Walk outwards from the preferred spot until the item is clear of every gate and squad.
+            var iz = Float.NaN
+            var offset = 0f
+            while (offset <= izLen && iz.isNaN()) {
+                for (candidate in floatArrayOf(preferred + offset, preferred - offset)) {
+                    if (candidate < 16f || candidate > length - 10f) continue
+                    if (mutableGates.all { abs(it.z - candidate) >= ITEM_CLEARANCE } &&
+                        mutableEnemies.all { abs(it.z - candidate) >= ITEM_CLEARANCE }
+                    ) {
+                        iz = candidate
+                        break
+                    }
+                }
+                offset += 1f
+            }
+            val ix = -0.6f + random.next() * 1.2f
+            val roll = random.next()
+            val kind = when {
+                roll < 0.3f -> ItemKind.RAPID
+                roll < 0.6f -> ItemKind.REINFORCE
+                roll < 0.85f -> ItemKind.SHIELD
+                else -> ItemKind.BOMB
+            }
+            if (!iz.isNaN()) mutableItems.add(Item(iz, ix, kind))
+        }
+
         // The boss is sized so a best-path army wins even while landing only half its shots.
         val bossShots = fireRateFor(best) * (BULLET_RANGE / speed)
         boss = Boss(length, max(3, floor(best * BOSS_FACTOR + bossShots * BOSS_SHOOT_FACTOR).toInt()))
@@ -276,6 +345,13 @@ class CrowdWorld(private val seed: Int = 1) {
         val prevZ = z
         z += speed * dt
         flash = max(0f, flash - dt)
+        rapidTimer = max(0f, rapidTimer - dt)
+        for (item in mutableItems) {
+            if (item.alive && item.z > prevZ && item.z <= z && abs(item.x - playerX) < ITEM_RADIUS + playerRadius) {
+                item.alive = false
+                applyItem(item)
+            }
+        }
         for (e in mutableEnemies) { // squads advance on the player once they are close
             val d = e.z - z
             if (e.alive && d > 0f && d < ENEMY_MARCH_RANGE) e.march(ENEMY_MARCH_SPEED * dt)
@@ -286,6 +362,11 @@ class CrowdWorld(private val seed: Int = 1) {
             if (!g.used && g.z > prevZ && g.z <= z) {
                 g.used = true
                 val side = if (playerX < 0f) g.left else g.right
+                if (!side.isGood && shield) {
+                    shield = false
+                    pendingEvents.add(Event(Event.Type.SHIELD_USED, playerX, g.z))
+                    continue
+                }
                 count = apply(count, side)
                 flash = FLASH_SECONDS
                 lastGateGood = side.isGood
@@ -301,6 +382,13 @@ class CrowdWorld(private val seed: Int = 1) {
 
         for (e in mutableEnemies) {
             if (e.alive && e.z > prevZ && e.z <= z && abs(e.x - playerX) < ENEMY_HALF_WIDTH + playerRadius) {
+                if (shield) {
+                    shield = false
+                    e.alive = false
+                    kills += e.count
+                    pendingEvents.add(Event(Event.Type.SHIELD_USED, e.x, e.z))
+                    continue
+                }
                 e.alive = false
                 count -= e.count
                 flash = FLASH_SECONDS
@@ -337,6 +425,29 @@ class CrowdWorld(private val seed: Int = 1) {
     }
 
     private var bossResolved = false
+
+    private fun applyItem(item: Item) {
+        pendingEvents.add(Event(Event.Type.ITEM, item.x, item.z, item = item.kind))
+        when (item.kind) {
+            ItemKind.RAPID -> rapidTimer = RAPID_SECONDS
+            ItemKind.SHIELD -> shield = true
+            ItemKind.REINFORCE -> count += max(REINFORCE_MIN, floor(count * REINFORCE_RATIO).toInt())
+            ItemKind.BOMB -> {
+                for (e in mutableEnemies) {
+                    if (e.alive && e.z - z < BOMB_RANGE) {
+                        kills += e.count
+                        e.wipe()
+                        pendingEvents.add(Event(Event.Type.HIT_ENEMY, e.x, e.z, flag = true))
+                    }
+                }
+                val b = boss
+                if (b != null && b.alive && b.z - z < BOMB_RANGE) {
+                    val damage = floor(b.maxCount * BOMB_BOSS_RATIO).toInt()
+                    kills += b.damage(damage)
+                }
+            }
+        }
+    }
 
     private fun updateShooting(dt: Float) {
         fireAccumulator += fireRate * dt
@@ -392,6 +503,13 @@ class CrowdWorld(private val seed: Int = 1) {
         this.z = z
     }
 
+    /** Test hook: place an item directly. */
+    internal fun addItemForTest(kind: ItemKind, x: Float, z: Float): Item {
+        val item = Item(z, x, kind)
+        mutableItems.add(item)
+        return item
+    }
+
     /** Test hook: place a bullet directly. */
     internal fun addBulletForTest(x: Float, z: Float) {
         mutableBullets.add(Bullet(x, z))
@@ -445,6 +563,18 @@ class CrowdWorld(private val seed: Int = 1) {
         const val ENEMY_MARCH_SPEED = 1.2f
         const val ENEMY_MARCH_RANGE = 35f
         const val MIN_ENEMY = 2
+
+        const val ITEM_RADIUS = 0.22f
+        const val BASE_ITEMS = 2
+        const val ITEMS_PER_TWO_LEVELS = 1
+        const val MAX_ITEMS = 5
+        const val ITEM_CLEARANCE = 5f
+        const val RAPID_SECONDS = 6f
+        const val RAPID_MULT = 2f
+        const val REINFORCE_RATIO = 0.3f
+        const val REINFORCE_MIN = 3
+        const val BOMB_RANGE = 40f
+        const val BOMB_BOSS_RATIO = 0.1f
 
         fun fireRateFor(count: Int): Float = min(count, MAX_SHOOTERS) * SHOTS_PER_SHOOTER
 

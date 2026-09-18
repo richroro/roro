@@ -221,4 +221,71 @@ class CrowdWorldTest {
         world.update(0.05f)
         assertEquals(startZ - CrowdWorld.ENEMY_MARCH_SPEED * 0.05f, enemy.z, 1e-4f)
     }
+
+    private fun pickUp(world: CrowdWorld, kind: CrowdWorld.ItemKind, count: Int): CrowdWorld.Item {
+        val z = 60f
+        val item = world.addItemForTest(kind, x = 0f, z = z)
+        world.setForTest(count = count, playerX = 0f, z = z - 0.1f)
+        world.update(0.05f)
+        assertTrue(!item.alive)
+        return item
+    }
+
+    @Test
+    fun `rapid fire doubles the fire rate for a while`() {
+        val world = CrowdWorld(seed = 21).apply { start() }
+        pickUp(world, CrowdWorld.ItemKind.RAPID, count = 10)
+        assertEquals(CrowdWorld.fireRateFor(10) * CrowdWorld.RAPID_MULT, world.fireRate, 1e-4f)
+        assertTrue(world.rapidTimer > 0f)
+        repeat(140) { world.update(0.05f) } // 7 seconds
+        assertEquals(0f, world.rapidTimer, 0f)
+    }
+
+    @Test
+    fun `reinforcements add at least three soldiers`() {
+        val world = CrowdWorld(seed = 21).apply { start() }
+        pickUp(world, CrowdWorld.ItemKind.REINFORCE, count = 4)
+        assertEquals(7, world.count)
+        val big = CrowdWorld(seed = 22).apply { start() }
+        pickUp(big, CrowdWorld.ItemKind.REINFORCE, count = 100)
+        assertEquals(130, big.count)
+    }
+
+    @Test
+    fun `shield absorbs one squad contact and destroys the squad`() {
+        val world = CrowdWorld(seed = 21).apply { start() }
+        pickUp(world, CrowdWorld.ItemKind.SHIELD, count = 1)
+        assertTrue(world.shield)
+        val enemy = world.enemies.first()
+        world.setForTest(count = 1, playerX = enemy.x, z = enemy.z - 0.1f)
+        world.update(0.05f)
+        assertTrue(!enemy.alive)
+        assertEquals(1, world.count)
+        assertTrue(!world.shield)
+        assertEquals(CrowdWorld.State.RUNNING, world.state)
+    }
+
+    @Test
+    fun `bomb wipes squads in range and chips the boss`() {
+        val world = CrowdWorld(seed = 21).apply { start() }
+        val boss = world.boss!!
+        world.setForTest(count = 5, playerX = 0f, z = boss.z - 30f)
+        val item = world.addItemForTest(CrowdWorld.ItemKind.BOMB, x = 0f, z = boss.z - 29.9f)
+        world.update(0.05f)
+        assertTrue(!item.alive)
+        assertTrue(world.enemies.filter { it.z - world.z < CrowdWorld.BOMB_RANGE }.none { it.alive })
+        assertEquals(boss.maxCount - (boss.maxCount * CrowdWorld.BOMB_BOSS_RATIO).toInt(), boss.count)
+    }
+
+    @Test
+    fun `items keep clear of gates and squads`() {
+        for (seed in 1..30) {
+            val world = CrowdWorld(seed = seed).apply { start() }
+            assertTrue(world.items.isNotEmpty())
+            for (item in world.items) {
+                assertTrue(world.gates.all { abs(it.z - item.z) >= CrowdWorld.ITEM_CLEARANCE - 1e-3f })
+                assertTrue(world.enemies.all { abs(it.z - item.z) >= CrowdWorld.ITEM_CLEARANCE - 1e-3f })
+            }
+        }
+    }
 }

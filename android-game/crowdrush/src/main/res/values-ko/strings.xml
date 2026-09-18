@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">군단 러시</string>
-    <string name="how_to_play">군단이 자동으로 사격합니다.\n게이트를 쏴서 숫자를 키우고 적 군단을 깎은 뒤\n빨간 보스 군단보다 많은 숫자로 돌파하세요</string>
+    <string name="how_to_play">군단이 자동으로 사격합니다.\n게이트를 쏴서 숫자를 키우고 적 군단을 깎고\n아이템(⚡연사 🛡방어막 ✚증원 💣폭탄)을 모아\n빨간 보스 군단보다 많은 숫자로 돌파하세요</string>
     <string name="tap_to_start">탭해서 시작</string>
     <string name="tap_next_level">탭해서 다음 레벨</string>
     <string name="tap_to_retry">탭해서 다시 하기</string>
@@ -15,4 +15,9 @@
     <string name="msg_lost_to_squad">적 군단 %1$d명에게 패배</string>
     <string name="msg_boss_beaten">보스 군단 %1$d명 격파!</string>
     <string name="msg_lost_to_boss">보스 군단 %1$d명에게 패배</string>
+    <string name="item_rapid">연사</string>
+    <string name="item_shield">방어막</string>
+    <string name="item_reinforce">증원</string>
+    <string name="item_bomb">폭탄</string>
+    <string name="shield_blocked">🛡 방어!</string>
 </resources>

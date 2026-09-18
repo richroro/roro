@@ -8,6 +8,8 @@ Outputs into crowdrush/src/main/res/raw/:
   sfx_buzz.wav   bad gate passed / enemy contact
   sfx_clear.wav  level clear arpeggio
   sfx_over.wav   game over descending tone
+  sfx_pickup.wav item picked up (two rising notes)
+  sfx_boom.wav   bomb item (low rumble)
 
 Run:  python3 android-game/tools/generate_sounds.py [out_dir]
 """
@@ -116,11 +118,27 @@ def over():
     return render(0.8, f)
 
 
+def pickup():
+    def f(t, r, i):
+        k = 0 if t < 0.09 else 1
+        freq = 659.25 if k == 0 else 1046.5
+        lt = t - k * 0.09
+        return (math.sin(2 * math.pi * freq * t) + 0.3 * math.sin(2 * math.pi * freq * 2 * t)) * env(lt, 0.005, 0.06 if k == 0 else 0.14)
+    return render(0.32, f)
+
+
+def boom():
+    noise = render(0.6, lambda t, r, i: (r.random() * 2 - 1) * env(t, 0.005, 0.18), seed=9)
+    noise = lowpass(lowpass(noise, 0.08), 0.2)
+    thump = render(0.6, lambda t, r, i: math.sin(2 * math.pi * (70 - 60 * t) * t) * env(t, 0.005, 0.25))
+    return [n * 1.2 + th * 0.8 for n, th in zip(noise, thump)]
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "crowdrush", "src", "main", "res", "raw")
     os.makedirs(out, exist_ok=True)
-    for name, fn in [("sfx_shot", shot), ("sfx_hit", hit), ("sfx_ding", ding), ("sfx_buzz", buzz), ("sfx_clear", clear), ("sfx_over", over)]:
+    for name, fn in [("sfx_shot", shot), ("sfx_hit", hit), ("sfx_ding", ding), ("sfx_buzz", buzz), ("sfx_clear", clear), ("sfx_over", over), ("sfx_pickup", pickup), ("sfx_boom", boom)]:
         save(os.path.join(out, name + ".wav"), fn())
     print("wrote sound effects to", os.path.abspath(out))
 

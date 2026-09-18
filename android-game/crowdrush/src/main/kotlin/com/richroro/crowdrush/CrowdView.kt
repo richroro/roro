@@ -56,7 +56,12 @@ class CrowdView @JvmOverloads constructor(
     private val sndBuzz = soundPool.load(context, R.raw.sfx_buzz, 1)
     private val sndClear = soundPool.load(context, R.raw.sfx_clear, 1)
     private val sndOver = soundPool.load(context, R.raw.sfx_over, 1)
-    private val lastPlayedNanos = LongArray(6)
+    private val sndPickup = soundPool.load(context, R.raw.sfx_pickup, 1)
+    private val sndBoom = soundPool.load(context, R.raw.sfx_boom, 1)
+    private val lastPlayedNanos = LongArray(8)
+    private val itemPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val itemRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; style = Paint.Style.STROKE }
+    private val emojiPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER }
 
     // ---- visual effects ----
     private class Particle(var x: Float, var z: Float, var dy: Float, var vy: Float, var vx: Float, var vz: Float, var life: Float, val maxLife: Float, val color: Int, val size: Float)
@@ -240,9 +245,59 @@ class CrowdView @JvmOverloads constructor(
                 sparks(e.x, e.z, 14, sparkBad, 0.4f)
                 play(sndBuzz, 3, 150, 0.7f)
             }
+            CrowdWorld.Event.Type.ITEM -> {
+                val kind = e.item ?: return
+                floatText(itemGlyph(kind) + " " + context.getString(itemName(kind)), e.x, e.z, itemColor(kind))
+                sparks(e.x, e.z, 12, itemColor(kind), 0.3f)
+                if (kind == CrowdWorld.ItemKind.BOMB) play(sndBoom, 7, 0, 0.9f) else play(sndPickup, 6, 0, 0.7f)
+            }
+            CrowdWorld.Event.Type.SHIELD_USED -> {
+                floatText(context.getString(R.string.shield_blocked), e.x, e.z, color(R.color.item_shield))
+                sparks(e.x, e.z, 16, color(R.color.item_shield), 0.5f)
+                play(sndPickup, 6, 0, 0.7f)
+            }
             CrowdWorld.Event.Type.LEVEL_CLEAR -> play(sndClear, 4, 0, 0.8f)
             CrowdWorld.Event.Type.GAME_OVER -> play(sndOver, 5, 0, 0.8f)
         }
+    }
+
+    private fun itemGlyph(kind: CrowdWorld.ItemKind): String = when (kind) {
+        CrowdWorld.ItemKind.RAPID -> "⚡"
+        CrowdWorld.ItemKind.SHIELD -> "🛡"
+        CrowdWorld.ItemKind.REINFORCE -> "✚"
+        CrowdWorld.ItemKind.BOMB -> "💣"
+    }
+
+    private fun itemName(kind: CrowdWorld.ItemKind): Int = when (kind) {
+        CrowdWorld.ItemKind.RAPID -> R.string.item_rapid
+        CrowdWorld.ItemKind.SHIELD -> R.string.item_shield
+        CrowdWorld.ItemKind.REINFORCE -> R.string.item_reinforce
+        CrowdWorld.ItemKind.BOMB -> R.string.item_bomb
+    }
+
+    private fun itemColor(kind: CrowdWorld.ItemKind): Int = when (kind) {
+        CrowdWorld.ItemKind.RAPID -> color(R.color.item_rapid)
+        CrowdWorld.ItemKind.SHIELD -> color(R.color.item_shield)
+        CrowdWorld.ItemKind.REINFORCE -> color(R.color.item_reinforce)
+        CrowdWorld.ItemKind.BOMB -> color(R.color.item_bomb)
+    }
+
+    private fun drawItem(canvas: Canvas, item: CrowdWorld.Item, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val r = w * 0.06f * f
+        val x = screenX(item.x, f)
+        val ground = screenY(f)
+        val y = ground - r * 1.3f - abs(sin(runTime * 3f + item.z)) * r * 0.5f
+        rect.set(x - r * 0.9f, ground - r * 0.3f, x + r * 0.9f, ground + r * 0.3f)
+        canvas.drawOval(rect, shadowPaint)
+        itemPaint.color = itemColor(item.kind)
+        canvas.drawCircle(x, y, r, itemPaint)
+        itemRingPaint.strokeWidth = max(1.5f, r * 0.14f)
+        canvas.drawCircle(x, y, r, itemRingPaint)
+        emojiPaint.textSize = r * 1.1f
+        canvas.drawText(itemGlyph(item.kind), x, y + r * 0.4f, emojiPaint)
     }
 
     private fun updateFx(dt: Float) {
@@ -403,6 +458,10 @@ class CrowdView @JvmOverloads constructor(
         world.boss?.let { b ->
             val d = b.z - world.z
             if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawBoss(canvas, b, d) })
+        }
+        for (item in world.items) {
+            val d = item.z - world.z
+            if (item.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawItem(canvas, item, d) })
         }
         for (bullet in world.bullets) {
             val d = bullet.z - world.z
@@ -590,6 +649,26 @@ class CrowdView @JvmOverloads constructor(
         val top = insetTop + h * 0.03f
         label(canvas, context.getString(R.string.level_label, world.level), w * 0.18f, top + w * 0.03f, w * 0.055f, Color.WHITE, color(R.color.text_stroke))
         label(canvas, context.getString(R.string.best_label, max(bestLevel, world.bestLevel)), w * 0.82f, top + w * 0.03f, w * 0.045f, Color.WHITE, color(R.color.text_stroke))
+        // active item effects, under the level label on the left
+        var ex = w * 0.05f
+        val ey = top + w * 0.09f
+        val eh = w * 0.06f
+        if (world.rapidTimer > 0f) {
+            val pw = w * 0.24f
+            rect.set(ex, ey, ex + pw, ey + eh)
+            canvas.drawRoundRect(rect, eh * 0.3f, eh * 0.3f, barBackPaint)
+            rect.set(ex, ey, ex + pw * (world.rapidTimer / CrowdWorld.RAPID_SECONDS), ey + eh)
+            itemPaint.color = color(R.color.item_rapid)
+            canvas.drawRoundRect(rect, eh * 0.3f, eh * 0.3f, itemPaint)
+            label(canvas, "⚡ " + context.getString(R.string.item_rapid), ex + pw / 2f, ey + eh / 2f, w * 0.035f, Color.WHITE, color(R.color.text_stroke))
+            ex += pw + w * 0.02f
+        }
+        if (world.shield) {
+            val pw = w * 0.2f
+            rect.set(ex, ey, ex + pw, ey + eh)
+            canvas.drawRoundRect(rect, eh * 0.3f, eh * 0.3f, barBackPaint)
+            label(canvas, "🛡 " + context.getString(R.string.item_shield), ex + pw / 2f, ey + eh / 2f, w * 0.035f, Color.WHITE, color(R.color.text_stroke))
+        }
         // mute toggle, under the "best" label on the right
         val size = w * 0.09f
         muteRect.set(w - w * 0.05f - size, top + w * 0.09f, w - w * 0.05f, top + w * 0.09f + size)
