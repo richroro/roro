@@ -11,6 +11,8 @@
 | `[tts]` 단어 수가 0 이거나 `timing: estimated` | 보이스가 WordBoundary 를 안 줌 | 자막은 글자 수 추정으로 나옴(약간 어긋날 수 있음). `female`/`male` 프리셋 보이스로 바꾸면 대부분 해결 |
 | `[image] pollinations 실패: HTTP 429/5xx` | 익명 한도·과부하 | 잠시 후 `--force` 없이 재실행(성공한 씬은 캐시됨). `--jobs 1` 로 동시 요청 줄이기. `POLLINATIONS_TOKEN` 발급 |
 | `[image] pollinations 실패: 요청 실패: timeout` | 생성이 느림 | 재실행. 프롬프트를 짧게. 스톡 키(Pexels) 추가로 폴백 확보 |
+| Open Images 색인이 큼/느림 | 첫 사용 때 색인 생성 | `--sets validation` 만 쓰면 약 40MB. 아예 끄려면 `AUTO_SHORTS_OPENIMAGES=0` |
+| Open Images 사진이 주제와 어긋남 | 그 개념의 분류가 없음 | `python scripts/openimages.py --find "키워드"` 로 잡히는 분류를 보고 키워드를 바꾼다. 정확도가 중요하면 Pexels 키 |
 | 사진 대신 전부 `card` | 키 없음 + Openverse/Wikimedia 실패 | `PEXELS_API_KEY` 발급(무료 2분)이 가장 확실. `python scripts/selftest_providers.py` 로 코드 경로부터 확인 |
 | `연결 불가 → 이번 실행에서 건너뜁니다` | 방화벽·프록시가 그 호스트를 막음 | 회사망이면 개인망에서 실행하거나, 막히지 않는 제공자만 `--image-providers` 로 지정 |
 | 사진이 주제와 안 맞음 | `keywords` 가 너무 길거나 사진이 없는 개념 | 흔한 명사 2~3개로 줄인다(`octopus three hearts` → `octopus underwater`). 개념은 은유 사물로 |

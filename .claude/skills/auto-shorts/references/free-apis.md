@@ -30,6 +30,7 @@
 | Pixabay | 필요(무료) | 스톡 사진 | https://pixabay.com/api/docs/ | `PIXABAY_API_KEY` | 100회/분 | 불필요 |
 | Openverse | 불필요 | CC 이미지 메타검색 | https://api.openverse.org | — | 익명 소량(하루 100 요청 안팎) | **필요**(자동 기록) |
 | Wikimedia Commons | 불필요 | 실존 동물·역사·장소 사진 | — | — | 예의상 요청 간격 유지 | **필요**(자동 기록) |
+| **Open Images** | 불필요 | 플리커 CC BY 2.0 사진 은행(사람이 검수한 라벨 7천여 종) | — | — | 첫 사용 때 색인 생성(CSV 수십 MB 다운로드 후 삭제, 색인 약 40MB). `AUTO_SHORTS_OPENIMAGES=0` 으로 끔 | **필요**(자동 기록) |
 | picsum | 불필요 | 무작위 사진(주제 무관) | — | — | `--image-providers` 로 명시할 때만 | 불필요 |
 | card | — | 로컬 그라디언트 카드 | — | — | 항상 성공 | 불필요 |
 
@@ -39,8 +40,24 @@
   재시도하고, 해상도 640px 미만·화면비 2.4:1 초과 이미지는 걸러 낸다. 한 영상 안에서 같은 사진은 다시 쓰지 않는다.
 - `style.image_style` 은 Pollinations 프롬프트에만 붙고, 스톡 검색에는 `keywords` 만 쓴다.
 - 연결이 막힌 제공자는 한 번 실패하면 그 실행 동안 건너뛴다(회사망·프록시 환경에서 빠르게 폴백).
-- 코드를 고친 뒤에는 `python scripts/selftest_providers.py` 로 여섯 제공자의 파싱·다운로드·정규화 경로를
+- 코드를 고친 뒤에는 `python scripts/selftest_providers.py` 로 제공자들의 파싱·다운로드·정규화 경로를
   네트워크 없이 확인할 수 있다.
+
+### Open Images 사진 은행 (`scripts/openimages.py`)
+
+구글 Open Images 는 플리커의 **CC BY 2.0 사진**을 사람이 검수한 라벨과 함께 공개한다. 스톡 키가 없거나
+Openverse·위키미디어가 막힌 환경에서도 실사 사진을 쓸 수 있는 마지막 보루다.
+
+```bash
+python scripts/openimages.py --build                     # 색인 만들기(validation, 약 40MB)
+python scripts/openimages.py --build --sets validation,test   # 사진 2배(색인 약 90MB)
+python scripts/openimages.py --find "bee flower"         # 어떤 분류·사진이 잡히는지 확인
+```
+
+- 사진 선택은 **분류(사람이 검수한 라벨) + 사진 제목**을 함께 본다. 분류만 보면 "medicine" 같은 넓은 분류에서
+  주제와 어긋난 사진이 걸리고, 제목만 보면 "Honey Garlic Sauce"(치킨) 같은 게 걸리기 때문이다.
+- 분류에 없는 개념(예: '결정화된 꿀')은 적중률이 떨어진다. 그런 씬은 Pexels 키나 AI 생성이 낫다.
+- **CC BY 2.0 은 저작자 표시가 필수**다. `meta.md` 의 출처 표기를 업로드 설명란에 그대로 넣는다.
 
 ## 배경음악 (기본 순서: jamendo → freesound → openverse → synth)
 

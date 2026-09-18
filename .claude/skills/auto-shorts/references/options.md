@@ -79,7 +79,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `--stage tts|plan|images|audio|subs|video|mix|extras` | 그 단계까지만 |
 | `--offline` | 무음 나레이션 + 카드 + 합성 BGM (구성 미리보기) |
 | `--tts-engine auto|edge|gtts|local|silent` | TTS 엔진. auto = edge → gtts → local 순. local 은 sherpa-onnx 오프라인(첫 실행 때 모델 다운로드) |
-| `--image-providers a,b,c` / `--bgm-providers a,b` | 제공자 순서 덮어쓰기 |
+| `--image-providers a,b,c` / `--bgm-providers a,b` | 제공자 순서 덮어쓰기. 이미지: `pexels` `unsplash` `pixabay` `openverse` `wikimedia` `openimages` `pollinations` `picsum` `card` |
 | `--no-bgm` / `--no-sfx` | 트랙 제외 |
 | `--jobs N` | 이미지 병렬 수집 수 (기본 3, 429 나면 1) |
 

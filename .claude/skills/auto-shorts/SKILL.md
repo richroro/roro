@@ -23,7 +23,9 @@ project.json ─▶ TTS(edge-tts, 단어 타이밍) ─▶ 씬 이미지(무료 
 Edge 가 되는 환경에서는 항상 Edge 가 쓰인다.
 
 이미지 순서(기본 `style.image_source: "photo"`): **무료 스톡 사진**(Pexels → Unsplash → Pixabay → Openverse →
-Wikimedia) → 사진이 없는 씬만 **AI 생성**(Pollinations) → 최후에 로컬 카드. 사진이 있는 주제는 사진이 더 그럴듯하고
+Wikimedia → Open Images) → 사진이 없는 씬만 **AI 생성**(Pollinations) → 최후에 로컬 카드.
+**Open Images** 는 키가 하나도 없어도 쓰는 CC BY 2.0 사진 은행이다(첫 사용 때 색인 생성, 저작자 표시 필수 —
+`meta.md` 에 자동으로 남는다). 사진이 있는 주제는 사진이 더 그럴듯하고
 AI 라벨·비진정성 정책에서도 안전하다. 씬의 `keywords`(흔한 영어 명사 2~3개)가 검색어다.
 
 ## 0단계. 환경 준비 (프로젝트당 한 번)

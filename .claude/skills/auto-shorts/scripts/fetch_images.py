@@ -10,6 +10,7 @@
     unsplash      무료 스톡 사진. UNSPLASH_ACCESS_KEY.
     pixabay       무료 스톡 사진/일러스트. PIXABAY_API_KEY.
     openverse     CC 이미지 메타검색(Flickr·위키미디어 등). 키 불필요. 출처 표기 필요.
+    openimages    구글 Open Images 의 플리커 CC BY 2.0 사진 은행. 키 불필요(첫 사용 때 색인 생성). 출처 표기 필요.
     wikimedia     위키미디어 공용. 키 불필요. 실존 동물·장소·역사·유물에 강함. 출처 표기 필요.
     pollinations  AI 이미지 생성. 키 불필요. 사진으로 찍을 수 없는 개념·상상 장면용.
     picsum        무작위 사진(주제 무관). 기본 순서에는 없다.
@@ -45,9 +46,9 @@ STAGE = "image"
 
 # 사진 우선(기본) / AI 우선 / 사진만
 PROVIDER_SETS = {
-    "photo": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "pollinations", "card"],
-    "ai": ["pollinations", "pexels", "unsplash", "pixabay", "openverse", "wikimedia", "card"],
-    "photo_only": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "card"],
+    "photo": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "pollinations", "card"],
+    "ai": ["pollinations", "pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "card"],
+    "photo_only": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "card"],
 }
 DEFAULT_PROVIDERS = PROVIDER_SETS["photo"]
 
@@ -271,6 +272,27 @@ def p_pollinations(prompt: str, keywords: str, seed: int, style: str, **_) -> tu
                   "license": "generated", "credit": "AI generated (pollinations.ai)"}
 
 
+def p_openimages(keywords: str, used: set, **_) -> tuple[bytes, dict]:
+    """Open Images(플리커 CC BY 2.0 사진 은행). 키 불필요. 첫 사용 때 색인을 만든다.
+
+    AUTO_SHORTS_OPENIMAGES=0 이면 끈다(색인 다운로드를 원치 않을 때).
+    """
+    if os.environ.get("AUTO_SHORTS_OPENIMAGES", "1") == "0":
+        raise LookupError("AUTO_SHORTS_OPENIMAGES=0 으로 꺼져 있음")
+    import openimages
+
+    if not openimages.index_path().exists():
+        log(STAGE, "Open Images 색인이 없어 만듭니다 (CSV 수십 MB, 최초 1회. 끄려면 AUTO_SHORTS_OPENIMAGES=0)")
+    for q in query_variants(keywords):
+        try:
+            url, info = openimages.pick(q, used=used)
+        except LookupError:
+            continue
+        data = http_get(url, timeout=90, stage=STAGE)
+        return data, info
+    raise LookupError(f"open images 에 '{keywords}' 사진 없음")
+
+
 def p_picsum(seed: int, **_) -> tuple[bytes, dict]:
     url = f'{EP["picsum"]}/{seed}/{WIDTH}/{HEIGHT}'
     return http_get(url, timeout=60, stage=STAGE), {
@@ -278,8 +300,9 @@ def p_picsum(seed: int, **_) -> tuple[bytes, dict]:
 
 
 PROVIDERS = {"pexels": p_pexels, "unsplash": p_unsplash, "pixabay": p_pixabay, "openverse": p_openverse,
-             "wikimedia": p_wikimedia, "pollinations": p_pollinations, "picsum": p_picsum}
-PHOTO_PROVIDERS = {"pexels", "unsplash", "pixabay", "openverse", "wikimedia", "picsum"}
+             "wikimedia": p_wikimedia, "openimages": p_openimages, "pollinations": p_pollinations,
+             "picsum": p_picsum}
+PHOTO_PROVIDERS = {"pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "picsum"}
 
 
 # ---------------------------------------------------------------- 로컬 카드 (최후 수단)
