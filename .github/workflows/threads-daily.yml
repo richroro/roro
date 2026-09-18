@@ -4,6 +4,10 @@ name: Threads Daily Publish
 # Slack DM으로 알린다. PC 전원과 무관하게 GitHub 클라우드에서 실행된다.
 # 게시 후 queue/ 이동을 다시 커밋해 중복 게시를 막는다.
 #
+# Secrets(THREADS_TOKEN_JSON / THREADS_CONFIG_JSON)가 아직 없으면 실패 대신
+# 경고만 남기고 건너뛴다. 설정 전에 main 에 등록해 둬도 매일 실패 메일이
+# 오지 않도록 하기 위함이다.
+#
 # 스레드 장기 토큰은 60일마다 갱신되고 갱신하면 새 토큰이 나온다. 러너에서
 # 갱신된 토큰은 GH_PAT(secrets 쓰기 권한 PAT)이 있으면 THREADS_TOKEN_JSON
 # secret 에 다시 저장하고, 없으면 Slack 으로 재등록을 요청한다.
@@ -24,7 +28,21 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Check setup
+        id: setup
+        env:
+          THREADS_TOKEN_JSON: ${{ secrets.THREADS_TOKEN_JSON }}
+          THREADS_CONFIG_JSON: ${{ secrets.THREADS_CONFIG_JSON }}
+        run: |
+          if [ -z "$THREADS_TOKEN_JSON" ] || [ -z "$THREADS_CONFIG_JSON" ]; then
+            echo "::warning::THREADS_TOKEN_JSON / THREADS_CONFIG_JSON secret 이 아직 없어 이번 실행은 건너뜁니다. .claude/skills/threads-auto-post/references/threads_setup.md 6단계를 마치면 자동으로 게시가 시작됩니다."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.setup.outputs.ready == 'true'
         uses: actions/checkout@v4
         with:
           # 스킬과 큐는 이 브랜치에만 있다. 워크플로는 main 에서
@@ -32,14 +50,17 @@ jobs:
           ref: add-blogger-auto-post-skill
 
       - name: Set up Python
+        if: steps.setup.outputs.ready == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install dependencies
+        if: steps.setup.outputs.ready == 'true'
         run: pip install --quiet -r .claude/skills/threads-auto-post/requirements.txt
 
       - name: Restore credentials from secrets
+        if: steps.setup.outputs.ready == 'true'
         env:
           THREADS_TOKEN_JSON: ${{ secrets.THREADS_TOKEN_JSON }}
           THREADS_CONFIG_JSON: ${{ secrets.THREADS_CONFIG_JSON }}
@@ -57,12 +78,14 @@ jobs:
           sha256sum "$SKILL/secrets/token.json" | cut -d' ' -f1 > "$RUNNER_TEMP/token.before"
 
       - name: Publish next queued post
+        if: steps.setup.outputs.ready == 'true'
         run: python .claude/skills/threads-auto-post/scripts/daily_post.py
 
       - name: Commit queue changes
         # 게시가 성공했으면 반드시 커밋돼야 한다. 그렇지 않으면 다음 실행에서
         # 같은 글이 또 올라간다. 다른 워크플로가 같은 브랜치에 푸시할 수 있어
         # 푸시 전에 rebase 로 최신 상태를 맞춘다.
+        if: steps.setup.outputs.ready == 'true'
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -79,7 +102,7 @@ jobs:
       - name: Persist refreshed token
         # 게시 실패 여부와 무관하게 실행한다. 갱신은 게시 직전에 일어나므로
         # 게시가 실패했어도 새 토큰은 보존해야 한다.
-        if: always()
+        if: always() && steps.setup.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |

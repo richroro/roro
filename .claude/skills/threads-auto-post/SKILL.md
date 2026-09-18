@@ -95,6 +95,8 @@ python .claude/skills/threads-auto-post/scripts/daily_post.py --dry-run
   등록 방법은 `references/threads_setup.md` 6~7단계.
 - 스케줄은 **main 브랜치의 워크플로 파일**로 돈다. 블로거와 같은 방식으로 이 파일이
   main 에도 등록돼 있어야 한다.
+- Secrets 를 아직 등록하지 않았으면 워크플로는 실패하지 않고 경고만 남기고 건너뛴다.
+  등록하는 순간부터 다음 스케줄에 자동으로 게시가 시작된다.
 - 수동 실행/테스트: GitHub → Actions → "Threads Daily Publish" → Run workflow.
 
 ### 스케줄 B — Windows 예약작업 (PC가 켜져 있을 때만)
