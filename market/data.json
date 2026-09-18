@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T03:17:40.288709+09:00",
+  "updatedAt": "2026-09-19T06:34:56.485736+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51778.04,
-      "change": 0.04,
-      "changePercent": 0.0,
+      "price": 51682.64,
+      "change": -95.4,
+      "changePercent": -0.18,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26413.61,
-      "change": -4.69,
-      "changePercent": -0.02,
+      "price": 26522.54,
+      "change": 104.24,
+      "changePercent": 0.39,
       "currency": "USD"
     }
   ],
@@ -38,8 +38,8 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1385.82,
-      "change": 5.87,
+      "price": 1385.95,
+      "change": 6.0,
       "changePercent": 0.43,
       "currency": "KRW"
     }
@@ -88,25 +88,25 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 335.36,
-      "change": -1.64,
-      "changePercent": -0.49,
+      "price": 336.13,
+      "change": -0.87,
+      "changePercent": -0.26,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 362.92,
-      "change": -3.28,
-      "changePercent": -0.9,
+      "price": 364.27,
+      "change": -1.93,
+      "changePercent": -0.53,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 219.54,
-      "change": 0.2,
-      "changePercent": 0.09,
+      "price": 222.27,
+      "change": 2.93,
+      "changePercent": 1.34,
       "currency": "USD"
     }
   ],
