@@ -8,7 +8,7 @@
 
 | 항목 | 상태 | 비고 |
 | --- | --- | --- |
-| 릴리스 AAB | ✅ 준비됨 | [최신 릴리스](https://github.com/richroro/roro/releases)의 `VillainRush-*.aab` |
+| 릴리스 AAB | ✅ 준비됨 | [최신 릴리스](https://github.com/richroro/roro/releases)의 `VillainRush-*.aab` (게임별 태그 `villainrush-v*`) |
 | 앱 아이콘 512×512 | ✅ 준비됨 | `store/goblinhunters-icon-512.png` |
 | 그래픽 이미지 1024×500 | ✅ 준비됨 | `store/goblinhunters-feature-graphic-1024x500.png` |
 | 휴대전화 스크린샷 | ✅ 준비됨 | `store/screenshots/play-*.jpg` (1080×1920, 5장) |
@@ -129,10 +129,13 @@ base64 -w0 villainrush-upload.jks > villainrush-upload.jks.b64   # macOS: base64
 1. Play Console **설정 → API 액세스** 에서 Google Cloud 프로젝트 연결 → 서비스 계정 생성 → JSON 키 다운로드.
 2. **사용자 및 권한** 에서 그 서비스 계정에 이 앱의 출시 권한 부여.
 3. JSON 내용을 저장소 시크릿 `PLAY_SERVICE_ACCOUNT_JSON` 으로 등록.
-4. **Actions → Android Release → Run workflow** 에서 `play_app=villainrush`, `play_track=internal` 실행 → 자동 업로드.
+4. **Actions → Android Release → Run workflow** 에서 `app=villainrush`, `play_track=internal` 실행 → 자동 업로드.
 
 이후에는 태그만 올리면 빌드·서명·릴리스까지 자동으로 진행됩니다.
 
 ```bash
-git tag android-v1.6.0 && git push origin android-v1.6.0
+git tag villainrush-v1.9.0 && git push origin villainrush-v1.9.0
 ```
+
+두 게임은 Play Console 에서 별개의 앱이라 등록정보·심사·versionCode 가 각각입니다.
+Sky Dodge 를 올릴 때는 같은 절차를 그 앱으로 한 번 더 진행하고, 태그는 `skydodge-v*` 를 씁니다.
