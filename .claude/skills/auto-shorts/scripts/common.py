@@ -175,6 +175,19 @@ def has_audio_stream(path: str | Path) -> bool:
 
 
 # ---------------------------------------------------------------- HTTP
+class Unreachable(RuntimeError):
+    """호스트에 아예 닿지 못함(오프라인·프록시 차단·DNS). 같은 실행에서 재시도해도 소용없다."""
+
+
+_CONN_ERRORS = ("ProxyError", "ConnectionError", "ConnectTimeout", "SSLError", "URLError",
+                "NewConnectionError", "MaxRetryError", "gaierror", "timeout", "TimeoutError")
+
+
+def _is_conn_error(e: Exception) -> bool:
+    name = e.__class__.__name__
+    return name in _CONN_ERRORS or "Tunnel connection failed" in str(e) or "Max retries exceeded" in str(e)
+
+
 def http_get(url: str, headers: Optional[dict] = None, timeout: int = 60,
              retries: int = 3, backoff: float = 2.0, stage: str = "http") -> bytes:
     """GET 요청. 429/5xx/네트워크 오류는 지수 백오프로 재시도. 4xx(429 제외)는 즉시 실패.
@@ -209,6 +222,9 @@ def http_get(url: str, headers: Optional[dict] = None, timeout: int = 60,
                 raise PermissionError(f"HTTP {e.code}") from e
         except Exception as e:  # noqa: BLE001
             last_err = e
+        if last_err is not None and _is_conn_error(last_err):
+            raise Unreachable(f"{urllib.parse.urlparse(url).netloc} 에 연결할 수 없습니다 "
+                              f"({last_err.__class__.__name__})") from last_err
         if attempt < retries - 1:
             wait = backoff * (2 ** attempt)
             warn(stage, f"{url[:80]}… 실패({last_err}), {wait:.0f}s 후 재시도")

@@ -24,7 +24,8 @@ from pathlib import Path
 from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import download, env_key, http_json, log, media_duration, qs, run_ffmpeg, warn, write_json  # noqa: E402
+from common import (Unreachable, download, env_key, http_json, log, media_duration, qs,  # noqa: E402
+                    run_ffmpeg, warn, write_json)
 
 STAGE = "audio"
 DEFAULT_BGM_PROVIDERS = ["jamendo", "freesound", "openverse", "synth"]
@@ -239,6 +240,8 @@ def fetch_bgm(*, query: str = "", mood: str = "playful", duration: float = 60.0,
             return info
         except LookupError as e:
             log(STAGE, f"{name} 건너뜀: {e}")
+        except Unreachable as e:
+            warn(STAGE, f"{name} 연결 불가: {e}")
         except Exception as e:  # noqa: BLE001
             warn(STAGE, f"{name} 실패: {e.__class__.__name__}: {str(e)[:160]}")
 

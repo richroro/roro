@@ -84,7 +84,9 @@
   - 밝은 잡학: `vibrant 3d render, soft studio lighting, pixar style, vertical, no text`
   - 역사: `oil painting style, warm candlelight, museum quality, vertical, no text`
   - 심리/개념: `minimal flat vector illustration, bold colors, simple shapes, vertical, no text`
-- `keywords` 는 스톡 사진 검색용이므로 **구체 명사 2~4개**: `octopus underwater`, `honey jar macro`.
+- `keywords` 는 무료 스톡 사진 검색어다(기본이 사진 우선). **사진이 실제로 존재하는 흔한 영어 명사 2~3개**로 적는다:
+  `octopus underwater`, `honey jar`, `bee flower`, `ancient pottery`. 개념어(`three hearts`, `enzyme`)는 사진이 없으니
+  은유가 되는 사물로 바꾼다. 여기서 실패한 씬만 `image_prompt` 로 AI 생성된다.
 - 하지 말 것: 실존 인물 이름·얼굴, 브랜드/로고, 저작권 캐릭터, 텍스트 생성 요청, 폭력·선정성.
 
 ## 6. 헤드라인·효과음·BGM 배치

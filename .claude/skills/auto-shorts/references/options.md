@@ -35,7 +35,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 
 | 키 | 설명 | 기본값 |
 |---|---|---|
-| `image_style` | 모든 AI 이미지 프롬프트 뒤에 붙는 톤 문구 | `""` |
+| `image_source` | `photo`(무료 스톡 사진 우선) / `ai`(AI 생성 우선) / `photo_only`(사진만, AI 안 씀) | `photo` |
+| `image_style` | AI 생성 프롬프트 뒤에 붙는 톤 문구(사진 검색에는 영향 없음) | `""` |
 | `transition` | `fade` `mix`(fade/smoothleft/zoomin/smoothup 순환) `smoothleft` `zoomin` `wipeleft` … `none` | `fade` |
 | `transition_duration` | 전환 길이(초) | `0.3` |
 | `ken_burns` | 이미지 줌/팬 모션 | `true` |
@@ -61,8 +62,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 |---|---|
 | `narration` | (필수) 읽을 문장 1~2개, 45자 이내 문장 |
 | `headline` | 씬 상단 큰 글씨, 12자 이내 |
-| `image_prompt` | AI 생성용 영어 프롬프트 |
-| `keywords` | 스톡 검색용 영어 2~4단어 (없으면 프롬프트에서 추출) |
+| `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
+| `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
 | `sfx` | `riser` `boom` `pop` `ding` `whoosh` (씬 시작에 재생) |
 | `emoji` | 이미지 확보 실패 시 카드에 크게 그릴 이모지(1~2개). 컬러 이모지 폰트(Noto Color Emoji / Segoe UI Emoji / Apple Color Emoji)가 있는 환경에서 렌더 |

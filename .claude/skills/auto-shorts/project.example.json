@@ -12,7 +12,8 @@
     "transition": "mix",
     "transition_duration": 0.3,
     "auto_transition_sfx": false,
-    "vignette": true
+    "vignette": true,
+    "image_source": "photo"
   },
   "bgm": {
     "query": "playful curious ukulele",
@@ -31,7 +32,7 @@
     },
     {
       "narration": "두 개는 아가미로 피를 보내고, 나머지 하나가 온몸으로 피를 돌립니다.",
-      "keywords": "octopus gills anatomy",
+      "keywords": "octopus tentacles",
       "image_prompt": "scientific illustration of an octopus with three glowing hearts visible, dark background",
       "emoji": "🫀"
     },
@@ -45,7 +46,7 @@
     },
     {
       "narration": "그래서 문어는 헤엄치는 걸 싫어하고, 바닥을 기어다니는 걸 더 좋아하죠.",
-      "keywords": "octopus crawling seabed",
+      "keywords": "octopus seabed",
       "image_prompt": "an octopus crawling on a rocky seabed, tentacles spread wide, natural light",
       "emoji": "🪨"
     },
@@ -58,7 +59,7 @@
     },
     {
       "narration": "이 정도면 외계 생물이라 불려도 할 말 없겠죠?",
-      "keywords": "octopus eye closeup",
+      "keywords": "octopus eye",
       "image_prompt": "an octopus looking straight at the camera with a curious expression, alien-like, cinematic",
       "sfx": "pop",
       "emoji": "👽"

@@ -1,6 +1,6 @@
 ---
 name: auto-shorts
-description: 주제 하나로 유튜브 쇼츠·릴스·틱톡용 9:16 세로 영상(mp4)을 끝까지 자동 제작한다 — 재미있는 주제·훅 있는 대본 → 무료 TTS 나레이션(edge-tts) → 무료 웹 API 이미지(Pollinations AI 생성, Pexels/Openverse/위키미디어) → 무료 BGM·효과음 → 읽는 단어가 강조되는 자막 → ffmpeg 렌더 → final.mp4. "쇼츠 만들어줘", "숏폼/릴스/틱톡 영상 자동으로", "TTS 나레이션 영상", "AI로 1분 영상", "재미있는 사실 영상 뽑아줘", "음성 읽어주는 세로 영상"처럼 짧은 세로 영상을 실제 파일로 만들어 달라는 요청이면 사용자가 스킬이나 도구 이름을 말하지 않아도 반드시 이 스킬을 쓴다. (웹캠 촬영은 make-shorts, Seedance/Higgsfield용 프롬프트 패키지는 ai-video-shorts 가 담당.)
+description: 주제 하나로 유튜브 쇼츠·릴스·틱톡용 9:16 세로 영상(mp4)을 끝까지 자동 제작한다 — 재미있는 주제·훅 있는 대본 → 무료 TTS 나레이션(edge-tts) → 무료 웹 API 이미지(Pexels·Unsplash·Pixabay·Openverse·위키미디어 스톡 사진 우선, 없으면 Pollinations AI 생성) → 무료 BGM·효과음 → 읽는 단어가 강조되는 자막 → ffmpeg 렌더 → final.mp4. "쇼츠 만들어줘", "숏폼/릴스/틱톡 영상 자동으로", "TTS 나레이션 영상", "AI로 1분 영상", "재미있는 사실 영상 뽑아줘", "음성 읽어주는 세로 영상"처럼 짧은 세로 영상을 실제 파일로 만들어 달라는 요청이면 사용자가 스킬이나 도구 이름을 말하지 않아도 반드시 이 스킬을 쓴다. (웹캠 촬영은 make-shorts, Seedance/Higgsfield용 프롬프트 패키지는 ai-video-shorts 가 담당.)
 ---
 
 # auto-shorts — 주제 하나로 완성 쇼츠 mp4 만들기
@@ -8,7 +8,7 @@ description: 주제 하나로 유튜브 쇼츠·릴스·틱톡용 9:16 세로 �
 Claude 가 **주제를 고르고 대본을 쓴 뒤**, 번들 스크립트가 나머지를 전부 자동으로 처리한다:
 
 ```
-project.json ─▶ TTS(edge-tts, 단어 타이밍) ─▶ 씬 이미지(무료 API) ─▶ BGM/SFX ─▶ 자막(ASS)
+project.json ─▶ TTS(edge-tts, 단어 타이밍) ─▶ 씬 이미지(무료 스톡 사진 → AI 생성) ─▶ BGM/SFX ─▶ 자막(ASS)
              ─▶ 켄 번즈 클립 → 크로스페이드 → 자막 번인 ─▶ 덕킹 믹스 + 라우드니스 ─▶ final.mp4
 ```
 
@@ -16,10 +16,15 @@ project.json ─▶ TTS(edge-tts, 단어 타이밍) ─▶ 씬 이미지(무료 
 `meta.md`(제목·설명·해시태그·출처 표기·Threads 게시글 초안). 모든 외부 자원은 **무료·키 불필요**가 기본이고,
 키를 넣으면 품질 좋은 스톡/음악 제공자가 앞순위로 추가된다. 인터넷이 막혀도 **음성은 오프라인 엔진**(sherpa-onnx
 한국어 VITS, 첫 실행 때 모델 자동 다운로드), **BGM 은 로컬 시퀀서**(드럼·베이스·코드·멜로디, 무드 5종),
-**이미지는 이모지 카드**로 완성되므로 절대 실패하지 않는다.
+**이미지는 로컬 카드**(선택한 이모지 포함)로 완성되므로 절대 실패하지 않는다 — 다만 카드는 어디까지나 최후 수단이고,
+정상 환경에서는 씬마다 실제 사진이 들어간다.
 
 나레이션 엔진 순서(`--tts-engine auto`): edge-tts(가장 자연스러움, 단어 타이밍 제공) → gTTS → local(오프라인).
 Edge 가 되는 환경에서는 항상 Edge 가 쓰인다.
+
+이미지 순서(기본 `style.image_source: "photo"`): **무료 스톡 사진**(Pexels → Unsplash → Pixabay → Openverse →
+Wikimedia) → 사진이 없는 씬만 **AI 생성**(Pollinations) → 최후에 로컬 카드. 사진이 있는 주제는 사진이 더 그럴듯하고
+AI 라벨·비진정성 정책에서도 안전하다. 씬의 `keywords`(흔한 영어 명사 2~3개)가 검색어다.
 
 ## 0단계. 환경 준비 (프로젝트당 한 번)
 
@@ -30,7 +35,9 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 
 - ffmpeg 는 시스템에 없어도 된다 — `imageio-ffmpeg` 가 정적 바이너리를 제공한다(자동 인식).
 - 결과의 `✗` 는 고쳐야 하는 것, `!` 는 막힌 네트워크 호스트(폴백으로 진행 가능)다.
-- API 키는 전부 선택. 있으면 `.claude/skills/auto-shorts/.env`(`.env.example` 참고)에 넣는다.
+- API 키는 전부 선택이지만 **Pexels 키 하나는 꼭 권한다**(무료, 2분, https://www.pexels.com/api/).
+  이 키가 있어야 씬마다 주제에 맞는 실사 사진이 들어간다. 키가 없으면 Openverse·Wikimedia 사진만 쓰게 되어
+  적중률이 떨어진다. 키는 `.claude/skills/auto-shorts/.env`(`.env.example` 참고)에 넣는다.
   어떤 키가 무엇을 좋게 하는지는 `references/free-apis.md`.
 - `check_env.py` 가 실패한 항목이 있어도 **폴백으로 진행 가능**하면 제작을 멈추지 말고 결과에 알려 준다.
 
@@ -68,7 +75,8 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   "thumbnail_text": "심장이 3개?!",          // (선택) 썸네일용 더 짧은 문구
   "lang": "ko", "voice": "female", "rate": "+12%",  // voice: female|male|male2|<edge 보이스 ID>. 편마다 보이스·훅 유형을 돌려 쓴다
   "style": {
-    "image_style": "stylized 3d illustration, bold colors, single clear subject, vertical 9:16, no text",  // 채널 고정 아트스타일. 실존 인물·장소의 포토리얼은 피한다(AI 자동 라벨·삭제 지문)
+    "image_source": "photo",                // photo(무료 스톡 사진 우선, 기본) | ai(AI 생성 우선) | photo_only(사진만)
+    "image_style": "stylized 3d illustration, bold colors, single clear subject, vertical 9:16, no text",  // AI 생성에만 적용되는 아트스타일. 실존 인물·장소의 포토리얼은 피한다
     "transition": "mix",                    // fade | mix | smoothleft | zoomin | none
     "auto_transition_sfx": false,           // true 면 씬 전환마다 whoosh (과하면 촌스러움)
     "vignette": true
@@ -79,8 +87,8 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
     { "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",   // 씬당 1~2문장
       "headline": "심장이 3개?!",             // (선택) 씬 상단 큰 글씨, 12자 이내
       "emoji": "🐙",                          // (선택) 이미지 확보 실패 시 카드에 크게 그릴 이모지 1개 — 항상 넣어 두면 폴백도 보기 좋다
-      "keywords": "octopus underwater",       // 스톡 검색용 영어 2~4단어
-      "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",  // AI 생성용
+      "keywords": "octopus underwater",       // ★ 사진 검색어. 흔한 영어 명사 2~3개 (사진이 존재하는 것으로!)
+      "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",  // 사진이 없을 때 쓸 AI 생성 프롬프트
       "sfx": "riser" }                        // (선택) riser|boom|pop|ding|whoosh
   ],
   "meta": { "description": "업로드 설명", "hashtags": ["문어", "신기한사실", "shorts"] }
@@ -101,8 +109,12 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 - 헤드라인은 훅 씬(필수, 첫 프레임부터) + 핵심 반전 씬 1~3개에만. 효과음은 2~4개만(riser=훅, boom=반전, pop=가벼운 강조, ding=정답).
 - 편마다 다르게: 훅 유형·이미지 스타일·보이스가 직전 편들과 똑같으면 바꾼다(`report.py` 의 반복 경고). 유튜브
   '비진정성 콘텐츠' 정책은 같은 템플릿의 TTS 슬라이드쇼를 명시적 위반 예시로 든다(`playbook.md` §6).
-- 이미지 프롬프트는 영어, `피사체 + 행동/구도 + 배경 + 조명`, 씬마다 구도를 바꾼다(클로즈업↔와이드).
-  실존 인물 얼굴·브랜드 로고·저작권 캐릭터·글자 포함 요청은 하지 않는다.
+- **`keywords` 가 결과를 좌우한다**: 스톡 사이트에 실제로 사진이 있는 흔한 영어 명사 2~3개로 적는다.
+  좋음 `honey jar`, `bee flower`, `deep ocean`, `ancient pottery` / 나쁨 `octopus three hearts`(그런 사진은 없다),
+  `honey enzyme hydrogen peroxide`. 추상 개념은 은유가 되는 사물로 바꿔 적는다(확률→주사위, 시간→모래시계).
+  검색어가 길면 파이프라인이 단어를 하나씩 줄여가며 재시도하므로 앞쪽 단어를 가장 중요한 것으로 둔다.
+- `image_prompt` 는 사진을 못 찾은 씬의 AI 생성용이다. 영어로 `피사체 + 행동/구도 + 배경 + 조명`,
+  씬마다 구도를 바꾼다(클로즈업↔와이드). 실존 인물 얼굴·브랜드 로고·저작권 캐릭터·글자 요청은 하지 않는다.
 - 자막에 들어가는 모든 문구(narration/headline/cta)에 이모지 없음 — 자막 폰트에 없어 깨진다.
 
 ## 3단계. 렌더
@@ -111,15 +123,16 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 python .claude/skills/auto-shorts/scripts/make_shorts.py shorts_output/<slug>/project.json --out shorts_output
 ```
 
-- 보통 2~5분 걸린다(AI 이미지 생성이 대부분, 씬당 10~60초). 단계별 산출물은 `shorts_output/<slug>/work/` 에 캐시되어
+- 보통 1~3분 걸린다(사진 검색·다운로드는 씬당 1~3초, AI 생성이 섞이면 씬당 10~60초). 단계별 산출물은 `shorts_output/<slug>/work/` 에 캐시되어
   **다시 실행하면 바뀐 것만 다시 만든다** — 대본 한 줄만 고치면 그 씬의 TTS·클립만 재생성된다.
 - 유용한 옵션: `--offline`(네트워크 없이 무음·카드로 구성 미리보기), `--force`(전부 재생성),
-  `--image-providers pollinations,pexels,card`, `--bgm-providers jamendo,synth`, `--no-bgm`, `--no-sfx`,
+  `--image-providers pexels,openverse,card`(순서 직접 지정), `--bgm-providers jamendo,synth`, `--no-bgm`, `--no-sfx`,
   `--tts-engine local`(오프라인 음성) / `silent`, `--stage images`(그 단계까지만).
 - 로그의 `[tts] 완료: local/…` 이면 Edge 가 막혀 오프라인 음성이 쓰인 것 — 결과에 알려 주고, 가능하면 Edge 가
   되는 환경에서 `--tts-engine edge --force` 로 다시 뽑기를 권한다(품질 차이가 크다).
-- 로그의 `[images] 완료: 1:pollinations, 2:card …` 줄로 어떤 제공자가 쓰였는지 본다. `card` 가
-  섞여 있으면 그 씬은 이미지 확보에 실패한 것 — 4단계에서 처리.
+- 로그의 `[images] 완료: 1:pexels, 2:openverse …` 줄로 씬마다 어떤 제공자가 쓰였는지 본다. `card` 가
+  섞여 있으면 그 씬은 이미지 확보에 실패한 것 — 4단계에서 키워드를 바꿔 다시 돌린다.
+  `연결 불가` 경고가 뜨면 그 호스트가 막힌 환경이다(회사망·프록시).
 
 ## 4단계. 검수 (반드시 눈으로)
 
@@ -129,8 +142,9 @@ python .claude/skills/auto-shorts/scripts/make_shorts.py shorts_output/<slug>/pr
    `ffmpeg -ss 12.5 -i final.mp4 -frames:v 1 frame.jpg`.
 2. `meta.md` 의 길이가 60초 이내인지, 출처 표기가 필요한 자료(CC)가 있는지 본다.
 3. 문제가 있으면 `project.json` 만 고치고 다시 렌더한다:
-   - 이미지가 엉뚱함 → 그 씬의 `image_prompt`/`keywords` 를 더 구체적으로 고치고 재실행(그 씬만 다시 만든다).
-     `card` 로 떨어진 씬도 같은 방법으로. `--force` 는 성공한 AI 이미지까지 전부 다시 만드니 쓰지 않는다.
+   - 이미지가 엉뚱함 → 그 씬의 `keywords` 를 **더 흔하고 짧은 명사**로 바꾸고 재실행(그 씬만 다시 만든다).
+     `card` 로 떨어진 씬도 같은 방법. `--force` 는 성공한 이미지까지 전부 다시 만드니 쓰지 않는다.
+   - 사진 대신 그림풍이 어울리는 주제면 `style.image_source` 를 `ai` 로.
    - 60초 초과 → 문장 줄이기 또는 `rate` 를 `+12%` 로.
    - 자막 줄바꿈이 어색 → 문장을 짧게 끊거나 `style.max_chars`(기본 16) 조정.
    - BGM 이 큼/작음 → `bgm.volume`(0.2~0.4).

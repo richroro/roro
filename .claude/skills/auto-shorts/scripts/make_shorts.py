@@ -40,7 +40,8 @@ import tts  # noqa: E402
 
 STAGES = ["tts", "plan", "images", "audio", "subs", "video", "mix", "extras"]
 DEFAULT_STYLE = {
-    "image_style": "",            # 모든 이미지 프롬프트 뒤에 붙는 스타일 문구
+    "image_source": "photo",      # photo(무료 스톡 사진 우선) | ai(AI 생성 우선) | photo_only(사진만)
+    "image_style": "",            # AI 생성 프롬프트 뒤에 붙는 스타일 문구 (사진 검색에는 쓰이지 않는다)
     "transition": "fade",         # fade | mix | smoothleft | zoomin | ... | none
     "transition_duration": 0.3,
     "ken_burns": True,
@@ -177,7 +178,15 @@ def main() -> None:
         return
 
     # ---------------------------------------------------------------- 3. 이미지
-    providers = [p.strip() for p in args.image_providers.split(",")] if args.image_providers else None
+    if args.image_providers:
+        providers = [p.strip() for p in args.image_providers.split(",") if p.strip()]
+    else:
+        src = str(style.get("image_source", "photo"))
+        providers = fetch_images.PROVIDER_SETS.get(src)
+        if providers is None:
+            warn("images", f"알 수 없는 image_source '{src}' → photo 로 진행")
+            providers = fetch_images.PROVIDER_SETS["photo"]
+    log("images", "제공자 순서: " + " → ".join(providers))
     used_urls: set = set()
     img_files = [work / f"img_{i:02d}.jpg" for i in range(1, n + 1)]
 

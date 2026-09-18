@@ -16,7 +16,11 @@
 `male2`=ko-KR-HyunsuMultilingualNeural(자연스러운 남성). 전체 목록: `python scripts/tts.py --list-voices ko`.
 영어 `en-female`/`en-male`, 일본어 `ja-female`/`ja-male` 도 있다.
 
-## 씬 이미지 (기본 순서: pollinations → pexels → unsplash → pixabay → openverse → wikimedia → card)
+## 씬 이미지 (기본 순서 `image_source: photo` — pexels → unsplash → pixabay → openverse → wikimedia → pollinations → card)
+
+무료 스톡 **사진이 1순위**다. 사진이 있는 주제(동물·음식·풍경·사물·인물 실루엣)는 AI 생성보다 사진이 더 그럴듯하고
+플랫폼 정책(AI 라벨·비진정성)에서도 안전하다. 사진으로 찍을 수 없는 개념(3개의 심장, 상상 장면)만 AI 생성이 맡는다.
+`style.image_source` 를 `ai` 로 두면 순서가 뒤집히고, `photo_only` 면 AI 를 아예 쓰지 않는다.
 
 | 제공자 | 키 | 무엇 | 발급 | 환경변수 | 한도/주의 | 출처 표기 |
 |---|---|---|---|---|---|---|
@@ -29,10 +33,14 @@
 | picsum | 불필요 | 무작위 사진(주제 무관) | — | — | `--image-providers` 로 명시할 때만 | 불필요 |
 | card | — | 로컬 그라디언트 카드 | — | — | 항상 성공 | 불필요 |
 
-- AI 생성(Pollinations)이 1순위인 이유: 스톡은 "문어 심장 세 개"를 못 찾지만 생성은 그린다. 다만
-  글자·손·실존 인물은 잘 못 그리니 프롬프트에서 요구하지 않는다.
-- 스톡 키를 하나라도 넣으면, 생성이 실패한 씬을 실사 사진으로 메꿔 준다. **Pexels 하나만 발급해도 충분**.
+- **Pexels 키 하나면 체감 품질이 가장 크게 오른다**(무료·2분·200회/시간). 없으면 Openverse·Wikimedia 만 남아
+  적중률이 떨어지고 카드 폴백이 늘어난다.
+- 검색어(`keywords`)는 흔한 영어 명사 2~3개. 파이프라인이 `portrait` 우선 → 전체, 긴 검색어 → 짧은 검색어 순으로
+  재시도하고, 해상도 640px 미만·화면비 2.4:1 초과 이미지는 걸러 낸다. 한 영상 안에서 같은 사진은 다시 쓰지 않는다.
 - `style.image_style` 은 Pollinations 프롬프트에만 붙고, 스톡 검색에는 `keywords` 만 쓴다.
+- 연결이 막힌 제공자는 한 번 실패하면 그 실행 동안 건너뛴다(회사망·프록시 환경에서 빠르게 폴백).
+- 코드를 고친 뒤에는 `python scripts/selftest_providers.py` 로 여섯 제공자의 파싱·다운로드·정규화 경로를
+  네트워크 없이 확인할 수 있다.
 
 ## 배경음악 (기본 순서: jamendo → freesound → openverse → synth)
 
