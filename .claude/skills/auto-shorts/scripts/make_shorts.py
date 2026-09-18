@@ -270,13 +270,30 @@ def main() -> None:
     clips = []
     for i, sc in enumerate(tl_scenes):
         clip = work / f"clip_{i + 1:02d}.mp4"
-        sig = sig_of(img_files[i], round(lengths[i], 3), sc["motion"], style["vignette"], style["look"],
-                     style.get("dim", 0.0))
+        # 씬에 video 가 있으면 AI 생성 클립 등 영상 소스를 쓰고, 없으면 이미지에 켄 번즈를 건다
+        src_video = scenes[i].get("video")
+        vpath = Path(src_video) if src_video else None
+        if vpath and not vpath.is_absolute():
+            for cand in (Path(src_video), outdir / src_video, work / src_video):
+                if cand.is_file():
+                    vpath = cand
+                    break
+        if vpath and not vpath.is_file():
+            warn("video", f"씬 {i + 1}: 영상 파일을 찾지 못해 이미지로 진행 — {src_video}")
+            vpath = None
+        sig = sig_of(vpath or img_files[i], round(lengths[i], 3), sc["motion"], style["vignette"],
+                     style["look"], style.get("dim", 0.0), bool(vpath), scenes[i].get("video_speed", 1.0))
         if sigs.stale(clip, sig, args.force):
-            log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s)")
-            render.render_scene_clip(img_files[i], clip, lengths[i], sc["motion"],
-                                     vignette=bool(style["vignette"]), look=style["look"],
-                                     dim=float(style.get("dim", 0.0)))
+            if vpath:
+                log("video", f"클립 {i + 1:02d}/{n} (영상 {vpath.name}, {lengths[i]:.1f}s)")
+                render.render_video_clip(vpath, clip, lengths[i], vignette=bool(style["vignette"]),
+                                         look=style["look"], dim=float(style.get("dim", 0.0)),
+                                         speed=float(scenes[i].get("video_speed", 1.0)))
+            else:
+                log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s)")
+                render.render_scene_clip(img_files[i], clip, lengths[i], sc["motion"],
+                                         vignette=bool(style["vignette"]), look=style["look"],
+                                         dim=float(style.get("dim", 0.0)))
             sigs.mark(clip, sig)
         clips.append(clip)
     video = work / "video.mp4"

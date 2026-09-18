@@ -72,6 +72,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
 | `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
+| `video` | 씬에 쓸 영상 클립 경로(AI 생성 클립 등). 9:16 크롭·길이에 맞춰 반복·무음. 이미지 대신 사용 |
+| `video_speed` | 클립 재생 속도(0.8 느리게 ~ 1.3 빠르게) | `1.0` |
 | `art` | 일러스트 템플릿 지정: `mountain` `sunrise` `night` `ocean` `forest` `rain` `candle` `road` `city` `stairs` `bird` `tree` `door` `window` `stage` `trophy` `abstract` (미지정이면 키워드로 추정) |
 | `art_palette` | 이 씬만 다른 팔레트 |
 | `quote` | 화면 중앙에 크게 띄울 문장. ` / ` 로 줄을 나눈다. 이 값이 있으면 그 씬은 하단 자막 대신 명언 레이아웃 |

@@ -58,6 +58,30 @@ def zoompan_expr(motion: str, n_frames: int) -> str:
     return f"zoompan=z='{z}':x='{x}':y='{y}':d={n_frames}:s={WIDTH}x{HEIGHT}:fps={FPS}"
 
 
+def render_video_clip(video: Path, out: Path, length: float, vignette: bool = True,
+                      look: str = "", dim: float = 0.0, speed: float = 1.0) -> Path:
+    """AI 생성 클립 등 **영상 소스**로 씬을 만든다. 9:16 중앙 크롭, 길이에 맞춰 반복, 무음.
+
+    생성 영상은 보통 4~6초라 씬보다 짧다. -stream_loop 로 이어 붙여 길이를 채우고, 짧은 크로스컷
+    대신 그대로 반복한다(정지 이미지보다 자연스럽다).
+    """
+    chain = [f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase",
+             f"crop={WIDTH}:{HEIGHT}", "setsar=1", f"fps={FPS}"]
+    if speed and abs(speed - 1.0) > 0.01:
+        chain.insert(0, f"setpts={1 / speed:.4f}*PTS")
+    if look == "cinematic":
+        chain.append("eq=contrast=1.05:saturation=1.08")
+    if dim > 0:
+        chain.append(f"eq=brightness=-{min(0.6, dim) * 0.55:.3f}:saturation={max(0.4, 1 - dim * 0.5):.2f}")
+    if vignette:
+        chain.append("vignette=angle=PI/6.5")
+    chain.append("format=yuv420p")
+    run_ffmpeg(["-stream_loop", "-1", "-i", str(video), "-t", f"{length:.3f}",
+                "-vf", ",".join(chain), "-r", str(FPS),
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-an", str(out)], stage=STAGE)
+    return out
+
+
 def render_scene_clip(image: Path, out: Path, length: float, motion: str = "in",
                       vignette: bool = True, look: str = "", dim: float = 0.0) -> Path:
     """1080x1920 정지 이미지 하나로 length 초짜리 무음 클립을 만든다."""

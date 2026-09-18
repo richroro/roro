@@ -221,5 +221,6 @@ python .claude/skills/auto-shorts/scripts/upload_youtube.py --slug <slug> --priv
 - `references/research-protocol.md` — 잘나가는 쇼츠를 다시 조사해 플레이북을 갱신하는 절차
 - `references/free-apis.md` — 제공자별 키 발급·환경변수·한도·라이선스·폴백 순서
 - `references/options.md` — project.json 전체 키(자막 크기·여백·모션·여백 시간 등 고급 옵션)와 CLI 플래그, 길이 계산
+- `references/video-generation.md` — Higgsfield 등 AI 영상 생성 연동, 씬에 영상 클립 직접 넣기
 - `references/troubleshooting.md` — edge-tts 403, Pollinations 429, ffmpeg 필터 없음, Windows 경로 등
 - `scripts/` 의 각 파일 상단 docstring — 단계별 단독 실행법 (`tts.py --list-voices ko` 등)
