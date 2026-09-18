@@ -4,21 +4,19 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- amber rune gate -->
+    <!-- amber gate the crew runs through -->
     <path
         android:fillColor="#F59E0B"
-        android:pathData="M28,40 q26,-10 52,0 v18 a4,4 0 0 1 -4,4 h-44 a4,4 0 0 1 -4,-4 z" />
+        android:pathData="M22,36 q32,-10 64,0 v16 a4,4 0 0 1 -4,4 h-56 a4,4 0 0 1 -4,-4 z" />
+    <path android:fillColor="#8B5A2B" android:pathData="M18,30 h6 v30 h-6 z" />
+    <path android:fillColor="#8B5A2B" android:pathData="M84,30 h6 v30 h-6 z" />
     <path
         android:fillColor="#FDE68A"
-        android:pathData="M50,44 h8 v6 h6 v8 h-6 v6 h-8 v-6 h-6 v-8 h6 z" />
-    <!-- wooden posts -->
-    <path android:fillColor="#8B5A2B" android:pathData="M24,34 h5 v30 h-5 z" />
-    <path android:fillColor="#8B5A2B" android:pathData="M79,34 h5 v30 h-5 z" />
-    <!-- rangers with hats -->
-    <path android:fillColor="#14B8A6" android:pathData="M42,72 l8,16 h-16 z" />
-    <path android:fillColor="#14B8A6" android:pathData="M54,68 l8,16 h-16 z" />
-    <path android:fillColor="#14B8A6" android:pathData="M66,72 l8,16 h-16 z" />
-    <path android:fillColor="#7C4A1E" android:pathData="M35,73 h14 v3 h-14 z M39,68 h6 v5 h-6 z" />
-    <path android:fillColor="#7C4A1E" android:pathData="M47,69 h14 v3 h-14 z M51,64 h6 v5 h-6 z" />
-    <path android:fillColor="#7C4A1E" android:pathData="M59,73 h14 v3 h-14 z M63,68 h6 v5 h-6 z" />
+        android:pathData="M50,38 h8 v5 h5 v8 h-5 v5 h-8 v-5 h-5 v-8 h5 z" />
+    <!-- the villain in a tie, seen head-on -->
+    <path android:fillColor="#F6CBA2" android:pathData="M54,64 m-11,0 a11,11 0 1 1 22,0 a11,11 0 1 1 -22,0" />
+    <path android:fillColor="#2A262A" android:pathData="M44,62 a10,9 0 0 1 20,0 h-4 a6,5 0 0 0 -12,0 z" />
+    <path android:fillColor="#242833" android:pathData="M49,62 h3 v3 h-3 z M56,62 h3 v3 h-3 z" />
+    <path android:fillColor="#F2F5FA" android:pathData="M42,76 h24 v18 h-24 z" />
+    <path android:fillColor="#D62E3E" android:pathData="M51,76 h6 l-2,12 -1,3 -1,-3 z" />
 </vector>

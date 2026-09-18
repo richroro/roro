@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Draw the Crowd Rush soldier sprites with the standard library only (no external assets).
+"""Draw every Villain Rush character with the standard library only (no external assets).
 
-Each sprite is 96x120 RGBA with a dark outline, two-tone shading and two walk frames.
-Outputs into crowdrush/src/main/res/drawable-nodpi/:
-  ranger_back_<frame>.png    the player's rangers (teal coat, wide-brim hat), seen from behind, frame = 0|1
-  goblin_front_<frame>.png   enemy goblins facing the camera, frame = 0|1
-  monster_<kind>_<frame>.png the end-of-road monsters (ogre, troll, golem, demon), 160x200, 2 stomp frames
+All characters share one chibi human build (big head, short limbs) so they read at small sizes,
+and every sprite has two walk frames. Outputs into crowdrush/src/main/res/drawable-nodpi/:
+
+  ally_back_<frame>.png     your colleagues, seen from behind (96x120)
+  mob_<stage>_<frame>.png   the small stuff you shoot on the way (96x120)
+  boss_<stage>_<frame>.png  the villain waiting at the end of the stage (160x200)
+
+Stages: 0 the boss at the office, 1 the classmate who married rich,
+        2 the aunt who never stops asking, 3 the neighbour upstairs.
 
 Run:  python3 android-game/tools/generate_sprites.py [out_dir]
 """
@@ -19,40 +23,21 @@ import zlib
 
 SS = 4
 W, H = 96, 120
+BW, BH = 160, 200
 
-OUTLINE = (0x1B, 0x1F, 0x2E)
-SKIN = (0xF6, 0xC9, 0x9A)
-SKIN_SHADE = (0xD9, 0xA0, 0x6C)
-EYE_WHITE = (0xFF, 0xFF, 0xFF)
-EYE = (0x1F, 0x29, 0x37)
-BROW = (0x4A, 0x2E, 0x1C)
-MOUTH = (0xB9, 0x6B, 0x4F)
-BOOT = (0x2B, 0x26, 0x24)
-BOOT_SOLE = (0x15, 0x12, 0x11)
-GLOVE = (0x3A, 0x33, 0x2E)
-RIFLE = (0x4B, 0x55, 0x63)
-RIFLE_DARK = (0x27, 0x2E, 0x3A)
-RIFLE_LIGHT = (0x7B, 0x86, 0x96)
-STOCK = (0x8B, 0x4A, 0x1C)
-STRAP = (0x3F, 0x3A, 0x35)
-PACK = (0x5E, 0x5A, 0x54)
-PACK_LIGHT = (0x7A, 0x76, 0x6F)
-BUCKLE = (0xD4, 0xAF, 0x37)
-
-RANGER = {"uni": (0x0F, 0x8A, 0x7E), "uni_light": (0x2D, 0xB5, 0xA6), "uni_dark": (0x0B, 0x5E, 0x56), "hat": (0x7C, 0x4A, 0x1E), "hat_light": (0x9C, 0x64, 0x2E), "hat_dark": (0x55, 0x30, 0x12), "band": (0xD9, 0x8E, 0x2B)}
-
-GOB_SKIN = (0x6D, 0xBB, 0x3A)
-GOB_SKIN_LIGHT = (0x93, 0xD6, 0x5C)
-GOB_SKIN_DARK = (0x47, 0x86, 0x25)
-GOB_EYE = (0xF5, 0xD0, 0x2E)
-GOB_PUPIL = (0x1B, 0x1F, 0x2E)
-GOB_TUNIC = (0x8B, 0x5A, 0x2B)
-GOB_TUNIC_LIGHT = (0xA8, 0x74, 0x3E)
-GOB_TUNIC_DARK = (0x5E, 0x3A, 0x18)
-GOB_SHORTS = (0x3E, 0x3A, 0x4A)
-GOB_TOOTH = (0xFF, 0xFF, 0xF0)
-GOB_CLUB = (0x6B, 0x45, 0x22)
-
+OUTLINE = (0x23, 0x25, 0x2E)
+SKIN = (0xF6, 0xCB, 0xA2)
+SKIN_SHADE = (0xDC, 0xA6, 0x76)
+SKIN_DEEP = (0xC2, 0x88, 0x5C)
+WHITE = (0xFF, 0xFF, 0xFF)
+EYE = (0x24, 0x28, 0x33)
+BLUSH = (0xF2, 0x9A, 0x8F)
+HAIR_BLACK = (0x2A, 0x26, 0x2A)
+HAIR_BLACK_L = (0x46, 0x40, 0x48)
+HAIR_BROWN = (0x6B, 0x46, 0x2B)
+HAIR_BROWN_L = (0x8C, 0x60, 0x3C)
+SHOE = (0x2B, 0x28, 0x2E)
+SHOE_SOLE = (0x16, 0x14, 0x18)
 
 class Canvas:
     def __init__(self, w, h):
@@ -165,392 +150,455 @@ def _inside(x, y, pts):
     return inside
 
 
-def draw_ranger(c: Canvas, t: dict, front: bool, frame: int):
-    O = 1.6  # outline width
-    cx = 48
-    step = 4 if frame == 1 else 0  # walk cycle: one leg forward, one back
 
-    # ---- legs & boots (drawn first so the torso overlaps the hips)
+# ---------------------------------------------------------------- shared chibi human
+# Unit space: x is measured from the character's centre, y from the top of the canvas.
+# head centre (0, 30) r 16 · torso 50..86 · legs 84..108 · shoes to 116
+
+
+class Pen:
+    """Draws into a Canvas in unit space, scaled and centred."""
+
+    def __init__(self, c: "Canvas", cx: float, sc: float):
+        self.c, self.cx, self.sc = c, cx, sc
+
+    def _x(self, x):
+        return self.cx + x * self.sc
+
+    def _y(self, y):
+        return y * self.sc
+
+    def rr(self, x0, y0, x1, y1, r, col, o=0):
+        self.c.rrect(self._x(x0), self._y(y0), self._x(x1), self._y(y1), r * self.sc, col, o * self.sc)
+
+    def ci(self, x, y, r, col, o=0):
+        self.c.circle(self._x(x), self._y(y), r * self.sc, col, o * self.sc)
+
+    def el(self, x, y, rx, ry, col, o=0, top_only=False):
+        self.c.ellipse(self._x(x), self._y(y), rx * self.sc, ry * self.sc, col, o * self.sc, top_only)
+
+    def po(self, pts, col):
+        self.c.polygon([(self._x(x), self._y(y)) for x, y in pts], col)
+
+    def po_out(self, pts, col, o=1.6):
+        self.po([(x + o * (1 if x >= 0 else -1) * 0.6, y + o * 0.6) for x, y in pts], OUTLINE)
+        self.po(pts, col)
+
+    def rot(self, x, y, w, h, ang, col, o=0):
+        self.c.rot_rect(self._x(x), self._y(y), w * self.sc, h * self.sc, ang, col, o * self.sc)
+
+
+def legs(p: Pen, frame: int, pants, pants_dark, shoe=SHOE, bare=False, shorts=False, O=1.6):
+    """Two legs with a walk cycle; frame 0 lifts the left leg, frame 1 the right."""
     for i, side in enumerate((-1, 1)):
-        lx = cx + side * 9
-        dy = -step if i == 0 else step
-        c.rrect(lx - 6, 78 + dy * 0.5, lx + 6, 100 + dy, 4, t["uni_dark"], outline=O)
-        c.rrect(lx - 6, 78 + dy * 0.5, lx - 1, 92 + dy, 3, t["uni"])            # lit side of the leg
-        c.rrect(lx - 7, 98 + dy, lx + 7, 110 + dy, 4, BOOT, outline=O)          # boot
-        c.rrect(lx - 7, 106 + dy, lx + 7, 110 + dy, 2, BOOT_SOLE)               # sole
+        lx = side * 9
+        lift = 5 if i == frame else 0
+        top = 72 if shorts else 84
+        p.rr(lx - 7, top - lift * 0.3, lx + 7, 106 - lift, 4, pants_dark, o=O)
+        p.rr(lx - 7, top - lift * 0.3, lx - 2, 100 - lift, 3, pants)
+        if shorts or bare:
+            p.rr(lx - 6, 88 - lift * 0.6, lx + 6, 106 - lift, 4, SKIN, o=O)
+            p.rr(lx - 6, 88 - lift * 0.6, lx - 2, 102 - lift, 3, SKIN_SHADE)
+        p.rr(lx - 8, 104 - lift, lx + 8, 116 - lift, 4, shoe, o=O)
+        p.rr(lx - 8, 112 - lift, lx + 8, 116 - lift, 2, SHOE_SOLE)
 
-    # ---- torso
-    c.rrect(cx - 19, 50, cx + 19, 84, 8, t["uni"], outline=O)
-    c.rrect(cx - 19, 50, cx - 7, 84, 8, t["uni_light"])                          # lit panel
-    c.rrect(cx - 19, 74, cx + 19, 79, 1, STRAP)                                  # belt
-    c.rrect(cx - 4, 73, cx + 4, 80, 1.5, BUCKLE, outline=1)                      # buckle
-    for side in (-1, 1):                                                         # shoulder pads
-        c.rrect(cx + side * 22 - 7, 48, cx + side * 22 + 7, 58, 4, t["uni_dark"], outline=O)
-    if front:
-        c.rrect(cx - 15, 56, cx - 5, 66, 2, t["uni_dark"], outline=1)            # chest pockets
-        c.rrect(cx + 5, 56, cx + 15, 66, 2, t["uni_dark"], outline=1)
-        c.rot_rect(cx, 66, 7, 40, 22, STRAP, outline=1)                          # sling
-    else:
-        c.rrect(cx - 13, 52, cx + 13, 76, 5, PACK, outline=O)                    # backpack
-        c.rrect(cx - 13, 52, cx - 5, 76, 5, PACK_LIGHT)
-        c.rrect(cx - 11, 60, cx + 11, 63, 1, STRAP)
-        c.rrect(cx - 17, 50, cx - 13, 78, 1.5, STRAP, outline=1)                 # straps
-        c.rrect(cx + 13, 50, cx + 17, 78, 1.5, STRAP, outline=1)
 
-    # ---- arms (sleeves + gloves)
+def arms(p: Pen, frame: int, sleeve, sleeve_light, short_sleeve=False, O=1.6, hand_y=82):
+    swing = 4 if frame == 1 else -4
     for side in (-1, 1):
-        ax = cx + side * 24
-        c.rrect(ax - 5, 54, ax + 5, 78, 5, t["uni"], outline=O)
-        c.rrect(ax - 5, 54, ax - 1, 72, 4, t["uni_light"])
-        c.circle(ax, 80, 5, GLOVE if not front else SKIN, outline=O)
-
-    # ---- rifle
-    if front:
-        c.rot_rect(cx + 2, 72, 48, 6, -22, RIFLE, outline=O)                     # receiver
-        c.rot_rect(cx + 20, 65, 18, 3, -22, RIFLE_LIGHT)                         # barrel highlight
-        c.rot_rect(cx - 16, 80, 12, 9, -22, STOCK, outline=O)                    # stock
-        c.rot_rect(cx + 8, 80, 5, 11, -22, RIFLE_DARK, outline=1)                # magazine
-        c.rot_rect(cx - 3, 79, 4, 7, -22, RIFLE_DARK, outline=1)                 # grip
-        c.circle(cx + 12, 68, 4.5, SKIN, outline=O)                              # forward hand
-        c.circle(cx - 8, 77, 4.5, SKIN, outline=O)                               # trigger hand
-    else:
-        c.rot_rect(cx + 10, 60, 6, 56, -10, RIFLE, outline=O)                    # slung on the back
-        c.rot_rect(cx + 6, 38, 3, 14, -10, RIFLE_LIGHT)
-        c.rot_rect(cx + 14, 84, 9, 12, -10, STOCK, outline=O)
-
-    # ---- head
-    c.rrect(cx - 5, 40, cx + 5, 52, 3, SKIN_SHADE, outline=O)                    # neck
-    if front:
-        c.circle(cx, 32, 15, SKIN, outline=O)
-        c.ellipse(cx, 41, 11, 5, SKIN_SHADE)                                     # chin shade
-        for side in (-1, 1):                                                     # ears
-            c.circle(cx + side * 15, 33, 3.5, SKIN, outline=O)
-        for side in (-1, 1):                                                     # eyes
-            c.ellipse(cx + side * 6, 33, 3.5, 4, EYE_WHITE, outline=1)
-            c.circle(cx + side * 6 + 0.6, 34, 2, EYE)
-            c.circle(cx + side * 6 + 1.4, 33, 0.8, EYE_WHITE)
-            c.rrect(cx + side * 6 - 4, 27.5, cx + side * 6 + 4, 29.5, 1, BROW)  # brows
-        c.rrect(cx - 4, 41, cx + 4, 43, 1, MOUTH)                                # mouth
-    else:
-        c.circle(cx, 32, 15, SKIN_SHADE, outline=O)
-        c.ellipse(cx, 30, 13, 11, SKIN)                                          # lit crown
-        for side in (-1, 1):
-            c.circle(cx + side * 15, 33, 3.5, SKIN_SHADE, outline=O)
-
-    # ---- wide-brim leather hat
-    c.ellipse(cx, 27, 30, 8, t["hat"], outline=O)                                # brim
-    c.ellipse(cx, 25, 30, 6, t["hat_light"])
-    c.ellipse(cx, 17, 17, 13, t["hat"], outline=O)                               # crown
-    c.rrect(cx - 17, 17, cx + 17, 28, 4, t["hat"], outline=O)
-    c.ellipse(cx - 6, 10, 8, 4, t["hat_light"])
-    c.rrect(cx - 17, 21, cx + 17, 26, 1, t["band"])                              # hat band
-    c.ellipse(cx, 27, 30, 8, t["hat_dark"], top_only=False) if False else None
-    c.rrect(cx - 30, 27, cx + 30, 30, 2, t["hat_dark"])                          # brim underside
-
-
-# ---------------------------------------------------------------- monsters
-MON_CLAW = (0xEE, 0xE6, 0xD0)
-MON_TOOTH = (0xFF, 0xFF, 0xF0)
-MON_MOUTH = (0x4A, 0x0E, 0x0E)
-MON_TONGUE = (0xC0, 0x3B, 0x5A)
-
-MONSTERS = {
-    # kind: body, light, dark, belly, eye white, iris, accent (horn/hair/stone), weapon, weapon dark
-    "ogre": {"body": (0x5B, 0xA6, 0x3C), "light": (0x8A, 0xD1, 0x5E), "dark": (0x3C, 0x75, 0x27), "belly": (0xC9, 0xE0, 0x8C),
-             "eye_w": (0xFF, 0xF3, 0xC4), "iris": (0xB9, 0x1C, 0x1C), "accent": (0xE8, 0xD8, 0xB0), "accent_dark": (0xB8, 0xA5, 0x7A),
-             "weapon": (0x7C, 0x4A, 0x1E), "weapon_dark": (0x54, 0x30, 0x12), "cloth": (0x6B, 0x4A, 0x2E)},
-    "troll": {"body": (0xC9, 0xA3, 0x3E), "light": (0xE8, 0xC9, 0x63), "dark": (0x8E, 0x6D, 0x1E), "belly": (0xF0, 0xDC, 0x9A),
-              "eye_w": (0xFF, 0xF7, 0xD6), "iris": (0x2B, 0x2F, 0x3A), "accent": (0x3A, 0x2E, 0x18), "accent_dark": (0x1F, 0x18, 0x0C),
-              "weapon": (0xD4, 0xAF, 0x37), "weapon_dark": (0x9A, 0x7B, 0x1E), "cloth": (0x2E, 0x2A, 0x3A)},
-    "golem": {"body": (0x8C, 0x7B, 0x66), "light": (0xB3, 0xA3, 0x8A), "dark": (0x5E, 0x50, 0x40), "belly": (0xA3, 0x92, 0x7A),
-              "eye_w": (0xFF, 0xB0, 0x2E), "iris": (0xFF, 0x62, 0x00), "accent": (0xFF, 0x8A, 0x1F), "accent_dark": (0xC2, 0x50, 0x00),
-              "weapon": (0x6F, 0x62, 0x50), "weapon_dark": (0x46, 0x3C, 0x30), "cloth": (0x4A, 0x40, 0x34)},
-    "demon": {"body": (0xC6, 0x2B, 0x2B), "light": (0xE8, 0x5C, 0x4A), "dark": (0x86, 0x14, 0x14), "belly": (0xF0, 0x8F, 0x6A),
-              "eye_w": (0xFF, 0xE8, 0x5C), "iris": (0x1A, 0x1A, 0x1A), "accent": (0x2B, 0x1B, 0x1B), "accent_dark": (0x14, 0x0A, 0x0A),
-              "weapon": (0x3A, 0x3F, 0x4A), "weapon_dark": (0x1F, 0x23, 0x2B), "cloth": (0x2E, 0x14, 0x3A)},
-}
-
-
-def _monster_legs(c, t, cx, frame, O):
-    """Thick legs with a stomping walk cycle: one leg lifted (shorter, foot raised), the other planted."""
-    for i, side in enumerate((-1, 1)):
-        lx = cx + side * 26
-        lift = (6 if i == frame else 0)
-        c.rrect(lx - 16, 140 - lift * 0.4, lx + 16, 176 - lift, 10, t["dark"], outline=O)
-        c.rrect(lx - 16, 140 - lift * 0.4, lx - 5, 168 - lift, 8, t["body"])
-        c.rrect(lx - 14, 158 - lift, lx + 14, 162 - lift, 1, t["dark"])              # knee crease
-        c.ellipse(lx, 182 - lift, 23, 11, t["body"], outline=O)                        # foot
-        c.ellipse(lx - 6, 178 - lift, 10, 5, t["light"])
-        for k in (-1, 0, 1):
-            c.circle(lx + k * 11, 189 - lift, 4.2, MON_CLAW, outline=1.2)
-
-
-def _monster_arms(c, t, cx, frame, O, weapon):
-    swing = 6 if frame == 1 else -6
-    for side in (-1, 1):
-        ax = cx + side * 62
+        ax = side * 25
         dy = swing * side
-        c.rot_rect(ax, 96 + dy, 27, 62, side * 18, t["body"], outline=O)
-        c.rot_rect(ax - side * 5, 84 + dy, 10, 40, side * 18, t["light"])
-        c.rot_rect(ax + side * 2, 112 + dy, 24, 8, side * 18, t["cloth"], outline=1)   # wrist wrap
-        c.circle(ax + side * 6, 128 + dy, 16, t["body"], outline=O)                     # fist
-        c.circle(ax + side * 2, 124 + dy, 6, t["light"])
-        for k in (-1, 0, 1):
-            c.circle(ax + side * 6 + k * 8, 139 + dy, 4, MON_CLAW, outline=1.2)
-    if weapon == "club":
-        c.rot_rect(cx + 66, 92 + swing, 13, 90, 8, t["weapon"], outline=O)
-        c.rot_rect(cx + 62, 48 + swing, 26, 38, 8, t["weapon_dark"], outline=O)
-        for k in range(4):
-            c.circle(cx + 52 + k * 7, 38 + swing + k * 5, 3.2, MON_CLAW, outline=1)
-    elif weapon == "mace":
-        c.rot_rect(cx + 66, 96 + swing, 9, 84, 6, t["weapon_dark"], outline=O)
-        c.circle(cx + 62, 48 + swing, 16, t["weapon"], outline=O)
-        c.circle(cx + 57, 43 + swing, 6, (0xB5, 0xBA, 0xC4))
-        for a in range(8):
-            ang = math.radians(a * 45)
-            c.polygon([(cx + 62 + math.cos(ang) * 14, 48 + swing + math.sin(ang) * 14),
-                       (cx + 62 + math.cos(ang + 0.3) * 17, 48 + swing + math.sin(ang + 0.3) * 17),
-                       (cx + 62 + math.cos(ang) * 23, 48 + swing + math.sin(ang) * 23),
-                       (cx + 62 + math.cos(ang - 0.3) * 17, 48 + swing + math.sin(ang - 0.3) * 17)], (0xD0, 0xD4, 0xDB))
-    elif weapon == "trident":
-        c.rot_rect(cx + 66, 100 + swing, 7, 120, 4, t["weapon"], outline=O)
-        c.rot_rect(cx + 62, 38 + swing, 26, 6, 4, t["weapon"], outline=O)
-        for k in (-1, 0, 1):
-            tx = cx + 62 + k * 10
-            c.polygon([(tx - 4, 40 + swing), (tx + 4, 40 + swing), (tx + k * 1.5, 14 + swing)], OUTLINE)
-            c.polygon([(tx - 2.5, 40 + swing), (tx + 2.5, 40 + swing), (tx + k * 1.5, 17 + swing)], (0xB5, 0xBA, 0xC4))
+        p.rr(ax - 5, 54 + dy, ax + 5, 78 + dy, 5, sleeve, o=O)
+        p.rr(ax - 5, 54 + dy, ax - 1, 72 + dy, 4, sleeve_light)
+        if short_sleeve:
+            p.rr(ax - 5, 64 + dy, ax + 5, 78 + dy, 5, SKIN, o=O)
+        p.ci(ax, hand_y + dy, 5, SKIN, o=O)
+    return swing
 
 
-def _monster_torso(c, t, cx, O, belly=True):
-    c.ellipse(cx, 96, 52, 46, t["body"], outline=O)
-    c.ellipse(cx - 18, 76, 22, 18, t["light"])
-    c.rrect(cx - 46, 126, cx + 46, 150, 12, t["cloth"], outline=O)                    # loincloth / belt
-    c.rrect(cx - 46, 126, cx + 46, 131, 2, t["accent_dark"])
+def torso(p: Pen, shirt, shirt_light, shirt_dark, belly=False, O=1.6):
     if belly:
-        c.ellipse(cx, 108, 32, 26, t["belly"], outline=1.5)
-        c.ellipse(cx, 116, 20, 12, tuple(max(0, v - 25) for v in t["belly"]))
-        c.circle(cx, 120, 3, t["dark"])                                                # navel
-
-
-def _monster_head(c, t, cx, O, eyes, horns, tusks, hair=False, brow=True):
-    c.ellipse(cx, 46, 42, 36, t["body"], outline=O)
-    c.ellipse(cx - 14, 30, 18, 12, t["light"])
-    if horns == "curved":
-        for side in (-1, 1):
-            pts = [(cx + side * 24, 24), (cx + side * 44, 14), (cx + side * 58, 26), (cx + side * 50, 34), (cx + side * 40, 24), (cx + side * 30, 30)]
-            c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
-            c.polygon(pts, t["accent"])
-            c.polygon([(cx + side * 30, 26), (cx + side * 42, 20), (cx + side * 50, 28), (cx + side * 42, 26)], t["accent_dark"])
-    elif horns == "straight":
-        for side in (-1, 1):
-            pts = [(cx + side * 26, 22), (cx + side * 52, 2), (cx + side * 42, 30)]
-            c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
-            c.polygon(pts, t["accent"])
-            c.polygon([(cx + side * 30, 22), (cx + side * 48, 8), (cx + side * 42, 28)], t["accent_dark"])
-    if hair:                                                                           # mohawk
-        c.polygon([(cx - 10, 18), (cx - 6, -2), (cx, 8), (cx + 6, -4), (cx + 10, 18)], OUTLINE)
-        c.polygon([(cx - 8, 18), (cx - 5, 2), (cx, 10), (cx + 5, 0), (cx + 8, 18)], t["accent"])
-    for side in (-1, 1):                                                               # ears
-        c.ellipse(cx + side * 44, 46, 8, 11, t["body"], outline=O)
-        c.ellipse(cx + side * 44, 46, 4, 6, t["dark"])
-    if eyes == 1:
-        c.ellipse(cx, 44, 17, 15, t["eye_w"], outline=O)
-        c.circle(cx + 2, 45, 8, t["iris"])
-        c.circle(cx + 2, 45, 4, OUTLINE)
-        c.circle(cx + 5, 41, 2.2, MON_TOOTH)
-        if brow:
-            c.rot_rect(cx - 12, 27, 30, 6, -14, t["dark"])
-            c.rot_rect(cx + 12, 27, 30, 6, 14, t["dark"])
+        p.el(0, 70, 24, 22, shirt, o=O)
+        p.rr(-22, 50, 22, 74, 8, shirt, o=O)
+        p.el(2, 76, 20, 14, shirt_light)
     else:
-        for side in (-1, 1):
-            c.ellipse(cx + side * 15, 44, 10, 9, t["eye_w"], outline=O)
-            c.circle(cx + side * 15 + 1, 45, 5, t["iris"])
-            c.circle(cx + side * 15 + 1, 45, 2.5, OUTLINE)
-            c.circle(cx + side * 15 + 3, 42, 1.6, MON_TOOTH)
-            if brow:
-                c.rot_rect(cx + side * 15, 33, 22, 5, side * 16, t["dark"])
-    c.rrect(cx - 26, 60, cx + 26, 76, 8, MON_MOUTH, outline=O)                         # mouth
-    c.ellipse(cx, 74, 14, 5, MON_TONGUE)
-    if tusks:
-        for side in (-1, 1):
-            c.polygon([(cx + side * 22, 66), (cx + side * 30, 66), (cx + side * 26, 50)], OUTLINE)
-            c.polygon([(cx + side * 23, 66), (cx + side * 29, 66), (cx + side * 26, 52)], MON_TOOTH)
-    for k in range(4):                                                                 # fangs
-        fx = cx - 18 + k * 12
-        c.polygon([(fx - 4, 60), (fx + 4, 60), (fx, 70)], MON_TOOTH)
-    for k in range(2):
-        fx = cx - 6 + k * 12
-        c.polygon([(fx - 4, 76), (fx + 4, 76), (fx, 66)], MON_TOOTH)
+        p.rr(-20, 50, 20, 86, 8, shirt, o=O)
+        p.rr(-20, 50, -8, 86, 8, shirt_light)
+    p.rr(-20, 82, 20, 88, 2, shirt_dark)
 
 
-def _prop_necktie(c, cx, O):
-    """Stage 1: the boss's red necktie and staff lanyard."""
-    c.polygon([(cx - 8, 82), (cx + 8, 82), (cx + 4, 92), (cx - 4, 92)], OUTLINE)
-    c.polygon([(cx - 6, 83), (cx + 6, 83), (cx + 3, 91), (cx - 3, 91)], (0xC0, 0x1E, 0x2E))
-    c.polygon([(cx - 9, 92), (cx + 9, 92), (cx + 5, 124), (cx, 132), (cx - 5, 124)], OUTLINE)
-    c.polygon([(cx - 7, 93), (cx + 7, 93), (cx + 4, 123), (cx, 129), (cx - 4, 123)], (0xD6, 0x2E, 0x3E))
-    c.polygon([(cx - 7, 93), (cx - 1, 93), (cx - 2, 122), (cx - 4, 123)], (0xE8, 0x5C, 0x66))
-    for side in (-1, 1):                                                     # lanyard
-        c.rot_rect(cx + side * 20, 96, 4, 40, side * 16, (0x1F, 0x2A, 0x44))
-    c.rrect(cx - 12, 112, cx + 12, 130, 2, (0xF1, 0xF5, 0xF9), outline=1.5)  # staff badge
-    c.rrect(cx - 9, 116, cx + 9, 119, 0.5, (0x94, 0xA3, 0xB8))
-    c.rrect(cx - 9, 122, cx + 4, 125, 0.5, (0x94, 0xA3, 0xB8))
-
-
-def _prop_gold(c, cx, O):
-    """Stage 2: the friend who married rich — crown, chains, gold watch."""
-    c.polygon([(cx - 26, 18), (cx - 18, -2), (cx - 8, 12), (cx, -6), (cx + 8, 12), (cx + 18, -2), (cx + 26, 18)], OUTLINE)
-    c.polygon([(cx - 23, 17), (cx - 16, 1), (cx - 8, 14), (cx, -3), (cx + 8, 14), (cx + 16, 1), (cx + 23, 17)], (0xF5, 0xD0, 0x4A))
-    c.rrect(cx - 24, 16, cx + 24, 23, 2, (0xD4, 0xAF, 0x37), outline=1.5)
-    for k in (-1, 0, 1):
-        c.circle(cx + k * 12, 19, 3, (0xE8, 0x3D, 0x6B), outline=1)           # jewels
-    for k in range(7):                                                        # gold chain
-        c.circle(cx - 27 + k * 9, 86 + abs(k - 3) * 3, 5, (0xF5, 0xD0, 0x4A), outline=1.5)
-    c.circle(cx, 104, 9, (0xF5, 0xD0, 0x4A), outline=1.5)                     # pendant
-    c.polygon([(cx - 4, 100), (cx + 4, 100), (cx, 110)], (0xFF, 0xF2, 0xB0))
-    c.rrect(cx + 52, 120, cx + 76, 132, 3, (0xF5, 0xD0, 0x4A), outline=1.5)   # wrist watch
-    c.circle(cx + 64, 126, 9, (0xFF, 0xF2, 0xB0), outline=1.5)
-    c.rot_rect(cx + 64, 124, 2, 8, 20, (0x3A, 0x2E, 0x18))
-
-
-def _prop_perm(c, cx, O):
-    """Stage 3: the nagging aunt — tight perm and round glasses."""
-    for k in range(9):                                                        # perm curls
-        ang = math.pi + k * (math.pi / 8)
-        px = cx + math.cos(ang) * 40
-        py = 44 + math.sin(ang) * 36
-        c.circle(px, py, 9, (0x6B, 0x46, 0x2B), outline=1.6)
-        c.circle(px - 2, py - 2, 4, (0x8A, 0x5E, 0x3C))
-    for side in (-1, 1):                                                      # round glasses
-        c.circle(cx + side * 15, 44, 13, (0x2B, 0x2F, 0x3A), outline=0)
-        c.circle(cx + side * 15, 44, 10.5, (0xE8, 0xF4, 0xFF))
-        c.circle(cx + side * 15 - 4, 40, 3.5, (0xFF, 0xFF, 0xFF))
-        c.circle(cx + side * 15 + 1, 45, 5, (0x1A, 0x1A, 0x1A))
-    c.rrect(cx - 6, 42, cx + 6, 45, 1, (0x2B, 0x2F, 0x3A))                    # bridge
-
-
-def draw_monster(c: Canvas, kind: str, frame: int):
-    """Hulking monsters facing the camera, 160x200. frame 0/1 = stomping walk cycle."""
-    t = MONSTERS[kind]
-    O = 2.2
-    cx = 80
-    _monster_legs(c, t, cx, frame, O)
-    if kind == "demon":                                                                # bat wings behind the body
-        for side in (-1, 1):
-            pts = [(cx + side * 30, 70), (cx + side * 78, 30), (cx + side * 76, 62), (cx + side * 96, 74), (cx + side * 78, 92), (cx + side * 92, 116), (cx + side * 40, 104)]
-            c.polygon([(x + side * 2, y) for x, y in pts], OUTLINE)
-            c.polygon(pts, t["accent"])
-            for k in range(3):
-                c.polygon([(cx + side * 34, 76 + k * 10), (cx + side * (74 + k * 4), 40 + k * 26), (cx + side * 36, 80 + k * 10)], t["accent_dark"])
-    weapon = {"ogre": "club", "troll": "mace", "golem": None, "demon": "trident"}[kind]
-    _monster_arms(c, t, cx, frame, O, weapon)
-    _monster_torso(c, t, cx, O, belly=(kind != "golem"))
-    if kind == "ogre":
-        for (wx, wy) in ((cx - 30, 88), (cx + 34, 104), (cx - 26, 118)):                  # warts
-            c.circle(wx, wy, 3, t["dark"])
-        c.rot_rect(cx + 20, 92, 22, 3, 30, t["dark"])                                      # scar
-        _monster_head(c, t, cx, O, eyes=1, horns="straight", tusks=False)
-        c.rot_rect(cx + 22, 38, 16, 3, 40, t["dark"])                                      # head scar
-        _prop_necktie(c, cx, O)
-    elif kind == "troll":
-        for (sx_, sy) in ((cx - 34, 92), (cx + 30, 82), (cx - 20, 124)):                  # stone-like spots
-            c.ellipse(sx_, sy, 6, 4, t["dark"])
-        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=True, hair=False)
-        c.ellipse(cx, 56, 11, 8, t["light"], outline=O)                                    # big nose
-        c.circle(cx - 4, 58, 2, t["dark"])
-        c.circle(cx + 4, 58, 2, t["dark"])
-        _prop_gold(c, cx, O)
-    elif kind == "golem":
-        # stone plates and glowing cracks
-        for (px, py, pw, ph) in ((cx - 36, 70, 26, 20), (cx + 8, 66, 30, 22), (cx - 20, 96, 34, 26), (cx + 18, 100, 24, 20)):
-            c.rrect(px, py, px + pw, py + ph, 4, t["light"], outline=1.5)
-        for (x0, y0, x1, y1) in ((cx - 10, 84, cx + 6, 96), (cx + 6, 96, cx - 2, 112)):
-            c.rot_rect((x0 + x1) / 2, (y0 + y1) / 2, 4, math.hypot(x1 - x0, y1 - y0), math.degrees(math.atan2(y1 - y0, x1 - x0)) - 90, t["accent"])
-        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=False, brow=False)
-        _prop_perm(c, cx, O)
-    elif kind == "demon":
-        _monster_head(c, t, cx, O, eyes=2, horns="curved", tusks=False)
-        for k in range(4):                                                                 # flames on the crown
-            fx = cx - 18 + k * 12
-            c.polygon([(fx - 6, 20), (fx + 6, 20), (fx + 2, 2 - (k % 2) * 6)], (0xFF, 0x8A, 0x1F))
-            c.polygon([(fx - 3, 20), (fx + 3, 20), (fx + 1, 8 - (k % 2) * 4)], (0xFF, 0xD2, 0x4A))
-        c.rrect(cx - 46, 126, cx + 46, 150, 12, t["cloth"], outline=O)
-        c.circle(cx, 138, 7, (0xFF, 0xD2, 0x4A), outline=1.5)                             # belt gem
-
-
-def draw_goblin(c: Canvas, frame: int):
-    """A scrappy goblin facing the camera: big ears, yellow eyes, ragged tunic, club."""
-    O = 1.6
-    cx = 48
-    step = 4 if frame == 1 else 0
-    # legs (bare) + feet
-    for i, side in enumerate((-1, 1)):
-        lx = cx + side * 9
-        dy = -step if i == 0 else step
-        c.rrect(lx - 6, 80 + dy * 0.5, lx + 6, 102 + dy, 4, GOB_SKIN_DARK, outline=O)
-        c.rrect(lx - 6, 80 + dy * 0.5, lx - 1, 94 + dy, 3, GOB_SKIN)
-        c.ellipse(lx + side * 2, 106 + dy, 10, 5, GOB_SKIN, outline=O)          # foot
-        c.circle(lx + side * 9, 105 + dy, 2.2, GOB_TOOTH)                         # toe claw
-    # shorts + tunic
-    c.rrect(cx - 15, 74, cx + 15, 86, 4, GOB_SHORTS, outline=O)
-    c.polygon([(cx - 18, 52), (cx + 18, 52), (cx + 20, 80), (cx + 8, 76), (cx, 82), (cx - 8, 76), (cx - 20, 80)], OUTLINE)
-    c.polygon([(cx - 16, 54), (cx + 16, 54), (cx + 18, 78), (cx + 8, 74), (cx, 80), (cx - 8, 74), (cx - 18, 78)], GOB_TUNIC)
-    c.polygon([(cx - 16, 54), (cx - 4, 54), (cx - 6, 76), (cx - 18, 78)], GOB_TUNIC_LIGHT)
-    c.rrect(cx - 16, 66, cx + 16, 70, 1, GOB_TUNIC_DARK)                          # rope belt
-    # arms
+def head(p: Pen, O=1.6, shade=True):
+    p.rr(-5, 42, 5, 52, 3, SKIN_SHADE, o=O)          # neck
+    p.ci(0, 30, 16, SKIN, o=O)
+    if shade:
+        p.el(0, 39, 11, 5, SKIN_SHADE)
     for side in (-1, 1):
-        ax = cx + side * 22
-        c.rot_rect(ax, 64, 9, 26, side * 20, GOB_SKIN, outline=O)
-        c.circle(ax + side * 5, 76, 5, GOB_SKIN_DARK, outline=O)                  # hands
-    # club in the right hand
-    c.rot_rect(cx + 34, 62, 6, 40, -15, GOB_CLUB, outline=O)
-    c.circle(cx + 40, 42, 8, GOB_CLUB, outline=O)
-    for k in range(3):
-        c.circle(cx + 36 + k * 4, 37 + k * 3, 2, GOB_TOOTH, outline=1)
-    # head
-    c.rrect(cx - 5, 44, cx + 5, 56, 3, GOB_SKIN_DARK, outline=O)                  # neck
-    c.ellipse(cx, 32, 18, 17, GOB_SKIN, outline=O)
-    c.ellipse(cx - 6, 24, 10, 6, GOB_SKIN_LIGHT)
-    for side in (-1, 1):                                                          # big pointy ears
-        pts = [(cx + side * 14, 30), (cx + side * 34, 18), (cx + side * 16, 40)]
-        c.polygon([(x + side * 1.5, y) for x, y in pts], OUTLINE)
-        c.polygon(pts, GOB_SKIN)
-        c.polygon([(cx + side * 17, 30), (cx + side * 29, 22), (cx + side * 18, 37)], GOB_SKIN_DARK)
-    for side in (-1, 1):                                                          # eyes
-        c.ellipse(cx + side * 7, 31, 5, 4, GOB_EYE, outline=1.2)
-        c.ellipse(cx + side * 7, 31, 1.5, 3.2, GOB_PUPIL)
-        c.rot_rect(cx + side * 7, 25, 9, 2.5, side * 18, GOB_SKIN_DARK)           # angry brows
-    c.rrect(cx - 9, 39, cx + 9, 44, 2, OUTLINE)                                   # grin
-    c.polygon([(cx - 6, 39), (cx - 2, 39), (cx - 4, 44)], GOB_TOOTH)
-    c.polygon([(cx + 2, 39), (cx + 6, 39), (cx + 4, 44)], GOB_TOOTH)
-    c.circle(cx, 36, 2.2, GOB_SKIN_DARK)                                          # nose
+        p.ci(side * 16, 32, 3.6, SKIN, o=O)          # ears
+
+
+def eyes(p: Pen, mood="plain", glasses=None, shut=False):
+    for side in (-1, 1):
+        ex = side * 6.5
+        if shut:
+            p.rr(ex - 4, 31, ex + 4, 33, 1, EYE)
+        else:
+            p.el(ex, 31, 3.6, 4.2, WHITE, o=1.1)
+            p.ci(ex + side * 0.4, 32, 2.1, EYE)
+            p.ci(ex + side * 0.4 + 0.9, 31, 0.8, WHITE)
+        if mood == "angry":
+            p.rot(ex, 25, 10, 3, side * -20, HAIR_BLACK)
+        elif mood == "smug":
+            p.rot(ex, 24.5, 9, 2.4, side * -10, HAIR_BLACK)
+        elif mood == "nag":
+            p.rot(ex, 25, 9, 2.6, side * 16, HAIR_BROWN)
+        else:
+            p.rot(ex, 25, 9, 2.4, side * 6, HAIR_BLACK)
+    if glasses:
+        for side in (-1, 1):
+            p.ci(side * 6.5, 31, 7.2, glasses)
+            p.ci(side * 6.5, 31, 5.8, (0xE9, 0xF4, 0xFF))
+            p.ci(side * 6.5 - 2, 28.5, 2, WHITE)
+            if not shut:
+                p.ci(side * 6.5 + 0.4, 32, 2.1, EYE)
+        p.rr(-2.5, 30, 2.5, 32, 1, glasses)
+
+
+def mouth(p: Pen, style="line"):
+    if style == "shout":
+        p.rr(-7, 37, 7, 45, 3, (0x6B, 0x21, 0x21), o=1.2)
+        p.el(0, 44, 4.5, 2, (0xE0, 0x6B, 0x7A))
+        p.rr(-6, 37.4, 6, 39, 0.6, WHITE)
+    elif style == "smirk":
+        p.rot(2, 40, 9, 2, 12, (0x9B, 0x53, 0x4A))
+    elif style == "grin":
+        p.rr(-6, 38, 6, 43, 2.4, (0x6B, 0x21, 0x21), o=1.2)
+        p.rr(-5.4, 38.4, 5.4, 40, 0.6, WHITE)
+    else:
+        p.rr(-4, 40, 4, 41.6, 0.8, (0x9B, 0x53, 0x4A))
+
+
+# ---------------------------------------------------------------- hair styles
+
+
+def hair_short(p: Pen, col=HAIR_BLACK, light=HAIR_BLACK_L, O=1.6):
+    p.el(0, 24, 17, 14, col, o=O, top_only=True)
+    p.rr(-17, 22, 17, 27, 2, col)
+    p.el(-6, 18, 7, 4, light)
+
+
+def hair_bald(p: Pen, col=HAIR_BLACK, O=1.6):
+    """The classic comb-over: bare crown, hair hanging on at the sides."""
+    p.el(-4, 18, 7, 4, (0xFF, 0xE2, 0xC2))          # shine on the scalp
+    for side in (-1, 1):
+        p.el(side * 13, 28, 6, 9, col, o=O)
+        p.rr(side * 17 - 3, 24, side * 17 + 3, 36, 2, col, o=O)
+    p.rot(-2, 21, 18, 3.4, -8, col)                  # the strand combed across
+
+
+def hair_slick(p: Pen, col=HAIR_BLACK, light=HAIR_BLACK_L, O=1.6):
+    p.el(0, 23, 17, 14, col, o=O, top_only=True)
+    p.rr(-17, 21, 17, 26, 2, col)
+    for k in range(4):
+        p.rot(-11 + k * 7, 19 + k * 0.6, 3, 13, 24, light)
+    p.po_out([(14, 16), (24, 10), (17, 24)], col)    # a flick at the back
+
+
+def hair_perm(p: Pen, col=HAIR_BROWN, light=HAIR_BROWN_L, O=1.6):
+    for k in range(11):
+        ang = math.pi + k * (math.pi / 10)
+        p.ci(math.cos(ang) * 19, 30 + math.sin(ang) * 17, 6, col, o=1.3)
+        p.ci(math.cos(ang) * 19 - 1.4, 30 + math.sin(ang) * 17 - 1.4, 2.6, light)
+
+
+def hair_messy(p: Pen, col=HAIR_BLACK, light=HAIR_BLACK_L, O=1.6):
+    p.el(0, 24, 17, 13, col, o=O, top_only=True)
+    p.rr(-17, 22, 17, 27, 2, col)
+    for k in range(6):
+        x = -14 + k * 5.6
+        p.po_out([(x - 3, 20), (x + 1, 6 + (k % 3) * 3), (x + 3, 20)], col, o=1.2)
+    p.el(-6, 19, 6, 3, light)
+
+
+# ---------------------------------------------------------------- the crew (ally)
+
+SHIRT_W = (0xF2, 0xF5, 0xFA)
+SHIRT_W_L = (0xFF, 0xFF, 0xFF)
+SHIRT_W_D = (0xC9, 0xD2, 0xE0)
+PANTS_NAVY = (0x2F, 0x3B, 0x5C)
+PANTS_NAVY_D = (0x1E, 0x27, 0x40)
+BAG = (0x5A, 0x3E, 0x28)
+BAG_D = (0x3C, 0x28, 0x18)
+LANYARD = (0x1F, 0x2A, 0x44)
+
+
+def draw_ally(c: "Canvas", frame: int):
+    """A colleague seen from behind: white shirt, navy trousers, satchel."""
+    p = Pen(c, W / 2, 1.0)
+    O = 1.6
+    legs(p, frame, PANTS_NAVY, PANTS_NAVY_D, O=O)
+    torso(p, SHIRT_W, SHIRT_W_L, SHIRT_W_D, O=O)
+    p.rr(-14, 52, 14, 80, 5, BAG, o=O)               # satchel on the back
+    p.rr(-14, 52, -6, 80, 5, (0x6E, 0x4E, 0x33))
+    p.rr(-14, 64, 14, 67, 1, BAG_D)
+    p.ci(0, 66, 3, (0xD4, 0xAF, 0x37), o=1)
+    for side in (-1, 1):
+        p.rr(side * 16 - 2, 50, side * 16 + 2, 78, 1.5, BAG_D, o=1)
+    arms(p, frame, SHIRT_W, SHIRT_W_L, O=O)
+    p.rr(-5, 42, 5, 52, 3, SKIN_SHADE, o=O)
+    p.ci(0, 30, 16, SKIN_SHADE, o=O)                 # back of the head
+    for side in (-1, 1):
+        p.ci(side * 16, 32, 3.6, SKIN_SHADE, o=O)
+    hair_short(p, O=O)
+    p.el(0, 32, 15, 11, HAIR_BLACK)                  # hair covers the back of the head
+
+
+# ---------------------------------------------------------------- the small stuff (mobs)
+
+
+def mob_paper(c: "Canvas", frame: int):
+    """Stage 1 — a stack of 'urgent' meeting papers with legs."""
+    p = Pen(c, W / 2, 1.0)
+    O = 1.6
+    bob = -2 if frame == 1 else 0
+    for i, side in enumerate((-1, 1)):
+        lx = side * 8
+        lift = 4 if i == frame else 0
+        p.rr(lx - 4, 86 + bob, lx + 4, 104 - lift, 2, (0xE8, 0xC9, 0x9A), o=O)
+        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    for k in range(3):                                # stacked sheets
+        p.rr(-24 + k * 1.5, 30 + k * 6 + bob, 24 - k * 1.5, 92 + bob, 3, (0xF7, 0xF8, 0xFB) if k == 2 else (0xDC, 0xE2, 0xEC), o=O)
+    p.rr(-18, 44 + bob, 18, 47 + bob, 1, (0xB6, 0xC0, 0xD0))
+    p.rr(-18, 52 + bob, 10, 55 + bob, 1, (0xB6, 0xC0, 0xD0))
+    p.rr(-18, 60 + bob, 14, 63 + bob, 1, (0xB6, 0xC0, 0xD0))
+    p.rot(12, 70 + bob, 26, 26, -14, (0xD9, 0x2E, 0x3E))    # 'urgent' stamp
+    p.rot(12, 70 + bob, 20, 20, -14, (0xF7, 0xF8, 0xFB))
+    p.rot(12, 70 + bob, 14, 5, -14, (0xD9, 0x2E, 0x3E))
+    for side in (-1, 1):                              # eyes on the top sheet
+        p.el(side * 8, 36 + bob, 4, 4.6, WHITE, o=1.1)
+        p.ci(side * 8, 37 + bob, 2.2, EYE)
+    p.rr(-4, 44 + bob, 4, 46 + bob, 1, (0x9B, 0x53, 0x4A))
+
+
+def mob_brag(c: "Canvas", frame: int):
+    """Stage 2 — a designer shopping bag, sparkling, with a car key hanging off it."""
+    p = Pen(c, W / 2, 1.0)
+    O = 1.6
+    bob = -2 if frame == 1 else 0
+    for i, side in enumerate((-1, 1)):
+        lx = side * 8
+        lift = 4 if i == frame else 0
+        p.rr(lx - 4, 88 + bob, lx + 4, 104 - lift, 2, (0x3A, 0x33, 0x2E), o=O)
+        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    p.rr(-22, 38 + bob, 22, 92 + bob, 4, (0x1F, 0x1B, 0x24), o=O)
+    p.rr(-22, 38 + bob, -10, 92 + bob, 4, (0x33, 0x2C, 0x3C))
+    for side in (-1, 1):                              # handles
+        p.rot(side * 10, 30 + bob, 4, 18, side * 14, (0xD4, 0xAF, 0x37), o=1.2)
+    p.rr(-15, 58 + bob, 15, 72 + bob, 2, (0xD4, 0xAF, 0x37))     # gold label
+    p.rr(-11, 62 + bob, 11, 68 + bob, 1, (0x1F, 0x1B, 0x24))
+    for side in (-1, 1):
+        p.el(side * 8, 46 + bob, 4, 4.6, WHITE, o=1.1)
+        p.ci(side * 8, 47 + bob, 2.2, EYE)
+    p.rot(2, 52 + bob, 8, 2, 12, (0xE8, 0xD0, 0xA0))
+    for (sx_, sy, sr) in ((-26, 30, 5), (24, 44, 4), (18, 24, 3)):   # sparkles
+        p.po([(sx_, sy - sr + bob), (sx_ + sr * 0.35, sy - sr * 0.35 + bob), (sx_ + sr, sy + bob),
+              (sx_ + sr * 0.35, sy + sr * 0.35 + bob), (sx_, sy + sr + bob),
+              (sx_ - sr * 0.35, sy + sr * 0.35 + bob), (sx_ - sr, sy + bob), (sx_ - sr * 0.35, sy - sr * 0.35 + bob)],
+             (0xFF, 0xE9, 0x8A))
+
+
+def mob_nag(c: "Canvas", frame: int):
+    """Stage 3 — a speech bubble that will not stop talking."""
+    p = Pen(c, W / 2, 1.0)
+    O = 1.6
+    bob = -2 if frame == 1 else 0
+    for i, side in enumerate((-1, 1)):
+        lx = side * 8
+        lift = 4 if i == frame else 0
+        p.rr(lx - 4, 86 + bob, lx + 4, 104 - lift, 2, (0xC8, 0xB4, 0xE8), o=O)
+        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    p.rr(-26, 26 + bob, 26, 76 + bob, 12, (0xFB, 0xF7, 0xFF), o=O)
+    p.po_out([(-12, 72 + bob), (2, 72 + bob), (-6, 92 + bob)], (0xFB, 0xF7, 0xFF), o=O)
+    p.rr(-26, 66 + bob, 26, 76 + bob, 12, (0xE6, 0xDC, 0xF5))
+    for side in (-1, 1):
+        p.el(side * 9, 42 + bob, 4.4, 5, WHITE, o=1.1)
+        p.ci(side * 9, 43 + bob, 2.4, EYE)
+        p.rot(side * 9, 34 + bob, 10, 2.6, side * 18, HAIR_BROWN)
+    p.rr(-7, 52 + bob, 7, 62 + bob, 3, (0x6B, 0x21, 0x21), o=1.2)
+    p.rr(-6, 52.6 + bob, 6, 54 + bob, 0.6, WHITE)
+    p.el(0, 60 + bob, 4, 2, (0xE0, 0x6B, 0x7A))
+    for k in range(3):                                 # trailing dots
+        p.ci(-30 - k * 0, 18 + bob - k * 0, 0, WHITE)
+
+
+def mob_thump(c: "Canvas", frame: int):
+    """Stage 4 — a basketball bouncing on your ceiling."""
+    p = Pen(c, W / 2, 1.0)
+    O = 1.6
+    drop = 8 if frame == 1 else 0
+    cy = 56 + drop
+    p.el(0, 104, 22, 6, (0x00, 0x00, 0x00, 0))
+    for k in range(3):                                 # impact rings
+        p.el(0, 100 + k * 4, 24 - k * 6, 5 - k, (0xFF, 0xE9, 0x8A) if k == 0 else (0xF7, 0xD6, 0x6B))
+    p.ci(0, cy, 30, (0xE3, 0x72, 0x22), o=O)
+    p.el(-10, cy - 12, 10, 6, (0xF2, 0x96, 0x44))
+    p.rr(-30, cy - 2, 30, cy + 2, 1, (0x7A, 0x33, 0x0C))
+    p.rot(0, cy, 4, 60, 90, (0x7A, 0x33, 0x0C))
+    p.po([(-26, cy - 16), (-12, cy), (-26, cy + 16), (-30, cy)], (0x7A, 0x33, 0x0C))
+    p.po([(26, cy - 16), (12, cy), (26, cy + 16), (30, cy)], (0x7A, 0x33, 0x0C))
+    for side in (-1, 1):
+        p.el(side * 9, cy - 6, 5, 5.6, WHITE, o=1.2)
+        p.ci(side * 9, cy - 5, 2.6, EYE)
+    p.rr(-7, cy + 6, 7, cy + 14, 3, (0x6B, 0x21, 0x21), o=1.2)
+    p.rr(-6, cy + 6.6, 6, cy + 8, 0.6, WHITE)
+
+
+# ---------------------------------------------------------------- the villains (bosses)
+
+BOSS_SC = 1.55
+
+
+def boss_pen(c: "Canvas") -> Pen:
+    return Pen(c, BW / 2, BOSS_SC)
+
+
+def draw_boss_manager(c: "Canvas", frame: int):
+    """Stage 1 — the department head who says your idea was his."""
+    p = boss_pen(c)
+    O = 1.5
+    shirt, shirt_l, shirt_d = (0xEDF2F9 >> 16 & 255, 0xEDF2F9 >> 8 & 255, 0xEDF2F9 & 255), WHITE, (0xC2, 0xCC, 0xDB)
+    legs(p, frame, (0x3A, 0x3F, 0x52), (0x25, 0x29, 0x38), O=O)
+    torso(p, shirt, shirt_l, (0x3A, 0x3F, 0x52), belly=True, O=O)
+    p.rr(-22, 80, 22, 88, 2, (0x3A, 0x2A, 0x1C))            # belt
+    p.rr(-5, 79, 5, 89, 1.5, (0xD4, 0xAF, 0x37), o=1)
+    swing = arms(p, frame, shirt, shirt_l, short_sleeve=True, O=O)
+    p.rot(30, 62 - swing, 7, 40, 18, (0x8A, 0x6B, 0x3A), o=O)   # golf club
+    p.rot(37, 42 - swing, 13, 9, 18, (0x5E, 0x63, 0x70), o=O)
+    p.po_out([(-9, 50), (9, 50), (5, 58), (-5, 58)], (0xC0, 0x1E, 0x2E), o=1.2)   # tie knot
+    p.po_out([(-6, 58), (6, 58), (4, 84), (0, 90), (-4, 84)], (0xD6, 0x2E, 0x3E), o=1.2)
+    p.rot(-3, 68, 4, 24, 0, (0xE8, 0x5C, 0x66))
+    for side in (-1, 1):                                       # lanyard
+        p.rot(side * 12, 58, 3, 22, side * 12, LANYARD)
+    p.rr(-8, 68, 8, 80, 1.5, (0xF1, 0xF5, 0xF9), o=1.2)
+    p.rr(-6, 71, 6, 73, 0.4, (0x94, 0xA3, 0xB8))
+    head(p, O=O)
+    hair_bald(p, O=O)
+    eyes(p, mood="angry")
+    mouth(p, "shout")
+    p.rot(0, 36, 12, 3, 0, HAIR_BLACK)                         # moustache
+
+
+def draw_boss_rich(c: "Canvas", frame: int):
+    """Stage 2 — the classmate who married into money."""
+    p = boss_pen(c)
+    O = 1.5
+    suit, suit_l, suit_d = (0x2A, 0x2E, 0x3E), (0x3D, 0x43, 0x58), (0x1A, 0x1D, 0x28)
+    legs(p, frame, suit, suit_d, shoe=(0x4A, 0x33, 0x1E), O=O)
+    p.rr(-20, 50, 20, 86, 8, WHITE, o=O)                       # dress shirt
+    p.rr(-20, 50, 20, 86, 8, WHITE)
+    torso(p, suit, suit_l, suit_d, O=O)
+    p.po([(-20, 50), (0, 52), (20, 50), (20, 58), (0, 86), (-20, 58)], WHITE)   # open jacket
+    p.po_out([(-9, 50), (0, 70), (9, 50)], WHITE, o=1.2)
+    for k in range(7):                                         # gold chain
+        p.ci(-16 + k * 5.4, 58 + abs(k - 3) * 2, 3, (0xF5, 0xD0, 0x4A), o=1.1)
+    swing = arms(p, frame, suit, suit_l, O=O)
+    p.rr(20, 74 + swing, 32, 80 + swing, 2, (0xF5, 0xD0, 0x4A), o=1.2)     # gold watch
+    p.ci(26, 77 + swing, 5, (0xFF, 0xF2, 0xB0), o=1.2)
+    p.rr(-34, 78 - swing, -22, 86 - swing, 2, (0x1F, 0x1B, 0x24), o=1.2)   # car key fob
+    p.ci(-28, 82 - swing, 2, (0xD9, 0x2E, 0x3E))
+    p.rot(-22, 80 - swing, 8, 2, 30, (0xC9, 0xB8, 0x7A))
+    head(p, O=O)
+    hair_slick(p, O=O)
+    p.rr(-17, 28, 17, 34, 3, (0x1F, 0x23, 0x2E), o=O)          # sunglasses
+    p.el(-8, 31, 7, 5, (0x3A, 0x44, 0x5C))
+    p.el(8, 31, 7, 5, (0x3A, 0x44, 0x5C))
+    p.el(-10, 29.5, 3, 1.6, (0x9C, 0xB6, 0xCF))
+    mouth(p, "smirk")
+    for (sx_, sy, sr) in ((-30, 22, 5), (30, 16, 4)):          # sparkles
+        p.po([(sx_, sy - sr), (sx_ + sr * 0.35, sy - sr * 0.35), (sx_ + sr, sy),
+              (sx_ + sr * 0.35, sy + sr * 0.35), (sx_, sy + sr),
+              (sx_ - sr * 0.35, sy + sr * 0.35), (sx_ - sr, sy), (sx_ - sr * 0.35, sy - sr * 0.35)],
+             (0xFF, 0xE9, 0x8A))
+
+
+def draw_boss_aunt(c: "Canvas", frame: int):
+    """Stage 3 — the aunt with the same question for thirty years."""
+    p = boss_pen(c)
+    O = 1.5
+    blouse, blouse_l, blouse_d = (0xE0, 0x6B, 0x8A), (0xF0, 0x91, 0xA8), (0xB4, 0x4C, 0x68)
+    legs(p, frame, (0x6B, 0x52, 0x7A), (0x4C, 0x38, 0x58), O=O)
+    torso(p, blouse, blouse_l, blouse_d, belly=True, O=O)
+    for (fx, fy) in ((-14, 58), (6, 54), (12, 72), (-8, 76), (0, 64)):     # flower print
+        for k in range(5):
+            ang = k * (2 * math.pi / 5)
+            p.ci(fx + math.cos(ang) * 3.2, fy + math.sin(ang) * 3.2, 2, (0xFF, 0xD9, 0xE4))
+        p.ci(fx, fy, 1.6, (0xFF, 0xF2, 0xB0))
+    p.po_out([(-12, 52), (12, 52), (16, 88), (-16, 88)], (0xF5, 0xF0, 0xE4), o=1.2)   # apron
+    p.rr(-16, 74, 16, 78, 1, (0xD9, 0xD0, 0xBE))
+    for side in (-1, 1):
+        p.rot(side * 9, 50, 3, 12, side * 10, (0xF5, 0xF0, 0xE4))
+    swing = arms(p, frame, blouse, blouse_l, short_sleeve=True, O=O)
+    p.rot(30, 62 - swing, 5, 34, 14, (0xB8, 0xBE, 0xC8), o=O)             # ladle
+    p.ci(36, 44 - swing, 9, (0xCED4DE >> 16 & 255, 0xCED4DE >> 8 & 255, 0xCED4DE & 255), o=O)
+    p.ci(36, 44 - swing, 6, (0x9AA3B0 >> 16 & 255, 0x9AA3B0 >> 8 & 255, 0x9AA3B0 & 255))
+    head(p, O=O)
+    hair_perm(p, O=O)
+    eyes(p, mood="nag", glasses=(0x3A, 0x33, 0x2E))
+    mouth(p, "shout")
+
+
+def draw_boss_neighbour(c: "Canvas", frame: int):
+    """Stage 4 — the upstairs neighbour, dribbling at 11 p.m."""
+    p = boss_pen(c)
+    O = 1.5
+    vest, vest_l, vest_d = (0xF2, 0xF4, 0xF8), WHITE, (0xC6, 0xCD, 0xDA)
+    legs(p, frame, (0x3E, 0x6B, 0x4A), (0x2A, 0x4C, 0x33), shoe=(0x5C, 0x63, 0x72), shorts=True, O=O)
+    p.rr(-20, 50, 20, 76, 8, vest, o=O)                        # tank top
+    p.rr(-20, 50, -8, 76, 8, vest_l)
+    for side in (-1, 1):
+        p.rr(side * 12 - 4, 46, side * 12 + 4, 56, 3, vest, o=O)
+    p.rr(-20, 72, 20, 78, 2, vest_d)
+    p.rr(-22, 74, 22, 84, 4, (0x3E, 0x6B, 0x4A), o=O)          # gym shorts
+    swing = arms(p, frame, SKIN, SKIN_SHADE, O=O, hand_y=80)
+    bx = 32
+    by = 70 + (10 if frame == 1 else -6)
+    p.ci(bx, by, 14, (0xE3, 0x72, 0x22), o=O)                  # basketball
+    p.rot(bx, by, 2.4, 28, 90, (0x7A, 0x33, 0x0C))
+    p.rot(bx, by, 28, 2.4, 0, (0x7A, 0x33, 0x0C))
+    p.el(bx - 5, by - 6, 5, 3, (0xF2, 0x96, 0x44))
+    for k in range(3):                                          # noise marks
+        p.po([(-34 - k * 3, 40 + k * 8), (-26 - k * 3, 44 + k * 8), (-34 - k * 3, 48 + k * 8)], (0xFF, 0xE9, 0x8A))
+    head(p, O=O)
+    hair_messy(p, O=O)
+    eyes(p, mood="plain")
+    mouth(p, "grin")
+    for side in (-1, 1):
+        p.el(side * 11, 36, 3.6, 2.2, BLUSH)
+
+
+MOBS = [mob_paper, mob_brag, mob_nag, mob_thump]
+BOSSES = [draw_boss_manager, draw_boss_rich, draw_boss_aunt, draw_boss_neighbour]
 
 
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "crowdrush", "src", "main", "res", "drawable-nodpi")
     os.makedirs(out, exist_ok=True)
-    # remove sprites from earlier iterations if present
     for old in os.listdir(out):
-        if old.startswith("soldier_"):
+        if old.startswith(("soldier_", "ranger_", "goblin_", "monster")):
             os.remove(os.path.join(out, old))
     for frame in (0, 1):
         c = Canvas(W, H)
-        draw_ranger(c, RANGER, front=False, frame=frame)
-        c.save(os.path.join(out, f"ranger_back_{frame}.png"))
-        g = Canvas(W, H)
-        draw_goblin(g, frame)
-        g.save(os.path.join(out, f"goblin_front_{frame}.png"))
-    try:
-        os.remove(os.path.join(out, "monster.png"))
-    except OSError:
-        pass
-    for kind in MONSTERS:
-        for frame in (0, 1):
-            m = Canvas(160, 200)
-            draw_monster(m, kind, frame)
-            m.save(os.path.join(out, f"monster_{kind}_{frame}.png"))
-    print("wrote ranger, goblin and monster sprites to", os.path.abspath(out))
+        draw_ally(c, frame)
+        c.save(os.path.join(out, f"ally_back_{frame}.png"))
+        for stage, fn in enumerate(MOBS):
+            m = Canvas(W, H)
+            fn(m, frame)
+            m.save(os.path.join(out, f"mob_{stage}_{frame}.png"))
+        for stage, fn in enumerate(BOSSES):
+            b = Canvas(BW, BH)
+            fn(b, frame)
+            b.save(os.path.join(out, f"boss_{stage}_{frame}.png"))
+    print("wrote ally, mob and boss sprites to", os.path.abspath(out))
 
 
 if __name__ == "__main__":

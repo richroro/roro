@@ -211,13 +211,26 @@ def draw_plus(c: Canvas, cx, cy, arm, thick, color):
     c.rounded_rect(cx - thick / 2, cy - arm, cx + thick / 2, cy + arm, thick / 4, color)
 
 
+SKIN = (0xF6, 0xCB, 0xA2)
+HAIR = (0x2A, 0x26, 0x2A)
+SHIRT = (0xF2, 0xF5, 0xFA)
+TIE = (0xD6, 0x2E, 0x3E)
+WOOD = (0x8B, 0x5A, 0x2B)
+
+
 def make_crowd_icon(path):
     c = Canvas(512, 512)
     c.fill_vertical_gradient(CR_BG, CR_BG)
     s = 512 / 108
-    c.rounded_rect(24 * s, 30 * s, 84 * s, 56 * s, 4 * s, CR_GATE)
-    draw_plus(c, 54 * s, 43 * s, 8 * s, 4 * s, (255, 255, 255))
-    draw_crowd(c, 54 * s, 76 * s, 14, 20 * s, CR_ALLY, 5 * s)
+    c.rounded_rect(18 * s, 30 * s, 24 * s, 60 * s, 1 * s, WOOD)
+    c.rounded_rect(84 * s, 30 * s, 90 * s, 60 * s, 1 * s, WOOD)
+    c.rounded_rect(24 * s, 34 * s, 84 * s, 56 * s, 4 * s, CR_GATE)
+    draw_plus(c, 54 * s, 45 * s, 9 * s, 4.5 * s, (0xFD, 0xE6, 0x8A))
+    c.circle(54 * s, 74 * s, 13 * s, SKIN)                      # head
+    c.circle(54 * s, 70 * s, 12 * s, HAIR)                      # hair
+    c.circle(54 * s, 76 * s, 11 * s, SKIN)                      # face below the fringe
+    c.rounded_rect(42 * s, 86 * s, 66 * s, 104 * s, 3 * s, SHIRT)  # shirt
+    c.polygon([(51 * s, 86 * s), (57 * s, 86 * s), (55 * s, 100 * s), (54 * s, 103 * s), (53 * s, 100 * s)], TIE)
     c.save(path)
 
 
@@ -238,7 +251,7 @@ def make_crowd_feature_graphic(path):
     draw_crowd(c, 512, 175, 60, 110, CR_ENEMY, 7)
     # player crowd in front
     draw_crowd(c, 512, 470, 30, 80, CR_ALLY, 13)
-    _wordmark_generic(c, "GOBLIN HUNTERS", 40, 50, cell=10, gap=3)
+    _wordmark_generic(c, "VILLAIN RUSH", 60, 50, cell=11, gap=3)
     c.save(path)
 
 
@@ -248,6 +261,8 @@ _GLYPHS.update({
     "I": ["111", "010", "010", "010", "111"],
     "N": ["1001", "1101", "1011", "1001", "1001"],
     "T": ["11111", "00100", "00100", "00100", "00100"],
+    "V": ["10001", "10001", "10001", "01010", "00100"],
+    "A": ["0110", "1001", "1111", "1001", "1001"],
     "C": ["0111", "1000", "1000", "1000", "0111"],
     "R": ["1110", "1001", "1110", "1010", "1001"],
     "W": ["10001", "10001", "10101", "10101", "01010"],
@@ -273,6 +288,6 @@ if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     make_icon(os.path.join(here, "skydodge-icon-512.png"))
     make_feature_graphic(os.path.join(here, "skydodge-feature-graphic-1024x500.png"))
-    make_crowd_icon(os.path.join(here, "goblinhunters-icon-512.png"))
-    make_crowd_feature_graphic(os.path.join(here, "goblinhunters-feature-graphic-1024x500.png"))
-    print("wrote skydodge-* and goblinhunters-* icon/feature images")
+    make_crowd_icon(os.path.join(here, "villainrush-icon-512.png"))
+    make_crowd_feature_graphic(os.path.join(here, "villainrush-feature-graphic-1024x500.png"))
+    print("wrote skydodge-* and villainrush-* icon/feature images")

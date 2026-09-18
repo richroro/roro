@@ -104,18 +104,20 @@ class CrowdView @JvmOverloads constructor(
     private val clouds = arrayOf(floatArrayOf(0.12f, 0.06f, 0.09f), floatArrayOf(0.38f, 0.11f, 0.07f), floatArrayOf(0.7f, 0.05f, 0.1f), floatArrayOf(0.9f, 0.13f, 0.06f))
     // Sprites drawn by tools/generate_sprites.py: rangers seen from behind, goblins facing the camera.
     private val allyFrames: Array<Bitmap> = arrayOf(
-        BitmapFactory.decodeResource(resources, R.drawable.ranger_back_0),
-        BitmapFactory.decodeResource(resources, R.drawable.ranger_back_1),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_0),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_1),
     )
-    private val enemyFrames: Array<Bitmap> = arrayOf(
-        BitmapFactory.decodeResource(resources, R.drawable.goblin_front_0),
-        BitmapFactory.decodeResource(resources, R.drawable.goblin_front_1),
+    private val mobFrames: Array<Array<Bitmap>> = arrayOf(
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_0_0), BitmapFactory.decodeResource(resources, R.drawable.mob_0_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_1_0), BitmapFactory.decodeResource(resources, R.drawable.mob_1_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_2_0), BitmapFactory.decodeResource(resources, R.drawable.mob_2_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_3_0), BitmapFactory.decodeResource(resources, R.drawable.mob_3_1)),
     )
-    private val monsterFrames: Array<Array<Bitmap>> = arrayOf(
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.monster_ogre_0), BitmapFactory.decodeResource(resources, R.drawable.monster_ogre_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.monster_troll_0), BitmapFactory.decodeResource(resources, R.drawable.monster_troll_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.monster_golem_0), BitmapFactory.decodeResource(resources, R.drawable.monster_golem_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.monster_demon_0), BitmapFactory.decodeResource(resources, R.drawable.monster_demon_1)),
+    private val bossFrames: Array<Array<Bitmap>> = arrayOf(
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_0_0), BitmapFactory.decodeResource(resources, R.drawable.boss_0_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_1_0), BitmapFactory.decodeResource(resources, R.drawable.boss_1_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_2_0), BitmapFactory.decodeResource(resources, R.drawable.boss_2_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_3_0), BitmapFactory.decodeResource(resources, R.drawable.boss_3_1)),
     )
     private var shakeTimer = 0f
     private val monsterHitPaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
@@ -638,15 +640,17 @@ class CrowdView @JvmOverloads constructor(
      * that spreads wider as it grows; enemy squads stand in ranks ([grid]). Each soldier
      * alternates between the two walk frames.
      */
-    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, drawn: Int, unit: Float, frames: Array<Bitmap>, paint: Paint, grid: Boolean) {
+    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, drawn: Int, unit: Float, frames: Array<Bitmap>, paint: Paint, grid: Boolean, maxWidth: Float = 0f) {
         val n = min(drawn, MAX_DRAWN_UNITS)
         val sh = unit * 3.6f
         val sw = sh * 0.8f
         if (grid) {
-            val cols = max(1, kotlin.math.ceil(sqrt(n * 1.6f)).toInt())
+            val spacingX = sw * 0.95f
+            val spacingY = unit * 1.15f
+            // keep the block no wider than the squad's real hitbox; extras stack into more rows
+            val fit = max(1, ((if (maxWidth > 0f) maxWidth else sw * 6f) / spacingX).toInt())
+            val cols = min(fit, max(1, kotlin.math.ceil(sqrt(n * 1.6f)).toInt()))
             val rows = (n + cols - 1) / cols
-            val spacingX = sw * 1.05f
-            val spacingY = unit * 1.35f
             for (i in 0 until n) {
                 val col = i % cols
                 val row = i / cols
@@ -741,7 +745,7 @@ class CrowdView @JvmOverloads constructor(
         val drawn = drawnCount(e.count, e.maxCount)
         val rv = crowdRadiusPx(drawn, unit)
         val cx = screenX(e.x, f)
-        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, enemyFrames, spritePaint, grid = true)
+        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint, grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f)
         label(canvas, e.count.toString(), cx, y - unit * 1.2f - rv * 0.9f - unit * 4.2f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
@@ -762,12 +766,12 @@ class CrowdView @JvmOverloads constructor(
         if (f < 0.05f) return
         val w = width.toFloat()
         val y = screenY(f)
-        val frames = monsterFrames[b.kind.coerceIn(0, monsterFrames.size - 1)]
+        val frames = bossFrames[b.kind.coerceIn(0, bossFrames.size - 1)]
         val stomp = if (b.marching) abs(sin(runTime * PI_F * 3f)) else 0f
         val sprite = frames[if (b.marching) (runTime * 3f).toInt() and 1 else 0]
-        val breathe = 1f + 0.03f * sin(runTime * 4f)
+        val breathe = 1f + 0.02f * sin(runTime * 4f)
         val hit = monsterHitTimer > 0f
-        val mh = w * 0.62f * f * breathe
+        val mh = w * 0.58f * f * breathe
         val mw = mh * 0.8f
         val x = screenX(0f, f) + if (b.marching) sin(runTime * PI_F * 3f) * w * 0.01f * f else 0f
         val ground = y
