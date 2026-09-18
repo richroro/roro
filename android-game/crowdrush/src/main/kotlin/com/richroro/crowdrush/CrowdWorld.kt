@@ -67,9 +67,15 @@ class CrowdWorld(private val seed: Int = 1) {
             internal set
     }
 
-    class Enemy(val z: Float, val x: Float, count: Int) {
+    class Enemy(z: Float, val x: Float, count: Int) {
+        var z: Float = z
+            private set
         var count: Int = count
             private set
+
+        internal fun march(dz: Float) {
+            z -= dz
+        }
         var alive: Boolean = true
             internal set
 
@@ -220,12 +226,27 @@ class CrowdWorld(private val seed: Int = 1) {
 
         val enemyCount = min(MAX_ENEMIES, BASE_ENEMIES + ((newLevel - 1) / 2) * ENEMIES_PER_TWO_LEVELS)
         mutableEnemies.clear()
+        // Squads are spread evenly along the lane (one per zone), kept clear of gates, alternate
+        // sides, and grow with how far along the lane they stand.
+        val zoneStart = 26f
+        val zoneEnd = length - 22f
+        val zoneLen = (zoneEnd - zoneStart) / enemyCount
         for (i in 0 until enemyCount) {
-            val ez = 24f + random.next() * (length - 40f)
+            var ez = zoneStart + zoneLen * (i + 0.35f + random.next() * 0.3f)
+            repeat(2) {
+                for (g in mutableGates) {
+                    if (abs(ez - g.z) < ENEMY_GATE_CLEARANCE) {
+                        ez = if (ez > g.z) g.z + ENEMY_GATE_CLEARANCE else g.z - ENEMY_GATE_CLEARANCE
+                    }
+                }
+            }
+            ez = ez.coerceIn(22f, length - 12f)
+            val progress = ez / length
             val expected = expectedCountAt(ez)
             val shotsInRange = fireRateFor(expected) * (BULLET_RANGE / speed)
-            val n = max(1, floor(expected * (0.15f + random.next() * 0.35f) + shotsInRange * ENEMY_SHOOT_FACTOR).toInt())
-            mutableEnemies.add(Enemy(ez, -0.55f + random.next() * 1.1f, n))
+            val n = max(MIN_ENEMY, floor(expected * (0.2f + 0.3f * progress) + shotsInRange * ENEMY_SHOOT_FACTOR).toInt())
+            val ex = (if (i % 2 == 0) -1f else 1f) * (0.25f + random.next() * 0.4f)
+            mutableEnemies.add(Enemy(ez, ex, n))
         }
 
         // The boss is sized so a best-path army wins even while landing only half its shots.
@@ -255,6 +276,10 @@ class CrowdWorld(private val seed: Int = 1) {
         val prevZ = z
         z += speed * dt
         flash = max(0f, flash - dt)
+        for (e in mutableEnemies) { // squads advance on the player once they are close
+            val d = e.z - z
+            if (e.alive && d > 0f && d < ENEMY_MARCH_RANGE) e.march(ENEMY_MARCH_SPEED * dt)
+        }
         updateShooting(dt)
 
         for (g in mutableGates) {
@@ -415,7 +440,11 @@ class CrowdWorld(private val seed: Int = 1) {
         const val MUL_HITS_PER_STEP = 20
         const val DIV_HITS_TO_FLIP = 15
         const val BOSS_SHOOT_FACTOR = 0.5f
-        const val ENEMY_SHOOT_FACTOR = 0.15f
+        const val ENEMY_SHOOT_FACTOR = 0.10f
+        const val ENEMY_GATE_CLEARANCE = 7f
+        const val ENEMY_MARCH_SPEED = 1.2f
+        const val ENEMY_MARCH_RANGE = 35f
+        const val MIN_ENEMY = 2
 
         fun fireRateFor(count: Int): Float = min(count, MAX_SHOOTERS) * SHOTS_PER_SHOOTER
 

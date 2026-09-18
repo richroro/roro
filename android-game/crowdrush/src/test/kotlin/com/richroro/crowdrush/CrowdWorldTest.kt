@@ -3,6 +3,7 @@ package com.richroro.crowdrush
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import kotlin.math.abs
 
 class CrowdWorldTest {
 
@@ -196,5 +197,28 @@ class CrowdWorldTest {
         val results = (1..CrowdWorld.GATE_HITS_PER_STEP).map { side.hit() }
         assertEquals(CrowdWorld.GATE_HITS_PER_STEP - 1, results.count { !it })
         assertTrue(results.last())
+    }
+
+    @Test
+    fun `enemy squads stay clear of gates and inside the lane`() {
+        for (seed in 1..30) {
+            val world = CrowdWorld(seed = seed).apply { start() }
+            for (e in world.enemies) {
+                assertTrue("seed $seed enemy at ${e.z} too close to a gate", world.gates.all { abs(it.z - e.z) >= CrowdWorld.ENEMY_GATE_CLEARANCE - 1e-3f })
+                assertTrue(e.z >= 22f && e.z <= world.length - 12f)
+                assertTrue(abs(e.x) + CrowdWorld.ENEMY_HALF_WIDTH <= CrowdWorld.LANE_HALF + 0.05f)
+                assertTrue(e.count >= CrowdWorld.MIN_ENEMY)
+            }
+        }
+    }
+
+    @Test
+    fun `enemy squads march toward the player once in range`() {
+        val world = CrowdWorld(seed = 4).apply { start() }
+        val enemy = world.enemies.first()
+        val startZ = enemy.z
+        world.setForTest(count = 1, playerX = 0.9f, z = enemy.z - CrowdWorld.ENEMY_MARCH_RANGE + 1f)
+        world.update(0.05f)
+        assertEquals(startZ - CrowdWorld.ENEMY_MARCH_SPEED * 0.05f, enemy.z, 1e-4f)
     }
 }
