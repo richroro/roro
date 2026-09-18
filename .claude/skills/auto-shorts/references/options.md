@@ -41,6 +41,10 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `transition_duration` | 전환 길이(초) | `0.3` |
 | `ken_burns` | 이미지 줌/팬 모션 | `true` |
 | `vignette` | 가장자리 어둡게(집중감) | `true` |
+| `layout` | `caption`(하단 카라오케 자막, 기본) / `quote`(씬의 `quote` 를 화면 정중앙 큰 글씨로, 하단 자막 없음) | `caption` |
+| `dim` | 사진을 어둡게(0~0.6). 큰 글씨를 얹는 명언 레이아웃에서 0.3~0.4 권장 | `0` |
+| `quote_size` / `quote_color` / `quote_margin_v` | 명언 글씨 크기·색·세로 위치(0=정중앙) | `74` / `#FFFFFF` / `0` |
+| `author_size` / `author_color` | 출처 줄 크기·색 | `46` / `#FFD400` |
 | `look` | `cinematic`(대비·채도 살짝 상승) 또는 `""` | `""` |
 | `gap_before` / `gap_after` | 씬 시작→나레이션, 나레이션 끝→씬 끝 여백(초). 첫 씬은 앞에 +0.1 | `0.10` / `0.35` |
 | `min_scene` | 씬 최소 길이(초) | `1.8` |
@@ -65,6 +69,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
 | `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
+| `quote` | 화면 중앙에 크게 띄울 문장. ` / ` 로 줄을 나눈다. 이 값이 있으면 그 씬은 하단 자막 대신 명언 레이아웃 |
+| `author` | 명언 출처(인물·책). 문장보다 조금 늦게 페이드인 |
 | `sfx` | `riser` `boom` `pop` `ding` `whoosh` (씬 시작에 재생) |
 | `emoji` | 이미지 확보 실패 시 카드에 크게 그릴 이모지(1~2개). 컬러 이모지 폰트(Noto Color Emoji / Segoe UI Emoji / Apple Color Emoji)가 있는 환경에서 렌더 |
 | `motion` | `in` `out` `pan_left` `pan_right` `pan_up` `pan_down` `static` (기본: 씬 순서대로 순환) |

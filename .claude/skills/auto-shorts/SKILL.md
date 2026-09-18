@@ -79,6 +79,8 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   "style": {
     "image_source": "photo",                // photo(무료 스톡 사진 우선, 기본) | ai(AI 생성 우선) | photo_only(사진만)
     "image_style": "stylized 3d illustration, bold colors, single clear subject, vertical 9:16, no text",  // AI 생성에만 적용되는 아트스타일. 실존 인물·장소의 포토리얼은 피한다
+    "layout": "caption",                    // caption(하단 카라오케, 기본) | quote(중앙 큰 글씨 명언 + 출처)
+    "dim": 0,                               // 사진 어둡게(0~0.6). quote 레이아웃이면 0.35 권장
     "transition": "mix",                    // fade | mix | smoothleft | zoomin | none
     "auto_transition_sfx": false,           // true 면 씬 전환마다 whoosh (과하면 촌스러움)
     "vignette": true

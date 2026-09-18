@@ -59,7 +59,7 @@ def zoompan_expr(motion: str, n_frames: int) -> str:
 
 
 def render_scene_clip(image: Path, out: Path, length: float, motion: str = "in",
-                      vignette: bool = True, look: str = "") -> Path:
+                      vignette: bool = True, look: str = "", dim: float = 0.0) -> Path:
     """1080x1920 정지 이미지 하나로 length 초짜리 무음 클립을 만든다."""
     n = max(2, int(round(length * FPS)))
     chain = [
@@ -68,6 +68,9 @@ def render_scene_clip(image: Path, out: Path, length: float, motion: str = "in",
     ]
     if look == "cinematic":
         chain.append("eq=contrast=1.05:saturation=1.08")
+    if dim > 0:
+        # 사진 위에 큰 글씨를 얹는 레이아웃(명언 등)에서 대비를 확보한다
+        chain.append(f"eq=brightness=-{min(0.6, dim) * 0.55:.3f}:saturation={max(0.4, 1 - dim * 0.5):.2f}")
     if vignette:
         chain.append("vignette=angle=PI/6.5")
     chain.append("format=yuv420p")

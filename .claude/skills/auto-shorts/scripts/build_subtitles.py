@@ -37,6 +37,11 @@ DEFAULT_STYLE = {
     "cta_seconds": 3.0,
     "max_words": 4,
     "max_chars": 16,
+    "quote_size": 74,                # 명언 레이아웃: 화면 중앙 큰 글씨
+    "quote_color": "#FFFFFF",
+    "quote_margin_v": 0,             # 0 이면 화면 정중앙
+    "author_size": 46,
+    "author_color": "#FFD400",
     "brand": "",                     # 채널명/시리즈명. 영상 내내 좌상단에 작게(아이덴티티·반복성 콘텐츠 판정 완화)
     "brand_size": 40,
     "caption_margin_h": 110,         # 자막 좌우 여백(px). 우측 버튼 열(약 15%)을 피한다
@@ -124,6 +129,13 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
         f"Style: CTA,{CAPTION_FONT},{st['cta_size']},{ass_color(st['cta_color'])},{hl},"
         f"{ass_color('#000000')},{ass_color('#000000', 0x50)},0,0,0,0,100,100,0,0,1,4,2,8,"
         f"70,70,{st['headline_margin_v'] + 20},1",
+        # 명언: 화면 정중앙(정렬 5), 줄바꿈 여유를 위해 좌우 여백을 넓게
+        f"Style: Quote,{CAPTION_FONT},{st['quote_size']},{ass_color(st['quote_color'])},{hl},"
+        f"{ass_color('#000000')},{ass_color('#000000', 0x60)},0,0,0,0,100,100,0,0,1,{st['outline']},3,5,"
+        f"120,120,{st['quote_margin_v']},1",
+        f"Style: Author,{CAPTION_FONT},{st['author_size']},{ass_color(st['author_color'])},{hl},"
+        f"{ass_color('#000000')},{ass_color('#000000', 0x60)},0,0,0,0,100,100,0,0,1,4,2,8,"
+        f"120,120,{int(HEIGHT * 0.62)},1",
         f"Style: Brand,{CAPTION_FONT},{st['brand_size']},{ass_color('#FFFFFF', 0x30)},{hl},"
         f"{ass_color('#000000', 0x30)},{ass_color('#000000', 0x80)},0,0,0,0,100,100,0,0,1,2,1,7,"
         f"60,60,190,1",
@@ -139,6 +151,25 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
         base = float(sc["start"])
         dur = float(sc["duration"])
         words = sc.get("words") or []
+        quote = (sc.get("quote") or "").strip()
+
+        if quote:
+            # --- 명언 레이아웃: 중앙에 큰 글씨로 씬 내내 띄우고, 하단 카라오케는 넣지 않는다
+            #     (나레이션이 같은 문장을 읽으므로 자막이 두 벌이면 산만하다)
+            text = "{\\fad(260,240)}" + esc(quote).replace(" / ", "\\N")
+            events.append((base, f"Dialogue: 0,{ts(base + 0.15)},{ts(base + dur - 0.1)},Quote,,0,0,0,,{text}"))
+            author = (sc.get("author") or "").strip()
+            if author:
+                a_start = base + min(1.2, dur * 0.35)
+                events.append((a_start, f"Dialogue: 0,{ts(a_start)},{ts(base + dur - 0.1)},Author,,0,0,0,,"
+                                        f"{{\\fad(300,240)}}— {esc(author)}"))
+            head = (sc.get("headline") or "").strip()
+            if head:
+                h_end = base + min(dur - 0.15, max(1.2, st["headline_seconds"]))
+                events.append((base, f"Dialogue: 1,{ts(base)},{ts(h_end)},Headline,,0,0,0,,"
+                                     f"{{\\fad(140,160)}}{esc(head)}"))
+            continue
+
         # --- 카라오케 캡션
         chunks = chunk_words(words, st["max_words"], st["max_chars"])
         for ci, chunk in enumerate(chunks):

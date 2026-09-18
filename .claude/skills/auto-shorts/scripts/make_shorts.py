@@ -46,6 +46,8 @@ DEFAULT_STYLE = {
     "transition_duration": 0.3,
     "ken_burns": True,
     "vignette": True,
+    "layout": "caption",          # caption(기본, 하단 카라오케) | quote(중앙 명언 + 출처)
+    "dim": 0.0,                   # 사진을 어둡게(0~0.6). 명언 레이아웃에서 0.3~0.4 권장
     "look": "",                   # "" | cinematic
     "gap_before": 0.10,           # 씬 시작 후 나레이션까지 여백(초)
     "gap_after": 0.35,            # 나레이션 끝 뒤 여백(초)
@@ -161,6 +163,7 @@ def main() -> None:
         tl_scenes.append({
             "index": i + 1, "start": round(t, 3), "duration": round(dur, 3), "lead": round(lead, 3),
             "narration": sc["narration"], "headline": sc.get("headline", ""), "words": words,
+            "quote": sc.get("quote", ""), "author": sc.get("author", ""),
             "audio": str(nar_files[i]), "sfx": sc.get("sfx"), "motion": motion,
         })
         t += dur
@@ -260,11 +263,13 @@ def main() -> None:
     clips = []
     for i, sc in enumerate(tl_scenes):
         clip = work / f"clip_{i + 1:02d}.mp4"
-        sig = sig_of(img_files[i], round(lengths[i], 3), sc["motion"], style["vignette"], style["look"])
+        sig = sig_of(img_files[i], round(lengths[i], 3), sc["motion"], style["vignette"], style["look"],
+                     style.get("dim", 0.0))
         if sigs.stale(clip, sig, args.force):
             log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s)")
             render.render_scene_clip(img_files[i], clip, lengths[i], sc["motion"],
-                                     vignette=bool(style["vignette"]), look=style["look"])
+                                     vignette=bool(style["vignette"]), look=style["look"],
+                                     dim=float(style.get("dim", 0.0)))
             sigs.mark(clip, sig)
         clips.append(clip)
     video = work / "video.mp4"

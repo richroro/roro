@@ -66,7 +66,7 @@ EP = {
 UNREACHABLE: set[str] = set()   # 이번 실행에서 연결 자체가 안 된 제공자 (씬마다 재시도하지 않는다)
 _UNREACHABLE_LOCK = threading.Lock()
 
-MIN_SHORT_SIDE = 640      # 이보다 작으면 1080x1920 으로 늘렸을 때 뭉갠다
+MIN_SHORT_SIDE = 600      # 이보다 작으면 1080x1920 으로 늘렸을 때 뭉갠다
 MAX_ASPECT = 2.4          # 너무 가로로 긴 파노라마는 세로 크롭에서 피사체를 잃는다
 
 
@@ -319,14 +319,23 @@ def p_openimages(keywords: str, used: set, **_) -> tuple[bytes, dict]:
 
     if not openimages.index_path().exists():
         log(STAGE, "Open Images 색인이 없어 만듭니다 (CSV 수십 MB, 최초 1회. 끄려면 AUTO_SHORTS_OPENIMAGES=0)")
+    # 후보 하나가 화질 기준에 걸려도 제공자 전체를 포기하지 않는다(다음 후보로).
     for q in query_variants(keywords):
-        try:
-            url, info = openimages.pick(q, used=used)
-        except LookupError:
-            continue
-        data = http_get(url, timeout=90, stage=STAGE)
-        return data, info
-    raise LookupError(f"open images 에 '{keywords}' 사진 없음")
+        for _ in range(5):
+            try:
+                url, info = openimages.pick(q, used=used)
+            except LookupError:
+                break
+            try:
+                data = http_get(url, timeout=90, stage=STAGE)
+                _check_quality(_open_image(data))
+            except Unreachable:
+                raise
+            except Exception as e:  # noqa: BLE001
+                log(STAGE, f"openimages 후보 건너뜀({e})")
+                continue
+            return data, info
+    raise LookupError(f"open images 에 '{keywords}' 에 맞는 사진 없음")
 
 
 def p_picsum(seed: int, **_) -> tuple[bytes, dict]:
