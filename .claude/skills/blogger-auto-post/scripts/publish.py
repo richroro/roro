@@ -16,7 +16,15 @@ Prints the published post URL on the last line (so a caller can capture it).
 import argparse
 import sys
 
-from common import get_service, load_config, slack_notify, now_str, record_published
+from common import (
+    ensure_coupang_disclosure,
+    get_service,
+    has_coupang_link,
+    load_config,
+    now_str,
+    record_published,
+    slack_notify,
+)
 
 
 def publish_post(title, html, labels, is_draft=False):
@@ -26,6 +34,9 @@ def publish_post(title, html, labels, is_draft=False):
         raise RuntimeError(
             "blog_id 가 설정되지 않았습니다. 먼저 auth.py 를 실행하세요."
         )
+
+    # 쿠팡 파트너스 링크가 있으면 필수 고지 문구를 맨 위에 보장한다 (이미 있으면 그대로).
+    html = ensure_coupang_disclosure(html)
 
     service = get_service(interactive=False)
     body = {"kind": "blogger#post", "title": title, "content": html}
@@ -67,7 +78,7 @@ def main():
 
     # 공개 발행만 실적 로그에 남긴다 (조회수-주제 연결용).
     if not args.draft:
-        record_published(args.title, labels, url, source="manual")
+        record_published(args.title, labels, url, source="manual", coupang=has_coupang_link(html))
 
     if not args.no_slack:
         label_str = ", ".join(labels) if labels else "-"

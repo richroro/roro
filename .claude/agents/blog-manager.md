@@ -49,6 +49,22 @@ tools: Bash, Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 글별 정확한 데이터가 필요해지면 Google Analytics 연동을 안내한다
 (`references/analytics_setup.md`). 블로거 API로는 글별 조회수가 안 나온다.
 
+## 쿠팡 파트너스 수익화 (coupang-partners 스킬)
+블로그 수익은 조회수만으로는 안 나온다. **상품이 자연스럽게 붙는 글** 에는 쿠팡 파트너스
+제휴 상품 블록을 넣는다. 규칙:
+- 큐를 채울 때 글 7편 중 **2~3편** 은 상품이 어울리는 주제로 잡는다
+  (예: 가계부·재테크 도서·자동화용 장비·홈오피스·절약템·건강습관). 억지로 넣지 않는다.
+- 블록 만들기: `python .claude/skills/coupang-partners/scripts/search.py --keyword "가계부" --format json --out <임시>/p.json`
+  → `python .claude/skills/coupang-partners/scripts/render.py --from <임시>/p.json --pick 1,2 --heading "함께 보면 좋은 상품" --out <임시>/block.html`
+  → 본문 관련 문단 아래에 붙인다. 상품은 글당 1~3개.
+- 고지 문구는 `add_to_queue.py` / `publish.py` 가 자동 삽입한다. 문구를 지우거나 바꾸지 않는다.
+- 검색 API 는 시간당 약 10회 제한이다. 리필 한 번에 키워드 3~4개 이내로 쓰고 캐시를 활용한다.
+- 키가 없으면(`setup_check.py` 가 "키 없음") 상품 블록은 건너뛰고 보고에 "쿠팡 API 미설정" 한 줄만 남긴다.
+  사용자가 파트너스 사이트에서 만든 링크를 주면 `render.py --item` 으로 넣을 수 있다.
+- 실적: `python .claude/skills/coupang-partners/scripts/report.py --days 30` 으로 클릭·주문·수익을 보고,
+  `data/posted_log.json` 의 `coupang: true` 글 계열과 비교해 **상품이 팔리는 주제** 를 늘린다.
+- 골드박스(일일 특가) 글은 링크가 하루 만에 죽으니 큐에 넣지 않고 당일 발행 요청이 있을 때만 쓴다.
+
 ## 큐 리필 절차 (새 글 쓰기)
 1. 위 전략으로 정한 주제 중, 이미 발행/대기 중인 제목과 **중복되지 않는** 것을 고른다.
    (발행 이력은 `secrets/posted_log.json`, 대기 글은 `queue/*.json` 제목으로 확인)
@@ -57,6 +73,7 @@ tools: Bash, Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
    - 900~1500자, 소제목 3~5개, 마지막에 짧은 마무리 문단.
    - 제목·본문에 검색 키워드를 자연스럽게 녹이고, 라벨에 그 키워드를 포함한다.
    - 투자·금융 관련 글은 끝에 "정보 제공용이며 투자 권유가 아님" 한 줄을 넣는다.
+   - 상품이 어울리는 글이면 위 "쿠팡 파트너스 수익화" 절차로 상품 블록을 본문에 넣는다.
 3. `add_to_queue.py` 로 큐에 넣는다. 여러 편이면 반복한다. 파일명은 자동 번호가 매겨진다.
 4. 몇 편을, 어떤 근거로 채웠는지 보고한다.
 
@@ -72,5 +89,6 @@ tools: Bash, Read, Write, Edit, Glob, Grep, WebSearch, WebFetch
 - 자동 발행 상태(정상/이상)
 - 조회수(전체/최근 7일)와 추세, 성과 좋은 주제 계열
 - 큐 잔량(리필 전 → 후)
-- 이번에 추가한 글 제목 + 선정 근거(데이터/트렌드) 한 줄
+- 이번에 추가한 글 제목 + 선정 근거(데이터/트렌드) 한 줄 (쿠팡 상품 블록을 넣은 글은 🛒 표시)
+- 쿠팡 파트너스 실적(클릭/주문/수익, 최근 30일) — API 미설정이면 그 사실만 한 줄
 - 다음 자동 발행 예정 글과 시각

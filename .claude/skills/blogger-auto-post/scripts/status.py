@@ -8,7 +8,7 @@ whether the queue needs a refill.
 import json
 from pathlib import Path
 
-from common import SKILL_DIR, load_config
+from common import SKILL_DIR, has_coupang_link, load_config
 
 QUEUE_DIR = SKILL_DIR / "queue"
 POSTED_DIR = QUEUE_DIR / "posted"
@@ -18,7 +18,11 @@ def _titles(paths):
     out = []
     for p in paths:
         try:
-            out.append((p.name, json.loads(p.read_text(encoding="utf-8")).get("title", "?")))
+            post = json.loads(p.read_text(encoding="utf-8"))
+            title = post.get("title", "?")
+            if has_coupang_link(post.get("html", "")):
+                title += "  🛒쿠팡"
+            out.append((p.name, title))
         except Exception:  # noqa: BLE001
             out.append((p.name, "(읽기 실패)"))
     return out

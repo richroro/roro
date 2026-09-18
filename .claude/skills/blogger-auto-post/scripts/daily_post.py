@@ -20,7 +20,15 @@ import sys
 import traceback
 from pathlib import Path
 
-from common import SKILL_DIR, load_config, save_config, slack_notify, now_str, record_published
+from common import (
+    SKILL_DIR,
+    has_coupang_link,
+    load_config,
+    now_str,
+    record_published,
+    save_config,
+    slack_notify,
+)
 from publish import publish_post
 
 QUEUE_DIR = SKILL_DIR / "queue"
@@ -95,6 +103,7 @@ def main(dry_run=False):
         print(f"  제목   : {title}")
         print(f"  라벨   : {', '.join(labels) if labels else '-'}")
         print(f"  본문 길이: {len(html)}자")
+        print(f"  쿠팡 링크: {'있음 (고지 문구 자동 삽입)' if has_coupang_link(html) else '없음'}")
         print(f"  발행 후 큐 잔량: {remaining}편")
         return
 
@@ -102,7 +111,7 @@ def main(dry_run=False):
     url = published.get("url", "")
 
     # 실적 로그 + 조회수 스냅샷 (주제별 성과 추적용, 실패해도 발행에는 영향 없음)
-    record_published(title, labels, url, source=picked["source"])
+    record_published(title, labels, url, source=picked["source"], coupang=has_coupang_link(html))
     try:
         from stats import snapshot
 

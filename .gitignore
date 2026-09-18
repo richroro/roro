@@ -34,3 +34,9 @@ __pycache__/
 *_stderr.log
 *_stdout.log
 probe_*.png
+
+# coupang-partners: API keys live in secrets/ (its own .gitignore keeps only
+# .env.example tracked); the search cache is runtime-only.
+.claude/skills/coupang-partners/cache/
+.claude/skills/coupang-partners/scripts/__pycache__/
+.claude/skills/coupang-partners/tests/__pycache__/

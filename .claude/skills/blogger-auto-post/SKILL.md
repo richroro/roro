@@ -92,6 +92,17 @@ python .claude/skills/blogger-auto-post/scripts/daily_post.py --dry-run
 Start-ScheduledTask -TaskName RichgogoBloggerDaily
 ```
 
+## 쿠팡 파트너스 상품 링크 넣기 (수익화)
+상품을 추천하는 글에는 `coupang-partners` 스킬로 만든 **제휴 상품 블록** 을 본문에 넣는다.
+순서: `search.py --keyword` 로 후보 확인 → `render.py` 로 블록 HTML 생성 → 글 본문의
+관련 문단 아래(또는 글 끝)에 붙임 → 평소처럼 `publish.py` / `add_to_queue.py`.
+- `publish.py` 와 `add_to_queue.py` 는 본문에 쿠팡 링크(`link.coupang.com` 등)가 있으면
+  **필수 고지 문구를 맨 위에 자동 삽입** 한다(이미 있으면 중복 안 함). 별도로 쓸 필요 없지만
+  `daily_post.py --dry-run` 의 "쿠팡 링크: 있음" 표시로 한 번 확인한다.
+- 글 하나에 상품 1~3개, 주제와 관련 있는 것만. 골드박스(일일 특가) 글은 큐에 넣지 말고 당일 발행.
+- API 키가 아직 없으면(최종 승인 전) 파트너스 사이트에서 만든 링크를 `render.py --item` 으로 넣는다.
+- 규정·키 발급은 `.claude/skills/coupang-partners/references/coupang_setup.md` 참고.
+
 ## 조회수 확인 & 데이터 기반 주제 선정
 `stats.py` 는 블로거 API로 **전체 조회수**(전체/30일/7일)를 가져와 `secrets/stats_history.json`
 에 스냅샷으로 쌓고, 스냅샷 사이의 증가분을 그 기간에 발행한 글의 라벨에 배분해

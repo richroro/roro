@@ -17,7 +17,7 @@ import json
 import sys
 from pathlib import Path
 
-from common import SKILL_DIR, load_config, save_config
+from common import SKILL_DIR, ensure_coupang_disclosure, load_config, save_config
 
 QUEUE_DIR = SKILL_DIR / "queue"
 POSTED_DIR = QUEUE_DIR / "posted"
@@ -40,6 +40,8 @@ def _max_existing_number():
 def add_post(title, html, labels):
     if not title or not html:
         raise ValueError("title 과 html 은 필수입니다.")
+    # 쿠팡 파트너스 링크가 있으면 고지 문구를 큐 단계에서 미리 넣어 dry-run 에서도 보이게 한다.
+    html = ensure_coupang_disclosure(html)
     QUEUE_DIR.mkdir(parents=True, exist_ok=True)
     cfg = load_config()
     # 카운터가 실제 파일과 어긋나도(수동 추가 등) 기존 글을 덮어쓰지 않도록,

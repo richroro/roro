@@ -7,6 +7,7 @@ libraries are required; Slack and Anthropic calls use urllib so the skill
 works without `requests`/`anthropic` installed.
 """
 import json
+import re
 import sys
 import urllib.request
 import urllib.error
@@ -42,6 +43,32 @@ STATS_HISTORY_PATH = DATA_DIR / "stats_history.json"
 
 # Blogger needs full scope to publish; readonly is not enough for posts.insert.
 SCOPES = ["https://www.googleapis.com/auth/blogger"]
+
+# ---------------------------------------------------------------------------
+# 쿠팡 파트너스 고지 문구 (coupang-partners 스킬의 common.py 와 같은 규칙)
+# 쿠팡 링크가 들어간 글은 공정위 지침·쿠팡 정책상 이 문구가 눈에 띄게 있어야 한다.
+# 발행/큐 추가 시 자동으로 본문 맨 위에 넣어 빠뜨리는 일이 없게 한다.
+# ---------------------------------------------------------------------------
+COUPANG_DISCLOSURE = "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+_COUPANG_DISCLOSURE_CORE = "쿠팡파트너스활동의일환"
+_COUPANG_LINK_RE = re.compile(r"https?://(?:[\w.-]+\.)?(?:coupang\.com|coupa\.ng)(?:/|\?|$)", re.I)
+
+
+def has_coupang_link(html):
+    return bool(_COUPANG_LINK_RE.search(html or ""))
+
+
+def ensure_coupang_disclosure(html):
+    """쿠팡 링크가 있는데 고지 문구가 없으면 본문 맨 위에 넣는다. 이미 있으면 그대로."""
+    if not has_coupang_link(html):
+        return html
+    if _COUPANG_DISCLOSURE_CORE in re.sub(r"\s+", "", html or ""):
+        return html
+    notice = (
+        '<p class="coupang-disclosure" style="font-size:0.85em;color:#777;margin:8px 0 16px;">'
+        f"{COUPANG_DISCLOSURE}</p>\n"
+    )
+    return notice + (html or "")
 
 
 def now_str():
@@ -79,8 +106,10 @@ def append_json_list(path, entry):
     return items
 
 
-def record_published(title, labels, url, source="manual"):
-    """Log a published post so stats.py can attribute traffic to topics."""
+def record_published(title, labels, url, source="manual", coupang=False):
+    """Log a published post so stats.py can attribute traffic to topics.
+    `coupang` marks posts carrying Coupang Partners links, so affiliate
+    performance can later be matched against topics."""
     return append_json_list(
         POSTED_LOG_PATH,
         {
@@ -90,6 +119,7 @@ def record_published(title, labels, url, source="manual"):
             "labels": labels or [],
             "url": url,
             "source": source,
+            "coupang": bool(coupang),
         },
     )
 
