@@ -5,6 +5,8 @@
     google_trends   구글 트렌드 일별 급상승 검색어 RSS (geo=KR)
     wikipedia       한국어 위키백과 어제 많이 본 문서 TOP (Wikimedia Pageviews API)
     reddit          r/todayilearned, r/interestingasfuck, r/Damnthatsinteresting 주간 TOP (재미난 사실 소재)
+    watchlist       trends/watchlist.txt 에 적은 유튜브 채널들의 최신 업로드 RSS(키 불필요) → 시간당 조회수로 정렬
+                    (잘나가는 잡학·상식 쇼츠 채널을 20~50개 적어 두면 '지금 터지는 제목'을 바로 본다)
 키가 있으면 추가되는 소스:
     youtube         YouTube Data API v3 — 한국 인기 급상승 + 쇼츠 검색(최근 7일, 조회수순) → 제목 패턴 분석
                     (YOUTUBE_API_KEY, 무료 할당량 10,000/일. 이 스크립트는 1회 약 700 유닛 사용)
@@ -33,7 +35,8 @@ from common import SKILL_DIR, env_key, http_get, http_json, log, qs, warn, write
 
 STAGE = "trends"
 TRENDS_DIR = SKILL_DIR / "trends"
-ALL_SOURCES = ["google_trends", "wikipedia", "reddit", "youtube"]
+ALL_SOURCES = ["google_trends", "wikipedia", "reddit", "watchlist", "youtube"]
+WATCHLIST = TRENDS_DIR / "watchlist.txt"
 DEFAULT_YT_QUERIES = ["신기한 사실", "몰랐던 상식", "동물 상식", "역사 비하인드", "우주 사실", "심리학 사실"]
 WIKI_SKIP = re.compile(r"^(위키백과:|특수:|파일:|분류:|틀:|도움말:|포털:|메인 페이지|Wikipedia|Special:|File:|-)")
 
@@ -101,6 +104,47 @@ def parse_reddit(data: dict, sub: str) -> list[dict]:
         if title:
             out.append({"sub": sub, "title": title, "score": d.get("score", 0),
                         "url": "https://www.reddit.com" + d.get("permalink", "")})
+    return out
+
+
+def watchlist_feeds(path: Path = WATCHLIST, now: dt.datetime | None = None) -> list[dict]:
+    """채널 RSS(https://www.youtube.com/feeds/videos.xml?channel_id=UC...)로 최신 15편의 조회수를 읽어
+    시간당 조회수(업로드 후 경과 시간 대비)로 정렬한다. 파일 한 줄 = 채널 ID (# 주석 가능)."""
+    if not path.is_file():
+        return []
+    ids = [l.split("#")[0].strip() for l in path.read_text(encoding="utf-8").splitlines()]
+    ids = [i for i in ids if i.startswith("UC")]
+    out = []
+    for cid in ids:
+        try:
+            xml = http_get(f"https://www.youtube.com/feeds/videos.xml?channel_id={cid}", timeout=20, retries=1,
+                           stage=STAGE).decode("utf-8", "replace")
+            out.extend(parse_channel_feed(xml, now))
+        except Exception as e:  # noqa: BLE001
+            warn(STAGE, f"watchlist {cid} 실패: {e}")
+    out.sort(key=lambda r: -r["views_per_hour"])
+    return out
+
+
+def parse_channel_feed(xml: str, now: dt.datetime | None = None) -> list[dict]:
+    ns = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015",
+          "media": "http://search.yahoo.com/mrss/"}
+    root = ET.fromstring(xml)
+    channel = (root.findtext("a:title", namespaces=ns) or "").strip()
+    now = now or dt.datetime.now(dt.timezone.utc)
+    out = []
+    for e in root.findall("a:entry", ns):
+        title = (e.findtext("a:title", namespaces=ns) or "").strip()
+        vid = (e.findtext("yt:videoId", namespaces=ns) or "").strip()
+        pub = (e.findtext("a:published", namespaces=ns) or "").strip()
+        stats = e.find("media:group/media:community/media:statistics", ns)
+        views = int(stats.get("views", 0)) if stats is not None else 0
+        try:
+            age_h = max(1.0, (now - dt.datetime.fromisoformat(pub.replace("Z", "+00:00"))).total_seconds() / 3600)
+        except ValueError:
+            age_h = 24.0
+        out.append({"channel": channel, "title": title, "views": views, "age_hours": round(age_h, 1),
+                    "views_per_hour": round(views / age_h, 1), "url": f"https://www.youtube.com/shorts/{vid}"})
     return out
 
 
@@ -204,6 +248,14 @@ def render_markdown(data: dict) -> str:
         for r in sorted(rd, key=lambda x: -x["score"])[:25]:
             L.append(f"- [{r['score']:,}] {r['title']}  <{r['url']}>")
         L.append("")
+    wl = data.get("watchlist") or []
+    if wl:
+        L += ["## 관찰 채널 최신 업로드 (시간당 조회수순, 키 불필요)", ""]
+        for r in wl[:25]:
+            L.append(f"- [{r['views_per_hour']:,.0f}/h · {r['views']:,}회 · {r['age_hours']:.0f}h] {r['title']} — {r['channel']}")
+        L.append("")
+    elif "watchlist" in data:
+        L += ["## 관찰 채널", "", f"`{WATCHLIST.name}` 에 유튜브 채널 ID(UC…)를 한 줄씩 적으면 그 채널들의 최신 쇼츠를 시간당 조회수로 보여 준다.", ""]
     yt = data.get("youtube") or {}
     if yt:
         L += ["## YouTube 잘나가는 쇼츠 (최근 7일, 조회수순)", ""]
@@ -243,6 +295,7 @@ def main() -> None:
         "google_trends": lambda: google_trends(args.geo),
         "wikipedia": lambda: wikipedia_top("ko.wikipedia" if args.geo == "KR" else "en.wikipedia"),
         "reddit": lambda: reddit_top(),
+        "watchlist": lambda: watchlist_feeds(),
         "youtube": lambda: youtube([q.strip() for q in (args.queries or ",".join(DEFAULT_YT_QUERIES)).split(",")], args.geo),
     }
     for name in sources:

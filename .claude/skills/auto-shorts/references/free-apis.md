@@ -46,6 +46,23 @@
 - 효과음은 기본 로컬 합성(whoosh/pop/ding/riser/boom). `FREESOUND_API_KEY` 가 있으면
   `python scripts/fetch_audio.py sfx --name whoosh --provider freesound --out work/sfx_whoosh.wav` 로 교체 가능.
 
+## 트렌드·잘나가는 쇼츠 데이터 (`scripts/research_trends.py`)
+
+| 소스 | 키 | 무엇 | 비고 |
+|---|---|---|---|
+| Google Trends RSS `trends.google.com/trending/rss?geo=KR` | 불필요 | 오늘 급상승 검색어 + 트래픽 + 뉴스 제목 | `pytrends` 는 2025-04 아카이브됨 — 쓰지 않는다 |
+| Wikimedia Pageviews `wikimedia.org/api/rest_v1/metrics/pageviews/top/ko.wikipedia/all-access/YYYY/MM/DD` | 불필요 | 어제 많이 본 한국어 위키 문서 1000개 | 집계는 UTC 자정 후 몇 시간 뒤 확정 |
+| Reddit `reddit.com/r/<sub>/top.json?t=week` | 불필요 | r/todayilearned 등 주간 인기 사실 | 설명적 User-Agent 필수, 과하면 429 |
+| YouTube 채널 RSS `youtube.com/feeds/videos.xml?channel_id=UC…` | 불필요 | 관찰 채널 최신 15편 + 조회수 → 시간당 조회수 | `trends/watchlist.txt` 에 채널 ID를 적는다 |
+| YouTube Data API v3 | 무료 키 `YOUTUBE_API_KEY` | 인기 급상승(1유닛) + 키워드 쇼츠 검색(100유닛/페이지) | 하루 10,000유닛. `videoDuration=short` 는 '4분 미만'이라 길이로 다시 거른다 |
+| Naver DataLab 검색어 트렌드 | 무료 키(네이버 개발자) | 내가 준 키워드의 상대 추이(발굴 아님, 검증용) | 하루 1,000회 — 후속 확장 후보 |
+| Hacker News `hacker-news.firebaseio.com/v0/beststories.json` | 불필요 | 영어 과학·기술 화제 | 후속 확장 후보 |
+
+**Threads**: 공개 트렌드/검색 API 가 없다. 키워드 검색(`graph.threads.net/v1.0/keyword_search`)은 Meta 앱 + 사용자 토큰 +
+`threads_keyword_search` 권한(앱 검토 필요)이 있어야 한다. 그래서 트렌드 조사 스크립트는 Threads 를 읽지 않고,
+Threads 는 **훅 테스트·확산 채널**로 쓴다(`references/playbook.md` 의 Threads 절). 영상 게시 제한: 5분·1GB·H.264/AAC,
+본문 500자, 첨부 텍스트 10,000자. 본문에 외부 링크를 넣으면 노출이 크게 줄므로 링크는 첫 답글에.
+
 ## 키 설정 방법
 
 1. `.claude/skills/auto-shorts/.env.example` 을 `.env` 로 복사하고 값을 채운다 (git 에 안 올라감).
