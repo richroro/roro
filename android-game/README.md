@@ -81,14 +81,24 @@ cd android-game
 
 ## CI / 배포 파이프라인 (`.github/workflows/android-release.yml`)
 
+두 앱은 **게임별로 따로** 빌드·릴리스됩니다. 태그도 버전도 앱마다 독립입니다.
+
 | 트리거 | 동작 |
 | --- | --- |
-| PR, `main` push | 단위 테스트 → 릴리스 APK/AAB 빌드 → Actions 아티팩트 업로드 |
-| `android-v*` 태그 push | 위 작업 + GitHub Release 생성 (APK/AAB 첨부) |
-| 수동 실행 (workflow_dispatch) | 옵션: `create_github_release`, `play_track`(internal/alpha/beta/production), `play_app`(skydodge/villainrush) |
+| PR, `main`/`claude/**` push | 두 앱 각각 단위 테스트 → 릴리스 APK/AAB 빌드 → 아티팩트 업로드 (릴리스는 안 만듦) |
+| `skydodge-v*` 태그 push | Sky Dodge 만 빌드하고 그 앱의 GitHub Release 생성 |
+| `villainrush-v*` 태그 push | Villain Rush 만 빌드하고 그 앱의 GitHub Release 생성 |
+| 수동 실행 (workflow_dispatch) | `app`(both/skydodge/villainrush), `version_name`, `create_github_release`, `play_track` |
 
-`versionCode` 는 워크플로 실행 번호(`github.run_number`)라서 항상 증가합니다.
-`versionName` 은 태그(`android-v1.2.0` → `1.2.0`) 또는 수동 실행 입력값에서 옵니다.
+```bash
+# 게임별 릴리스
+git tag villainrush-v1.9.0 && git push origin villainrush-v1.9.0
+git tag skydodge-v1.1.0    && git push origin skydodge-v1.1.0
+```
+
+`versionCode` 는 워크플로 실행 번호(`github.run_number`)라서 항상 증가합니다. Play Console 에서 두 앱은 별개이므로
+각자의 versionCode 수열만 증가하면 되고, 번호가 서로 이어지지 않아도 문제가 없습니다.
+`versionName` 은 태그(`villainrush-v1.9.0` → `1.9.0`) 또는 수동 실행 입력값에서 옵니다.
 
 ### 1. 업로드 키 만들기 (한 번만)
 
@@ -119,7 +129,10 @@ base64 -w0 skydodge-upload.jks > skydodge-upload.jks.b64   # macOS: base64 -i sk
 > **빌런 러시 스토어 등록 자료는 [`store/PLAY_STORE.md`](store/PLAY_STORE.md) 에 모두 정리돼 있습니다.**
 > 앱 이름·설명 문구, 콘솔 설문 답변, 스크린샷(`store/screenshots/`), 개인정보처리방침 URL 까지 그대로 붙여 넣으면 됩니다.
 
-### 3. Google Play Console 에 앱 만들기 (앱마다 최초 1회, 수동)
+### 3. Google Play Console 에 앱 만들기 (게임마다 최초 1회, 수동)
+
+Play Console 에서 두 게임은 **완전히 별개의 앱**입니다. 등록정보·스크린샷·콘텐츠 등급·심사·versionCode 가 각각이며,
+업로드 키스토어는 공유해도 되지만 Play 앱 서명 키는 앱마다 따로 생성됩니다.
 
 1. https://play.google.com/console 에서 개발자 계정 등록 (1회 등록비 US$25).
 2. **앱 만들기** → 이름 `Sky Dodge` 또는 `Villain Rush`, 기본 언어 한국어, 앱/게임 → 게임, 무료.
@@ -141,13 +154,13 @@ base64 -w0 skydodge-upload.jks > skydodge-upload.jks.b64   # macOS: base64 -i sk
 1. Play Console **설정 → API 액세스** 에서 Google Cloud 프로젝트 연결 → 서비스 계정 생성 → JSON 키 다운로드.
 2. Play Console **사용자 및 권한** 에서 그 서비스 계정에 앱 권한(출시 관리) 부여.
 3. JSON 내용을 `PLAY_SERVICE_ACCOUNT_JSON` 시크릿으로 등록.
-4. **Actions → Android Release → Run workflow** 에서 `play_track=internal`, `play_app` 선택 후 실행 → 내부 테스트 트랙에 자동 업로드.
+4. **Actions → Android Release → Run workflow** 에서 `app` 으로 게임을 고르고 `play_track=internal` 로 실행 → 그 앱의 내부 테스트 트랙에 자동 업로드.
    검수 후 콘솔에서 프로덕션으로 승급하거나, `play_track=production` 으로 재실행.
 
 ### 5. 새 버전 내기
 
 ```bash
-git tag android-v1.0.1 && git push origin android-v1.0.1
+git tag villainrush-v1.9.0 && git push origin villainrush-v1.9.0
 ```
 
-태그를 올리면 빌드·서명·GitHub Release 까지 자동으로 진행됩니다.
+태그를 올리면 그 게임만 빌드·서명·GitHub Release 까지 자동으로 진행됩니다.

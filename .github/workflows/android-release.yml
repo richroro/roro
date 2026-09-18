@@ -1,9 +1,14 @@
 name: Android Release
 
-# android-game/ 의 두 앱(Sky Dodge :app, Villain Rush :crowdrush) 빌드·테스트·서명 파이프라인.
-#  - PR / main push : 빌드 + 단위 테스트 + 서명된 APK/AAB 아티팩트 업로드
-#  - android-v* 태그 : 위 작업 + GitHub Release 생성(APK/AAB 첨부)
-#  - 수동 실행       : 옵션으로 GitHub Release 생성, Google Play 트랙 업로드
+# android-game/ 의 두 앱을 **게임별로** 빌드·테스트·서명·배포한다.
+#
+#  - PR / main / claude/** push : 두 앱 모두 빌드 + 단위 테스트 (릴리스는 만들지 않음)
+#  - skydodge-v* 태그           : Sky Dodge 만 릴리스
+#  - villainrush-v* 태그        : Villain Rush 만 릴리스
+#  - 수동 실행                  : app 입력으로 한 앱만 또는 둘 다 선택
+#
+# 앱마다 GitHub Release 와 태그가 따로 생기고 버전도 따로 올라간다.
+# Play Console 에서도 두 앱은 별개의 앱이므로 등록정보·심사·versionCode 가 각각이다.
 #
 # 필요한 GitHub Secrets (Settings → Secrets and variables → Actions):
 #   ANDROID_KEYSTORE_BASE64   업로드 키스토어(.jks)를 base64 로 인코딩한 문자열
@@ -16,7 +21,7 @@ name: Android Release
 on:
   push:
     branches: [main, "claude/**"]
-    tags: ["android-v*"]
+    tags: ["skydodge-v*", "villainrush-v*"]
     paths:
       - "android-game/**"
       - ".github/workflows/android-release.yml"
@@ -26,8 +31,13 @@ on:
       - ".github/workflows/android-release.yml"
   workflow_dispatch:
     inputs:
+      app:
+        description: "빌드할 게임"
+        type: choice
+        options: [both, skydodge, villainrush]
+        default: both
       version_name:
-        description: "versionName (예: 1.0.0). 비우면 태그 또는 기본값 사용"
+        description: "versionName (예: 1.8.0). 비우면 1.0.0"
         required: false
         default: ""
       create_github_release:
@@ -39,11 +49,6 @@ on:
         type: choice
         options: [none, internal, alpha, beta, production]
         default: none
-      play_app:
-        description: "Google Play 에 올릴 앱"
-        type: choice
-        options: [skydodge, villainrush]
-        default: skydodge
 
 permissions:
   contents: write
@@ -52,23 +57,95 @@ concurrency:
   group: android-release-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # Play Console 은 versionCode 가 항상 증가해야 하므로 워크플로 실행 번호를 그대로 쓴다.
-  ANDROID_VERSION_CODE: ${{ github.run_number }}
-
 jobs:
+  plan:
+    name: Pick apps and version
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.pick.outputs.apps }}
+      version_name: ${{ steps.pick.outputs.version_name }}
+      release: ${{ steps.pick.outputs.release }}
+    steps:
+      - name: Decide which games to build and at what version
+        id: pick
+        env:
+          INPUT_APP: ${{ inputs.app }}
+          INPUT_VERSION: ${{ inputs.version_name }}
+          INPUT_RELEASE: ${{ inputs.create_github_release }}
+        run: |
+          set -euo pipefail
+          apps='["skydodge","villainrush"]'
+          version="1.0.0"
+          release="false"
+
+          case "$GITHUB_REF" in
+            refs/tags/skydodge-v*)
+              apps='["skydodge"]'
+              version="${GITHUB_REF#refs/tags/skydodge-v}"
+              release="true"
+              ;;
+            refs/tags/villainrush-v*)
+              apps='["villainrush"]'
+              version="${GITHUB_REF#refs/tags/villainrush-v}"
+              release="true"
+              ;;
+            *)
+              if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+                case "$INPUT_APP" in
+                  skydodge)    apps='["skydodge"]' ;;
+                  villainrush) apps='["villainrush"]' ;;
+                esac
+                [ -n "$INPUT_VERSION" ] && version="$INPUT_VERSION"
+                release="${INPUT_RELEASE:-false}"
+              fi
+              ;;
+          esac
+
+          echo "apps=$apps" >> "$GITHUB_OUTPUT"
+          echo "version_name=$version" >> "$GITHUB_OUTPUT"
+          echo "release=$release" >> "$GITHUB_OUTPUT"
+          echo "apps=$apps version=$version release=$release"
+
   build:
-    name: Build · test · sign
+    name: ${{ matrix.app }} · build · test · sign
+    needs: plan
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: android-game
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.plan.outputs.apps) }}
+    env:
+      # Play Console 은 versionCode 가 앱마다 항상 증가해야 하므로 워크플로 실행 번호를 쓴다.
+      ANDROID_VERSION_CODE: ${{ github.run_number }}
+      ANDROID_VERSION_NAME: ${{ needs.plan.outputs.version_name }}
     outputs:
-      version_name: ${{ steps.version.outputs.version_name }}
       store_ready: ${{ steps.keystore.outputs.store_ready }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve app settings
+        id: app
+        env:
+          APP: ${{ matrix.app }}
+        run: |
+          set -euo pipefail
+          if [ "$APP" = "skydodge" ]; then
+            echo "module=app" >> "$GITHUB_OUTPUT"
+            echo "gradle=:app" >> "$GITHUB_OUTPUT"
+            echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
+            echo "title=Sky Dodge (스카이 닷지)" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
+          else
+            echo "module=crowdrush" >> "$GITHUB_OUTPUT"
+            echo "gradle=:crowdrush" >> "$GITHUB_OUTPUT"
+            echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
+            echo "title=Villain Rush (빌런 러시)" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -89,21 +166,6 @@ jobs:
           (yes || true) | "$SDKMANAGER" --licenses > /dev/null || true
           "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0" > /dev/null
 
-      - name: Resolve version name
-        id: version
-        env:
-          INPUT_VERSION: ${{ inputs.version_name }}
-        run: |
-          if [ -n "$INPUT_VERSION" ]; then
-            v="$INPUT_VERSION"
-          elif [[ "$GITHUB_REF" == refs/tags/android-v* ]]; then
-            v="${GITHUB_REF#refs/tags/android-v}"
-          else
-            v="1.0.0"
-          fi
-          echo "version_name=$v" >> "$GITHUB_OUTPUT"
-          echo "versionName=$v versionCode=$ANDROID_VERSION_CODE"
-
       - name: Restore release keystore from secrets
         id: keystore
         env:
@@ -121,29 +183,33 @@ jobs:
 
       - name: Unit tests + release APK + release AAB
         env:
-          ANDROID_VERSION_NAME: ${{ steps.version.outputs.version_name }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: ./gradlew --no-daemon --stacktrace testReleaseUnitTest assembleRelease bundleRelease
+          GRADLE_PREFIX: ${{ steps.app.outputs.gradle }}
+        run: |
+          ./gradlew --no-daemon --stacktrace \
+            "${GRADLE_PREFIX}:testReleaseUnitTest" \
+            "${GRADLE_PREFIX}:assembleRelease" \
+            "${GRADLE_PREFIX}:bundleRelease"
 
       - name: Collect artifacts
         env:
-          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          MODULE: ${{ steps.app.outputs.module }}
+          PREFIX: ${{ steps.app.outputs.prefix }}
+          VERSION_NAME: ${{ needs.plan.outputs.version_name }}
         run: |
+          set -euo pipefail
           mkdir -p dist
-          cp app/build/outputs/apk/release/app-release.apk "dist/SkyDodge-${VERSION_NAME}.apk"
-          cp app/build/outputs/bundle/release/app-release.aab "dist/SkyDodge-${VERSION_NAME}.aab"
-          cp app/build/outputs/mapping/release/mapping.txt "dist/SkyDodge-${VERSION_NAME}-mapping.txt"
-          cp crowdrush/build/outputs/apk/release/crowdrush-release.apk "dist/VillainRush-${VERSION_NAME}.apk"
-          cp crowdrush/build/outputs/bundle/release/crowdrush-release.aab "dist/VillainRush-${VERSION_NAME}.aab"
-          cp crowdrush/build/outputs/mapping/release/mapping.txt "dist/VillainRush-${VERSION_NAME}-mapping.txt"
+          cp "${MODULE}/build/outputs/apk/release/${MODULE}-release.apk" "dist/${PREFIX}-${VERSION_NAME}.apk"
+          cp "${MODULE}/build/outputs/bundle/release/${MODULE}-release.aab" "dist/${PREFIX}-${VERSION_NAME}.aab"
+          cp "${MODULE}/build/outputs/mapping/release/mapping.txt" "dist/${PREFIX}-${VERSION_NAME}-mapping.txt"
           ls -la dist
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: android-apps-${{ steps.version.outputs.version_name }}-build${{ github.run_number }}
+          name: ${{ matrix.app }}-${{ needs.plan.outputs.version_name }}-build${{ github.run_number }}
           path: android-game/dist/*
           if-no-files-found: error
 
@@ -151,51 +217,89 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-test-reports-${{ github.run_number }}
-          path: android-game/app/build/reports/tests/
+          name: ${{ matrix.app }}-test-reports-${{ github.run_number }}
+          path: android-game/${{ steps.app.outputs.module }}/build/reports/tests/
           if-no-files-found: ignore
 
   github-release:
-    name: GitHub Release
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/android-v') || (github.event_name == 'workflow_dispatch' && inputs.create_github_release)
+    name: ${{ matrix.app }} · GitHub Release
+    needs: [plan, build]
+    if: needs.plan.outputs.release == 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.plan.outputs.apps) }}
     steps:
+      - name: Resolve app settings
+        id: app
+        env:
+          APP: ${{ matrix.app }}
+        run: |
+          set -euo pipefail
+          if [ "$APP" = "skydodge" ]; then
+            echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
+            echo "title=Sky Dodge (스카이 닷지)" >> "$GITHUB_OUTPUT"
+            echo "blurb=떨어지는 블록을 좌우 드래그로 피하고 별을 모으는 한 손 캐주얼 게임." >> "$GITHUB_OUTPUT"
+          else
+            echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
+            echo "title=Villain Rush (빌런 러시)" >> "$GITHUB_OUTPUT"
+            echo "blurb=동료를 모아 달리며 게이트를 쏴 인원을 불리고, 스테이지마다 현실 빌런을 물리치는 사격 러너." >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: android-apps-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
+          name: ${{ matrix.app }}-${{ needs.plan.outputs.version_name }}-build${{ github.run_number }}
           path: dist
 
       - name: Create or update release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: android-v${{ needs.build.outputs.version_name }}
-          name: Android games ${{ needs.build.outputs.version_name }}
+          tag_name: ${{ matrix.app }}-v${{ needs.plan.outputs.version_name }}
+          name: ${{ steps.app.outputs.title }} ${{ needs.plan.outputs.version_name }}
           prerelease: ${{ needs.build.outputs.store_ready != 'true' }}
           files: |
             dist/*.apk
             dist/*.aab
           body: |
-            **Sky Dodge · Villain Rush** ${{ needs.build.outputs.version_name }} (versionCode ${{ github.run_number }})
+            **${{ steps.app.outputs.title }}** ${{ needs.plan.outputs.version_name }} (versionCode ${{ github.run_number }})
 
-            | 앱 | 설치용 APK | Play 업로드용 AAB |
-            | --- | --- | --- |
-            | Sky Dodge (스카이 닷지) | `SkyDodge-*.apk` | `SkyDodge-*.aab` |
-            | Villain Rush (빌런 러시) | `VillainRush-*.apk` | `VillainRush-*.aab` |
+            ${{ steps.app.outputs.blurb }}
+
+            - `${{ steps.app.outputs.prefix }}-*.apk` : 휴대폰에서 직접 설치(사이드로드)용
+            - `${{ steps.app.outputs.prefix }}-*.aab` : Google Play Console 업로드용 App Bundle
 
             ${{ needs.build.outputs.store_ready == 'true' && '릴리스 키로 서명됨 (Play Console 업로드 가능).' || '⚠️ 디버그 키로 서명됨. Play 업로드용 서명은 저장소 Secrets 에 키스토어를 등록한 뒤 다시 빌드하세요 (android-game/README.md 참고).' }}
 
   google-play:
-    name: Upload to Google Play
-    needs: build
+    name: ${{ matrix.app }} · Upload to Google Play
+    needs: [plan, build]
     if: github.event_name == 'workflow_dispatch' && inputs.play_track != 'none' && needs.build.outputs.store_ready == 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJSON(needs.plan.outputs.apps) }}
     steps:
+      - name: Resolve app settings
+        id: app
+        env:
+          APP: ${{ matrix.app }}
+        run: |
+          set -euo pipefail
+          if [ "$APP" = "skydodge" ]; then
+            echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
+          else
+            echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: android-apps-${{ needs.build.outputs.version_name }}-build${{ github.run_number }}
+          name: ${{ matrix.app }}-${{ needs.plan.outputs.version_name }}-build${{ github.run_number }}
           path: dist
 
       - name: Check Play service account secret
@@ -203,30 +307,16 @@ jobs:
           SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
         run: |
           if [ -z "$SERVICE_ACCOUNT_JSON" ]; then
-            echo "::error::PLAY_SERVICE_ACCOUNT_JSON secret is not set. See android-game/README.md."
+            echo "::error::PLAY_SERVICE_ACCOUNT_JSON secret is not set. See android-game/store/PLAY_STORE.md."
             exit 1
-          fi
-
-      - name: Pick app
-        id: pick
-        env:
-          PLAY_APP: ${{ inputs.play_app }}
-          VERSION_NAME: ${{ needs.build.outputs.version_name }}
-        run: |
-          if [ "$PLAY_APP" = "villainrush" ]; then
-            echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
-            echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
-          else
-            echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
-            echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Upload AAB to Play track
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: ${{ steps.pick.outputs.package }}
-          releaseFiles: dist/${{ steps.pick.outputs.prefix }}-${{ needs.build.outputs.version_name }}.aab
-          mappingFile: dist/${{ steps.pick.outputs.prefix }}-${{ needs.build.outputs.version_name }}-mapping.txt
+          packageName: ${{ steps.app.outputs.package }}
+          releaseFiles: dist/${{ steps.app.outputs.prefix }}-${{ needs.plan.outputs.version_name }}.aab
+          mappingFile: dist/${{ steps.app.outputs.prefix }}-${{ needs.plan.outputs.version_name }}-mapping.txt
           track: ${{ inputs.play_track }}
           status: completed
