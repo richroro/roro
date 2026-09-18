@@ -17,6 +17,8 @@
     <color name="ally">#14B8A6</color>
     <color name="hit">#F59E0B</color>
     <color name="enemy">#84CC16</color>
+    <color name="hp_fill">#DC2626</color>
+    <color name="hp_track">#7F1D1D</color>
     <color name="head">#FDE68A</color>
     <color name="gate_good">#E0F59E0B</color>
     <color name="gate_bad">#D97C3AED</color>

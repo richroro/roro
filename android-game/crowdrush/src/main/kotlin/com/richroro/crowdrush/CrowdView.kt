@@ -124,8 +124,12 @@ class CrowdView @JvmOverloads constructor(
         colorFilter = LightingColorFilter(0xFFFFFFFF.toInt(), 0x00FF4040)
     }
     private var monsterHitTimer = 0f
+    private var flashTimer = 0f
+    private var flashColor = 0
+    private val flashPaint = Paint()
     private val hpBackPaint = Paint().apply { color = 0x8C0F172A.toInt() }
-    private val hpPaint = Paint().apply { color = color(R.color.enemy) }
+    private val hpPaint = Paint().apply { color = color(R.color.hp_fill) }
+    private val hpTrackPaint = Paint().apply { color = color(R.color.hp_track) }
     private val hpEdgePaint = Paint().apply { color = Color.WHITE; style = Paint.Style.STROKE; strokeWidth = 1.5f }
     private val spritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
     private val hitSpritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
@@ -140,6 +144,7 @@ class CrowdView @JvmOverloads constructor(
     private val barPaint = Paint().apply { color = color(R.color.gold) }
     private val bulletPaint = Paint().apply { color = color(R.color.bullet) }
     private val bulletEdgePaint = Paint().apply { color = color(R.color.bullet_edge) }
+    private val corePaint = Paint().apply { color = 0xFFFFFBEB.toInt() }
     private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         typeface = Typeface.DEFAULT_BOLD
         textAlign = Paint.Align.CENTER
@@ -233,6 +238,11 @@ class CrowdView @JvmOverloads constructor(
         floatTexts.add(FloatText(text, x, z, 0.8f, 0.8f, color))
     }
 
+    private fun screenFlash(color: Int, strength: Float) {
+        flashColor = color
+        flashTimer = strength
+    }
+
     private fun handleEvent(e: CrowdWorld.Event) {
         val sparkGood = color(R.color.spark_good)
         val sparkBad = color(R.color.spark_bad)
@@ -259,9 +269,10 @@ class CrowdView @JvmOverloads constructor(
             }
             CrowdWorld.Event.Type.HIT_BOSS -> {
                 monsterHitTimer = 0.08f
-                sparks(e.x, e.z, if (e.flag) 24 else 3, color(R.color.monster_spark), 0.3f)
+                sparks(e.x, e.z, if (e.flag) 30 else 3, color(R.color.monster_spark), 0.3f)
                 if (e.flag) {
-                    shakeTimer = 0.4f
+                    shakeTimer = 0.5f
+                    screenFlash(Color.WHITE, 0.5f)
                     play(sndBoom, 7, 0, 0.9f)
                 } else {
                     play(sndHit, 1, 50, 0.3f, 0.2f)
@@ -274,16 +285,21 @@ class CrowdView @JvmOverloads constructor(
             }
             CrowdWorld.Event.Type.GATE_GOOD -> {
                 floatText(e.label, e.x, e.z, gold)
-                sparks(e.x, e.z, 12, sparkGood, 0.4f)
+                sparks(e.x, e.z, 18, sparkGood, 0.5f)
+                screenFlash(sparkGood, 0.22f)
                 play(sndDing, 2, 80, 0.7f)
             }
             CrowdWorld.Event.Type.GATE_BAD -> {
                 floatText(e.label, e.x, e.z, sparkBad)
+                sparks(e.x, e.z, 10, sparkBad, 0.4f)
+                screenFlash(sparkBad, 0.3f)
                 play(sndBuzz, 3, 150, 0.7f)
             }
             CrowdWorld.Event.Type.CONTACT -> {
                 floatText("-" + e.value + " " + stageMobs[stageIndex(world.level)], e.x, e.z, sparkBad)
-                sparks(e.x, e.z, 14, color(R.color.spark_enemy), 0.4f)
+                sparks(e.x, e.z, 18, color(R.color.spark_enemy), 0.5f)
+                screenFlash(color(R.color.hit), 0.3f)
+                shakeTimer = 0.25f
                 play(sndBuzz, 3, 150, 0.7f)
             }
             CrowdWorld.Event.Type.ITEM -> {
@@ -360,6 +376,7 @@ class CrowdView @JvmOverloads constructor(
         muzzleTimer = max(0f, muzzleTimer - dt)
         monsterHitTimer = max(0f, monsterHitTimer - dt)
         shakeTimer = max(0f, shakeTimer - dt)
+        flashTimer = max(0f, flashTimer - dt * 2.2f)
         val pi = particles.iterator()
         while (pi.hasNext()) {
             val p = pi.next()
@@ -551,6 +568,11 @@ class CrowdView @JvmOverloads constructor(
 
         drawPlayer(canvas, w)
         drawFx(canvas, w)
+        if (flashTimer > 0f) {
+            flashPaint.color = flashColor
+            flashPaint.alpha = (255 * min(0.55f, flashTimer)).toInt().coerceIn(0, 255)
+            canvas.drawRect(-w, -h, w * 2f, h * 2f, flashPaint)
+        }
         canvas.restore()
         drawHud(canvas, w, h)
         drawOverlay(canvas, w, h)
@@ -757,18 +779,55 @@ class CrowdView @JvmOverloads constructor(
         val f = factor(d)
         if (f < 0.05f) return
         val w = width.toFloat()
-        val bw = max(2f, w * 0.012f * f)
-        val bh = max(4f, w * 0.035f * f)
+        val bw = max(3f, w * 0.018f * f)
+        val bh = max(7f, w * 0.07f * f)
         val x = screenX(bullet.x, f)
-        val y = screenY(f) - w * 0.06f * f
+        val y = screenY(f) - w * 0.07f * f
+        bulletPaint.alpha = 90                                           // tracer trail
+        canvas.drawRect(x - bw * 0.35f, y - bh * 2.1f, x + bw * 0.35f, y - bh * 0.8f, bulletPaint)
+        bulletPaint.alpha = 255
         canvas.drawRect(x - bw / 2f - 1f, y - bh - 1f, x + bw / 2f + 1f, y + 1f, bulletEdgePaint)
         canvas.drawRect(x - bw / 2f, y - bh, x + bw / 2f, y, bulletPaint)
+        canvas.drawRect(x - bw * 0.2f, y - bh, x + bw * 0.2f, y - bh * 0.45f, corePaint)
+    }
+
+    /**
+     * A wall of henchmen behind the villain, laid out in screen space so it stacks upward and
+     * widens like a packed stand. It shrinks row by row as the villain's HP drops.
+     */
+    private fun drawHorde(canvas: Canvas, b: CrowdWorld.Boss, baseY: Float, f: Float) {
+        val ratio = (b.count / max(1, b.maxCount).toFloat()).coerceIn(0f, 1f)
+        if (ratio <= 0f) return
+        val w = width.toFloat()
+        val frames = mobFrames[stageIndex(world.level)]
+        val sh = w * 0.062f * (0.8f + 0.45f * f)
+        val sw = sh * 0.8f
+        val rowH = sh * 0.40f
+        val rows = max(1, kotlin.math.ceil(HORDE_ROWS * ratio).toInt())
+        var budget = 340
+        for (row in rows - 1 downTo 0) {
+            if (budget <= 0) break
+            val y = baseY - row * rowH
+            val halfPx = min(w * 0.78f, w * (0.26f + row * 0.055f))
+            val cols = max(7, (halfPx * 2f / (sw * 0.82f)).toInt())
+            spritePaint.alpha = (255 * (0.62f + 0.38f * (1f - row / (HORDE_ROWS * 1.4f)))).toInt().coerceIn(0, 255)
+            for (col in 0 until cols) {
+                if (budget <= 0) break
+                val px = w / 2f - halfPx + (col + if (row % 2 == 1) 0.5f else 0f) * (halfPx * 2f / cols)
+                if (px < -sw || px > w + sw) continue
+                rect.set(px - sw / 2f, y - sh, px + sw / 2f, y)
+                canvas.drawBitmap(frames[(row + col) and 1], null, rect, spritePaint)
+                budget--
+            }
+        }
+        spritePaint.alpha = 255
     }
 
     private fun drawMonster(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
         val f = factor(d)
         if (f < 0.05f) return
         val w = width.toFloat()
+        drawHorde(canvas, b, screenY(f), f)
         val y = screenY(f)
         val frames = bossFrames[b.kind.coerceIn(0, bossFrames.size - 1)]
         val stomp = if (b.marching) abs(sin(runTime * PI_F * 3f)) else 0f
@@ -786,14 +845,17 @@ class CrowdView @JvmOverloads constructor(
         rect.set(x - mw / 2f, yTop - mh - lift, x + mw / 2f, yTop - lift)
         canvas.drawBitmap(sprite, null, rect, if (hit) monsterHitPaint else spritePaint)
         label(canvas, monsterName(b.kind), x, ground + w * 0.05f * f, max(8f, w * 0.05f * f), Color.WHITE, color(R.color.gate_post_bad))
-        // HP bar + number
-        val bw = w * 0.5f * f
-        val bh = max(3f, w * 0.03f * f)
-        val by = yTop - mh - w * 0.09f * f
-        canvas.drawRect(x - bw / 2f, by, x + bw / 2f, by + bh, hpBackPaint)
+        // a chunky HP bar with the count sitting on it
+        val h = height.toFloat()
+        val bw = max(w * 0.46f, w * 0.62f * f)
+        val bh = max(w * 0.035f, w * 0.05f * f)
+        val by = max(h * 0.1f, yTop - mh - w * 0.1f * f)
+        canvas.drawRect(x - bw / 2f - 2f, by - 2f, x + bw / 2f + 2f, by + bh + 2f, hpBackPaint)
+        canvas.drawRect(x - bw / 2f, by, x + bw / 2f, by + bh, hpTrackPaint)
         canvas.drawRect(x - bw / 2f, by, x - bw / 2f + bw * (b.count / max(1, b.maxCount).toFloat()), by + bh, hpPaint)
-        canvas.drawRect(x - bw / 2f, by, x + bw / 2f, by + bh, hpEdgePaint)
-        label(canvas, b.count.toString(), x, by - w * 0.05f * f, max(10f, w * 0.1f * f), Color.WHITE, color(R.color.gate_post_bad))
+        hpEdgePaint.strokeWidth = 2f
+        canvas.drawRect(x - bw / 2f - 2f, by - 2f, x + bw / 2f + 2f, by + bh + 2f, hpEdgePaint)
+        label(canvas, b.count.toString(), x, by + bh / 2f, max(14f, w * 0.075f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
     private fun drawPlayer(canvas: Canvas, w: Float) {
@@ -805,8 +867,9 @@ class CrowdView @JvmOverloads constructor(
         val px = screenX(world.playerX, f)
         val paint = if (world.flash > 0f && !world.lastGateGood) hitSpritePaint else spritePaint
         drawCrowd(canvas, px, y - unit * 1.2f, drawn, unit, allyFrames, paint, grid = false)
+        val pop = if (world.flash > 0f) 1f + world.flash * 0.7f else 1f
         label(
-            canvas, world.count.toString(), px, y - unit * 1.2f - rv * 0.6f - unit * 4.4f, w * 0.09f,
+            canvas, world.count.toString(), px, y - unit * 1.2f - rv * 0.6f - unit * 4.4f, w * 0.11f * pop,
             if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),
         )
     }
@@ -925,6 +988,7 @@ class CrowdView @JvmOverloads constructor(
         private const val LANE_HALF_PX = 0.5f
         private const val VIEW_DISTANCE = 60f
         private const val NEAR_OVERSHOOT = 3.4f
+        private const val HORDE_ROWS = 14f
         private const val STRIPE_SPACING = 4f
         private const val WALL_HEIGHT = 0.035f
         private const val MAX_DRAWN_UNITS = 64
