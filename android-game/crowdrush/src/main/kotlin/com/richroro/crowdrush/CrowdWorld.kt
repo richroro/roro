@@ -68,6 +68,7 @@ class CrowdWorld(private val seed: Int = 1) {
     }
 
     class Enemy(z: Float, val x: Float, count: Int) {
+        val maxCount: Int = count
         var z: Float = z
             private set
         var count: Int = count

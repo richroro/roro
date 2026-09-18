@@ -23,6 +23,7 @@
     <color name="item_shield">#22D3EE</color>
     <color name="item_reinforce">#22C55E</color>
     <color name="item_bomb">#A855F7</color>
+    <color name="monster_spark">#BEF264</color>
     <color name="gold_stroke">#78350F</color>
     <color name="text">#F8FAFC</color>
     <color name="text_stroke">#0F172A</color>

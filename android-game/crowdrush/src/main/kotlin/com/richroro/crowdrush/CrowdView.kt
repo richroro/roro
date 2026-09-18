@@ -98,11 +98,18 @@ class CrowdView @JvmOverloads constructor(
         BitmapFactory.decodeResource(resources, R.drawable.soldier_red_front_0),
         BitmapFactory.decodeResource(resources, R.drawable.soldier_red_front_1),
     )
+    private val monsterSprite: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.monster)
+    private val monsterHitPaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
+        colorFilter = LightingColorFilter(0xFFFFFFFF.toInt(), 0x00FF4040)
+    }
+    private var monsterHitTimer = 0f
+    private val hpBackPaint = Paint().apply { color = 0x8C0F172A.toInt() }
+    private val hpPaint = Paint().apply { color = color(R.color.enemy) }
+    private val hpEdgePaint = Paint().apply { color = Color.WHITE; style = Paint.Style.STROKE; strokeWidth = 1.5f }
     private val spritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
     private val hitSpritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
         colorFilter = LightingColorFilter(0xFFFFB366.toInt(), 0x00331100)
     }
-    private val bossBandPaint = Paint().apply { color = color(R.color.boss_band) }
     private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x40000000 }
     private val gateGoodPaint = Paint().apply { color = color(R.color.gate_good) }
     private val gateBadPaint = Paint().apply { color = color(R.color.gate_bad) }
@@ -227,9 +234,14 @@ class CrowdView @JvmOverloads constructor(
                     play(sndHit, 1, 50, 0.3f, 0.2f)
                 }
             }
-            CrowdWorld.Event.Type.HIT_ENEMY, CrowdWorld.Event.Type.HIT_BOSS -> {
+            CrowdWorld.Event.Type.HIT_ENEMY -> {
                 sparks(e.x, e.z, if (e.flag) 10 else 3, sparkBad, 0.15f)
                 if (e.flag) play(sndDing, 2, 80, 0.5f) else play(sndHit, 1, 50, 0.3f, 0.2f)
+            }
+            CrowdWorld.Event.Type.HIT_BOSS -> {
+                monsterHitTimer = 0.08f
+                sparks(e.x, e.z, if (e.flag) 24 else 3, color(R.color.monster_spark), 0.3f)
+                if (e.flag) play(sndBoom, 7, 0, 0.9f) else play(sndHit, 1, 50, 0.3f, 0.2f)
             }
             CrowdWorld.Event.Type.GATE_GOOD -> {
                 floatText(e.label, e.x, e.z, gold)
@@ -302,6 +314,7 @@ class CrowdView @JvmOverloads constructor(
 
     private fun updateFx(dt: Float) {
         muzzleTimer = max(0f, muzzleTimer - dt)
+        monsterHitTimer = max(0f, monsterHitTimer - dt)
         val pi = particles.iterator()
         while (pi.hasNext()) {
             val p = pi.next()
@@ -343,9 +356,10 @@ class CrowdView @JvmOverloads constructor(
         }
         if (muzzleTimer > 0f) {
             val f = factor(0f)
-            val rpx = w * LANE_HALF_PX * world.playerRadius
+            val unit = unitPx(1f)
+            val rv = crowdRadiusPx(drawnCount(world.count, world.count), unit)
             val mx = screenX(muzzleX, f)
-            val my = screenY(f) - rpx * 0.2f - rpx * 0.55f - w * 0.02f
+            val my = screenY(f) - unit * 1.2f - rv * 0.55f - unit * 1.5f
             val r = w * 0.03f * (0.6f + muzzleTimer / 0.06f)
             muzzlePaint.shader = RadialGradient(
                 mx, my, r,
@@ -457,7 +471,7 @@ class CrowdView @JvmOverloads constructor(
         }
         world.boss?.let { b ->
             val d = b.z - world.z
-            if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawBoss(canvas, b, d) })
+            if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawMonster(canvas, b, d) })
         }
         for (item in world.items) {
             val d = item.z - world.z
@@ -514,19 +528,31 @@ class CrowdView @JvmOverloads constructor(
     private val crowdXs = FloatArray(MAX_DRAWN_UNITS)
     private val crowdYs = FloatArray(MAX_DRAWN_UNITS)
 
+    /** Soldier size on screen depends only on perspective, never on crowd size. */
+    private fun unitPx(f: Float): Float = max(2.5f, width * 0.022f * f)
+
+    /** Squads bigger than [MAX_DRAWN_UNITS] shrink their drawn ranks in proportion to their losses. */
+    private fun drawnCount(count: Int, maxCount: Int): Int = when {
+        count <= 0 -> 0
+        maxCount <= MAX_DRAWN_UNITS -> min(count, MAX_DRAWN_UNITS)
+        else -> max(1, Math.round(MAX_DRAWN_UNITS * count / maxCount.toFloat()))
+    }
+
+    private fun crowdRadiusPx(drawn: Int, unit: Float): Float = unit * 0.95f * sqrt(max(drawn, 1).toFloat())
+
     /**
-     * Draws up to [MAX_DRAWN_UNITS] soldiers. The player army is a spiral blob; enemy squads
-     * stand in ranks ([grid]). Each soldier alternates between the two walk frames.
+     * Draws up to [MAX_DRAWN_UNITS] soldiers of constant size. The player army is a spiral blob
+     * that spreads wider as it grows; enemy squads stand in ranks ([grid]). Each soldier
+     * alternates between the two walk frames.
      */
-    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, count: Int, radiusPx: Float, frames: Array<Bitmap>, paint: Paint, grid: Boolean) {
-        val n = min(count, MAX_DRAWN_UNITS)
-        val unit = max(3f, radiusPx * 0.34f)
+    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, drawn: Int, unit: Float, frames: Array<Bitmap>, paint: Paint, grid: Boolean) {
+        val n = min(drawn, MAX_DRAWN_UNITS)
         val sh = unit * 3.6f
         val sw = sh * 0.8f
         if (grid) {
             val cols = max(1, kotlin.math.ceil(sqrt(n * 1.6f)).toInt())
             val rows = (n + cols - 1) / cols
-            val spacingX = min(sw * 1.05f, radiusPx * 2f / cols)
+            val spacingX = sw * 1.05f
             val spacingY = unit * 1.35f
             for (i in 0 until n) {
                 val col = i % cols
@@ -538,7 +564,7 @@ class CrowdView @JvmOverloads constructor(
         } else {
             for (i in 0 until n) {
                 val angle = i * GOLDEN_ANGLE
-                val r = radiusPx * sqrt((i + 0.5f) / max(n, 6).toFloat()) * 0.95f
+                val r = unit * 0.95f * sqrt(i + 0.5f)
                 crowdXs[i] = cx + cos(angle) * r
                 crowdYs[i] = cy + sin(angle) * r * 0.55f
             }
@@ -603,10 +629,12 @@ class CrowdView @JvmOverloads constructor(
         if (f < 0.05f) return
         val w = width.toFloat()
         val y = screenY(f)
-        val rpx = w * LANE_HALF_PX * f * (CrowdWorld.ENEMY_HALF_WIDTH * 0.9f)
+        val unit = unitPx(f)
+        val drawn = drawnCount(e.count, e.maxCount)
+        val rv = crowdRadiusPx(drawn, unit)
         val cx = screenX(e.x, f)
-        drawCrowd(canvas, cx, y - rpx * 0.3f, e.count, rpx, enemyFrames, spritePaint, grid = true)
-        label(canvas, e.count.toString(), cx, y - rpx * 0.3f - rpx * 1.1f - w * 0.03f * f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
+        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, enemyFrames, spritePaint, grid = true)
+        label(canvas, e.count.toString(), cx, y - unit * 1.2f - rv * 0.9f - unit * 4.2f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
     private fun drawBullet(canvas: Canvas, bullet: CrowdWorld.Bullet, d: Float) {
@@ -621,26 +649,42 @@ class CrowdView @JvmOverloads constructor(
         canvas.drawRect(x - bw / 2f, y - bh, x + bw / 2f, y, bulletPaint)
     }
 
-    private fun drawBoss(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
+    private fun drawMonster(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
         val f = factor(d)
         if (f < 0.05f) return
         val w = width.toFloat()
         val y = screenY(f)
-        val rpx = w * LANE_HALF_PX * f * 0.9f
-        canvas.drawRect(screenX(-1f, f), y - rpx * 1.2f, screenX(1f, f), y, bossBandPaint)
-        drawCrowd(canvas, screenX(0f, f), y - rpx * 0.25f, b.count, rpx, enemyFrames, spritePaint, grid = true)
-        label(canvas, b.count.toString(), screenX(0f, f), y - rpx * 1.2f - w * 0.05f * f, max(10f, w * 0.11f * f), Color.WHITE, color(R.color.gate_post_bad))
+        val breathe = 1f + 0.03f * sin(runTime * 4f)
+        val hit = monsterHitTimer > 0f
+        val mh = w * 0.62f * f * breathe
+        val mw = mh * 0.8f
+        val x = screenX(0f, f)
+        rect.set(x - mw * 0.45f, y - mw * 0.12f, x + mw * 0.45f, y + mw * 0.12f)
+        canvas.drawOval(rect, shadowPaint)
+        val lift = if (hit) w * 0.01f else 0f
+        rect.set(x - mw / 2f, y - mh - lift, x + mw / 2f, y - lift)
+        canvas.drawBitmap(monsterSprite, null, rect, if (hit) monsterHitPaint else spritePaint)
+        // HP bar + number
+        val bw = w * 0.5f * f
+        val bh = max(3f, w * 0.03f * f)
+        val by = y - mh - w * 0.09f * f
+        canvas.drawRect(x - bw / 2f, by, x + bw / 2f, by + bh, hpBackPaint)
+        canvas.drawRect(x - bw / 2f, by, x - bw / 2f + bw * (b.count / max(1, b.maxCount).toFloat()), by + bh, hpPaint)
+        canvas.drawRect(x - bw / 2f, by, x + bw / 2f, by + bh, hpEdgePaint)
+        label(canvas, b.count.toString(), x, by - w * 0.05f * f, max(10f, w * 0.1f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
     private fun drawPlayer(canvas: Canvas, w: Float) {
         val f = factor(0f)
         val y = screenY(f)
-        val rpx = w * LANE_HALF_PX * world.playerRadius
+        val unit = unitPx(1f)
+        val drawn = drawnCount(world.count, world.count)
+        val rv = crowdRadiusPx(drawn, unit)
         val px = screenX(world.playerX, f)
         val paint = if (world.flash > 0f && !world.lastGateGood) hitSpritePaint else spritePaint
-        drawCrowd(canvas, px, y - rpx * 0.2f, world.count, rpx, allyFrames, paint, grid = false)
+        drawCrowd(canvas, px, y - unit * 1.2f, drawn, unit, allyFrames, paint, grid = false)
         label(
-            canvas, world.count.toString(), px, y - rpx * 0.2f - rpx * 0.9f - w * 0.05f, w * 0.09f,
+            canvas, world.count.toString(), px, y - unit * 1.2f - rv * 0.6f - unit * 4.4f, w * 0.09f,
             if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),
         )
     }

@@ -4,6 +4,7 @@
 Each sprite is 96x120 RGBA with a dark outline, two-tone shading and two walk frames.
 Outputs into crowdrush/src/main/res/drawable-nodpi/:
   soldier_<team>_<view>_<frame>.png   team = blue|red, view = front|back, frame = 0|1
+  monster.png                          the end-of-lane monster (160x200)
 
 Run:  python3 android-game/tools/generate_sprites.py [out_dir]
 """
@@ -237,6 +238,78 @@ def draw_soldier(c: Canvas, t: dict, front: bool, frame: int):
         c.rrect(cx + 14, 31, cx + 16, 42, 0.5, STRAP)
 
 
+MON_BODY = (0x5B, 0xA6, 0x3C)
+MON_LIGHT = (0x8A, 0xD1, 0x5E)
+MON_DARK = (0x3C, 0x75, 0x27)
+MON_BELLY = (0xC9, 0xE0, 0x8C)
+MON_HORN = (0xE8, 0xD8, 0xB0)
+MON_HORN_DARK = (0xB8, 0xA5, 0x7A)
+MON_EYE_WHITE = (0xFF, 0xF3, 0xC4)
+MON_EYE = (0xB9, 0x1C, 0x1C)
+MON_MOUTH = (0x5A, 0x12, 0x12)
+MON_TOOTH = (0xFF, 0xFF, 0xF0)
+MON_CLUB = (0x7C, 0x4A, 0x1E)
+MON_CLUB_DARK = (0x54, 0x30, 0x12)
+MON_CLAW = (0xEE, 0xE6, 0xD0)
+MON_PANTS = (0x6B, 0x4A, 0x2E)
+
+
+def draw_monster(c: Canvas):
+    """A hulking one-eyed ogre with horns, fangs and a club, facing the camera. Canvas is 160x200."""
+    O = 2.2
+    cx = 80
+    # legs / feet
+    for side in (-1, 1):
+        lx = cx + side * 26
+        c.rrect(lx - 16, 140, lx + 16, 176, 10, MON_DARK, outline=O)
+        c.rrect(lx - 16, 140, lx - 5, 168, 8, MON_BODY)
+        c.ellipse(lx, 182, 22, 11, MON_BODY, outline=O)       # feet
+        for t in (-1, 0, 1):                                  # toe claws
+            c.circle(lx + t * 11, 189, 4.2, MON_CLAW, outline=1.2)
+    c.rrect(cx - 46, 126, cx + 46, 150, 12, MON_PANTS, outline=O)  # loincloth
+    # arms (behind body top, in front of legs)
+    for side in (-1, 1):
+        ax = cx + side * 62
+        c.rot_rect(ax, 96, 26, 62, side * 18, MON_BODY, outline=O)
+        c.rot_rect(ax - side * 5, 84, 10, 40, side * 18, MON_LIGHT)
+        c.circle(ax + side * 6, 128, 15, MON_BODY, outline=O)       # fists
+        for k in (-1, 0, 1):
+            c.circle(ax + side * 6 + k * 8, 138, 4, MON_CLAW, outline=1.2)
+    # club in the right hand
+    c.rot_rect(cx + 82, 96, 14, 96, 12, MON_CLUB, outline=O)
+    c.rot_rect(cx + 90, 52, 30, 40, 12, MON_CLUB_DARK, outline=O)
+    for k in range(4):
+        c.circle(cx + 78 + k * 8, 44 + k * 6, 3.5, MON_CLAW, outline=1)
+    # torso
+    c.ellipse(cx, 96, 52, 46, MON_BODY, outline=O)
+    c.ellipse(cx - 18, 76, 22, 18, MON_LIGHT)
+    c.ellipse(cx, 108, 32, 26, MON_BELLY, outline=1.5)             # belly
+    c.ellipse(cx, 116, 20, 12, (0xB3, 0xCC, 0x78))
+    # head
+    c.ellipse(cx, 46, 42, 36, MON_BODY, outline=O)
+    c.ellipse(cx - 14, 30, 18, 12, MON_LIGHT)
+    for side in (-1, 1):                                             # horns
+        pts = [(cx + side * 26, 22), (cx + side * 52, 2), (cx + side * 42, 30)]
+        c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
+        c.polygon(pts, MON_HORN)
+        c.polygon([(cx + side * 30, 22), (cx + side * 48, 8), (cx + side * 42, 28)], MON_HORN_DARK)
+    for side in (-1, 1):                                             # ears
+        c.ellipse(cx + side * 44, 46, 8, 11, MON_BODY, outline=O)
+    c.ellipse(cx, 44, 17, 15, MON_EYE_WHITE, outline=O)              # single eye
+    c.circle(cx + 2, 45, 8, MON_EYE)
+    c.circle(cx + 2, 45, 4, OUTLINE)
+    c.circle(cx + 5, 41, 2.2, MON_EYE_WHITE)
+    c.rot_rect(cx - 12, 27, 30, 6, -14, MON_DARK)                    # brow
+    c.rot_rect(cx + 12, 27, 30, 6, 14, MON_DARK)
+    c.rrect(cx - 26, 60, cx + 26, 76, 8, MON_MOUTH, outline=O)      # mouth
+    for k in range(4):                                               # fangs
+        fx = cx - 18 + k * 12
+        c.polygon([(fx - 4, 60), (fx + 4, 60), (fx, 70)], MON_TOOTH)
+    for k in range(2):
+        fx = cx - 6 + k * 12
+        c.polygon([(fx - 4, 76), (fx + 4, 76), (fx, 66)], MON_TOOTH)
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "crowdrush", "src", "main", "res", "drawable-nodpi")
@@ -253,7 +326,10 @@ def main():
                 c = Canvas(W, H)
                 draw_soldier(c, team, front=(view == "front"), frame=frame)
                 c.save(os.path.join(out, f"soldier_{name}_{view}_{frame}.png"))
-    print("wrote soldier sprites to", os.path.abspath(out))
+    m = Canvas(160, 200)
+    draw_monster(m)
+    m.save(os.path.join(out, "monster.png"))
+    print("wrote soldier and monster sprites to", os.path.abspath(out))
 
 
 if __name__ == "__main__":
