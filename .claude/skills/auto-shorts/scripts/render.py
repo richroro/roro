@@ -136,14 +136,41 @@ def assemble_video(clips: list[Path], durations: list[float], out: Path, *, subs
 _STEREO = "aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo"
 
 
-def narration_track(files: list[Path], durations: list[float], leads: list[float], out: Path) -> Path:
+# TTS 목소리 다듬기: 럼블 제거 → 저중역 온기 → 기계적인 중고역·치찰음 완화 → 레벨 고르기 →
+# 아주 짧은 룸 리버브(건조함 완화). 어떤 엔진(edge-tts·오프라인 모델)에도 도움이 된다.
+VOICE_POLISH = ("highpass=f=85,"
+                "equalizer=f=240:t=q:w=1.1:g=2.5,"
+                "equalizer=f=1900:t=q:w=1.4:g=-1.5,"
+                "equalizer=f=6500:t=q:w=1.6:g=-3,"
+                "acompressor=threshold=-20dB:ratio=3:attack=8:release=180:makeup=2,"
+                "aecho=0.92:0.9:21:0.09,"        # out_gain 을 1 가까이 둬야 목소리 크기가 유지된다
+                "alimiter=limit=0.95")
+
+
+def pitch_filter(percent: float) -> str:
+    """목소리 높낮이를 percent 만큼(-6~+6) 바꾼다. 음정만 바뀌고 속도는 유지된다."""
+    if not percent:
+        return ""
+    r = 1.0 + max(-12.0, min(12.0, percent)) / 100.0
+    return f"asetrate=48000*{r:.4f},aresample=48000,atempo={1 / r:.4f}"
+
+
+def narration_track(files: list[Path], durations: list[float], leads: list[float], out: Path,
+                    polish: bool = True, pitch: float = 0.0) -> Path:
     args: list[str] = []
     for f in files:
         args += ["-i", str(f)]
+    chain = [_STEREO]
+    pf = pitch_filter(pitch)
+    if pf:
+        chain.append(pf)
+    if polish:
+        chain.append(VOICE_POLISH)
+    pre = ",".join(chain)
     parts = []
     for i, (d, lead) in enumerate(zip(durations, leads)):
         ms = int(round(lead * 1000))
-        parts.append(f"[{i}:a]{_STEREO},adelay={ms}|{ms},apad=whole_dur={d:.3f},atrim=0:{d:.3f},"
+        parts.append(f"[{i}:a]{pre},adelay={ms}|{ms},apad=whole_dur={d:.3f},atrim=0:{d:.3f},"
                      f"asetpts=N/SR/TB[a{i}]")
     parts.append("".join(f"[a{i}]" for i in range(len(files))) + f"concat=n={len(files)}:v=0:a=1[a]")
     run_ffmpeg(args + ["-filter_complex", ";".join(parts), "-map", "[a]", "-c:a", "pcm_s16le", str(out)],
@@ -157,8 +184,11 @@ def music_track(bgm: Path, total: float, volume: float, narration: Path, out: Pa
              f"loudnorm=I=-20:TP=-2:LRA=9,aresample=48000,volume={volume:.3f},"
              f"afade=t=in:d=1.0,afade=t=out:st={total - fade_out:.3f}:d={fade_out:.3f},atrim=0:{total:.3f}[m]")
     if duck:
+        # 예전 설정(threshold 0.03 / ratio 5)은 음악을 너무 깊게 눌러 거의 들리지 않았다.
+        # 말할 때만 부드럽게 비켜 주고 문장 사이에서는 빠르게 돌아오게 한다.
         fc = (f"{music};[1:a]{_STEREO}[sc];"
-              f"[m][sc]sidechaincompress=threshold=0.03:ratio=5:attack=15:release=350:makeup=1:level_sc=1[a]")
+              f"[m][sc]sidechaincompress=threshold=0.055:ratio=2.8:attack=20:release=260:makeup=1.6:"
+              f"level_sc=1[a]")
     else:
         fc = f"{music.replace('[m]', '[a]')}"
     run_ffmpeg(["-stream_loop", "-1", "-i", str(bgm), "-i", str(narration), "-filter_complex", fc,

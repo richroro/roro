@@ -58,7 +58,7 @@ python scripts/illustrate.py --keywords "포기하지 마 한 걸음" --out a.jp
 ```
 
 - 템플릿: mountain · sunrise · night · ocean · forest · rain · candle · road · city · stairs · bird · tree ·
-  door · window · abstract. 씬의 `art` 로 직접 지정하거나 `keywords`(한국어도 인식)로 자동 선택된다.
+  door · window · **stage**(무대·시상식) · **trophy**(수상·기록) · abstract. 씬의 `art` 로 직접 지정하거나 `keywords`(한국어도 인식)로 자동 선택된다.
 - 팔레트: night · dawn · dusk · forest · ocean · warm. `style.art_palette` 로 고정하거나 씬마다 바꿀 수 있다.
 - 사진 제공자가 모두 실패했을 때의 폴백으로도 들어간다(그라디언트 카드보다 낫다).
 
@@ -87,7 +87,9 @@ python scripts/openimages.py --find "bee flower"         # 어떤 분류·사진
 | Openverse | 불필요 | Jamendo/Freesound 모아 검색 | — | — | 필요(자동 기록) |
 | synth | — | **실제 악기 샘플 연주**(FluidR3_GM: 피아노·일렉피아노·베이스·스트링·마림바 + 합성 드럼). 무드 5종 × seed 마다 다른 곡, 인트로→본절 구성, 킥 펌핑·리버브 | — | — | 불필요(MIT 음원) |
 
-- BGM 은 `loudnorm(-20 LUFS)` 로 맞춘 뒤 `bgm.volume` 을 곱하고, 나레이션이 나올 때 자동으로 약 8dB 줄인다.
+- BGM 은 `loudnorm(-20 LUFS)` 로 맞춘 뒤 `bgm.volume` 을 곱하고, 말하는 동안만 부드럽게 비켜 준다
+  (사이드체인 threshold 0.055 · ratio 2.8). 목표 균형은 **나레이션 대비 음악 7~9dB 아래** — 들리되 말을 가리지 않는다.
+  `bgm.volume` 0.3~0.35 가 기준이고, 음악이 주인공인 포맷(명언·감성)은 0.4 이상도 쓴다.
 
 ### 로컬 BGM 생성기 (`scripts/synth_bgm.py`)
 

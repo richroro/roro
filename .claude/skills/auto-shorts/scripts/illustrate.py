@@ -6,7 +6,7 @@
 팔레트가 통일되며, 씬마다 정확히 원하는 장면이 나온다.
 
 템플릿: mountain · sunrise · night · ocean · forest · rain · candle · road · city · stairs
-        bird · tree · door · window · abstract
+        bird · tree · door · window · stage · trophy · abstract
 
 CLI:
     python illustrate.py --template mountain --out a.jpg --seed 3 --palette dusk
@@ -57,6 +57,8 @@ KEYWORD_MAP = {
     "tree": ["lone tree", "혼자", "고독", "홀로"],
     "door": ["door", "gate", "문", "기회", "선택"],
     "window": ["window", "창문", "창"],
+    "stage": ["stage", "concert", "award", "무대", "공연", "시상식", "연설", "데뷔", "스포트라이트"],
+    "trophy": ["trophy", "prize", "win", "record", "트로피", "수상", "1위", "기록", "우승", "관왕"],
 }
 
 
@@ -356,6 +358,53 @@ def t_window(img, draw, rng, pal):
     return img
 
 
+def t_stage(img, draw, rng, pal):
+    """무대와 스포트라이트 — 시상식·공연·발표 장면."""
+    from PIL import Image, ImageDraw, ImageFilter  # type: ignore
+
+    floor = int(HEIGHT * 0.78)
+    draw.rectangle((0, 0, WIDTH, HEIGHT), fill=pal["layers"][3])
+    cx = WIDTH // 2
+    cone = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    ImageDraw.Draw(cone).polygon([(cx - 110, -40), (cx + 110, -40),
+                                  (cx + 420, floor), (cx - 420, floor)], fill=(*pal["orb"], 60))
+    img = Image.alpha_composite(img.convert("RGBA"), cone.filter(ImageFilter.GaussianBlur(50))).convert("RGB")
+    draw = _redraw(img)
+    draw.ellipse((cx - 330, floor - 90, cx + 330, floor + 90), fill=(*pal["orb"], 55))
+    draw.rectangle((0, floor, WIDTH, HEIGHT), fill=pal["layers"][2])
+    for i in range(2):                       # 양쪽 커튼
+        w = int(WIDTH * 0.2)
+        x = 0 if i == 0 else WIDTH - w
+        draw.rectangle((x, 0, x + w, floor + 40), fill=pal["layers"][1])
+        for k in range(5):                   # 주름
+            kx = x + int(w * (k + 0.5) / 5)
+            draw.line((kx, 0, kx, floor + 40), fill=pal["layers"][0], width=8)
+    draw.rectangle((cx - 9, floor - 300, cx + 9, floor), fill=pal["layers"][0])   # 마이크 스탠드
+    draw.ellipse((cx - 34, floor - 348, cx + 34, floor - 282), fill=pal["layers"][0])
+    return img
+
+
+def t_trophy(img, draw, rng, pal):
+    """트로피 — 수상·기록·1위."""
+    cx, cy = WIDTH // 2, int(HEIGHT * 0.5)
+    img = _glow(img, (cx, cy), 380, pal["accent"], 120)
+    draw = _redraw(img)
+    gold = pal["accent"]
+    draw.chord((cx - 150, cy - 250, cx + 150, cy + 60), 0, 180, fill=gold)        # 컵
+    draw.rectangle((cx - 150, cy - 250, cx + 150, cy - 210), fill=gold)
+    for sgn in (-1, 1):                                                           # 손잡이
+        draw.arc((cx + sgn * 130 - 90, cy - 240, cx + sgn * 130 + 90, cy - 80),
+                 90 if sgn > 0 else 270, 270 if sgn > 0 else 90, fill=gold, width=22)
+    draw.polygon([(cx - 40, cy + 55), (cx + 40, cy + 55), (cx + 26, cy + 150), (cx - 26, cy + 150)], fill=gold)
+    draw.rounded_rectangle((cx - 130, cy + 150, cx + 130, cy + 230), radius=14, fill=pal["layers"][1])
+    draw.rectangle((0, cy + 230, WIDTH, HEIGHT), fill=pal["layers"][3])
+    for _ in range(26):                                                           # 반짝임
+        x, y = rng.randint(cx - 380, cx + 380), rng.randint(cy - 330, cy + 120)
+        r = rng.choice([2, 3, 4])
+        draw.ellipse((x - r, y - r, x + r, y + r), fill=(*pal["star"], rng.randint(120, 230)))
+    return img
+
+
 def t_abstract(img, draw, rng, pal):
     for _ in range(7):
         r = rng.randint(180, 520)
@@ -366,7 +415,7 @@ def t_abstract(img, draw, rng, pal):
     return img
 
 
-TEMPLATES = {"mountain": t_mountain, "sunrise": t_sunrise, "night": t_night, "ocean": t_ocean,
+TEMPLATES = {"stage": t_stage, "trophy": t_trophy, "mountain": t_mountain, "sunrise": t_sunrise, "night": t_night, "ocean": t_ocean,
              "forest": t_forest, "rain": t_rain, "candle": t_candle, "road": t_road, "city": t_city,
              "stairs": t_stairs, "bird": t_bird, "tree": t_tree, "door": t_door, "window": t_window,
              "abstract": t_abstract}

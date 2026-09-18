@@ -49,6 +49,8 @@ DEFAULT_STYLE = {
     "layout": "caption",          # caption(기본, 하단 카라오케) | quote(중앙 명언 + 출처)
     "dim": 0.0,                   # 사진을 어둡게(0~0.6). 명언 레이아웃에서 0.3~0.4 권장
     "art_palette": "",            # 일러스트 팔레트 고정(night/dawn/dusk/forest/ocean/warm). 비우면 BGM 무드에 맞춘다
+    "voice_polish": True,         # TTS 목소리 다듬기(EQ·컴프·짧은 룸). 끄려면 false
+    "voice_pitch": 0.0,           # 목소리 높낮이 %(-6~+6). 음수면 낮고 차분해진다
     "look": "",                   # "" | cinematic
     "gap_before": 0.10,           # 씬 시작 후 나레이션까지 여백(초)
     "gap_after": 0.35,            # 나레이션 끝 뒤 여백(초)
@@ -289,9 +291,11 @@ def main() -> None:
     # ---------------------------------------------------------------- 7. 믹스
     nar_wav = work / "narration.wav"
     leads = [sc["lead"] for sc in tl_scenes]
-    sig = sig_of(*nar_files, durations, leads)
+    polish = bool(style.get("voice_polish", True))
+    pitch = float(style.get("voice_pitch", 0.0))
+    sig = sig_of(*nar_files, durations, leads, polish, pitch)
     if sigs.stale(nar_wav, sig, args.force):
-        render.narration_track(nar_files, durations, leads, nar_wav)
+        render.narration_track(nar_files, durations, leads, nar_wav, polish=polish, pitch=pitch)
         sigs.mark(nar_wav, sig)
     tracks = [nar_wav]
     if bgm_file:

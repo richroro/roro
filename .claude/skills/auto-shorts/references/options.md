@@ -11,6 +11,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `thumbnail_text` | 썸네일 전용 짧은 문구 | title |
 | `lang` | `ko` / `en` / `ja` — TTS 언어 | `ko` |
 | `voice` | `female` `male` `male2` `en-female` `en-male` `ja-female` `ja-male` 또는 Edge 보이스 ID | 언어별 기본 |
+| `style.voice_polish` | TTS 목소리 다듬기(럼블 제거·저중역 온기·치찰음 완화·레벨 고르기·짧은 룸). 어떤 엔진에도 효과 | `true` |
+| `style.voice_pitch` | 목소리 높낮이 %(-6~+6). 음수면 낮고 차분하다. 속도는 그대로 | `0` |
 | `rate` / `pitch` | 말 속도 `"+8%"`, 피치 `"+0Hz"` | `+0%` / `+0Hz` |
 | `seed` | 씬별 AI 이미지 시드·카드 색·합성 BGM 곡의 기준(재현성). 바꾸면 다른 곡/이미지가 나온다 | `7` |
 | `cta` | 마지막 3초 상단 문구(이모지 금지) | 없음 |
@@ -70,7 +72,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
 | `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
-| `art` | 일러스트 템플릿 지정: `mountain` `sunrise` `night` `ocean` `forest` `rain` `candle` `road` `city` `stairs` `bird` `tree` `door` `window` `abstract` (미지정이면 키워드로 추정) |
+| `art` | 일러스트 템플릿 지정: `mountain` `sunrise` `night` `ocean` `forest` `rain` `candle` `road` `city` `stairs` `bird` `tree` `door` `window` `stage` `trophy` `abstract` (미지정이면 키워드로 추정) |
 | `art_palette` | 이 씬만 다른 팔레트 |
 | `quote` | 화면 중앙에 크게 띄울 문장. ` / ` 로 줄을 나눈다. 이 값이 있으면 그 씬은 하단 자막 대신 명언 레이아웃 |
 | `author` | 명언 출처(인물·책). 문장보다 조금 늦게 페이드인 |
