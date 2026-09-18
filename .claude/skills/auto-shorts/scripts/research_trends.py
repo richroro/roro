@@ -22,10 +22,8 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import json
 import re
 import sys
-import urllib.parse
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path

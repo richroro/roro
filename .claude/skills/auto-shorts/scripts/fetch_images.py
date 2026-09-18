@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (CAPTION_FONT_FILE, HEIGHT, WIDTH, download, env_key, http_get,  # noqa: E402
+from common import (CAPTION_FONT_FILE, HEIGHT, WIDTH, env_key, http_get,  # noqa: E402
                     http_json, log, qs, warn, write_json)
 
 DEFAULT_PROVIDERS = ["pollinations", "pexels", "unsplash", "pixabay", "openverse", "wikimedia", "card"]

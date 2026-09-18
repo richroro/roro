@@ -167,7 +167,7 @@ def synth_silent(text: str, out_mp3: Path, chars_per_sec: float = 5.2) -> None:
     from common import run_ffmpeg
 
     dur = max(1.0, len(text) / chars_per_sec)
-    run_ffmpeg(["-f", "lavfi", "-i", f"anullsrc=r=24000:cl=mono", "-t", f"{dur:.2f}",
+    run_ffmpeg(["-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono", "-t", f"{dur:.2f}",
                 "-c:a", "libmp3lame", "-q:a", "5", str(out_mp3)], stage="tts")
 
 
@@ -195,7 +195,7 @@ def synthesize(text: str, out_mp3: str | Path, *, voice: str | None = None, lang
 
     if engine in ("auto", "edge"):
         try:
-            import edge_tts  # noqa: F401
+            import edge_tts  # noqa: F401  (설치 여부 확인용)
         except ImportError:
             if engine == "edge":
                 die("tts", "edge-tts 가 없습니다:  pip install edge-tts")
@@ -212,7 +212,7 @@ def synthesize(text: str, out_mp3: str | Path, *, voice: str | None = None, lang
 
     if used is None:
         try:
-            from gtts import gTTS  # noqa: F401
+            from gtts import gTTS  # noqa: F401  (설치 여부 확인용)
         except ImportError:
             die("tts", f"edge-tts 실패({err}) 이고 gTTS 도 없습니다:  pip install gTTS")
         synth_gtts(text, out_mp3, lang)

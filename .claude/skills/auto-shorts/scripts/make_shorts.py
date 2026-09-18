@@ -29,7 +29,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (FPS, SKILL_DIR, die, find_ffmpeg, fresh, load_project, log, media_duration,  # noqa: E402
+from common import (FPS, SKILL_DIR, find_ffmpeg, fresh, load_project, log, media_duration,  # noqa: E402
                     read_json, slugify, warn, write_json)
 from log_result import features_from_project  # noqa: E402
 import build_subtitles  # noqa: E402

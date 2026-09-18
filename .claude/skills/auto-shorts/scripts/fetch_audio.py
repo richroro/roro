@@ -125,7 +125,6 @@ def synth_bgm(mood: str, duration: float, out: Path) -> dict:
     """ffmpeg aevalsrc 로 코드 패드 + 아르페지오 + 베이스를 합성해 앰비언트 루프를 만든다."""
     mood = _mood_norm(mood)
     chords, block, arp_step, lp = _MOOD_DEF[mood]
-    cyc = block * 4
     swell = f"(0.55+0.45*sin(PI*mod(t,{block})/{block}))"          # 코드마다 부풀었다 잦아드는 포락선
     pad = _select_by_block([_chord_sum(c, 0.22) for c in chords], block) + f"*{swell}"
     # 아르페지오: 코드 음을 한 옥타브 위에서 arp_step 간격으로 순환, 빠르게 감쇠하는 플럭

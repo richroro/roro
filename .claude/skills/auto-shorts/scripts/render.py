@@ -16,7 +16,6 @@ make_shorts.py 가 순서대로 호출한다. 각 함수는 파일 하나를 만
 from __future__ import annotations
 
 import json
-import math
 import re
 import subprocess
 import sys
@@ -24,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (CAPTION_FONT_FILE, FONT_DIR, FPS, HEIGHT, WIDTH, ff_path, find_ffmpeg,  # noqa: E402
-                    log, run_ffmpeg)
+                    run_ffmpeg)
 
 STAGE = "render"
 MOTIONS = ["in", "out", "pan_right", "in", "pan_up", "out", "pan_left", "in", "pan_down"]

@@ -11,14 +11,13 @@ from __future__ import annotations
 import argparse
 import importlib
 import os
-import shutil
 import socket
 import subprocess
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import CAPTION_FONT_FILE, FONT_DIR, SKILL_DIR  # noqa: E402
+from common import CAPTION_FONT_FILE, SKILL_DIR  # noqa: E402
 
 REQUIRED_FILTERS = ["zoompan", "xfade", "ass", "sidechaincompress", "loudnorm", "amix", "apad"]
 HOSTS = {
