@@ -16,11 +16,16 @@ and bring down the ogre waiting at the end of the road</string>
     <string name="reached_level">Reached level %1$d</string>
     <string name="msg_wiped">Your rangers were wiped out</string>
     <string name="msg_lost_to_squad">Overrun by a pack of %1$d goblins</string>
-    <string name="msg_boss_beaten">Ogre defeated! (HP %1$d)</string>
-    <string name="msg_lost_to_boss">Devoured by the ogre (HP %1$d left)</string>
+    <string name="msg_boss_beaten">%1$s defeated! (HP %2$d)</string>
+    <string name="msg_lost_to_boss">Devoured by the %1$s (HP %2$d left)</string>
     <string name="item_rapid">Rapid fire</string>
     <string name="item_shield">Shield</string>
     <string name="item_reinforce">Reinforcements</string>
     <string name="item_bomb">Bomb</string>
     <string name="shield_blocked">🛡 Blocked!</string>
+    <string name="monster_ogre">Ogre</string>
+    <string name="monster_troll">Troll</string>
+    <string name="monster_golem">Rock Golem</string>
+    <string name="monster_demon">Fire Demon</string>
+    <string name="monster_appears">%1$s appears!</string>
 </resources>

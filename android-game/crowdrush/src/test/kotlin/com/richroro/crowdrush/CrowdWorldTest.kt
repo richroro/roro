@@ -288,4 +288,26 @@ class CrowdWorldTest {
             }
         }
     }
+
+    @Test
+    fun `a different monster waits at the end of each level and it stomps toward the rangers`() {
+        val world = CrowdWorld(seed = 8).apply { start() }
+        val kinds = (1..CrowdWorld.MONSTER_KINDS + 1).map { world.startLevel(it); world.boss!!.kind }
+        assertEquals((0 until CrowdWorld.MONSTER_KINDS).toList() + 0, kinds)
+
+        world.startLevel(1)
+        val boss = world.boss!!
+        val startZ = boss.z
+        world.setForTest(count = 1, playerX = 0f, z = boss.z - CrowdWorld.MONSTER_MARCH_RANGE - 5f)
+        world.update(0.05f)
+        assertEquals(startZ, boss.z, 0f) // out of range: stands still
+        assertTrue(!boss.marching)
+        world.setForTest(count = 1, playerX = 0f, z = boss.z - CrowdWorld.MONSTER_MARCH_RANGE + 1f)
+        world.update(0.05f)
+        assertEquals(startZ - CrowdWorld.MONSTER_MARCH_SPEED * 0.05f, boss.z, 1e-4f)
+        assertTrue(boss.marching && boss.roared)
+        val events = ArrayList<CrowdWorld.Event>()
+        world.drainEvents(events)
+        assertTrue(events.any { it.type == CrowdWorld.Event.Type.ROAR })
+    }
 }

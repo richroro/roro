@@ -16,11 +16,16 @@
     <string name="reached_level">레벨 %1$d 도달</string>
     <string name="msg_wiped">레인저가 모두 쓰러졌습니다</string>
     <string name="msg_lost_to_squad">고블린 %1$d마리에게 패배</string>
-    <string name="msg_boss_beaten">오우거 격파! (HP %1$d)</string>
-    <string name="msg_lost_to_boss">오우거에게 패배 (HP %1$d 남음)</string>
+    <string name="msg_boss_beaten">%1$s 격파! (HP %2$d)</string>
+    <string name="msg_lost_to_boss">%1$s에게 패배 (HP %2$d 남음)</string>
     <string name="item_rapid">연사</string>
     <string name="item_shield">방어막</string>
     <string name="item_reinforce">증원</string>
     <string name="item_bomb">폭탄</string>
     <string name="shield_blocked">🛡 방어!</string>
+    <string name="monster_ogre">오우거</string>
+    <string name="monster_troll">트롤</string>
+    <string name="monster_golem">바위 골렘</string>
+    <string name="monster_demon">화염 마귀</string>
+    <string name="monster_appears">%1$s 출현!</string>
 </resources>

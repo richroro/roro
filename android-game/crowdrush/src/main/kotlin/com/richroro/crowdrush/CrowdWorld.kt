@@ -94,12 +94,23 @@ class CrowdWorld(private val seed: Int = 1) {
         }
     }
 
-    class Boss(val z: Float, count: Int) {
+    /** The end-of-road monster. [kind] indexes the monster type (0 ogre, 1 troll, 2 golem, 3 demon). */
+    class Boss(z: Float, count: Int, val kind: Int) {
         val maxCount: Int = count
+        var z: Float = z
+            private set
         var count: Int = count
             private set
         var alive: Boolean = true
             internal set
+        var roared: Boolean = false
+            internal set
+        var marching: Boolean = false
+            internal set
+
+        internal fun march(dz: Float) {
+            z -= dz
+        }
 
         internal fun shot() {
             count--
@@ -135,7 +146,7 @@ class CrowdWorld(private val seed: Int = 1) {
 
     /** Something the renderer may want to show or play. Drained once per frame via [drainEvents]. */
     class Event(val type: Type, val x: Float = 0f, val z: Float = 0f, val value: Int = 0, val flag: Boolean = false, val label: String = "", val item: ItemKind? = null) {
-        enum class Type { SHOT, HIT_GATE, HIT_ENEMY, HIT_BOSS, GATE_GOOD, GATE_BAD, CONTACT, LEVEL_CLEAR, GAME_OVER, ITEM, SHIELD_USED }
+        enum class Type { SHOT, HIT_GATE, HIT_ENEMY, HIT_BOSS, GATE_GOOD, GATE_BAD, CONTACT, LEVEL_CLEAR, GAME_OVER, ITEM, SHIELD_USED, ROAR }
     }
 
     var level: Int = 1
@@ -321,7 +332,7 @@ class CrowdWorld(private val seed: Int = 1) {
 
         // The boss is sized so a best-path army wins even while landing only half its shots.
         val bossShots = fireRateFor(best) * (BULLET_RANGE / speed)
-        boss = Boss(length, max(3, floor(best * BOSS_FACTOR + bossShots * BOSS_SHOOT_FACTOR).toInt()))
+        boss = Boss(length, max(3, floor(best * BOSS_FACTOR + bossShots * BOSS_SHOOT_FACTOR).toInt()), kind = (newLevel - 1) % MONSTER_KINDS)
         bossResolved = false
         state = State.RUNNING
     }
@@ -356,6 +367,19 @@ class CrowdWorld(private val seed: Int = 1) {
         for (e in mutableEnemies) { // squads advance on the player once they are close
             val d = e.z - z
             if (e.alive && d > 0f && d < ENEMY_MARCH_RANGE) e.march(ENEMY_MARCH_SPEED * dt)
+        }
+        boss?.let { b -> // the monster roars and stomps toward the rangers once they are in range
+            val d = b.z - z
+            if (b.alive && d > 0f && d < MONSTER_MARCH_RANGE) {
+                if (!b.roared) {
+                    b.roared = true
+                    pendingEvents.add(Event(Event.Type.ROAR, 0f, b.z, value = b.kind))
+                }
+                b.march(MONSTER_MARCH_SPEED * dt)
+                b.marching = true
+            } else {
+                b.marching = false
+            }
         }
         updateShooting(dt)
 
@@ -576,6 +600,10 @@ class CrowdWorld(private val seed: Int = 1) {
         const val REINFORCE_MIN = 3
         const val BOMB_RANGE = 40f
         const val BOMB_BOSS_RATIO = 0.1f
+
+        const val MONSTER_KINDS = 4
+        const val MONSTER_MARCH_RANGE = 45f
+        const val MONSTER_MARCH_SPEED = 1.6f
 
         fun fireRateFor(count: Int): Float = min(count, MAX_SHOOTERS) * SHOTS_PER_SHOOTER
 

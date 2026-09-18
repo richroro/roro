@@ -5,7 +5,7 @@ Each sprite is 96x120 RGBA with a dark outline, two-tone shading and two walk fr
 Outputs into crowdrush/src/main/res/drawable-nodpi/:
   ranger_back_<frame>.png    the player's rangers (teal coat, wide-brim hat), seen from behind, frame = 0|1
   goblin_front_<frame>.png   enemy goblins facing the camera, frame = 0|1
-  monster.png                the ogre chieftain at the end of the lane (160x200)
+  monster_<kind>_<frame>.png the end-of-road monsters (ogre, troll, golem, demon), 160x200, 2 stomp frames
 
 Run:  python3 android-game/tools/generate_sprites.py [out_dir]
 """
@@ -248,76 +248,190 @@ def draw_ranger(c: Canvas, t: dict, front: bool, frame: int):
     c.rrect(cx - 30, 27, cx + 30, 30, 2, t["hat_dark"])                          # brim underside
 
 
-MON_BODY = (0x5B, 0xA6, 0x3C)
-MON_LIGHT = (0x8A, 0xD1, 0x5E)
-MON_DARK = (0x3C, 0x75, 0x27)
-MON_BELLY = (0xC9, 0xE0, 0x8C)
-MON_HORN = (0xE8, 0xD8, 0xB0)
-MON_HORN_DARK = (0xB8, 0xA5, 0x7A)
-MON_EYE_WHITE = (0xFF, 0xF3, 0xC4)
-MON_EYE = (0xB9, 0x1C, 0x1C)
-MON_MOUTH = (0x5A, 0x12, 0x12)
-MON_TOOTH = (0xFF, 0xFF, 0xF0)
-MON_CLUB = (0x7C, 0x4A, 0x1E)
-MON_CLUB_DARK = (0x54, 0x30, 0x12)
+# ---------------------------------------------------------------- monsters
 MON_CLAW = (0xEE, 0xE6, 0xD0)
-MON_PANTS = (0x6B, 0x4A, 0x2E)
+MON_TOOTH = (0xFF, 0xFF, 0xF0)
+MON_MOUTH = (0x4A, 0x0E, 0x0E)
+MON_TONGUE = (0xC0, 0x3B, 0x5A)
+
+MONSTERS = {
+    # kind: body, light, dark, belly, eye white, iris, accent (horn/hair/stone), weapon, weapon dark
+    "ogre": {"body": (0x5B, 0xA6, 0x3C), "light": (0x8A, 0xD1, 0x5E), "dark": (0x3C, 0x75, 0x27), "belly": (0xC9, 0xE0, 0x8C),
+             "eye_w": (0xFF, 0xF3, 0xC4), "iris": (0xB9, 0x1C, 0x1C), "accent": (0xE8, 0xD8, 0xB0), "accent_dark": (0xB8, 0xA5, 0x7A),
+             "weapon": (0x7C, 0x4A, 0x1E), "weapon_dark": (0x54, 0x30, 0x12), "cloth": (0x6B, 0x4A, 0x2E)},
+    "troll": {"body": (0x6F, 0x8A, 0xA8), "light": (0x9C, 0xB6, 0xCF), "dark": (0x46, 0x5D, 0x78), "belly": (0xB9, 0xC9, 0xD9),
+              "eye_w": (0xFF, 0xF7, 0xD6), "iris": (0xF5, 0x9E, 0x0B), "accent": (0x2B, 0x2F, 0x3A), "accent_dark": (0x15, 0x18, 0x20),
+              "weapon": (0x8A, 0x8F, 0x99), "weapon_dark": (0x55, 0x5A, 0x63), "cloth": (0x3F, 0x52, 0x3A)},
+    "golem": {"body": (0x8C, 0x7B, 0x66), "light": (0xB3, 0xA3, 0x8A), "dark": (0x5E, 0x50, 0x40), "belly": (0xA3, 0x92, 0x7A),
+              "eye_w": (0xFF, 0xB0, 0x2E), "iris": (0xFF, 0x62, 0x00), "accent": (0xFF, 0x8A, 0x1F), "accent_dark": (0xC2, 0x50, 0x00),
+              "weapon": (0x6F, 0x62, 0x50), "weapon_dark": (0x46, 0x3C, 0x30), "cloth": (0x4A, 0x40, 0x34)},
+    "demon": {"body": (0xC6, 0x2B, 0x2B), "light": (0xE8, 0x5C, 0x4A), "dark": (0x86, 0x14, 0x14), "belly": (0xF0, 0x8F, 0x6A),
+              "eye_w": (0xFF, 0xE8, 0x5C), "iris": (0x1A, 0x1A, 0x1A), "accent": (0x2B, 0x1B, 0x1B), "accent_dark": (0x14, 0x0A, 0x0A),
+              "weapon": (0x3A, 0x3F, 0x4A), "weapon_dark": (0x1F, 0x23, 0x2B), "cloth": (0x2E, 0x14, 0x3A)},
+}
 
 
-def draw_monster(c: Canvas):
-    """A hulking one-eyed ogre with horns, fangs and a club, facing the camera. Canvas is 160x200."""
-    O = 2.2
-    cx = 80
-    # legs / feet
-    for side in (-1, 1):
+def _monster_legs(c, t, cx, frame, O):
+    """Thick legs with a stomping walk cycle: one leg lifted (shorter, foot raised), the other planted."""
+    for i, side in enumerate((-1, 1)):
         lx = cx + side * 26
-        c.rrect(lx - 16, 140, lx + 16, 176, 10, MON_DARK, outline=O)
-        c.rrect(lx - 16, 140, lx - 5, 168, 8, MON_BODY)
-        c.ellipse(lx, 182, 22, 11, MON_BODY, outline=O)       # feet
-        for t in (-1, 0, 1):                                  # toe claws
-            c.circle(lx + t * 11, 189, 4.2, MON_CLAW, outline=1.2)
-    c.rrect(cx - 46, 126, cx + 46, 150, 12, MON_PANTS, outline=O)  # loincloth
-    # arms (behind body top, in front of legs)
+        lift = (6 if i == frame else 0)
+        c.rrect(lx - 16, 140 - lift * 0.4, lx + 16, 176 - lift, 10, t["dark"], outline=O)
+        c.rrect(lx - 16, 140 - lift * 0.4, lx - 5, 168 - lift, 8, t["body"])
+        c.rrect(lx - 14, 158 - lift, lx + 14, 162 - lift, 1, t["dark"])              # knee crease
+        c.ellipse(lx, 182 - lift, 23, 11, t["body"], outline=O)                        # foot
+        c.ellipse(lx - 6, 178 - lift, 10, 5, t["light"])
+        for k in (-1, 0, 1):
+            c.circle(lx + k * 11, 189 - lift, 4.2, MON_CLAW, outline=1.2)
+
+
+def _monster_arms(c, t, cx, frame, O, weapon):
+    swing = 6 if frame == 1 else -6
     for side in (-1, 1):
         ax = cx + side * 62
-        c.rot_rect(ax, 96, 26, 62, side * 18, MON_BODY, outline=O)
-        c.rot_rect(ax - side * 5, 84, 10, 40, side * 18, MON_LIGHT)
-        c.circle(ax + side * 6, 128, 15, MON_BODY, outline=O)       # fists
+        dy = swing * side
+        c.rot_rect(ax, 96 + dy, 27, 62, side * 18, t["body"], outline=O)
+        c.rot_rect(ax - side * 5, 84 + dy, 10, 40, side * 18, t["light"])
+        c.rot_rect(ax + side * 2, 112 + dy, 24, 8, side * 18, t["cloth"], outline=1)   # wrist wrap
+        c.circle(ax + side * 6, 128 + dy, 16, t["body"], outline=O)                     # fist
+        c.circle(ax + side * 2, 124 + dy, 6, t["light"])
         for k in (-1, 0, 1):
-            c.circle(ax + side * 6 + k * 8, 138, 4, MON_CLAW, outline=1.2)
-    # club in the right hand
-    c.rot_rect(cx + 82, 96, 14, 96, 12, MON_CLUB, outline=O)
-    c.rot_rect(cx + 90, 52, 30, 40, 12, MON_CLUB_DARK, outline=O)
-    for k in range(4):
-        c.circle(cx + 78 + k * 8, 44 + k * 6, 3.5, MON_CLAW, outline=1)
-    # torso
-    c.ellipse(cx, 96, 52, 46, MON_BODY, outline=O)
-    c.ellipse(cx - 18, 76, 22, 18, MON_LIGHT)
-    c.ellipse(cx, 108, 32, 26, MON_BELLY, outline=1.5)             # belly
-    c.ellipse(cx, 116, 20, 12, (0xB3, 0xCC, 0x78))
-    # head
-    c.ellipse(cx, 46, 42, 36, MON_BODY, outline=O)
-    c.ellipse(cx - 14, 30, 18, 12, MON_LIGHT)
-    for side in (-1, 1):                                             # horns
-        pts = [(cx + side * 26, 22), (cx + side * 52, 2), (cx + side * 42, 30)]
-        c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
-        c.polygon(pts, MON_HORN)
-        c.polygon([(cx + side * 30, 22), (cx + side * 48, 8), (cx + side * 42, 28)], MON_HORN_DARK)
-    for side in (-1, 1):                                             # ears
-        c.ellipse(cx + side * 44, 46, 8, 11, MON_BODY, outline=O)
-    c.ellipse(cx, 44, 17, 15, MON_EYE_WHITE, outline=O)              # single eye
-    c.circle(cx + 2, 45, 8, MON_EYE)
-    c.circle(cx + 2, 45, 4, OUTLINE)
-    c.circle(cx + 5, 41, 2.2, MON_EYE_WHITE)
-    c.rot_rect(cx - 12, 27, 30, 6, -14, MON_DARK)                    # brow
-    c.rot_rect(cx + 12, 27, 30, 6, 14, MON_DARK)
-    c.rrect(cx - 26, 60, cx + 26, 76, 8, MON_MOUTH, outline=O)      # mouth
-    for k in range(4):                                               # fangs
+            c.circle(ax + side * 6 + k * 8, 139 + dy, 4, MON_CLAW, outline=1.2)
+    if weapon == "club":
+        c.rot_rect(cx + 66, 92 + swing, 13, 90, 8, t["weapon"], outline=O)
+        c.rot_rect(cx + 62, 48 + swing, 26, 38, 8, t["weapon_dark"], outline=O)
+        for k in range(4):
+            c.circle(cx + 52 + k * 7, 38 + swing + k * 5, 3.2, MON_CLAW, outline=1)
+    elif weapon == "mace":
+        c.rot_rect(cx + 66, 96 + swing, 9, 84, 6, t["weapon_dark"], outline=O)
+        c.circle(cx + 62, 48 + swing, 16, t["weapon"], outline=O)
+        c.circle(cx + 57, 43 + swing, 6, (0xB5, 0xBA, 0xC4))
+        for a in range(8):
+            ang = math.radians(a * 45)
+            c.polygon([(cx + 62 + math.cos(ang) * 14, 48 + swing + math.sin(ang) * 14),
+                       (cx + 62 + math.cos(ang + 0.3) * 17, 48 + swing + math.sin(ang + 0.3) * 17),
+                       (cx + 62 + math.cos(ang) * 23, 48 + swing + math.sin(ang) * 23),
+                       (cx + 62 + math.cos(ang - 0.3) * 17, 48 + swing + math.sin(ang - 0.3) * 17)], (0xD0, 0xD4, 0xDB))
+    elif weapon == "trident":
+        c.rot_rect(cx + 66, 100 + swing, 7, 120, 4, t["weapon"], outline=O)
+        c.rot_rect(cx + 62, 38 + swing, 26, 6, 4, t["weapon"], outline=O)
+        for k in (-1, 0, 1):
+            tx = cx + 62 + k * 10
+            c.polygon([(tx - 4, 40 + swing), (tx + 4, 40 + swing), (tx + k * 1.5, 14 + swing)], OUTLINE)
+            c.polygon([(tx - 2.5, 40 + swing), (tx + 2.5, 40 + swing), (tx + k * 1.5, 17 + swing)], (0xB5, 0xBA, 0xC4))
+
+
+def _monster_torso(c, t, cx, O, belly=True):
+    c.ellipse(cx, 96, 52, 46, t["body"], outline=O)
+    c.ellipse(cx - 18, 76, 22, 18, t["light"])
+    c.rrect(cx - 46, 126, cx + 46, 150, 12, t["cloth"], outline=O)                    # loincloth / belt
+    c.rrect(cx - 46, 126, cx + 46, 131, 2, t["accent_dark"])
+    if belly:
+        c.ellipse(cx, 108, 32, 26, t["belly"], outline=1.5)
+        c.ellipse(cx, 116, 20, 12, tuple(max(0, v - 25) for v in t["belly"]))
+        c.circle(cx, 120, 3, t["dark"])                                                # navel
+
+
+def _monster_head(c, t, cx, O, eyes, horns, tusks, hair=False, brow=True):
+    c.ellipse(cx, 46, 42, 36, t["body"], outline=O)
+    c.ellipse(cx - 14, 30, 18, 12, t["light"])
+    if horns == "curved":
+        for side in (-1, 1):
+            pts = [(cx + side * 24, 24), (cx + side * 44, 14), (cx + side * 58, 26), (cx + side * 50, 34), (cx + side * 40, 24), (cx + side * 30, 30)]
+            c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
+            c.polygon(pts, t["accent"])
+            c.polygon([(cx + side * 30, 26), (cx + side * 42, 20), (cx + side * 50, 28), (cx + side * 42, 26)], t["accent_dark"])
+    elif horns == "straight":
+        for side in (-1, 1):
+            pts = [(cx + side * 26, 22), (cx + side * 52, 2), (cx + side * 42, 30)]
+            c.polygon([(x + side * 1.5, y - 1.5) for x, y in pts], OUTLINE)
+            c.polygon(pts, t["accent"])
+            c.polygon([(cx + side * 30, 22), (cx + side * 48, 8), (cx + side * 42, 28)], t["accent_dark"])
+    if hair:                                                                           # mohawk
+        c.polygon([(cx - 10, 18), (cx - 6, -2), (cx, 8), (cx + 6, -4), (cx + 10, 18)], OUTLINE)
+        c.polygon([(cx - 8, 18), (cx - 5, 2), (cx, 10), (cx + 5, 0), (cx + 8, 18)], t["accent"])
+    for side in (-1, 1):                                                               # ears
+        c.ellipse(cx + side * 44, 46, 8, 11, t["body"], outline=O)
+        c.ellipse(cx + side * 44, 46, 4, 6, t["dark"])
+    if eyes == 1:
+        c.ellipse(cx, 44, 17, 15, t["eye_w"], outline=O)
+        c.circle(cx + 2, 45, 8, t["iris"])
+        c.circle(cx + 2, 45, 4, OUTLINE)
+        c.circle(cx + 5, 41, 2.2, MON_TOOTH)
+        if brow:
+            c.rot_rect(cx - 12, 27, 30, 6, -14, t["dark"])
+            c.rot_rect(cx + 12, 27, 30, 6, 14, t["dark"])
+    else:
+        for side in (-1, 1):
+            c.ellipse(cx + side * 15, 44, 10, 9, t["eye_w"], outline=O)
+            c.circle(cx + side * 15 + 1, 45, 5, t["iris"])
+            c.circle(cx + side * 15 + 1, 45, 2.5, OUTLINE)
+            c.circle(cx + side * 15 + 3, 42, 1.6, MON_TOOTH)
+            if brow:
+                c.rot_rect(cx + side * 15, 33, 22, 5, side * 16, t["dark"])
+    c.rrect(cx - 26, 60, cx + 26, 76, 8, MON_MOUTH, outline=O)                         # mouth
+    c.ellipse(cx, 74, 14, 5, MON_TONGUE)
+    if tusks:
+        for side in (-1, 1):
+            c.polygon([(cx + side * 22, 66), (cx + side * 30, 66), (cx + side * 26, 50)], OUTLINE)
+            c.polygon([(cx + side * 23, 66), (cx + side * 29, 66), (cx + side * 26, 52)], MON_TOOTH)
+    for k in range(4):                                                                 # fangs
         fx = cx - 18 + k * 12
         c.polygon([(fx - 4, 60), (fx + 4, 60), (fx, 70)], MON_TOOTH)
     for k in range(2):
         fx = cx - 6 + k * 12
         c.polygon([(fx - 4, 76), (fx + 4, 76), (fx, 66)], MON_TOOTH)
+
+
+def draw_monster(c: Canvas, kind: str, frame: int):
+    """Hulking monsters facing the camera, 160x200. frame 0/1 = stomping walk cycle."""
+    t = MONSTERS[kind]
+    O = 2.2
+    cx = 80
+    _monster_legs(c, t, cx, frame, O)
+    if kind == "demon":                                                                # bat wings behind the body
+        for side in (-1, 1):
+            pts = [(cx + side * 30, 70), (cx + side * 78, 30), (cx + side * 76, 62), (cx + side * 96, 74), (cx + side * 78, 92), (cx + side * 92, 116), (cx + side * 40, 104)]
+            c.polygon([(x + side * 2, y) for x, y in pts], OUTLINE)
+            c.polygon(pts, t["accent"])
+            for k in range(3):
+                c.polygon([(cx + side * 34, 76 + k * 10), (cx + side * (74 + k * 4), 40 + k * 26), (cx + side * 36, 80 + k * 10)], t["accent_dark"])
+    weapon = {"ogre": "club", "troll": "mace", "golem": None, "demon": "trident"}[kind]
+    _monster_arms(c, t, cx, frame, O, weapon)
+    _monster_torso(c, t, cx, O, belly=(kind != "golem"))
+    if kind == "ogre":
+        for (wx, wy) in ((cx - 30, 88), (cx + 34, 104), (cx - 26, 118)):                  # warts
+            c.circle(wx, wy, 3, t["dark"])
+        c.rot_rect(cx + 20, 92, 22, 3, 30, t["dark"])                                      # scar
+        _monster_head(c, t, cx, O, eyes=1, horns="straight", tusks=False)
+        c.rot_rect(cx + 22, 38, 16, 3, 40, t["dark"])                                      # head scar
+    elif kind == "troll":
+        for (sx_, sy) in ((cx - 34, 92), (cx + 30, 82), (cx - 20, 124)):                  # stone-like spots
+            c.ellipse(sx_, sy, 6, 4, t["dark"])
+        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=True, hair=True)
+        c.ellipse(cx, 56, 11, 8, t["light"], outline=O)                                    # big nose
+        c.circle(cx - 4, 58, 2, t["dark"])
+        c.circle(cx + 4, 58, 2, t["dark"])
+    elif kind == "golem":
+        # stone plates and glowing cracks
+        for (px, py, pw, ph) in ((cx - 36, 70, 26, 20), (cx + 8, 66, 30, 22), (cx - 20, 96, 34, 26), (cx + 18, 100, 24, 20)):
+            c.rrect(px, py, px + pw, py + ph, 4, t["light"], outline=1.5)
+        for (x0, y0, x1, y1) in ((cx - 10, 84, cx + 6, 96), (cx + 6, 96, cx - 2, 112)):
+            c.rot_rect((x0 + x1) / 2, (y0 + y1) / 2, 4, math.hypot(x1 - x0, y1 - y0), math.degrees(math.atan2(y1 - y0, x1 - x0)) - 90, t["accent"])
+        _monster_head(c, t, cx, O, eyes=2, horns=None, tusks=False, brow=False)
+        c.rrect(cx - 24, 22, cx + 24, 34, 4, t["light"], outline=1.5)                      # brow plate
+        for k in range(3):                                                                 # rock spikes on the head
+            sx_ = cx - 20 + k * 20
+            c.polygon([(sx_ - 8, 18), (sx_ + 8, 18), (sx_, 2)], OUTLINE)
+            c.polygon([(sx_ - 6, 18), (sx_ + 6, 18), (sx_, 5)], t["light"])
+    elif kind == "demon":
+        _monster_head(c, t, cx, O, eyes=2, horns="curved", tusks=False)
+        for k in range(4):                                                                 # flames on the crown
+            fx = cx - 18 + k * 12
+            c.polygon([(fx - 6, 20), (fx + 6, 20), (fx + 2, 2 - (k % 2) * 6)], (0xFF, 0x8A, 0x1F))
+            c.polygon([(fx - 3, 20), (fx + 3, 20), (fx + 1, 8 - (k % 2) * 4)], (0xFF, 0xD2, 0x4A))
+        c.rrect(cx - 46, 126, cx + 46, 150, 12, t["cloth"], outline=O)
+        c.circle(cx, 138, 7, (0xFF, 0xD2, 0x4A), outline=1.5)                             # belt gem
 
 
 def draw_goblin(c: Canvas, frame: int):
@@ -383,9 +497,15 @@ def main():
         g = Canvas(W, H)
         draw_goblin(g, frame)
         g.save(os.path.join(out, f"goblin_front_{frame}.png"))
-    m = Canvas(160, 200)
-    draw_monster(m)
-    m.save(os.path.join(out, "monster.png"))
+    try:
+        os.remove(os.path.join(out, "monster.png"))
+    except OSError:
+        pass
+    for kind in MONSTERS:
+        for frame in (0, 1):
+            m = Canvas(160, 200)
+            draw_monster(m, kind, frame)
+            m.save(os.path.join(out, f"monster_{kind}_{frame}.png"))
     print("wrote ranger, goblin and monster sprites to", os.path.abspath(out))
 
 

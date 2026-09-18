@@ -10,6 +10,7 @@ Outputs into crowdrush/src/main/res/raw/:
   sfx_over.wav   game over descending tone
   sfx_pickup.wav item picked up (two rising notes)
   sfx_boom.wav   bomb item (low rumble)
+  sfx_roar.wav   monster roar when it starts charging
 
 Run:  python3 android-game/tools/generate_sounds.py [out_dir]
 """
@@ -134,11 +135,21 @@ def boom():
     return [n * 1.2 + th * 0.8 for n, th in zip(noise, thump)]
 
 
+def roar():
+    def f(t, r, i):
+        vib = 1 + 0.06 * math.sin(2 * math.pi * 9 * t)
+        freq = (95 - 30 * t) * vib
+        saw = 2 * ((freq * t) % 1) - 1
+        growl = saw * 0.7 + (r.random() * 2 - 1) * 0.5
+        return growl * env(t, 0.03, 0.35)
+    return lowpass(render(0.8, f, seed=11), 0.18)
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "crowdrush", "src", "main", "res", "raw")
     os.makedirs(out, exist_ok=True)
-    for name, fn in [("sfx_shot", shot), ("sfx_hit", hit), ("sfx_ding", ding), ("sfx_buzz", buzz), ("sfx_clear", clear), ("sfx_over", over), ("sfx_pickup", pickup), ("sfx_boom", boom)]:
+    for name, fn in [("sfx_shot", shot), ("sfx_hit", hit), ("sfx_ding", ding), ("sfx_buzz", buzz), ("sfx_clear", clear), ("sfx_over", over), ("sfx_pickup", pickup), ("sfx_boom", boom), ("sfx_roar", roar)]:
         save(os.path.join(out, name + ".wav"), fn())
     print("wrote sound effects to", os.path.abspath(out))
 
