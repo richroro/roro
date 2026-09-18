@@ -188,7 +188,7 @@ def main() -> None:
             return read_json(out.with_suffix(".json"), {"provider": "cache"})
         info = fetch_images.fetch_image(
             prompt=sc.get("image_prompt", ""), keywords=sc.get("keywords", ""), out=out, providers=providers,
-            seed=(project.get("seed", 0) * 100 + i + 1) if project.get("seed") else None,
+            seed=int(project.get("seed", 7)) * 100 + i + 1,   # 씬마다 다른 고정 시드(카드 색·AI 생성 재현성)
             style=style["image_style"], card_text="",
             used=used_urls, local=sc.get("image"))
         sigs.mark(out, sig)
@@ -299,14 +299,25 @@ def main() -> None:
         return
 
     # ---------------------------------------------------------------- 8. 부가 산출물
-    render.preview_sheet(final, total, outdir / "preview.jpg")
+    marks = [sc["start"] + 0.6 for sc in tl_scenes if sc.get("headline")]
+    if project.get("cta"):
+        marks.append(total - 1.0)
+    render.preview_sheet(final, total, outdir / "preview.jpg", marks=marks)
     render.thumbnail(img_files[0], project.get("thumbnail_text") or project["title"], outdir / "thumbnail.jpg")
-    credits = []
+    credits, no_credit = [], []
     for i, inf in enumerate(img_info, 1):
-        if inf.get("credit") and inf.get("provider") not in ("card", "cache"):
+        prov = inf.get("provider")
+        if prov in ("card", "cache", "pollinations", "local"):
+            continue                      # 생성·로컬 자료는 출처 표기 대상이 아니다
+        if inf.get("credit"):
             credits.append(f"- 씬 {i} 이미지: {inf['credit']}")
-    if bgm_info and bgm_info.get("credit"):
-        credits.append(f"- 배경음악: {bgm_info['credit']}")
+    if bgm_info:
+        if bgm_info.get("provider") in ("synth", "cache", "local"):
+            no_credit.append("합성 BGM" if bgm_info.get("provider") != "local" else "사용자 제공 BGM(라이선스 직접 확인)")
+        elif bgm_info.get("credit"):
+            credits.append(f"- 배경음악: {bgm_info['credit']}")
+    if any(inf.get("provider") == "pollinations" for inf in img_info):
+        no_credit.append("AI 생성 이미지(Pollinations)")
     meta = project.get("meta") or {}
     tags = meta.get("hashtags") or []
     lines = [f"# {project['title']}", "",
@@ -315,7 +326,8 @@ def main() -> None:
              "## 설명 (복사해서 업로드 설명란에)", "", meta.get("description", "").strip(), "",
              " ".join(t if t.startswith("#") else f"#{t}" for t in tags), "",
              "## 출처 표기 (CC 자료를 썼다면 설명란에 함께 넣기)", ""]
-    lines += credits or ["- 외부 출처 없음 (AI 생성/합성 자료만 사용)"]
+    lines += credits or ["- 없음"]
+    lines += ["", "표기 불필요: " + (", ".join(no_credit) or "해당 없음") + " (생성·합성 자료)"]
     (outdir / "meta.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     actual = media_duration(final)
     log("done", f"{final}  ({actual:.1f}s, {final.stat().st_size / 1e6:.1f}MB, {time.time() - t0:.0f}s 소요)")

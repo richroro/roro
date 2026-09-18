@@ -3,6 +3,8 @@
   "title": "문어는 심장이 3개다?!",
   "thumbnail_text": "심장이 3개?!",
   "lang": "ko",
+  "category": "animals",
+  "hook_type": "question",
   "voice": "female",
   "rate": "+8%",
   "style": {

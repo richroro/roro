@@ -28,7 +28,7 @@ DEFAULT_STYLE = {
     "highlight_color": "#FFD400",   # 노랑
     "outline": 5,
     "caption_margin_v": 560,         # 아래에서 띄우는 픽셀 (1920 기준)
-    "headline_size": 92,
+    "headline_size": 104,
     "headline_color": "#FFFFFF",
     "headline_margin_v": 250,
     "headline_seconds": 2.6,
@@ -83,9 +83,15 @@ def chunk_words(words: list[dict], max_words: int, max_chars: int) -> list[list[
             cur, cur_len = [], 0
     if cur:
         chunks.append(cur)
-    # 마지막 덩어리가 한 어절뿐이면 앞 덩어리에 붙인다(외로운 한 단어 방지)
-    if len(chunks) >= 2 and len(chunks[-1]) == 1 and len(chunks[-2]) < max_words:
-        chunks[-2].extend(chunks.pop())
+    # 마지막 덩어리가 한 어절뿐이면(외로운 한 단어) 앞 덩어리에서 한 어절을 옮겨 2:2 로 나누거나,
+    # 앞 덩어리가 짧으면 합친다. 어느 쪽도 max_chars 를 크게 넘기지 않게 한다.
+    if len(chunks) >= 2 and len(chunks[-1]) == 1:
+        prev, last = chunks[-2], chunks[-1]
+        merged_len = sum(len(w["text"]) for w in prev + last) + len(prev)
+        if len(prev) >= 3 and not _END_PUNCT.search(prev[-2]["text"]):
+            last.insert(0, prev.pop())
+        elif merged_len <= max_chars + 2:
+            prev.extend(chunks.pop())
     return chunks
 
 

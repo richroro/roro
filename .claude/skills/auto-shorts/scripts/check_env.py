@@ -128,7 +128,7 @@ def main() -> None:
         if err is None:
             ok(f"{label}")
         else:
-            print(f"  ✗ {label}: {err} (막혀 있으면 폴백 제공자로 진행됨)")
+            print(f"  ! {label}: {err} (막혀 있으면 폴백 제공자로 진행됨 — 실패 아님)")
 
     if args.probe:
         print("[probe] edge-tts 합성 테스트")

@@ -15,13 +15,16 @@ make_shorts.py 가 순서대로 호출한다. 각 함수는 파일 하나를 만
 """
 from __future__ import annotations
 
+import json
 import math
+import re
+import subprocess
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (CAPTION_FONT_FILE, FONT_DIR, FPS, HEIGHT, WIDTH, ff_path, log,  # noqa: E402
-                    run_ffmpeg)
+from common import (CAPTION_FONT_FILE, FONT_DIR, FPS, HEIGHT, WIDTH, ff_path, find_ffmpeg,  # noqa: E402
+                    log, run_ffmpeg)
 
 STAGE = "render"
 MOTIONS = ["in", "out", "pan_right", "in", "pan_up", "out", "pan_left", "in", "pan_down"]
@@ -182,30 +185,81 @@ def sfx_track(events: list[tuple[Path, float, float]], total: float, out: Path) 
     return out
 
 
+def _measure_loudness(wav: Path) -> dict | None:
+    """loudnorm 1패스: 측정값(JSON)을 stderr 에서 읽는다."""
+    proc = subprocess.run(
+        [find_ffmpeg(), "-hide_banner", "-nostdin", "-i", str(wav), "-af",
+         "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
+    m = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", proc.stderr, re.S)
+    if not m:
+        return None
+    try:
+        d = json.loads(m.group(0))
+        return {k: d[k] for k in ("input_i", "input_tp", "input_lra", "input_thresh", "target_offset")}
+    except (json.JSONDecodeError, KeyError):
+        return None
+
+
 def mux(video: Path, tracks: list[Path], out: Path, loudnorm: bool = True) -> Path:
-    args = ["-i", str(video)]
+    """트랙을 믹스해 wav 로 만든 뒤, 2패스 loudnorm(측정 → 선형 적용)으로 -14 LUFS 에 맞춰 영상과 합친다."""
+    mix = out.parent / "work" / "mix.wav" if (out.parent / "work").is_dir() else out.with_suffix(".mix.wav")
+    args: list[str] = []
     for t in tracks:
         args += ["-i", str(t)]
     k = len(tracks)
-    if k == 1:
-        chain = "[1:a]"
-        fc_parts = []
+    fc = ("".join(f"[{i}:a]" for i in range(k)) + f"amix=inputs={k}:normalize=0[a]") if k > 1 else "[0:a]anull[a]"
+    run_ffmpeg(args + ["-filter_complex", fc, "-map", "[a]", "-c:a", "pcm_s16le", str(mix)], stage=STAGE)
+
+    if loudnorm:
+        meas = _measure_loudness(mix)
+        if meas:
+            ln = (f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={meas['input_i']}:measured_TP={meas['input_tp']}:"
+                  f"measured_LRA={meas['input_lra']}:measured_thresh={meas['input_thresh']}:"
+                  f"offset={meas['target_offset']}:linear=true,aresample=48000")
+        else:
+            ln = "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000"
     else:
-        fc_parts = ["".join(f"[{i + 1}:a]" for i in range(k)) + f"amix=inputs={k}:normalize=0[mix]"]
-        chain = "[mix]"
-    post = "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000" if loudnorm else "alimiter=limit=0.95"
-    fc_parts.append(f"{chain}{post}[a]")
-    run_ffmpeg(args + ["-filter_complex", ";".join(fc_parts), "-map", "0:v", "-map", "[a]",
-                       "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
-                       "-shortest", str(out)], stage=STAGE)
+        ln = "alimiter=limit=0.95"
+    run_ffmpeg(["-i", str(video), "-i", str(mix), "-map", "0:v", "-map", "1:a", "-af", ln,
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", str(out)],
+               stage=STAGE)
     return out
 
 
 # ---------------------------------------------------------------- 검수용
-def preview_sheet(video: Path, total: float, out: Path, cols: int = 4, rows: int = 3) -> Path:
-    step = max(0.5, total / (cols * rows))
-    run_ffmpeg(["-i", str(video), "-vf", f"fps=1/{step:.4f},scale=270:480,tile={cols}x{rows}",
-                "-frames:v", "1", "-q:v", "3", str(out)], stage=STAGE)
+def preview_sheet(video: Path, total: float, out: Path, marks: list[float] | None = None,
+                  cols: int = 4, rows: int = 3) -> Path:
+    """프레임 그리드. 균등 간격 샘플에 더해, marks(헤드라인 시작 등)에 해당하는 순간을 반드시 포함시켜
+    검수할 때 헤드라인·CTA 가 실제로 보이는지 확인할 수 있게 한다. 각 타일에 시각을 적는다."""
+    from PIL import Image, ImageDraw, ImageFont  # type: ignore
+
+    n = cols * rows
+    marks = sorted({round(min(max(0.05, m), total - 0.1), 2) for m in (marks or [])})[:n - 2]
+    even = [round(total * (i + 0.5) / n, 2) for i in range(n)]
+    times = list(marks)
+    for t in even:                     # 마크와 1.5초 이내로 겹치는 균등 샘플은 건너뛴다
+        if len(times) >= n:
+            break
+        if all(abs(t - m) > 1.5 for m in times):
+            times.append(t)
+    times = sorted(times)[:n]
+    tw, th = 270, 480
+    sheet = Image.new("RGB", (cols * tw, rows * th), (20, 20, 20))
+    font = ImageFont.truetype(str(CAPTION_FONT_FILE), 22) if CAPTION_FONT_FILE.exists() else ImageFont.load_default()
+    tmp = out.parent / "work" / "_preview_frame.jpg" if (out.parent / "work").is_dir() else out.with_suffix(".frame.jpg")
+    for i, t in enumerate(times):
+        run_ffmpeg(["-ss", f"{t:.2f}", "-i", str(video), "-frames:v", "1", "-q:v", "3",
+                    "-vf", f"scale={tw}:{th}", str(tmp)], stage=STAGE)
+        tile = Image.open(tmp).convert("RGB")
+        d = ImageDraw.Draw(tile)
+        label = f"{t:.1f}s" + (" ★" if t in marks else "")
+        d.rectangle((0, th - 30, 8 + int(d.textlength(label, font=font)) + 8, th), fill=(0, 0, 0))
+        d.text((8, th - 28), label, font=font, fill=(255, 212, 0) if t in marks else (255, 255, 255))
+        sheet.paste(tile, ((i % cols) * tw, (i // cols) * th))
+    tmp.unlink(missing_ok=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(out, "JPEG", quality=88)
     return out
 
 
