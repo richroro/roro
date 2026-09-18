@@ -1,0 +1,22 @@
+{
+  "name": "cafe24-reply-pilot",
+  "version": "0.1.0",
+  "description": "카페24 앱스토어용 AI 답변 도우미 — 상품문의·후기·1:1 게시판 미답변 글에 매장 정책과 주문 정보를 근거로 답변 초안을 만들고 승인 후 게시합니다.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --env-file=.env src/server.js",
+    "mock:cafe24": "node scripts/mock-cafe24.js",
+    "demo:launch-url": "node --env-file=.env scripts/demo-launch-url.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.126.0",
+    "express": "^5.1.0"
+  },
+  "license": "MIT"
+}
