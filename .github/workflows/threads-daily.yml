@@ -1,0 +1,156 @@
+name: Threads Daily Publish
+
+# 매일 08:00 KST(23:00 UTC)에 큐의 맨 앞 글을 메타 스레드에 게시하고
+# Slack DM으로 알린다. PC 전원과 무관하게 GitHub 클라우드에서 실행된다.
+# 게시 후 queue/ 이동을 다시 커밋해 중복 게시를 막는다.
+#
+# Secrets(THREADS_TOKEN_JSON / THREADS_CONFIG_JSON)가 아직 없으면 실패 대신
+# 경고만 남기고 건너뛴다. 설정 전에 main 에 등록해 둬도 매일 실패 메일이
+# 오지 않도록 하기 위함이다.
+#
+# 스레드 장기 토큰은 60일마다 갱신되고 갱신하면 새 토큰이 나온다. 러너에서
+# 갱신된 토큰은 GH_PAT(secrets 쓰기 권한 PAT)이 있으면 THREADS_TOKEN_JSON
+# secret 에 다시 저장하고, 없으면 Slack 으로 재등록을 요청한다.
+#
+# 수동 실행(Run workflow)은 기본이 실제 게시다. 게시 없이 확인만 하려면
+# dry_run 을 켠다.
+
+on:
+  schedule:
+    - cron: "0 23 * * *"   # 23:00 UTC = 08:00 KST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "게시하지 않고 다음에 나갈 글과 설정만 확인"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write          # 게시 후 queue 변경을 push 하기 위함
+
+concurrency:
+  group: threads-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check setup
+        id: setup
+        env:
+          THREADS_TOKEN_JSON: ${{ secrets.THREADS_TOKEN_JSON }}
+          THREADS_CONFIG_JSON: ${{ secrets.THREADS_CONFIG_JSON }}
+        run: |
+          if [ -z "$THREADS_TOKEN_JSON" ] || [ -z "$THREADS_CONFIG_JSON" ]; then
+            echo "::warning::THREADS_TOKEN_JSON / THREADS_CONFIG_JSON secret 이 아직 없어 이번 실행은 건너뜁니다. .claude/skills/threads-auto-post/references/threads_setup.md 6단계를 마치면 자동으로 게시가 시작됩니다."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: steps.setup.outputs.ready == 'true'
+        uses: actions/checkout@v4
+        with:
+          # 스킬과 큐는 이 브랜치에만 있다. 워크플로는 main 에서
+          # 실행되므로 대상 브랜치를 명시적으로 체크아웃해야 한다.
+          ref: add-blogger-auto-post-skill
+
+      - name: Set up Python
+        if: steps.setup.outputs.ready == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.setup.outputs.ready == 'true'
+        run: pip install --quiet -r .claude/skills/threads-auto-post/requirements.txt
+
+      - name: Restore credentials from secrets
+        if: steps.setup.outputs.ready == 'true'
+        env:
+          THREADS_TOKEN_JSON: ${{ secrets.THREADS_TOKEN_JSON }}
+          THREADS_CONFIG_JSON: ${{ secrets.THREADS_CONFIG_JSON }}
+          BLOGGER_CONFIG_JSON: ${{ secrets.BLOGGER_CONFIG_JSON }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          set -e
+          SKILL=.claude/skills/threads-auto-post
+          mkdir -p "$SKILL/secrets" slackbot
+          printf '%s' "$THREADS_TOKEN_JSON"  > "$SKILL/secrets/token.json"
+          printf '%s' "$THREADS_CONFIG_JSON" > "$SKILL/secrets/config.json"
+          printf 'SLACK_BOT_TOKEN=%s\n' "$SLACK_BOT_TOKEN" > slackbot/.env
+          # 블로거 설정이 있으면 Slack DM 대상(slack_user_id)을 거기서 재사용한다.
+          if [ -n "$BLOGGER_CONFIG_JSON" ]; then
+            mkdir -p .claude/skills/blogger-auto-post/secrets
+            printf '%s' "$BLOGGER_CONFIG_JSON" > .claude/skills/blogger-auto-post/secrets/config.json
+          fi
+          # sanity check (값은 출력하지 않음)
+          python -c "import json;json.load(open('$SKILL/secrets/token.json'));json.load(open('$SKILL/secrets/config.json'));print('secrets OK')"
+          # secret 은 JSON 문서 전체라 GitHub 마스킹이 토큰 문자열 자체는 못 가린다.
+          # 오류 메시지에 URL 이 섞여 나와도 로그에 안 남도록 토큰만 따로 마스킹한다.
+          python -c "import json;print(json.load(open('$SKILL/secrets/token.json'))['access_token'])" | sed 's/^/::add-mask::/'
+          # 게시 후 토큰이 갱신됐는지 비교하기 위한 지문
+          sha256sum "$SKILL/secrets/token.json" | cut -d' ' -f1 > "$RUNNER_TEMP/token.before"
+          # Slack DM 대상이 없으면 알림이 전부 조용히 빠지므로 미리 경고한다.
+          python -c "import sys;sys.path.insert(0,'$SKILL/scripts');from common import _read_slack_env,_resolve_slack_channel;t,u=_read_slack_env();print('slack OK' if (t and _resolve_slack_channel(u)) else '::warning::Slack DM 대상을 찾을 수 없어 알림이 전송되지 않습니다. THREADS_CONFIG_JSON 의 config.json 에 slack_user_id 를 넣거나 BLOGGER_CONFIG_JSON secret 을 확인하세요.')"
+
+      - name: Publish next queued post
+        if: steps.setup.outputs.ready == 'true'
+        run: python .claude/skills/threads-auto-post/scripts/daily_post.py ${{ inputs.dry_run == true && '--dry-run' || '' }}
+
+      - name: Commit queue changes
+        # 게시가 성공했으면 반드시 커밋돼야 한다. 그렇지 않으면 다음 실행에서
+        # 같은 글이 또 올라간다. update-market 등 다른 워크플로가 같은 브랜치에
+        # 수시로 푸시하므로, 거부되면 rebase 후 몇 번 더 시도한다.
+        if: steps.setup.outputs.ready == 'true' && inputs.dry_run != true
+        run: |
+          set -e
+          SKILL=.claude/skills/threads-auto-post
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "$SKILL/queue"
+          if git diff --cached --quiet; then
+            echo "커밋할 queue 변경 없음."
+            exit 0
+          fi
+          git commit -m "chore(threads): daily publish [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin add-blogger-auto-post-skill && git push origin HEAD:add-blogger-auto-post-skill; then
+              echo "queue 변경 push 완료."
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "push 실패 (${i}/5), 잠시 후 재시도"
+            sleep $((i * 5))
+          done
+          echo "::error::queue 변경 push 실패. 다음 실행에서 같은 글이 다시 게시될 수 있습니다."
+          MSG="⚠️ 스레드 게시는 됐지만 queue 변경 push 에 실패했습니다. 다음 실행 전에 queue/ 의 방금 게시한 파일을 queue/posted/ 로 직접 옮겨 커밋해 주세요. (add-blogger-auto-post-skill 브랜치)" \
+            python -c "import os,sys;sys.path.insert(0,'$SKILL/scripts');from common import slack_notify;slack_notify(os.environ['MSG'])"
+          exit 1
+
+      - name: Persist refreshed token
+        # 게시 실패 여부와 무관하게 실행한다. 갱신은 게시 직전에 일어나므로
+        # 게시가 실패했어도 새 토큰은 보존해야 한다.
+        if: always() && steps.setup.outputs.ready == 'true' && inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          SKILL=.claude/skills/threads-auto-post
+          [ -f "$RUNNER_TEMP/token.before" ] && [ -f "$SKILL/secrets/token.json" ] || exit 0
+          AFTER=$(sha256sum "$SKILL/secrets/token.json" | cut -d' ' -f1)
+          if [ "$AFTER" = "$(cat "$RUNNER_TEMP/token.before")" ]; then
+            echo "토큰 변경 없음."
+            exit 0
+          fi
+          # 새 토큰도 로그에 나오지 않게 마스킹
+          python -c "import json;print(json.load(open('$SKILL/secrets/token.json'))['access_token'])" | sed 's/^/::add-mask::/'
+          if [ -n "$GH_TOKEN" ] && gh secret set THREADS_TOKEN_JSON --repo "$GITHUB_REPOSITORY" < "$SKILL/secrets/token.json"; then
+            echo "갱신된 토큰을 THREADS_TOKEN_JSON secret 에 저장했습니다."
+          else
+            # GH_PAT 이 없거나(만료·권한 부족 포함) 저장에 실패한 경우 모두 알린다.
+            echo "::warning::토큰이 갱신됐지만 THREADS_TOKEN_JSON secret 에 저장하지 못했습니다 (GH_PAT 없음 또는 권한/만료 문제)."
+            MSG="⚠️ 스레드 토큰이 클라우드 러너에서 갱신됐지만 THREADS_TOKEN_JSON secret 에 저장하지 못했습니다 (GH_PAT 없음 또는 권한/만료 문제). 기존 토큰이 만료되기 전에 로컬에서 auth.py 를 다시 실행해 secret 을 재등록하거나 GH_PAT 을 점검하세요. (threads_setup.md 6~7단계)" \
+              python -c "import os,sys;sys.path.insert(0,'$SKILL/scripts');from common import slack_notify;slack_notify(os.environ['MSG'])"
+          fi
