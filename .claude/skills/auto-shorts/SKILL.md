@@ -151,7 +151,29 @@ python .claude/skills/auto-shorts/scripts/make_shorts.py shorts_output/<slug>/pr
    - 자막 줄바꿈이 어색 → 문장을 짧게 끊거나 `style.max_chars`(기본 16) 조정.
    - BGM 이 큼/작음 → `bgm.volume`(0.2~0.4).
 
-## 5단계. 전달
+## 5단계. 업로드 (선택)
+
+`scripts/upload_youtube.py` 로 바로 올릴 수 있다. **처음 한 번만** 구글 인증이 필요하다(사용자 PC에서 브라우저가 열린다).
+
+```bash
+# 1회: 구글 클라우드 콘솔에서 YouTube Data API v3 사용 설정 → OAuth 클라이언트 ID(데스크톱 앱) JSON 을
+#      .claude/skills/auto-shorts/secrets/client_secret.json 으로 저장한 뒤
+python .claude/skills/auto-shorts/scripts/upload_youtube.py --auth
+
+# 매번
+python .claude/skills/auto-shorts/scripts/upload_youtube.py --slug <slug> --dry-run   # 제목·설명 확인
+python .claude/skills/auto-shorts/scripts/upload_youtube.py --slug <slug>             # 비공개로 업로드
+python .claude/skills/auto-shorts/scripts/upload_youtube.py --slug <slug> --privacy public
+```
+
+- 기본값은 **비공개**다. 스튜디오에서 확인하고 공개하는 편이 안전하므로, 사용자가 명시적으로 공개를
+  요청하지 않으면 `--privacy public` 을 붙이지 않는다.
+- 제목·설명·태그는 `meta.md` 와 `project.json` 에서 자동으로 채우고, **CC 사진 출처 표기를 설명란에 넣는다**
+  (CC BY 는 표기가 의무다). 썸네일도 함께 올린다.
+- 업로드 할당량은 하루 약 6편(1건 1,600유닛 / 기본 10,000유닛)이다.
+- Claude 는 사용자의 구글 계정으로 대신 로그인할 수 없다. 인증은 사용자가 직접 한 번 해야 한다.
+
+## 6단계. 전달
 
 사용자에게 알린다: `final.mp4` 경로, 길이, 사용한 보이스·이미지 제공자, `meta.md` 의 제목/설명/해시태그,
 출처 표기가 필요한지 여부, 그리고 `thumbnail.jpg`. 이어서 만들 만한 후속 주제 1~2개를 짧게 제안한다
