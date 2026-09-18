@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-18T08:29:37.029356+09:00",
+  "updatedAt": "2026-09-18T13:28:15.009842+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6715.41,
-      "change": -2.56,
-      "changePercent": -0.04,
+      "price": 6899.13,
+      "change": 183.72,
+      "changePercent": 2.74,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 822.18,
-      "change": 9.77,
-      "changePercent": 1.2,
+      "price": 824.96,
+      "change": 8.98,
+      "changePercent": 1.1,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1380.37,
-      "change": 0.42,
-      "changePercent": 0.03,
+      "price": 1384.98,
+      "change": 5.03,
+      "changePercent": 0.36,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 252500.0,
-      "change": -1000.0,
-      "changePercent": -0.39,
+      "price": 260750.0,
+      "change": 8250.0,
+      "changePercent": 3.27,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1745000.0,
-      "change": -14000.0,
-      "changePercent": -0.8,
+      "price": 1849000.0,
+      "change": 104000.0,
+      "changePercent": 5.96,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 199000.0,
-      "change": -2500.0,
-      "changePercent": -1.24,
+      "price": 197300.0,
+      "change": -1700.0,
+      "changePercent": -0.85,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 33500.0,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 33450.0,
+      "change": -50.0,
+      "changePercent": -0.15,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 365000.0,
-      "change": -2000.0,
-      "changePercent": -0.54,
+      "price": 363500.0,
+      "change": -1500.0,
+      "changePercent": -0.41,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "[마켓뷰] 美증시 긴축 소화하며 반등…코스피도 이어받을까",
-      "link": "https://www.yna.co.kr/view/AKR20260918018900008",
-      "pubDate": "Fri, 18 Sep 2026 08:06:33 +0900",
+      "title": "해태제과, 오예스·홈런볼 등 25개 브랜드 가격 인상",
+      "link": "https://www.yna.co.kr/view/AKR20260918093600030",
+      "pubDate": "Fri, 18 Sep 2026 12:58:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "유류세 인하 11월 말까지 두 달 연장…\"국민 유류비 부담 경감\"",
-      "link": "https://www.yna.co.kr/view/AKR20260917196400002",
-      "pubDate": "Fri, 18 Sep 2026 08:00:04 +0900",
+      "title": "檢, '빗썸 관계사 주가조작·횡령' 혐의 강종현 징역 20년 구형",
+      "link": "https://www.yna.co.kr/view/AKR20260918094200004",
+      "pubDate": "Fri, 18 Sep 2026 12:51:44 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[가보니] 약 챙기고 안부 묻고…국가유공자 찾아간 약사들",
-      "link": "https://www.yna.co.kr/view/AKR20260917170600017",
-      "pubDate": "Fri, 18 Sep 2026 08:00:03 +0900",
+      "title": "서울 청약시장 강남 쏠림…1순위 경쟁률 비강남의 13.4배",
+      "link": "https://www.yna.co.kr/view/AKR20260918093400003",
+      "pubDate": "Fri, 18 Sep 2026 12:34:30 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
-      "link": "https://www.yna.co.kr/view/AKR20260918012300011",
-      "pubDate": "Fri, 18 Sep 2026 07:30:00 +0900",
+      "title": "李대통령, 대미투자에 \"한미 양국 도움되도록 치열하게 협의 중\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918090200001",
+      "pubDate": "Fri, 18 Sep 2026 12:16:33 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[반려동물] 본업 살려 유기견 돕는다…기업 동물복지 활동 다변화",
-      "link": "https://www.yna.co.kr/view/AKR20260917178400030",
-      "pubDate": "Fri, 18 Sep 2026 07:00:31 +0900",
+      "title": "李대통령 \"부동산 공급 최대한 신속히 늘릴 것…매주 진척 확인\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918087400001",
+      "pubDate": "Fri, 18 Sep 2026 12:11:46 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"80만원인데 찾는다고?\"…비싼데도 불티 난 '명품 한우'의 비밀 [현장+]",
-      "link": "https://www.hankyung.com/article/202609171542g",
-      "pubDate": "Fri, 18 Sep 2026 07:00:07 +0900",
+      "title": "'페이' 등 간편지급 일 평균 1.2조…증권계좌로 간편송금도 급증",
+      "link": "https://www.yna.co.kr/view/AKR20260918073600002",
+      "pubDate": "Fri, 18 Sep 2026 12:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "작년 공공부문 적자 83조 '역대 최대'…\"내년엔 흑자될 수도\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918075300002",
+      "pubDate": "Fri, 18 Sep 2026 12:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] 키움증권, 초록우산과 아동금융교육 지원 협약",
+      "link": "https://www.yna.co.kr/view/AKR20260918087600008",
+      "pubDate": "Fri, 18 Sep 2026 11:58:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 일본은행, 3개월만 기준금리 1.25%로 인상…31년만 최고",
+      "link": "https://www.yna.co.kr/view/AKR20260918087900073",
+      "pubDate": "Fri, 18 Sep 2026 11:57:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "하나금융, ADGM·한화자산운용과 스테이블코인 협력",
+      "link": "https://www.yna.co.kr/view/AKR20260918086100002",
+      "pubDate": "Fri, 18 Sep 2026 11:55:56 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"매출 873% 폭증했다\"…삼성·SK 무섭게 쫓는 中 반도체 회사 [테크로그]",
+      "link": "https://www.hankyung.com/article/202609183282g",
+      "pubDate": "Fri, 18 Sep 2026 11:25:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "물가 꺾여도 금리는 더 오른다?…Fed 점도표에 숨은 '내년 추가 인상' 신호 [김주완의 글로벌머니 X파일]",
-      "link": "https://www.hankyung.com/article/202609171629i",
-      "pubDate": "Fri, 18 Sep 2026 07:00:04 +0900",
+      "title": "차기 수협은행장 21일 최종 면접…'신학기 vs 이형주' 2파전 속 변수는",
+      "link": "https://www.hankyung.com/article/202609183444i",
+      "pubDate": "Fri, 18 Sep 2026 11:16:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[만나보니] 캐런 티오 구글 부사장 \"누구나 앱 만드는 시대…품질이 승부\"",
-      "link": "https://www.yna.co.kr/view/AKR20260917185000017",
-      "pubDate": "Fri, 18 Sep 2026 06:00:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "입법조사처 \"CPTPP 가입 시 마사회·aT 규범 충돌 가능성\"",
-      "link": "https://www.yna.co.kr/view/AKR20260917141000030",
-      "pubDate": "Fri, 18 Sep 2026 06:00:15 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "서울 아파트값 7월에도 상승세 지속…1년 새 15% 상승",
-      "link": "https://www.yna.co.kr/view/AKR20260917177800004",
-      "pubDate": "Fri, 18 Sep 2026 06:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융정보분석원, 타지키스탄 국립은행과 자금세탁방지 대응 협력",
-      "link": "https://www.yna.co.kr/view/AKR20260917181900002",
-      "pubDate": "Fri, 18 Sep 2026 06:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "서울 소상공인 매장서 카드 쓰면 추첨 통해 최대 5만원 상품권",
-      "link": "https://www.yna.co.kr/view/AKR20260917184100004",
-      "pubDate": "Fri, 18 Sep 2026 06:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"달아서 안 먹었는데…\" 2030 '해장템'으로 대박 난 정체 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609171684g",
-      "pubDate": "Fri, 18 Sep 2026 06:00:05 +0900",
+      "title": "\"커피 한 잔 99원\"…990원 컵커피 재미 본 남양유업 또 승부수",
+      "link": "https://www.hankyung.com/article/202609183355i",
+      "pubDate": "Fri, 18 Sep 2026 11:00:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "오픈웨이트AI 모델 주의보…암호화폐 해킹 1년새 440% 급증",
-      "link": "https://www.hankyung.com/article/202609182447i",
-      "pubDate": "Fri, 18 Sep 2026 00:52:19 +0900",
+      "title": "HSAD, 에쓰오일 50주년 캠페인 '샤이닝 투모로우' 공개",
+      "link": "https://www.hankyung.com/article/202609183368i",
+      "pubDate": "Fri, 18 Sep 2026 10:46:48 +0900",
       "source": "한국경제"
     },
     {
-      "title": "아마존의 AI 전력 수혜주는 어디?…나이키는 다우지수 퇴출 위험 [박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202609172432i",
-      "pubDate": "Thu, 17 Sep 2026 23:47:11 +0900",
+      "title": "네파, 종로직영점 리뉴얼 오픈…'도심형 아웃도어 거점'으로 탈바꿈",
+      "link": "https://www.hankyung.com/article/202609183221i",
+      "pubDate": "Fri, 18 Sep 2026 10:13:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"금리보다 유가\"…美 증시 하루만에 급반등, 나스닥 1.6%↑",
-      "link": "https://www.hankyung.com/article/202609172437i",
-      "pubDate": "Thu, 17 Sep 2026 23:45:16 +0900",
+      "title": "100년 숙성 발사믹·프리미엄 화병…달라진 백화점 VIP 추석 선물",
+      "link": "https://www.hankyung.com/article/202609171810i",
+      "pubDate": "Fri, 18 Sep 2026 10:06:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"日, 3조엔 대미 투자금 반도체공장 건설 협의\"",
-      "link": "https://www.hankyung.com/article/2026091724141",
-      "pubDate": "Thu, 17 Sep 2026 22:54:12 +0900",
+      "title": "'드론 잡는 드론'에 꽂혔다…외교단 눈길 사로잡은 'K-드론'",
+      "link": "https://www.hankyung.com/article/202609171877i",
+      "pubDate": "Fri, 18 Sep 2026 10:00:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"美日 5500억패키지 세번째 프로젝트는 반도체 공장 건설\" [닛케이]",
-      "link": "https://www.hankyung.com/article/202609172425i",
-      "pubDate": "Thu, 17 Sep 2026 22:52:51 +0900",
+      "title": "\"집에서도 호텔처럼\"…GS샵, 프리미업 리빙 상품 확대",
+      "link": "https://www.hankyung.com/article/202609182893g",
+      "pubDate": "Fri, 18 Sep 2026 09:55:46 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"한동안 코스피 잠잠하더니\"…개미들 다시 '초긴장 모드' [분석+]",
-      "link": "https://www.hankyung.com/article/2026091718256",
-      "pubDate": "Thu, 17 Sep 2026 22:00:04 +0900",
+      "title": "골칫거리 쓰레기가 돈 버는 '황금알' 됐다…57억 '잭팟'",
+      "link": "https://www.hankyung.com/article/202609183028i",
+      "pubDate": "Fri, 18 Sep 2026 09:35:32 +0900",
       "source": "한국경제"
     },
     {
-      "title": "단종된 '추억의 라면'도 뚝딱…1만 권 '스프 처방전'의 비밀 [현장+]",
-      "link": "https://www.hankyung.com/article/202609179876g",
-      "pubDate": "Thu, 17 Sep 2026 22:00:01 +0900",
+      "title": "\"KTX보다 빠르다\"…김포서 1시간, 남해안 로컬여행 출시",
+      "link": "https://www.hankyung.com/article/202609182973g",
+      "pubDate": "Fri, 18 Sep 2026 09:33:24 +0900",
       "source": "한국경제"
     }
   ]
