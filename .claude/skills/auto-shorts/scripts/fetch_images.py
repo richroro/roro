@@ -13,6 +13,7 @@
     openimages    구글 Open Images 의 플리커 CC BY 2.0 사진 은행. 키 불필요(첫 사용 때 색인 생성). 출처 표기 필요.
     wikimedia     위키미디어 공용. 키 불필요. 실존 동물·장소·역사·유물에 강함. 출처 표기 필요.
     pollinations  AI 이미지 생성. 키 불필요. 사진으로 찍을 수 없는 개념·상상 장면용.
+    illustration  장면을 직접 그린 플랫 일러스트(산·바다·밤하늘·촛불·길…). 키·네트워크 불필요.
     picsum        무작위 사진(주제 무관). 기본 순서에는 없다.
     card          로컬 그라디언트 카드(+선택 이모지). 항상 성공하는 최후 수단.
 
@@ -46,9 +47,12 @@ STAGE = "image"
 
 # 사진 우선(기본) / AI 우선 / 사진만
 PROVIDER_SETS = {
-    "photo": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "pollinations", "card"],
-    "ai": ["pollinations", "pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "card"],
-    "photo_only": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "card"],
+    "photo": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "pollinations",
+              "illustration", "card"],
+    "ai": ["pollinations", "pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages",
+           "illustration", "card"],
+    "photo_only": ["pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "illustration", "card"],
+    "draw": ["illustration", "card"],          # 직접 그린 플랫 일러스트만 쓴다(네트워크 불필요)
 }
 DEFAULT_PROVIDERS = PROVIDER_SETS["photo"]
 
@@ -338,6 +342,21 @@ def p_openimages(keywords: str, used: set, **_) -> tuple[bytes, dict]:
     raise LookupError(f"open images 에 '{keywords}' 에 맞는 사진 없음")
 
 
+def p_illustration(keywords: str, seed: int, art: str = "", art_palette: str = "",
+                   mood: str = "calm", card_text: str = "", **_) -> tuple[bytes, dict]:
+    """장면을 직접 그린다(scripts/illustrate.py). 네트워크·키 불필요, 씬 내용과 항상 맞는다."""
+    import io
+
+    import illustrate
+
+    template = art or illustrate.pick_template(f"{keywords} {card_text}")
+    img = illustrate.draw_scene(template, None, seed=seed, palette=art_palette or None, mood=mood)
+    buf = io.BytesIO()
+    img.save(buf, "JPEG", quality=93)
+    return buf.getvalue(), {"provider": "illustration", "url": None, "query": f"{keywords} → {template}",
+                            "license": "generated", "credit": f"illustration ({template}, local)"}
+
+
 def p_picsum(seed: int, **_) -> tuple[bytes, dict]:
     url = f'{EP["picsum"]}/{seed}/{WIDTH}/{HEIGHT}'
     return http_get(url, timeout=60, stage=STAGE), {
@@ -346,7 +365,7 @@ def p_picsum(seed: int, **_) -> tuple[bytes, dict]:
 
 PROVIDERS = {"pexels": p_pexels, "unsplash": p_unsplash, "pixabay": p_pixabay, "openverse": p_openverse,
              "wikimedia": p_wikimedia, "openimages": p_openimages, "pollinations": p_pollinations,
-             "picsum": p_picsum}
+             "illustration": p_illustration, "picsum": p_picsum}
 PHOTO_PROVIDERS = {"pexels", "unsplash", "pixabay", "openverse", "wikimedia", "openimages", "picsum"}
 
 
@@ -478,7 +497,8 @@ def _wrap(text: str, font, max_w: int, draw) -> list[str]:
 # ---------------------------------------------------------------- 공개 API
 def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, providers: Optional[list[str]] = None,
                 seed: Optional[int] = None, style: str = "", card_text: str = "", used: Optional[set] = None,
-                local: Optional[str] = None, emoji: str = "") -> dict:
+                local: Optional[str] = None, emoji: str = "", art: str = "", art_palette: str = "",
+                mood: str = "calm") -> dict:
     """씬 하나의 이미지를 확보해 out(1080x1920 JPEG)에 저장하고 출처 정보를 돌려준다."""
     out = Path(out)
     used = used if used is not None else set()
@@ -506,7 +526,8 @@ def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, provid
             warn(STAGE, f"알 수 없는 제공자 무시: {name}")
             continue
         try:
-            data, info = fn(prompt=prompt, keywords=keywords, seed=seed, style=style, used=used)
+            data, info = fn(prompt=prompt, keywords=keywords, seed=seed, style=style, used=used,
+                            art=art, art_palette=art_palette, mood=mood, card_text=card_text)
             img = _open_image(data)
             if name in PHOTO_PROVIDERS:
                 _check_quality(img)
@@ -549,12 +570,14 @@ def main() -> None:
     ap.add_argument("--style", default="", help="AI 프롬프트 뒤에 붙일 스타일 문구")
     ap.add_argument("--card-text", default="", help="카드 폴백에 쓸 문구")
     ap.add_argument("--emoji", default="", help="카드 폴백에 그릴 이모지(1~2개)")
+    ap.add_argument("--art", default="", help="일러스트 템플릿 이름(미지정 시 키워드로 추정)")
+    ap.add_argument("--art-palette", default="", help="일러스트 팔레트(night/dawn/dusk/forest/ocean/warm)")
     ap.add_argument("--local", default=None, help="직접 지정한 이미지 파일")
     args = ap.parse_args()
     info = fetch_image(prompt=args.prompt, keywords=args.keywords, out=args.out,
                        providers=[p.strip() for p in args.providers.split(",") if p.strip()],
                        seed=args.seed, style=args.style, card_text=args.card_text, local=args.local,
-                       emoji=args.emoji)
+                       emoji=args.emoji, art=args.art, art_palette=args.art_palette)
     print(json.dumps(info, ensure_ascii=False))
 
 

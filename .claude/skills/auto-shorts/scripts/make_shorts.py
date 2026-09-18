@@ -48,6 +48,7 @@ DEFAULT_STYLE = {
     "vignette": True,
     "layout": "caption",          # caption(기본, 하단 카라오케) | quote(중앙 명언 + 출처)
     "dim": 0.0,                   # 사진을 어둡게(0~0.6). 명언 레이아웃에서 0.3~0.4 권장
+    "art_palette": "",            # 일러스트 팔레트 고정(night/dawn/dusk/forest/ocean/warm). 비우면 BGM 무드에 맞춘다
     "look": "",                   # "" | cinematic
     "gap_before": 0.10,           # 씬 시작 후 나레이션까지 여백(초)
     "gap_after": 0.35,            # 나레이션 끝 뒤 여백(초)
@@ -197,13 +198,17 @@ def main() -> None:
         sc = scenes[i]
         out = img_files[i]
         sig = sig_of(sc.get("image_prompt", ""), sc.get("keywords", ""), sc.get("image", ""), style["image_style"],
-                     providers)
+                     providers, sc.get("art", ""), sc.get("art_palette", ""), style.get("art_palette", ""),
+                     sc.get("emoji", ""))
         if not sigs.stale(out, sig, args.force):
             return read_json(out.with_suffix(".json"), {"provider": "cache"})
         info = fetch_images.fetch_image(
             prompt=sc.get("image_prompt", ""), keywords=sc.get("keywords", ""), out=out, providers=providers,
             seed=int(project.get("seed", 7)) * 100 + i + 1,   # 씬마다 다른 고정 시드(카드 색·AI 생성 재현성)
-            style=style["image_style"], card_text="", emoji=sc.get("emoji", ""),
+            style=style["image_style"], card_text=sc.get("headline") or sc.get("quote") or sc["narration"][:30],
+            emoji=sc.get("emoji", ""), art=sc.get("art", ""),
+            art_palette=sc.get("art_palette") or style.get("art_palette", ""),
+            mood=(project.get("bgm") or {}).get("mood", "calm"),
             used=used_urls, local=sc.get("image"))
         sigs.mark(out, sig)
         return info

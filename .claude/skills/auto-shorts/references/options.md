@@ -35,7 +35,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 
 | 키 | 설명 | 기본값 |
 |---|---|---|
-| `image_source` | `photo`(무료 스톡 사진 우선) / `ai`(AI 생성 우선) / `photo_only`(사진만, AI 안 씀) | `photo` |
+| `image_source` | `photo`(무료 스톡 사진 우선) / `ai`(AI 생성 우선) / `photo_only`(사진만) / `draw`(직접 그린 일러스트만) | `photo` |
+| `art_palette` | 일러스트 팔레트 고정: `night` `dawn` `dusk` `forest` `ocean` `warm`. 비우면 BGM 무드에 맞춘다 | `""` |
 | `image_style` | AI 생성 프롬프트 뒤에 붙는 톤 문구(사진 검색에는 영향 없음) | `""` |
 | `transition` | `fade` `mix`(fade/smoothleft/zoomin/smoothup 순환) `smoothleft` `zoomin` `wipeleft` … `none` | `fade` |
 | `transition_duration` | 전환 길이(초) | `0.3` |
@@ -69,6 +70,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
 | `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
 | `image` | 직접 지정한 이미지 파일 경로(제공자 건너뜀) |
+| `art` | 일러스트 템플릿 지정: `mountain` `sunrise` `night` `ocean` `forest` `rain` `candle` `road` `city` `stairs` `bird` `tree` `door` `window` `abstract` (미지정이면 키워드로 추정) |
+| `art_palette` | 이 씬만 다른 팔레트 |
 | `quote` | 화면 중앙에 크게 띄울 문장. ` / ` 로 줄을 나눈다. 이 값이 있으면 그 씬은 하단 자막 대신 명언 레이아웃 |
 | `author` | 명언 출처(인물·책). 문장보다 조금 늦게 페이드인 |
 | `sfx` | `riser` `boom` `pop` `ding` `whoosh` (씬 시작에 재생) |

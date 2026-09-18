@@ -32,6 +32,7 @@
 | Wikimedia Commons | 불필요 | 실존 동물·역사·장소 사진 | — | — | 예의상 요청 간격 유지 | **필요**(자동 기록) |
 | **Open Images** | 불필요 | 플리커 CC BY 2.0 사진 은행(사람이 검수한 라벨 7천여 종) | — | — | 첫 사용 때 색인 생성(CSV 수십 MB 다운로드 후 삭제, 색인 약 40MB). `AUTO_SHORTS_OPENIMAGES=0` 으로 끔 | **필요**(자동 기록) |
 | picsum | 불필요 | 무작위 사진(주제 무관) | — | — | `--image-providers` 로 명시할 때만 | 불필요 |
+| **illustration** | 불필요 | 장면을 직접 그린 플랫 일러스트(산·바다·밤하늘·촛불·길·계단…) 15종 × 팔레트 6종 | — | — | 네트워크 없이 항상 성공. `image_source: "draw"` 로 이것만 쓸 수 있다 | 불필요 |
 | card | — | 로컬 그라디언트 카드 | — | — | 항상 성공 | 불필요 |
 
 - **Pexels 키 하나면 체감 품질이 가장 크게 오른다**(무료·2분·200회/시간). 없으면 Openverse·Wikimedia 만 남아
@@ -44,6 +45,22 @@
 - 연결이 막힌 제공자는 한 번 실패하면 그 실행 동안 건너뛴다(회사망·프록시 환경에서 빠르게 폴백).
 - 코드를 고친 뒤에는 `python scripts/selftest_providers.py` 로 제공자들의 파싱·다운로드·정규화 경로를
   네트워크 없이 확인할 수 있다.
+
+### 장면 일러스트 (`scripts/illustrate.py`)
+
+사진이 주제와 안 맞거나(추상적인 개념) 그림이 더 어울리는 영상(명언·감성)에서 쓴다. 키도 네트워크도 필요 없고,
+한 영상 안에서 팔레트가 통일되며 씬 내용과 항상 맞는다.
+
+```bash
+python scripts/illustrate.py --sheet /tmp/sheet.jpg              # 템플릿 15종 미리보기
+python scripts/illustrate.py --template mountain --palette dusk --out a.jpg
+python scripts/illustrate.py --keywords "포기하지 마 한 걸음" --out a.jpg   # 한국어 키워드로 추정
+```
+
+- 템플릿: mountain · sunrise · night · ocean · forest · rain · candle · road · city · stairs · bird · tree ·
+  door · window · abstract. 씬의 `art` 로 직접 지정하거나 `keywords`(한국어도 인식)로 자동 선택된다.
+- 팔레트: night · dawn · dusk · forest · ocean · warm. `style.art_palette` 로 고정하거나 씬마다 바꿀 수 있다.
+- 사진 제공자가 모두 실패했을 때의 폴백으로도 들어간다(그라디언트 카드보다 낫다).
 
 ### Open Images 사진 은행 (`scripts/openimages.py`)
 

@@ -25,7 +25,8 @@ Edge 가 되는 환경에서는 항상 Edge 가 쓰인다.
 이미지 순서(기본 `style.image_source: "photo"`): **무료 스톡 사진**(Pexels → Unsplash → Pixabay → Openverse →
 Wikimedia → Open Images) → 사진이 없는 씬만 **AI 생성**(Pollinations) → 최후에 로컬 카드.
 **Open Images** 는 키가 하나도 없어도 쓰는 CC BY 2.0 사진 은행이다(첫 사용 때 색인 생성, 저작자 표시 필수 —
-`meta.md` 에 자동으로 남는다). 사진이 있는 주제는 사진이 더 그럴듯하고
+`meta.md` 에 자동으로 남는다). 사진 대신 **그림**이 어울리는 영상(명언·감성·추상 개념)은
+`style.image_source: "draw"` 로 두면 `scripts/illustrate.py` 가 씬마다 장면을 직접 그린다(15종 템플릿 × 6종 팔레트). 사진이 있는 주제는 사진이 더 그럴듯하고
 AI 라벨·비진정성 정책에서도 안전하다. 씬의 `keywords`(흔한 영어 명사 2~3개)가 검색어다.
 
 ## 0단계. 환경 준비 (프로젝트당 한 번)
@@ -77,7 +78,7 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
   "thumbnail_text": "심장이 3개?!",          // (선택) 썸네일용 더 짧은 문구
   "lang": "ko", "voice": "female", "rate": "+12%",  // voice: female|male|male2|<edge 보이스 ID>. 편마다 보이스·훅 유형을 돌려 쓴다
   "style": {
-    "image_source": "photo",                // photo(무료 스톡 사진 우선, 기본) | ai(AI 생성 우선) | photo_only(사진만)
+    "image_source": "photo",                // photo(스톡 사진 우선, 기본) | ai(AI 생성 우선) | photo_only(사진만) | draw(직접 그린 일러스트)
     "image_style": "stylized 3d illustration, bold colors, single clear subject, vertical 9:16, no text",  // AI 생성에만 적용되는 아트스타일. 실존 인물·장소의 포토리얼은 피한다
     "layout": "caption",                    // caption(하단 카라오케, 기본) | quote(중앙 큰 글씨 명언 + 출처)
     "dim": 0,                               // 사진 어둡게(0~0.6). quote 레이아웃이면 0.35 권장
@@ -91,6 +92,7 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
     { "narration": "문어 심장이 몇 개인지 아세요? 놀라지 마세요, 세 개입니다.",   // 씬당 1~2문장
       "headline": "심장이 3개?!",             // (선택) 씬 상단 큰 글씨, 12자 이내
       "emoji": "🐙",                          // (선택) 이미지 확보 실패 시 카드에 크게 그릴 이모지 1개 — 항상 넣어 두면 폴백도 보기 좋다
+      "art": "ocean",                         // (선택) 일러스트 템플릿 지정 (image_source: draw 이거나 사진 실패 시)
       "keywords": "octopus underwater",       // ★ 사진 검색어. 흔한 영어 명사 2~3개 (사진이 존재하는 것으로!)
       "image_prompt": "a giant pacific octopus hovering in deep blue water, glowing eyes, close-up",  // 사진이 없을 때 쓸 AI 생성 프롬프트
       "sfx": "riser" }                        // (선택) riser|boom|pop|ding|whoosh
