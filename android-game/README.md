@@ -116,6 +116,9 @@ base64 -w0 skydodge-upload.jks > skydodge-upload.jks.b64   # macOS: base64 -i sk
 
 두 앱은 같은 업로드 키스토어로 서명됩니다 (Play Console 에서는 앱마다 별도 등록).
 
+> **빌런 러시 스토어 등록 자료는 [`store/PLAY_STORE.md`](store/PLAY_STORE.md) 에 모두 정리돼 있습니다.**
+> 앱 이름·설명 문구, 콘솔 설문 답변, 스크린샷(`store/screenshots/`), 개인정보처리방침 URL 까지 그대로 붙여 넣으면 됩니다.
+
 ### 3. Google Play Console 에 앱 만들기 (앱마다 최초 1회, 수동)
 
 1. https://play.google.com/console 에서 개발자 계정 등록 (1회 등록비 US$25).
