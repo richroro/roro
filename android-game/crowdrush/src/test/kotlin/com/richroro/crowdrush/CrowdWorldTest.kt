@@ -237,8 +237,13 @@ class CrowdWorldTest {
         pickUp(world, CrowdWorld.ItemKind.RAPID, count = 10)
         assertEquals(CrowdWorld.fireRateFor(10) * CrowdWorld.RAPID_MULT, world.fireRate, 1e-4f)
         assertTrue(world.rapidTimer > 0f)
-        repeat(140) { world.update(0.05f) } // 7 seconds
+        // Hold the crowd short of the first gate so nothing can end the run while the timer drains.
+        repeat(140) { // 7 seconds
+            world.setForTest(count = 10, playerX = 0f, z = 5f)
+            world.update(0.05f)
+        }
         assertEquals(0f, world.rapidTimer, 0f)
+        assertEquals(CrowdWorld.fireRateFor(10), world.fireRate, 1e-4f)
     }
 
     @Test

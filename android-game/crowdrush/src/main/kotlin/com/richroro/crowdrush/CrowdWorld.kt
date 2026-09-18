@@ -567,8 +567,8 @@ class CrowdWorld(private val seed: Int = 1) {
         const val BASE_SPEED = 4.4f
         const val SPEED_PER_LEVEL = 0.28f
         const val MAX_SPEED = 8.5f
-        const val BASE_LENGTH = 110f
-        const val LENGTH_PER_LEVEL = 12f
+        const val BASE_LENGTH = 132f
+        const val LENGTH_PER_LEVEL = 10f
         const val BASE_GATES = 5
         const val GATES_PER_LEVEL = 1
         const val MAX_GATES = 12
@@ -609,8 +609,8 @@ class CrowdWorld(private val seed: Int = 1) {
         const val BOMB_BOSS_RATIO = 0.1f
 
         const val MONSTER_KINDS = 4
-        const val MONSTER_MARCH_RANGE = 45f
-        const val MONSTER_MARCH_SPEED = 1.6f
+        const val MONSTER_MARCH_RANGE = 30f
+        const val MONSTER_MARCH_SPEED = 0.45f
 
         fun fireRateFor(count: Int): Float = min(count, MAX_SHOOTERS) * SHOTS_PER_SHOOTER
 
