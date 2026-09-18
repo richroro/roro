@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>꼬마 왕국: 숲의 전쟁</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div id="hud-left">
+      <img id="princess" alt="이슬 공주">
+      <div>
+        <div id="castle-lv">성 Lv1</div>
+        <div id="pop">주민 0/3</div>
+      </div>
+    </div>
+    <div id="res"></div>
+    <button id="btn-settings" class="icon-btn" aria-label="설정">⚙</button>
+  </header>
+
+  <div id="stage">
+    <canvas id="battle" width="360" height="200"></canvas>
+    <div id="lane-ctl">
+      <span id="lane-status">대기 중</span>
+      <button id="btn-speed" class="mini">1x</button>
+      <button id="btn-skip" class="mini hidden">건너뛰기</button>
+    </div>
+  </div>
+
+  <nav id="tabs">
+    <button class="tab active" data-tab="kingdom">🏰<span>왕국</span><i class="badge"></i></button>
+    <button class="tab" data-tab="people">🍺<span>주민</span><i class="badge"></i></button>
+    <button class="tab" data-tab="army">⚔️<span>부대</span><i class="badge"></i></button>
+    <button class="tab" data-tab="gear">🎒<span>장비</span><i class="badge"></i></button>
+    <button class="tab" data-tab="quest">🗺️<span>원정</span><i class="badge"></i></button>
+  </nav>
+
+  <main id="panel"></main>
+
+  <div id="modal-root" class="hidden"><div id="modal"></div></div>
+  <div id="toasts"></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
