@@ -66,7 +66,8 @@ def main() -> None:
     ap.add_argument("--slug", required=True)
     ap.add_argument("--out", default="shorts_output", help="제작 폴더 루트")
     ap.add_argument("--platform", default="youtube", choices=["youtube", "reels", "tiktok", "threads", "other"])
-    ap.add_argument("--views", type=int, required=True)
+    ap.add_argument("--views", type=int, required=True, help="조회수 (2025-03 이후 '재생 시작' 기준 수치)")
+    ap.add_argument("--engaged-views", type=int, default=None, help="참여 조회수(유튜브 스튜디오 고급 모드) — 수익화 기준 지표")
     ap.add_argument("--avg-view-pct", type=float, default=None, help="평균 시청 지속률(%%), 유튜브 스튜디오 값")
     ap.add_argument("--viewed-vs-swiped", type=float, default=None, help="쇼츠 '시청 vs 스와이프' 비율(%%)")
     ap.add_argument("--likes", type=int, default=None)
@@ -84,7 +85,8 @@ def main() -> None:
     timeline = read_json(pdir / "work" / "timeline.json")
     row = {
         "slug": args.slug, "logged_at": dt.datetime.now().isoformat(timespec="minutes"), "platform": args.platform,
-        "views": args.views, "avg_view_pct": args.avg_view_pct, "viewed_vs_swiped": args.viewed_vs_swiped,
+        "views": args.views, "engaged_views": args.engaged_views, "avg_view_pct": args.avg_view_pct,
+        "viewed_vs_swiped": args.viewed_vs_swiped,
         "likes": args.likes, "comments": args.comments, "subs": args.subs, "days": args.days, "url": args.url,
         "note": args.note,
     }

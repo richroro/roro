@@ -37,6 +37,9 @@ DEFAULT_STYLE = {
     "cta_seconds": 3.0,
     "max_words": 4,
     "max_chars": 16,
+    "brand": "",                     # 채널명/시리즈명. 영상 내내 좌상단에 작게(아이덴티티·반복성 콘텐츠 판정 완화)
+    "brand_size": 40,
+    "caption_margin_h": 110,         # 자막 좌우 여백(px). 우측 버튼 열(약 15%)을 피한다
 }
 
 
@@ -114,13 +117,16 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
         "Alignment, MarginL, MarginR, MarginV, Encoding",
         f"Style: Caption,{CAPTION_FONT},{st['caption_size']},{ass_color(st['caption_color'])},{hl},"
         f"{ass_color('#000000')},{ass_color('#000000', 0x60)},0,0,0,0,100,100,0,0,1,{st['outline']},2,2,"
-        f"70,70,{st['caption_margin_v']},1",
+        f"{st['caption_margin_h']},{st['caption_margin_h']},{st['caption_margin_v']},1",
         f"Style: Headline,{CAPTION_FONT},{st['headline_size']},{ass_color(st['headline_color'])},{hl},"
         f"{ass_color('#000000')},{ass_color('#000000', 0x50)},0,0,0,0,100,100,0,0,1,{st['outline'] + 1},3,8,"
         f"70,70,{st['headline_margin_v']},1",
         f"Style: CTA,{CAPTION_FONT},{st['cta_size']},{ass_color(st['cta_color'])},{hl},"
         f"{ass_color('#000000')},{ass_color('#000000', 0x50)},0,0,0,0,100,100,0,0,1,4,2,8,"
         f"70,70,{st['headline_margin_v'] + 20},1",
+        f"Style: Brand,{CAPTION_FONT},{st['brand_size']},{ass_color('#FFFFFF', 0x30)},{hl},"
+        f"{ass_color('#000000', 0x30)},{ass_color('#000000', 0x80)},0,0,0,0,100,100,0,0,1,2,1,7,"
+        f"60,60,190,1",
         "",
         "[Events]",
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
@@ -172,6 +178,10 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
             start = max(start, float(last["start"]) + st["headline_seconds"] + 0.1)
         if total - start > 0.8:
             events.append((start, f"Dialogue: 1,{ts(start)},{ts(total)},CTA,,0,0,0,,{{\\fad(200,0)}}{esc(cta)}"))
+
+    brand = (st.get("brand") or "").strip()
+    if brand:
+        events.append((-1.0, f"Dialogue: 2,{ts(0)},{ts(total)},Brand,,0,0,0,,{esc(brand)}"))
 
     events.sort(key=lambda e: e[0])
     lines.extend(e[1] for e in events)

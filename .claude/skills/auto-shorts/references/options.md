@@ -52,6 +52,8 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `max_words` / `max_chars` | 한 번에 보여 줄 어절 수 / 글자 수(초과 시 다음 덩어리로) | `4` / `16` |
 | `headline_size` / `headline_color` / `headline_margin_v` / `headline_seconds` | 헤드라인 크기·색·위(top)에서의 거리·표시 시간(첫 씬은 씬 전체) | `104` / `#FFFFFF` / `250` / `2.6` |
 | `cta_size` / `cta_color` / `cta_seconds` | CTA 크기·색·표시 시간 | `60` / `#FFD400` / `3.0` |
+| `caption_margin_h` | 자막 좌우 여백(px). 우측 버튼 열을 피하려면 100 이상 | `110` |
+| `brand` / `brand_size` | 채널명·시리즈명을 영상 내내 좌상단에 작게(반투명). 채널 아이덴티티 + '반복 템플릿' 인상 완화 | `""` / `40` |
 
 ## `scenes[]`
 

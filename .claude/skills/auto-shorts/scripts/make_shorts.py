@@ -18,6 +18,7 @@ project.json 스키마는 SKILL.md 와 project.example.json 참고.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import hashlib
 import json
 import shutil
@@ -28,8 +29,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (FPS, die, find_ffmpeg, fresh, load_project, log, media_duration,  # noqa: E402
+from common import (FPS, SKILL_DIR, die, find_ffmpeg, fresh, load_project, log, media_duration,  # noqa: E402
                     read_json, slugify, warn, write_json)
+from log_result import features_from_project  # noqa: E402
 import build_subtitles  # noqa: E402
 import fetch_audio  # noqa: E402
 import fetch_images  # noqa: E402
@@ -328,7 +330,21 @@ def main() -> None:
              "## 출처 표기 (CC 자료를 썼다면 설명란에 함께 넣기)", ""]
     lines += credits or ["- 없음"]
     lines += ["", "표기 불필요: " + (", ".join(no_credit) or "해당 없음") + " (생성·합성 자료)"]
+    # Threads 게시글 초안: 첫 줄이 훅(150자 이내), 질문으로 끝내 답글 유도
+    last_sentence = scenes[-1]["narration"].strip().split(". ")[-1]
+    question = last_sentence if last_sentence.endswith("?") else "여러분은 알고 있었나요?"
+    lines += ["", "## Threads 게시글 초안 (첫 줄 = 훅, 마지막 줄 = 질문)", "",
+              project["title"], "", (meta.get("description", "") or scenes[0]["narration"]).strip(), "", question,
+              "", "(영상 링크 또는 파일 첨부) " + " ".join(f"#{t.lstrip('#')}" for t in tags[:3])]
     (outdir / "meta.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # 제작 레지스트리: 최근 편들의 훅 유형·카테고리가 반복되는지 report.py 가 본다
+    reg = SKILL_DIR / "data" / "productions.jsonl"
+    reg.parent.mkdir(parents=True, exist_ok=True)
+    entry = {"slug": slug, "date": dt.date.today().isoformat(), "out": str(final)}
+    entry.update(features_from_project(project, timeline))
+    existing = [l for l in reg.read_text(encoding="utf-8").splitlines() if l.strip()] if reg.exists() else []
+    existing = [l for l in existing if json.loads(l).get("slug") != slug]
+    reg.write_text("\n".join(existing + [json.dumps(entry, ensure_ascii=False)]) + "\n", encoding="utf-8")
     actual = media_duration(final)
     log("done", f"{final}  ({actual:.1f}s, {final.stat().st_size / 1e6:.1f}MB, {time.time() - t0:.0f}s 소요)")
     log("done", f"검수: {outdir / 'preview.jpg'} 를 열어 자막 위치·이미지 품질을 확인하세요. 메타: {outdir / 'meta.md'}")

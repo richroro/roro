@@ -21,7 +21,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import SKILL_DIR  # noqa: E402
 
 PERF = SKILL_DIR / "data" / "performance.jsonl"
+PROD = SKILL_DIR / "data" / "productions.jsonl"
 MIN_SAMPLES = 3   # 이보다 적으면 우연일 수 있어 제안하지 않는다
+# 훅 실패 기준 (2025-26 벤치마크: 30~60초 쇼츠 평균 시청률 40~55%가 보통, '시청 vs 스와이프' 60% 미만이면 훅 문제)
+HOOK_FAIL_VVSA = 60.0
+HOOK_FAIL_AVG_PCT = 40.0
 
 
 def load_rows() -> list[dict]:
@@ -75,13 +79,57 @@ def suggestions(tables: dict) -> list[str]:
     return tips
 
 
+def hook_failures(rows: list[dict]) -> list[str]:
+    out = []
+    for r in rows:
+        why = []
+        if isinstance(r.get("viewed_vs_swiped"), (int, float)) and r["viewed_vs_swiped"] < HOOK_FAIL_VVSA:
+            why.append(f'시청 vs 스와이프 {r["viewed_vs_swiped"]}% < {HOOK_FAIL_VVSA:.0f}%')
+        if isinstance(r.get("avg_view_pct"), (int, float)) and r["avg_view_pct"] < HOOK_FAIL_AVG_PCT:
+            why.append(f'평균 시청률 {r["avg_view_pct"]}% < {HOOK_FAIL_AVG_PCT:.0f}%')
+        if why:
+            out.append(f'{r.get("title")} [{r.get("hook_type")}] — {", ".join(why)} → 첫 문장·헤드라인을 바꿔 다음 편에서 재시험')
+    return out
+
+
+def recent_productions(n: int = 6) -> list[dict]:
+    if not PROD.exists():
+        return []
+    rows = []
+    for line in PROD.read_text(encoding="utf-8").splitlines():
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            pass
+    return rows[-n:]
+
+
+def repetition_warnings(prods: list[dict]) -> list[str]:
+    """최근 편들이 훅 유형·구조가 똑같으면 경고 (유튜브 '비진정성 콘텐츠' 정책 + 시청자 피로)."""
+    warns = []
+    if len(prods) >= 3:
+        last3 = prods[-3:]
+        for key, label in (("hook_type", "훅 유형"), ("category", "카테고리"), ("image_style", "이미지 스타일")):
+            vals = {p.get(key) for p in last3}
+            if len(vals) == 1 and None not in vals:
+                warns.append(f"최근 3편의 {label}이 모두 '{last3[0].get(key)}' — 다음 편은 다른 {label}로 (반복 템플릿으로 보이지 않게)")
+    return warns
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="auto-shorts 성과 리포트")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
     rows = load_rows()
+    prods = recent_productions()
     if not rows:
-        print("기록이 없습니다. 업로드 후:  python scripts/log_result.py --slug <slug> --views N --avg-view-pct P")
+        print("성과 기록이 없습니다. 업로드 후:  python scripts/log_result.py --slug <slug> --views N --avg-view-pct P")
+        if prods:
+            print("\n최근 제작:")
+            for p in prods:
+                print(f'- {p.get("date")} {p.get("title")} [{p.get("category")}/{p.get("hook_type")}/{p.get("duration")}s]')
+            for w in repetition_warnings(prods):
+                print(f"! {w}")
         return
     tables = {
         "카테고리": group_stats(rows, lambda r: r.get("category", "unknown"), "카테고리"),
@@ -93,9 +141,11 @@ def main() -> None:
         "플랫폼": group_stats(rows, lambda r: r.get("platform", "?"), "플랫폼"),
     }
     tips = suggestions(tables)
+    fails = hook_failures(rows)
+    reps = repetition_warnings(prods)
     top = sorted(rows, key=lambda r: -(r.get("views") or 0))[:5]
     if args.json:
-        print(json.dumps({"n": len(rows), "tables": tables, "tips": tips,
+        print(json.dumps({"n": len(rows), "tables": tables, "tips": tips, "hook_failures": fails, "repetition": reps,
                           "top": [{k: r.get(k) for k in ("slug", "title", "views", "avg_view_pct", "hook_type", "category")} for r in top]},
                          ensure_ascii=False, indent=1))
         return
@@ -111,6 +161,14 @@ def main() -> None:
             mv = f'{r["median_views"]:,}' if r["median_views"] is not None else "-"
             mp = f'{r["median_avg_view_pct"]}%' if r["median_avg_view_pct"] is not None else "-"
             print(f'| {r["value"]} | {r["n"]} | {mv} | {mp} |')
+    if fails:
+        print("\n## 훅 실패로 보이는 편")
+        for f in fails:
+            print(f"- {f}")
+    if reps:
+        print("\n## 반복 경고")
+        for w in reps:
+            print(f"- {w}")
     print("\n## 제안" + ("" if tips else f" (표본이 특징당 {MIN_SAMPLES}편 이상 쌓이면 나옵니다)"))
     for t in tips:
         print(f"- {t}")
