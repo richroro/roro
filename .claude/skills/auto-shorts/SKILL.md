@@ -203,7 +203,9 @@ python .claude/skills/auto-shorts/scripts/upload_youtube.py --slug <slug> --priv
 
 - **품질**: AI 이미지는 씬마다 다른 구도, 한 영상 안에서는 `image_style` 로 톤 통일. 켄 번즈 방향이 씬마다
   자동으로 바뀌고(줌인/아웃/팬), 전환은 0.4초. 자막은 78px Pretendard ExtraBold, 현재 어절만 노랑 강조.
-  BGM 은 나레이션에 맞춰 자동 덕킹, 최종 2패스 loudnorm 으로 -14 LUFS(유튜브 기준)에 맞춘다. 웹 BGM 이 없으면
+  나레이션은 `voice_polish` 로 다듬는다(럼블 제거·저중역 온기·치찰음 완화·레벨 고르기·아주 짧은 룸).
+  `voice_pitch` 로 음정만 낮출 수 있다(속도 유지). BGM 은 말할 때만 비켜 주고 최종 2패스 loudnorm 으로 -14 LUFS.
+  렌더 뒤 `work/narration.wav` 와 `work/music.wav` 의 RMS 차이가 7~9dB 인지 보면 균형을 확인할 수 있다.
   `scripts/synth_bgm.py` 가 **실제 악기 샘플**(FluidR3_GM, MIT)로 무드·시드별로 다른 곡을 연주한다
   (피아노·일렉피아노·베이스·스트링·마림바 + 합성 드럼, 인트로→본절 구성). 저작권 곡은 Content ID 에
   걸리므로 넣지 않는다 — 인기곡이 필요하면 업로드 후 플랫폼 편집기에서 얹는다.
