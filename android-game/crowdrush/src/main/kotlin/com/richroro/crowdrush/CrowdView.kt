@@ -1,8 +1,11 @@
 package com.richroro.crowdrush
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.LightingColorFilter
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
@@ -16,6 +19,7 @@ import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.min
@@ -43,11 +47,15 @@ class CrowdView @JvmOverloads constructor(
     private val roadPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.road) }
     private val wallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.wall) }
     private val stripePaint = Paint().apply { color = 0x59FFFFFF; strokeWidth = 1f }
-    private val allyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.ally) }
-    private val hitPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.hit) }
-    private val enemyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.enemy) }
+    // Soldier sprites (64x80 PNGs drawn by tools/generate_sprites.py). The player army is seen
+    // from behind; enemies face the camera.
+    private val allySprite: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.soldier_blue_back)
+    private val enemySprite: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.soldier_red_front)
+    private val spritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
+    private val hitSpritePaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
+        colorFilter = LightingColorFilter(0xFFFFB366.toInt(), 0x00331100)
+    }
     private val bossBandPaint = Paint().apply { color = color(R.color.boss_band) }
-    private val headPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.head) }
     private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x40000000 }
     private val gateGoodPaint = Paint().apply { color = color(R.color.gate_good) }
     private val gateBadPaint = Paint().apply { color = color(R.color.gate_bad) }
@@ -258,24 +266,30 @@ class CrowdView @JvmOverloads constructor(
         }
     }
 
-    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, count: Int, radiusPx: Float, bodyPaint: Paint) {
+    private val crowdXs = FloatArray(MAX_DRAWN_UNITS)
+    private val crowdYs = FloatArray(MAX_DRAWN_UNITS)
+
+    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, count: Int, radiusPx: Float, sprite: Bitmap, paint: Paint) {
         val n = min(count, MAX_DRAWN_UNITS)
         val unit = max(3f, radiusPx * 0.34f)
+        val sh = unit * 3.6f
+        val sw = sh * 0.8f
         for (i in 0 until n) {
             val angle = i * GOLDEN_ANGLE
             val r = radiusPx * sqrt((i + 0.5f) / max(n, 6).toFloat()) * 0.95f
-            val bob = sin(runTime * 14f + i) * unit * 0.25f
-            val x = cx + cos(angle) * r
-            val y = cy + sin(angle) * r * 0.55f + bob
-            rect.set(x - unit * 0.8f, y + unit * 0.6f, x + unit * 0.8f, y + unit * 1.2f)
+            val bob = abs(sin(runTime * 10f + i)) * unit * 0.3f
+            crowdXs[i] = cx + cos(angle) * r
+            crowdYs[i] = cy + sin(angle) * r * 0.55f - bob
+        }
+        // painter's order: soldiers lower on screen are nearer and drawn last
+        for (i in (0 until n).sortedBy { crowdYs[it] }) {
+            val x = crowdXs[i]
+            val y = crowdYs[i]
+            val feet = y + unit
+            rect.set(x - sw * 0.45f, feet - unit * 0.3f, x + sw * 0.45f, feet + unit * 0.3f)
             canvas.drawOval(rect, shadowPaint)
-            path.reset()
-            path.moveTo(x, y - unit * 1.6f)
-            path.lineTo(x + unit * 0.75f, y + unit * 0.7f)
-            path.lineTo(x - unit * 0.75f, y + unit * 0.7f)
-            path.close()
-            canvas.drawPath(path, bodyPaint)
-            canvas.drawCircle(x, y - unit * 0.55f, unit * 0.32f, headPaint)
+            rect.set(x - sw / 2f, feet - sh, x + sw / 2f, feet)
+            canvas.drawBitmap(sprite, null, rect, paint)
         }
     }
 
@@ -325,7 +339,7 @@ class CrowdView @JvmOverloads constructor(
         val y = screenY(f)
         val rpx = w * LANE_HALF_PX * f * (CrowdWorld.ENEMY_HALF_WIDTH * 0.9f)
         val cx = screenX(e.x, f)
-        drawCrowd(canvas, cx, y - rpx * 0.3f, e.count, rpx, enemyPaint)
+        drawCrowd(canvas, cx, y - rpx * 0.3f, e.count, rpx, enemySprite, spritePaint)
         label(canvas, e.count.toString(), cx, y - rpx * 0.3f - rpx * 1.1f - w * 0.03f * f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
@@ -348,7 +362,7 @@ class CrowdView @JvmOverloads constructor(
         val y = screenY(f)
         val rpx = w * LANE_HALF_PX * f * 0.9f
         canvas.drawRect(screenX(-1f, f), y - rpx * 1.2f, screenX(1f, f), y, bossBandPaint)
-        drawCrowd(canvas, screenX(0f, f), y - rpx * 0.25f, b.count, rpx, enemyPaint)
+        drawCrowd(canvas, screenX(0f, f), y - rpx * 0.25f, b.count, rpx, enemySprite, spritePaint)
         label(canvas, b.count.toString(), screenX(0f, f), y - rpx * 1.2f - w * 0.05f * f, max(10f, w * 0.11f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
@@ -357,8 +371,8 @@ class CrowdView @JvmOverloads constructor(
         val y = screenY(f)
         val rpx = w * LANE_HALF_PX * world.playerRadius
         val px = screenX(world.playerX, f)
-        val paint = if (world.flash > 0f && !world.lastGateGood) hitPaint else allyPaint
-        drawCrowd(canvas, px, y - rpx * 0.2f, world.count, rpx, paint)
+        val paint = if (world.flash > 0f && !world.lastGateGood) hitSpritePaint else spritePaint
+        drawCrowd(canvas, px, y - rpx * 0.2f, world.count, rpx, allySprite, paint)
         label(
             canvas, world.count.toString(), px, y - rpx * 0.2f - rpx * 0.9f - w * 0.05f, w * 0.09f,
             if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),

@@ -31,8 +31,13 @@ android-game/
 │  │  ├─ CrowdView.kt     # 유사 3D(원근 투영) Canvas 렌더링 + 터치 입력
 │  │  └─ MainActivity.kt
 │  └─ src/test/…/CrowdWorldTest.kt
+├─ tools/generate_sprites.py           # 병사 스프라이트(PNG) 생성기 → crowdrush/src/main/res/drawable-nodpi/
 └─ store/                              # Play Console 등록용 이미지 + 생성 스크립트
 ```
+
+Crowd Rush 의 병사 이미지는 외부 에셋 없이 `tools/generate_sprites.py` 가 그려서 만든 64×80 PNG 입니다
+(`soldier_blue_back.png` = 아군, 뒷모습 / `soldier_red_front.png` = 적군, 정면). 다른 그림으로 바꾸려면
+같은 파일 이름으로 `crowdrush/src/main/res/drawable-nodpi/` 에 PNG 를 덮어쓰면 됩니다.
 
 ### Crowd Rush 규칙
 
