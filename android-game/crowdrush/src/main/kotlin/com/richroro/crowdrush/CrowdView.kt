@@ -93,7 +93,18 @@ class CrowdView @JvmOverloads constructor(
 
     // ---- visual effects ----
     private class Particle(var x: Float, var z: Float, var dy: Float, var vy: Float, var vx: Float, var vz: Float, var life: Float, val maxLife: Float, val color: Int, val size: Float)
-    private class FloatText(val text: String, val x: Float, val z: Float, var life: Float, val maxLife: Float, val color: Int)
+    private class FloatText(
+        val text: String,
+        val x: Float,
+        val z: Float,
+        var life: Float,
+        val maxLife: Float,
+        val color: Int,
+        val near: Boolean,
+    )
+
+    /** Ink top of the player's count plate, so contact texts can be kept off it. */
+    private var playerLabelTopY = 0f
     private val particles = ArrayList<Particle>()
     private val floatTexts = ArrayList<FloatText>()
     private val events = ArrayList<CrowdWorld.Event>()
@@ -264,7 +275,7 @@ class CrowdView @JvmOverloads constructor(
     }
 
     private fun floatText(text: String, x: Float, z: Float, color: Int) {
-        floatTexts.add(FloatText(text, x, z, 0.8f, 0.8f, color))
+        floatTexts.add(FloatText(text, x, z, 0.8f, 0.8f, color, near = abs(z - world.z) < 1.5f))
     }
 
     private fun screenFlash(color: Int, strength: Float) {
@@ -477,13 +488,23 @@ class CrowdView @JvmOverloads constructor(
         }
         for (t in floatTexts) {
             val d = t.z - world.z
-            if (d < -4f || d > VIEW_DISTANCE) continue
-            val f = factor(d)
+            if (!t.near && (d < -4f || d > VIEW_DISTANCE)) continue
             val k = 1f - t.life / t.maxLife
             val alpha = (255f * min(1f, t.life / 0.3f)).toInt()
             fillPaint.alpha = alpha
             strokePaint.alpha = alpha
-            label(canvas, t.text, screenX(t.x, f), screenY(f) - w * (0.12f + k * 0.12f) * f - w * 0.02f, max(10f, w * 0.07f * f), t.color, color(R.color.text_stroke))
+            if (t.near) {
+                // Gate takes, contacts and pickups all happen ON the camera. Projected, they landed
+                // inside the count plate in the very frame it flashes and swells, and the two
+                // outlined texts smeared together. Run these up the screen from above the plate.
+                label(
+                    canvas, t.text, screenX(t.x, factor(0f)), playerLabelTopY - w * 0.04f - w * 0.11f * k,
+                    w * 0.06f, t.color, color(R.color.text_stroke),
+                )
+            } else {
+                val f = factor(d)
+                label(canvas, t.text, screenX(t.x, f), screenY(f) - w * (0.12f + k * 0.12f) * f - w * 0.02f, max(10f, w * 0.07f * f), t.color, color(R.color.text_stroke))
+            }
             fillPaint.alpha = 255
             strokePaint.alpha = 255
         }
@@ -619,7 +640,17 @@ class CrowdView @JvmOverloads constructor(
         }
         for (e in world.enemies) {
             val d = e.z - world.z
-            if (e.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawEnemy(canvas, e, d) })
+            if (!e.alive || d >= VIEW_DISTANCE) continue
+            // A squad is a block metres deep, not a point: culling it on its front rank wiped out
+            // the three dozen figures still standing in front of the camera.
+            val depth = crowdDepth(
+                drawnCount(e.maxCount, e.maxCount),
+                CrowdWorld.ENEMY_HALF_WIDTH * if (e.elite) 1.6f else 1f,
+            )
+            if (d <= -4f - depth) continue
+            // once the front rank is behind us the rear rank decides what this paints over
+            val key = if (d < 0f) min(d + depth, VIEW_DISTANCE - 0.5f) else d
+            drawables.add(key to { drawEnemy(canvas, e, d) })
         }
         world.boss?.let { b ->
             val d = b.z - world.z
@@ -722,6 +753,12 @@ class CrowdView @JvmOverloads constructor(
 
     private val crowdXs = FloatArray(MAX_DRAWN_UNITS)
     private val crowdYs = FloatArray(MAX_DRAWN_UNITS)
+    /** Topmost projected head of the last crowd drawn, so a label can clear it. */
+    private var lastCrowdTopY = 0f
+    private val hordeDx = FloatArray(HORDE_SLOTS)
+    private val hordeDz = FloatArray(HORDE_SLOTS)
+    private val hordeOrder = IntArray(HORDE_SLOTS)
+    private var hordeBuilt = false
 
     /** Soldier size on screen depends only on perspective, never on crowd size. */
     private fun unitPx(f: Float): Float = max(2.5f, width * 0.022f * f)
@@ -732,6 +769,22 @@ class CrowdView @JvmOverloads constructor(
         maxCount <= MAX_DRAWN_UNITS -> min(count, MAX_DRAWN_UNITS)
         else -> max(1, Math.round(MAX_DRAWN_UNITS * count / maxCount.toFloat()))
     }
+
+    /** Columns in a grid formation of [slots] places inside a lane half-width of [halfWidth]. */
+    private fun crowdCols(slots: Int, halfWidth: Float): Int {
+        val laid = min(slots, MAX_DRAWN_UNITS)
+        val fit = max(1, Math.round(halfWidth * 2f / CROWD_SPACING_X))
+        return min(fit, max(1, kotlin.math.ceil(sqrt(laid * 1.6f)).toInt()))
+    }
+
+    private fun crowdRows(slots: Int, halfWidth: Float): Int {
+        val laid = min(slots, MAX_DRAWN_UNITS)
+        return max(1, kotlin.math.ceil(laid / crowdCols(slots, halfWidth).toFloat()).toInt())
+    }
+
+    /** How far back in metres a grid formation reaches from its front rank. */
+    private fun crowdDepth(slots: Int, halfWidth: Float): Float =
+        (crowdRows(slots, halfWidth) - 1) * CROWD_SPACING_Z + CROWD_SPACING_Z * 0.35f
 
     /**
      * A step coprime with [m] and near the golden ratio, so `i * step % m` walks every slot
@@ -785,8 +838,7 @@ class CrowdView @JvmOverloads constructor(
         // re-packs; the player's own crowd only ever has the places it is currently using.
         val laid = if (grid) slotCount else n
         if (grid) {
-            val fit = max(1, Math.round(halfWidth * 2f / CROWD_SPACING_X))
-            val cols = min(fit, max(1, kotlin.math.ceil(sqrt(slotCount * 1.6f)).toInt()))
+            val cols = crowdCols(slotCount, halfWidth)
             for (i in 0 until laid) {
                 val col = i % cols
                 val row = i / cols
@@ -815,15 +867,25 @@ class CrowdView @JvmOverloads constructor(
             }
         }
         val baseAlpha = paint.alpha
-        if (alpha < 1f) paint.alpha = (baseAlpha * alpha.coerceIn(0f, 1f)).toInt()
+        val baseShadow = shadowPaint.alpha
+        val bodyAlpha = baseAlpha * alpha.coerceIn(0f, 1f)
         // Casualties are spread through the formation with a coprime step, so exactly one figure
         // drops out per loss and it can be anyone. Taking them off the end instead peeled whole
         // rear ranks away five at a time: the small figures at the back kept vanishing in clumps
         // while the bullets were plainly landing at the front.
         val step = scatterStep(laid)
+        var topY = Float.MAX_VALUE
         for (i in (0 until laid).sortedByDescending { crowdYs[it] }) {   // far ranks first
             if (i * step % laid >= n) continue                           // already fallen
-            val f = factor(worldZ + crowdYs[i] - world.z)
+            // Each figure lives and dies on its OWN distance. A block ten metres deep used to be
+            // culled as one object on its front rank's z, so three dozen people still ahead of
+            // the camera blinked out together; now they walk past and dissolve one by one.
+            val dz = worldZ + crowdYs[i] - world.z
+            if (dz <= -NEAR_OVERSHOOT) continue
+            val near = ((dz + NEAR_OVERSHOOT) / 2f).coerceIn(0f, 1f)
+            paint.alpha = (bodyAlpha * near).toInt().coerceIn(0, 255)
+            shadowPaint.alpha = (baseShadow * near).toInt().coerceIn(0, 255)
+            val f = factor(dz)
             if (f < 0.04f) continue
             val unit = unitPx(f)
             val sh = unit * 3.6f
@@ -832,7 +894,11 @@ class CrowdView @JvmOverloads constructor(
             val sway: Float
             val frame: Int
             if (stepRate > 0.05f) {
-                frame = ((runTime * 8f * min(1f, stepRate + 0.35f)).toInt() + i) and 1
+                // Constant cadence. Scaling the PHASE by stepRate meant the frame index was
+                // runTime times a moving rate, so the legs buzzed several times per displayed
+                // frame while a squad closed in, worse the longer the app had been open, then
+                // snapped to a steady march. Vigour now comes from the bob and sway amplitudes.
+                frame = ((runTime * 8f).toInt() + i) and 1
                 bob = abs(sin(runTime * 12f + i)) * unit * 0.25f * min(1f, stepRate + 0.3f)
                 sway = sin(runTime * 6f + i * 1.7f) * unit * 0.1f * stepRate
             } else {
@@ -842,12 +908,16 @@ class CrowdView @JvmOverloads constructor(
             }
             val x = screenX(worldX + crowdXs[i], f) + sway
             val ground = screenY(f)
+
             rect.set(x - sw * 0.42f, ground - unit * 0.28f, x + sw * 0.42f, ground + unit * 0.28f)
             canvas.drawOval(rect, shadowPaint)
             rect.set(x - sw / 2f, ground - sh - bob, x + sw / 2f, ground - bob)
             canvas.drawBitmap(frames[frame], null, rect, paint)
+            if (rect.top < topY) topY = rect.top
         }
         paint.alpha = baseAlpha
+        shadowPaint.alpha = baseShadow
+        lastCrowdTopY = if (topY == Float.MAX_VALUE) screenY(factor(0f)) else topY
     }
 
     private fun label(canvas: Canvas, text: String, x: Float, y: Float, size: Float, fill: Int, stroke: Int) {
@@ -921,19 +991,32 @@ class CrowdView @JvmOverloads constructor(
             grid = true, halfWidth = CrowdWorld.ENEMY_HALF_WIDTH * scale,
             stepRate = e.step, alpha = fade,
         )
-        val cx = screenX(e.x, f)
-        val top = screenY(f) - unitPx(f) * 3.6f * scale - w * 0.03f * f
+        if (d < 0f) return          // past the camera: no plate pinned to the bottom edge
+        // Anchor the plate to the BACK of the block, which is its highest point on screen.
+        // Hung off the front rank it ended up stamped in the middle of a deep squad.
+        val fTop = factor(d + crowdDepth(slots, CrowdWorld.ENEMY_HALF_WIDTH * scale))
+        val cx = screenX(e.x, fTop)
+        val top = screenY(fTop) - unitPx(fTop) * 3.6f - w * 0.03f * f
         label(canvas, e.count.toString(), cx, top, max(9f, w * 0.07f * f * scale), Color.WHITE, color(R.color.gate_post_bad))
         if (e.elite) {
+            // The one moment the game wants the name read is the moment it used to run off the
+            // screen edge: cap the growth, shrink an over-long name to fit, then clamp the plate.
             val name = stageMinis[stageIndex(world.level)]
-            val fs = max(9f, w * 0.05f * f)
+            val maxW = w * 0.96f
+            val baseFs = max(9f, w * 0.05f * min(f, 1f))
+            bodyPaint.textSize = baseFs
+            val raw = bodyPaint.measureText(name) + baseFs * 0.9f
+            val fs = if (raw > maxW) baseFs * (maxW / raw) else baseFs
             bodyPaint.textSize = fs
-            val tw = bodyPaint.measureText(name) + fs * 0.9f
-            rect.set(cx - tw / 2f, top - fs * 2.1f, cx + tw / 2f, top - fs * 0.6f)
+            val half = min(maxW, bodyPaint.measureText(name) + fs * 0.9f) / 2f
+            val lo = half + w * 0.01f
+            val hi = w - half - w * 0.01f
+            val plateX = if (lo > hi) w / 2f else cx.coerceIn(lo, hi)
+            rect.set(plateX - half, top - fs * 2.1f, plateX + half, top - fs * 0.6f)
             canvas.drawRoundRect(rect, fs * 0.25f, fs * 0.25f, platePaint)
             plateEdgePaint.strokeWidth = max(1f, fs * 0.09f)
             canvas.drawRoundRect(rect, fs * 0.25f, fs * 0.25f, plateEdgePaint)
-            label(canvas, name, cx, rect.centerY(), fs, Color.WHITE, color(R.color.gate_stroke_bad))
+            label(canvas, name, plateX, rect.centerY(), fs, Color.WHITE, color(R.color.gate_stroke_bad))
         }
     }
 
@@ -957,39 +1040,73 @@ class CrowdView @JvmOverloads constructor(
      * A wall of henchmen behind the villain, laid out in screen space so it stacks upward and
      * widens like a packed stand. It shrinks row by row as the villain's HP drops.
      */
-    private fun drawHorde(canvas: Canvas, b: CrowdWorld.Boss, baseY: Float, f: Float) {
+    /**
+     * One fixed stand of henchmen behind the villain, in world offsets. Built once: the layout must
+     * not depend on how far away the boss is, or the whole mass respaces itself every metre.
+     */
+    private fun buildHorde() {
+        if (hordeBuilt) return
+        var i = 0
+        var rank = 0
+        while (i < HORDE_SLOTS) {
+            val halfLane = min(1.05f, 0.45f + rank * 0.07f)   // widens towards the back, stops at the fence
+            val cols = max(7, Math.round(halfLane * 2f / CROWD_SPACING_X))
+            val gap = halfLane * 2f / cols
+            var col = 0
+            while (col < cols && i < HORDE_SLOTS) {
+                val jitter = ((i * 7919) % 13) / 13f - 0.5f
+                val depthJitter = ((i * 6151) % 11) / 11f - 0.5f
+                val stagger = if (rank % 2 == 1) 0.25f else -0.25f
+                hordeDx[i] = (col - (cols - 1) / 2f + stagger) * gap + jitter * gap * 0.3f
+                hordeDz[i] = rank * CROWD_SPACING_Z + depthJitter * CROWD_SPACING_Z * 0.35f
+                i++
+                col++
+            }
+            rank++
+        }
+        val far = (0 until HORDE_SLOTS).sortedByDescending { hordeDz[it] }
+        for (k in far.indices) hordeOrder[k] = far[k]
+        hordeBuilt = true
+    }
+
+    /**
+     * The villain's henchmen. Every one of them stands on the ground at its own distance and is
+     * projected like any other figure, so the mass recedes and grows as the boss closes instead of
+     * hanging at a fixed pixel size above the horizon. Losses are scattered through the stand with
+     * the same coprime walk the squads use: the old version cut the drawn count to
+     * `ceil(14 * hp_ratio)` whole rows and peeled them off the top, which dropped about thirty of
+     * the smallest, least-occluded figures in a single frame, thirteen times per fight.
+     */
+    private fun drawHorde(canvas: Canvas, b: CrowdWorld.Boss, bossD: Float) {
         val ratio = (b.count / max(1, b.maxCount).toFloat()).coerceIn(0f, 1f)
         if (ratio <= 0f) return
-        val w = width.toFloat()
+        buildHorde()
         val frames = mobFrames[stageIndex(world.level)]
-        val sh = w * 0.062f * (0.8f + 0.45f * f)
-        val sw = sh * 0.8f
-        val rowH = sh * 0.40f
-        val rows = max(1, kotlin.math.ceil(HORDE_ROWS * ratio).toInt())
-        var budget = 340
-        for (row in rows - 1 downTo 0) {
-            if (budget <= 0) break
-            val y = baseY - row * rowH
-            val halfPx = min(w * 0.78f, w * (0.26f + row * 0.055f))
-            val cols = max(7, (halfPx * 2f / (sw * 0.82f)).toInt())
-            spritePaint.alpha = (255 * (0.62f + 0.38f * (1f - row / (HORDE_ROWS * 1.4f)))).toInt().coerceIn(0, 255)
-            for (col in 0 until cols) {
-                if (budget <= 0) break
-                val px = w / 2f - halfPx + (col + if (row % 2 == 1) 0.5f else 0f) * (halfPx * 2f / cols)
-                if (px < -sw || px > w + sw) continue
-                rect.set(px - sw / 2f, y - sh, px + sw / 2f, y)
-                canvas.drawBitmap(frames[(row + col) and 1], null, rect, spritePaint)
-                budget--
-            }
+        val standing = max(1, Math.round(HORDE_SLOTS * ratio))
+        val step = scatterStep(HORDE_SLOTS)
+        val bossF = max(0.05f, factor(bossD))
+        val baseAlpha = spritePaint.alpha
+        for (k in 0 until HORDE_SLOTS) {
+            val i = hordeOrder[k]
+            if (i * step % HORDE_SLOTS >= standing) continue     // already fallen
+            val f = factor(bossD + hordeDz[i])
+            if (f < 0.04f) continue
+            val sh = unitPx(f) * 3.6f
+            val sw = sh * 0.8f
+            val x = screenX(hordeDx[i], f)
+            val ground = screenY(f)
+            spritePaint.alpha = (255f * (0.72f + 0.28f * min(1f, f / bossF))).toInt().coerceIn(0, 255)
+            rect.set(x - sw / 2f, ground - sh, x + sw / 2f, ground)
+            canvas.drawBitmap(frames[(i + k) and 1], null, rect, spritePaint)
         }
-        spritePaint.alpha = 255
+        spritePaint.alpha = baseAlpha
     }
 
     private fun drawMonster(canvas: Canvas, b: CrowdWorld.Boss, d: Float) {
         val f = factor(d)
         if (f < 0.05f) return
         val w = width.toFloat()
-        drawHorde(canvas, b, screenY(f), f)
+        drawHorde(canvas, b, d)
         val y = screenY(f)
         val frames = bossFrames[b.kind.coerceIn(0, bossFrames.size - 1)]
         val stomp = if (b.marching) abs(sin(runTime * PI_F * 3f)) else 0f
@@ -1028,10 +1145,14 @@ class CrowdView @JvmOverloads constructor(
         drawCrowd(canvas, world.playerX, world.z, drawn, drawn, allyFrames, paint, grid = false, stepRate = 1f)
         val px = screenX(world.playerX, f)
         val pop = if (world.flash > 0f) 1f + world.flash * 0.7f else 1f
+        // Float the count above the crowd's real silhouette. Pinned to a nominal figure at dz=0 it
+        // sank deeper into your own ranks the more people you had - backwards from what it says.
+        val top = max(height * 0.55f, lastCrowdTopY - w * 0.11f * pop * 0.35f)
         label(
-            canvas, world.count.toString(), px, screenY(f) - unit * 3.6f - w * 0.05f, w * 0.11f * pop,
+            canvas, world.count.toString(), px, top, w * 0.11f * pop,
             if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),
         )
+        playerLabelTopY = top - w * 0.11f * pop * 0.5f
     }
 
     private fun drawHud(canvas: Canvas, w: Float, h: Float) {
@@ -1156,7 +1277,7 @@ class CrowdView @JvmOverloads constructor(
         private const val LANE_HALF_PX = 0.5f
         private const val VIEW_DISTANCE = 60f
         private const val NEAR_OVERSHOOT = 3.4f
-        private const val HORDE_ROWS = 14f
+        private const val HORDE_SLOTS = 240
         private const val CROWD_SPACING_X = 0.135f   // lane units: one figure wide, so ranks do not overlap
         private const val CROWD_SPACING_Z = 0.85f    // metres between ranks: far enough apart that
                                                      // perspective separates them on screen
