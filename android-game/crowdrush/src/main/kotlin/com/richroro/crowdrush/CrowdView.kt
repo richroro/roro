@@ -734,11 +734,36 @@ class CrowdView @JvmOverloads constructor(
     }
 
     /**
+     * A step coprime with [m] and near the golden ratio, so `i * step % m` walks every slot
+     * exactly once. Used to scatter a crowd's losses through its formation.
+     */
+    private fun scatterStep(m: Int): Int {
+        if (m <= 2) return 1
+        var k = max(1, Math.round(m * 0.618f))
+        repeat(m) {
+            if (gcdOf(k, m) == 1) return k
+            k = if (k + 1 >= m) 1 else k + 1
+        }
+        return 1
+    }
+
+    private fun gcdOf(a: Int, b: Int): Int {
+        var x = a
+        var y = b
+        while (y != 0) {
+            val t = x % y
+            x = y
+            y = t
+        }
+        return x
+    }
+
+    /**
      * Crowds stand on the ground in the world, not on a flat sheet: every figure is placed at its
      * own lane position and distance and then projected, so ranks further back really are further
      * back (smaller, higher up the screen) instead of being stacked upward at one size.
-     * Slots come from the crowd's original size so losses thin the front rank rather than
-     * re-packing the block. [stepRate] 0 means standing around; higher means walking.
+     * Slots come from the crowd's original size so the block never re-packs itself, and the
+     * casualties are scattered through it. [stepRate] 0 means standing around; higher means walking.
      */
     private fun drawCrowd(
         canvas: Canvas,
@@ -756,10 +781,13 @@ class CrowdView @JvmOverloads constructor(
         val slotCount = min(slots, MAX_DRAWN_UNITS)
         val n = min(drawn, slotCount)
         if (n <= 0) return
+        // A squad keeps every slot of its original formation laid out, so the block never
+        // re-packs; the player's own crowd only ever has the places it is currently using.
+        val laid = if (grid) slotCount else n
         if (grid) {
             val fit = max(1, Math.round(halfWidth * 2f / CROWD_SPACING_X))
             val cols = min(fit, max(1, kotlin.math.ceil(sqrt(slotCount * 1.6f)).toInt()))
-            for (i in 0 until n) {
+            for (i in 0 until laid) {
                 val col = i % cols
                 val row = i / cols
                 val jitter = ((i * 7919) % 13) / 13f - 0.5f
@@ -779,7 +807,7 @@ class CrowdView @JvmOverloads constructor(
                 crowdYs[i] = row * CROWD_SPACING_Z + depthJitter * CROWD_SPACING_Z * 0.35f
             }
         } else {
-            for (i in 0 until n) {
+            for (i in 0 until laid) {
                 val angle = i * GOLDEN_ANGLE
                 val r = sqrt(i + 0.5f)
                 crowdXs[i] = cos(angle) * r * 0.062f
@@ -788,7 +816,13 @@ class CrowdView @JvmOverloads constructor(
         }
         val baseAlpha = paint.alpha
         if (alpha < 1f) paint.alpha = (baseAlpha * alpha.coerceIn(0f, 1f)).toInt()
-        for (i in (0 until n).sortedByDescending { crowdYs[it] }) {   // far ranks first
+        // Casualties are spread through the formation with a coprime step, so exactly one figure
+        // drops out per loss and it can be anyone. Taking them off the end instead peeled whole
+        // rear ranks away five at a time: the small figures at the back kept vanishing in clumps
+        // while the bullets were plainly landing at the front.
+        val step = scatterStep(laid)
+        for (i in (0 until laid).sortedByDescending { crowdYs[it] }) {   // far ranks first
+            if (i * step % laid >= n) continue                           // already fallen
             val f = factor(worldZ + crowdYs[i] - world.z)
             if (f < 0.04f) continue
             val unit = unitPx(f)
