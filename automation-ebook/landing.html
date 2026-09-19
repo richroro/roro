@@ -1,0 +1,623 @@
+<title>혼자서도 10명 몫을 해내는 법 — AI 업무 자동화 전자책</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink-900: #12242b;
+    --ink-700: #24444d;
+    --ink-500: #4a6870;
+    --paper-0: #f7f5ef;
+    --paper-50: #eef2ec;
+    --paper-100: #e1e7dc;
+    --line: rgba(18, 36, 43, 0.14);
+    --line-strong: rgba(18, 36, 43, 0.28);
+    --accent: #b9791f;
+    --accent-ink: #7a4f10;
+    --accent-soft: rgba(185, 121, 31, 0.14);
+    --good: #4c7a52;
+    --shadow: 0 1px 2px rgba(18, 36, 43, 0.06);
+
+    --font-display: "Noto Serif KR", "Batang", "궁서", Georgia, serif;
+    --font-body: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Noto Sans Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink-900: #eef2ec;
+      --ink-700: #cdd8cf;
+      --ink-500: #9fb0a2;
+      --paper-0: #0f1c20;
+      --paper-50: #142a2f;
+      --paper-100: #1c363b;
+      --line: rgba(238, 242, 236, 0.14);
+      --line-strong: rgba(238, 242, 236, 0.26);
+      --accent: #e2a84f;
+      --accent-ink: #f4cf94;
+      --accent-soft: rgba(226, 168, 79, 0.16);
+      --good: #7fbf87;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink-900: #eef2ec;
+    --ink-700: #cdd8cf;
+    --ink-500: #9fb0a2;
+    --paper-0: #0f1c20;
+    --paper-50: #142a2f;
+    --paper-100: #1c363b;
+    --line: rgba(238, 242, 236, 0.14);
+    --line-strong: rgba(238, 242, 236, 0.26);
+    --accent: #e2a84f;
+    --accent-ink: #f4cf94;
+    --accent-soft: rgba(226, 168, 79, 0.16);
+    --good: #7fbf87;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-theme="light"] {
+    --ink-900: #12242b;
+    --ink-700: #24444d;
+    --ink-500: #4a6870;
+    --paper-0: #f7f5ef;
+    --paper-50: #eef2ec;
+    --paper-100: #e1e7dc;
+    --line: rgba(18, 36, 43, 0.14);
+    --line-strong: rgba(18, 36, 43, 0.28);
+    --accent: #b9791f;
+    --accent-ink: #7a4f10;
+    --accent-soft: rgba(185, 121, 31, 0.14);
+    --good: #4c7a52;
+    --shadow: 0 1px 2px rgba(18, 36, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper-0);
+    color: var(--ink-900);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 2.1rem;
+  }
+
+  ::selection { background: var(--accent-soft); color: var(--ink-900); }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 1.25rem; }
+  }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; margin: 0; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.4em;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(8px);
+    background: color-mix(in srgb, var(--paper-0) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 0;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-700);
+  }
+  .brand-mark {
+    width: 1.7rem;
+    height: 1.7rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-ink);
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.4rem;
+    font-size: 0.86rem;
+    color: var(--ink-700);
+  }
+  .nav-links a { text-decoration: none; opacity: 0.85; }
+  .nav-links a:hover { opacity: 1; color: var(--accent-ink); }
+  @media (max-width: 560px) { .nav-links { display: none; } }
+
+  /* hero */
+  .hero { padding: 4.2rem 0 3rem; }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.28;
+    margin-top: 0.9rem;
+    color: var(--ink-900);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent-ink);
+    box-shadow: inset 0 -0.32em 0 var(--accent-soft);
+  }
+  .hero p.sub {
+    margin-top: 1.1rem;
+    max-width: 34rem;
+    font-size: 1.06rem;
+    color: var(--ink-700);
+  }
+
+  .cta-row { display: flex; gap: 0.8rem; margin-top: 1.9rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn-primary { background: var(--accent); color: #221604; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px -6px var(--accent-ink); }
+  .btn-ghost { border-color: var(--line-strong); color: var(--ink-900); background: transparent; }
+  .btn-ghost:hover { background: var(--paper-50); }
+
+  .stat-row {
+    margin-top: 2.6rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    padding-top: 1.4rem;
+    gap: 1rem;
+  }
+  @media (max-width: 560px) { .stat-row { grid-template-columns: 1fr; gap: 1.2rem; } }
+  .stat b {
+    display: block;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.5rem;
+    color: var(--accent-ink);
+  }
+  .stat span {
+    font-size: 0.82rem;
+    color: var(--ink-500);
+  }
+
+  section { padding: 3.2rem 0; border-top: 1px solid var(--line); }
+  .section-head { margin-bottom: 1.8rem; }
+  .section-head h2 { font-size: 1.55rem; margin-top: 0.6rem; }
+  .section-head p { color: var(--ink-700); margin-top: 0.6rem; max-width: 34rem; }
+
+  /* time chart */
+  .chart { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.6rem; }
+  .chart-row { display: grid; grid-template-columns: 8.5rem 1fr 3.4rem; align-items: center; gap: 0.8rem; }
+  .chart-label { font-size: 0.88rem; color: var(--ink-700); }
+  .chart-track { height: 0.62rem; background: var(--paper-100); border-radius: 2px; overflow: hidden; }
+  .chart-fill { height: 100%; background: linear-gradient(90deg, var(--accent-ink), var(--accent)); border-radius: 2px; width: 0; transition: width 1s cubic-bezier(.2,.7,.2,1); }
+  .chart-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 0.84rem; color: var(--ink-500); text-align: right; }
+  .chart-note { margin-top: 1.1rem; font-size: 0.86rem; color: var(--ink-500); }
+  .chart-note b { color: var(--accent-ink); font-family: var(--font-mono); }
+
+  /* toc */
+  .toc-list { display: flex; flex-direction: column; margin-top: 1.6rem; }
+  .toc-item {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    gap: 1rem;
+    padding: 1.05rem 0;
+    border-top: 1px dotted var(--line-strong);
+  }
+  .toc-item:first-child { border-top: none; }
+  .toc-num { font-family: var(--font-mono); color: var(--accent-ink); font-size: 0.92rem; padding-top: 0.15rem; }
+  .toc-item h3 { font-size: 1.02rem; font-weight: 700; color: var(--ink-900); font-family: var(--font-body); }
+  .toc-item p { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--ink-500); }
+  .toc-item.appendix .toc-num { color: var(--good); }
+
+  /* prompt card */
+  .card {
+    background: var(--paper-50);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem;
+    margin-top: 1.6rem;
+    box-shadow: var(--shadow);
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.9rem; }
+  .card-head span { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-500); }
+  .copy-btn {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-700);
+    padding: 0.35rem 0.7rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--paper-100); }
+  .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card pre {
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    line-height: 1.65;
+    color: var(--ink-900);
+    overflow-x: auto;
+  }
+
+  /* who / not-who */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.6rem; }
+  @media (max-width: 560px) { .who-grid { grid-template-columns: 1fr; } }
+  .who-col { border: 1px solid var(--line); border-radius: 6px; padding: 1.3rem 1.4rem; }
+  .who-col h3 { font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 0.9rem; }
+  .who-col.yes { border-color: color-mix(in srgb, var(--good) 45%, var(--line)); }
+  .who-col.yes h3 { color: var(--good); }
+  .who-col.no h3 { color: var(--ink-500); }
+  .who-col ul { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; color: var(--ink-700); }
+  .who-col li { margin-bottom: 0.5rem; }
+
+  /* includes */
+  .includes { margin-top: 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1.6rem; }
+  @media (max-width: 560px) { .includes { grid-template-columns: 1fr; } }
+  .includes li { list-style: none; display: flex; gap: 0.6rem; font-size: 0.92rem; color: var(--ink-700); }
+  .includes li::before { content: "—"; color: var(--accent-ink); flex-shrink: 0; }
+  .includes { padding: 0; margin-left: 0; }
+
+  /* pricing */
+  .price-card {
+    margin-top: 1.8rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    padding: 2rem 2.2rem;
+    background: var(--paper-50);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .price-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.6rem; }
+  .price-name { font-family: var(--font-display); font-size: 1.2rem; }
+  .price-amount { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .price-amount .was { color: var(--ink-500); text-decoration: line-through; font-size: 0.95rem; margin-right: 0.5rem; }
+  .price-amount .now { color: var(--accent-ink); font-size: 1.7rem; font-weight: 700; }
+  .price-card .btn-primary { align-self: flex-start; margin-top: 0.4rem; }
+  .price-fine { font-size: 0.8rem; color: var(--ink-500); }
+
+  /* faq */
+  details {
+    border-top: 1px solid var(--line);
+    padding: 1.05rem 0;
+  }
+  details:last-child { border-bottom: 1px solid var(--line); }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.98rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    color: var(--accent-ink);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 0.8rem 0 0.2rem; color: var(--ink-700); font-size: 0.92rem; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.6rem 0 3.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-500);
+  }
+  footer .foot-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+
+  .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .chart-fill { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-row">
+    <div class="brand"><span class="brand-mark">AT</span> AUTOMATION TIME</div>
+    <div class="nav-links">
+      <a href="#toc">목차</a>
+      <a href="#sample">미리보기</a>
+      <a href="#includes">구성</a>
+      <a href="#price">가격</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">1인 사업가 · 프리랜서를 위한 실전 가이드</span>
+    <h1>혼자서도 <em>10명 몫</em>을<br />해내는 법</h1>
+    <p class="sub">AI 업무 자동화 전자책 — 이메일, 문서, 콘텐츠, 고객 응대, 회계까지. 오늘 바로 복사해서 쓰는 프롬프트 30개와 4주 실행 로드맵으로 반복 업무를 덜어냅니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#price">지금 구매하기</a>
+      <a class="btn btn-ghost" href="#toc">목차 먼저 보기</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>23–31<span style="font-size:0.9rem">시간</span></b><span>주당 반복 업무에 쓰는 평균 시간</span></div>
+      <div class="stat"><b>30+</b><span>바로 쓰는 실전 프롬프트</span></div>
+      <div class="stat"><b>4<span style="font-size:0.9rem">주</span></b><span>따라만 하면 되는 실행 로드맵</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="time">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">문제 진단</span>
+      <h2>당신의 시간은 어디로 사라졌나</h2>
+      <p>핵심 업무 외에 매주 이만큼의 시간이 커뮤니케이션과 행정에 쓰입니다. 이 책은 이 네 가지 영역을 순서대로 줄여나갑니다.</p>
+    </div>
+    <div class="chart reveal">
+      <div class="chart-row">
+        <div class="chart-label">커뮤니케이션</div>
+        <div class="chart-track"><div class="chart-fill" data-w="90"></div></div>
+        <div class="chart-val">8–10h</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">콘텐츠 마케팅</div>
+        <div class="chart-track"><div class="chart-fill" data-w="70"></div></div>
+        <div class="chart-val">6–8h</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">문서 · 행정</div>
+        <div class="chart-track"><div class="chart-fill" data-w="60"></div></div>
+        <div class="chart-val">5–7h</div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">고객 지원</div>
+        <div class="chart-track"><div class="chart-fill" data-w="50"></div></div>
+        <div class="chart-val">4–6h</div>
+      </div>
+    </div>
+    <p class="chart-note reveal">합치면 주당 <b>약 27시간</b> — 정규직 직원 한 명의 근무 시간과 비슷합니다. 이 책은 그 시간을 되찾는 방법을 다룹니다.</p>
+  </div>
+</section>
+
+<section id="toc">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">목차</span>
+      <h2>9개 챕터, 하나의 실행 순서</h2>
+      <p>이론 → 진단 → 영역별 자동화 → 도구 연결 → 4주 로드맵 순서로 구성되어, 처음부터 그대로 따라가면 됩니다.</p>
+    </div>
+    <div class="toc-list reveal">
+      <div class="toc-item"><div class="toc-num">01</div><div><h3>왜 지금 자동화인가</h3><p>1인 사업가의 시간이 새는 구조를 숫자로 진단합니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">02</div><div><h3>나의 업무 자동화 지도 그리기</h3><p>빈도 × 소모도 매트릭스로 무엇부터 자동화할지 정합니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">03</div><div><h3>이메일·메시지 응대 자동화</h3><p>AI 초안 + 사람 확인 구조로 답장 시간을 1/5로 줄입니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">04</div><div><h3>문서 자동화: 제안서·보고서·계약서</h3><p>마스터 프롬프트 하나로 매번 새로 쓰지 않는 구조를 만듭니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">05</div><div><h3>콘텐츠 제작 자동화</h3><p>글 하나를 SNS·뉴스레터·영상 스크립트로 파생시킵니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">06</div><div><h3>고객 관리와 반복 상담 자동화</h3><p>FAQ 자동 응답과 온보딩 시퀀스를 미리 준비해둡니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">07</div><div><h3>회계·행정 업무 가볍게 만들기</h3><p>지출 정리와 인보이스 안내 문구를 템플릿화합니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">08</div><div><h3>노코드 도구로 자동화 연결하기</h3><p>Zapier·Make로 사람 개입 없이 흐르는 시스템을 만듭니다.</p></div></div>
+      <div class="toc-item"><div class="toc-num">09</div><div><h3>4주 자동화 로드맵</h3><p>주차별 체크리스트로 오늘부터 실행합니다.</p></div></div>
+      <div class="toc-item appendix"><div class="toc-num">부록</div><div><h3>프롬프트 라이브러리 30선</h3><p>이메일·문서·콘텐츠·고객관리·행정 영역별 즉시 사용 프롬프트.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="sample">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">미리보기</span>
+      <h2>책에 실린 프롬프트, 그대로 공개</h2>
+      <p>3장 "이메일·메시지 응대 자동화"에 실린 프롬프트입니다. 대괄호 안만 채워서 바로 사용할 수 있습니다.</p>
+    </div>
+    <div class="card reveal">
+      <div class="card-head">
+        <span>03 · 이메일 응대 — 문의 맞춤 답장 생성</span>
+        <button class="copy-btn" id="copyBtn" type="button">복사</button>
+      </div>
+      <pre id="promptText">아래는 내 기본 답변 템플릿이야:
+[템플릿 붙여넣기]
+
+아래는 실제로 받은 문의야:
+[고객 문의 내용 붙여넣기]
+
+템플릿의 톤과 구조를 유지하면서, 이 문의의 구체적인 내용(이름, 요청사항)에
+맞게 답장을 완성해줘.</pre>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">대상 확인</span>
+      <h2>이런 분께 맞습니다</h2>
+    </div>
+    <div class="who-grid reveal">
+      <div class="who-col yes">
+        <h3>이 책이 맞는 분</h3>
+        <ul>
+          <li>혼자 또는 소수로 사업을 운영하는 프리랜서·사업가</li>
+          <li>코딩 없이 AI와 무료·저가 도구로 자동화를 시작하고 싶은 분</li>
+          <li>반복되는 이메일·문서·콘텐츠 작업에 지친 분</li>
+          <li>이론보다 오늘 바로 쓸 프롬프트가 필요한 분</li>
+        </ul>
+      </div>
+      <div class="who-col no">
+        <h3>이 책이 맞지 않는 분</h3>
+        <ul>
+          <li>개발자용 API·코드 기반 자동화를 찾는 분</li>
+          <li>대규모 조직의 RPA 도입을 검토하는 분</li>
+          <li>세무·법률 자동 처리를 기대하는 분 (전문가 확인은 별도 필요)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="includes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">구성</span>
+      <h2>무엇을 받게 되나요</h2>
+    </div>
+    <ul class="includes reveal">
+      <li>전자책 본문 (9개 챕터 + 부록, 텍스트 파일 제공)</li>
+      <li>바로 쓰는 프롬프트 30선 라이브러리</li>
+      <li>자동화 우선순위 매트릭스 워크시트</li>
+      <li>4주 실행 로드맵 체크리스트</li>
+      <li>이메일·제안서·온보딩 템플릿 초안</li>
+      <li>노코드 자동화 추천 조합 4가지</li>
+    </ul>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">가격</span>
+      <h2>한 번 구매로 계속 활용하세요</h2>
+      <p>도구 구독료 한 달 치보다 저렴한 가격으로, 매주 반복 업무 시간을 줄이는 시스템을 얻습니다.</p>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-top">
+        <div class="price-name">AI 업무 자동화 전자책 — 정식판</div>
+        <div class="price-amount"><span class="was">29,000원</span><span class="now">19,000원</span></div>
+      </div>
+      <ul class="includes" style="grid-template-columns: 1fr;">
+        <li>전자책 본문 + 프롬프트 30선 + 워크시트 + 로드맵</li>
+        <li>업데이트판 무상 제공</li>
+      </ul>
+      <a class="btn btn-primary" href="#price">지금 구매하기</a>
+      <p class="price-fine">결제 버튼은 실제 판매 채널(예: 크몽·탈잉·Gumroad 등) 연동이 필요합니다. 이 페이지는 소개용 랜딩페이지입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>자주 묻는 질문</h2>
+    </div>
+    <div class="reveal">
+      <details>
+        <summary>코딩을 전혀 몰라도 따라할 수 있나요?</summary>
+        <p>네. 모든 방법은 AI 채팅창에 프롬프트를 붙여넣는 방식이며, 8장의 노코드 도구도 클릭 기반 설정만 다룹니다.</p>
+      </details>
+      <details>
+        <summary>어떤 AI 도구를 써야 하나요?</summary>
+        <p>ChatGPT, Claude 등 대화형 AI 도구라면 대부분 그대로 적용됩니다. 특정 유료 구독을 요구하지 않습니다.</p>
+      </details>
+      <details>
+        <summary>세금·법률 관련 자동화도 다루나요?</summary>
+        <p>지출 정리, 인보이스 문구 등 행정 보조 업무는 다루지만, 세무 신고와 계약 법률 검토는 전문가 확인이 필요하다고 책 안에서도 명시하고 있습니다.</p>
+      </details>
+      <details>
+        <summary>업데이트되면 다시 구매해야 하나요?</summary>
+        <p>아니요. 최초 구매 후 개정판은 무상으로 제공됩니다.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>AUTOMATION TIME · AI 업무 자동화 전자책</span>
+    <span>본 페이지는 판매 소개용 초안이며, 실제 결제·정산은 선택한 판매 채널의 정책을 따릅니다.</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var bars = document.querySelectorAll(".chart-fill");
+    var revealEls = document.querySelectorAll(".reveal");
+
+    if (reduceMotion) {
+      bars.forEach(function (b) { b.style.width = b.dataset.w + "%"; });
+      revealEls.forEach(function (el) { el.classList.add("in"); });
+    } else if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            if (entry.target.classList.contains("chart")) {
+              entry.target.querySelectorAll(".chart-fill").forEach(function (b) {
+                b.style.width = b.dataset.w + "%";
+              });
+            }
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      bars.forEach(function (b) { b.style.width = b.dataset.w + "%"; });
+      revealEls.forEach(function (el) { el.classList.add("in"); });
+    }
+
+    var copyBtn = document.getElementById("copyBtn");
+    var promptText = document.getElementById("promptText");
+    if (copyBtn && promptText) {
+      copyBtn.addEventListener("click", function () {
+        var text = promptText.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            copyBtn.textContent = "복사됨";
+            setTimeout(function () { copyBtn.textContent = "복사"; }, 1600);
+          });
+        }
+      });
+    }
+  })();
+</script>

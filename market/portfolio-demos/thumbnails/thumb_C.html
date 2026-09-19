@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1200px; height:900px; overflow:hidden; }
+  body { font-family:"Malgun Gothic","맑은 고딕",sans-serif;
+    background:linear-gradient(160deg,#10233f 0%,#123a5e 100%); color:#fff; position:relative; }
+  .wrap { position:absolute; inset:0; padding:76px; display:flex; flex-direction:column; }
+  .badge { align-self:flex-start; background:#ff8a3d; color:#3a1600; font-weight:900;
+    font-size:32px; padding:11px 24px; border-radius:12px; }
+  h1 { font-size:76px; font-weight:900; line-height:1.18; margin-top:36px; letter-spacing:-2px; }
+  h1 .hl { color:#ffb14d; }
+  .demo { margin-top:auto; background:#0b1a30; border:2px solid #29496f; border-radius:16px;
+    overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.4); }
+  .demo .bar { background:#16294a; padding:14px 20px; display:flex; gap:10px; align-items:center; }
+  .dot { width:15px; height:15px; border-radius:50%; }
+  .demo .body { padding:22px 26px; font-family:"Consolas",monospace; font-size:25px; line-height:1.6; }
+  .g { color:#5fd38a; } .b2 { color:#7db6ff; } .y { color:#ffd21f; } .w { color:#dfe8f5; }
+  .foot { margin-top:30px; display:flex; align-items:center; justify-content:space-between; }
+  .tags { font-size:29px; font-weight:800; color:#cfe0f5; }
+  .price { font-size:34px; font-weight:900; color:#ffb14d; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge">데이터 수집 · 크롤링</span>
+    <h1>웹사이트 데이터,<br><span class="hl">자동으로 긁어</span> 엑셀로 정리</h1>
+
+    <div class="demo">
+      <div class="bar">
+        <span class="dot" style="background:#ff5f57"></span>
+        <span class="dot" style="background:#febc2e"></span>
+        <span class="dot" style="background:#28c840"></span>
+      </div>
+      <div class="body">
+        <div class="w">&gt; python <span class="y">collect.py</span></div>
+        <div class="b2">- 수집 중: 상품목록 ...</div>
+        <div class="g">✔ 320건 수집 완료 → 결과.xlsx 저장</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="tags">상품·가격·목록·뉴스 자동 수집</div>
+      <div class="price">5만원부터</div>
+    </div>
+  </div>
+</body>
+</html>
