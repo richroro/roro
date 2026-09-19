@@ -107,6 +107,9 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 `bgm` 에 `"file": "경로"` 를 주면 직접 고른 음악을 쓴다. 자막 크기·여백, 씬별 모션, 여백 시간 같은 고급 옵션과
 성과 분석용 `category`/`hook_type` 은 `references/options.md` 에 있다 — 품질을 더 조이고 싶을 때 읽는다.
 
+**숫자가 주인공인 주제**(공모주·실적·순위·가격비교)는 사진 대신 씬에 `card` 를 넣어 표·숫자 카드를 직접 그린다.
+면책 문구(`style.disclaimer`)와 수치 검증 규칙까지 `references/data-shorts.md` 에 있다.
+
 **대본 체크리스트 (쓰고 나서 반드시 스스로 검사)**
 - 첫 씬 첫 문장이 결론·반전·구체적 질문으로 바로 시작하는가? 인사말·"오늘은 ~알아볼게요"는 금지. 제목·첫 씬 `headline`(필수)과
   같은 궁금증을 가리키는가? 훅이 약속한 사실이 10초 안에 나오는가?

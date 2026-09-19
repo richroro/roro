@@ -298,8 +298,8 @@ def validate_project(p: dict) -> None:
                 continue
             if not str(s.get("narration", "")).strip():
                 errs.append(f"scene {i}: narration 이 비어 있습니다")
-            if not (s.get("image_prompt") or s.get("image") or s.get("keywords")):
-                errs.append(f"scene {i}: image_prompt / keywords / image 중 하나는 있어야 합니다")
+            if not (s.get("image_prompt") or s.get("image") or s.get("keywords") or s.get("card")):
+                errs.append(f"scene {i}: image_prompt / keywords / image / card 중 하나는 있어야 합니다")
     if not p.get("title"):
         errs.append("title 이 없습니다")
     if errs:

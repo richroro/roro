@@ -498,10 +498,22 @@ def _wrap(text: str, font, max_w: int, draw) -> list[str]:
 def fetch_image(*, prompt: str = "", keywords: str = "", out: str | Path, providers: Optional[list[str]] = None,
                 seed: Optional[int] = None, style: str = "", card_text: str = "", used: Optional[set] = None,
                 local: Optional[str] = None, emoji: str = "", art: str = "", art_palette: str = "",
-                mood: str = "calm") -> dict:
+                mood: str = "calm", card: Optional[dict] = None, card_theme: str = "navy") -> dict:
     """씬 하나의 이미지를 확보해 out(1080x1920 JPEG)에 저장하고 출처 정보를 돌려준다."""
     out = Path(out)
     used = used if used is not None else set()
+
+    if card:
+        # 숫자·표가 주인공인 씬. 네트워크도 저작권 표기도 필요 없고, 씬이 말하는 값을 그대로 보여 준다.
+        import datacard
+
+        datacard.draw_card(card, out, card_theme)
+        info = {"provider": "datacard", "url": "", "license": "generated",
+                "credit": f"직접 생성한 데이터 카드({card.get('type', 'stat')})"}
+        if card.get("source"):
+            info["credit"] += f" · 수치 출처 {card['source']}"
+        write_json(out.with_suffix(".json"), info)
+        return info
     providers = providers or DEFAULT_PROVIDERS
     if seed is None:
         seed = int(hashlib.md5((prompt + keywords).encode()).hexdigest()[:6], 16) % 100000

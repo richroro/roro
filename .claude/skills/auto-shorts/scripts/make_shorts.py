@@ -49,6 +49,7 @@ DEFAULT_STYLE = {
     "layout": "caption",          # caption(기본, 하단 카라오케) | quote(중앙 명언 + 출처)
     "dim": 0.0,                   # 사진을 어둡게(0~0.6). 명언 레이아웃에서 0.3~0.4 권장
     "art_palette": "",            # 일러스트 팔레트 고정(night/dawn/dusk/forest/ocean/warm). 비우면 BGM 무드에 맞춘다
+    "card_theme": "navy",         # 데이터 카드 테마(navy/ink/teal)
     "voice_polish": True,         # TTS 목소리 다듬기(EQ·컴프·짧은 룸). 끄려면 false
     "voice_pitch": 0.0,           # 목소리 높낮이 %(-6~+6). 음수면 낮고 차분해진다
     "look": "",                   # "" | cinematic
@@ -167,7 +168,9 @@ def main() -> None:
             dur = max(dur, float(sc["min_duration"]))
         words = [{"text": w["text"], "start": round(w["start"] + lead, 3), "end": round(w["end"] + lead, 3)}
                  for w in info["words"]]
-        motion = sc.get("motion") or (render.MOTIONS[i % len(render.MOTIONS)] if style["ken_burns"] else "static")
+        # 데이터 카드는 화면에 딱 맞춰 그렸으므로 팬/줌으로 밀면 잘린다 — 기본을 static 으로 둔다
+        motion = sc.get("motion") or ("static" if sc.get("card") else
+                                      (render.MOTIONS[i % len(render.MOTIONS)] if style["ken_burns"] else "static"))
         tl_scenes.append({
             "index": i + 1, "start": round(t, 3), "duration": round(dur, 3), "lead": round(lead, 3),
             "narration": sc["narration"], "headline": sc.get("headline", ""), "words": words,
@@ -212,7 +215,7 @@ def main() -> None:
         out = img_files[i]
         sig = sig_of(sc.get("image_prompt", ""), sc.get("keywords", ""), sc.get("image", ""), style["image_style"],
                      providers, sc.get("art", ""), sc.get("art_palette", ""), style.get("art_palette", ""),
-                     sc.get("emoji", ""))
+                     sc.get("emoji", ""), sc.get("card"), style.get("card_theme", "navy"))
         if not sigs.stale(out, sig, args.force):
             return read_json(out.with_suffix(".json"), {"provider": "cache"})
         info = fetch_images.fetch_image(
@@ -222,7 +225,8 @@ def main() -> None:
             emoji=sc.get("emoji", ""), art=sc.get("art", ""),
             art_palette=sc.get("art_palette") or style.get("art_palette", ""),
             mood=(project.get("bgm") or {}).get("mood", "calm"),
-            used=used_urls, local=sc.get("image"))
+            used=used_urls, local=sc.get("image"),
+            card=sc.get("card"), card_theme=style.get("card_theme", "navy"))
         sigs.mark(out, sig)
         return info
 

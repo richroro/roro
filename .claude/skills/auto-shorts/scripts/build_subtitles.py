@@ -28,6 +28,9 @@ DEFAULT_STYLE = {
     "highlight_color": "#FFD400",   # 노랑
     "outline": 5,
     "caption_margin_v": 560,         # 아래에서 띄우는 픽셀 (1920 기준)
+    "disclaimer": "",           # 영상 내내 하단에 작게 띄우는 면책/출처 문구(투자·의료 주제)
+    "disclaimer_size": 40,
+    "disclaimer_margin_v": 96,
     "headline_size": 104,
     "headline_color": "#FFFFFF",
     "headline_margin_v": 250,
@@ -139,6 +142,9 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
         f"Style: Brand,{CAPTION_FONT},{st['brand_size']},{ass_color('#FFFFFF', 0x30)},{hl},"
         f"{ass_color('#000000', 0x30)},{ass_color('#000000', 0x80)},0,0,0,0,100,100,0,0,1,2,1,7,"
         f"60,60,190,1",
+        f"Style: Disclaimer,{CAPTION_FONT},{st['disclaimer_size']},{ass_color('#FFFFFF', 0x45)},{hl},"
+        f"{ass_color('#000000', 0x40)},{ass_color('#000000', 0x70)},0,0,0,0,100,100,0,0,1,3,1,2,"
+        f"70,70,{st['disclaimer_margin_v']},1",
         "",
         "[Events]",
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
@@ -242,6 +248,11 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
             start = max(start, float(last["start"]) + st["headline_seconds"] + 0.1)
         if total - start > 0.8:
             events.append((start, f"Dialogue: 1,{ts(start)},{ts(total)},CTA,,0,0,0,,{{\\fad(200,0)}}{esc(cta)}"))
+
+    # 면책 문구: 영상 내내 하단에 작게. 투자·의료처럼 판단이 따르는 주제에서 쓴다.
+    disc = (st.get("disclaimer") or "").strip()
+    if disc:
+        events.append((-0.5, f"Dialogue: 2,{ts(0)},{ts(total)},Disclaimer,,0,0,0,,{esc(disc)}"))
 
     brand = (st.get("brand") or "").strip()
     if brand:

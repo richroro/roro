@@ -58,6 +58,9 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `outline` | 자막 외곽선 두께 | `5` |
 | `caption_margin_v` | 화면 아래에서 자막까지 픽셀(1920 기준). 쇼츠 UI 를 피하려면 500 이상 | `560` |
 | `max_words` / `max_chars` | 한 번에 보여 줄 어절 수 / 글자 수(초과 시 다음 덩어리로) | `4` / `16` |
+| `card_theme` | 데이터 카드 테마 `navy`/`ink`/`teal` | `navy` |
+| `disclaimer` | 영상 내내 하단에 작게 띄우는 면책·출처 문구(투자·의료 주제) | `""` |
+| `disclaimer_size` / `disclaimer_margin_v` | 면책 문구 크기·아래에서의 거리 | `40` / `96` |
 | `beat_seconds` | 이 간격(초)마다 줌 펀치로 화면을 바꾼다. `0` 이면 끔 | `1.8` |
 | `headline_size` / `headline_color` / `headline_margin_v` / `headline_seconds` | 헤드라인 크기·색·위(top)에서의 거리·표시 시간(첫 씬은 씬 전체) | `104` / `#FFFFFF` / `250` / `2.6` |
 | `cta_size` / `cta_color` / `cta_seconds` | CTA 크기·색·표시 시간 | `60` / `#FFD400` / `3.0` |
@@ -71,6 +74,7 @@ SKILL.md 의 예시는 자주 쓰는 것만 보여 준다. 여기가 전체 목�
 | `narration` | (필수) 읽을 문장 1~2개, 45자 이내 문장 |
 | `headline` | 씬 상단 큰 글씨, 12자 이내. `beats` 가 있으면 무시된다 |
 | `beats` | 씬 안에서 순서대로 뜨는 문구 배열(각 12자 이내). 씬 길이를 균등 분할해 바뀌고, 바뀔 때마다 줌 펀치가 들어간다. 2개면 약 1.8초마다 화면이 변한다 |
+| `card` | 숫자·표 카드를 직접 그려 씬 배경으로 쓴다(사진 제공자 건너뜀). 종류 `stat`/`compare`/`table`/`bars`/`steps` — `references/data-shorts.md` |
 | `loop_back` | 마지막 씬에 `true` — 첫 씬 그림으로 닫아 반복 재생 때 이어져 보인다. 그 씬은 이미지를 따로 받지 않고 `cta` 도 빠진다 |
 | `image_prompt` | 사진을 못 찾았을 때 쓰는 AI 생성용 영어 프롬프트 |
 | `keywords` | **사진 검색어.** 흔한 영어 명사 2~3개. 길면 단어를 줄여가며 재시도 (없으면 프롬프트에서 추출) |
