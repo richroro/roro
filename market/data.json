@@ -1,0 +1,235 @@
+{
+  "updatedAt": "2026-09-18T13:28:15.009842+09:00",
+  "indices": [
+    {
+      "symbol": "^KS11",
+      "name": "KOSPI",
+      "price": 6899.13,
+      "change": 183.72,
+      "changePercent": 2.74,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^KQ11",
+      "name": "KOSDAQ",
+      "price": 824.96,
+      "change": 8.98,
+      "changePercent": 1.1,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^DJI",
+      "name": "다우존스",
+      "price": 51778.04,
+      "change": 316.14,
+      "changePercent": 0.61,
+      "currency": "USD"
+    },
+    {
+      "symbol": "^IXIC",
+      "name": "나스닥",
+      "price": 26418.3,
+      "change": 439.88,
+      "changePercent": 1.69,
+      "currency": "USD"
+    }
+  ],
+  "fx": [
+    {
+      "symbol": "KRW=X",
+      "name": "USD/KRW",
+      "price": 1384.98,
+      "change": 5.03,
+      "changePercent": 0.36,
+      "currency": "KRW"
+    }
+  ],
+  "stocks": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "price": 260750.0,
+      "change": 8250.0,
+      "changePercent": 3.27,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "price": 1849000.0,
+      "change": 104000.0,
+      "changePercent": 5.96,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "price": 197300.0,
+      "change": -1700.0,
+      "changePercent": -0.85,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035720.KS",
+      "name": "카카오",
+      "price": 33450.0,
+      "change": -50.0,
+      "changePercent": -0.15,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "373220.KS",
+      "name": "LG에너지솔루션",
+      "price": 363500.0,
+      "change": -1500.0,
+      "changePercent": -0.41,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "price": 337.0,
+      "change": 4.59,
+      "changePercent": 1.38,
+      "currency": "USD"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "price": 366.2,
+      "change": 8.12,
+      "changePercent": 2.27,
+      "currency": "USD"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "price": 219.34,
+      "change": 5.44,
+      "changePercent": 2.54,
+      "currency": "USD"
+    }
+  ],
+  "news": [
+    {
+      "title": "해태제과, 오예스·홈런볼 등 25개 브랜드 가격 인상",
+      "link": "https://www.yna.co.kr/view/AKR20260918093600030",
+      "pubDate": "Fri, 18 Sep 2026 12:58:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "檢, '빗썸 관계사 주가조작·횡령' 혐의 강종현 징역 20년 구형",
+      "link": "https://www.yna.co.kr/view/AKR20260918094200004",
+      "pubDate": "Fri, 18 Sep 2026 12:51:44 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울 청약시장 강남 쏠림…1순위 경쟁률 비강남의 13.4배",
+      "link": "https://www.yna.co.kr/view/AKR20260918093400003",
+      "pubDate": "Fri, 18 Sep 2026 12:34:30 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "李대통령, 대미투자에 \"한미 양국 도움되도록 치열하게 협의 중\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918090200001",
+      "pubDate": "Fri, 18 Sep 2026 12:16:33 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "李대통령 \"부동산 공급 최대한 신속히 늘릴 것…매주 진척 확인\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918087400001",
+      "pubDate": "Fri, 18 Sep 2026 12:11:46 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'페이' 등 간편지급 일 평균 1.2조…증권계좌로 간편송금도 급증",
+      "link": "https://www.yna.co.kr/view/AKR20260918073600002",
+      "pubDate": "Fri, 18 Sep 2026 12:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "작년 공공부문 적자 83조 '역대 최대'…\"내년엔 흑자될 수도\"",
+      "link": "https://www.yna.co.kr/view/AKR20260918075300002",
+      "pubDate": "Fri, 18 Sep 2026 12:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] 키움증권, 초록우산과 아동금융교육 지원 협약",
+      "link": "https://www.yna.co.kr/view/AKR20260918087600008",
+      "pubDate": "Fri, 18 Sep 2026 11:58:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 일본은행, 3개월만 기준금리 1.25%로 인상…31년만 최고",
+      "link": "https://www.yna.co.kr/view/AKR20260918087900073",
+      "pubDate": "Fri, 18 Sep 2026 11:57:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "하나금융, ADGM·한화자산운용과 스테이블코인 협력",
+      "link": "https://www.yna.co.kr/view/AKR20260918086100002",
+      "pubDate": "Fri, 18 Sep 2026 11:55:56 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"매출 873% 폭증했다\"…삼성·SK 무섭게 쫓는 中 반도체 회사 [테크로그]",
+      "link": "https://www.hankyung.com/article/202609183282g",
+      "pubDate": "Fri, 18 Sep 2026 11:25:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "차기 수협은행장 21일 최종 면접…'신학기 vs 이형주' 2파전 속 변수는",
+      "link": "https://www.hankyung.com/article/202609183444i",
+      "pubDate": "Fri, 18 Sep 2026 11:16:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"커피 한 잔 99원\"…990원 컵커피 재미 본 남양유업 또 승부수",
+      "link": "https://www.hankyung.com/article/202609183355i",
+      "pubDate": "Fri, 18 Sep 2026 11:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "HSAD, 에쓰오일 50주년 캠페인 '샤이닝 투모로우' 공개",
+      "link": "https://www.hankyung.com/article/202609183368i",
+      "pubDate": "Fri, 18 Sep 2026 10:46:48 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "네파, 종로직영점 리뉴얼 오픈…'도심형 아웃도어 거점'으로 탈바꿈",
+      "link": "https://www.hankyung.com/article/202609183221i",
+      "pubDate": "Fri, 18 Sep 2026 10:13:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "100년 숙성 발사믹·프리미엄 화병…달라진 백화점 VIP 추석 선물",
+      "link": "https://www.hankyung.com/article/202609171810i",
+      "pubDate": "Fri, 18 Sep 2026 10:06:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'드론 잡는 드론'에 꽂혔다…외교단 눈길 사로잡은 'K-드론'",
+      "link": "https://www.hankyung.com/article/202609171877i",
+      "pubDate": "Fri, 18 Sep 2026 10:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"집에서도 호텔처럼\"…GS샵, 프리미업 리빙 상품 확대",
+      "link": "https://www.hankyung.com/article/202609182893g",
+      "pubDate": "Fri, 18 Sep 2026 09:55:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "골칫거리 쓰레기가 돈 버는 '황금알' 됐다…57억 '잭팟'",
+      "link": "https://www.hankyung.com/article/202609183028i",
+      "pubDate": "Fri, 18 Sep 2026 09:35:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"KTX보다 빠르다\"…김포서 1시간, 남해안 로컬여행 출시",
+      "link": "https://www.hankyung.com/article/202609182973g",
+      "pubDate": "Fri, 18 Sep 2026 09:33:24 +0900",
+      "source": "한국경제"
+    }
+  ]
+}
