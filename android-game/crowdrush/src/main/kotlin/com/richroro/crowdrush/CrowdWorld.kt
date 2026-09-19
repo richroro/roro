@@ -77,6 +77,10 @@ class CrowdWorld(private val seed: Int = 1) {
         var count: Int = count
             private set
 
+        /** 0 while standing around, ramping to 1 as the squad closes in; drives the walk cycle. */
+        var step: Float = 0f
+            internal set
+
         internal fun march(dz: Float) {
             z -= dz
         }
@@ -116,6 +120,10 @@ class CrowdWorld(private val seed: Int = 1) {
         var roared: Boolean = false
             internal set
         var marching: Boolean = false
+            internal set
+
+        /** 0 while waiting, ramping to 1 as it closes in. */
+        var step: Float = 0f
             internal set
 
         internal fun march(dz: Float) {
@@ -460,9 +468,18 @@ class CrowdWorld(private val seed: Int = 1) {
                 applyItem(item)
             }
         }
-        for (e in mutableEnemies) { // squads advance on the player once they are close
+        for (e in mutableEnemies) {
+            // Squads notice you and start moving: they creep at the edge of their range and build
+            // up to a walk, instead of snapping from perfectly still to full speed.
             val d = e.z - z
-            if (e.alive && d > 0f && d < ENEMY_MARCH_RANGE) e.march(ENEMY_MARCH_SPEED * dt)
+            if (e.alive && d > 0f && d < ENEMY_MARCH_RANGE) {
+                val t = 1f - d / ENEMY_MARCH_RANGE
+                val ease = t * t * (3f - 2f * t)
+                e.march(ENEMY_MARCH_SPEED * ease * dt)
+                e.step = ease
+            } else {
+                e.step = 0f
+            }
         }
         boss?.let { b -> // the monster roars and stomps toward the rangers once they are in range
             val d = b.z - z
@@ -471,10 +488,14 @@ class CrowdWorld(private val seed: Int = 1) {
                     b.roared = true
                     pendingEvents.add(Event(Event.Type.ROAR, 0f, b.z, value = b.kind))
                 }
-                b.march(MONSTER_MARCH_SPEED * dt)
-                b.marching = true
+                val t = 1f - d / MONSTER_MARCH_RANGE
+                val ease = t * t * (3f - 2f * t)
+                b.step = ease
+                b.march(MONSTER_MARCH_SPEED * ease * dt)
+                b.marching = ease > 0.08f
             } else {
                 b.marching = false
+                b.step = 0f
             }
         }
         updateShooting(dt)

@@ -213,13 +213,33 @@ class CrowdWorldTest {
     }
 
     @Test
-    fun `enemy squads march toward the player once in range`() {
+    fun `enemy squads ease into their march instead of snapping to full speed`() {
         val world = CrowdWorld(seed = 4).apply { start() }
         val enemy = world.enemies.first()
-        val startZ = enemy.z
-        world.setForTest(count = 1, playerX = 0.9f, z = enemy.z - CrowdWorld.ENEMY_MARCH_RANGE + 1f)
+        val full = CrowdWorld.ENEMY_MARCH_SPEED * 0.05f
+
+        // out of range: standing still
+        world.setForTest(count = 1, playerX = 0.9f, z = enemy.z - CrowdWorld.ENEMY_MARCH_RANGE - 5f)
+        var from = enemy.z
         world.update(0.05f)
-        assertEquals(startZ - CrowdWorld.ENEMY_MARCH_SPEED * 0.05f, enemy.z, 1e-4f)
+        assertEquals(from, enemy.z, 0f)
+        assertEquals(0f, enemy.step, 0f)
+
+        // just inside the range: creeping, nowhere near full speed
+        world.setForTest(count = 1, playerX = 0.9f, z = enemy.z - CrowdWorld.ENEMY_MARCH_RANGE + 1f)
+        from = enemy.z
+        world.update(0.05f)
+        val creep = from - enemy.z
+        assertTrue("should have started moving", creep > 0f)
+        assertTrue("should be far slower than full speed", creep < full * 0.2f)
+
+        // right on top of the player: close to full speed
+        world.setForTest(count = 1, playerX = 0.9f, z = enemy.z - 0.5f)
+        from = enemy.z
+        world.update(0.05f)
+        val charge = from - enemy.z
+        assertTrue("should be near full speed", charge > full * 0.8f)
+        assertTrue(enemy.step > 0.8f)
     }
 
     private fun pickUp(world: CrowdWorld, kind: CrowdWorld.ItemKind, count: Int): CrowdWorld.Item {
@@ -309,8 +329,10 @@ class CrowdWorldTest {
         assertTrue(!boss.marching)
         world.setForTest(count = 1, playerX = 0f, z = boss.z - CrowdWorld.MONSTER_MARCH_RANGE + 1f)
         world.update(0.05f)
-        assertEquals(startZ - CrowdWorld.MONSTER_MARCH_SPEED * 0.05f, boss.z, 1e-4f)
-        assertTrue(boss.marching && boss.roared)
+        val crept = startZ - boss.z
+        assertTrue("should have started moving", crept > 0f)
+        assertTrue("should ease in, not snap to full speed", crept < CrowdWorld.MONSTER_MARCH_SPEED * 0.05f * 0.2f)
+        assertTrue(boss.roared)
         val events = ArrayList<CrowdWorld.Event>()
         world.drainEvents(events)
         assertTrue(events.any { it.type == CrowdWorld.Event.Type.ROAR })

@@ -711,21 +711,36 @@ class CrowdView @JvmOverloads constructor(
     private fun crowdRadiusPx(drawn: Int, unit: Float): Float = unit * 0.95f * sqrt(max(drawn, 1).toFloat())
 
     /**
-     * Draws up to [MAX_DRAWN_UNITS] soldiers of constant size. The player army is a spiral blob
-     * that spreads wider as it grows; enemy squads stand in ranks ([grid]). Each soldier
-     * alternates between the two walk frames.
+     * Draws a crowd of constant-size figures. Formation slots are laid out from [slots], the
+     * squad's original size, so shooting one down removes the front rank instead of re-packing
+     * the block and making every survivor jump. [stepRate] of 0 means standing around (a slow
+     * breath); higher means walking.
      */
-    private fun drawCrowd(canvas: Canvas, cx: Float, cy: Float, drawn: Int, unit: Float, frames: Array<Bitmap>, paint: Paint, grid: Boolean, maxWidth: Float = 0f) {
-        val n = min(drawn, MAX_DRAWN_UNITS)
+    private fun drawCrowd(
+        canvas: Canvas,
+        cx: Float,
+        cy: Float,
+        drawn: Int,
+        unit: Float,
+        frames: Array<Bitmap>,
+        paint: Paint,
+        grid: Boolean,
+        maxWidth: Float = 0f,
+        slots: Int = drawn,
+        stepRate: Float = 1f,
+        alpha: Float = 1f,
+    ) {
+        val slotCount = min(slots, MAX_DRAWN_UNITS)
+        val n = min(drawn, slotCount)
+        if (n <= 0) return
         val sh = unit * 3.6f
         val sw = sh * 0.8f
         if (grid) {
             val spacingX = sw * 0.95f
             val spacingY = unit * 1.15f
-            // keep the block no wider than the squad's real hitbox; extras stack into more rows
             val fit = max(1, ((if (maxWidth > 0f) maxWidth else sw * 6f) / spacingX).toInt())
-            val cols = min(fit, max(1, kotlin.math.ceil(sqrt(n * 1.6f)).toInt()))
-            val rows = (n + cols - 1) / cols
+            val cols = min(fit, max(1, kotlin.math.ceil(sqrt(slotCount * 1.6f)).toInt()))
+            val rows = (slotCount + cols - 1) / cols
             for (i in 0 until n) {
                 val col = i % cols
                 val row = i / cols
@@ -741,17 +756,30 @@ class CrowdView @JvmOverloads constructor(
                 crowdYs[i] = cy + sin(angle) * r * 0.55f
             }
         }
-        // painter's order: soldiers lower on screen are nearer and drawn last
+        val baseAlpha = paint.alpha
+        if (alpha < 1f) paint.alpha = (baseAlpha * alpha.coerceIn(0f, 1f)).toInt()
+        // painter's order: figures lower on screen are nearer and drawn last
         for (i in (0 until n).sortedBy { crowdYs[it] }) {
-            val x = crowdXs[i]
+            val bob: Float
+            val sway: Float
+            val frame: Int
+            if (stepRate > 0.05f) {
+                frame = ((runTime * 8f * min(1f, stepRate + 0.35f)).toInt() + i) and 1
+                bob = abs(sin(runTime * 12f + i)) * unit * 0.25f * min(1f, stepRate + 0.3f)
+                sway = sin(runTime * 6f + i * 1.7f) * unit * 0.1f * stepRate
+            } else {
+                frame = 0
+                bob = abs(sin(runTime * 2.2f + i * 0.7f)) * unit * 0.06f      // standing around
+                sway = sin(runTime * 1.3f + i) * unit * 0.03f
+            }
+            val x = crowdXs[i] + sway
             val feet = crowdYs[i] + unit
-            val bob = abs(sin(runTime * 12f + i)) * unit * 0.25f
-            val frame = ((runTime * 8f).toInt() + i) and 1
             rect.set(x - sw * 0.42f, feet - unit * 0.28f, x + sw * 0.42f, feet + unit * 0.28f)
             canvas.drawOval(rect, shadowPaint)
             rect.set(x - sw / 2f, feet - sh - bob, x + sw / 2f, feet - bob)
             canvas.drawBitmap(frames[frame], null, rect, paint)
         }
+        paint.alpha = baseAlpha
     }
 
     private fun label(canvas: Canvas, text: String, x: Float, y: Float, size: Float, fill: Int, stroke: Int) {
@@ -822,7 +850,13 @@ class CrowdView @JvmOverloads constructor(
         val rv = crowdRadiusPx(drawn, unit)
         val cx = screenX(e.x, f)
         val top = y - unit * 1.2f - rv * 0.9f - unit * 4.2f
-        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint, grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f * scale)
+        // fade in over the last stretch of view distance so squads do not pop into existence
+        val fade = ((VIEW_DISTANCE - d) / 12f).coerceIn(0f, 1f)
+        drawCrowd(
+            canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint,
+            grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f * scale,
+            slots = drawnCount(e.maxCount, e.maxCount), stepRate = e.step, alpha = fade,
+        )
         label(canvas, e.count.toString(), cx, top, max(8f, w * 0.07f * f * scale), Color.WHITE, color(R.color.gate_post_bad))
         if (e.elite) {
             val name = stageMinis[stageIndex(world.level)]
@@ -928,7 +962,7 @@ class CrowdView @JvmOverloads constructor(
         val rv = crowdRadiusPx(drawn, unit)
         val px = screenX(world.playerX, f)
         val paint = if (world.flash > 0f && !world.lastGateGood) hitSpritePaint else spritePaint
-        drawCrowd(canvas, px, y - unit * 1.2f, drawn, unit, allyFrames, paint, grid = false)
+        drawCrowd(canvas, px, y - unit * 1.2f, drawn, unit, allyFrames, paint, grid = false, stepRate = 1f)
         val pop = if (world.flash > 0f) 1f + world.flash * 0.7f else 1f
         label(
             canvas, world.count.toString(), px, y - unit * 1.2f - rv * 0.6f - unit * 4.4f, w * 0.11f * pop,
