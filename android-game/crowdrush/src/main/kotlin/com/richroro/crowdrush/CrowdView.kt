@@ -759,14 +759,24 @@ class CrowdView @JvmOverloads constructor(
         if (grid) {
             val fit = max(1, Math.round(halfWidth * 2f / CROWD_SPACING_X))
             val cols = min(fit, max(1, kotlin.math.ceil(sqrt(slotCount * 1.6f)).toInt()))
-            val rows = (slotCount + cols - 1) / cols
             for (i in 0 until n) {
                 val col = i % cols
                 val row = i / cols
                 val jitter = ((i * 7919) % 13) / 13f - 0.5f
-                crowdXs[i] = (col - (cols - 1) / 2f) * CROWD_SPACING_X + jitter * CROWD_SPACING_X * 0.22f
-                // index 0 is the back rank, so losses eat the front
-                crowdYs[i] = (rows - 1 - row) * CROWD_SPACING_Z
+                val depthJitter = ((i * 6151) % 11) / 11f - 0.5f
+                // Ranks alternate half a place left and right. Without the stagger a rank sits
+                // exactly behind the one in front of it and is completely hidden, so a squad of
+                // eighty reads as the six people in its front row. The jitter on top keeps the
+                // block's edges ragged, so it looks like a crowd rather than a marching band.
+                val stagger = if (row % 2 == 1) 0.25f else -0.25f
+                crowdXs[i] = (col - (cols - 1) / 2f + stagger) * CROWD_SPACING_X +
+                    jitter * CROWD_SPACING_X * 0.3f
+                // Index 0 is the FRONT rank, sitting on the squad's own z. Laying it out the other
+                // way round meant the survivors of a squad were its back ranks, ten metres behind
+                // where the squad actually was, so shooting one made the remnant shrink and slide
+                // away from you instead of closing in. The block now keeps its front edge and
+                // loses depth from behind as the people at the back are picked off.
+                crowdYs[i] = row * CROWD_SPACING_Z + depthJitter * CROWD_SPACING_Z * 0.35f
             }
         } else {
             for (i in 0 until n) {
@@ -1113,8 +1123,9 @@ class CrowdView @JvmOverloads constructor(
         private const val VIEW_DISTANCE = 60f
         private const val NEAR_OVERSHOOT = 3.4f
         private const val HORDE_ROWS = 14f
-        private const val CROWD_SPACING_X = 0.135f   // lane units, about one figure wide at any distance
-        private const val CROWD_SPACING_Z = 0.5f     // metres between ranks
+        private const val CROWD_SPACING_X = 0.135f   // lane units: one figure wide, so ranks do not overlap
+        private const val CROWD_SPACING_Z = 0.85f    // metres between ranks: far enough apart that
+                                                     // perspective separates them on screen
         private const val STRIPE_SPACING = 4f
         private const val WALL_HEIGHT = 0.035f
         private const val MAX_DRAWN_UNITS = 64
