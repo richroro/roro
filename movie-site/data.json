@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-17",
-  "updated": "2026-09-18T04:45:42+00:00",
+  "date": "2026-09-18",
+  "updated": "2026-09-19T04:39:32+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "인턴",
       "open": "2026-09-16",
-      "share": 24.1,
-      "audience": 46155,
-      "total": 128721,
-      "screens": 1426
+      "share": 24.8,
+      "audience": 61142,
+      "total": 189862,
+      "screens": 1428
     },
     {
       "rank": 2,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 28.1,
-      "audience": 39365,
-      "total": 10960848,
-      "screens": 1059
+      "share": 30.5,
+      "audience": 55192,
+      "total": 11016040,
+      "screens": 1135
     },
     {
       "rank": 3,
-      "title": "레지던트 이블: 0번째 밤",
-      "open": "2026-09-17",
-      "share": 11.8,
-      "audience": 21924,
-      "total": 22875,
-      "screens": 553
+      "title": "옵세션",
+      "open": "2026-09-02",
+      "share": 14.4,
+      "audience": 31449,
+      "total": 601695,
+      "screens": 692
     },
     {
       "rank": 4,
-      "title": "옵세션",
-      "open": "2026-09-02",
-      "share": 12.8,
-      "audience": 21591,
-      "total": 570246,
-      "screens": 627
+      "title": "레지던트 이블: 0번째 밤",
+      "open": "2026-09-17",
+      "share": 9.3,
+      "audience": 21382,
+      "total": 44257,
+      "screens": 574
     },
     {
       "rank": 5,
-      "title": "암살자(들)",
-      "open": "2026-09-23",
-      "share": 6.8,
-      "audience": 13477,
-      "total": 14134,
-      "screens": 75
+      "title": "스파이더맨: 브랜드 뉴 데이",
+      "open": "2026-07-29",
+      "share": 2.2,
+      "audience": 6108,
+      "total": 8963072,
+      "screens": 471
     },
     {
       "rank": 6,
-      "title": "스파이더맨: 브랜드 뉴 데이",
-      "open": "2026-07-29",
-      "share": 2.0,
-      "audience": 4207,
-      "total": 8956964,
-      "screens": 451
+      "title": "부활남: 더 레드",
+      "open": "2026-09-30",
+      "share": 2.1,
+      "audience": 5124,
+      "total": 6350,
+      "screens": 27
     },
     {
       "rank": 7,
-      "title": "시간을 달리는 소녀",
-      "open": "2007-06-14",
-      "share": 1.8,
-      "audience": 3022,
-      "total": 120503,
-      "screens": 153
+      "title": "암살자(들)",
+      "open": "2026-09-23",
+      "share": 1.7,
+      "audience": 4319,
+      "total": 18453,
+      "screens": 25
     },
     {
       "rank": 8,
       "title": "더 드라마",
       "open": "2026-09-09",
-      "share": 1.6,
-      "audience": 3000,
-      "total": 70567,
-      "screens": 261
+      "share": 1.2,
+      "audience": 2892,
+      "total": 73459,
+      "screens": 241
     },
     {
       "rank": 9,
-      "title": "디지몬 어드벤처 : 운명적 만남 & 우리들의 워 게임!",
-      "open": "2026-09-16",
-      "share": 1.2,
-      "audience": 2022,
-      "total": 6308,
-      "screens": 165
+      "title": "시간을 달리는 소녀",
+      "open": "2007-06-14",
+      "share": 1.4,
+      "audience": 2860,
+      "total": 123363,
+      "screens": 150
     },
     {
       "rank": 10,
-      "title": "아이유 콘서트 : 더 위닝",
-      "open": "2025-01-24",
-      "share": 1.4,
-      "audience": 1439,
-      "total": 80073,
-      "screens": 36
+      "title": "디지몬 어드벤처 : 운명적 만남 & 우리들의 워 게임!",
+      "open": "2026-09-16",
+      "share": 0.9,
+      "audience": 2005,
+      "total": 8313,
+      "screens": 156
     }
   ]
 }
