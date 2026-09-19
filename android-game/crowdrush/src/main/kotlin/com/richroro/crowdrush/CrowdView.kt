@@ -41,25 +41,49 @@ class CrowdView @JvmOverloads constructor(
     private var muted = prefs.getBoolean(KEY_MUTED, false)
 
     // ---- sound (short WAVs from tools/generate_sounds.py, played through SoundPool) ----
-    private val soundPool: SoundPool = SoundPool.Builder()
-        .setMaxStreams(8)
-        .setAudioAttributes(
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build(),
-        )
-        .build()
-    private val sndShot = soundPool.load(context, R.raw.sfx_shot, 1)
-    private val sndHit = soundPool.load(context, R.raw.sfx_hit, 1)
-    private val sndDing = soundPool.load(context, R.raw.sfx_ding, 1)
-    private val sndBuzz = soundPool.load(context, R.raw.sfx_buzz, 1)
-    private val sndClear = soundPool.load(context, R.raw.sfx_clear, 1)
-    private val sndOver = soundPool.load(context, R.raw.sfx_over, 1)
-    private val sndPickup = soundPool.load(context, R.raw.sfx_pickup, 1)
-    private val sndBoom = soundPool.load(context, R.raw.sfx_boom, 1)
-    private val sndRoar = soundPool.load(context, R.raw.sfx_roar, 1)
+    // The pool is released when the view leaves its window and rebuilt if the view comes back.
+    // Playing on a released pool is a use-after-free in the native layer and takes the process
+    // down with it, so every play goes through [soundPool] being non-null.
+    private var soundPool: SoundPool? = null
+    private var sndShot = 0
+    private var sndHit = 0
+    private var sndDing = 0
+    private var sndBuzz = 0
+    private var sndClear = 0
+    private var sndOver = 0
+    private var sndPickup = 0
+    private var sndBoom = 0
+    private var sndRoar = 0
     private val lastPlayedNanos = LongArray(9)
+
+    private fun openSounds() {
+        if (soundPool != null) return
+        val pool = SoundPool.Builder()
+            .setMaxStreams(8)
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build(),
+            )
+            .build()
+        sndShot = pool.load(context, R.raw.sfx_shot, 1)
+        sndHit = pool.load(context, R.raw.sfx_hit, 1)
+        sndDing = pool.load(context, R.raw.sfx_ding, 1)
+        sndBuzz = pool.load(context, R.raw.sfx_buzz, 1)
+        sndClear = pool.load(context, R.raw.sfx_clear, 1)
+        sndOver = pool.load(context, R.raw.sfx_over, 1)
+        sndPickup = pool.load(context, R.raw.sfx_pickup, 1)
+        sndBoom = pool.load(context, R.raw.sfx_boom, 1)
+        sndRoar = pool.load(context, R.raw.sfx_roar, 1)
+        soundPool = pool
+        lastPlayedNanos.fill(0L)
+    }
+
+    private fun closeSounds() {
+        soundPool?.release()
+        soundPool = null
+    }
     private val itemPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val hazardPaint = Paint().apply { color = 0xD9F87171.toInt() }
     private val platePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xEB7C3AED.toInt() }
@@ -204,12 +228,13 @@ class CrowdView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        openSounds()
         resume()
     }
 
     override fun onDetachedFromWindow() {
         pause()
-        soundPool.release()
+        closeSounds()
         super.onDetachedFromWindow()
     }
 
@@ -217,11 +242,12 @@ class CrowdView @JvmOverloads constructor(
 
     private fun play(id: Int, slot: Int, minIntervalMs: Long, volume: Float, rateJitter: Float = 0f) {
         if (muted) return
+        val pool = soundPool ?: return
         val now = System.nanoTime()
         if (now - lastPlayedNanos[slot] < minIntervalMs * 1_000_000L) return
         lastPlayedNanos[slot] = now
         val rate = 1f + (fxRandom.nextFloat() * 2f - 1f) * rateJitter
-        soundPool.play(id, volume, volume, 1, 0, rate)
+        pool.play(id, volume, volume, 1, 0, rate)
     }
 
     private fun sparks(x: Float, z: Float, n: Int, color: Int, spread: Float) {

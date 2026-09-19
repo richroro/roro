@@ -44,8 +44,8 @@ class CrowdWorld(private val seed: Int = 1) {
         internal fun hit(): Boolean {
             hits++
             return when (op) {
-                Op.ADD -> if (hits % GATE_HITS_PER_STEP == 0) { value++; true } else false
-                Op.MUL -> if (hits % MUL_HITS_PER_STEP == 0) { value++; true } else false
+                Op.ADD -> if (hits % GATE_HITS_PER_STEP == 0 && value < MAX_GATE_VALUE) { value++; true } else false
+                Op.MUL -> if (hits % MUL_HITS_PER_STEP == 0 && value < MAX_MUL_VALUE) { value++; true } else false
                 Op.SUB -> if (hits % GATE_HITS_PER_STEP == 0) {
                     value--
                     if (value <= 0) flipToPlusOne()
@@ -296,7 +296,8 @@ class CrowdWorld(private val seed: Int = 1) {
             val goodValue = if (goodOp == Op.MUL) {
                 if (random.next() < 0.75f) 2 else 3
             } else {
-                2 + floor(random.next() * (4f + newLevel * 2f + best * 0.4f)).toInt()
+                (2 + floor(random.next() * (4f + newLevel * 2f + best * 0.4f)).toInt())
+                    .coerceIn(2, MAX_GATE_VALUE)
             }
             val roll = random.next()
             val otherOp: Op
@@ -305,10 +306,12 @@ class CrowdWorld(private val seed: Int = 1) {
                 roll < 0.4f -> {
                     otherOp = Op.ADD
                     otherValue = max(1, floor(goodValue * (0.3f + random.next() * 0.4f)).toInt())
+                        .coerceAtMost(MAX_GATE_VALUE)
                 }
                 roll < 0.7f -> {
                     otherOp = Op.SUB
-                    otherValue = 1 + floor(random.next() * max(2f, best * 0.3f)).toInt()
+                    otherValue = (1 + floor(random.next() * max(2f, best * 0.3f)).toInt())
+                        .coerceAtMost(MAX_GATE_VALUE)
                 }
                 else -> {
                     otherOp = Op.DIV
@@ -596,7 +599,9 @@ class CrowdWorld(private val seed: Int = 1) {
         when (item.kind) {
             ItemKind.RAPID -> rapidTimer = RAPID_SECONDS
             ItemKind.SHIELD -> shield = true
-            ItemKind.REINFORCE -> count += max(REINFORCE_MIN, floor(count * REINFORCE_RATIO).toInt())
+            ItemKind.REINFORCE ->
+                count = (count.toLong() + max(REINFORCE_MIN, floor(count * REINFORCE_RATIO).toInt()))
+                    .coerceAtMost(MAX_CREW.toLong()).toInt()
             ItemKind.BOMB -> {
                 for (e in mutableEnemies) {
                     if (e.alive && e.z - z < BOMB_RANGE) {
@@ -732,6 +737,11 @@ class CrowdWorld(private val seed: Int = 1) {
         const val ENEMY_HALF_WIDTH = 0.36f
         const val BOSS_FACTOR = 0.6f
         const val START_COUNT = 1
+
+        /** Crowd, gate and multiplier ceilings: keep the numbers readable and the arithmetic safe. */
+        const val MAX_CREW = 9_999
+        const val MAX_GATE_VALUE = 999
+        const val MAX_MUL_VALUE = 9
         const val MAX_FRAME_DT = 0.05f
         const val FLASH_SECONDS = 0.25f
 
@@ -789,9 +799,14 @@ class CrowdWorld(private val seed: Int = 1) {
         const val MSG_LOST_TO_BOSS = "boss_lost:%d"
         const val MSG_CRUSHED_BY_WALL = "wall:%d"
 
+        /**
+         * Gate arithmetic, clamped to [MAX_CREW]. Without the clamp a good run compounds past two
+         * billion in a dozen levels and the next x2 gate wraps a negative crowd out of an Int
+         * overflow, ending the run out of nowhere.
+         */
         fun apply(count: Int, side: GateSide): Int = when (side.op) {
-            Op.ADD -> count + side.value
-            Op.MUL -> count * side.value
+            Op.ADD -> (count.toLong() + side.value).coerceIn(0L, MAX_CREW.toLong()).toInt()
+            Op.MUL -> (count.toLong() * side.value).coerceIn(0L, MAX_CREW.toLong()).toInt()
             Op.SUB -> max(0, count - side.value)
             Op.DIV -> max(0, count / side.value)
         }
