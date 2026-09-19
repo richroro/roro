@@ -463,10 +463,9 @@ class CrowdView @JvmOverloads constructor(
         }
         if (muzzleTimer > 0f) {
             val f = factor(0f)
-            val unit = unitPx(1f)
-            val rv = crowdRadiusPx(drawnCount(world.count, world.count), unit)
+            val unit = unitPx(f)
             val mx = screenX(muzzleX, f)
-            val my = screenY(f) - unit * 1.2f - rv * 0.55f - unit * 1.5f
+            val my = screenY(f) - unit * 2.2f
             val r = w * 0.03f * (0.6f + muzzleTimer / 0.06f)
             muzzlePaint.shader = RadialGradient(
                 mx, my, r,
@@ -708,58 +707,57 @@ class CrowdView @JvmOverloads constructor(
         else -> max(1, Math.round(MAX_DRAWN_UNITS * count / maxCount.toFloat()))
     }
 
-    private fun crowdRadiusPx(drawn: Int, unit: Float): Float = unit * 0.95f * sqrt(max(drawn, 1).toFloat())
-
     /**
-     * Draws a crowd of constant-size figures. Formation slots are laid out from [slots], the
-     * squad's original size, so shooting one down removes the front rank instead of re-packing
-     * the block and making every survivor jump. [stepRate] of 0 means standing around (a slow
-     * breath); higher means walking.
+     * Crowds stand on the ground in the world, not on a flat sheet: every figure is placed at its
+     * own lane position and distance and then projected, so ranks further back really are further
+     * back (smaller, higher up the screen) instead of being stacked upward at one size.
+     * Slots come from the crowd's original size so losses thin the front rank rather than
+     * re-packing the block. [stepRate] 0 means standing around; higher means walking.
      */
     private fun drawCrowd(
         canvas: Canvas,
-        cx: Float,
-        cy: Float,
+        worldX: Float,
+        worldZ: Float,
         drawn: Int,
-        unit: Float,
+        slots: Int,
         frames: Array<Bitmap>,
         paint: Paint,
         grid: Boolean,
-        maxWidth: Float = 0f,
-        slots: Int = drawn,
+        halfWidth: Float = CrowdWorld.ENEMY_HALF_WIDTH,
         stepRate: Float = 1f,
         alpha: Float = 1f,
     ) {
         val slotCount = min(slots, MAX_DRAWN_UNITS)
         val n = min(drawn, slotCount)
         if (n <= 0) return
-        val sh = unit * 3.6f
-        val sw = sh * 0.8f
         if (grid) {
-            val spacingX = sw * 0.95f
-            val spacingY = unit * 1.15f
-            val fit = max(1, ((if (maxWidth > 0f) maxWidth else sw * 6f) / spacingX).toInt())
+            val fit = max(1, Math.round(halfWidth * 2f / CROWD_SPACING_X))
             val cols = min(fit, max(1, kotlin.math.ceil(sqrt(slotCount * 1.6f)).toInt()))
             val rows = (slotCount + cols - 1) / cols
             for (i in 0 until n) {
                 val col = i % cols
                 val row = i / cols
                 val jitter = ((i * 7919) % 13) / 13f - 0.5f
-                crowdXs[i] = cx + (col - (cols - 1) / 2f) * spacingX + jitter * spacingX * 0.25f
-                crowdYs[i] = cy + (row - (rows - 1) / 2f) * spacingY
+                crowdXs[i] = (col - (cols - 1) / 2f) * CROWD_SPACING_X + jitter * CROWD_SPACING_X * 0.22f
+                // index 0 is the back rank, so losses eat the front
+                crowdYs[i] = (rows - 1 - row) * CROWD_SPACING_Z
             }
         } else {
             for (i in 0 until n) {
                 val angle = i * GOLDEN_ANGLE
-                val r = unit * 0.95f * sqrt(i + 0.5f)
-                crowdXs[i] = cx + cos(angle) * r
-                crowdYs[i] = cy + sin(angle) * r * 0.55f
+                val r = sqrt(i + 0.5f)
+                crowdXs[i] = cos(angle) * r * 0.062f
+                crowdYs[i] = sin(angle) * r * 0.21f
             }
         }
         val baseAlpha = paint.alpha
         if (alpha < 1f) paint.alpha = (baseAlpha * alpha.coerceIn(0f, 1f)).toInt()
-        // painter's order: figures lower on screen are nearer and drawn last
-        for (i in (0 until n).sortedBy { crowdYs[it] }) {
+        for (i in (0 until n).sortedByDescending { crowdYs[it] }) {   // far ranks first
+            val f = factor(worldZ + crowdYs[i] - world.z)
+            if (f < 0.04f) continue
+            val unit = unitPx(f)
+            val sh = unit * 3.6f
+            val sw = sh * 0.8f
             val bob: Float
             val sway: Float
             val frame: Int
@@ -772,11 +770,11 @@ class CrowdView @JvmOverloads constructor(
                 bob = abs(sin(runTime * 2.2f + i * 0.7f)) * unit * 0.06f      // standing around
                 sway = sin(runTime * 1.3f + i) * unit * 0.03f
             }
-            val x = crowdXs[i] + sway
-            val feet = crowdYs[i] + unit
-            rect.set(x - sw * 0.42f, feet - unit * 0.28f, x + sw * 0.42f, feet + unit * 0.28f)
+            val x = screenX(worldX + crowdXs[i], f) + sway
+            val ground = screenY(f)
+            rect.set(x - sw * 0.42f, ground - unit * 0.28f, x + sw * 0.42f, ground + unit * 0.28f)
             canvas.drawOval(rect, shadowPaint)
-            rect.set(x - sw / 2f, feet - sh - bob, x + sw / 2f, feet - bob)
+            rect.set(x - sw / 2f, ground - sh - bob, x + sw / 2f, ground - bob)
             canvas.drawBitmap(frames[frame], null, rect, paint)
         }
         paint.alpha = baseAlpha
@@ -843,21 +841,19 @@ class CrowdView @JvmOverloads constructor(
         val f = factor(d)
         if (f < 0.05f) return
         val w = width.toFloat()
-        val y = screenY(f)
-        val scale = if (e.elite) 1.65f else 1f
-        val unit = unitPx(f) * scale
+        val scale = if (e.elite) 1.6f else 1f
+        val slots = drawnCount(e.maxCount, e.maxCount)
         val drawn = drawnCount(e.count, e.maxCount)
-        val rv = crowdRadiusPx(drawn, unit)
-        val cx = screenX(e.x, f)
-        val top = y - unit * 1.2f - rv * 0.9f - unit * 4.2f
         // fade in over the last stretch of view distance so squads do not pop into existence
         val fade = ((VIEW_DISTANCE - d) / 12f).coerceIn(0f, 1f)
         drawCrowd(
-            canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint,
-            grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f * scale,
-            slots = drawnCount(e.maxCount, e.maxCount), stepRate = e.step, alpha = fade,
+            canvas, e.x, e.z, drawn, slots, mobFrames[stageIndex(world.level)], spritePaint,
+            grid = true, halfWidth = CrowdWorld.ENEMY_HALF_WIDTH * scale,
+            stepRate = e.step, alpha = fade,
         )
-        label(canvas, e.count.toString(), cx, top, max(8f, w * 0.07f * f * scale), Color.WHITE, color(R.color.gate_post_bad))
+        val cx = screenX(e.x, f)
+        val top = screenY(f) - unitPx(f) * 3.6f * scale - w * 0.03f * f
+        label(canvas, e.count.toString(), cx, top, max(9f, w * 0.07f * f * scale), Color.WHITE, color(R.color.gate_post_bad))
         if (e.elite) {
             val name = stageMinis[stageIndex(world.level)]
             val fs = max(9f, w * 0.05f * f)
@@ -956,16 +952,14 @@ class CrowdView @JvmOverloads constructor(
 
     private fun drawPlayer(canvas: Canvas, w: Float) {
         val f = factor(0f)
-        val y = screenY(f)
-        val unit = unitPx(1f)
+        val unit = unitPx(f)
         val drawn = drawnCount(world.count, world.count)
-        val rv = crowdRadiusPx(drawn, unit)
-        val px = screenX(world.playerX, f)
         val paint = if (world.flash > 0f && !world.lastGateGood) hitSpritePaint else spritePaint
-        drawCrowd(canvas, px, y - unit * 1.2f, drawn, unit, allyFrames, paint, grid = false, stepRate = 1f)
+        drawCrowd(canvas, world.playerX, world.z, drawn, drawn, allyFrames, paint, grid = false, stepRate = 1f)
+        val px = screenX(world.playerX, f)
         val pop = if (world.flash > 0f) 1f + world.flash * 0.7f else 1f
         label(
-            canvas, world.count.toString(), px, y - unit * 1.2f - rv * 0.6f - unit * 4.4f, w * 0.11f * pop,
+            canvas, world.count.toString(), px, screenY(f) - unit * 3.6f - w * 0.05f, w * 0.11f * pop,
             if (world.flash > 0f) color(R.color.gold) else Color.WHITE, color(R.color.gate_post_good),
         )
     }
@@ -1093,6 +1087,8 @@ class CrowdView @JvmOverloads constructor(
         private const val VIEW_DISTANCE = 60f
         private const val NEAR_OVERSHOOT = 3.4f
         private const val HORDE_ROWS = 14f
+        private const val CROWD_SPACING_X = 0.135f   // lane units, about one figure wide at any distance
+        private const val CROWD_SPACING_Z = 0.5f     // metres between ranks
         private const val STRIPE_SPACING = 4f
         private const val WALL_HEIGHT = 0.035f
         private const val MAX_DRAWN_UNITS = 64
