@@ -401,4 +401,47 @@ class CrowdWorldTest {
         assertEquals(8, dodge.count)
         assertTrue(other.alive)
     }
+
+    @Test
+    fun `a x2 gate on a maxed-out crowd clamps instead of overflowing into a negative`() {
+        val near = CrowdWorld.MAX_CREW - 1
+        val doubled = CrowdWorld.apply(near, CrowdWorld.GateSide(CrowdWorld.Op.MUL, 2))
+        assertEquals(CrowdWorld.MAX_CREW, doubled)
+
+        val added = CrowdWorld.apply(near, CrowdWorld.GateSide(CrowdWorld.Op.ADD, CrowdWorld.MAX_GATE_VALUE))
+        assertEquals(CrowdWorld.MAX_CREW, added)
+
+        // the pathological case: without the clamp this is what wrapped the crowd negative
+        val huge = CrowdWorld.apply(Int.MAX_VALUE / 2, CrowdWorld.GateSide(CrowdWorld.Op.MUL, 3))
+        assertTrue("a x3 gate must never produce a negative crowd, got \$huge", huge > 0)
+        assertEquals(CrowdWorld.MAX_CREW, huge)
+    }
+
+    @Test
+    fun `playing many levels well never pushes the crowd or a gate out of readable range`() {
+        for (seed in 1..12) {
+            val w = CrowdWorld(seed)
+            w.start()
+            repeat(60 * 60 * 6) {
+                val g = w.gates.firstOrNull { !it.used && it.z > w.z }
+                if (g != null) {
+                    val target = if (g.left.isGood && !g.right.isGood) -0.45f else 0.45f
+                    w.movePlayerBy((target - w.playerX) * 0.35f)
+                }
+                w.update(1f / 60f)
+                assertTrue("crowd went out of range at level \${w.level}: \${w.count}",
+                    w.count in 0..CrowdWorld.MAX_CREW)
+                for (gate in w.gates) {
+                    assertTrue("gate value out of range: \${gate.left.label} / \${gate.right.label}",
+                        gate.left.value in 1..CrowdWorld.MAX_GATE_VALUE &&
+                            gate.right.value in 1..CrowdWorld.MAX_GATE_VALUE)
+                }
+                when (w.state) {
+                    CrowdWorld.State.LEVEL_CLEAR -> w.nextLevel()
+                    CrowdWorld.State.GAME_OVER -> w.start()
+                    else -> {}
+                }
+            }
+        }
+    }
 }
