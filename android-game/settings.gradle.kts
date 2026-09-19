@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "RoroGames"
-include(":app", ":crowdrush")
+include(":app", ":crowdrush", ":skystrike")

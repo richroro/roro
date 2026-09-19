@@ -179,3 +179,22 @@ git tag villainrush-v1.9.0 && git push origin villainrush-v1.9.0
 ```
 
 태그를 올리면 그 게임만 빌드·서명·GitHub Release 까지 자동으로 진행됩니다.
+
+## Sky Strike (스카이 스트라이크) — `:skystrike`
+
+A vertical scrolling shooter. You fly along the bottom, the guns fire on their own, and
+everything else falls towards you. Four enemy types (straight-flying drones, weaving light
+fighters, flak gunners that lead their shots, and divers that accelerate into you), five
+power-ups, and a heavy bomber waiting at the end of every stage.
+
+- Simulation: `SkyWorld.kt`, pure Kotlin with no Android in it, unit tested on a plain JVM.
+- Renderer: `SkyView.kt`, a Canvas view. Screen space is x in [-1, 1] across, y in [0, 1] down.
+- Aircraft are drawn by `tools/generate_planes.py`, which shares the crowd game's PNG writer.
+- Sounds come from the same `tools/generate_sounds.py`.
+
+Regenerate the art and audio with:
+
+```
+python3 tools/generate_planes.py
+python3 tools/generate_sounds.py skystrike/src/main/res/raw
+```

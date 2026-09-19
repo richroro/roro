@@ -5,6 +5,7 @@ name: Android Release
 #  - PR / main / claude/** push : 두 앱 모두 빌드 + 단위 테스트 (릴리스는 만들지 않음)
 #  - skydodge-v* 태그           : Sky Dodge 만 릴리스
 #  - villainrush-v* 태그        : Villain Rush 만 릴리스
+#  - skystrike-v* 태그          : Sky Strike 만 릴리스
 #  - 수동 실행                  : app 입력으로 한 앱만 또는 둘 다 선택
 #
 # 앱마다 GitHub Release 와 태그가 따로 생기고 버전도 따로 올라간다.
@@ -21,7 +22,7 @@ name: Android Release
 on:
   push:
     branches: [main, "claude/**"]
-    tags: ["skydodge-v*", "villainrush-v*"]
+    tags: ["skydodge-v*", "villainrush-v*", "skystrike-v*"]
     paths:
       - "android-game/**"
       - ".github/workflows/android-release.yml"
@@ -34,8 +35,8 @@ on:
       app:
         description: "빌드할 게임"
         type: choice
-        options: [both, skydodge, villainrush]
-        default: both
+        options: [all, skydodge, villainrush, skystrike]
+        default: all
       version_name:
         description: "versionName (예: 1.8.0). 비우면 1.0.0"
         required: false
@@ -74,7 +75,7 @@ jobs:
           INPUT_RELEASE: ${{ inputs.create_github_release }}
         run: |
           set -euo pipefail
-          apps='["skydodge","villainrush"]'
+          apps='["skydodge","villainrush","skystrike"]'
           version="1.0.0"
           release="false"
 
@@ -83,6 +84,11 @@ jobs:
               apps='["skydodge"]'
               version="${GITHUB_REF#refs/tags/skydodge-v}"
               release="true"
+              ;;
+            refs/tags/skystrike-v*)
+              apps='["skystrike"]'
+              version="${GITHUB_REF#refs/tags/skystrike-v}"
+              release=true
               ;;
             refs/tags/villainrush-v*)
               apps='["villainrush"]'
@@ -94,6 +100,7 @@ jobs:
                 case "$INPUT_APP" in
                   skydodge)    apps='["skydodge"]' ;;
                   villainrush) apps='["villainrush"]' ;;
+                  skystrike)   apps='["skystrike"]' ;;
                 esac
                 [ -n "$INPUT_VERSION" ] && version="$INPUT_VERSION"
                 release="${INPUT_RELEASE:-false}"
@@ -139,6 +146,12 @@ jobs:
             echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
             echo "title=Sky Dodge (스카이 닷지)" >> "$GITHUB_OUTPUT"
             echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
+          elif [ "$APP" = "skystrike" ]; then
+            echo "module=skystrike" >> "$GITHUB_OUTPUT"
+            echo "gradle=:skystrike" >> "$GITHUB_OUTPUT"
+            echo "prefix=SkyStrike" >> "$GITHUB_OUTPUT"
+            echo "title=Sky Strike (스카이 스트라이크)" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.skystrike" >> "$GITHUB_OUTPUT"
           else
             echo "module=crowdrush" >> "$GITHUB_OUTPUT"
             echo "gradle=:crowdrush" >> "$GITHUB_OUTPUT"
@@ -241,6 +254,10 @@ jobs:
             echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
             echo "title=Sky Dodge (스카이 닷지)" >> "$GITHUB_OUTPUT"
             echo "blurb=떨어지는 블록을 좌우 드래그로 피하고 별을 모으는 한 손 캐주얼 게임." >> "$GITHUB_OUTPUT"
+          elif [ "$APP" = "skystrike" ]; then
+            echo "prefix=SkyStrike" >> "$GITHUB_OUTPUT"
+            echo "title=Sky Strike (스카이 스트라이크)" >> "$GITHUB_OUTPUT"
+            echo "blurb=좌우 드래그로 날고 자동 사격으로 적기를 떨구는 수직 스크롤 슈팅. 스테이지 끝에는 거대 폭격기가 기다린다." >> "$GITHUB_OUTPUT"
           else
             echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
             echo "title=Villain Rush (빌런 러시)" >> "$GITHUB_OUTPUT"
@@ -291,6 +308,9 @@ jobs:
           if [ "$APP" = "skydodge" ]; then
             echo "prefix=SkyDodge" >> "$GITHUB_OUTPUT"
             echo "package=com.richroro.skydodge" >> "$GITHUB_OUTPUT"
+          elif [ "$APP" = "skystrike" ]; then
+            echo "prefix=SkyStrike" >> "$GITHUB_OUTPUT"
+            echo "package=com.richroro.skystrike" >> "$GITHUB_OUTPUT"
           else
             echo "prefix=VillainRush" >> "$GITHUB_OUTPUT"
             echo "package=com.richroro.crowdrush" >> "$GITHUB_OUTPUT"
