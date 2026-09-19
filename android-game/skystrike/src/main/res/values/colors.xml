@@ -26,4 +26,5 @@
     <color name="smoke">#FF94A3B8</color>
     <color name="shield_ring">#FF22D3EE</color>
     <color name="bomb_flash">#FFFFFFFF</color>
+    <color name="ic_launcher_background">#0B2545</color>
 </resources>
