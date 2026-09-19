@@ -21,6 +21,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import os
 import shutil
 import sys
 import threading
@@ -51,6 +52,7 @@ DEFAULT_STYLE = {
     "art_palette": "",            # 일러스트 팔레트 고정(night/dawn/dusk/forest/ocean/warm). 비우면 BGM 무드에 맞춘다
     "card_theme": "navy",         # 데이터 카드 테마(navy/ink/teal)
     "card_anim_seconds": 1.1,     # 카드 숫자가 0에서 올라오는 시간(초). 0 이면 정지
+    "capture_anim_seconds": 1.6,  # 캡처 위 빨간 박스가 그려지는 시간(초)
     "voice_polish": True,         # TTS 목소리 다듬기(EQ·컴프·짧은 룸). 끄려면 false
     "voice_pitch": 0.0,           # 목소리 높낮이 %(-6~+6). 음수면 낮고 차분해진다
     "look": "",                   # "" | cinematic
@@ -63,6 +65,40 @@ DEFAULT_STYLE = {
     "transition_sfx_volume": 0.35,
     "sfx_volume": 0.7,
 }
+
+
+_TABLE_LOCK = threading.Lock()
+
+
+def _capture_src(cap: dict, work: Path, project: dict) -> Path:
+    """capture 의 원본 이미지를 준비한다.
+
+    src 가 있으면 그 파일(프로젝트 폴더 기준 상대경로 허용). table 스펙이 있으면
+    공시 수치를 표 이미지로 조판해서 쓴다 — 원문 캡처를 구하기 전 단계에서 쓴다.
+    """
+    import annotate
+
+    if cap.get("src"):
+        p = Path(cap["src"])
+        if not p.is_absolute():
+            for base in (Path(project["__dir__"]), Path.cwd()):
+                if (base / p).is_file():
+                    return base / p
+        return p
+    if cap.get("table"):
+        key = hashlib.md5(json.dumps(cap["table"], sort_keys=True,
+                                     ensure_ascii=False).encode()).hexdigest()[:10]
+        out = work / f"table_{key}.jpg"
+        # 여러 씬이 같은 표를 쓰고 이미지 수집은 병렬이다. 임시 파일에 쓰고 마지막에 이름만
+        # 바꿔야, 쓰는 도중의 파일을 다른 씬이 읽어 "image file is truncated" 로 깨지지 않는다.
+        with _TABLE_LOCK:
+            if not out.exists():
+                tmp = out.with_name(f"{out.stem}.{os.getpid()}.part.jpg")   # 확장자는 유지
+                annotate.make_table_image(cap["table"], tmp)
+                tmp.replace(out)
+        return out
+    die("images", "capture 에 src(이미지 경로) 또는 table(표 스펙) 중 하나는 있어야 합니다")
+    raise SystemExit
 
 
 def sig_of(*parts) -> str:
@@ -122,6 +158,12 @@ def main() -> None:
     t0 = time.time()
     find_ffmpeg()
     project = load_project(args.project)
+    # voice: "none" 이면 목소리 없이 자막만으로 가는 영상이다. 자막 길이로 씬 길이를 잡고
+    # BGM·효과음만 남는다. 공시·데이터물은 읽는 영상이라 오히려 이쪽이 맞는 경우가 많다.
+    if str(project.get("voice", "")).lower() in ("none", "off", "silent", "무음"):
+        args.tts_engine = "silent"
+        log("plan", "나레이션 없음 — 자막 전용 영상으로 만듭니다(BGM·효과음만)")
+
     style = dict(DEFAULT_STYLE)
     # 명언 레이아웃은 호흡이 생명이라 줌 펀치가 방해된다 — 명시하지 않으면 끈다
     if str((project.get("style") or {}).get("layout", "")) == "quote":
@@ -185,6 +227,7 @@ def main() -> None:
         "title": project["title"], "total": total, "fps": FPS, "transition": style["transition"],
         "transition_duration": float(style["transition_duration"]), "cta": project.get("cta", ""),
         "style": project.get("style") or {}, "scenes": tl_scenes,
+        "silent": args.tts_engine == "silent",
     }
     write_json(work / "timeline.json", timeline)
     log("plan", f"총 길이 {total:.1f}s  (씬 평균 {total / n:.1f}s)")
@@ -209,6 +252,18 @@ def main() -> None:
     loop_back = n > 1 and bool(scenes[-1].get("loop_back"))
 
     def get_image(i: int):
+        sc0 = scenes[i]
+        if sc0.get("capture"):
+            # 공시·문서 캡처에 표시를 그린 씬. 제공자 체인을 타지 않는다.
+            import annotate
+
+            cap = dict(sc0["capture"])
+            cap["src"] = str(_capture_src(cap, work, project))
+            annotate.render(cap, img_files[i])
+            info = {"provider": "capture", "url": "", "license": "user-provided",
+                    "credit": f"캡처 주석({len(cap.get('marks') or [])}개 표시)"}
+            write_json(img_files[i].with_suffix(".json"), info)
+            return info
         if loop_back and i == n - 1:
             # 마지막 씬은 첫 씬 그림을 그대로 쓴다 — 내려받지도, 사진 한 장을 낭비하지도 않는다
             return {"provider": "loop_back"}
@@ -216,7 +271,8 @@ def main() -> None:
         out = img_files[i]
         sig = sig_of(sc.get("image_prompt", ""), sc.get("keywords", ""), sc.get("image", ""), style["image_style"],
                      providers, sc.get("art", ""), sc.get("art_palette", ""), style.get("art_palette", ""),
-                     sc.get("emoji", ""), sc.get("card"), style.get("card_theme", "navy"))
+                     sc.get("emoji", ""), sc.get("card"), style.get("card_theme", "navy"),
+                     sc.get("capture"))
         if not sigs.stale(out, sig, args.force):
             return read_json(out.with_suffix(".json"), {"provider": "cache"})
         info = fetch_images.fetch_image(
@@ -306,13 +362,26 @@ def main() -> None:
         beats_n = max(1, min(5, beats_n))
         sig = sig_of(vpath or src_img, round(lengths[i], 3), sc["motion"], style["vignette"],
                      style["look"], style.get("dim", 0.0), bool(vpath),
-                     scenes[i].get("video_speed", 1.0), beats_n, bool(src_card))
+                     scenes[i].get("video_speed", 1.0), beats_n, bool(src_card),
+                     scenes[src_i].get("capture"))
         if sigs.stale(clip, sig, args.force):
             if vpath:
                 log("video", f"클립 {i + 1:02d}/{n} (영상 {vpath.name}, {lengths[i]:.1f}s)")
                 render.render_video_clip(vpath, clip, lengths[i], vignette=bool(style["vignette"]),
                                          look=style["look"], dim=float(style.get("dim", 0.0)),
                                          speed=float(scenes[i].get("video_speed", 1.0)))
+            elif scenes[src_i].get("capture"):
+                import annotate
+
+                cap = dict(scenes[src_i]["capture"])
+                cap["src"] = str(_capture_src(cap, work, project))
+                adir = work / f"anim_{src_i + 1:02d}"
+                nf = annotate.render_animation(cap, adir, FPS,
+                                               float(style.get("capture_anim_seconds", 1.6)))
+                log("video", f"클립 {i + 1:02d}/{n} (캡처 표시 {len(cap.get('marks') or [])}개, "
+                             f"{lengths[i]:.1f}s, {nf}프레임)")
+                render.render_card_clip(adir, nf, src_img, clip, lengths[i],
+                                        beats=beats_n, look=style["look"])
             elif src_card:
                 # 숫자가 0 에서 올라오는 앞부분만 프레임으로 그리고, 나머지는 마지막 프레임을 붙인다
                 import datacard

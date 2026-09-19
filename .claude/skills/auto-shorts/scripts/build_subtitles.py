@@ -106,6 +106,41 @@ def chunk_words(words: list[dict], max_words: int, max_chars: int) -> list[list[
     return chunks
 
 
+_NUMTOK = re.compile(r"(\d[\d,.]*\s*(?:%|원|주|건|배|일|개월)?)")
+
+
+def _accent_numbers(text: str, color: str) -> str:
+    """숫자와 단위를 강조색으로. 목소리가 없으면 이게 사실상 유일한 시선 유도 장치다."""
+    return _NUMTOK.sub(lambda m: f"{{\\c{color}}}{m.group(1)}{{\\r}}", text)
+
+
+_NBSP = "\u00a0"
+_KEEP = re.compile(r"(\d[\d,.]*)\s+(대|배|분의)\s+(\d[\d,.]*)")
+
+
+def _wrap(text: str, max_chars: int) -> str:
+    """단어 경계에서 줄을 나눈다. ASS 줄바꿈은 \\N 이다.
+
+    "1,109 대 1" 처럼 하나로 읽어야 하는 숫자 표현은 줄바꿈으로 찢지 않는다.
+    """
+    text = _KEEP.sub(lambda m: f"{m.group(1)}{_NBSP}{m.group(2)}{_NBSP}{m.group(3)}", text)
+    words = [w for w in text.split(" ") if w]
+    lines, cur = [], ""
+    for w in words:
+        cand = f"{cur} {w}".strip()
+        if len(cand) > max_chars and cur:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = cand
+    if cur:
+        lines.append(cur)
+    if len(lines) > 3:                      # 4줄이면 너무 빽빽하다 — 균등하게 3줄로
+        k = (len(words) + 2) // 3
+        lines = [" ".join(words[i:i + k]) for i in range(0, len(words), k)][:3]
+    return "\\N".join(lines)
+
+
 def build_ass(timeline: dict, style: dict | None = None) -> str:
     st = dict(DEFAULT_STYLE)
     st.update({k: v for k, v in (style or {}).items() if k in DEFAULT_STYLE})
@@ -180,6 +215,24 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
             head = (sc.get("headline") or "").strip()
             if head:
                 h_end = base + min(dur - 0.15, max(1.2, st["headline_seconds"]))
+                events.append((base, f"Dialogue: 1,{ts(base)},{ts(h_end)},Headline,,0,0,0,,"
+                                     f"{{\\fad(140,160)}}{esc(head)}"))
+            continue
+
+        if timeline.get("silent"):
+            # 목소리가 없으면 자막이 곧 내용이다. 단어 단위로 쪼개면 "공모가 희망밴드가 세 /
+            # 번 깎였습니다" 처럼 끊겨 읽기가 무너진다 — 문장 전체를 한 번에 띄운다.
+            # 한 줄에 들어가는 글자 수는 폰트 크기가 정한다(한글 글자 폭 ≈ 폰트 크기).
+            avail = WIDTH - 2 * st["caption_margin_h"]
+            per_line = max(8, int(avail / (st["caption_size"] * 0.98)))
+            body = _accent_numbers(_wrap(esc(sc["narration"]), per_line), hl_inline)
+            c0, c1 = base + 0.12, base + dur - 0.1
+            if c1 - c0 > 0.4:
+                events.append((c0, f"Dialogue: 0,{ts(c0)},{ts(c1)},Caption,,0,0,0,,"
+                                   f"{{\\fad(160,140)}}{body}"))
+            head = (sc.get("headline") or "").strip()
+            if head:
+                h_end = base + min(dur - 0.15, max(1.2, dur if si == 0 else st["headline_seconds"]))
                 events.append((base, f"Dialogue: 1,{ts(base)},{ts(h_end)},Headline,,0,0,0,,"
                                      f"{{\\fad(140,160)}}{esc(head)}"))
             continue

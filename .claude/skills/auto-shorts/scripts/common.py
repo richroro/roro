@@ -281,6 +281,7 @@ def load_project(path: str | Path) -> dict:
     except json.JSONDecodeError as e:
         die("project", f"JSON 문법 오류 ({p}): {e}")
     validate_project(data)
+    data["__dir__"] = str(p.resolve().parent)   # capture.src 같은 상대경로의 기준
     return data
 
 
@@ -298,8 +299,10 @@ def validate_project(p: dict) -> None:
                 continue
             if not str(s.get("narration", "")).strip():
                 errs.append(f"scene {i}: narration 이 비어 있습니다")
-            if not (s.get("image_prompt") or s.get("image") or s.get("keywords") or s.get("card")):
-                errs.append(f"scene {i}: image_prompt / keywords / image / card 중 하나는 있어야 합니다")
+            if not (s.get("image_prompt") or s.get("image") or s.get("keywords")
+                    or s.get("card") or s.get("capture")):
+                errs.append(f"scene {i}: image_prompt / keywords / image / card / capture 중 "
+                            f"하나는 있어야 합니다")
     if not p.get("title"):
         errs.append("title 이 없습니다")
     if errs:
@@ -338,7 +341,8 @@ def validate_project(p: dict) -> None:
         warn("project", f"화면 문구가 {covered}/{len(scenes)} 씬에만 있습니다 — 시청자 6할 이상이 소리를 끄고 봅니다. "
                         f"거의 모든 씬에 headline 이나 beats 를 넣으세요")
 
-    if not quote_layout and not any(sc.get("loop_back") for sc in scenes):
+    silent = str(p.get("voice", "")).lower() in ("none", "off", "silent", "무음")
+    if not quote_layout and not silent and not any(sc.get("loop_back") for sc in scenes):
         warn("project", "마지막 씬에 loop_back 이 없습니다 — 끝 문장이 첫 문장으로 이어지면 반복 재생이 붙습니다")
 
 

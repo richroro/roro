@@ -109,6 +109,8 @@ python .claude/skills/auto-shorts/scripts/check_env.py          # 문제 있으�
 
 **숫자가 주인공인 주제**(공모주·실적·순위·가격비교)는 사진 대신 씬에 `card` 를 넣어 표·숫자 카드를 직접 그린다.
 면책 문구(`style.disclaimer`)와 수치 검증 규칙까지 `references/data-shorts.md` 에 있다.
+공시 원문 캡처를 쓸 때는 씬에 `capture` 를 넣어 **빨간 박스·스포트라이트**를 자동으로 그린다(`scripts/annotate.py`).
+`"voice": "none"` 이면 나레이션 없이 **자막만으로** 가는 영상이 된다 — 읽는 영상인 공시·데이터물에 맞다.
 
 **대본 체크리스트 (쓰고 나서 반드시 스스로 검사)**
 - 첫 씬 첫 문장이 결론·반전·구체적 질문으로 바로 시작하는가? 인사말·"오늘은 ~알아볼게요"는 금지. 제목·첫 씬 `headline`(필수)과
