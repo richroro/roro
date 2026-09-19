@@ -24,6 +24,7 @@ import android.view.View
 import android.view.WindowInsets
 import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
@@ -144,24 +145,95 @@ class CrowdView @JvmOverloads constructor(
     private val allyFrames: Array<Bitmap> = arrayOf(
         BitmapFactory.decodeResource(resources, R.drawable.ally_back_0),
         BitmapFactory.decodeResource(resources, R.drawable.ally_back_1),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_2),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_3),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_4),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_5),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_6),
+        BitmapFactory.decodeResource(resources, R.drawable.ally_back_7),
     )
     private val mobFrames: Array<Array<Bitmap>> = arrayOf(
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_0_0), BitmapFactory.decodeResource(resources, R.drawable.mob_0_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_1_0), BitmapFactory.decodeResource(resources, R.drawable.mob_1_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_2_0), BitmapFactory.decodeResource(resources, R.drawable.mob_2_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.mob_3_0), BitmapFactory.decodeResource(resources, R.drawable.mob_3_1)),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_0),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_1),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_2),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_3),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_4),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_5),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_6),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_0_7),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_0),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_1),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_2),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_3),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_4),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_5),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_6),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_1_7),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_0),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_1),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_2),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_3),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_4),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_5),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_6),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_2_7),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_0),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_1),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_2),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_3),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_4),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_5),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_6),
+            BitmapFactory.decodeResource(resources, R.drawable.mob_3_7),
+        ),
     )
     private val bossFrames: Array<Array<Bitmap>> = arrayOf(
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_0_0), BitmapFactory.decodeResource(resources, R.drawable.boss_0_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_1_0), BitmapFactory.decodeResource(resources, R.drawable.boss_1_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_2_0), BitmapFactory.decodeResource(resources, R.drawable.boss_2_1)),
-        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.boss_3_0), BitmapFactory.decodeResource(resources, R.drawable.boss_3_1)),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_0),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_1),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_2),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_3),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_4),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_0_5),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_0),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_1),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_2),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_3),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_4),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_1_5),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_0),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_1),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_2),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_3),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_4),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_2_5),
+        ),
+        arrayOf(
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_0),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_1),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_2),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_3),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_4),
+            BitmapFactory.decodeResource(resources, R.drawable.boss_3_5),
+        ),
     )
     private var shakeTimer = 0f
     private val monsterHitPaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
         colorFilter = LightingColorFilter(0xFFFFFFFF.toInt(), 0x00FF4040)
     }
     private var monsterHitTimer = 0f
+    private var bossStepMark = -1
     private var flashTimer = 0f
     private var flashColor = 0
     private val flashPaint = Paint()
@@ -770,6 +842,9 @@ class CrowdView @JvmOverloads constructor(
         else -> max(1, Math.round(MAX_DRAWN_UNITS * count / maxCount.toFloat()))
     }
 
+    /** A stable value in [0, 1) for slot [i]; different salts give independent streams. */
+    private fun hash01(i: Int, salt: Int): Float = ((i * salt) % 101) / 101f
+
     /** Columns in a grid formation of [slots] places inside a lane half-width of [halfWidth]. */
     private fun crowdCols(slots: Int, halfWidth: Float): Int {
         val laid = min(slots, MAX_DRAWN_UNITS)
@@ -894,13 +969,18 @@ class CrowdView @JvmOverloads constructor(
             val sway: Float
             val frame: Int
             if (stepRate > 0.05f) {
-                // Constant cadence. Scaling the PHASE by stepRate meant the frame index was
-                // runTime times a moving rate, so the legs buzzed several times per displayed
-                // frame while a squad closed in, worse the longer the app had been open, then
-                // snapped to a steady march. Vigour now comes from the bob and sway amplitudes.
-                frame = ((runTime * 8f).toInt() + i) and 1
-                bob = abs(sin(runTime * 12f + i)) * unit * 0.25f * min(1f, stepRate + 0.3f)
-                sway = sin(runTime * 6f + i * 1.7f) * unit * 0.1f * stepRate
+                // ONE phase drives the sprite and the body, so the two can never fight each other.
+                // Each figure also carries its own offset and a little of its own pace: a crowd
+                // stepping in perfect unison is exactly what reads as clockwork.
+                val ph = runTime * WALK_CYCLES_PER_SEC * (0.92f + 0.16f * hash01(i, 6151)) +
+                    hash01(i, 7919)
+                val cyc = ph - floor(ph)
+                frame = (cyc * frames.size).toInt().coerceIn(0, frames.size - 1)
+                // The hip rise is drawn into the sprite now, with the planted foot staying on the
+                // ground. Lifting the whole sprite here as well is what made them look like they
+                // were skating, so all that is left out here is the weight shift side to side.
+                bob = 0f
+                sway = sin(cyc * 2f * PI_F) * unit * 0.07f * min(1f, stepRate + 0.3f)
             } else {
                 frame = 0
                 bob = abs(sin(runTime * 2.2f + i * 0.7f)) * unit * 0.06f      // standing around
@@ -1109,15 +1189,29 @@ class CrowdView @JvmOverloads constructor(
         drawHorde(canvas, b, d)
         val y = screenY(f)
         val frames = bossFrames[b.kind.coerceIn(0, bossFrames.size - 1)]
-        val stomp = if (b.marching) abs(sin(runTime * PI_F * 3f)) else 0f
-        val sprite = frames[if (b.marching) (runTime * 3f).toInt() and 1 else 0]
+        // One phase again, and this time it carries weight. The old version lifted the villain
+        // on a sine while flipping between two poses at a different rate, so he hovered and
+        // twitched. Now the sprite runs a real stride and each footfall squashes him down onto it.
+        val ph = runTime * BOSS_CYCLES_PER_SEC
+        val cyc = ph - floor(ph)
+        val sprite = frames[if (b.marching) (cyc * frames.size).toInt().coerceIn(0, frames.size - 1) else 0]
+        val foot = abs(sin(cyc * 2f * PI_F))                  // peaks as each foot plants
+        val sharp = foot * foot * foot * foot * foot * foot   // a hit, not a swell
+        val impact = if (b.marching) sharp else 0f
         val breathe = 1f + 0.02f * sin(runTime * 4f)
+        val squash = 1f + 0.075f * impact
         val hit = monsterHitTimer > 0f
-        val mh = w * 0.58f * f * breathe
-        val mw = mh * 0.8f
-        val x = screenX(0f, f) + if (b.marching) sin(runTime * PI_F * 3f) * w * 0.01f * f else 0f
+        val mh = w * 0.58f * f * breathe / squash             // anchored at the feet, so he
+        val mw = w * 0.58f * f * breathe * 0.8f * squash      // settles instead of floating
+        val x = screenX(0f, f) + if (b.marching) sin(cyc * 2f * PI_F) * w * 0.012f * f else 0f
         val ground = y
-        val yTop = ground - stomp * w * 0.02f * f
+        val yTop = ground
+        // the ground takes it: one shake per footfall, and only once he is close enough to feel
+        val mark = ((((cyc + 0.25f) % 1f) * 2f).toInt())
+        if (b.marching && f > 0.45f && mark != bossStepMark) {
+            if (bossStepMark >= 0) shakeTimer = max(shakeTimer, 0.09f * f)
+            bossStepMark = mark
+        }
         rect.set(x - mw * 0.45f, ground - mw * 0.12f, x + mw * 0.45f, ground + mw * 0.12f)
         canvas.drawOval(rect, shadowPaint)
         val lift = if (hit) w * 0.01f else 0f
@@ -1278,6 +1372,8 @@ class CrowdView @JvmOverloads constructor(
         private const val VIEW_DISTANCE = 60f
         private const val NEAR_OVERSHOOT = 3.4f
         private const val HORDE_SLOTS = 240
+        private const val WALK_CYCLES_PER_SEC = 1.15f   // one full stride, both feet
+        private const val BOSS_CYCLES_PER_SEC = 0.62f   // the villain is heavier and slower
         private const val CROWD_SPACING_X = 0.135f   // lane units: one figure wide, so ranks do not overlap
         private const val CROWD_SPACING_Z = 0.85f    // metres between ranks: far enough apart that
                                                      // perspective separates them on screen
