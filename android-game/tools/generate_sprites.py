@@ -161,12 +161,13 @@ class Pen:
 
     def __init__(self, c: "Canvas", cx: float, sc: float):
         self.c, self.cx, self.sc = c, cx, sc
+        self.dy = 0.0          # everything drawn after legs() rides on the hips
 
     def _x(self, x):
         return self.cx + x * self.sc
 
     def _y(self, y):
-        return y * self.sc
+        return (y + self.dy) * self.sc
 
     def rr(self, x0, y0, x1, y1, r, col, o=0):
         self.c.rrect(self._x(x0), self._y(y0), self._x(x1), self._y(y1), r * self.sc, col, o * self.sc)
@@ -188,26 +189,73 @@ class Pen:
         self.c.rot_rect(self._x(x), self._y(y), w * self.sc, h * self.sc, ang, col, o * self.sc)
 
 
-def legs(p: Pen, frame: int, pants, pants_dark, shoe=SHOE, bare=False, shorts=False, O=1.6):
-    """Two legs with a walk cycle; frame 0 lifts the left leg, frame 1 the right."""
+WALK_FRAMES = 8      # samples of the walk cycle; two poses is what made it look like a flip-book
+BOSS_FRAMES = 6      # the villain's stride is slower, so it needs fewer
+WALK_LIFT = 9.5      # how far a foot comes off the ground at mid-swing
+WALK_STRIDE = 6.5    # how far it travels fore and aft
+WALK_BOB = 3.2       # how far the hips rise as the legs pass under the body
+
+
+def leg_phase(t: float, i: int) -> float:
+    """Phase angle of leg i (0 left, 1 right) at cycle position t in [0, 1)."""
+    return 2 * math.pi * t + (0.0 if i == 0 else math.pi)
+
+
+def body_bob(t: float) -> float:
+    """Hips are highest as the legs pass under the body and lowest at contact."""
+    return WALK_BOB * abs(math.cos(2 * math.pi * t))
+
+
+def legs(p: Pen, t: float, pants, pants_dark, shoe=SHOE, bare=False, shorts=False, O=1.6):
+    """
+    A walk cycle driven by a continuous phase instead of a two-pose flip.
+
+    Each leg travels fore and aft as sin(theta) and leaves the ground through the forward
+    half of that swing, highest as it passes under the body. The planted foot stays put
+    while the hips rise, so the leg stretches rather than the whole figure lifting off -
+    a sprite that translates bodily upward is what reads as skating rather than walking.
+    """
+    bob = body_bob(t)
     for i, side in enumerate((-1, 1)):
-        lx = side * 9
-        lift = 5 if i == frame else 0
-        top = 72 if shorts else 84
-        p.rr(lx - 7, top - lift * 0.3, lx + 7, 106 - lift, 4, pants_dark, o=O)
-        p.rr(lx - 7, top - lift * 0.3, lx - 2, 100 - lift, 3, pants)
+        th = leg_phase(t, i)
+        lift = WALK_LIFT * max(0.0, math.cos(th))
+        fwd = WALK_STRIDE * math.sin(th)
+        lx = side * 9 + fwd
+        top = (72 if shorts else 84) - bob
+        p.rr(lx - 7, top, lx + 7, 106 - lift, 4, pants_dark, o=O)
+        p.rr(lx - 7, top, lx - 2, 100 - lift, 3, pants)
         if shorts or bare:
-            p.rr(lx - 6, 88 - lift * 0.6, lx + 6, 106 - lift, 4, SKIN, o=O)
-            p.rr(lx - 6, 88 - lift * 0.6, lx - 2, 102 - lift, 3, SKIN_SHADE)
+            p.rr(lx - 6, 88 - bob * 0.6, lx + 6, 106 - lift, 4, SKIN, o=O)
+            p.rr(lx - 6, 88 - bob * 0.6, lx - 2, 102 - lift, 3, SKIN_SHADE)
         p.rr(lx - 8, 104 - lift, lx + 8, 116 - lift, 4, shoe, o=O)
         p.rr(lx - 8, 112 - lift, lx + 8, 116 - lift, 2, SHOE_SOLE)
+    p.dy = -bob
+    return bob
 
 
-def arms(p: Pen, frame: int, sleeve, sleeve_light, short_sleeve=False, O=1.6, hand_y=82):
-    swing = 4 if frame == 1 else -4
+def stub_legs(p: Pen, t: float, col, O=1.6, top=86):
+    """The little legs under a mob prop, on the same cycle as a person's."""
+    bob = body_bob(t) * 0.8
+    for i, side in enumerate((-1, 1)):
+        th = leg_phase(t, i)
+        lift = 5.0 * max(0.0, math.cos(th))
+        fwd = 3.0 * math.sin(th)
+        lx = side * 8 + fwd
+        p.rr(lx - 4, top - bob, lx + 4, 104 - lift, 2, col, o=O)
+        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    return -bob
+
+
+def arms(p: Pen, t: float, sleeve, sleeve_light, short_sleeve=False, O=1.6, hand_y=82):
+    """Arms swing against the legs. Returns the right arm's offset so props can follow it."""
+    swing = 0.0
     for side in (-1, 1):
-        ax = side * 25
-        dy = swing * side
+        th = leg_phase(t, 0 if side < 0 else 1)
+        dy = -7.0 * math.sin(th)         # opposes the leg on the same side
+        dx = 3.0 * math.sin(th)
+        if side > 0:
+            swing = dy
+        ax = side * 25 + dx
         p.rr(ax - 5, 54 + dy, ax + 5, 78 + dy, 5, sleeve, o=O)
         p.rr(ax - 5, 54 + dy, ax - 1, 72 + dy, 4, sleeve_light)
         if short_sleeve:
@@ -359,12 +407,7 @@ def mob_paper(c: "Canvas", frame: int):
     """Stage 1 — a stack of 'urgent' meeting papers with legs."""
     p = Pen(c, W / 2, 1.0)
     O = 1.6
-    bob = -2 if frame == 1 else 0
-    for i, side in enumerate((-1, 1)):
-        lx = side * 8
-        lift = 4 if i == frame else 0
-        p.rr(lx - 4, 86 + bob, lx + 4, 104 - lift, 2, (0xE8, 0xC9, 0x9A), o=O)
-        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    bob = stub_legs(p, frame, (0xE8, 0xC9, 0x9A), O=O)
     for k in range(3):                                # stacked sheets
         p.rr(-24 + k * 1.5, 30 + k * 6 + bob, 24 - k * 1.5, 92 + bob, 3, (0xF7, 0xF8, 0xFB) if k == 2 else (0xDC, 0xE2, 0xEC), o=O)
     p.rr(-18, 44 + bob, 18, 47 + bob, 1, (0xB6, 0xC0, 0xD0))
@@ -383,12 +426,7 @@ def mob_brag(c: "Canvas", frame: int):
     """Stage 2 — a designer shopping bag, sparkling, with a car key hanging off it."""
     p = Pen(c, W / 2, 1.0)
     O = 1.6
-    bob = -2 if frame == 1 else 0
-    for i, side in enumerate((-1, 1)):
-        lx = side * 8
-        lift = 4 if i == frame else 0
-        p.rr(lx - 4, 88 + bob, lx + 4, 104 - lift, 2, (0x3A, 0x33, 0x2E), o=O)
-        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    bob = stub_legs(p, frame, (0x3A, 0x33, 0x2E), O=O, top=88)
     p.rr(-22, 38 + bob, 22, 92 + bob, 4, (0x1F, 0x1B, 0x24), o=O)
     p.rr(-22, 38 + bob, -10, 92 + bob, 4, (0x33, 0x2C, 0x3C))
     for side in (-1, 1):                              # handles
@@ -410,12 +448,7 @@ def mob_nag(c: "Canvas", frame: int):
     """Stage 3 — a speech bubble that will not stop talking."""
     p = Pen(c, W / 2, 1.0)
     O = 1.6
-    bob = -2 if frame == 1 else 0
-    for i, side in enumerate((-1, 1)):
-        lx = side * 8
-        lift = 4 if i == frame else 0
-        p.rr(lx - 4, 86 + bob, lx + 4, 104 - lift, 2, (0xC8, 0xB4, 0xE8), o=O)
-        p.rr(lx - 6, 102 - lift, lx + 6, 112 - lift, 3, SHOE, o=O)
+    bob = stub_legs(p, frame, (0xC8, 0xB4, 0xE8), O=O)
     p.rr(-26, 26 + bob, 26, 76 + bob, 12, (0xFB, 0xF7, 0xFF), o=O)
     p.po_out([(-12, 72 + bob), (2, 72 + bob), (-6, 92 + bob)], (0xFB, 0xF7, 0xFF), o=O)
     p.rr(-26, 66 + bob, 26, 76 + bob, 12, (0xE6, 0xDC, 0xF5))
@@ -434,12 +467,18 @@ def mob_thump(c: "Canvas", frame: int):
     """Stage 4 — a basketball bouncing on your ceiling."""
     p = Pen(c, W / 2, 1.0)
     O = 1.6
-    drop = 8 if frame == 1 else 0
-    cy = 56 + drop
+    # |cos| gives a bounce the right way round: a sharp point at the floor and a rounded,
+    # slow apex. A two-pose flip had it teleporting between up and down.
+    hit = 1.0 - abs(math.cos(math.pi * frame))
+    drop = 10.0 * hit
+    squash = 1.0 + 0.16 * hit              # the ball flattens as it lands
+    cy = 54 + drop
     p.el(0, 104, 22, 6, (0x00, 0x00, 0x00, 0))
-    for k in range(3):                                 # impact rings
-        p.el(0, 100 + k * 4, 24 - k * 6, 5 - k, (0xFF, 0xE9, 0x8A) if k == 0 else (0xF7, 0xD6, 0x6B))
-    p.ci(0, cy, 30, (0xE3, 0x72, 0x22), o=O)
+    for k in range(3):                                 # impact rings, brightest on contact
+        rk = (24 - k * 6) * (0.5 + 0.7 * hit)
+        p.el(0, 100 + k * 4, rk, (5 - k) * (0.5 + 0.7 * hit),
+             (0xFF, 0xE9, 0x8A) if k == 0 else (0xF7, 0xD6, 0x6B))
+    p.el(0, cy, 30 * squash, 30 / squash, (0xE3, 0x72, 0x22), o=O)
     p.el(-10, cy - 12, 10, 6, (0xF2, 0x96, 0x44))
     p.rr(-30, cy - 2, 30, cy + 2, 1, (0x7A, 0x33, 0x0C))
     p.rot(0, cy, 4, 60, 90, (0x7A, 0x33, 0x0C))
@@ -560,7 +599,7 @@ def draw_boss_neighbour(c: "Canvas", frame: int):
     p.rr(-22, 74, 22, 84, 4, (0x3E, 0x6B, 0x4A), o=O)          # gym shorts
     swing = arms(p, frame, SKIN, SKIN_SHADE, O=O, hand_y=80)
     bx = 32
-    by = 70 + (10 if frame == 1 else -6)
+    by = 64 + 18 * (1.0 - abs(math.cos(math.pi * frame)))      # dribble, sharp at the floor
     p.ci(bx, by, 14, (0xE3, 0x72, 0x22), o=O)                  # basketball
     p.rot(bx, by, 2.4, 28, 90, (0x7A, 0x33, 0x0C))
     p.rot(bx, by, 28, 2.4, 0, (0x7A, 0x33, 0x0C))
@@ -586,17 +625,23 @@ def main():
     for old in os.listdir(out):
         if old.startswith(("soldier_", "ranger_", "goblin_", "monster")):
             os.remove(os.path.join(out, old))
-    for frame in (0, 1):
+    for old in os.listdir(out):
+        if old.startswith(("ally_back_", "mob_", "boss_")):
+            os.remove(os.path.join(out, old))
+    for frame in range(WALK_FRAMES):
+        t = frame / WALK_FRAMES
         c = Canvas(W, H)
-        draw_ally(c, frame)
+        draw_ally(c, t)
         c.save(os.path.join(out, f"ally_back_{frame}.png"))
         for stage, fn in enumerate(MOBS):
             m = Canvas(W, H)
-            fn(m, frame)
+            fn(m, t)
             m.save(os.path.join(out, f"mob_{stage}_{frame}.png"))
+    for frame in range(BOSS_FRAMES):
+        t = frame / BOSS_FRAMES
         for stage, fn in enumerate(BOSSES):
             b = Canvas(BW, BH)
-            fn(b, frame)
+            fn(b, t)
             b.save(os.path.join(out, f"boss_{stage}_{frame}.png"))
     print("wrote ally, mob and boss sprites to", os.path.abspath(out))
 
