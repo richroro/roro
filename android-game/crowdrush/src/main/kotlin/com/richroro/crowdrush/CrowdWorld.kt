@@ -739,7 +739,7 @@ class CrowdWorld(private val seed: Int = 1) {
         const val START_COUNT = 1
 
         /** Crowd, gate and multiplier ceilings: keep the numbers readable and the arithmetic safe. */
-        const val MAX_CREW = 9_999
+        const val MAX_CREW = 99_999
         const val MAX_GATE_VALUE = 999
         const val MAX_MUL_VALUE = 9
         const val MAX_FRAME_DT = 0.05f
