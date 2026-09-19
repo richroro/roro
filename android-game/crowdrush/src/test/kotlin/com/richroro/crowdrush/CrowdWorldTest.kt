@@ -315,4 +315,68 @@ class CrowdWorldTest {
         world.drainEvents(events)
         assertTrue(events.any { it.type == CrowdWorld.Event.Type.ROAR })
     }
+
+    @Test
+    fun `each stage is laid out differently`() {
+        val world = CrowdWorld(seed = 31)
+        val shapes = (1..CrowdWorld.PROFILES.size).map { level ->
+            world.startLevel(level)
+            Triple(world.gates.size, world.enemies.size, world.walls.size)
+        }
+        // the office is gate-heavy with no walls, the reunion and the flat put walls up,
+        // the family dinner comes in waves
+        assertEquals(0, shapes[0].third)
+        assertTrue("office should be the gate-heaviest", shapes[0].first > shapes[2].first)
+        assertTrue("family dinner should have the most squads", shapes[2].second > shapes[0].second)
+        assertTrue("reunion and flat should put up walls", shapes[1].third > 0 && shapes[3].third > 0)
+        assertEquals(shapes.size, shapes.distinct().size)
+    }
+
+    @Test
+    fun `every stage names a mini villain squad`() {
+        val world = CrowdWorld(seed = 17)
+        for (level in 1..CrowdWorld.PROFILES.size) {
+            world.startLevel(level)
+            val elites = world.enemies.filter { it.elite }
+            assertEquals("level $level", 1, elites.size)
+            assertTrue(elites.first().count > CrowdWorld.MIN_ENEMY)
+        }
+    }
+
+    @Test
+    fun `bullets break a wall down and the bomb flattens it`() {
+        val world = CrowdWorld(seed = 5).apply { startLevel(2) }
+        val wall = world.walls.first()
+        val hp = wall.hp
+        world.setForTest(count = 10, playerX = wall.x, z = wall.z - 30f)
+        repeat(hp) { world.addBulletForTest(x = wall.x, z = wall.z - 0.5f) }
+        world.update(0.05f)
+        assertEquals(0, wall.hp)
+        assertTrue(!wall.alive)
+
+        val other = CrowdWorld(seed = 5).apply { startLevel(2) }
+        val target = other.walls.first()
+        other.setForTest(count = 10, playerX = 0f, z = target.z - 20f)
+        other.addItemForTest(CrowdWorld.ItemKind.BOMB, x = 0f, z = target.z - 19.9f)
+        other.update(0.05f)
+        assertTrue(!target.alive)
+    }
+
+    @Test
+    fun `walking into a standing wall costs its remaining people, dodging it costs nothing`() {
+        val hit = CrowdWorld(seed = 5).apply { startLevel(2) }
+        val wall = hit.walls.first()
+        val toll = wall.hp
+        hit.setForTest(count = toll + 4, playerX = wall.x, z = wall.z - 0.1f)
+        hit.update(0.05f)
+        assertEquals(4, hit.count)
+        assertTrue(!wall.alive)
+
+        val dodge = CrowdWorld(seed = 5).apply { startLevel(2) }
+        val other = dodge.walls.first()
+        dodge.setForTest(count = 8, playerX = -other.x, z = other.z - 0.1f)
+        dodge.update(0.05f)
+        assertEquals(8, dodge.count)
+        assertTrue(other.alive)
+    }
 }

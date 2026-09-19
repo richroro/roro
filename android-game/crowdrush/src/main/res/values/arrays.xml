@@ -42,4 +42,10 @@
         <item>The Lunar New Year trailer just dropped.</item>
         <item>3 a.m. You are staring at the ceiling.</item>
     </string-array>
+    <string-array name="stage_mini">
+        <item>Section Head</item>
+        <item>The Reunion Treasurer</item>
+        <item>Great-Aunt</item>
+        <item>The Building Manager</item>
+    </string-array>
 </resources>

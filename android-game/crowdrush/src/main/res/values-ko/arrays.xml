@@ -41,4 +41,10 @@
         <item>설날 예고편이 벌써 떴다. "그때 보자."</item>
         <item>새벽 3시. 나는 천장을 보며 눈을 떴다.</item>
     </string-array>
+    <string-array name="stage_mini">
+        <item>과장님</item>
+        <item>동창회 총무</item>
+        <item>큰어머니</item>
+        <item>관리사무소장</item>
+    </string-array>
 </resources>
