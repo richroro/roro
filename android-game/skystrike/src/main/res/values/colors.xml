@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sky_top">#FF0B2545</color>
+    <color name="sky_mid">#FF1E5A8A</color>
+    <color name="sky_low">#FF4FA3D1</color>
+    <color name="sea">#FF10395E</color>
+    <color name="sea_light">#FF1B4F7C</color>
+    <color name="cloud">#FFEAF4FF</color>
+    <color name="cloud_far">#FFB9D6EE</color>
+    <color name="text">#FFF8FAFC</color>
+    <color name="text_stroke">#FF0B1020</color>
+    <color name="panel">#E6101A30</color>
+    <color name="panel_edge">#FF3C5A8C</color>
+    <color name="tracer">#FFFFF0B8</color>
+    <color name="tracer_core">#FFFFFFFF</color>
+    <color name="foe_shot">#FFFF8A4D</color>
+    <color name="foe_shot_core">#FFFFE0A8</color>
+    <color name="hp_full">#FF34D399</color>
+    <color name="hp_low">#FFF87171</color>
+    <color name="hp_track">#FF27354F</color>
+    <color name="boss_hp">#FFF87171</color>
+    <color name="boss_hp_track">#FF6B1D1D</color>
+    <color name="gold">#FFFACC15</color>
+    <color name="spark_good">#FFFDE68A</color>
+    <color name="spark_bad">#FFFCA5A5</color>
+    <color name="smoke">#FF94A3B8</color>
+    <color name="shield_ring">#FF22D3EE</color>
+    <color name="bomb_flash">#FFFFFFFF</color>
+</resources>

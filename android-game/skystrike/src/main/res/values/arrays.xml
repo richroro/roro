@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stage_place">
+        <item>The Coast Road</item>
+        <item>Thunderhead Pass</item>
+        <item>The Ember Fields</item>
+        <item>The Long Night</item>
+    </string-array>
+    <string-array name="stage_raider">
+        <item>Iron Gull</item>
+        <item>Stormcaller</item>
+        <item>Ember Queen</item>
+        <item>The Long Shadow</item>
+    </string-array>
+    <string-array name="stage_tag">
+        <item>it has been circling since dawn</item>
+        <item>it flies inside its own weather</item>
+        <item>it burns what it cannot carry</item>
+        <item>nobody has seen it and landed</item>
+    </string-array>
+    <string-array name="stage_story">
+        <item>Dawn patrol. The convoy below has asked for cover\ntwice this week, and twice nobody came.\nToday you came.</item>
+        <item>The front moved overnight and took the pass with it.\nControl says fly around. Control is not up here.</item>
+        <item>Everything under you is already alight.\nWhatever started it is still in the air,\nand it is not finished.</item>
+        <item>No horizon, no ground, no second pass.\nJust the instruments and whatever is out there\nwaiting for your engine note.</item>
+    </string-array>
+    <string-array name="stage_clear">
+        <item>The convoy made harbour. Somebody waved.</item>
+        <item>The pass is open. The weather can keep the rest.</item>
+        <item>The fires are burning down on their own now.</item>
+        <item>Dawn, eventually. You are still flying.</item>
+    </string-array>
+</resources>

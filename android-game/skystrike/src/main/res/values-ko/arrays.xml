@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stage_place">
+        <item>해안 항로</item>
+        <item>뇌운 고개</item>
+        <item>잿불 평원</item>
+        <item>긴 밤</item>
+    </string-array>
+    <string-array name="stage_raider">
+        <item>강철 갈매기</item>
+        <item>폭풍우를 부르는 자</item>
+        <item>잿불의 여왕</item>
+        <item>긴 그림자</item>
+    </string-array>
+    <string-array name="stage_tag">
+        <item>새벽부터 저 위를 돌고 있다</item>
+        <item>제 날씨를 몰고 다닌다</item>
+        <item>가져가지 못할 것은 태운다</item>
+        <item>본 사람 중에 착륙한 사람이 없다</item>
+    </string-array>
+    <string-array name="stage_story">
+        <item>새벽 초계. 아래 수송선단이 이번 주에만\n두 번 엄호를 요청했고, 두 번 다 아무도 안 왔다.\n오늘은 당신이 왔다.</item>
+        <item>밤사이 전선이 고개를 삼키고 이동했다.\n관제는 우회하라지만, 관제는 여기 없다.</item>
+        <item>발밑은 이미 전부 타고 있다.\n불을 지른 게 아직 상공에 있고,\n아직 안 끝났다.</item>
+        <item>수평선도, 지면도, 두 번째 기회도 없다.\n계기판과, 당신 엔진 소리를 기다리는\n무언가뿐이다.</item>
+    </string-array>
+    <string-array name="stage_clear">
+        <item>선단이 항구에 닿았다. 누군가 손을 흔들었다.</item>
+        <item>고개가 열렸다. 나머지는 날씨가 가져가라지.</item>
+        <item>불길은 이제 알아서 사그라든다.</item>
+        <item>결국 새벽이 왔다. 당신은 아직 날고 있다.</item>
+    </string-array>
+</resources>
