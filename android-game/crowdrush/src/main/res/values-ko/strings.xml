@@ -27,4 +27,11 @@
     <string name="clear_title">%1$s 격파!</string>
     <string name="crew_left">남은 동료 %1$d · 처치 %2$d</string>
     <string name="next_up">다음 상대 %1$s · %2$s</string>
+    <string name="course_label">오늘의 코스</string>
+    <string name="course_gate_rush">게이트 러시</string>
+    <string name="course_waves">%1$s 파도</string>
+    <string name="course_walls">벽 구간</string>
+    <string name="course_fast">빠른 진행</string>
+    <string name="course_mini">중간 빌런 %1$s</string>
+    <string name="msg_crushed_by_wall">벽에 %1$d명이 갈렸다</string>
 </resources>

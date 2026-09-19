@@ -61,6 +61,9 @@ class CrowdView @JvmOverloads constructor(
     private val sndRoar = soundPool.load(context, R.raw.sfx_roar, 1)
     private val lastPlayedNanos = LongArray(9)
     private val itemPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val hazardPaint = Paint().apply { color = 0xD9F87171.toInt() }
+    private val platePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xEB7C3AED.toInt() }
+    private val plateEdgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFC4B5FD.toInt(); style = Paint.Style.STROKE }
     private val itemRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; style = Paint.Style.STROKE }
     private val emojiPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER }
 
@@ -278,6 +281,23 @@ class CrowdView @JvmOverloads constructor(
                     play(sndHit, 1, 50, 0.3f, 0.2f)
                 }
             }
+            CrowdWorld.Event.Type.HIT_WALL -> {
+                sparks(e.x, e.z, if (e.flag) 22 else 3, color(R.color.wood_light), 0.25f)
+                if (e.flag) {
+                    screenFlash(sparkGood, 0.25f)
+                    shakeTimer = 0.25f
+                    play(sndBoom, 7, 0, 0.8f)
+                } else {
+                    play(sndHit, 1, 50, 0.3f, 0.2f)
+                }
+            }
+            CrowdWorld.Event.Type.WALL_CONTACT -> {
+                floatText("-" + e.value, e.x, e.z, sparkBad)
+                sparks(e.x, e.z, 20, color(R.color.wood_light), 0.5f)
+                screenFlash(color(R.color.hit), 0.35f)
+                shakeTimer = 0.3f
+                play(sndBuzz, 3, 150, 0.8f)
+            }
             CrowdWorld.Event.Type.ROAR -> {
                 floatText(context.getString(R.string.monster_appears, monsterName(e.value)), 0f, e.z, sparkBad)
                 shakeTimer = 0.5f
@@ -324,6 +344,7 @@ class CrowdView @JvmOverloads constructor(
     private val stageTags: Array<String> = resources.getStringArray(R.array.stage_tag)
     private val stageStories: Array<String> = resources.getStringArray(R.array.stage_story)
     private val stageMobs: Array<String> = resources.getStringArray(R.array.stage_mob)
+    private val stageMinis: Array<String> = resources.getStringArray(R.array.stage_mini)
     private val stageClears: Array<String> = resources.getStringArray(R.array.stage_clear)
     private val stageFails: Array<String> = resources.getStringArray(R.array.stage_fail)
 
@@ -352,6 +373,30 @@ class CrowdView @JvmOverloads constructor(
         CrowdWorld.ItemKind.SHIELD -> color(R.color.item_shield)
         CrowdWorld.ItemKind.REINFORCE -> color(R.color.item_reinforce)
         CrowdWorld.ItemKind.BOMB -> color(R.color.item_bomb)
+    }
+
+    private fun drawWall(canvas: Canvas, wall: CrowdWorld.Barricade, d: Float) {
+        val f = factor(d)
+        if (f < 0.05f) return
+        val w = width.toFloat()
+        val x0 = screenX(wall.x - wall.halfWidth, f)
+        val x1 = screenX(wall.x + wall.halfWidth, f)
+        val wh = w * 0.13f * f
+        val y = screenY(f)
+        canvas.drawRect(x0, y - wh * 0.12f, x1, y + wh * 0.12f, shadowPaint)
+        val planks = 4
+        val ratio = (wall.hp / max(1, wall.maxHp).toFloat()).coerceIn(0f, 1f)
+        val shown = max(1, kotlin.math.ceil(planks * ratio).toInt())
+        for (k in 0 until shown) {                       // the top planks fall away as it breaks
+            val py = y - wh + (planks - 1 - k) * (wh / planks)
+            canvas.drawRect(x0, py, x1, py + wh / planks + 1f, woodDarkPaint)
+            canvas.drawRect(x0 + 2f, py + 2f, x1 - 2f, py + wh / planks - 1f, if (k % 2 == 1) woodLightPaint else woodPaint)
+        }
+        for (px in floatArrayOf(x0, x1)) {
+            canvas.drawRect(px - w * 0.012f * f, y - wh * 1.15f, px + w * 0.012f * f, y, woodDarkPaint)
+        }
+        canvas.drawRect(x0, y - wh * 0.98f, x1, y - wh * 0.98f + max(2f, wh * 0.1f), hazardPaint)
+        label(canvas, wall.hp.toString(), (x0 + x1) / 2f, y - wh * 0.55f, max(11f, w * 0.085f * f), Color.WHITE, color(R.color.gate_post_bad))
     }
 
     private fun drawItem(canvas: Canvas, item: CrowdWorld.Item, d: Float) {
@@ -554,6 +599,10 @@ class CrowdView @JvmOverloads constructor(
         world.boss?.let { b ->
             val d = b.z - world.z
             if (b.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawMonster(canvas, b, d) })
+        }
+        for (wall in world.walls) {
+            val d = wall.z - world.z
+            if (wall.alive && d > -4f && d < VIEW_DISTANCE) drawables.add(d to { drawWall(canvas, wall, d) })
         }
         for (item in world.items) {
             val d = item.z - world.z
@@ -767,12 +816,25 @@ class CrowdView @JvmOverloads constructor(
         if (f < 0.05f) return
         val w = width.toFloat()
         val y = screenY(f)
-        val unit = unitPx(f)
+        val scale = if (e.elite) 1.65f else 1f
+        val unit = unitPx(f) * scale
         val drawn = drawnCount(e.count, e.maxCount)
         val rv = crowdRadiusPx(drawn, unit)
         val cx = screenX(e.x, f)
-        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint, grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f)
-        label(canvas, e.count.toString(), cx, y - unit * 1.2f - rv * 0.9f - unit * 4.2f, max(8f, w * 0.07f * f), Color.WHITE, color(R.color.gate_post_bad))
+        val top = y - unit * 1.2f - rv * 0.9f - unit * 4.2f
+        drawCrowd(canvas, cx, y - unit * 1.2f, drawn, unit, mobFrames[stageIndex(world.level)], spritePaint, grid = true, maxWidth = w * LANE_HALF_PX * f * CrowdWorld.ENEMY_HALF_WIDTH * 2f * scale)
+        label(canvas, e.count.toString(), cx, top, max(8f, w * 0.07f * f * scale), Color.WHITE, color(R.color.gate_post_bad))
+        if (e.elite) {
+            val name = stageMinis[stageIndex(world.level)]
+            val fs = max(9f, w * 0.05f * f)
+            bodyPaint.textSize = fs
+            val tw = bodyPaint.measureText(name) + fs * 0.9f
+            rect.set(cx - tw / 2f, top - fs * 2.1f, cx + tw / 2f, top - fs * 0.6f)
+            canvas.drawRoundRect(rect, fs * 0.25f, fs * 0.25f, platePaint)
+            plateEdgePaint.strokeWidth = max(1f, fs * 0.09f)
+            canvas.drawRoundRect(rect, fs * 0.25f, fs * 0.25f, plateEdgePaint)
+            label(canvas, name, cx, rect.centerY(), fs, Color.WHITE, color(R.color.gate_stroke_bad))
+        }
     }
 
     private fun drawBullet(canvas: Canvas, bullet: CrowdWorld.Bullet, d: Float) {
@@ -919,6 +981,7 @@ class CrowdView @JvmOverloads constructor(
             "squad" -> context.getString(R.string.msg_lost_to_squad, n) + " (" + stageMobs[stageIndex(world.level)] + ")"
             "boss_beaten" -> context.getString(R.string.msg_boss_beaten, monsterName(world.boss?.kind ?: 0))
             "boss_lost" -> context.getString(R.string.msg_lost_to_boss, monsterName(world.boss?.kind ?: 0), n)
+            "wall" -> context.getString(R.string.msg_crushed_by_wall, n)
             else -> ""
         }
     }
@@ -938,9 +1001,16 @@ class CrowdView @JvmOverloads constructor(
         val accent: String
         when (world.state) {
             CrowdWorld.State.READY -> {
+                val profile = world.profileOf(world.level)
+                val bits = ArrayList<String>()
+                if (profile.gates >= 1.2f) bits.add(context.getString(R.string.course_gate_rush))
+                if (profile.enemies >= 1.2f) bits.add(context.getString(R.string.course_waves, stageMobs[stage]))
+                if (profile.walls >= 2) bits.add(context.getString(R.string.course_walls))
+                if (profile.speed > 1.05f) bits.add(context.getString(R.string.course_fast))
+                bits.add(context.getString(R.string.course_mini, stageMinis[stage]))
                 pre = stageTag
                 title = context.getString(R.string.monster_appears, stageVillains[stage])
-                body = stageStories[stage]
+                body = stageStories[stage] + "\n\n" + context.getString(R.string.course_label) + " · " + bits.joinToString(" · ")
                 accent = context.getString(R.string.tap_to_start)
             }
             CrowdWorld.State.LEVEL_CLEAR -> {
