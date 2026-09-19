@@ -27,7 +27,7 @@ and take down the villain waiting at the end of the day</string>
     <string name="clear_title">%1$s defeated!</string>
     <string name="crew_left">%1$d crew left · %2$d cleared</string>
     <string name="next_up">Next up: %1$s · %2$s</string>
-    <string name="course_label">Today's course</string>
+    <string name="course_label">Today\'s course</string>
     <string name="course_gate_rush">gate rush</string>
     <string name="course_waves">waves of %1$s</string>
     <string name="course_walls">walls</string>
