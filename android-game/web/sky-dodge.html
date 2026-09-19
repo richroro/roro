@@ -1,0 +1,323 @@
+<title>Sky Dodge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root {
+    --sky-top: #0F172A;
+    --sky-bottom: #312E81;
+    --ground: #070B16;
+    --panel: #111A33;
+    --line: #26325A;
+    --text: #F8FAFC;
+    --muted: #9AA6C8;
+    --player: #22D3EE;
+    --block: #F43F5E;
+    --star: #FBBF24;
+    --display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--body);
+    padding-inline: 16px;
+    padding-block: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  header {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tag {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .stage {
+    width: 100%;
+    max-width: 420px;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+  }
+  canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: var(--sky-top);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+  }
+  canvas:focus-visible { box-shadow: 0 0 0 3px var(--player); }
+  .hints {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    justify-content: space-between;
+  }
+  .hints span { font-variant-numeric: tabular-nums; }
+  kbd {
+    font-family: var(--display);
+    font-size: 0.75rem;
+    padding: 1px 6px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--panel);
+    color: var(--text);
+  }
+</style>
+
+<header>
+  <h1>Sky Dodge</h1>
+  <span class="tag">Android 앱 브라우저 버전</span>
+</header>
+<div class="stage">
+  <canvas id="game" tabindex="0" aria-label="Sky Dodge 게임 화면. 좌우 드래그 또는 방향키로 조작합니다."></canvas>
+</div>
+<div class="hints">
+  <span>드래그 또는 <kbd>←</kbd> <kbd>→</kbd> 로 이동 · 탭/스페이스로 시작</span>
+  <span>블록 = 게임 오버 · 별 = +50점</span>
+</div>
+
+<script>
+(function () {
+  // ---- GameWorld: a 1:1 port of android-game/.../GameWorld.kt (same constants) ----
+  const C = {
+    PLAYER_RADIUS: 0.05, PLAYER_BOTTOM_MARGIN: 0.22, BLOCK_HITBOX_SCALE: 0.8, STAR_GRAB_BONUS: 0.015,
+    STAR_SIZE: 0.07, STAR_CHANCE: 0.22, STAR_POINTS: 50, POINTS_PER_SECOND: 10,
+    MIN_BLOCK_WIDTH: 0.12, MAX_BLOCK_WIDTH: 0.28, BLOCK_HEIGHT: 0.065,
+    BASE_FALL_SPEED: 0.55, MAX_FALL_SPEED: 1.6, FALL_ACCELERATION: 0.012,
+    FIRST_SPAWN_DELAY: 0.6, BASE_SPAWN_INTERVAL: 0.9, MIN_SPAWN_INTERVAL: 0.3, SPAWN_ACCELERATION: 0.008,
+    MAX_FRAME_DT: 0.05, SCORE_EPSILON: 0.001,
+  };
+  const State = { READY: 'READY', PLAYING: 'PLAYING', PAUSED: 'PAUSED', GAME_OVER: 'GAME_OVER' };
+
+  class GameWorld {
+    constructor() {
+      this.height = 2; this.state = State.READY; this.score = 0; this.elapsed = 0;
+      this.starsCollected = 0; this.playerX = 0.5; this.entities = []; this.spawnTimer = 0;
+    }
+    get playerY() { return this.height - C.PLAYER_BOTTOM_MARGIN; }
+    get fallSpeed() { return Math.min(C.BASE_FALL_SPEED + this.elapsed * C.FALL_ACCELERATION, C.MAX_FALL_SPEED); }
+    get spawnInterval() { return Math.max(C.MIN_SPAWN_INTERVAL, C.BASE_SPAWN_INTERVAL - this.elapsed * C.SPAWN_ACCELERATION); }
+    setAspect(a) { this.height = Math.min(3, Math.max(1, a)); }
+    start() {
+      this.entities = []; this.elapsed = 0; this.score = 0; this.starsCollected = 0;
+      this.playerX = 0.5; this.spawnTimer = C.FIRST_SPAWN_DELAY; this.state = State.PLAYING;
+    }
+    pause() { if (this.state === State.PLAYING) this.state = State.PAUSED; }
+    resume() { if (this.state === State.PAUSED) this.state = State.PLAYING; }
+    movePlayerBy(dx) { this.playerX = Math.min(1 - C.PLAYER_RADIUS, Math.max(C.PLAYER_RADIUS, this.playerX + dx)); }
+    update(dtSeconds) {
+      if (this.state !== State.PLAYING) return;
+      const dt = Math.min(C.MAX_FRAME_DT, Math.max(0, dtSeconds));
+      this.elapsed += dt;
+      this.spawnTimer -= dt;
+      while (this.spawnTimer <= 0) { this.spawn(); this.spawnTimer += this.spawnInterval; }
+      for (let i = this.entities.length - 1; i >= 0; i--) {
+        const e = this.entities[i];
+        e.y += e.fallSpeed * dt;
+        if (e.y - e.height / 2 > this.height) { this.entities.splice(i, 1); continue; }
+        if (this.collides(e)) {
+          if (e.kind === 'STAR') { this.starsCollected++; this.entities.splice(i, 1); }
+          else { this.state = State.GAME_OVER; break; }
+        }
+      }
+      this.score = Math.floor(this.elapsed * C.POINTS_PER_SECOND + C.SCORE_EPSILON) + this.starsCollected * C.STAR_POINTS;
+    }
+    spawn() {
+      const isStar = Math.random() < C.STAR_CHANCE;
+      const width = isStar ? C.STAR_SIZE : C.MIN_BLOCK_WIDTH + Math.random() * (C.MAX_BLOCK_WIDTH - C.MIN_BLOCK_WIDTH);
+      const height = isStar ? C.STAR_SIZE : C.BLOCK_HEIGHT;
+      this.entities.push({
+        kind: isStar ? 'STAR' : 'BLOCK',
+        x: width / 2 + Math.random() * (1 - width), y: -height, width, height,
+        fallSpeed: this.fallSpeed * (0.85 + Math.random() * 0.3),
+        spin: (Math.random() - 0.5) * 120,
+      });
+    }
+    collides(e) {
+      const hw = e.width / 2, hh = e.height / 2;
+      const cx = Math.min(e.x + hw, Math.max(e.x - hw, this.playerX));
+      const cy = Math.min(e.y + hh, Math.max(e.y - hh, this.playerY));
+      const dx = this.playerX - cx, dy = this.playerY - cy;
+      const r = e.kind === 'STAR' ? C.PLAYER_RADIUS + C.STAR_GRAB_BONUS : C.PLAYER_RADIUS * C.BLOCK_HITBOX_SCALE;
+      return dx * dx + dy * dy < r * r;
+    }
+  }
+
+  // ---- GameView equivalent ----
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const world = new GameWorld();
+  const DRAG_GAIN = 1.25;
+  const KEY_SPEED = 1.6; // world units per second while an arrow key is held
+  let best = 0, isNewBest = false, lastTime = 0, lastPointerX = null, keyDir = 0;
+  try { best = parseInt(localStorage.getItem('skydodge.best') || '0', 10) || 0; } catch (e) {}
+
+  function saveBest() { try { localStorage.setItem('skydodge.best', String(best)); } catch (e) {} }
+
+  function resize() {
+    const stage = canvas.parentElement;
+    const availW = stage.clientWidth, availH = stage.clientHeight || window.innerHeight - 140;
+    let w = Math.min(availW, availH * 9 / 16), h = w * 16 / 9;
+    if (h > availH) { h = availH; w = h * 9 / 16; }
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    world.setAspect(h / w);
+    canvas._w = w; canvas._h = h;
+  }
+
+  function starPath(cx, cy, outer, inner) {
+    ctx.beginPath();
+    for (let i = 0; i < 10; i++) {
+      const r = i % 2 === 0 ? outer : inner, a = -Math.PI / 2 + i * Math.PI / 5;
+      const px = cx + Math.cos(a) * r, py = cy + Math.sin(a) * r;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  function wrap(text, maxWidth) {
+    const words = text.split(' '), lines = []; let cur = '';
+    for (const w of words) {
+      const cand = cur ? cur + ' ' + w : w;
+      if (ctx.measureText(cand).width > maxWidth && cur) { lines.push(cur); cur = w; } else cur = cand;
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+
+  function draw() {
+    const w = canvas._w, h = canvas._h, u = w;
+    const g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, '#0F172A'); g.addColorStop(1, '#312E81');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+
+    for (const e of world.entities) {
+      const cx = e.x * u, cy = e.y * u;
+      if (e.kind === 'BLOCK') {
+        const bw = e.width * u, bh = e.height * u, r = bh * 0.25;
+        roundRect(cx - bw / 2, cy - bh / 2, bw, bh, r);
+        ctx.fillStyle = '#F43F5E'; ctx.fill();
+        ctx.lineWidth = u * 0.006; ctx.strokeStyle = '#FB7185'; ctx.stroke();
+      } else {
+        const outer = e.width * u / 2;
+        ctx.save(); ctx.translate(cx, cy); ctx.rotate((world.elapsed * e.spin % 360) * Math.PI / 180);
+        starPath(0, 0, outer, outer * 0.45); ctx.fillStyle = '#FBBF24'; ctx.fill(); ctx.restore();
+      }
+    }
+
+    const px = world.playerX * u, py = world.playerY * u, pr = C.PLAYER_RADIUS * u;
+    ctx.fillStyle = 'rgba(34,211,238,0.25)'; ctx.beginPath(); ctx.arc(px, py, pr * 1.6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#22D3EE'; ctx.beginPath(); ctx.arc(px, py, pr, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#CFFAFE'; ctx.beginPath(); ctx.arc(px - pr * 0.35, py - pr * 0.35, pr * 0.28, 0, Math.PI * 2); ctx.fill();
+
+    const margin = u * 0.05;
+    ctx.fillStyle = '#F8FAFC'; ctx.font = `700 ${u * 0.055}px "Chakra Petch", sans-serif`; ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left'; ctx.fillText('점수 ' + world.score, margin, margin + u * 0.055);
+    ctx.textAlign = 'right'; ctx.fillText('최고 ' + best, u - margin, margin + u * 0.055);
+
+    let title = null, body = null, accent = null;
+    if (world.state === State.READY) { title = 'SKY DODGE'; body = '좌우로 드래그해서 블록을 피하고 별을 모으세요'; accent = '화면을 탭해서 시작'; }
+    else if (world.state === State.PAUSED) { title = '점수 ' + world.score; accent = '일시정지 · 탭해서 계속'; }
+    else if (world.state === State.GAME_OVER) { title = '게임 오버'; body = `점수 ${world.score}   최고 ${best}`; accent = isNewBest ? '신기록!' : '탭해서 다시 하기'; }
+    if (title) {
+      ctx.fillStyle = 'rgba(2,6,23,0.6)'; ctx.fillRect(0, 0, w, h);
+      ctx.textAlign = 'center'; ctx.fillStyle = '#F8FAFC';
+      let y = h * 0.42;
+      ctx.font = `700 ${u * 0.11}px "Chakra Petch", sans-serif`; ctx.fillText(title, w / 2, y);
+      if (body) {
+        y += u * 0.11; ctx.font = `400 ${u * 0.045}px "IBM Plex Sans", sans-serif`;
+        const lines = wrap(body, u * 0.86);
+        for (const line of lines) { ctx.fillText(line, w / 2, y); y += u * 0.063; }
+      }
+      y += u * 0.12; ctx.fillStyle = '#FBBF24'; ctx.font = `700 ${u * 0.06}px "Chakra Petch", sans-serif`; ctx.fillText(accent, w / 2, y);
+    }
+  }
+
+  function frame(now) {
+    const dt = lastTime ? (now - lastTime) / 1000 : 0; lastTime = now;
+    if (keyDir !== 0 && world.state === State.PLAYING) world.movePlayerBy(keyDir * KEY_SPEED * Math.min(dt, C.MAX_FRAME_DT));
+    const before = world.state;
+    world.update(dt);
+    if (before === State.PLAYING && world.state === State.GAME_OVER) {
+      if (world.score > best) { best = world.score; isNewBest = true; saveBest(); }
+      if (navigator.vibrate) { try { navigator.vibrate(60); } catch (e) {} }
+    }
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  function tap() {
+    if (world.state === State.READY || world.state === State.GAME_OVER) { isNewBest = false; world.start(); }
+    else if (world.state === State.PAUSED) world.resume();
+  }
+
+  canvas.addEventListener('pointerdown', (ev) => {
+    canvas.focus({ preventScroll: true }); canvas.setPointerCapture(ev.pointerId);
+    lastPointerX = ev.clientX; tap();
+  });
+  canvas.addEventListener('pointermove', (ev) => {
+    if (lastPointerX === null) return;
+    if (world.state === State.PLAYING) world.movePlayerBy((ev.clientX - lastPointerX) / canvas._w * DRAG_GAIN);
+    lastPointerX = ev.clientX;
+  });
+  const release = () => { lastPointerX = null; };
+  canvas.addEventListener('pointerup', release); canvas.addEventListener('pointercancel', release);
+  canvas.addEventListener('keydown', (ev) => {
+    if (ev.key === 'ArrowLeft') { keyDir = -1; ev.preventDefault(); }
+    else if (ev.key === 'ArrowRight') { keyDir = 1; ev.preventDefault(); }
+    else if (ev.key === ' ' || ev.key === 'Enter') { tap(); ev.preventDefault(); }
+    else if (ev.key === 'p' || ev.key === 'Escape') { world.pause(); }
+  });
+  canvas.addEventListener('keyup', (ev) => { if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') keyDir = 0; });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { world.pause(); lastTime = 0; } });
+  window.addEventListener('resize', resize);
+
+  function start(saved) {
+    if (saved && typeof saved.best === 'number' && saved.best > best) best = saved.best;
+    resize(); requestAnimationFrame(frame);
+  }
+  if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ best }));
+  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
+  else start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+})();
+</script>
