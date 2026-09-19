@@ -1,3 +1,24 @@
-.claude/
+# Claude 로컬 설정은 무시하되, 스킬은 저장소에 포함한다 (GitHub Actions·다른 PC에서도 쓰기 위해)
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+.claude/skills/auto-shorts/.env
 portfolio/
 webcam_preview.py
+
+# auto-shorts 산출물(영상·중간 파일)은 커밋하지 않는다
+shorts_output/
+
+# 일반 런타임 잔재
+__pycache__/
+*.pyc
+*.log
+
+# auto-shorts: 오프라인 TTS 모델(수십 MB)은 첫 실행 때 내려받는다
+.claude/skills/auto-shorts/models/
+
+# auto-shorts: Open Images 사진 색인 캐시(수십 MB, 첫 실행 때 생성)
+.claude/skills/auto-shorts/cache/
+
+# auto-shorts: 유튜브 OAuth 클라이언트·토큰은 절대 커밋하지 않는다
+.claude/skills/auto-shorts/secrets/

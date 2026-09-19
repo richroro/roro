@@ -1,0 +1,54 @@
+name: auto-shorts weekly trends
+
+# 매주 월요일 07:00 KST(일요일 22:00 UTC)에 트렌드 브리핑을 갱신해 커밋한다.
+# 키 없이도 구글 급상승 검색어·위키백과 인기 문서·Reddit TIL 을 모으고,
+# 저장소 시크릿 YOUTUBE_API_KEY 가 있으면 잘나가는 쇼츠 제목·길이 분석까지 붙는다.
+# Claude 는 쇼츠를 만들 때 .claude/skills/auto-shorts/trends/latest.md 를 읽어 주제를 고른다.
+
+on:
+  schedule:
+    - cron: "0 22 * * 0"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-shorts-trends
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # 스킬을 다른 브랜치에 두고 있다면 다른 워크플로처럼 ref 를 지정한다:
+        # with:
+        #   ref: add-blogger-auto-post-skill
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet requests
+
+      - name: Research trends
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python .claude/skills/auto-shorts/scripts/research_trends.py
+
+      - name: Commit briefing
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/auto-shorts/trends
+          if git diff --cached --quiet; then
+            echo "변경 없음."
+          else
+            git commit -m "chore(auto-shorts): weekly trends $(date -u +%Y-%m-%d) [skip ci]"
+            git push
+          fi
