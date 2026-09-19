@@ -480,9 +480,12 @@ class CrowdWorld(private val seed: Int = 1) {
                 val ease = t * t * (3f - 2f * t)
                 e.march(ENEMY_MARCH_SPEED * ease * dt)
                 e.step = ease
-            } else {
-                e.step = 0f
+            } else if (d > 0f) {
+                e.step = 0f          // still up the road, has not noticed you yet
             }
+            // A squad you have already walked past keeps walking as it leaves the frame. Zeroing
+            // step here froze the whole block mid-stride at the instant it drew level with your
+            // own crowd - same screen line, same size, yours still pumping its legs beside it.
         }
         boss?.let { b -> // the monster roars and stomps toward the rangers once they are in range
             val d = b.z - z
