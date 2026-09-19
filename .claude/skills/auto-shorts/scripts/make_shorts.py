@@ -55,6 +55,8 @@ DEFAULT_STYLE = {
     "gap_before": 0.10,           # 씬 시작 후 나레이션까지 여백(초)
     "gap_after": 0.35,            # 나레이션 끝 뒤 여백(초)
     "min_scene": 1.8,
+    "beat_seconds": 1.8,        # 이 간격마다 줌 펀치로 화면을 바꾼다(0 이면 끔).
+                                # 시청자는 1.5~2초마다 "계속 볼까"를 다시 판단한다.
     "auto_transition_sfx": False, # 씬 전환마다 whoosh
     "transition_sfx_volume": 0.35,
     "sfx_volume": 0.7,
@@ -119,6 +121,9 @@ def main() -> None:
     find_ffmpeg()
     project = load_project(args.project)
     style = dict(DEFAULT_STYLE)
+    # 명언 레이아웃은 호흡이 생명이라 줌 펀치가 방해된다 — 명시하지 않으면 끈다
+    if str((project.get("style") or {}).get("layout", "")) == "quote":
+        style["beat_seconds"] = 0
     style.update(project.get("style") or {})
     slug = project.get("slug") or slugify(project["title"])
     outdir = Path(args.out) / slug
@@ -167,6 +172,7 @@ def main() -> None:
             "index": i + 1, "start": round(t, 3), "duration": round(dur, 3), "lead": round(lead, 3),
             "narration": sc["narration"], "headline": sc.get("headline", ""), "words": words,
             "quote": sc.get("quote", ""), "author": sc.get("author", ""),
+            "beats": sc.get("beats") or [], "loop_back": bool(sc.get("loop_back")),
             "audio": str(nar_files[i]), "sfx": sc.get("sfx"), "motion": motion,
         })
         t += dur
@@ -195,8 +201,13 @@ def main() -> None:
     log("images", "제공자 순서: " + " → ".join(providers))
     used_urls: set = set()
     img_files = [work / f"img_{i:02d}.jpg" for i in range(1, n + 1)]
+    # loop_back: 마지막 씬을 첫 씬과 같은 그림으로 닫으면 영상이 다시 시작될 때 이어져 보인다(반복 재생 유도)
+    loop_back = n > 1 and bool(scenes[-1].get("loop_back"))
 
     def get_image(i: int):
+        if loop_back and i == n - 1:
+            # 마지막 씬은 첫 씬 그림을 그대로 쓴다 — 내려받지도, 사진 한 장을 낭비하지도 않는다
+            return {"provider": "loop_back"}
         sc = scenes[i]
         out = img_files[i]
         sig = sig_of(sc.get("image_prompt", ""), sc.get("keywords", ""), sc.get("image", ""), style["image_style"],
@@ -281,8 +292,14 @@ def main() -> None:
         if vpath and not vpath.is_file():
             warn("video", f"씬 {i + 1}: 영상 파일을 찾지 못해 이미지로 진행 — {src_video}")
             vpath = None
-        sig = sig_of(vpath or img_files[i], round(lengths[i], 3), sc["motion"], style["vignette"],
-                     style["look"], style.get("dim", 0.0), bool(vpath), scenes[i].get("video_speed", 1.0))
+        src_img = img_files[0] if (loop_back and i == n - 1) else img_files[i]
+        bsec = float(style.get("beat_seconds") or 0)
+        beats_n = max(len(sc.get("beats") or []),
+                      int(round(lengths[i] / bsec)) if bsec > 0 else 1)
+        beats_n = max(1, min(5, beats_n))
+        sig = sig_of(vpath or src_img, round(lengths[i], 3), sc["motion"], style["vignette"],
+                     style["look"], style.get("dim", 0.0), bool(vpath),
+                     scenes[i].get("video_speed", 1.0), beats_n)
         if sigs.stale(clip, sig, args.force):
             if vpath:
                 log("video", f"클립 {i + 1:02d}/{n} (영상 {vpath.name}, {lengths[i]:.1f}s)")
@@ -290,10 +307,10 @@ def main() -> None:
                                          look=style["look"], dim=float(style.get("dim", 0.0)),
                                          speed=float(scenes[i].get("video_speed", 1.0)))
             else:
-                log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s)")
-                render.render_scene_clip(img_files[i], clip, lengths[i], sc["motion"],
+                log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s, 비트 {beats_n})")
+                render.render_scene_clip(src_img, clip, lengths[i], sc["motion"],
                                          vignette=bool(style["vignette"]), look=style["look"],
-                                         dim=float(style.get("dim", 0.0)))
+                                         dim=float(style.get("dim", 0.0)), beats=beats_n)
             sigs.mark(clip, sig)
         clips.append(clip)
     video = work / "video.mp4"

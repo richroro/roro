@@ -284,6 +284,9 @@ def load_project(path: str | Path) -> dict:
     return data
 
 
+CPS = 7.0   # 한국어 TTS 가 1초에 읽는 글자 수(rate +10% 실측). 길이 어림에 쓴다.
+
+
 def validate_project(p: dict) -> None:
     errs = []
     if not isinstance(p.get("scenes"), list) or not p["scenes"]:
@@ -301,16 +304,42 @@ def validate_project(p: dict) -> None:
         errs.append("title 이 없습니다")
     if errs:
         die("project", "프로젝트 검증 실패:\n  - " + "\n  - ".join(errs))
-    # 플레이북 규칙 경고(막지는 않는다)
-    first = p["scenes"][0]
+    # 플레이북 규칙 경고(막지는 않는다). 기준은 references/script-writing.md 의 2026 리텐션 데이터.
+    scenes = p["scenes"]
+    first = scenes[0]
+    quote_layout = str((p.get("style") or {}).get("layout", "")) == "quote"
+
+    def on_screen(sc: dict) -> bool:
+        return bool(str(sc.get("headline", "")).strip() or (sc.get("beats") or []) or
+                    str(sc.get("quote", "")).strip())
+
     opener = str(first.get("narration", "")).strip()
     if any(opener.startswith(k) for k in ("안녕하세요", "안녕", "오늘은", "여러분 안녕", "제가")):
         warn("project", f"첫 문장이 인사/예고로 시작합니다 → 결론이나 구체적 질문으로 바로 시작하세요: '{opener[:30]}…'")
-    if not first.get("headline"):
-        warn("project", "첫 씬에 headline 이 없습니다 — 첫 프레임의 텍스트 훅은 조회수에 가장 큰 영향을 줍니다(12자 이내로 넣으세요)")
-    chars = sum(len(str(s.get("narration", ""))) for s in p["scenes"])
-    if chars > 260:
-        warn("project", f"나레이션 {chars}자 — 45초를 넘길 수 있습니다. 페이오프 뒤는 잘라내세요(권장 150~230자)")
+    if not on_screen(first):
+        warn("project", "첫 씬에 headline/beats 가 없습니다 — 첫 프레임의 텍스트 훅은 조회수에 가장 큰 영향을 줍니다(12자 이내)")
+
+    # 실측: 한국어 TTS 가 rate +10% 에서 초당 약 7자를 읽는다(렌더된 영상 5편 기준).
+    chars = sum(len(str(s.get("narration", ""))) for s in scenes)
+    if chars > 240:
+        warn("project", f"나레이션 {chars}자 ≈ {chars / CPS:.0f}초 — 쇼츠 완주율은 20~30초 구간이 가장 높습니다. "
+                        f"페이오프 뒤를 잘라 140~210자로 줄이세요")
+    elif chars < 110:
+        warn("project", f"나레이션 {chars}자 ≈ {chars / CPS:.0f}초 — 너무 짧아 정보가 안 남을 수 있습니다(권장 140~210자)")
+
+    for i, sc in enumerate(scenes, 1):
+        ln = len(str(sc.get("narration", "")))
+        if ln > 42 and not sc.get("beats"):
+            warn("project", f"씬 {i}: 나레이션 {ln}자 ≈ {ln / CPS:.0f}초인데 화면이 한 번도 안 바뀝니다 — "
+                            f"문장을 쪼개거나 beats 로 문구를 2~3개 넣으세요")
+
+    covered = sum(1 for sc in scenes if on_screen(sc))
+    if covered < len(scenes) * 0.8:
+        warn("project", f"화면 문구가 {covered}/{len(scenes)} 씬에만 있습니다 — 시청자 6할 이상이 소리를 끄고 봅니다. "
+                        f"거의 모든 씬에 headline 이나 beats 를 넣으세요")
+
+    if not quote_layout and not any(sc.get("loop_back") for sc in scenes):
+        warn("project", "마지막 씬에 loop_back 이 없습니다 — 끝 문장이 첫 문장으로 이어지면 반복 재생이 붙습니다")
 
 
 def slugify(text: str) -> str:

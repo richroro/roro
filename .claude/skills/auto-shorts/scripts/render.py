@@ -31,6 +31,7 @@ TRANSITION_MIX = ["fade", "smoothleft", "zoomin", "smoothup"]
 UPSCALE = 3          # zoompan 떨림을 줄이기 위한 사전 업스케일 배율
 ZOOM_AMOUNT = 0.14   # 줌 인/아웃 폭 (14%)
 PAN_ZOOM = 1.12      # 팬 동작 시 고정 줌
+PUNCH = 0.045        # 비트마다 주는 줌 펀치 폭 (4.5%) — 1.5~2초마다 화면이 변해야 이탈이 준다
 
 
 def _ease(n_frames: int) -> str:
@@ -38,7 +39,7 @@ def _ease(n_frames: int) -> str:
     return f"({p}*{p}*(3-2*{p}))"   # smoothstep
 
 
-def zoompan_expr(motion: str, n_frames: int) -> str:
+def zoompan_expr(motion: str, n_frames: int, beats: int = 1) -> str:
     e = _ease(n_frames)
     center_x, center_y = "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"
     if motion == "in":
@@ -55,6 +56,11 @@ def zoompan_expr(motion: str, n_frames: int) -> str:
         z, x, y = f"{PAN_ZOOM}", center_x, f"(ih-ih/zoom)*{e}"
     else:  # static
         z, x, y = "1", center_x, center_y
+    if beats > 1:
+        # 비트 시작마다 살짝 당겼다가 풀리는 펀치를 얹는다. 이미지를 더 쓰지 않고도
+        # "1.5~2초마다 화면이 바뀐다"는 조건을 만족시키는 가장 싼 방법이다.
+        bf = max(1, int(round(n_frames / beats)))
+        z = f"({z})+{PUNCH}*pow(1-mod(on\,{bf})/{bf}\,2)"
     return f"zoompan=z='{z}':x='{x}':y='{y}':d={n_frames}:s={WIDTH}x{HEIGHT}:fps={FPS}"
 
 
@@ -83,12 +89,16 @@ def render_video_clip(video: Path, out: Path, length: float, vignette: bool = Tr
 
 
 def render_scene_clip(image: Path, out: Path, length: float, motion: str = "in",
-                      vignette: bool = True, look: str = "", dim: float = 0.0) -> Path:
-    """1080x1920 정지 이미지 하나로 length 초짜리 무음 클립을 만든다."""
+                      vignette: bool = True, look: str = "", dim: float = 0.0,
+                      beats: int = 1) -> Path:
+    """1080x1920 정지 이미지 하나로 length 초짜리 무음 클립을 만든다.
+
+    beats > 1 이면 그 횟수만큼 줌 펀치를 넣어 씬 안에서도 화면이 움직이게 한다.
+    """
     n = max(2, int(round(length * FPS)))
     chain = [
         f"scale={WIDTH * UPSCALE}:{HEIGHT * UPSCALE}:flags=lanczos",
-        zoompan_expr(motion, n),
+        zoompan_expr(motion, n, beats),
     ]
     if look == "cinematic":
         chain.append("eq=contrast=1.05:saturation=1.08")

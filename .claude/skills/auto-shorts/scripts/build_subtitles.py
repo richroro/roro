@@ -147,7 +147,15 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
     total = float(timeline["total"])
     scenes = timeline["scenes"]
 
+    last_card_end = 0.0      # 마지막 씬에서 화면 문구가 사라지는 시각 (CTA 가 겹치지 않게)
+    cta_text = (timeline.get("cta") or "").strip()
+    # loop_back 씬에서는 CTA 를 넣지 않는다. 마지막 문구가 다음 재생의 훅이라 그 자리를 양보할 수 없고,
+    # 구독 유도보다 반복 재생이 노출에 더 크게 기여한다.
+    if cta_text and scenes[-1].get("loop_back"):
+        cta_text = ""
     for si, sc in enumerate(scenes):
+        if si == len(scenes) - 1:
+            last_card_end = 0.0
         base = float(sc["start"])
         dur = float(sc["duration"])
         words = sc.get("words") or []
@@ -192,20 +200,45 @@ def build_ass(timeline: dict, style: dict | None = None) -> str:
                         parts.append(t)
                 text = " ".join(parts)
                 events.append((w_start, f"Dialogue: 0,{ts(w_start)},{ts(w_end)},Caption,,0,0,0,,{text}"))
-        # --- 헤드라인
-        head = (sc.get("headline") or "").strip()
-        if head:
-            h_dur = dur if si == 0 else st["headline_seconds"]
-            h_end = base + min(dur - 0.15, max(1.2, h_dur))
-            text = f"{{\\fad(140,160)\\fscx92\\fscy92\\t(0,160,\\fscx100\\fscy100)}}{esc(head)}"
-            events.append((base, f"Dialogue: 1,{ts(base)},{ts(h_end)},Headline,,0,0,0,,{text}"))
+        # --- 헤드라인 / 비트 카드
+        #     beats 가 있으면 씬 안에서 문구가 순서대로 바뀐다. 소리를 끄고 보는 시청자(6할 이상)에게는
+        #     이 카드가 대본 그 자체이고, 문구가 바뀌는 순간이 곧 "화면이 변했다"는 신호다.
+        cards = [str(b).strip() for b in (sc.get("beats") or []) if str(b).strip()]
+        if not cards:
+            head = (sc.get("headline") or "").strip()
+            cards = [head] if head else []
+        if cards:
+            # 마지막 씬에서는 CTA 가 들어올 자리를 미리 비워 둔다(둘 다 헤드라인 높이에 뜬다)
+            limit = base + dur - 0.12
+            if si == len(scenes) - 1 and cta_text and not sc.get("loop_back"):
+                # CTA 를 위해 마지막 씬의 절반 이상을 비우지는 않는다
+                reserve = min(st["cta_seconds"], dur * 0.45)
+                limit = min(limit, total - reserve - 0.15)
+            if len(cards) == 1:
+                spans = [(base, min(limit, base + min(dur - 0.15,
+                                                      max(1.2, dur if si == 0 else st["headline_seconds"]))))]
+            else:
+                slot = dur / len(cards)
+                spans = [(base + k * slot, min(limit, base + (k + 1) * slot - 0.12))
+                         for k in range(len(cards))]
+                spans[-1] = (spans[-1][0], limit)
+            for (c_start, c_end), card in zip(spans, cards):
+                if c_end - c_start < 0.5:
+                    continue
+                last_card_end = max(last_card_end, c_end)
+                text = f"{{\\fad(140,160)\\fscx92\\fscy92\\t(0,160,\\fscx100\\fscy100)}}{esc(card)}"
+                events.append((c_start, f"Dialogue: 1,{ts(c_start)},{ts(c_end)},Headline,,0,0,0,,{text}"))
 
     # --- CTA (마지막 몇 초)
-    cta = (timeline.get("cta") or "").strip()
+    cta = cta_text
     if cta:
         start = max(0.0, total - st["cta_seconds"])
         last = scenes[-1]
-        if last.get("headline"):
+        # CTA 는 헤드라인과 같은 높이에 뜨므로, 마지막 씬 문구가 사라진 뒤에만 띄운다.
+        # 자리가 안 나면 아예 넣지 않는다 — 글자 두 벌이 겹치는 것보다 낫다.
+        if last_card_end:
+            start = max(start, last_card_end + 0.15)
+        elif last.get("headline"):
             start = max(start, float(last["start"]) + st["headline_seconds"] + 0.1)
         if total - start > 0.8:
             events.append((start, f"Dialogue: 1,{ts(start)},{ts(total)},CTA,,0,0,0,,{{\\fad(200,0)}}{esc(cta)}"))
