@@ -39,7 +39,12 @@ def _ease(n_frames: int) -> str:
     return f"({p}*{p}*(3-2*{p}))"   # smoothstep
 
 
-def zoompan_expr(motion: str, n_frames: int, beats: int = 1) -> str:
+def zoompan_expr(motion: str, n_frames: int, beats: int = 1, d: int = 0) -> str:
+    """d 는 입력 프레임 하나가 만들어 낼 출력 프레임 수.
+
+    정지 이미지 입력이면 d=n_frames(기본). **영상 스트림 입력이면 반드시 d=1** 이다 —
+    스트림에 d=n 을 주면 첫 프레임 하나가 클립 전체로 늘어나고 나머지가 버려진다.
+    """
     e = _ease(n_frames)
     center_x, center_y = "iw/2-(iw/zoom/2)", "ih/2-(ih/zoom/2)"
     if motion == "in":
@@ -61,7 +66,7 @@ def zoompan_expr(motion: str, n_frames: int, beats: int = 1) -> str:
         # "1.5~2초마다 화면이 바뀐다"는 조건을 만족시키는 가장 싼 방법이다.
         bf = max(1, int(round(n_frames / beats)))
         z = f"({z})+{PUNCH}*pow(1-mod(on\,{bf})/{bf}\,2)"
-    return f"zoompan=z='{z}':x='{x}':y='{y}':d={n_frames}:s={WIDTH}x{HEIGHT}:fps={FPS}"
+    return f"zoompan=z='{z}':x='{x}':y='{y}':d={d or n_frames}:s={WIDTH}x{HEIGHT}:fps={FPS}"
 
 
 def render_video_clip(video: Path, out: Path, length: float, vignette: bool = True,
@@ -111,6 +116,31 @@ def render_scene_clip(image: Path, out: Path, length: float, motion: str = "in",
     run_ffmpeg([
         "-i", str(image), "-vf", ",".join(chain), "-frames:v", str(n), "-r", str(FPS),
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-an", str(out),
+    ], stage=STAGE)
+    return out
+
+
+def render_card_clip(frames_dir: Path, n_frames: int, still: Path, out: Path, length: float,
+                     beats: int = 1, look: str = "") -> Path:
+    """데이터 카드 씬: 숫자가 올라가는 프레임 시퀀스 + 나머지는 정지 프레임.
+
+    정지 이미지와 달리 업스케일을 거치지 않는다 — 표와 숫자는 선명해야 읽힌다.
+    """
+    n = max(2, int(round(length * FPS)))
+    hold = max(0.04, (n - n_frames) / FPS)
+    chain = ["concat=n=2:v=1"]
+    if beats > 1:
+        chain.append(zoompan_expr("static", n, beats, d=1))   # 스트림 입력이므로 d=1
+    if look == "cinematic":
+        chain.append("eq=contrast=1.04:saturation=1.05")
+    chain.append("format=yuv420p")
+    run_ffmpeg([
+        "-framerate", str(FPS), "-i", str(frames_dir / "f_%03d.jpg"),
+        "-loop", "1", "-t", f"{hold:.3f}", "-i", str(still),
+        "-filter_complex", "[0:v]fps=" + str(FPS) + "[a];[1:v]fps=" + str(FPS) + "[b];[a][b]"
+                           + ",".join(chain) + "[v]",
+        "-map", "[v]", "-frames:v", str(n), "-r", str(FPS),
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-an", str(out),
     ], stage=STAGE)
     return out
 

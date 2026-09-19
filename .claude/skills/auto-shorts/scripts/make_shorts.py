@@ -50,6 +50,7 @@ DEFAULT_STYLE = {
     "dim": 0.0,                   # 사진을 어둡게(0~0.6). 명언 레이아웃에서 0.3~0.4 권장
     "art_palette": "",            # 일러스트 팔레트 고정(night/dawn/dusk/forest/ocean/warm). 비우면 BGM 무드에 맞춘다
     "card_theme": "navy",         # 데이터 카드 테마(navy/ink/teal)
+    "card_anim_seconds": 1.1,     # 카드 숫자가 0에서 올라오는 시간(초). 0 이면 정지
     "voice_polish": True,         # TTS 목소리 다듬기(EQ·컴프·짧은 룸). 끄려면 false
     "voice_pitch": 0.0,           # 목소리 높낮이 %(-6~+6). 음수면 낮고 차분해진다
     "look": "",                   # "" | cinematic
@@ -296,20 +297,33 @@ def main() -> None:
         if vpath and not vpath.is_file():
             warn("video", f"씬 {i + 1}: 영상 파일을 찾지 못해 이미지로 진행 — {src_video}")
             vpath = None
-        src_img = img_files[0] if (loop_back and i == n - 1) else img_files[i]
+        src_i = 0 if (loop_back and i == n - 1) else i
+        src_img = img_files[src_i]
+        src_card = scenes[src_i].get("card")
         bsec = float(style.get("beat_seconds") or 0)
         beats_n = max(len(sc.get("beats") or []),
                       int(round(lengths[i] / bsec)) if bsec > 0 else 1)
         beats_n = max(1, min(5, beats_n))
         sig = sig_of(vpath or src_img, round(lengths[i], 3), sc["motion"], style["vignette"],
                      style["look"], style.get("dim", 0.0), bool(vpath),
-                     scenes[i].get("video_speed", 1.0), beats_n)
+                     scenes[i].get("video_speed", 1.0), beats_n, bool(src_card))
         if sigs.stale(clip, sig, args.force):
             if vpath:
                 log("video", f"클립 {i + 1:02d}/{n} (영상 {vpath.name}, {lengths[i]:.1f}s)")
                 render.render_video_clip(vpath, clip, lengths[i], vignette=bool(style["vignette"]),
                                          look=style["look"], dim=float(style.get("dim", 0.0)),
                                          speed=float(scenes[i].get("video_speed", 1.0)))
+            elif src_card:
+                # 숫자가 0 에서 올라오는 앞부분만 프레임으로 그리고, 나머지는 마지막 프레임을 붙인다
+                import datacard
+
+                adir = work / f"anim_{src_i + 1:02d}"
+                nf = datacard.render_animation(src_card, adir, style.get("card_theme", "navy"),
+                                               FPS, float(style.get("card_anim_seconds", 1.1)))
+                log("video", f"클립 {i + 1:02d}/{n} (카드 {src_card.get('type')}, {lengths[i]:.1f}s, "
+                             f"카운트업 {nf}프레임, 비트 {beats_n})")
+                render.render_card_clip(adir, nf, src_img, clip, lengths[i],
+                                        beats=beats_n, look=style["look"])
             else:
                 log("video", f"클립 {i + 1:02d}/{n} ({sc['motion']}, {lengths[i]:.1f}s, 비트 {beats_n})")
                 render.render_scene_clip(src_img, clip, lengths[i], sc["motion"],

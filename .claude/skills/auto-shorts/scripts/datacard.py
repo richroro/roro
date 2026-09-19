@@ -43,6 +43,39 @@ THEMES = {
 }
 
 
+# ---------------------------------------------------------------- 숫자 카운트업
+_NUM = __import__("re").compile(r"(\d[\d,]*(?:\.\d+)?)")
+
+
+def _ease_out(p: float) -> float:
+    p = max(0.0, min(1.0, p))
+    return 1 - (1 - p) ** 3
+
+
+def anim_number(text: str, p: float) -> str:
+    """'18,000원' 같은 문자열의 첫 숫자를 0→원래값으로 키운다. 쉼표·소수점·단위는 그대로 둔다.
+
+    숫자 영상에서 값이 그냥 '떠 있는' 것과 올라가는 것은 체감이 완전히 다르다.
+    """
+    if p >= 1.0:
+        return text
+    m = _NUM.search(text)
+    if not m:
+        return text
+    raw = m.group(1)
+    try:
+        val = float(raw.replace(",", ""))
+    except ValueError:
+        return text
+    cur = val * _ease_out(p)
+    if "." in raw:
+        dec = len(raw.split(".")[1])
+        shown = f"{cur:,.{dec}f}" if "," in raw else f"{cur:.{dec}f}"
+    else:
+        shown = f"{cur:,.0f}" if "," in raw else f"{cur:.0f}"
+    return text[:m.start(1)] + shown + text[m.end(1):]
+
+
 def _font(size: int, bold: bool = True):
     from PIL import ImageFont
 
@@ -88,7 +121,7 @@ def _panel(draw, theme: dict, top: int, height: int, margin: int = 70, radius: i
     return box
 
 
-def c_stat(draw, theme, card):
+def c_stat(draw, theme, card, p=1.0):
     """큰 숫자 하나. 라벨(위) / 값(가운데) / 보조 문구(아래)."""
     h = 560
     top = BODY_TOP + (BODY_BOTTOM - BODY_TOP - h) // 2
@@ -103,14 +136,14 @@ def c_stat(draw, theme, card):
         f = _fit(draw, label, 54, WIDTH - 260, bold=False)
         draw.text((cx, y), label, font=f, fill=theme["sub"], anchor="ma")
         y += 86
-    f = _fit(draw, value, 180, WIDTH - 220)
-    draw.text((cx, y + 10), value, font=f, fill=theme["ink"], anchor="ma")
+    f = _fit(draw, value, 180, WIDTH - 220)      # 글자 크기는 최종값 기준으로 고정(숫자가 커져도 안 흔들린다)
+    draw.text((cx, y + 10), anim_number(value, p), font=f, fill=theme["ink"], anchor="ma")
     if note:
         f = _fit(draw, note, 46, WIDTH - 240, bold=False)
         draw.text((cx, box[3] - 96), note, font=f, fill=theme["good"], anchor="ma")
 
 
-def c_compare(draw, theme, card):
+def c_compare(draw, theme, card, p=1.0):
     """전 → 후 두 값. delta 를 주면 아래에 크게 표시한다."""
     h = 620
     top = BODY_TOP + (BODY_BOTTOM - BODY_TOP - h) // 2
@@ -127,7 +160,7 @@ def c_compare(draw, theme, card):
         val = str(side.get("value", ""))
         f = _fit(draw, val, 104, colw - gutter)
         color = theme["good"] if i == 1 and card.get("highlight_right", True) else theme["ink"]
-        draw.text((cx, y + 76), val, font=f, fill=color, anchor="ma")
+        draw.text((cx, y + 76), anim_number(val, p), font=f, fill=color, anchor="ma")
     # 가운데 화살표 (두 값 사이 빈 칸에)
     ax, ay = box[0] + colw, y + 132
     draw.line((ax - 30, ay, ax + 18, ay), fill=theme["line"], width=9)
@@ -138,7 +171,7 @@ def c_compare(draw, theme, card):
         draw.text((WIDTH // 2, box[3] - 176), delta, font=f, fill=theme["good"], anchor="ma")
 
 
-def c_table(draw, theme, card):
+def c_table(draw, theme, card, p=1.0):
     """라벨-값 행. rows: [[라벨, 값], ...], highlight: 강조할 행 번호(0부터)."""
     rows = [r for r in (card.get("rows") or []) if r][:7]
     if not rows:
@@ -158,6 +191,11 @@ def c_table(draw, theme, card):
         draw.line((box[0] + pad, y - 14, box[2] - pad, y - 14), fill=theme["line"], width=3)
     hi = card.get("highlight")
     for i, row in enumerate(rows):
+        # 행이 위에서부터 차례로 들어온다 — 마지막(보통 강조 행)이 가장 늦게 도착한다
+        rp = _ease_out(max(0.0, min(1.0, p * (len(rows) + 1) - i)))
+        if rp <= 0.02:
+            y += row_h
+            continue
         label, value = (list(row) + ["", ""])[:2]
         strong = (hi is not None and i == int(hi))
         if strong:
@@ -166,7 +204,7 @@ def c_table(draw, theme, card):
         fl = _fit(draw, str(label), 52, (box[2] - box[0]) // 2 - pad, bold=False)
         draw.text((box[0] + pad, y + 8), str(label), font=fl, fill=theme["sub"])
         fv = _fit(draw, str(value), 58, (box[2] - box[0]) // 2 - pad)
-        draw.text((box[2] - pad, y + 4), str(value), font=fv,
+        draw.text((box[2] - pad, y + 4), anim_number(str(value), p), font=fv,
                   fill=theme["good"] if strong else theme["ink"], anchor="ra")
         if i + 1 < len(rows):
             draw.line((box[0] + pad, y + row_h - 16, box[2] - pad, y + row_h - 16),
@@ -174,7 +212,7 @@ def c_table(draw, theme, card):
         y += row_h
 
 
-def c_bars(draw, theme, card):
+def c_bars(draw, theme, card, p=1.0):
     """가로 막대. rows: [[라벨, 값(숫자), 표시문구(선택)], ...]"""
     rows = [r for r in (card.get("rows") or []) if r][:5]
     if not rows:
@@ -195,19 +233,19 @@ def c_bars(draw, theme, card):
         f = _fit(draw, label, 44, box[2] - box[0] - pad * 2, bold=False)
         draw.text((box[0] + pad, y), label, font=f, fill=theme["sub"])
         fv = _font(46)
-        draw.text((box[2] - pad, y - 2), text, font=fv,
+        draw.text((box[2] - pad, y - 2), anim_number(text, p), font=fv,
                   fill=theme["good"] if strong else theme["ink"], anchor="ra")
         bar_y = y + 62
         full = box[2] - box[0] - pad * 2
         draw.rounded_rectangle((box[0] + pad, bar_y, box[0] + pad + full, bar_y + 34),
                                radius=17, fill=theme["line"])
-        w = max(34, int(full * (num / peak)))
+        w = max(34, int(full * (num / peak) * _ease_out(p)))
         draw.rounded_rectangle((box[0] + pad, bar_y, box[0] + pad + w, bar_y + 34),
                                radius=17, fill=theme["good"] if strong else theme["ink"])
         y += row_h
 
 
-def c_steps(draw, theme, card):
+def c_steps(draw, theme, card, p=1.0):
     """단계/타임라인. rows: [[라벨, 값], ...], done: 완료로 표시할 개수."""
     rows = [r for r in (card.get("rows") or []) if r][:5]
     if not rows:
@@ -221,8 +259,13 @@ def c_steps(draw, theme, card):
     y = top + 42
     dot_x = box[0] + pad + 22
     for i, row in enumerate(rows):
+        # 단계가 위에서부터 하나씩 켜진다
+        rp = _ease_out(max(0.0, min(1.0, p * (len(rows) + 1) - i)))
+        if rp <= 0.02:
+            y += row_h
+            continue
         label, value = (list(row) + ["", ""])[:2]
-        on = i < done
+        on = i < done and rp > 0.6
         color = theme["good"] if on else theme["line"]
         if i + 1 < len(rows):
             draw.line((dot_x, y + 30, dot_x, y + row_h + 10), fill=theme["line"], width=6)
@@ -241,8 +284,8 @@ def c_steps(draw, theme, card):
 CARDS = {"stat": c_stat, "compare": c_compare, "table": c_table, "bars": c_bars, "steps": c_steps}
 
 
-def draw_card(card: dict, out: str | Path, theme: str = "navy") -> Path:
-    """카드 하나를 1080x1920 JPEG 로 그린다."""
+def draw_card(card: dict, out: str | Path, theme: str = "navy", progress: float = 1.0) -> Path:
+    """카드 하나를 1080x1920 JPEG 로 그린다. progress<1 이면 숫자가 자라는 중간 프레임."""
     from PIL import ImageDraw
 
     th = THEMES.get(theme or "navy", THEMES["navy"])
@@ -251,7 +294,7 @@ def draw_card(card: dict, out: str | Path, theme: str = "navy") -> Path:
     fn = CARDS.get(str(card.get("type", "stat")))
     if not fn:
         raise ValueError(f"알 수 없는 카드 종류: {card.get('type')} (가능: {', '.join(CARDS)})")
-    fn(draw, th, card)
+    fn(draw, th, card, progress)
     src = str(card.get("source", "")).strip()
     if src:
         draw.text((WIDTH // 2, HEIGHT - 210), f"출처 {src}", font=_font(34, False),
@@ -260,6 +303,23 @@ def draw_card(card: dict, out: str | Path, theme: str = "navy") -> Path:
     out.parent.mkdir(parents=True, exist_ok=True)
     img.save(out, quality=94)
     return out
+
+
+def render_animation(card: dict, outdir: str | Path, theme: str = "navy",
+                     fps: int = 30, seconds: float = 1.1) -> int:
+    """카드가 그려지는 앞부분을 프레임으로 뽑는다. 돌려주는 값은 프레임 개수.
+
+    씬 전체를 프레임으로 만들면 느리고 디스크만 먹는다. 숫자가 올라가는 앞 1초만 그리고
+    나머지는 마지막 프레임을 정지로 붙인다.
+    """
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    for f in outdir.glob("f_*.jpg"):
+        f.unlink()
+    n = max(2, int(round(fps * seconds)))
+    for i in range(n):
+        draw_card(card, outdir / f"f_{i + 1:03d}.jpg", theme, progress=(i + 1) / n)
+    return n
 
 
 SAMPLES = [
