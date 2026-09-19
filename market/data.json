@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T09:08:06.078817+09:00",
+  "updatedAt": "2026-09-19T14:41:58.334411+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -13,8 +13,8 @@
       "symbol": "^KQ11",
       "name": "KOSDAQ",
       "price": 827.12,
-      "change": 11.14,
-      "changePercent": 1.37,
+      "change": 4.94,
+      "changePercent": 0.6,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1385.95,
-      "change": 6.0,
-      "changePercent": 0.43,
+      "price": 1385.0,
+      "change": 5.05,
+      "changePercent": 0.37,
       "currency": "KRW"
     }
   ],
@@ -112,10 +112,100 @@
   ],
   "news": [
     {
+      "title": "[여행소식] 비싼 하와이 외식비 낮춘다…와이키키서 첫 '레스토랑 위크'",
+      "link": "https://www.yna.co.kr/view/AKR20260919040600542",
+      "pubDate": "Sat, 19 Sep 2026 14:27:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "건설업체 서한, 추석 앞두고 협력사 125곳에 공사대금 조기 지급",
+      "link": "https://www.yna.co.kr/view/AKR20260919039100053",
+      "pubDate": "Sat, 19 Sep 2026 14:00:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "모델 맡은 기업들 모여 '프로젝트 광고'까지…\"이 정도면 장원영 ETF\" [김소연의 얼굴전략]",
+      "link": "https://www.hankyung.com/article/202609184078g",
+      "pubDate": "Sat, 19 Sep 2026 13:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "인천 강화서 구제역 추가 발생…소 2마리 항원 양성",
+      "link": "https://www.yna.co.kr/view/AKR20260919033700030",
+      "pubDate": "Sat, 19 Sep 2026 12:00:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] 40일 뒤 기업들 어쩌나…문자 시장 '대혼란' 초읽기",
+      "link": "https://www.hankyung.com/article/202609195099H",
+      "pubDate": "Sat, 19 Sep 2026 11:48:19 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "하루아침에 회사가 사라졌다…'85만 차주' 날벼락 맞은 이유 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202609120317i",
+      "pubDate": "Sat, 19 Sep 2026 11:30:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "순창 동계 밤, 12년 연속 중국 수출…올해 총 150ｔ 선적",
+      "link": "https://www.yna.co.kr/view/AKR20260919027900055",
+      "pubDate": "Sat, 19 Sep 2026 10:53:35 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20260919026200011",
+      "pubDate": "Sat, 19 Sep 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "KF-21·무인기 '한 팀'으로…KAI가 그리는 미래 공중전 체계",
+      "link": "https://www.hankyung.com/article/202609171191i",
+      "pubDate": "Sat, 19 Sep 2026 10:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"GPU는 잊어라\" 경쟁사도 품은 엔비디아, 다음 먹거리는? [김인엽의 AI 프런티어]",
+      "link": "https://www.hankyung.com/article/202609184402i",
+      "pubDate": "Sat, 19 Sep 2026 10:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'차명 갭투자' 건축업자, 벌금 700만원…약식명령보다 상향",
+      "link": "https://www.yna.co.kr/view/AKR20260918105400061",
+      "pubDate": "Sat, 19 Sep 2026 10:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성 뛰어든 '3100억 투자' 정체는…AI 뒤흔들 '파격 계획' [강경주의 테크X]",
+      "link": "https://www.hankyung.com/article/2026091839056",
+      "pubDate": "Sat, 19 Sep 2026 09:30:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "불황에도 혼자 컸다…中 '가전 공룡' 메이디의 생존법",
+      "link": "https://www.hankyung.com/article/202608313543i",
+      "pubDate": "Sat, 19 Sep 2026 09:00:18 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"우리가 매출 22%를 떼갔다고?\"…'온플법' 위기감에 행동 나선 e커머스",
+      "link": "https://www.hankyung.com/article/202609184623i",
+      "pubDate": "Sat, 19 Sep 2026 09:00:13 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "서울공항 주변 비행안전구역 축소방안은…성남시 22일 설명회",
       "link": "https://www.yna.co.kr/view/AKR20260918065900061",
       "pubDate": "Sat, 19 Sep 2026 09:00:07 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "맥도날드 매장에 팬들 몰렸다…홍콩 2030 홀린 'GD의 30초' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609182456i",
+      "pubDate": "Sat, 19 Sep 2026 09:00:07 +0900",
+      "source": "한국경제"
     },
     {
       "title": "\"국내은행 상반기 순익 줄어…이자이익 늘어도 부실 위험 커져\"",
@@ -136,99 +226,9 @@
       "source": "연합뉴스"
     },
     {
-      "title": "한은, 퇴임한 이창용에 매달 700만원…자문 기록은 \"관리 안 해\"",
-      "link": "https://www.yna.co.kr/view/AKR20260918089600002",
-      "pubDate": "Sat, 19 Sep 2026 07:55:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "주유소 기름값 18주째 하락…최고가격제 영향에 1천800원대 지속",
-      "link": "https://www.yna.co.kr/view/AKR20260918152000003",
-      "pubDate": "Sat, 19 Sep 2026 07:01:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[신상잇슈] 오뚜기 '숙성크림 카레고로케'·파리바게뜨 '감자쫀떡'",
-      "link": "https://www.yna.co.kr/view/AKR20260918040300030",
-      "pubDate": "Sat, 19 Sep 2026 07:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[금주핫템] 아이더 '슬림 블렌드 다운 재킷'·씰리침대 '자개 매트리스'",
-      "link": "https://www.yna.co.kr/view/AKR20260917184200030",
-      "pubDate": "Sat, 19 Sep 2026 07:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "AI 덕에 한국 대박 났는데…\"이미 위험한 단계\" 섬뜩한 경고 [김주완의 글로벌머니 X파일]",
       "link": "https://www.hankyung.com/article/202609184079i",
       "pubDate": "Sat, 19 Sep 2026 07:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[AI돋보기] AI가 질문을 보완하는 시대…프롬프트 비법은 끝났나",
-      "link": "https://www.yna.co.kr/view/AKR20260918121100017",
-      "pubDate": "Sat, 19 Sep 2026 06:33:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'뽀통령' 얼굴에 테이프 붙인 이유가…1000억 쓰고 '충격'",
-      "link": "https://www.hankyung.com/article/2026091844221",
-      "pubDate": "Sat, 19 Sep 2026 06:00:12 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"70만원 받던 배우였습니다\"…10년 뒤 그 무대가 바뀌었다 [권용훈의 직업불만족(族)]",
-      "link": "https://www.hankyung.com/article/202609078130i",
-      "pubDate": "Sat, 19 Sep 2026 06:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이번엔 일본 안 가요\"…'이 나라' 1150만명 몰리자 벌어진 일 [플라잇톡]",
-      "link": "https://www.hankyung.com/article/202609183926g",
-      "pubDate": "Fri, 18 Sep 2026 22:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"설립 2년 만에 7500억 회사 됐다\"…투자자들 몰린 '이 기술'",
-      "link": "https://www.hankyung.com/article/2026091844761",
-      "pubDate": "Fri, 18 Sep 2026 20:00:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'품절, 품절, 또 품절'…99만개 팔린 빵, 매장 가도 없는 이유 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609183061g",
-      "pubDate": "Fri, 18 Sep 2026 20:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "韓총리, 태릉지구 방문…\"국민신뢰 가늠자, 차질없이 추진\"",
-      "link": "https://www.yna.co.kr/view/AKR20260918180500001",
-      "pubDate": "Fri, 18 Sep 2026 19:38:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "비씨카드·중구, 친환경 포장재 지원 협약",
-      "link": "https://www.hankyung.com/article/2026091845281",
-      "pubDate": "Fri, 18 Sep 2026 18:17:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "김종철 인천경제자유구역청장 취임",
-      "link": "https://www.hankyung.com/article/2026091845311",
-      "pubDate": "Fri, 18 Sep 2026 18:15:46 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "해성디에스, 2500억 투자해 패널 공법 도입 앞당긴다",
-      "link": "https://www.hankyung.com/article/202609184617i",
-      "pubDate": "Fri, 18 Sep 2026 18:06:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'노란봉투법' 첫 집행정지 인용 나왔다…동희오토, 중노위 결정 제동",
-      "link": "https://www.hankyung.com/article/202609184234i",
-      "pubDate": "Fri, 18 Sep 2026 18:06:43 +0900",
       "source": "한국경제"
     }
   ]
