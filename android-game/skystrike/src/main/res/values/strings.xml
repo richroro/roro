@@ -30,4 +30,6 @@
     <string name="rush_in">Formation inbound!</string>
     <string name="boss_rage">ENRAGED</string>
     <string name="best_chain">Best chain %1$d</string>
+    <string name="tap_continue">Tap to resume stage %1$d · %2$d left</string>
+    <string name="continues_spent">No resumes left</string>
 </resources>

@@ -98,6 +98,8 @@ class SkyWorld(private val seed: Int = 1) {
         var rage = 0f
             internal set
         internal var spin = 0f
+        internal var burst = 0
+        internal var wallGap = 0
         /** True once the last blast has gone off and the hull is no longer there to draw. */
         var finished = false
             internal set
@@ -125,6 +127,20 @@ class SkyWorld(private val seed: Int = 1) {
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
+
+    /**
+     * How a raider fights. The hull you see is the hull that behaves this way, so a stage you
+     * have flown before still surprises you once the raider underneath it changes.
+     */
+    enum class BossStyle { FAN, BURST, WALL, DAGGER, COLUMN, RING }
+
+    class BossProfile(
+        val style: BossStyle,
+        val sweepRate: Float,
+        val reach: Float,
+        val gap: Float,
+        val hp: Float,
+    )
 
     /** The shapes a wave can fly in. Each stage draws from its own set. */
     enum class Formation { LINE, VEE, ARC, TRAIL, SPLIT }
@@ -166,6 +182,9 @@ class SkyWorld(private val seed: Int = 1) {
     var score = 0
         private set
     var kills = 0
+        private set
+    /** How many times this run can still pick itself up where it fell. */
+    var continues = MAX_CONTINUES
         private set
 
     var playerX = 0f
@@ -236,7 +255,29 @@ class SkyWorld(private val seed: Int = 1) {
         pendingEvents.clear()
     }
 
-    fun start() = startLevel(1)
+    /**
+     * A brand new run. Everything a run accumulates resets here and nowhere else, so a stage
+     * change or a continue carries the score, the kill count and the best chain with it.
+     */
+    fun start() {
+        score = 0
+        kills = 0
+        bestCombo = 0
+        continues = MAX_CONTINUES
+        startLevel(1)
+    }
+
+    /**
+     * Picks the run back up on the stage you fell on, with a fresh aircraft. The score and the
+     * kills stay -- you are continuing, not starting over -- and you only get [MAX_CONTINUES] of
+     * them, so the run still has an end. Returns false when there is nothing left to spend.
+     */
+    fun continueRun(): Boolean {
+        if (state != State.GAME_OVER || continues <= 0) return false
+        continues--
+        startLevel(level)
+        return true
+    }
 
     fun nextLevel() = startLevel(level + 1)
 
@@ -262,7 +303,6 @@ class SkyWorld(private val seed: Int = 1) {
         flash = 0f
         combo = 0
         comboTimer = 0f
-        bestCombo = 0
         rushDone = false
         fireAccumulator = 0f
         elapsed = 0f
@@ -498,9 +538,13 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun spawnBoss() {
         val profile = profileOf(level)
-        val hp = max(30, (BOSS_BASE_HP * profile.bossHp * (1f + (level - 1) * 0.45f)).toInt())
-        boss = Boss((level - 1).mod(BOSS_KINDS), hp)
-        pendingEvents.add(Event(Event.Type.BOSS_IN, 0f, 0f, value = (level - 1).mod(BOSS_KINDS)))
+        val kind = (level - 1).mod(BOSS_KINDS)
+        val hp = max(
+            30,
+            (BOSS_BASE_HP * profile.bossHp * bossProfileOf(kind).hp * (1f + (level - 1) * 0.45f)).toInt(),
+        )
+        boss = Boss(kind, hp)
+        pendingEvents.add(Event(Event.Type.BOSS_IN, 0f, 0f, value = kind))
     }
 
     private fun updateBoss(dt: Float) {
@@ -516,11 +560,20 @@ class SkyWorld(private val seed: Int = 1) {
         } else {
             b.rage = max(0f, b.rage - dt)
             // each phase sweeps faster and wider, and leans on the salvo harder
-            b.sweep += dt * BOSS_PHASE_SWEEP[b.phase]
-            b.x = sin(b.sweep * BOSS_SWEEP_RATE) * BOSS_SWEEP_X * BOSS_PHASE_REACH[b.phase]
+            val kindly = bossProfileOf(b.kind)
+            b.sweep += dt * BOSS_PHASE_SWEEP[b.phase] * kindly.sweepRate
+            b.x = sin(b.sweep * BOSS_SWEEP_RATE) * BOSS_SWEEP_X * BOSS_PHASE_REACH[b.phase] * kindly.reach
             b.salvo -= dt
             if (b.salvo <= 0f) {
-                b.salvo = ((BOSS_SALVO_GAP - level * 0.03f) * BOSS_PHASE_GAP[b.phase]).coerceAtLeast(0.32f)
+                // a burst raider keeps firing until its burst is spent, then takes the long gap
+                if (b.burst > 0) {
+                    b.burst--
+                    b.salvo = BURST_GAP
+                } else {
+                    b.salvo = ((BOSS_SALVO_GAP - level * 0.03f) * BOSS_PHASE_GAP[b.phase] * kindly.gap)
+                        .coerceAtLeast(0.32f)
+                    if (kindly.style == BossStyle.BURST) b.burst = BURST_SHOTS - 1
+                }
                 fireBossSalvo(b)
             }
         }
@@ -529,28 +582,45 @@ class SkyWorld(private val seed: Int = 1) {
     }
 
     private fun fireBossSalvo(b: Boss) {
-        // Phase 2 turns the fan into a slow spiral, so the gap you slip through keeps moving.
-        if (b.phase >= 2) {
-            b.spin += BOSS_SPIN_STEP
-            for (i in 0 until BOSS_SPIRAL_ARMS) {
-                val ang = b.spin + i * (TAU / BOSS_SPIRAL_ARMS)
-                mutableShots.add(
-                    Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, abs(cos(ang)) * ENEMY_SHOT_SPEED, false),
-                )
+        val kindly = bossProfileOf(b.kind)
+        val step = b.phase                              // every phase adds one more of everything
+        when (kindly.style) {
+            // the plain wide fan: slip between the arms
+            BossStyle.FAN -> fan(b, 3 + (level - 1).coerceAtMost(4) + step, BOSS_FAN)
+            // three quick ones, tight, then it has to breathe
+            BossStyle.BURST -> fan(b, 3 + step, BOSS_FAN * 0.55f)
+            // a curtain the width of the sky, with one gap that walks along it
+            BossStyle.WALL -> {
+                val slots = WALL_SLOTS + step
+                b.wallGap = (b.wallGap + 1 + step).mod(slots)
+                for (i in 0 until slots) {
+                    if (i == b.wallGap || i == (b.wallGap + 1).mod(slots)) continue
+                    val x = -WALL_REACH + 2f * WALL_REACH * (i / (slots - 1f))
+                    mutableShots.add(Shot(x, b.y + 0.08f, 0f, ENEMY_SHOT_SPEED * 0.8f, false))
+                }
             }
-            pendingEvents.add(Event(Event.Type.ENEMY_SHOT, b.x, b.y))
-            return
+            // a narrow spike, straight down its own nose, from a hull that will not hold still
+            BossStyle.DAGGER -> fan(b, 2 + step, BOSS_FAN * 0.3f)
+            // it owns the ground under it: a tight column, one shot behind the next
+            BossStyle.COLUMN -> {
+                for (i in 0 until COLUMN_SHOTS + step) {
+                    val lead = i * 0.07f
+                    mutableShots.add(Shot(b.x, b.y + 0.08f + lead, 0f, ENEMY_SHOT_SPEED * 1.15f, false))
+                }
+            }
+            // an even ring, turned a little further each time, so the gap keeps moving
+            BossStyle.RING -> {
+                b.spin += BOSS_SPIN_STEP
+                val arms = BOSS_SPIRAL_ARMS + step
+                for (i in 0 until arms) {
+                    val ang = b.spin + i * (TAU / arms)
+                    mutableShots.add(
+                        Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, abs(cos(ang)) * ENEMY_SHOT_SPEED, false),
+                    )
+                }
+            }
         }
-        // A fan the player has to slip between, widening with the stage.
-        val arms = 3 + (level - 1).coerceAtMost(4)
-        for (i in 0 until arms) {
-            val t = if (arms == 1) 0.5f else i / (arms - 1).toFloat()
-            val ang = (t - 0.5f) * BOSS_FAN
-            mutableShots.add(
-                Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, cos(ang) * ENEMY_SHOT_SPEED, false),
-            )
-        }
-        // From phase 1 it also picks you out of the fan and puts one straight at you.
+        // From phase 1 every raider also picks you out of its own pattern.
         if (b.phase >= 1) {
             val dx = playerX - b.x
             val dy = max(0.15f, playerY - b.y)
@@ -560,6 +630,17 @@ class SkyWorld(private val seed: Int = 1) {
             )
         }
         pendingEvents.add(Event(Event.Type.ENEMY_SHOT, b.x, b.y))
+    }
+
+    /** [arms] shots spread evenly across [width] radians, aimed down the screen. */
+    private fun fan(b: Boss, arms: Int, width: Float) {
+        for (i in 0 until arms) {
+            val t = if (arms == 1) 0.5f else i / (arms - 1).toFloat()
+            val ang = (t - 0.5f) * width
+            mutableShots.add(
+                Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, cos(ang) * ENEMY_SHOT_SPEED, false),
+            )
+        }
     }
 
     private fun damageBoss(b: Boss, amount: Int) {
@@ -589,6 +670,7 @@ class SkyWorld(private val seed: Int = 1) {
         b.nextBreakAt = BOSS_DEATH_SECONDS - BOSS_BREAK_GAP * 0.35f
         b.breaks = 0
         b.finished = false
+        b.burst = 0
         // the sky clears with it: nothing already in the air may still kill you now
         for (s in mutableShots) if (!s.fromPlayer) s.alive = false
         pendingEvents.add(Event(Event.Type.BOSS_DOWN, b.x, b.y, value = b.kind))
@@ -854,6 +936,15 @@ class SkyWorld(private val seed: Int = 1) {
         boss = Boss(0, hp).also { it.y = BOSS_STATION_Y; it.engaged = true }
     }
 
+    internal fun forceBossKindForTest(kind: Int) {
+        val b = boss ?: return
+        boss = Boss(kind, b.hp).also { it.y = BOSS_STATION_Y; it.engaged = true }
+    }
+
+    internal fun clearShotsForTest() {
+        mutableShots.clear()
+    }
+
     internal fun forceBossPhaseForTest(phase: Int) {
         boss?.phase = phase
     }
@@ -905,6 +996,7 @@ class SkyWorld(private val seed: Int = 1) {
         const val MAX_HP = 5
         const val START_BOMBS = 2
         const val MAX_BOMBS = 5
+        const val MAX_CONTINUES = 3
         const val MAX_SPREAD = 5
         const val RAM_DAMAGE = 1
         const val SHOT_DAMAGE = 1
@@ -932,7 +1024,28 @@ class SkyWorld(private val seed: Int = 1) {
         const val CLEAR_BONUS = 250
         const val BOSS_SCORE = 500
 
-        const val BOSS_KINDS = 4
+        const val BOSS_KINDS = 6
+
+        /**
+         * One per hull, in the order [SkyView] loads the sprites. A raider that slides fast does
+         * not also get to be a wall, and the one that barely moves is paid for in health.
+         */
+        val BOSS_PROFILES = listOf(
+            // the four-engine heavy: the plain wide fan everything else is measured against
+            BossProfile(BossStyle.FAN, 1.0f, 1.0f, 1.0f, 1.0f),
+            // twin boom: three salvos in a row, then long enough to breathe
+            BossProfile(BossStyle.BURST, 1.5f, 1.1f, 1.3f, 1.0f),
+            // flying wing: lays a curtain across the sky with one gap in it
+            BossProfile(BossStyle.WALL, 0.5f, 0.6f, 1.4f, 1.1f),
+            // the dagger: a narrow spike of fire, and it will not hold still
+            BossProfile(BossStyle.DAGGER, 1.9f, 1.15f, 0.8f, 0.9f),
+            // the barge: slow, heavy, and it owns the ground under its nose
+            BossProfile(BossStyle.COLUMN, 0.6f, 1.2f, 0.75f, 1.25f),
+            // the eye: an even ring, turning a little each time
+            BossProfile(BossStyle.RING, 0.8f, 0.5f, 1.15f, 1.05f),
+        )
+
+        fun bossProfileOf(kind: Int): BossProfile = BOSS_PROFILES[kind.mod(BOSS_PROFILES.size)]
         const val BOSS_BASE_HP = 70f
         const val BOSS_STATION_Y = 0.2f
         /** How long the hull takes to come apart before the clear panel is allowed up. */
@@ -955,6 +1068,11 @@ class SkyWorld(private val seed: Int = 1) {
         const val BOSS_AIMED_SPEED = 0.95f
         const val BOSS_SPIRAL_ARMS = 5
         const val BOSS_SPIN_STEP = 0.7f
+        const val BURST_SHOTS = 3
+        const val BURST_GAP = 0.17f
+        const val WALL_SLOTS = 8
+        const val WALL_REACH = 0.85f
+        const val COLUMN_SHOTS = 3
         const val BOSS_SWEEP_RATE = 0.9f
         const val BOSS_SWEEP_X = 0.5f
         const val BOSS_SALVO_GAP = 1.15f

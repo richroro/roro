@@ -206,8 +206,28 @@ stops feeling like a metronome.
 
 **Three rounds, not one.** The raider changes its mind at `BOSS_PHASE_2` and `BOSS_PHASE_3` of its
 health -- the bar carries a tick at each, so you can see them coming. It sweeps faster and wider
-each time. From phase 1 it stops only throwing its fan and picks you out of it with an aimed shot;
-at phase 2 the fan becomes a slow spiral, so the gap you slip through keeps moving.
+each time, and from phase 1 it also picks you out of its own pattern with an aimed shot.
+
+**Six raiders, not four repaints.** Each hull in `BOSS_PROFILES` has its own silhouette *and* its
+own `BossStyle`, so what you are looking at tells you what is about to come out of it:
+
+| hull | style | what it does |
+|---|---|---|
+| four-engine heavy | `FAN` | the plain wide fan everything else is measured against |
+| twin boom | `BURST` | three salvos back to back, then long enough to breathe |
+| flying wing | `WALL` | a curtain the width of the sky with one gap that walks along it |
+| dagger | `DAGGER` | a narrow spike of fire, from a hull that will not hold still |
+| armoured barge | `COLUMN` | a tight column straight down its nose; it owns the ground under it |
+| the disc | `RING` | an even ring, turned a little further each salvo |
+
+A raider that slides fast does not also get to be a wall, and the one that barely moves pays for it
+in health. Six raiders against four stages means the cycles do not line up: fly the coast road a
+second time and something else is waiting at the end of it.
+
+**Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
+you back on the stage you fell on with a fresh aircraft. The score, the kills and the best chain
+stay -- you are continuing, not starting over -- and only `start()` clears them, so the run still
+ends once the continues are spent.
 
 When the raider's health runs out the stage does not end on that frame. The world nearly stops
 for a beat (`HITSTOP_SCALE`), then winds back up while the hull falls, rolls over and comes apart
