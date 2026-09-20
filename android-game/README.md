@@ -201,6 +201,10 @@ added since each ask you to do something you would not otherwise do:
 | `SPLITTER` | dies into two smaller ones. Finish what you started -- and it is two more links on the chain. |
 | `TURRET` | comes in, parks at `TURRET_STATION_Y` and owns that patch of sky until you take it away. It gives up after `TURRET_SECONDS` rather than wedging the stage open. |
 | `SWARM` | tiny, quick, one hit each, and never fewer than seven. |
+| `MINER` | crosses slowly and leaves `MINE`s behind it. |
+| `MINE` | not an aircraft: it barely drifts, and it is still there when you come back. |
+| `CHARGER` | picks your lane, spends `CHARGE_TELL` telling you about it, then takes it at `CHARGE_SPEED`. |
+| `HEALER` | mends the worst-off aircraft within `HEAL_RADIUS` -- and never itself, so it is always the thing to shoot first. |
 
 `halfOf(kind)` gives each one the hitbox it looks like it has, and the renderer scales the sprite
 from the same number, so what you see is what you can hit.
@@ -256,8 +260,14 @@ and the two that look after the chain and the sky around you (`CHARM`, `MAGNET`)
 - **`CHARM`** eats one chain break. The hit still lands and still costs a hit point -- the chain
   is what survives it.
 
-`DROP_TABLE` keeps the drop *rate* where it was, so ten kinds means more variety per drop rather
-than more power: the staples stay common and the exotics stay a treat.
+- **`SLOW`** puts everything coming at you on a `SLOW_FACTOR` clock -- their aircraft, their fire,
+  the raider. Your own rounds keep their speed, so it is a window, not a pause.
+- **`ORBIT`** gives you orbs circling the aircraft that eat the fire that runs into them.
+- **`VAMPIRE`** puts a hit point back every `VAMP_KILLS` kills, so aggression pays for itself.
+- **`MEDAL`** is points on the spot, multiplied by whatever your chain is paying.
+
+`DROP_TABLE` keeps the drop *rate* where it was, so fourteen kinds means more variety per drop
+rather than more power: the staples stay common and the exotics stay a treat.
 
 **Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
 you back on the stage you fell on with a fresh aircraft. The score, the kills and the best chain
