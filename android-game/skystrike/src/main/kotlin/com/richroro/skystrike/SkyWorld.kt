@@ -183,7 +183,7 @@ class SkyWorld(private val seed: Int = 1) {
             SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
             BOSS_DOWN, BOSS_BREAK, KILL_BOSS, BOSS_PHASE,
             COMBO_UP, COMBO_LOST, CHARM_USED, RUSH, DEFLECT, SPLIT,
-            MINE_LAID, CHARGE, HEAL, ORBIT_BLOCK, VAMP_HEAL, MEDAL,
+            MINE_LAID, CHARGE, HEAL, ORBIT_BLOCK, VAMP_HEAL, MEDAL, BOON_TAKEN,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -201,6 +201,13 @@ class SkyWorld(private val seed: Int = 1) {
         val gap: Float,
         val hp: Float,
     )
+
+    /**
+     * What you pick between stages. Unlike a pickup, a boon is yours for the rest of the run --
+     * it is what makes the fourth stage of a good run feel different from the fourth stage of a
+     * bad one, and it is the reason to keep a run alive rather than restart for a better start.
+     */
+    enum class Boon { ARMOUR, BOMBS, GUNS, ESCORT, RAPIDFIRE, CHAINWINDOW, CHARMED, MAGNETIC, PIERCING, SUPPLY, AGILITY, CHAINCAP }
 
     /** The shapes a wave can fly in. Each stage draws from its own set. */
     enum class Formation { LINE, VEE, ARC, TRAIL, SPLIT }
@@ -243,6 +250,35 @@ class SkyWorld(private val seed: Int = 1) {
         private set
     var kills = 0
         private set
+    /** What the run has picked up between stages, and how many times each. */
+    private val boonLevels = HashMap<Boon, Int>()
+    val boons: Map<Boon, Int> get() = boonLevels
+
+    /** The three on offer right now. Empty unless the stage has just been cleared. */
+    var offered: List<Boon> = emptyList()
+        private set
+
+    fun boonLevel(boon: Boon): Int = boonLevels[boon] ?: 0
+
+    // What the boons add up to. Everything that reads a starting value reads one of these.
+    fun maxHp(): Int = MAX_HP + boonLevel(Boon.ARMOUR)
+    fun startBombs(): Int = START_BOMBS + boonLevel(Boon.BOMBS)
+    fun startSpread(): Int = min(MAX_SPREAD, 1 + boonLevel(Boon.GUNS))
+    fun startWingmen(): Int = min(MAX_WINGMEN, boonLevel(Boon.ESCORT))
+    fun fireRate(): Float = BASE_FIRE_RATE * (1f + RAPIDFIRE_STEP * boonLevel(Boon.RAPIDFIRE))
+    fun comboWindow(): Float = COMBO_WINDOW + CHAINWINDOW_STEP * boonLevel(Boon.CHAINWINDOW)
+    fun maxComboMult(): Int = MAX_COMBO_MULT + CHAINCAP_STEP * boonLevel(Boon.CHAINCAP)
+    fun basePierce(): Int = boonLevel(Boon.PIERCING)
+    fun itemChance(): Float = ITEM_CHANCE * (1f + SUPPLY_STEP * boonLevel(Boon.SUPPLY))
+    /**
+     * How far forward this run may push. Agility buys sky, but never past [FRONT_FLOOR] -- the
+     * boss fight opening with a free ram is a promise the boons do not get to break.
+     */
+    fun frontLimit(): Float =
+        max(FRONT_FLOOR, PLAYER_Y_MIN - AGILITY_STEP * boonLevel(Boon.AGILITY))
+    /** A standing pull on pickups, before any magnet you happen to be holding. */
+    fun standingPull(): Float = MAGNETIC_STEP * boonLevel(Boon.MAGNETIC)
+
     /** Hits taken on this stage, and the best chain held on it: what the stage is graded on. */
     var stageHits = 0
         private set
@@ -358,11 +394,40 @@ class SkyWorld(private val seed: Int = 1) {
      * A brand new run. Everything a run accumulates resets here and nowhere else, so a stage
      * change or a continue carries the score, the kill count and the best chain with it.
      */
+    /**
+     * Lays out three to pick between. Anything already at its ceiling drops out of the pool, so
+     * late in a run you are choosing between the things you have not taken yet.
+     */
+    private fun offerBoons() {
+        val pool = Boon.entries.filter { boonLevel(it) < boonCap(it) }.toMutableList()
+        val picks = ArrayList<Boon>(BOONS_OFFERED)
+        while (picks.size < BOONS_OFFERED && pool.isNotEmpty()) {
+            picks.add(pool.removeAt(random.nextInt(pool.size)))
+        }
+        offered = picks
+    }
+
+    /**
+     * Takes the boon at [index] of what is on offer and flies on. Returns false when there is
+     * nothing to take, so the view can fall back to simply starting the next stage.
+     */
+    fun takeBoon(index: Int): Boolean {
+        if (state != State.LEVEL_CLEAR || index !in offered.indices) return false
+        val boon = offered[index]
+        boonLevels[boon] = boonLevel(boon) + 1
+        pendingEvents.add(Event(Event.Type.BOON_TAKEN, 0f, 0f, value = boon.ordinal))
+        offered = emptyList()
+        nextLevel()
+        return true
+    }
+
     fun start() {
         score = 0
         kills = 0
         bestCombo = 0
         continues = MAX_CONTINUES
+        boonLevels.clear()
+        offered = emptyList()
         startLevel(1)
     }
 
@@ -394,16 +459,16 @@ class SkyWorld(private val seed: Int = 1) {
         boss = null
         playerX = 0f
         playerY = PLAYER_Y
-        hp = MAX_HP
-        bombs = START_BOMBS
+        hp = maxHp()
+        bombs = startBombs()
         shield = false
         rapidTimer = 0f
-        spread = 1
-        wingmen = 0
+        spread = startSpread()
+        wingmen = startWingmen()
         pierceTimer = 0f
         homingTimer = 0f
         magnetTimer = 0f
-        charm = false
+        charm = boonLevel(Boon.CHARMED) > 0
         slowTimer = 0f
         orbs = 0
         orbitPhase = 0f
@@ -425,6 +490,7 @@ class SkyWorld(private val seed: Int = 1) {
         nextWaveAt = 0.8f
         gust = 0f
         nextFlareAt = FLARE_GAP
+        offered = emptyList()
         state = State.RUNNING
     }
 
@@ -434,7 +500,7 @@ class SkyWorld(private val seed: Int = 1) {
      */
     fun movePlayerBy(dx: Float, dy: Float = 0f) {
         playerX = (playerX + dx).coerceIn(-PLAYER_LIMIT, PLAYER_LIMIT)
-        playerY = (playerY + dy).coerceIn(PLAYER_Y_MIN, PLAYER_Y_MAX)
+        playerY = (playerY + dy).coerceIn(frontLimit(), PLAYER_Y_MAX)
     }
 
     /** Sets off the screen-clearing bomb, if one is left. Returns true when it fired. */
@@ -961,7 +1027,7 @@ class SkyWorld(private val seed: Int = 1) {
     // ---- the player -----------------------------------------------------------------------
 
     private fun updatePlayerFire(dt: Float) {
-        val rate = BASE_FIRE_RATE * (if (rapidTimer > 0f) RAPID_MULT else 1f)
+        val rate = fireRate() * (if (rapidTimer > 0f) RAPID_MULT else 1f)
         fireAccumulator += rate * dt
         while (fireAccumulator >= 1f) {
             fireAccumulator -= 1f
@@ -981,7 +1047,7 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun addPlayerShot(x: Float, y: Float, vx: Float) {
         val shot = Shot(x, y, vx, -SHOT_SPEED, true)
-        if (pierceTimer > 0f) shot.pierce = PIERCE_HITS
+        shot.pierce = if (pierceTimer > 0f) PIERCE_HITS else basePierce()
         mutableShots.add(shot)
     }
 
@@ -1158,7 +1224,7 @@ class SkyWorld(private val seed: Int = 1) {
     }
 
     private fun maybeDropItem(x: Float, y: Float) {
-        if (random.next() >= ITEM_CHANCE) return
+        if (random.next() >= itemChance()) return
         var roll = random.next() * DROP_WEIGHT_TOTAL
         var kind = DROP_TABLE.last().first
         for ((k, weight) in DROP_TABLE) {
@@ -1173,14 +1239,15 @@ class SkyWorld(private val seed: Int = 1) {
         while (it.hasNext()) {
             val item = it.next()
             if (!item.alive) { it.remove(); continue }
-            if (magnetTimer > 0f) {
+            val pull = if (magnetTimer > 0f) MAGNET_PULL else standingPull()
+            if (pull > 0f) {
                 // reel it in: still falling, but now it is coming to you
                 val dx = playerX - item.x
                 val dy = playerY - item.y
                 val d = kotlin.math.sqrt(dx * dx + dy * dy)
                 if (d > 1e-4f) {
-                    item.x += dx / d * MAGNET_PULL * dt
-                    item.y += dy / d * MAGNET_PULL * dt
+                    item.x += dx / d * pull * dt
+                    item.y += dy / d * pull * dt
                 }
             }
             item.y += ITEM_FALL_SPEED * dt
@@ -1201,7 +1268,7 @@ class SkyWorld(private val seed: Int = 1) {
             ItemKind.RAPID -> rapidTimer = RAPID_SECONDS
             ItemKind.SHIELD -> shield = true
             ItemKind.BOMB -> bombs = min(MAX_BOMBS, bombs + 1)
-            ItemKind.REPAIR -> hp = min(MAX_HP, hp + 1)
+            ItemKind.REPAIR -> hp = min(maxHp(), hp + 1)
             ItemKind.WINGMAN -> wingmen = min(MAX_WINGMEN, wingmen + 1)
             ItemKind.PIERCE -> pierceTimer = PIERCE_SECONDS
             ItemKind.HOMING -> homingTimer = HOMING_SECONDS
@@ -1231,6 +1298,7 @@ class SkyWorld(private val seed: Int = 1) {
         }
         if (!b.alive) {
             if (b.dying > 0f) return
+            offerBoons()
             state = State.LEVEL_CLEAR
             bestLevel = max(bestLevel, level)
             score += CLEAR_BONUS * level
@@ -1250,28 +1318,28 @@ class SkyWorld(private val seed: Int = 1) {
     }
 
     /** What a kill is worth right now: one more step of the chain for every [COMBO_STEP] kills. */
-    fun comboMultiplier(): Int = (1 + combo / COMBO_STEP).coerceAtMost(MAX_COMBO_MULT)
+    fun comboMultiplier(): Int = (1 + combo / COMBO_STEP).coerceAtMost(maxComboMult())
 
     /** Banks a kill, extends the chain, and pays out at the chain's rate. */
     private fun awardKill(kind: Kind, x: Float, y: Float) {
         kills++
         combo++
-        comboTimer = COMBO_WINDOW
+        comboTimer = comboWindow()
         bestCombo = max(bestCombo, combo)
         stageBestCombo = max(stageBestCombo, combo)
         val mult = comboMultiplier()
         score += scoreFor(kind) * mult
-        if (vampTimer > 0f && hp < MAX_HP) {
+        if (vampTimer > 0f && hp < maxHp()) {
             vampCount++
             if (vampCount >= VAMP_KILLS) {
                 vampCount = 0
-                hp = min(MAX_HP, hp + 1)
+                hp = min(maxHp(), hp + 1)
                 pendingEvents.add(Event(Event.Type.VAMP_HEAL, x, y))
             }
         }
         pendingEvents.add(Event(Event.Type.KILL_ENEMY, x, y, value = mult))
         // the chain announces itself only when it actually steps up
-        if (combo % COMBO_STEP == 0 && mult <= MAX_COMBO_MULT) {
+        if (combo % COMBO_STEP == 0 && mult <= maxComboMult()) {
             pendingEvents.add(Event(Event.Type.COMBO_UP, x, y, value = mult))
         }
     }
@@ -1383,6 +1451,10 @@ class SkyWorld(private val seed: Int = 1) {
             if (roll < 0f) { kind = k; break }
         }
         return kind
+    }
+
+    internal fun giveBoonForTest(boon: Boon) {
+        boonLevels[boon] = boonLevel(boon) + 1
     }
 
     internal fun clearShotsForTest() {
@@ -1501,6 +1573,28 @@ class SkyWorld(private val seed: Int = 1) {
         const val VAMP_KILLS = 8
         const val MEDAL_SCORE = 120
 
+        /** How many to lay out between stages, and how far each one may be stacked. */
+        const val BOONS_OFFERED = 3
+        const val RAPIDFIRE_STEP = 0.15f
+        const val CHAINWINDOW_STEP = 0.6f
+        const val CHAINCAP_STEP = 2
+        const val SUPPLY_STEP = 0.5f
+        // one level takes you as far forward as the raider's hull allows, so there is no second
+        const val AGILITY_STEP = 0.045f
+        const val MAGNETIC_STEP = 0.22f
+
+        fun boonCap(boon: Boon): Int = when (boon) {
+            // the ones that change a number you can keep stacking
+            Boon.ARMOUR, Boon.BOMBS, Boon.RAPIDFIRE, Boon.SUPPLY, Boon.CHAINWINDOW -> 3
+            Boon.GUNS -> MAX_SPREAD - 1
+            Boon.ESCORT -> MAX_WINGMEN
+            Boon.PIERCING -> 2
+            Boon.CHAINCAP -> 2
+            Boon.AGILITY -> 1
+            // the ones that are either on or off
+            Boon.CHARMED, Boon.MAGNETIC -> 1
+        }
+
         /**
          * What falls, and how often. Ten kinds at the same drop rate means more variety per
          * drop rather than more power; the staples stay common and the exotics stay a treat.
@@ -1549,6 +1643,8 @@ class SkyWorld(private val seed: Int = 1) {
         fun bossProfileOf(kind: Int): BossProfile = BOSS_PROFILES[kind.mod(BOSS_PROFILES.size)]
         const val BOSS_BASE_HP = 70f
         const val BOSS_STATION_Y = 0.2f
+        /** No aircraft, however agile, may sit inside the raider's hull. */
+        const val FRONT_FLOOR = BOSS_STATION_Y + BOSS_HALF + PLAYER_HALF_Y + 0.01f
         /** How long the hull takes to come apart before the clear panel is allowed up. */
         const val BOSS_DEATH_SECONDS = 2.6f
         const val BOSS_BREAKS = 11

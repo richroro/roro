@@ -43,4 +43,6 @@
     <string name="item_orbit">위성</string>
     <string name="item_vampire">흡혈</string>
     <string name="item_medal">훈장</string>
+    <string name="pick_one">하나를 고르세요</string>
+    <string name="boon_have">보유: %1$s</string>
 </resources>

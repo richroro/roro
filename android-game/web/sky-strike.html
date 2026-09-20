@@ -37,7 +37,7 @@
 </div>
 <div class="hints">
   <span>왼쪽 아래 <b>조종 영역</b>을 끌거나 <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> 로 상하좌우 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>M</kbd> 소리</span>
-  <span>적기 12종 · 아이템 14종 · 스테이지마다 S~C 평가 (무피격 + 긴 연쇄 = S)</span>
+  <span>적기 12종 · 아이템 14종 · 스테이지 클리어마다 강화 3장 중 1장 선택 · S~C 평가</span>
 </div>
 
 <script>
@@ -45,6 +45,8 @@
   // ---------- SkyWorld: pure simulation (mirrors skystrike/SkyWorld.kt) ----------
   const C = {
     PLAYER_Y: 0.86, PLAYER_Y_MIN: 0.50, PLAYER_Y_MAX: 0.94,
+    // no aircraft, however agile, may sit inside the raider's hull
+    FRONT_FLOOR: 0.2 + 0.2 + 0.045 + 0.01,
     PLAYER_LIMIT: 0.88, PLAYER_HALF_X: 0.055, PLAYER_HALF_Y: 0.045,
     ENEMY_HALF: 0.062, SHIELD_ARC: 0.55, TURRET_STATION_Y: 0.30, TURRET_SECONDS: 7,
     TURRET_FIRE: 0.62, SPLIT_SPREAD: 0.075,
@@ -63,6 +65,8 @@
     BOSS_AIMED_SPEED: 0.95, BOSS_SPIRAL_ARMS: 5, BOSS_SPIN_STEP: 0.7,
     BURST_SHOTS: 3, BURST_GAP: 0.17, WALL_SLOTS: 8, WALL_REACH: 0.85, COLUMN_SHOTS: 3,
     MAX_CONTINUES: 3,
+    BOONS_OFFERED: 3, RAPIDFIRE_STEP: 0.15, CHAINWINDOW_STEP: 0.6, CHAINCAP_STEP: 2,
+    SUPPLY_STEP: 0.5, AGILITY_STEP: 0.045, MAGNETIC_STEP: 0.22,
     MAX_WINGMEN: 4, WINGMAN_OFFSET: 0.115, WINGMAN_TRAIL: 0.035,
     PIERCE_SECONDS: 8, PIERCE_HITS: 3, HOMING_SECONDS: 7, HOMING_TURN: 5.5,
     MAGNET_SECONDS: 9, MAGNET_PULL: 0.85,
@@ -161,6 +165,7 @@
       this.shield = false; this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
       this.combo = 0; this.comboTimer = 0; this.bestCombo = 0; this.continues = C.MAX_CONTINUES;
       this.stageHits = 0; this.stageBestCombo = 0;
+      this.boons = {}; this.offered = [];
       this.wingmen = 0; this.pierceTimer = 0; this.homingTimer = 0; this.magnetTimer = 0; this.charm = false;
       this.slowTimer = 0; this.orbs = 0; this.orbitPhase = 0; this.vampTimer = 0; this.vampCount = 0;
       this.enemies = []; this.pendingSpawns = []; this.shots = []; this.items = []; this.flares = []; this.boss = null;
@@ -173,15 +178,17 @@
       const p = profileOf(level);
       this.enemies = []; this.pendingSpawns = []; this.shots = []; this.items = []; this.flares = []; this.events = []; this.boss = null;
       this.playerX = 0; this.playerY = C.PLAYER_Y;
-      this.hp = C.MAX_HP; this.bombs = C.START_BOMBS; this.shield = false;
-      this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
-      this.wingmen = 0; this.pierceTimer = 0; this.homingTimer = 0; this.magnetTimer = 0; this.charm = false;
+      this.hp = this.maxHp(); this.bombs = this.startBombs(); this.shield = false;
+      this.rapidTimer = 0; this.spread = this.startSpread(); this.mercy = 0; this.flash = 0;
+      this.wingmen = this.startWingmen(); this.pierceTimer = 0; this.homingTimer = 0;
+      this.magnetTimer = 0; this.charm = this.boonLevel('CHARMED') > 0;
       this.slowTimer = 0; this.orbs = 0; this.orbitPhase = 0; this.vampTimer = 0; this.vampCount = 0;
       this.combo = 0; this.comboTimer = 0;
       this.stageHits = 0; this.stageBestCombo = 0;
       this.fireAcc = 0; this.elapsed = 0; this.waveIndex = 0; this.totalWaves = p.waves; this.nextWaveAt = 0.8;
       // one scripted surge halfway through, so the stage is not a metronome all the way down
       this.rushAt = Math.floor(p.waves / 2); this.rushDone = false;
+      this.offered = [];
       this.gust = 0; this.nextFlareAt = C.FLARE_GAP;
       this.state = State.RUNNING;
     }
@@ -194,7 +201,45 @@
       this.kills = 0;
       this.bestCombo = 0;
       this.continues = C.MAX_CONTINUES;
+      this.boons = {};
+      this.offered = [];
       this.startLevel(1);
+    }
+
+    boonLevel(id) { return this.boons[id] || 0; }
+    // What the boons add up to. Everything that reads a starting value reads one of these.
+    maxHp() { return C.MAX_HP + this.boonLevel('ARMOUR'); }
+    startBombs() { return C.START_BOMBS + this.boonLevel('BOMBS'); }
+    startSpread() { return Math.min(C.MAX_SPREAD, 1 + this.boonLevel('GUNS')); }
+    startWingmen() { return Math.min(C.MAX_WINGMEN, this.boonLevel('ESCORT')); }
+    fireRate() { return C.BASE_FIRE_RATE * (1 + C.RAPIDFIRE_STEP * this.boonLevel('RAPIDFIRE')); }
+    comboWindow() { return C.COMBO_WINDOW + C.CHAINWINDOW_STEP * this.boonLevel('CHAINWINDOW'); }
+    maxComboMult() { return C.MAX_COMBO_MULT + C.CHAINCAP_STEP * this.boonLevel('CHAINCAP'); }
+    basePierce() { return this.boonLevel('PIERCING'); }
+    itemChance() { return C.ITEM_CHANCE * (1 + C.SUPPLY_STEP * this.boonLevel('SUPPLY')); }
+    /** Agility buys sky, but never past the floor: a free ram is a promise boons do not break. */
+    frontLimit() { return Math.max(C.FRONT_FLOOR, C.PLAYER_Y_MIN - C.AGILITY_STEP * this.boonLevel('AGILITY')); }
+    standingPull() { return C.MAGNETIC_STEP * this.boonLevel('MAGNETIC'); }
+
+    /** Lays out three to pick between, skipping anything already at its ceiling. */
+    offerBoons() {
+      const pool = BOONS.filter(b => this.boonLevel(b.id) < b.cap);
+      const picks = [];
+      while (picks.length < C.BOONS_OFFERED && pool.length) {
+        picks.push(pool.splice(Math.floor(this.r() * pool.length), 1)[0].id);
+      }
+      this.offered = picks;
+    }
+
+    /** Takes the boon at `index` and flies on. False when there is nothing there to take. */
+    takeBoon(index) {
+      if (this.state !== State.LEVEL_CLEAR || index < 0 || index >= this.offered.length) return false;
+      const id = this.offered[index];
+      this.boons[id] = this.boonLevel(id) + 1;
+      this.events.push({ t: 'BOON_TAKEN', x: 0, y: 0, value: id });
+      this.offered = [];
+      this.nextLevel();
+      return true;
     }
 
     /**
@@ -211,7 +256,7 @@
     nextLevel() { this.startLevel(this.level + 1); }
     movePlayerBy(dx, dy = 0) {
       this.playerX = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + dx));
-      this.playerY = Math.max(C.PLAYER_Y_MIN, Math.min(C.PLAYER_Y_MAX, this.playerY + dy));
+      this.playerY = Math.max(this.frontLimit(), Math.min(C.PLAYER_Y_MAX, this.playerY + dy));
     }
 
     useBomb() {
@@ -292,28 +337,28 @@
       return 3;
     }
 
-    comboMultiplier() { return Math.min(C.MAX_COMBO_MULT, 1 + Math.floor(this.combo / C.COMBO_STEP)); }
+    comboMultiplier() { return Math.min(this.maxComboMult(), 1 + Math.floor(this.combo / C.COMBO_STEP)); }
 
     /** Banks a kill, extends the chain, and pays out at the chain's rate. */
     awardKill(kind, x, y) {
       this.kills++;
       this.combo++;
-      this.comboTimer = C.COMBO_WINDOW;
+      this.comboTimer = this.comboWindow();
       this.bestCombo = Math.max(this.bestCombo, this.combo);
       this.stageBestCombo = Math.max(this.stageBestCombo, this.combo);
       const mult = this.comboMultiplier();
       this.score += scoreFor(kind) * mult;
-      if (this.vampTimer > 0 && this.hp < C.MAX_HP) {
+      if (this.vampTimer > 0 && this.hp < this.maxHp()) {
         this.vampCount++;
         if (this.vampCount >= C.VAMP_KILLS) {
           this.vampCount = 0;
-          this.hp = Math.min(C.MAX_HP, this.hp + 1);
+          this.hp = Math.min(this.maxHp(), this.hp + 1);
           this.events.push({ t: 'VAMP_HEAL', x, y });
         }
       }
       this.events.push({ t: 'KILL_ENEMY', x, y, value: mult });
       // the chain announces itself only when it actually steps up
-      if (this.combo % C.COMBO_STEP === 0 && mult <= C.MAX_COMBO_MULT) {
+      if (this.combo % C.COMBO_STEP === 0 && mult <= this.maxComboMult()) {
         this.events.push({ t: 'COMBO_UP', x, y, value: mult });
       }
     }
@@ -669,7 +714,7 @@
     }
 
     updateFire(dt) {
-      const rate = C.BASE_FIRE_RATE * (this.rapidTimer > 0 ? C.RAPID_MULT : 1);
+      const rate = this.fireRate() * (this.rapidTimer > 0 ? C.RAPID_MULT : 1);
       this.fireAcc += rate * dt;
       while (this.fireAcc >= 1) {
         this.fireAcc -= 1;
@@ -703,7 +748,7 @@
 
     addPlayerShot(x, y, vx) {
       this.shots.push({ x, y, vx, vy: -C.SHOT_SPEED, fromPlayer: true, alive: true, damage: 1,
-        pierce: this.pierceTimer > 0 ? C.PIERCE_HITS : 0, lastHit: null });
+        pierce: this.pierceTimer > 0 ? C.PIERCE_HITS : this.basePierce(), lastHit: null });
     }
 
     /** Where the escort at `index` is sitting right now, so the view can draw it. */
@@ -844,7 +889,7 @@
     }
 
     maybeDrop(x, y) {
-      if (this.r() >= C.ITEM_CHANCE) return;
+      if (this.r() >= this.itemChance()) return;
       let roll = this.r() * DROP_WEIGHT_TOTAL;
       let kind = DROP_TABLE[DROP_TABLE.length - 1][0];
       for (const [k, weight] of DROP_TABLE) {
@@ -857,11 +902,12 @@
     updateItems(dt) {
       for (let i = this.items.length - 1; i >= 0; i--) {
         const it = this.items[i];
-        if (this.magnetTimer > 0) {
+        const pull = this.magnetTimer > 0 ? C.MAGNET_PULL : this.standingPull();
+        if (pull > 0) {
           // reel it in: still falling, but now it is coming to you
           const dx = this.playerX - it.x, dy = this.playerY - it.y;
           const d = Math.hypot(dx, dy);
-          if (d > 1e-4) { it.x += dx / d * C.MAGNET_PULL * dt; it.y += dy / d * C.MAGNET_PULL * dt; }
+          if (d > 1e-4) { it.x += dx / d * pull * dt; it.y += dy / d * pull * dt; }
         }
         it.y += C.ITEM_FALL_SPEED * dt;
         if (it.y > 1.1) { this.items.splice(i, 1); continue; }
@@ -871,7 +917,7 @@
           else if (it.kind === 'RAPID') this.rapidTimer = C.RAPID_SECONDS;
           else if (it.kind === 'SHIELD') this.shield = true;
           else if (it.kind === 'BOMB') this.bombs = Math.min(C.MAX_BOMBS, this.bombs + 1);
-          else if (it.kind === 'REPAIR') this.hp = Math.min(C.MAX_HP, this.hp + 1);
+          else if (it.kind === 'REPAIR') this.hp = Math.min(this.maxHp(), this.hp + 1);
           else if (it.kind === 'WINGMAN') this.wingmen = Math.min(C.MAX_WINGMEN, this.wingmen + 1);
           else if (it.kind === 'PIERCE') this.pierceTimer = C.PIERCE_SECONDS;
           else if (it.kind === 'HOMING') this.homingTimer = C.HOMING_SECONDS;
@@ -900,6 +946,7 @@
       }
       if (!b.alive) {
         if (b.dying > 0) return;
+        this.offerBoons();
         this.state = State.LEVEL_CLEAR;
         this.bestLevel = Math.max(this.bestLevel, this.level);
         this.score += C.CLEAR_BONUS * this.level;
@@ -1038,6 +1085,12 @@
         sparks(ev.x, ev.y, 16, '#34D399', 0.45, 0.011);
         floatText('흡혈', ev.x, ev.y, '#34D399');
         play('pickup', 0.85); break;
+      case 'BOON_TAKEN': {
+        const b = boonOf(ev.value);
+        fx.banner = b ? b.name : '';
+        fx.bannerTimer = 1.4;
+        play('clear', 1.2); break;
+      }
       case 'MEDAL':
         sparks(ev.x, ev.y, 20, '#FACC15', 0.5, 0.012);
         floatText('+' + ev.value, ev.x, ev.y, '#FACC15');
@@ -1222,6 +1275,27 @@
   window.__w = world; window.__fx = fx; window.__State = State; window.__C = C; window.__SkyWorld = SkyWorld;
   const SCROLL_SPEED = 0.16, PROP_HZ = 22, BANK_DEG = 18;
   const RANKS = ['S', 'A', 'B', 'C'];
+  /**
+   * What you pick between stages. Unlike a pickup, a boon is yours for the rest of the run --
+   * it is what makes the fourth stage of a good run feel different from the fourth of a bad one.
+   */
+  const BOONS = [
+    { id: 'ARMOUR', cap: 3, name: '장갑', desc: '체력 1 증가, 런 내내 유지' },
+    { id: 'BOMBS', cap: 3, name: '예비 폭탄', desc: '스테이지 시작 시 폭탄 1개 추가' },
+    { id: 'GUNS', cap: 4, name: '추가 포문', desc: '스테이지 시작 시 포문 1개 추가' },
+    { id: 'ESCORT', cap: 4, name: '호위대', desc: '스테이지 시작 시 요기 1기와 함께' },
+    { id: 'RAPIDFIRE', cap: 3, name: '속사', desc: '발사 속도 15% 증가' },
+    { id: 'CHAINWINDOW', cap: 3, name: '긴 연쇄', desc: '연쇄 유지 시간 0.6초 증가' },
+    { id: 'CHARMED', cap: 1, name: '행운의 부적', desc: '스테이지 시작 시 부적 보유' },
+    { id: 'MAGNETIC', cap: 1, name: '자기장', desc: '아이템이 항상 끌려옴' },
+    { id: 'PIERCING', cap: 2, name: '관통 탄심', desc: '탄이 기체를 1대 더 관통' },
+    { id: 'SUPPLY', cap: 3, name: '보급 증가', desc: '아이템 드롭 1.5배' },
+    { id: 'AGILITY', cap: 1, name: '기동', desc: '전방으로 더 전진 가능' },
+    { id: 'CHAINCAP', cap: 2, name: '연쇄 상한', desc: '연쇄 배율 상한 2단계 증가' },
+  ];
+  const boonOf = id => BOONS.find(b => b.id === id);
+  /** Where the three cards were last drawn, so a tap can be matched to one. */
+  const boonCards = [];
   const SIZE = { player: 0.17, foe: 0.135, raider: 0.62, pickup: 0.1 };
   let runTime = 0, smoothBank = 0, lastPlayerX = 0;
   let best = 0, bestScore = 0;
@@ -1417,7 +1491,7 @@
     if (pad.band > 0.01) {
       ctx.globalAlpha = 0.45 * pad.band;
       ctx.lineWidth = Math.max(1.5, w * 0.004);
-      const y = sy(C.PLAYER_Y_MIN), dash = w * 0.028;
+      const y = sy(world.frontLimit()), dash = w * 0.028;
       ctx.beginPath();
       for (let x = w * 0.04; x < w * 0.96; x += dash * 2) {
         ctx.moveTo(x, y); ctx.lineTo(Math.min(x + dash, w * 0.96), y);
@@ -1717,7 +1791,7 @@
     } else {
       title = '격추됨';
       body = `${st.place} 상공에서 격추됐다\n${world.kills}기 격추 · ${world.score}점${chainLine()}`
-        + (world.continues === 0 ? '\n남은 기회 없음' : '');
+        + boonLine() + (world.continues === 0 ? '\n남은 기회 없음' : '');
       accent = world.continues > 0
         ? `탭하면 ${world.level} 스테이지부터 · 기회 ${world.continues}회`
         : '탭하면 재출격';
@@ -1731,7 +1805,12 @@
       titleLines = wrapAt(title, w * 0.80, titleSize, true);
     }
     const lines = wrapAt(body, w * 0.78, w * 0.042, false);
-    const panelH = h * 0.30 + lines.length * w * 0.052 + (titleLines.length - 1) * titleSize * 1.25;
+    // three cards to pick between, if there are any: they take the room the accent line had
+    const cards = world.offered;
+    const cardH = w * 0.115;
+    const cardsH = cards.length ? cards.length * (cardH + w * 0.022) + w * 0.05 : 0;
+    const panelH = h * 0.30 + lines.length * w * 0.052
+      + (titleLines.length - 1) * titleSize * 1.25 + cardsH;
     ctx.fillStyle = 'rgba(16,26,48,0.92)';
     ctx.beginPath(); ctx.roundRect(w * 0.07, h * 0.5 - panelH / 2, w * 0.86, panelH, w * 0.05); ctx.fill();
     ctx.strokeStyle = '#3C5A8C'; ctx.lineWidth = Math.max(2, w * 0.005); ctx.stroke();
@@ -1746,7 +1825,32 @@
     ctx.textAlign = 'center'; ctx.fillStyle = '#F8FAFC';
     for (const line of lines) { ctx.fillText(line, w / 2, y); y += w * 0.052; }
     y += w * 0.03;
-    label(accent, w / 2, y, w * 0.05, '#FACC15', '#0B1020');
+    if (!cards.length) {
+      label(accent, w / 2, y, w * 0.05, '#FACC15', '#0B1020');
+      boonCards.length = 0;
+      return;
+    }
+    label('하나를 고르세요', w / 2, y, w * 0.045, '#FACC15', '#0B1020');
+    y += w * 0.045;
+    boonCards.length = 0;
+    for (let i = 0; i < cards.length; i++) {
+      const boon = boonOf(cards[i]);
+      const top = y, l = w * 0.11, r = w * 0.89;
+      boonCards.push({ l, t: top, r, b: top + cardH });
+      ctx.globalAlpha = 0.27;
+      ctx.fillStyle = '#3C5A8C';
+      ctx.beginPath(); ctx.roundRect(l, top, r - l, cardH, cardH * 0.28); ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = '#3C5A8C'; ctx.lineWidth = Math.max(2, w * 0.005);
+      ctx.beginPath(); ctx.roundRect(l, top, r - l, cardH, cardH * 0.28); ctx.stroke();
+      const held = world.boonLevel(boon.id);
+      label(boon.name + (held > 0 ? '  x' + (held + 1) : ''), (l + r) / 2, top + cardH * 0.42,
+        w * 0.042, '#FACC15', '#0B1020');
+      ctx.font = `400 ${w * 0.032}px "IBM Plex Sans", sans-serif`;
+      ctx.textAlign = 'center'; ctx.fillStyle = '#F8FAFC';
+      ctx.fillText(boon.desc, (l + r) / 2, top + cardH * 0.80);
+      y += cardH + w * 0.022;
+    }
   }
 
   /**
@@ -1772,6 +1876,14 @@
   }
 
   /** How far the chain got, if it got anywhere worth saying. */
+  /** The boons this run is carrying, for the panel that ends it. */
+  function boonLine() {
+    const held = BOONS.filter(b => world.boonLevel(b.id) > 0);
+    if (!held.length) return '';
+    return '\n보유: ' + held.map(b =>
+      b.name + (world.boonLevel(b.id) > 1 ? ' x' + world.boonLevel(b.id) : '')).join(' · ');
+  }
+
   function chainLine() {
     return world.bestCombo < C.COMBO_STEP ? '' : ` · 최고 연쇄 ${world.bestCombo}`;
   }
@@ -1787,6 +1899,16 @@
 
   // ---------- Input ----------
   let dragging = false, onPad = false, lastTouch = 0, lastTouchY = 0, dragPointer = -1;
+  /** Matches a tap to one of the three cards, if it landed on one. */
+  function takeCardAt(x, y) {
+    if (!world.offered.length) return false;
+    for (let i = 0; i < world.offered.length && i < boonCards.length; i++) {
+      const c = boonCards[i];
+      if (c && x >= c.l && x <= c.r && y >= c.t && y <= c.b) return world.takeBoon(i);
+    }
+    return false;          // tapped the panel but not a card: wait rather than skipping a pick
+  }
+
   function bombHit(px, py) {
     const w = canvas._w, h = canvas._h, r = w * 0.085;
     const bx = w - r - w * 0.05, by = h - r - w * 0.06;
@@ -1813,7 +1935,7 @@
       }
     }
     if (world.state === State.READY) world.start();
-    else if (world.state === State.LEVEL_CLEAR) world.nextLevel();
+    else if (world.state === State.LEVEL_CLEAR) { if (!takeCardAt(p.x, p.y)) world.nextLevel(); }
     // a death picks the run back up where it fell, while you still have a resume
     else if (world.state === State.GAME_OVER) { if (!world.continueRun()) world.start(); }
   }
@@ -1846,7 +1968,8 @@
       ac();
       if (world.state === State.GAME_OVER) { if (!world.continueRun()) world.start(); }
       else if (world.state === State.READY) world.start();
-      else if (world.state === State.LEVEL_CLEAR) world.nextLevel();
+      // the keyboard takes the first card, so a deck-less player is never stuck
+      else if (world.state === State.LEVEL_CLEAR) { if (!world.takeBoon(0)) world.nextLevel(); }
     } else return;
     e.preventDefault();
   });

@@ -32,4 +32,32 @@
         <item>The fires are burning down on their own now.</item>
         <item>Dawn, eventually. You are still flying.</item>
     </string-array>
+    <string-array name="boon_name">
+        <item>Armour</item>
+        <item>Spare bombs</item>
+        <item>Extra gun</item>
+        <item>Escort</item>
+        <item>Rapid fire</item>
+        <item>Long chain</item>
+        <item>Lucky charm</item>
+        <item>Magnetism</item>
+        <item>Piercing core</item>
+        <item>Resupply</item>
+        <item>Agility</item>
+        <item>Chain ceiling</item>
+    </string-array>
+    <string-array name="boon_desc">
+        <item>One more hit point, for the rest of the run</item>
+        <item>Start every stage with an extra bomb</item>
+        <item>Start every stage with one more gun line</item>
+        <item>Start every stage with an escort on your wing</item>
+        <item>Your guns run 15% faster</item>
+        <item>The chain window stays open 0.6s longer</item>
+        <item>Start every stage holding the charm</item>
+        <item>Pickups always drift towards you</item>
+        <item>Your rounds punch through one more hull</item>
+        <item>Half again as many pickups fall</item>
+        <item>Push 0.06 further up the screen</item>
+        <item>The chain pays two steps higher</item>
+    </string-array>
 </resources>

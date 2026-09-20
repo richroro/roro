@@ -209,6 +209,21 @@ added since each ask you to do something you would not otherwise do:
 `halfOf(kind)` gives each one the hitbox it looks like it has, and the renderer scales the sprite
 from the same number, so what you see is what you can hit.
 
+**Something to pick between stages.** Clearing a stage lays out `BOONS_OFFERED` boons to choose
+from, and the choice is the reason to keep a run alive rather than restart for a better opening.
+A pickup lasts a stage; **a boon lasts the run**, so the fourth stage of a good run is flown in a
+different aircraft from the fourth stage of a bad one.
+
+Everything that reads a starting value -- hit points, bombs, gun lines, escorts, fire rate, the
+chain window and its ceiling, pierce, drop rate, how far forward you may push -- reads it from a
+`boonLevel()`-derived function rather than a constant, so a boon is one line rather than a special
+case scattered about. Each has its own ceiling in `boonCap()` and drops out of the offer once it is
+full, so late in a run you are choosing between the things you have not taken yet.
+
+`frontLimit()` is the one that needs watching: agility buys sky, but it is clamped at
+`FRONT_FLOOR`, because "a boss fight can never open with a free ram" is a promise the boons do not
+get to break. A test pins it.
+
 **A grade for the stage, not just a clear.** `stageRank()` reads the hits you took and the best
 chain you held: flying clean earns the top of it, and holding a chain through a whole stage is
 what separates S from A. It resets per stage, so a bad stage does not follow you.
