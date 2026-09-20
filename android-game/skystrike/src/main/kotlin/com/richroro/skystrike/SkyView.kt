@@ -194,6 +194,45 @@ class SkyView @JvmOverloads constructor(
     private class Cloud(val x: Float, var y: Float, val r: Float, val far: Boolean)
     private val clouds = ArrayList<Cloud>()
 
+    /** What a stage looks like. The names already promised four different skies; this delivers them. */
+    private enum class Ambient { CALM, LIGHTNING, EMBERS, STARS }
+
+    private class Theme(
+        val top: Int, val mid: Int, val low: Int,
+        val cloudNear: Int, val cloudFar: Int,
+        val alphaNear: Int, val alphaFar: Int,
+        val ground: Int, val groundFrom: Float,
+        val accent: Int,
+        val ambient: Ambient,
+    )
+
+    private val themes: Array<Theme> by lazy {
+        arrayOf(
+            Theme(color(R.color.s1_top), color(R.color.s1_mid), color(R.color.s1_low),
+                color(R.color.s1_cloud), color(R.color.s1_cloud_far), 125, 70,
+                color(R.color.s1_ground), 0.82f, color(R.color.s1_cloud), Ambient.CALM),
+            Theme(color(R.color.s2_top), color(R.color.s2_mid), color(R.color.s2_low),
+                color(R.color.s2_cloud), color(R.color.s2_cloud_far), 190, 140,
+                color(R.color.s2_ground), 0.74f, color(R.color.s2_bolt), Ambient.LIGHTNING),
+            Theme(color(R.color.s3_top), color(R.color.s3_mid), color(R.color.s3_low),
+                color(R.color.s3_cloud), color(R.color.s3_cloud_far), 150, 105,
+                color(R.color.s3_ground), 0.78f, color(R.color.s3_ember), Ambient.EMBERS),
+            Theme(color(R.color.s4_top), color(R.color.s4_mid), color(R.color.s4_low),
+                color(R.color.s4_cloud), color(R.color.s4_cloud_far), 95, 55,
+                color(R.color.s4_ground), 0.88f, color(R.color.s4_star), Ambient.STARS),
+        )
+    }
+
+    private fun theme(): Theme = themes[stageIndex(world.level)]
+
+    /** Embers drifting up out of the fires, or the star field on the night run. */
+    private class Mote(var x: Float, var y: Float, var vx: Float, var vy: Float, val r: Float, val phase: Float)
+    private val motes = ArrayList<Mote>()
+    private var motesFor = -1
+    private var boltTimer = 2.5f
+    private var boltFlash = 0f
+    private var boltX = 0f
+
     init {
         isFocusable = true
         isClickable = true
@@ -386,6 +425,47 @@ class SkyView @JvmOverloads constructor(
             c.y += scroll * (if (c.far) 0.45f else 1f)
             if (c.y > 1.25f) c.y -= 1.6f
         }
+        updateAmbient(dt)
+    }
+
+    private fun updateAmbient(dt: Float) {
+        val t = theme()
+        val stage = stageIndex(world.level)
+        if (motesFor != stage) {
+            motesFor = stage
+            motes.clear()
+            val r = java.util.Random(stage * 9176L + 3)
+            when (t.ambient) {
+                Ambient.EMBERS -> repeat(46) {
+                    motes.add(Mote(-1.05f + r.nextFloat() * 2.1f, r.nextFloat(),
+                        (r.nextFloat() - 0.5f) * 0.05f, -0.09f - r.nextFloat() * 0.13f,
+                        0.0035f + r.nextFloat() * 0.005f, r.nextFloat() * SkyWorld.TAU))
+                }
+                Ambient.STARS -> repeat(70) {
+                    motes.add(Mote(-1.05f + r.nextFloat() * 2.1f, r.nextFloat(), 0f,
+                        0.012f + r.nextFloat() * 0.02f,
+                        0.0022f + r.nextFloat() * 0.0035f, r.nextFloat() * SkyWorld.TAU))
+                }
+                else -> {}
+            }
+        }
+        for (m in motes) {
+            m.x += m.vx * dt
+            m.y += m.vy * dt
+            if (m.y < -0.06f) { m.y = 1.06f; m.x = -1.05f + fxRandom.nextFloat() * 2.1f }
+            if (m.y > 1.06f) { m.y = -0.06f; m.x = -1.05f + fxRandom.nextFloat() * 2.1f }
+        }
+        if (t.ambient == Ambient.LIGHTNING) {
+            boltFlash = max(0f, boltFlash - dt * 3.4f)
+            boltTimer -= dt
+            if (boltTimer <= 0f) {
+                boltTimer = 2.2f + fxRandom.nextFloat() * 4.5f
+                boltFlash = 1f
+                boltX = -0.7f + fxRandom.nextFloat() * 1.4f
+            }
+        } else {
+            boltFlash = 0f
+        }
     }
 
     // ---- input ------------------------------------------------------------------------------
@@ -476,15 +556,21 @@ class SkyView @JvmOverloads constructor(
     }
 
     private fun drawSky(canvas: Canvas, w: Float, h: Float) {
+        val t = theme()
         skyPaint.shader = LinearGradient(
-            0f, 0f, 0f, h,
-            intArrayOf(color(R.color.sky_top), color(R.color.sky_mid), color(R.color.sky_low)),
+            0f, 0f, 0f, h, intArrayOf(t.top, t.mid, t.low),
             floatArrayOf(0f, 0.55f, 1f), Shader.TileMode.CLAMP,
         )
         canvas.drawRect(0f, 0f, w, h, skyPaint)
+
+        // stars sit behind the weather; embers ride in front of it
+        if (t.ambient == Ambient.STARS) drawMotes(canvas, w, t)
+
+        val lit = boltFlash * boltFlash          // the bolt lights the cloud tops, not just the screen
         for (c in clouds) {
-            cloudPaint.color = if (c.far) color(R.color.cloud_far) else color(R.color.cloud)
-            cloudPaint.alpha = if (c.far) 70 else 120
+            cloudPaint.color = if (c.far) t.cloudFar else t.cloudNear
+            val base = if (c.far) t.alphaFar else t.alphaNear
+            cloudPaint.alpha = (base + (255 - base) * lit * 0.75f).toInt().coerceIn(0, 255)
             val r = c.r * w
             rect.set(sx(c.x) - r, sy(c.y) - r * 0.32f, sx(c.x) + r, sy(c.y) + r * 0.32f)
             canvas.drawOval(rect, cloudPaint)
@@ -492,11 +578,31 @@ class SkyView @JvmOverloads constructor(
             canvas.drawOval(rect, cloudPaint)
         }
         cloudPaint.alpha = 255
+
+        if (t.ambient == Ambient.EMBERS) drawMotes(canvas, w, t)
+
         seaPaint.shader = LinearGradient(
-            0f, h * 0.82f, 0f, h,
-            intArrayOf(0x00000000, color(R.color.sea)), floatArrayOf(0f, 1f), Shader.TileMode.CLAMP,
+            0f, h * t.groundFrom, 0f, h,
+            intArrayOf(t.ground and 0x00FFFFFF, t.ground), floatArrayOf(0f, 1f), Shader.TileMode.CLAMP,
         )
-        canvas.drawRect(0f, h * 0.82f, w, h, seaPaint)
+        canvas.drawRect(0f, h * t.groundFrom, w, h, seaPaint)
+
+        if (boltFlash > 0f) {
+            flashPaint.color = t.accent
+            flashPaint.alpha = (110 * lit).toInt().coerceIn(0, 255)
+            canvas.drawRect(0f, 0f, w, h, flashPaint)
+        }
+    }
+
+    private fun drawMotes(canvas: Canvas, w: Float, t: Theme) {
+        for (m in motes) {
+            val twinkle = 0.55f + 0.45f * sin(runTime * 2.6f + m.phase)
+            particlePaint.color = t.accent
+            particlePaint.alpha = (255f * twinkle * (if (t.ambient == Ambient.EMBERS) 0.85f else 0.7f))
+                .toInt().coerceIn(0, 255)
+            canvas.drawCircle(sx(m.x), sy(m.y), max(1f, m.r * w), particlePaint)
+        }
+        particlePaint.alpha = 255
     }
 
     private fun bankedSprite(canvas: Canvas, bmp: Bitmap, cx: Float, cy: Float, sw: Float, sh: Float, bank: Float, paint: Paint) {

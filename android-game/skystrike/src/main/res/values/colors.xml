@@ -27,4 +27,39 @@
     <color name="shield_ring">#FF22D3EE</color>
     <color name="bomb_flash">#FFFFFFFF</color>
     <color name="ic_launcher_background">#0B2545</color>
+
+    <!-- Stage 1, the coast road at dawn: cold overhead, the sun still low on the water. -->
+    <color name="s1_top">#FF12305C</color>
+    <color name="s1_mid">#FF2F6FA8</color>
+    <color name="s1_low">#FFE8A765</color>
+    <color name="s1_cloud">#FFFFF1E0</color>
+    <color name="s1_cloud_far">#FFC6DCEF</color>
+    <color name="s1_ground">#FF10395E</color>
+
+    <!-- Stage 2, inside the weather: bruised slate, and the clouds do the lighting. -->
+    <color name="s2_top">#FF1A1B2A</color>
+    <color name="s2_mid">#FF39405C</color>
+    <color name="s2_low">#FF5A5F7A</color>
+    <color name="s2_cloud">#FF8E93AD</color>
+    <color name="s2_cloud_far">#FF4A5070</color>
+    <color name="s2_ground">#FF23273A</color>
+    <color name="s2_bolt">#FFDCE4FF</color>
+
+    <!-- Stage 3, everything below already alight. -->
+    <color name="s3_top">#FF2B1220</color>
+    <color name="s3_mid">#FF7A2A1E</color>
+    <color name="s3_low">#FFD9701F</color>
+    <color name="s3_cloud">#FF6B4436</color>
+    <color name="s3_cloud_far">#FF43281F</color>
+    <color name="s3_ground">#FF8A2F12</color>
+    <color name="s3_ember">#FFFFB454</color>
+
+    <!-- Stage 4, no horizon and no ground. Just instruments and stars. -->
+    <color name="s4_top">#FF05060F</color>
+    <color name="s4_mid">#FF0D1230</color>
+    <color name="s4_low">#FF17204A</color>
+    <color name="s4_cloud">#FF2A3358</color>
+    <color name="s4_cloud_far">#FF171E3A</color>
+    <color name="s4_ground">#FF0A0E22</color>
+    <color name="s4_star">#FFEAF0FF</color>
 </resources>
