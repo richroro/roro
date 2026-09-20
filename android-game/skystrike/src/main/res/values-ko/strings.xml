@@ -45,4 +45,8 @@
     <string name="item_medal">훈장</string>
     <string name="pick_one">하나를 고르세요</string>
     <string name="boon_have">보유: %1$s</string>
+    <string name="ai_label">AI</string>
+    <string name="ai_flying">AI 비행 중 · 끌면 직접 조종</string>
+    <string name="ai_on">자동 비행 시작</string>
+    <string name="ai_off">직접 조종으로</string>
 </resources>
