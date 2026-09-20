@@ -30,4 +30,6 @@
     <string name="rush_in">편대 돌입!</string>
     <string name="boss_rage">분노</string>
     <string name="best_chain">최고 연쇄 %1$d</string>
+    <string name="tap_continue">탭하면 %1$d 스테이지부터 · 기회 %2$d회</string>
+    <string name="continues_spent">남은 기회 없음</string>
 </resources>

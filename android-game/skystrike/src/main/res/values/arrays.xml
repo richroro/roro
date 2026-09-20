@@ -6,11 +6,13 @@
         <item>The Ember Fields</item>
         <item>The Long Night</item>
     </string-array>
-    <string-array name="stage_raider">
-        <item>Iron Gull</item>
+    <string-array name="boss_name">
+        <item>Steel Gull</item>
         <item>Stormcaller</item>
         <item>Ember Queen</item>
-        <item>The Long Shadow</item>
+        <item>Long Shadow</item>
+        <item>Iron Bastion</item>
+        <item>The Eye</item>
     </string-array>
     <string-array name="stage_tag">
         <item>it has been circling since dawn</item>

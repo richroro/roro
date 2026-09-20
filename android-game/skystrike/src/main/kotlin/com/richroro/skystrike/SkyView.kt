@@ -205,6 +205,8 @@ class SkyView @JvmOverloads constructor(
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_1_0), BitmapFactory.decodeResource(resources, R.drawable.raider_1_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_2_0), BitmapFactory.decodeResource(resources, R.drawable.raider_2_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_3_0), BitmapFactory.decodeResource(resources, R.drawable.raider_3_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_4_0), BitmapFactory.decodeResource(resources, R.drawable.raider_4_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_5_0), BitmapFactory.decodeResource(resources, R.drawable.raider_5_1)),
     )
     private val pickupBitmaps: Map<SkyWorld.ItemKind, Bitmap> = mapOf(
         SkyWorld.ItemKind.SPREAD to BitmapFactory.decodeResource(resources, R.drawable.pickup_spread),
@@ -215,7 +217,8 @@ class SkyView @JvmOverloads constructor(
     )
 
     private val stagePlaces: Array<String> = resources.getStringArray(R.array.stage_place)
-    private val stageRaiders: Array<String> = resources.getStringArray(R.array.stage_raider)
+    private val bossNames: Array<String> = resources.getStringArray(R.array.boss_name)
+    private fun bossName(kind: Int): String = bossNames[kind.mod(bossNames.size)]
     private val stageTags: Array<String> = resources.getStringArray(R.array.stage_tag)
     private val stageStories: Array<String> = resources.getStringArray(R.array.stage_story)
     private val stageClears: Array<String> = resources.getStringArray(R.array.stage_clear)
@@ -456,7 +459,7 @@ class SkyView @JvmOverloads constructor(
                 debris(e.x, e.y, 16)
                 shakeTimer = 0.7f
                 screenFlash(Color.WHITE, 0.55f)
-                floatText(context.getString(R.string.raider_down, stageRaiders[stageIndex(world.level)]), e.x, e.y, color(R.color.gold))
+                floatText(context.getString(R.string.raider_down, bossName(e.value)), e.x, e.y, color(R.color.gold))
                 play(sndBoom, 7, 0, 1f)
                 performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             }
@@ -485,7 +488,7 @@ class SkyView @JvmOverloads constructor(
                 play(sndBoom, 7, 0, 1f)
             }
             SkyWorld.Event.Type.BOSS_IN -> {
-                floatText(stageRaiders[stageIndex(world.level)], 0f, 0.3f, color(R.color.spark_bad))
+                floatText(bossName(e.value), 0f, 0.3f, color(R.color.spark_bad))
                 shakeTimer = 0.5f
                 play(sndRoar, 8, 0, 0.9f)
             }
@@ -614,7 +617,8 @@ class SkyView @JvmOverloads constructor(
                 when (world.state) {
                     SkyWorld.State.READY -> world.start()
                     SkyWorld.State.LEVEL_CLEAR -> world.nextLevel()
-                    SkyWorld.State.GAME_OVER -> world.start()
+                    // a death picks the run back up where it fell, while you still have a resume
+                    SkyWorld.State.GAME_OVER -> if (!world.continueRun()) world.start()
                     SkyWorld.State.RUNNING -> {}
                 }
                 performClick()
@@ -1018,7 +1022,7 @@ class SkyView @JvmOverloads constructor(
             }
             padPaint.alpha = 255
         }
-        label(canvas, stageRaiders[stageIndex(world.level)], w / 2f, by + bh / 2f, w * 0.042f,
+        label(canvas, bossName(b.kind), w / 2f, by + bh / 2f, w * 0.042f,
             Color.WHITE, color(R.color.text_stroke))
     }
 
@@ -1202,8 +1206,13 @@ class SkyView @JvmOverloads constructor(
             else -> {
                 title = context.getString(R.string.game_over)
                 body = context.getString(R.string.lost_to_foes, stagePlaces[stage]) + "\n" +
-                    context.getString(R.string.kills_line, world.kills, world.score) + chainLine()
-                accent = context.getString(R.string.tap_to_retry)
+                    context.getString(R.string.kills_line, world.kills, world.score) + chainLine() +
+                    (if (world.continues == 0) "\n" + context.getString(R.string.continues_spent) else "")
+                accent = if (world.continues > 0) {
+                    context.getString(R.string.tap_continue, world.level, world.continues)
+                } else {
+                    context.getString(R.string.tap_to_retry)
+                }
             }
         }
         // The clear lines are whole sentences, so the title wraps too -- and drops a size when

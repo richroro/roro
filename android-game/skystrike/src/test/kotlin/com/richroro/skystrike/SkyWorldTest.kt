@@ -1,5 +1,6 @@
 package com.richroro.skystrike
 
+import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -420,7 +421,7 @@ class SkyWorldTest {
         val y0 = b.y
         val roll0 = b.roll
         repeat(30) { w.update(1f / 60f) }
-        assertTrue("it should be falling, ${'$'}y0 -> ${'$'}{b.y}", b.y > y0)
+        assertTrue("it should be falling, $y0 -> ${b.y}", b.y > y0)
         assertTrue("it should be rolling over", b.roll > roll0)
     }
 
@@ -524,7 +525,7 @@ class SkyWorldTest {
         chainKills(hot, SkyWorld.COMBO_STEP * 2 + 1)
         assertTrue("the chain should be paying by now", hot.comboMultiplier() >= 3)
         assertTrue(
-            "a chain of ${'$'}{hot.combo} paid ${'$'}{hot.score} for ${'$'}{hot.combo} kills, flat would be ${'$'}{single * hot.combo}",
+            "a chain of ${hot.combo} paid ${hot.score} for ${hot.combo} kills, flat would be ${single * hot.combo}",
             hot.score > single * hot.combo,
         )
     }
@@ -593,8 +594,8 @@ class SkyWorldTest {
             }
             w.enemies.forEach { it.y = -0.5f }
         }
-        assertTrue("there should have been ordinary waves first, saw ${'$'}before", before > 0)
-        assertTrue("the surge (${'$'}surge) should beat the biggest ordinary wave (${'$'}ordinary)", surge > ordinary)
+        assertTrue("there should have been ordinary waves first, saw $before", before > 0)
+        assertTrue("the surge ($surge) should beat the biggest ordinary wave ($ordinary)", surge > ordinary)
     }
 
     @Test
@@ -639,8 +640,8 @@ class SkyWorldTest {
         val p0 = salvoGap(0)
         val p1 = salvoGap(1)
         val p2 = salvoGap(2)
-        assertTrue("phase 1 should fire faster than phase 0 (${'$'}p1 vs ${'$'}p0)", p1 < p0)
-        assertTrue("phase 2 should fire faster than phase 1 (${'$'}p2 vs ${'$'}p1)", p2 < p1)
+        assertTrue("phase 1 should fire faster than phase 0 ($p1 vs $p0)", p1 < p0)
+        assertTrue("phase 2 should fire faster than phase 1 ($p2 vs $p1)", p2 < p1)
     }
 
     @Test
@@ -667,5 +668,141 @@ class SkyWorldTest {
         }
         assertEquals("a calm raider only throws its fan", 0, aimedShots(0))
         assertTrue("an angry one picks you out of it", aimedShots(1) > 0)
+    }
+
+    // ---- continuing, and six raiders that are not the same raider -------------------------------
+
+    /** Flies the run into the ground on whatever stage it is on. */
+    private fun die(w: SkyWorld) {
+        var guard = 0
+        while (w.state == SkyWorld.State.RUNNING && guard++ < 400) {
+            w.setForTest(hp = 1, mercy = 0f)
+            w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY)
+            w.update(1f / 60f)
+        }
+        assertEquals(SkyWorld.State.GAME_OVER, w.state)
+    }
+
+    @Test
+    fun `a death picks the run back up on the stage it fell on`() {
+        val w = running()
+        w.startLevel(3)
+        w.setForTest(spread = 4)
+        die(w)
+        assertEquals(3, w.level)
+        assertTrue(w.continueRun())
+        assertEquals("you resume where you fell, not at the start", 3, w.level)
+        assertEquals(SkyWorld.State.RUNNING, w.state)
+        assertEquals("with a fresh aircraft", SkyWorld.MAX_HP, w.hp)
+        assertEquals(1, w.spread)
+    }
+
+    @Test
+    fun `a continue keeps what the run has earned`() {
+        val w = running()
+        w.soloModeForTest()
+        chainKills(w, SkyWorld.COMBO_STEP * 2)
+        val score = w.score
+        val kills = w.kills
+        val chain = w.bestCombo
+        assertTrue(score > 0 && kills > 0 && chain > 0)
+        die(w)
+        w.continueRun()
+        assertEquals("the score is yours to keep", score, w.score)
+        assertEquals(kills, w.kills)
+        assertEquals(chain, w.bestCombo)
+    }
+
+    @Test
+    fun `the run still ends once the continues are spent`() {
+        val w = running()
+        assertEquals(SkyWorld.MAX_CONTINUES, w.continues)
+        repeat(SkyWorld.MAX_CONTINUES) {
+            die(w)
+            assertTrue("continue $it should have been available", w.continueRun())
+        }
+        assertEquals(0, w.continues)
+        die(w)
+        assertTrue("there should be nothing left to spend", !w.continueRun())
+        assertEquals(SkyWorld.State.GAME_OVER, w.state)
+    }
+
+    @Test
+    fun `a fresh run starts from nothing`() {
+        val w = running()
+        w.soloModeForTest()
+        chainKills(w, SkyWorld.COMBO_STEP * 2)
+        die(w)
+        w.continueRun()
+        w.start()
+        assertEquals(1, w.level)
+        assertEquals("a new run does not inherit the last one's score", 0, w.score)
+        assertEquals(0, w.kills)
+        assertEquals(0, w.bestCombo)
+        assertEquals(SkyWorld.MAX_CONTINUES, w.continues)
+    }
+
+    @Test
+    fun `every raider hull has a profile and a way of fighting of its own`() {
+        assertEquals(SkyWorld.BOSS_KINDS, SkyWorld.BOSS_PROFILES.size)
+        val styles = SkyWorld.BOSS_PROFILES.map { it.style }
+        assertEquals("no two raiders should fight the same way", styles.size, styles.toSet().size)
+    }
+
+    @Test
+    fun `the stages cycle raiders on their own count, so a route changes hands`() {
+        val kinds = (1..SkyWorld.BOSS_KINDS * 2).map { (it - 1).mod(SkyWorld.BOSS_KINDS) }
+        assertEquals("all six should come round", SkyWorld.BOSS_KINDS, kinds.take(SkyWorld.BOSS_KINDS).toSet().size)
+        // four stages, six raiders: flying the same route again brings a different one
+        assertTrue(
+            "stage 1 should not always draw raider 0",
+            (0 until SkyWorld.BOSS_KINDS).map { (it * SkyWorld.PROFILES.size).mod(SkyWorld.BOSS_KINDS) }.toSet().size > 1,
+        )
+    }
+
+    @Test
+    fun `each raider lays down a pattern the others do not`() {
+        /** Fires one salvo from raider [kind] at phase 0 and describes what came out. */
+        fun salvo(kind: Int): String {
+            val w = SkyWorld(9).apply { startLevel(kind + 1) }
+            w.clearWavesForTest()
+            w.forceBossForTest(hp = 100000)
+            w.forceBossKindForTest(kind)
+            var frames = 0
+            while (frames++ < 60 * 8 && w.shots.none { !it.fromPlayer }) w.update(1f / 60f)
+            val shots = w.shots.filter { !it.fromPlayer }
+            assertTrue("raider $kind never fired", shots.isNotEmpty())
+            val acrossSky = shots.maxOf { it.x } - shots.minOf { it.x }
+            val acrossAim = shots.maxOf { it.vx } - shots.minOf { it.vx }
+            val straight = shots.count { abs(it.vx) < 1e-3f }
+            return "n=${shots.size} sky=${(acrossSky * 10).toInt()} " +
+                "aim=${(acrossAim * 10).toInt()} straight=$straight"
+        }
+        val prints = (0 until SkyWorld.BOSS_KINDS).map { salvo(it) }
+        assertEquals(
+            "every raider should lay down its own pattern: $prints",
+            SkyWorld.BOSS_KINDS,
+            prints.toSet().size,
+        )
+    }
+
+    @Test
+    fun `the curtain raider always leaves a way through`() {
+        val w = SkyWorld(5).apply { startLevel(1) }
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 100000)
+        w.forceBossKindForTest(SkyWorld.BOSS_PROFILES.indexOfFirst { it.style == SkyWorld.BossStyle.WALL })
+        repeat(4) {
+            var frames = 0
+            while (frames++ < 60 * 8 && w.shots.none { !it.fromPlayer }) w.update(1f / 60f)
+            val curtain = w.shots.filter { !it.fromPlayer }.map { it.x }.sorted()
+            assertTrue("a curtain should be more than a couple of shots", curtain.size >= 5)
+            val widest = curtain.zipWithNext().maxOf { (a, b) -> b - a }
+            assertTrue(
+                "there has to be a hole wide enough to fly through, widest gap was $widest",
+                widest > SkyWorld.PLAYER_HALF_X * 2f,
+            )
+            w.clearShotsForTest()
+        }
     }
 }

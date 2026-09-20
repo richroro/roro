@@ -164,28 +164,120 @@ def raider_base(c: Canvas, frame: int, body, body_l, wing, accent):
 
 
 def raider_zeppelin(c: Canvas, frame: int):
+    """The four-engine heavy: wide straight wing, slab sides, nothing clever."""
     p = raider_base(c, frame, (0x5A, 0x64, 0x78), (0x76, 0x82, 0x96), (0x3E, 0x46, 0x56), (0x8A, 0x96, 0xAA))
     p.rr(-20, 44, 20, 52, 3, (0xE8, 0x4C, 0x3D), o=1.2)
 
 
 def raider_storm(c: Canvas, frame: int):
-    p = raider_base(c, frame, (0x44, 0x52, 0x7A), (0x5E, 0x70, 0xA0), (0x2E, 0x38, 0x58), (0x6B, 0x7E, 0xB8))
+    """Twin boom: two hulls with open sky down the middle, joined by a centre plank."""
+    body, body_l = (0x44, 0x52, 0x7A), (0x5E, 0x70, 0xA0)
+    wing, accent = (0x2E, 0x38, 0x58), (0x6B, 0x7E, 0xB8)
+    p = Pen(c, RW / 2, 1.0)
     for side in (-1, 1):
-        p.po([(side * 14, 44), (side * 22, 30), (side * 8, 40)], (0xFF, 0xD6, 0x6B))
+        exhaust(p, side * 54, 36, 8, frame)
+    p.po_out([(-86, 82), (86, 82), (86, 100), (-86, 100)], wing, o=1.8)      # the plank between them
+    p.rr(-30, 86, 30, 96, 4, accent, o=1.4)
+    for side in (-1, 1):                                                     # the two booms
+        x = side * 54
+        p.po_out([(x, 132), (x + side * 20, 96), (x + side * 21, 52), (x + side * 8, 30),
+                  (x - side * 8, 30), (x - side * 21, 52), (x - side * 20, 96)], body, o=1.8)
+        p.po([(x, 126), (x + side * 9, 94), (x + side * 10, 54), (x, 38)], body_l)
+        p.el(x, 60, 12, 10, GLASS, o=1.3)
+        p.el(x - side * 3, 56, 5, 4, WHITE)
+        p.po_out([(x - 26, 124), (x, 110), (x + 26, 124), (x + 26, 132), (x - 26, 132)], wing, o=1.4)
+        prop(p, x, 112, 14, frame, col=(0xC8, 0xD0, 0xDC))
+    for side in (-1, 1):                                                     # wingtip lights
+        p.ci(side * 82, 91, 5, (0xFF, 0xD6, 0x6B), o=1.2)
 
 
 def raider_ember(c: Canvas, frame: int):
-    p = raider_base(c, frame, (0x7A, 0x3A, 0x2E), (0xA0, 0x52, 0x3E), (0x58, 0x28, 0x20), (0xC2, 0x6B, 0x3A))
-    p.el(0, 100, 18, 8, (0xFF, 0xA8, 0x4D), o=1.2)
+    """A flying wing: one swept triangle, no tail, a hot bar along its trailing edge."""
+    body, body_l = (0x7A, 0x3A, 0x2E), (0xA0, 0x52, 0x3E)
+    wing, accent = (0x58, 0x28, 0x20), (0xC2, 0x6B, 0x3A)
+    p = Pen(c, RW / 2, 1.0)
+    for k in (-0.62, -0.22, 0.22, 0.62):
+        exhaust(p, k * 96, 34, 9, frame)
+    p.po_out([(0, 142), (96, 58), (96, 34), (-96, 34), (-96, 58)], wing, o=1.8)
+    p.po_out([(0, 128), (52, 62), (52, 40), (-52, 40), (-52, 62)], body, o=1.5)
+    p.po([(0, 118), (24, 66), (24, 46), (-24, 46), (-24, 66)], body_l)
+    p.rr(-88, 34, 88, 44, 4, accent, o=1.4)                                  # the trailing-edge bar
+    glow = (0xFF, 0xA8, 0x4D) if frame % 2 == 0 else (0xFF, 0xD8, 0x96)
+    p.rr(-80, 36, 80, 41, 2, glow)
+    p.el(0, 78, 17, 13, GLASS, o=1.4)
+    p.el(-5, 73, 7, 6, WHITE)
+    for side in (-1, 1):
+        p.ci(side * 66, 52, 7, accent, o=1.3)
+        p.po([(side * 62, 44), (side * 70, 44), (side * 66, 32)], (0xFF, 0xC4, 0x4D))
 
 
 def raider_void(c: Canvas, frame: int):
-    p = raider_base(c, frame, (0x33, 0x33, 0x3E), (0x4C, 0x4C, 0x5C), (0x22, 0x22, 0x2C), (0x6B, 0x5A, 0x9A))
+    """A dagger: long, narrow, everything swept back. The one that is hard to lead."""
+    body, body_l = (0x33, 0x33, 0x3E), (0x4C, 0x4C, 0x5C)
+    wing, accent = (0x22, 0x22, 0x2C), (0x6B, 0x5A, 0x9A)
+    p = Pen(c, RW / 2, 1.0)
+    exhaust(p, 0, 28, 11, frame)
+    for side in (-1, 1):                                                     # sharply swept wings
+        p.po_out([(0, 96), (side * 92, 44), (side * 96, 30), (side * 30, 52), (0, 70)], wing, o=1.6)
+        p.po([(side * 20, 62), (side * 74, 40), (side * 78, 33), (side * 26, 54)], accent)
+        p.ci(side * 86, 37, 5, (0xB8, 0x8A, 0xFF), o=1.2)
+    p.po_out([(0, 150), (17, 104), (19, 60), (13, 34), (-13, 34), (-19, 60), (-17, 104)], body, o=1.8)
+    p.po([(0, 140), (8, 104), (9, 60), (0, 40)], body_l)
+    p.el(0, 84, 12, 14, GLASS, o=1.4)
+    p.el(-3, 78, 5, 6, WHITE)
+    p.po_out([(-30, 48), (0, 34), (30, 48), (30, 56), (-30, 56)], wing, o=1.4)
     for side in (-1, 1):
-        p.ci(side * 56, 64, 5, (0xB8, 0x8A, 0xFF), o=1.2)
+        p.rr(side * 26 - 4, 66, side * 26 + 4, 92, 3, accent, o=1.3)         # underwing pods
 
 
-RAIDERS = [raider_zeppelin, raider_storm, raider_ember, raider_void]
+def raider_bastion(c: Canvas, frame: int):
+    """An armoured barge: short, fat, slab-sided, and covered in turrets."""
+    body, body_l = (0x4E, 0x50, 0x46), (0x6C, 0x70, 0x60)
+    wing, accent = (0x33, 0x35, 0x2E), (0x9A, 0x8A, 0x52)
+    p = Pen(c, RW / 2, 1.0)
+    for k in (-0.7, -0.4, 0.4, 0.7):
+        exhaust(p, k * 92, 40, 8, frame)
+    p.rr(-94, 42, 94, 76, 8, wing, o=1.8)                                    # the slab
+    p.rr(-96, 78, 96, 96, 6, wing, o=1.6)                                    # sponsons
+    for side in (-1, 1):
+        p.rr(side * 72 - 16, 80, side * 72 + 16, 112, 7, body, o=1.6)
+        prop(p, side * 72, 118, 14, frame, col=(0xC0, 0xC4, 0xB0))
+        p.ci(side * 46, 62, 10, accent, o=1.4)                               # turrets
+        p.rr(side * 46 - 3, 44, side * 46 + 3, 64, 1.4, (0x2A, 0x2E, 0x28), o=1.2)
+    p.rr(-34, 50, 34, 124, 10, body, o=1.8)                                  # the middle block
+    p.rr(-18, 56, 18, 112, 7, body_l)
+    p.el(0, 96, 16, 12, GLASS, o=1.4)
+    p.el(-5, 92, 6, 5, WHITE)
+    p.rr(-40, 126, 40, 136, 4, accent, o=1.4)                                # chin plate
+    for k in (-0.55, 0, 0.55):
+        p.ci(k * 44, 132, 5, (0x2A, 0x2E, 0x28), o=1.1)
+
+
+def raider_ring(c: Canvas, frame: int):
+    """A disc with an eye in it. Nothing else in the sky is shaped like this."""
+    body, body_l = (0x2E, 0x4C, 0x52), (0x40, 0x6E, 0x76)
+    wing, accent = (0x1E, 0x33, 0x38), (0x3E, 0xC6, 0xD6)
+    p = Pen(c, RW / 2, 1.0)
+    for a in (35, 145, 215, 325):                                            # four outriggers
+        rad = math.radians(a)
+        x, y = math.cos(rad) * 86, 86 + math.sin(rad) * 52
+        p.rr(x - 13, y - 13, x + 13, y + 13, 5, wing, o=1.6)
+        prop(p, x, y, 12, frame, col=(0x9ED8E0 >> 16 & 255, 0x9ED8E0 >> 8 & 255, 0x9ED8E0 & 255))
+    p.el(0, 86, 92, 56, wing, o=1.8)                                         # the outer ring
+    p.el(0, 86, 74, 44, body, o=1.4)
+    p.el(0, 86, 52, 31, body_l)
+    exhaust(p, 0, 34, 12, frame)
+    p.el(0, 86, 30, 22, (0x14, 0x22, 0x26), o=1.4)                           # the eye
+    glow = accent if frame % 2 == 0 else (0x9C, 0xEC, 0xF6)
+    p.el(0, 86, 21, 15, glow)
+    p.el(-6, 81, 8, 6, WHITE)
+    for side in (-1, 1):                                                     # gun blisters
+        p.ci(side * 62, 86, 8, accent, o=1.4)
+        p.rr(side * 62 - 3, 86, side * 62 + 3, 116, 1.4, (0x16, 0x26, 0x2A), o=1.2)
+
+
+RAIDERS = [raider_zeppelin, raider_storm, raider_ember, raider_void,
+           raider_bastion, raider_ring]
 
 
 # ---------------------------------------------------------------- pickups

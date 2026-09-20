@@ -6,11 +6,13 @@
         <item>잿불 평원</item>
         <item>긴 밤</item>
     </string-array>
-    <string-array name="stage_raider">
+    <string-array name="boss_name">
         <item>강철 갈매기</item>
         <item>폭풍우를 부르는 자</item>
         <item>잿불의 여왕</item>
         <item>긴 그림자</item>
+        <item>무쇠 요새</item>
+        <item>외눈</item>
     </string-array>
     <string-array name="stage_tag">
         <item>새벽부터 저 위를 돌고 있다</item>
