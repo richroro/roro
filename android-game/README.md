@@ -224,6 +224,24 @@ A raider that slides fast does not also get to be a wall, and the one that barel
 in health. Six raiders against four stages means the cycles do not line up: fly the coast road a
 second time and something else is waiting at the end of it.
 
+**Ten pickups, on five different axes.** More guns (`SPREAD`, `WINGMAN`), a faster gun (`RAPID`),
+a gun that behaves differently (`PIERCE`, `HOMING`), staying alive (`SHIELD`, `REPAIR`, `BOMB`),
+and the two that look after the chain and the sky around you (`CHARM`, `MAGNET`).
+
+- **`WINGMAN`** puts an escort off your wingtip, up to `MAX_WINGMEN`. They fire when you fire, and
+  an escort is the first thing a hit takes -- only once they are gone does a hit cost you a gun.
+- **`PIERCE`** lets a round punch through `PIERCE_HITS` hulls instead of stopping at the first. A
+  shot remembers what it last hit, so punching through is not the same as hitting one aircraft
+  four frames running. Against a `TRAIL` formation it is a whole chain in one round.
+- **`HOMING`** lets your rounds lean towards whatever is still ahead of them, at `HOMING_TURN` per
+  second, without letting them speed up or slow down.
+- **`MAGNET`** reels falling pickups in instead of letting them sail past.
+- **`CHARM`** eats one chain break. The hit still lands and still costs a hit point -- the chain
+  is what survives it.
+
+`DROP_TABLE` keeps the drop *rate* where it was, so ten kinds means more variety per drop rather
+than more power: the staples stay common and the exotics stay a treat.
+
 **Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
 you back on the stage you fell on with a fresh aircraft. The score, the kills and the best chain
 stay -- you are continuing, not starting over -- and only `start()` clears them, so the run still

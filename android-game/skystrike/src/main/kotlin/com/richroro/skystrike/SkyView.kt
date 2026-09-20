@@ -214,6 +214,15 @@ class SkyView @JvmOverloads constructor(
         SkyWorld.ItemKind.SHIELD to BitmapFactory.decodeResource(resources, R.drawable.pickup_shield),
         SkyWorld.ItemKind.BOMB to BitmapFactory.decodeResource(resources, R.drawable.pickup_bomb),
         SkyWorld.ItemKind.REPAIR to BitmapFactory.decodeResource(resources, R.drawable.pickup_repair),
+        SkyWorld.ItemKind.WINGMAN to BitmapFactory.decodeResource(resources, R.drawable.pickup_wingman),
+        SkyWorld.ItemKind.PIERCE to BitmapFactory.decodeResource(resources, R.drawable.pickup_pierce),
+        SkyWorld.ItemKind.HOMING to BitmapFactory.decodeResource(resources, R.drawable.pickup_homing),
+        SkyWorld.ItemKind.MAGNET to BitmapFactory.decodeResource(resources, R.drawable.pickup_magnet),
+        SkyWorld.ItemKind.CHARM to BitmapFactory.decodeResource(resources, R.drawable.pickup_charm),
+    )
+    private val wingmanFrames: Array<Bitmap> = arrayOf(
+        BitmapFactory.decodeResource(resources, R.drawable.wingman_0),
+        BitmapFactory.decodeResource(resources, R.drawable.wingman_1),
     )
 
     private val stagePlaces: Array<String> = resources.getStringArray(R.array.stage_place)
@@ -415,6 +424,11 @@ class SkyView @JvmOverloads constructor(
                 comboPop = 0f
                 floatText(context.getString(R.string.combo_lost), e.x, e.y - 0.06f, color(R.color.smoke))
             }
+            SkyWorld.Event.Type.CHARM_USED -> {
+                sparks(e.x, e.y, 18, color(R.color.gold), 0.45f, 0.01f)
+                floatText(context.getString(R.string.charm_saved), e.x, e.y - 0.05f, color(R.color.gold))
+                play(sndPickup, 6, 0, 0.8f, 0f, 0.8f)
+            }
             SkyWorld.Event.Type.RUSH -> {
                 banner = context.getString(R.string.rush_in)
                 bannerTimer = 1.5f
@@ -503,6 +517,11 @@ class SkyView @JvmOverloads constructor(
         SkyWorld.ItemKind.SHIELD -> R.string.item_shield
         SkyWorld.ItemKind.BOMB -> R.string.item_bomb
         SkyWorld.ItemKind.REPAIR -> R.string.item_repair
+        SkyWorld.ItemKind.WINGMAN -> R.string.item_wingman
+        SkyWorld.ItemKind.PIERCE -> R.string.item_pierce
+        SkyWorld.ItemKind.HOMING -> R.string.item_homing
+        SkyWorld.ItemKind.MAGNET -> R.string.item_magnet
+        SkyWorld.ItemKind.CHARM -> R.string.item_charm
     }
 
     private fun updateFx(dt: Float) {
@@ -888,8 +907,14 @@ class SkyView @JvmOverloads constructor(
         // blink while the mercy window is running so it is obvious you are not solid yet
         val blink = world.mercy > 0f && ((world.mercy * 14f).toInt() and 1) == 0
         if (!blink) {
-            val frame = ((runTime * PROP_HZ).toInt()) and 1
-            bankedSprite(canvas, playerFrames[frame], cx, cy, sw, sh, bankOf(), spritePaint)
+            bankedSprite(canvas, playerFrames[frameIndex()], cx, cy, sw, sh, bankOf(), spritePaint)
+        }
+        // the escorts, drawn behind you so your own aircraft stays the thing you read first
+        for (i in 0 until world.wingmen) {
+            val wx = sx(world.wingmanX(i))
+            val wy = sy(world.wingmanY())
+            val wh = w * PLAYER_SIZE * 0.66f
+            bankedSprite(canvas, wingmanFrames[frameIndex()], wx, wy, wh * 0.8f, wh, bankOf() * 0.7f, spritePaint)
         }
         if (world.shield) {
             shieldPaint.strokeWidth = max(2f, w * 0.008f)
@@ -907,6 +932,8 @@ class SkyView @JvmOverloads constructor(
             muzzlePaint.shader = null
         }
     }
+
+    private fun frameIndex(): Int = ((runTime * PROP_HZ).toInt()) and 1
 
     /** The fighter rolls into whichever way you are dragging it, and eases back when you stop. */
     private fun bankOf(): Float {
@@ -1027,6 +1054,14 @@ class SkyView @JvmOverloads constructor(
     }
 
     private fun drawShot(canvas: Canvas, s: SkyWorld.Shot, w: Float) {
+        if (s.fromPlayer && s.pierce > 0) {
+            // a round that will punch through is drawn longer and hotter than one that will not
+            tracerPaint.color = color(R.color.s3_ember)
+            val len = w * 0.05f
+            rect.set(sx(s.x) - w * 0.009f, sy(s.y) - len, sx(s.x) + w * 0.009f, sy(s.y) + len * 0.35f)
+            canvas.drawRoundRect(rect, w * 0.009f, w * 0.009f, tracerPaint)
+            tracerPaint.color = color(R.color.tracer)
+        }
         val r = w * (if (s.fromPlayer) 0.009f else 0.013f)
         val cx = sx(s.x)
         val cy = sy(s.y)
@@ -1119,10 +1154,7 @@ class SkyView @JvmOverloads constructor(
             px += pip + gap
         }
         drawCombo(canvas, w, py + pip * 1.8f)
-        if (world.rapidTimer > 0f) {
-            label(canvas, context.getString(R.string.item_rapid), w * 0.06f + total / 2f, py + pip * 4.4f,
-                w * 0.035f, color(R.color.gold), color(R.color.text_stroke))
-        }
+        drawEffects(canvas, w, py + pip * 4.6f)
 
         // bomb button
         val r = w * 0.085f
@@ -1168,6 +1200,32 @@ class SkyView @JvmOverloads constructor(
         hpPaint.color = if (left < 0.3f) color(R.color.hp_low) else color(R.color.gold)
         rect.set(x, by, x + bw * left, by + bh)
         canvas.drawRoundRect(rect, bh, bh, hpPaint)
+    }
+
+    /**
+     * What is running right now, as a stack of draining chips. Four things can be on a timer at
+     * once, so a single word in the corner no longer says enough.
+     */
+    private fun drawEffects(canvas: Canvas, w: Float, top: Float) {
+        var y = top
+        fun chip(nameId: Int, left: Float, span: Float, tint: Int) {
+            val cw = w * 0.2f
+            val ch = w * 0.036f
+            rect.set(w * 0.06f, y, w * 0.06f + cw, y + ch)
+            canvas.drawRoundRect(rect, ch / 2f, ch / 2f, hpTrackPaint)
+            hpPaint.color = tint
+            rect.set(w * 0.06f, y, w * 0.06f + cw * (left / span).coerceIn(0f, 1f), y + ch)
+            canvas.drawRoundRect(rect, ch / 2f, ch / 2f, hpPaint)
+            label(canvas, context.getString(nameId), w * 0.06f + cw / 2f, y + ch * 0.78f,
+                w * 0.029f, Color.WHITE, color(R.color.text_stroke))
+            y += ch * 1.22f
+        }
+        if (world.rapidTimer > 0f) chip(R.string.item_rapid, world.rapidTimer, SkyWorld.RAPID_SECONDS, color(R.color.gold))
+        if (world.pierceTimer > 0f) chip(R.string.item_pierce, world.pierceTimer, SkyWorld.PIERCE_SECONDS, color(R.color.s3_ember))
+        if (world.homingTimer > 0f) chip(R.string.item_homing, world.homingTimer, SkyWorld.HOMING_SECONDS, color(R.color.hp_low))
+        if (world.magnetTimer > 0f) chip(R.string.item_magnet, world.magnetTimer, SkyWorld.MAGNET_SECONDS, color(R.color.shield_ring))
+        // the charm is not on a clock: it sits there until something takes it
+        if (world.charm) chip(R.string.item_charm, 1f, 1f, color(R.color.gold))
     }
 
     /** A line across the middle of the sky for the moments that deserve one. */

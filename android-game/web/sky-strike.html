@@ -37,7 +37,7 @@
 </div>
 <div class="hints">
   <span>왼쪽 아래 <b>조종 영역</b>을 끌거나 <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> 로 상하좌우 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>M</kbd> 소리</span>
-  <span>자동 사격 · 아이템: ✦확산 ⚡연사 🛡방어막 💣폭탄 ✚수리</span>
+  <span>자동 사격 · 아이템 10종: 확산 · 연사 · 방어막 · 폭탄 · 수리 · 요기 · 관통 · 유도 · 자석 · 부적</span>
 </div>
 
 <script>
@@ -58,6 +58,9 @@
     BOSS_AIMED_SPEED: 0.95, BOSS_SPIRAL_ARMS: 5, BOSS_SPIN_STEP: 0.7,
     BURST_SHOTS: 3, BURST_GAP: 0.17, WALL_SLOTS: 8, WALL_REACH: 0.85, COLUMN_SHOTS: 3,
     MAX_CONTINUES: 3,
+    MAX_WINGMEN: 4, WINGMAN_OFFSET: 0.115, WINGMAN_TRAIL: 0.035,
+    PIERCE_SECONDS: 8, PIERCE_HITS: 3, HOMING_SECONDS: 7, HOMING_TURN: 5.5,
+    MAGNET_SECONDS: 9, MAGNET_PULL: 0.85,
     CLEAR_BONUS: 250, BOSS_SCORE: 500,
     BOSS_KINDS: 6, BOSS_BASE_HP: 70, BOSS_STATION_Y: 0.2, BOSS_ENTRY_SPEED: 0.22,
     BOSS_SWEEP_RATE: 0.9, BOSS_SWEEP_X: 0.5, BOSS_SALVO_GAP: 1.15, BOSS_FAN: 1.5, BOMB_BOSS_RATIO: 0.16,
@@ -109,7 +112,17 @@
       story: '수평선도, 지면도, 두 번째 기회도 없다.\n계기판과, 당신 엔진 소리를 기다리는\n무언가뿐이다.',
       clear: '결국 새벽이 왔다. 당신은 아직 날고 있다.' },
   ];
-  const ITEM_LABEL = { SPREAD: '확산', RAPID: '연사', SHIELD: '방어막', BOMB: '폭탄', REPAIR: '수리' };
+  const ITEM_LABEL = { SPREAD: '확산', RAPID: '연사', SHIELD: '방어막', BOMB: '폭탄', REPAIR: '수리',
+    WINGMAN: '요기', PIERCE: '관통', HOMING: '유도', MAGNET: '자석', CHARM: '부적' };
+  /**
+   * What falls, and how often. Ten kinds at the same drop rate means more variety per drop
+   * rather than more power; the staples stay common and the exotics stay a treat.
+   */
+  const DROP_TABLE = [
+    ['SPREAD', 14], ['RAPID', 13], ['SHIELD', 11], ['REPAIR', 11], ['PIERCE', 11],
+    ['HOMING', 11], ['WINGMAN', 10], ['BOMB', 8], ['MAGNET', 6], ['CHARM', 5],
+  ];
+  const DROP_WEIGHT_TOTAL = DROP_TABLE.reduce((a, d) => a + d[1], 0);
   const profileOf = l => PROFILES[(l - 1) % PROFILES.length];
   const stageOf = l => STAGES[(l - 1) % STAGES.length];
   const State = { READY: 'READY', RUNNING: 'RUNNING', LEVEL_CLEAR: 'LEVEL_CLEAR', GAME_OVER: 'GAME_OVER' };
@@ -127,6 +140,7 @@
       this.hp = C.MAX_HP; this.bombs = C.START_BOMBS;
       this.shield = false; this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
       this.combo = 0; this.comboTimer = 0; this.bestCombo = 0; this.continues = C.MAX_CONTINUES;
+      this.wingmen = 0; this.pierceTimer = 0; this.homingTimer = 0; this.magnetTimer = 0; this.charm = false;
       this.enemies = []; this.shots = []; this.items = []; this.flares = []; this.boss = null;
       this.events = []; this.gust = 0;
     }
@@ -139,6 +153,7 @@
       this.playerX = 0; this.playerY = C.PLAYER_Y;
       this.hp = C.MAX_HP; this.bombs = C.START_BOMBS; this.shield = false;
       this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
+      this.wingmen = 0; this.pierceTimer = 0; this.homingTimer = 0; this.magnetTimer = 0; this.charm = false;
       this.combo = 0; this.comboTimer = 0;
       this.fireAcc = 0; this.elapsed = 0; this.waveIndex = 0; this.totalWaves = p.waves; this.nextWaveAt = 0.8;
       // one scripted surge halfway through, so the stage is not a metronome all the way down
@@ -196,6 +211,9 @@
       this.flash = Math.max(0, this.flash - dt);
       this.mercy = Math.max(0, this.mercy - dt);
       this.rapidTimer = Math.max(0, this.rapidTimer - dt);
+      this.pierceTimer = Math.max(0, this.pierceTimer - dt);
+      this.homingTimer = Math.max(0, this.homingTimer - dt);
+      this.magnetTimer = Math.max(0, this.magnetTimer - dt);
       this.updateHazard(dt);
       this.updateCombo(dt);
       this.spawnWaves();
@@ -501,11 +519,53 @@
         this.fireAcc -= 1;
         for (let i = 0; i < this.spread; i++) {
           const off = this.spread === 1 ? 0 : (i / (this.spread - 1) - 0.5);
-          this.shots.push({ x: this.playerX + off * 0.09, y: this.playerY - 0.05, vx: off * 0.35,
-            vy: -C.SHOT_SPEED, fromPlayer: true, alive: true, damage: 1 });
+          this.addPlayerShot(this.playerX + off * 0.09, this.playerY - 0.05, off * 0.35);
+        }
+        // the escorts fire straight ahead from where they are sitting
+        for (let i = 0; i < this.wingmen; i++) {
+          this.addPlayerShot(this.wingmanX(i), this.wingmanY(), 0);
         }
         this.events.push({ t: 'SHOT', x: this.playerX, y: this.playerY - 0.05 });
       }
+    }
+
+    addPlayerShot(x, y, vx) {
+      this.shots.push({ x, y, vx, vy: -C.SHOT_SPEED, fromPlayer: true, alive: true, damage: 1,
+        pierce: this.pierceTimer > 0 ? C.PIERCE_HITS : 0, lastHit: null });
+    }
+
+    /** Where the escort at `index` is sitting right now, so the view can draw it. */
+    wingmanX(index) {
+      return this.playerX + (index % 2 === 0 ? -1 : 1) * C.WINGMAN_OFFSET * (1 + Math.floor(index / 2));
+    }
+    wingmanY() { return this.playerY + C.WINGMAN_TRAIL; }
+
+    /** Turns a player shot towards the nearest target, without letting it speed up or slow down. */
+    steerHoming(s, dt) {
+      let bestX = 0, bestY = 0, bestD = Infinity;
+      for (const e of this.enemies) {
+        if (!e.alive || e.y > s.y) continue;          // only things still ahead of it
+        const d = (e.x - s.x) ** 2 + (e.y - s.y) ** 2;
+        if (d < bestD) { bestD = d; bestX = e.x; bestY = e.y; }
+      }
+      const b = this.boss;
+      if (b && b.alive && b.y <= s.y) {
+        const d = (b.x - s.x) ** 2 + (b.y - s.y) ** 2;
+        if (d < bestD) { bestD = d; bestX = b.x; bestY = b.y; }
+      }
+      if (bestD === Infinity) return;
+      const speed = Math.hypot(s.vx, s.vy);
+      if (speed <= 1e-5) return;
+      const tx = bestX - s.x, ty = bestY - s.y;
+      const tl = Math.hypot(tx, ty);
+      if (tl <= 1e-5) return;
+      const k = Math.max(0, Math.min(1, C.HOMING_TURN * dt));
+      let nx = s.vx / speed * (1 - k) + tx / tl * k;
+      let ny = s.vy / speed * (1 - k) + ty / tl * k;
+      const nl = Math.hypot(nx, ny);
+      if (nl <= 1e-5) return;
+      s.vx = nx / nl * speed;
+      s.vy = ny / nl * speed;
     }
 
     hitsPlayer(x, y, half) {
@@ -522,11 +582,17 @@
         this.events.push({ t: 'SHIELD_USED', x, y });
         return;
       }
-      // the chain is the price of being hit, and it hurts more than the hit point does
-      if (this.combo >= C.COMBO_STEP) this.events.push({ t: 'COMBO_LOST', x, y, value: this.combo });
-      this.combo = 0; this.comboTimer = 0;
+      // the charm eats one chain break; the hit still lands, the chain survives it
+      if (this.charm) {
+        this.charm = false;
+        this.events.push({ t: 'CHARM_USED', x, y, value: this.combo });
+      } else {
+        if (this.combo >= C.COMBO_STEP) this.events.push({ t: 'COMBO_LOST', x, y, value: this.combo });
+        this.combo = 0; this.comboTimer = 0;
+      }
       this.hp -= amount; this.flash = C.FLASH_SECONDS; this.mercy = C.MERCY_SECONDS;
-      this.spread = Math.max(1, this.spread - 1);
+      // an escort is the first thing a hit takes; only once they are gone does it cost a gun
+      if (this.wingmen > 0) this.wingmen--; else this.spread = Math.max(1, this.spread - 1);
       this.events.push({ t: 'HIT_PLAYER', x, y });
       if (this.hp <= 0) {
         this.hp = 0; this.state = State.GAME_OVER;
@@ -542,11 +608,14 @@
         s.x += s.vx * dt; s.y += s.vy * dt;
         if (s.y < -0.15 || s.y > 1.15 || Math.abs(s.x) > 1.2) { this.shots.splice(i, 1); continue; }
         if (s.fromPlayer) {
+          if (this.homingTimer > 0) this.steerHoming(s, dt);
           let spent = false;
           for (const e of this.enemies) {
-            if (!e.alive) continue;
+            if (!e.alive || e === s.lastHit) continue;
             if (Math.abs(e.x - s.x) < C.ENEMY_HALF && Math.abs(e.y - s.y) < C.ENEMY_HALF) {
-              e.hp -= s.damage; spent = true;
+              e.hp -= s.damage;
+              // a piercing round carries on to whatever is behind it
+              if (s.pierce > 0) { s.pierce--; s.lastHit = e; } else spent = true;
               if (e.hp <= 0) {
                 e.alive = false;
                 this.awardKill(e.kind, e.x, e.y);
@@ -556,8 +625,10 @@
             }
           }
           const b = this.boss;
-          if (!spent && b && b.alive && Math.abs(b.x - s.x) < C.BOSS_HALF && Math.abs(b.y - s.y) < C.BOSS_HALF) {
-            spent = true; this.damageBoss(b, s.damage);
+          if (!spent && b && b.alive && b !== s.lastHit &&
+              Math.abs(b.x - s.x) < C.BOSS_HALF && Math.abs(b.y - s.y) < C.BOSS_HALF) {
+            if (s.pierce > 0) { s.pierce--; s.lastHit = b; } else spent = true;
+            this.damageBoss(b, s.damage);
             if (b.alive) this.events.push({ t: 'HIT_BOSS', x: s.x, y: s.y });
           }
           if (spent) this.shots.splice(i, 1);
@@ -571,14 +642,24 @@
 
     maybeDrop(x, y) {
       if (this.r() >= C.ITEM_CHANCE) return;
-      const roll = this.r();
-      const kind = roll < 0.26 ? 'SPREAD' : roll < 0.5 ? 'RAPID' : roll < 0.72 ? 'SHIELD' : roll < 0.88 ? 'REPAIR' : 'BOMB';
+      let roll = this.r() * DROP_WEIGHT_TOTAL;
+      let kind = DROP_TABLE[DROP_TABLE.length - 1][0];
+      for (const [k, weight] of DROP_TABLE) {
+        roll -= weight;
+        if (roll < 0) { kind = k; break; }
+      }
       this.items.push({ x, y, kind, alive: true });
     }
 
     updateItems(dt) {
       for (let i = this.items.length - 1; i >= 0; i--) {
         const it = this.items[i];
+        if (this.magnetTimer > 0) {
+          // reel it in: still falling, but now it is coming to you
+          const dx = this.playerX - it.x, dy = this.playerY - it.y;
+          const d = Math.hypot(dx, dy);
+          if (d > 1e-4) { it.x += dx / d * C.MAGNET_PULL * dt; it.y += dy / d * C.MAGNET_PULL * dt; }
+        }
         it.y += C.ITEM_FALL_SPEED * dt;
         if (it.y > 1.1) { this.items.splice(i, 1); continue; }
         if (Math.abs(it.y - this.playerY) < C.ITEM_HALF + C.PLAYER_HALF_Y && Math.abs(it.x - this.playerX) < C.ITEM_HALF + C.PLAYER_HALF_X) {
@@ -587,7 +668,12 @@
           else if (it.kind === 'RAPID') this.rapidTimer = C.RAPID_SECONDS;
           else if (it.kind === 'SHIELD') this.shield = true;
           else if (it.kind === 'BOMB') this.bombs = Math.min(C.MAX_BOMBS, this.bombs + 1);
-          else this.hp = Math.min(C.MAX_HP, this.hp + 1);
+          else if (it.kind === 'REPAIR') this.hp = Math.min(C.MAX_HP, this.hp + 1);
+          else if (it.kind === 'WINGMAN') this.wingmen = Math.min(C.MAX_WINGMEN, this.wingmen + 1);
+          else if (it.kind === 'PIERCE') this.pierceTimer = C.PIERCE_SECONDS;
+          else if (it.kind === 'HOMING') this.homingTimer = C.HOMING_SECONDS;
+          else if (it.kind === 'MAGNET') this.magnetTimer = C.MAGNET_SECONDS;
+          else if (it.kind === 'CHARM') this.charm = true;
           this.score += C.ITEM_SCORE;
           this.events.push({ t: 'PICKUP', x: it.x, y: it.y, kind: it.kind });
         }
@@ -724,6 +810,10 @@
       case 'COMBO_LOST':
         fx.comboPop = 0;
         floatText('연쇄 끊김', ev.x, ev.y - 0.06, '#94A3B8'); break;
+      case 'CHARM_USED':
+        sparks(ev.x, ev.y, 18, '#FACC15', 0.45, 0.01);
+        floatText('연쇄 지킴', ev.x, ev.y - 0.05, '#FACC15');
+        play('pickup', 0.8); break;
       case 'RUSH':
         fx.banner = '편대 돌입!'; fx.bannerTimer = 1.5;
         fx.shake = Math.max(fx.shake, 0.25); play('roar', 1.35); break;
@@ -848,6 +938,19 @@
   SPRITES.pickups.BOMB.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFFElEQVR42u1b3UsVQRT3P/CPEPWq5V7F1CQxMCIpzAqsB+lCEVZGWvQF1UMfT2ZKL0VF3UKI6kWKCqlAiegpvFAkQZDhS9RLvQW9TPvbdi6ze3dmZ+fO7F1rBw7K7syZc87M/s7HzK2qSlva0pa2tKXNaKupbbZsGrUpb9OcTUs2ER8tue/ybl/rX1B6iqOsLC25PKyVpHjOXcmiIlb9etK3ah8Zyp4jY223yNmOGTLe9cpDeIZ36IO+GEPHZ7Mt5PrF/gJ4J1nxHlbxhroOMtB8mJxov1eirCxh7KEtw+TDkxw5PryBGgRz9CRJ8Wp3mxZXe2/rOLnQOausOKWnx+6SX2/HHDrSPenZFe6c1Un4zgtUqEHrlFDxqxsXyJ2Bj+T+ri/k8Z7vHsIzvEOfK70vyfublwhZHHEI/2M8eGMOxgiFiuGDq/wPCNKe6eNu9Yl1r8nt/kUyk/taonQQzZ98R37Ony8qD8rvfFTyaWBO1wg/YjeCC3SOAAAs3qpjNWUVBy1cfk5+Lxz1KP9t9nQgb8yJuZndkItz5YvK87b79I5P0opTWn54w6M8CEYBL948PiNYsW173coHGQG74dmBZee5pBHMfQ4u2hd0KP9g92cyuf2Fh/DMbwT8ZcdJGqFgxDtQVwfwEX3zYcqf2TxNmjJrS6I+PMM71ggARP94zMHDBAYYp0wEOQ5zEdqHAR5WGYoObmoj4yNdHsIzvGN3QhBhDszFC5wYo/boNMAc9fO8LQhXF7b62Org41eeEt6hTxgfzMWTg4kT5rS6PERhoiBHxt3pMgDm4skBGZmIMadt9RHeiiI8GYTXZQARFoAgq5ZdQH0+EhvR6iOEjdsAmFO0CyBz2bEBRX5kdaKkJSi2DwLAg70ToQZAnzAgpLmDSCbIXLZHoMWMsJQ2TFgoxbo+kQGoS8SYML5hqTQtqpS1/QEoYWkrT8Brg29Id3YbqamzSH1jG2lY/Xdb8tyg87nZfdAXYzAWPFQMAGLA0FIxwGhY1CcyAATHStZmWhylGps7HXKU45TA8I72wxiMBQ+eEcLkYqLDURUDoDjplKiiGoBVnirEEpTLNK3xEGsklkRGCJMLsrsGyCu7P9TpwibygyC2Lk95FQIv8IwCgiDIruwOKQAGFTBFbtBBevv75a2oCjnYYfNkgVHkBtlCqzIQFhFbonZHAyEa67Pfsi4CTzZXEAVCLFE9jBqAhsLI5rBSupWnBN6YQxQKV8wASFC2du4ndZlWYwYAb8whSoYqZgCkqOgPRDdlAPDGHLx0WLcBpEGQBRyd4BcIhgoyqYKgtBtkXY4p5Ys4oCCTqhuUDoSSaoByAyHpUDipn0C5obB0MsQCThwgKCtPWclQlHSYUm/TkHE3iDlkT5bLSoejFEQ8pSjDgZCoNGeiICJVEvOXokyFwlHl0HJcJlMULSlLG0qGRGV5I0XRKGVxlnBCozsdBk+ZubWXxWUPRvwAhC2owwhORcnmJQvE2g9GZI/GREZQ+RxoSSyK8saOxmQPR4MEcg4s3aJoFMDDGNHNk1gPR6Mcj/O2pYPKtlLw5f4aIK0R4p0DoHZf2c8ttuPxKBckeCsEdEYgw6sK453KDbNYLkhEvSIjkzsgqeFdnFRQnsR2WUr2kpRJqtglqajX5ExQxa/JqV6U1LHqibkoGcdVWT+AJu6qbByXpcGDSWySd1k6juvyjOLJvS6f/mAi3Bj/109m0pa2tKUtbSug/QGzVizGYKpnjQAAAABJRU5ErkJggg==';
   SPRITES.pickups.REPAIR = new Image();
   SPRITES.pickups.REPAIR.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADqElEQVR42u1bzWpUMRTuG/QhtNTSsXdQQajKyFCUYv3BP7rybmQUCo4bFaQuBDfiouCqFGE2pUsR3LgbcFXczCPMI5R5gni/SzJkbm9OknuTzK3mwNnMzd/5kpx85ySzsBAlSpQoUaJ4lXNLa0mm/UwHmQ4zHWfKCjrm3wa8bPIvGL2nMNZUx7yN5CwZnvKZnBpy/vIltvzgGlvpddnq7iZrfbnL1g4ezih+wzeUQVnUKYCBNtMmG96ZMbzVZsvbN9jqpzunjDVV1EUbaKsARKdJhi/yZTqd7ZVXG+zi1/uVDS8q2kKbhVWBPhebsM9HYlAX0puk4etHz9jGj5ds69dr9vT3+xnFb/iGMhQQ6EMCYTQ3/8CNP8FAltavKJd6+9tj1v3eY4+G704ZrVKURR3UVW0N9MlBOAkOAnd0+QDgsFSzjtm0MbwMCNWKQJ/oW1oNaciZnxqvWq63f+5UNryoaEvVTwGEJNiyD2W8JQj+tgP39qO6xm8d7rDNgxelim8OQBh5OR3EUQfnQ+15yvBW97qW/aEMBQTlEyTHuOeD5OSNU96ecngw7M3bXTaZTJhK8A1lUJZyjNTpIIHZcQnAUJzzqiWIY4uafdSnjJdBQFlqFaAv1TgknjB0euSBhVEkh5p97G+0YSooizrUKqDIksQYU2ezDypKMTzKebkGgPIFUIzVySqYnvlZMELNPihsaADQJ7UKpAAqqe35EZFRwUoZt/cNAPqkxpRHkXVPBJHM0IW0OhLjAwCoLpQWSZVayx8ORReu6khO58N2Ppjj4z9GirKooyNLunFJzjCpAkBfx/qmW8CQ5LhSQZZ045LYYb8KAIPc+/e62o5MSI4rkcmSblwYOwdgUPn4Q57OZK+FML5IlnS+CWOvfBwKB1iWwCzrJLSYTA7GXtkRiv2mTVw2GACosCMCEAGIAEQnGI9BX0QIqajQRAh9+iZCxlS4cFHhXamLGJdU2DgYkoHAshPa/niP3dp/XjkYQl20Ibdpc9laKxiyCYcpRQLz6ucn1uEw6qiSn6aTUSsctkmIuD4qTY+4EAkRo5RY0wBwlhIzTYo2DQBnSVGbtHhTAHCeFje9GHFFlkxJTrCLEdOrMRdkyYbkBL0aM70cdUGWTElO0MtRm+txW7JUleQEvx63eSARWoM8kLB9IjMH41mwx1Kmj6R86tweSdk+k/Ohc38mV/WhpItZb8xDyfhUNj6Wjs/l4x8mLMH4v/4yEyVKlChRzoD8BUDc9j60DO2mAAAAAElFTkSuQmCC';
+  SPRITES.pickups.WINGMAN = new Image();
+  SPRITES.pickups.WINGMAN.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAE+klEQVR42u1b60tUQRT3P/CPKNFebh+KqCghJYmkJ5gkaGhEJGkJmRWGlhT6RXuqke5GiSX2kIzAIgkqRDB7FwSJGL0gTIoiCKb9Xe5cZu/uzJ25j91r3QMHwr1znjPnNVNaWgABBBBAAAF4CrMyskNRrIpiOIpDURyPIjHhuP5bWP829C8o3cJRVhbHdRqhmaR4qe5JQ5HZ81eQzOXFZE5+NZm3qYnM39pOsssuxyD+ht/wDb7FGpMxQLPUz4rnxCietZhk5pSTeYUn4pSVRawFDdAyGSLHT4qn69vU8PactQfJgpKIbcXNCFqgadoV4Jnuh3M+RoXKyq0QKr6scoDk1d4jBfWPSGHzkxjE3/AbvhEZAjwYI4ylLD7oyk9BkIyFedytvnB7L1lVc5dsPj4apzQP8S3WYC3vaICnboSppBtBD3SaAAhYPK/DmyqKJzIEb0eAJ3gzu6E0mZ43lOdt1/xD920rbkbQ4vExGSGUtG2fLOUVjeDdcdCj/Zibytf3vCV1kaduG2HMk+xAUx2Cj+jMq3h16PlXcv3mINl09KH0GlFMYAJjixdFjkZcFO1VAl5F+0tCoai6QykwirIDEw9y3DTAEM3zvC2ItKXi/d4HHw0DtHX1Kq0FL54cTJ0w5GrKQxUmKnJUvL/txDPy49cfwwDT09Nkw96I0i4QFUtMxVjqmvdRiooqPBUPnrk1QcxwpPWSEg1RxQhZXdkFRs6PNiMi76OEVRH+87ffcQaYnHxP1uzpkaYBnqJdwDRQIceRHx2ZqFlJVNuLUh8PdjeEpemAp0gmrYt0mhHoMMOqpVXx/ouJ71wDDA+PkPV1d6RpWbXSdKjiaPsjoFi1q3ZSHw9UUqKVXEwwDNkxQJVV1adqABQ+VqBSGFnJxVSHVXYMENaif361KwYwpz4eqKREK7kgu26AsO30hzmdFSOZIMgWPjTqby0uI+WV9dq/WZApjKyCoBYHorLbToc0ACYaYIrSYOOFEdJ87V2MsNjSH75MGR4+2thEQisLjbSHwNfa2a/9xkuJoAnaMmmQHbTaDoS0ppaZ2dFCCIogkiPSs8K3XBnVFOsKXyS5Rfu5kX7L4QHS3Xc7YWEEmmyWEBVCLFI9PDUALYXLDp43tvG+8BvD+6fbI2TjjkbpFFd84KK2hn4PWhTAQ1QKp8wAK6v6tQhOAREfwq/e1amU29ljQ48Bmz3AA7x8Z4AlRcfjIjoiv9NJEGiYAbySYQDpIAg82dEdJygiv1MDmLMHALxkZHIaBKXT4Nx1DUYEZwF536kBEtUO4AWeXqdB6UKo9tg5bmGD1teu8onaZgrg6XUhJFUKY5u9fPU6pqEBUhj//NO2AbCWRxc8rY6n01JYqhkqqW41ipeSmjZt22UsKtCqPFrhoQVWVZ62zbRiBE3QBg9KF7w9a4Zk2mEMHvqu3iDHTvXEeQNnFAKg6ht8/En5agxrsBY0zOcdvMATvHmDGsftsMxABKOnpdvOCr2AIeWynd3Kl6NYIxrCAsGbN6pzayAiNRLzG7o2EpMdivoNXRuKqozF/eR9V8fishcjfkHXL0Zkr8b8gJ5djclejqZ663t2OapyPZ4q9Px6XOWBRAqVn0rWKxHiFyMk9YmM6iMpr898Sh5JqT6T8yrap/SZnN2Hkm543TcPJYOnssFj6eC5fPAfJhSN8X/9l5kAAggggABmAPwF/Risc26WL8cAAAAASUVORK5CYII=';
+  SPRITES.pickups.PIERCE = new Image();
+  SPRITES.pickups.PIERCE.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAD6UlEQVR42u1bzWsTQRTvf9A/QkRE2QgBCa0aDYUqxF4q1UtJEXIRJQgieBY8eAn1UC9CLh6koL0UD0UN4tdJ4tmDOaT3Ih60p2d+YTdsJju7b3ZmNlOdgQdh5+O995s37828mczN+eKLL7744ovVcux4UBpSa0idIXWH1B8SCdQP6zph29K/oHRboiyX+uEYpaOkeCOcybEi5ZMBXSsHdGchoEe1gJ4uB/SiPkn4hjq0QVv0EcDAmA2XFa/GFT91IqD1swG1l6aV5RL6YgyMJQBRdUnx+dBMx7N9/3xAnSv5FRcJY2FMwSrAc96Fdd6LhGpW0hXfvbFA724u0edbdfp2b22C8A11aJMGBHjEQOjNzD+Eyh9AkMXTclPfXjlDbzZq9PXu6oTCO80Ver5RHxF+x+vQFn3QV7Y0wDME4aBwEEJHNxIADks265hNUfFPrVVaqVSmPD6+oU4EQmYR4AnesTEaRc78WHmZub5vLk+ZOehBvUYXLl6mwWCfooLf+Ia6pD4YS8ZHAKFUmNnnUR6Emd58skViwTfUyfoxQbC3HEJv39NRXgcABRB6VqJDFOrgfNLWfJoCugCA0nxCzDG2bWxyRoOneXvR4dkAADzSokPMH1RNAtCN4rzMBBG2soQ3AQAIvGRyxPYJXaMhD7uwJNMH6gn79lSSAaAyBngmWSNkjMnTMDb72IomIQ5ma+u36fHWNovOXboqBQB13HHAE7yTZIKsRqwgivk4jMgcH+q5QpsEAATeMocYO0CVtD0/TmSyNeciACDIrB0RomRG2pHWVQBiEaGvZf6ydeY6AJF/yr0Mwrxc6q7PVSeYsDts5QEAyclRiiora1MJyoWHQfDMyjZB9rB9J3f4Q54uK2OTlOCwuRGKEihZckH23OEwcoBJCUyRkMkpGgDwzJILsud2hJGpcXJ2nEOQaQDSUmeikwZZBQDEOQiZAgC8uHIVBoArh6GZAeDCcdg0ACwn6Npp0KQTZIVBlzdCumGQtRFyeSusuxFibYVdBkB3K2zkMPT9xz7lLeg7s8OQqePw5rMd+v3nUFl59EHfmR2HuQkRjhN89fqjMgDoo+METSVEMlNi3DC4t/eWrTza6oRBYykxTlKUSy+vL9Lhr5+ZyqMN2urwMpYU5aTFVejDw1YmAGij+5jCaFqcezHCpcEX+VJAne74xi9GuFdjukvBhOlbuxrjXo7qLAUTpm/tclTlejzPUjBh+tavx1UeSKgsBROmX8gDCdUnMtyloGv6hT6RUX0kZZNm9khK9ZmcDZr5M7m8DyVNzLozDyX9U1n/WNo/l/d/mFAE4//6y4wvvvjiiy9HoPwF14ElBCJYccAAAAAASUVORK5CYII=';
+  SPRITES.pickups.HOMING = new Image();
+  SPRITES.pickups.HOMING.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAExklEQVR42u1b3UtUQRT3P/CPCMXUXEHoISEppAiCiKRAiu3BessNgpBeAoMgQYQe6qGHhXwxM+jBfBI3KSKCWKmkXmo3okRBF0kUqZj2d7mz3J29M3Pmfu1ac+DAcu/cOZ9zPmZmm5osWLBgwYKFWGFfS1eqjJkyZsuYK2OhjEzAgvsu645N/QtCT0iEpWLBnSO1lwRPu5asCNLT2sMG2g6zK+3H2O2OU+x+5wCb6hqsQjzDO4zBWHwjKANzphtZ8D6v4B0t3exC2xE20Xm6Rlgq4lvMgbkERfQ1kuDNrptWrH29/QTLHjgXWHARMRfmFLwCNJsbYZ3nOVOX9vcrBZ89dJkt9F9lr06OsKWzo1WIZ3iHMSpFgIZHCfm6xQdX+BIY6W09KHX16e7zbP7oMHt75maN0DLEWHyDb2VLAzRdJZQSV4Ib6BwGELBkVoc1ZYJvF1YYB/yWKULmEaAJ2h5vSCdp+YrwMnddPH5NaWURVGMxl4yOoIRUYm4fRnhTBRgoIb7l4Eb7fBTCU5dAQCXkY8kOPNUh+KjWvEqAL2OP2Nqz1+znh0KNB+AZ3mGMag5VTPAExok4ihxnclW09wt47y7eYSvTz9nvrR1GBYzFN/jWLzCqsoMnHvRFqYAcz/MyF0Ta8rO4ieB+ivDzCNCS8eGpE3KRpjxUYaoiR7T+em6JRQWYS/QCVbHkqRjTkVkfpaiqwqMI/2drm23OvWSr45Ps69AoKw7ecBC/8QzvMIaiBFXFCF4j8QKe89GMqKyPElYlPIQqzcxXCS1DjMFYP0V4lQCaKi/wNFCp0JEfHZmqWeG1PdarCLvFH+z7yF2t4CLiG3wrAo8JoKniCTyHzgh8M0PX0vJoLwY8CKCy+sqtBw6qvEFUAmjw7KBrpfmmSij3R0DRtatgBmlLdHud5XeWPzuo8wRxOYCWTgFATzBMBVFARlf1eRUgWh/rWCUYLF8RSOEFQMwlegFFAZ7qMBNEAdicdLaodITEtQ+L6QIeLM9B5wWYS/QC0NTxBd5dBWQDpz/s0+kIFR8vVDGHdEa1PtULMKcXQFPHF3gPnA55APTbwBRx9c1yFXPI6VTrU70Ac1bRKNPU8QXeAwdCXlP7TbzxsVhhxPubgy7yy0CXEUQQ+fDjlcsRqQJ0QLH+r7UNR2BYFr8pXqCDhlcABOZVoV/1p/OChlFA0CWw/nCWfRsekwqId7L0WY8lEFsQDIL1CILkNPhpcs4oDQZBMQ2CZtxpkFwIvciMGxdCJuhXCIFm3IUQuRQG7m5uGZXCJiiWwqBF4SlsKUxuhoDv780YN0PUtli0PmhReArVDJm0w8AnvUM1XqBrhymuL7bDoAFalJPlUO2wyYaILBbEsSFCWftRboiQtsSqOsOni7FtiWFu6nF6JFti1E1RihLCbopShY90U9RkW5yqhCBgInzk2+LUgxFZTBADowngW+qaj+1ghHo0psoOSFsmisBYfEOJ9okcjVEPRykegRJW7B14bY93phZP5HDU5HicipROzgRjPx43uSBBQUovH0D4UlK3RFhYJUSlgESvyJhekopzCdTtkpTpNbk4sO7X5IJelIzixmjDXJS0V2XtZWl7Xd7+YcJQGf/XX2YsWLBgwcIegL8cmVE3/YNmQAAAAABJRU5ErkJggg==';
+  SPRITES.pickups.MAGNET = new Image();
+  SPRITES.pickups.MAGNET.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEdUlEQVR42u1bzUtVQRT3P3CfmlQmFeETJVMrX0UEQVi0cFHBSxBEgl7Qpg8QCUMIQTR40MZXWNCiKILaumkhbd6mvYs2tRLpDzjd33Dned99d86dO/fOe9eaAwfk3Zlz5vzmzDlnPuzocOTIkSNHjqzSkaMDBY/LHlc93vR422MK8bb/req3LfwLRq8ojNXlbV9GYT8ZXvJnsm7IoYEx6j1/nXomp6n71gPqmpmnA/eeNzB+wze0QVv0CYEBmaU8G14MGn74+DD1XpqirjsPm4zVZfSFDMgKAVHMk+GdvpvWZ7vnxiwdmFs0NryJPVmQGfIK6OzMwzqvyUEdvHKbNbz/cYUGF1/R6PI7ulj53MD4Dd/QhgMCOgIg1NoWH3zjd8SsDxWVrt59f5kGnq5T8cXHJqNVjLbog76qpQGdPgg7LQfBD3RiAAhYqlnHbKoMn1h6TeOPVgXjbxUQSo/wdEJ3wBtKrZz5PeMV7jq8tNFgzNmFlzQ4NUvHxi8r0x6+oQ3aBvtClkpPCIRCy9xe1/iRuwvUPzwhBjg7V6b16gZtbX2nMOE3fEMbtEUf9E0Igr3l4Ef7mq7xmMUTF67R4NAZWl2r0O7uLukS2qIP+kKG9AhNEGpWsoNMdQg+3JqXs953ckTMZhLDo4CADMiS3sDFhEBgXLFR5AjhXLRH0MJA0e79h0+UFUEWZEI2dHDZIRAPilkCsFnP8woXRNqyYXwUCNClGkegTtjMNOWhCuOKnLH5inBVG8YHQYAO6OKKpUDFWMps9kV5y1R4CFZYr7YJOqCLqxgx1ky8QOZ8bEa42e+7WRYRWxXwlr9+S1z/o48qMEIXdHJeENhAFVJHfuzIuMHC5ZC2VGS6CVIRdIklyfTFmFNnBHmYwW1pZeTl0l3WAECX7rhgQyr310E6bu1nDYCMBTqeabwM/HM5tuoTSrziAyWsin78/G0MAPqqCDpFUcZNzl51WDYBoCqi/+Q0qwRtomp7SeU3X4wBQF8VQSd0c/0xdh+AqnH6wzmdcp3NzNfXPwYUxaefrBkDgL4qufU4EHG+WK9OvbEbp8N6ANRQgLSk2uKKFGoIQOgssIGlTp0JMgqEUhE3QAkAlwLxzRSAOLlxAMglCrYKQBzZyAIgB4ADwC4A2kEwrwCkDYKxaTDvAKRNg7GFUN4BSFsIxZbCugBwJ0ncyU5aANKWwrGbIV0A4splVZmbFoBUmyGd7XCeAUi9HdY5EJEA/Hm7Tr+unotkfDMFQEeuCoCsDkTYIzEJgGqQkk0B0JEbCUBWR2Jxh6J5BSCzQ9G4Y/FcApD1sTh3MZIEgKSXo6YAZH4xwl6N+Wvt2egp5SDxDW0wUASmwP1dE+Mb2qCtrtygV1q7GuMuR7HeuIMLfIuKH/JVmOrVWGK5Ni9HY6/HPeXSmDCneiyVQK716/EkDyRazS15IJH0iUwbjKeWPZbSfSRlldv1SCrpMzkb3PZncqYPJbOY9dw8lHRPZd1jafdc3v3DREIw/q9/mXHkyJEjR/uA/gJmOcj4YwcOcgAAAABJRU5ErkJggg==';
+  SPRITES.pickups.CHARM = new Image();
+  SPRITES.pickups.CHARM.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEM0lEQVR42u1bzUtUURT3P/A/KMusTJtXZrmwGkEJhcoIrKBgooKQoJFAo7BNGpKIUoHLJrBFrYKgjRBC24hZ9bGbTXuZVYsWp/k93hvuPO89c++b9zH27oEDw7vn3nu+7jnnfkxHhwULFixYsBArdPfknBoWa1iq4VYNKzWkAFa8tpJH6/wPQq8phNXFijeGs5sEL3iWrAvi5PppYuQw3bjYQzPX99OTO120fH9PA+Ib2kADWvQJKANjFtpZ8LwoeG/vUbo0dojmbu7bIawuoi/GwFgBReTbSfBOz03r1r59+QAtTO8NLXgQMRbGDHgF5uxsh3Ve9pm6MnGQFXz98RF6szhI71ZO08f1cw2Ib2gDDacIzCEooZxafPCE3wYjpwb6lK6+MtNFr58O0IdXozuEViFo0Qd9VUsDc3pK2E5cCV6gcxlAwFJZHdY0EVymCJVHYE7MLXhDIUnL14VXuevG0lBowYOIsVTzBJTgJOb2SQlvqIT4loMX7ctpCG+ohHIs2cFPdQg+3JqPS3gfuZggBMa1OIocd3Au2rcS8EwCI5cdhHiQj1IBW36eV7kg0paM4ferY7T6aMRF/G4moA495lLxIdQJW5GmPFRhXJEjWn/+3hmaHD9Jff3Ojg0OvqENNGHpMRdXLAkVYyEy66MU5So8MPbswVkaPHGcjg0M08Lic9rc/EzVapV8wG98QxtoQGtKjzm4WAAEr5F4gZ/zsRnhrI8S9trkkMvki5frDUKoYHZu3ogeNKBFH8yFOTkvEDZQTsuRHzsybrMyPpKj8xem6PuPn6QDd6eLRvQioA/6Yk6OJ/DcckbwDzO4LS3yLxjSsaJveRN6lTdgDK4eETJCpSX3R0BRTTJ9tdt1SV1LYj2b0DfzBIwFHlT8CcHQCaOAYrOqDxNgXarg99cN+laaoi/LORffPsxRaemWNj1+45sKMDdnIKE6LIZRAA4n3SMqVaSFBWSu/PdPtUGQIKINNGHpxaUAHlQZCrx7CiiFTn84p5MNPjrc66YnGXDC/Po0LxUG39DGKUEG4AG8yHgE76HToR8AZQeYQKQZrGmZG6uEAMqEF5XA9ZUtB/AAXmQ8gvfQgdCvxFR5Fm0y9+esD2wGXF+ZF4AH8KKqU3w5IlWA71qmArSqAFV/bqlaBcShgKwsgcwHwcynwcwXQpkvhbO9Gcr8dtjkQARBKOkDEVXgi/pAROtIzPeEpI7EOMtHeiSmeygqxgSsO91DTtCa0nNrPvJDUZNj8SADcNHAy476yxG0iQo1pW9m/UiPxXUvRjiGUJAAdRRoSh/7xYju1Vg7YGxXY7qXo2lirJejJtfjaWHs1+MmDyRSFH47qVci1C5KSPSJjOkjqbjXfCqPpEyfycUV7VN9Jhf2oWQUVm+bh5L2qax9LG2fy9s/TBgqI1t/mbFgwYIFC7sA/gHzdUHzOygjUAAAAABJRU5ErkJggg==';
+  SPRITES.wingman = [new Image(), new Image()];
+  SPRITES.wingman[0].src = 'data:image/png;base64,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';
+  SPRITES.wingman[1].src = 'data:image/png;base64,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';
 
   // ---------- Rendering ----------
   const canvas = document.getElementById('game'), ctx = canvas.getContext('2d');
@@ -1070,6 +1173,12 @@
     smoothBank += (target - smoothBank) * 0.25;
     const blink = world.mercy > 0 && (Math.floor(world.mercy * 14) & 1) === 0;
     if (!blink) banked(SPRITES.player[Math.floor(runTime * PROP_HZ) & 1], cx, cy, sw, sh, smoothBank);
+    // the escorts, drawn behind you so your own aircraft stays the thing you read first
+    for (let i = 0; i < world.wingmen; i++) {
+      const wh = w * SIZE.player * 0.66;
+      banked(SPRITES.wingman[Math.floor(runTime * PROP_HZ) & 1],
+        sx(world.wingmanX(i)), sy(world.wingmanY()), wh * 0.8, wh, smoothBank * 0.7);
+    }
     if (world.shield) {
       ctx.strokeStyle = '#22D3EE'; ctx.lineWidth = Math.max(2, w * 0.008);
       ctx.globalAlpha = 0.55 + 0.35 * Math.sin(runTime * 6);
@@ -1119,8 +1228,10 @@
       const r = w * (s.fromPlayer ? 0.009 : 0.013);
       const cx = sx(s.x), cy = sy(s.y);
       if (s.fromPlayer) {
-        ctx.fillStyle = '#FFF0B8';
-        ctx.beginPath(); ctx.roundRect(cx - r, cy - r * 2.6, r * 2, r * 5.2, r); ctx.fill();
+        // a round that will punch through is drawn longer and hotter than one that will not
+        ctx.fillStyle = s.pierce > 0 ? '#FFB454' : '#FFF0B8';
+        const tail = s.pierce > 0 ? 4.2 : 2.6;
+        ctx.beginPath(); ctx.roundRect(cx - r, cy - r * tail, r * 2, r * (tail + 2.6), r); ctx.fill();
         ctx.fillStyle = '#FFFFFF';
         ctx.beginPath(); ctx.roundRect(cx - r * 0.42, cy - r * 2, r * 0.84, r * 4, r); ctx.fill();
       } else {
@@ -1234,7 +1345,7 @@
       px += pip + gap;
     }
     drawCombo(py + pip * 1.8);
-    if (world.rapidTimer > 0) label('연사', w * 0.06 + (C.MAX_HP * pip + (C.MAX_HP - 1) * gap) / 2, py + pip * 4.4, w * 0.035, '#FACC15', '#0B1020');
+    drawEffects(py + pip * 4.6);
 
     const r = w * 0.085, bx = w - r - w * 0.05, by = h - r - w * 0.06;
     ctx.globalAlpha = world.bombs > 0 ? 0.9 : 0.43;
@@ -1274,6 +1385,30 @@
   }
 
   /** A line across the middle of the sky for the moments that deserve one. */
+  /**
+   * What is running right now, as a stack of draining chips. Four things can be on a timer at
+   * once, so a single word in the corner no longer says enough.
+   */
+  function drawEffects(top) {
+    const w = canvas._w;
+    let y = top;
+    const chip = (name, left, span, tint) => {
+      const cw = w * 0.2, ch = w * 0.036;
+      ctx.fillStyle = '#27354F';
+      ctx.beginPath(); ctx.roundRect(w * 0.06, y, cw, ch, ch / 2); ctx.fill();
+      ctx.fillStyle = tint;
+      ctx.beginPath(); ctx.roundRect(w * 0.06, y, cw * Math.max(0, Math.min(1, left / span)), ch, ch / 2); ctx.fill();
+      label(name, w * 0.06 + cw / 2, y + ch * 0.78, w * 0.029, '#FFFFFF', '#0B1020');
+      y += ch * 1.22;
+    };
+    if (world.rapidTimer > 0) chip('연사', world.rapidTimer, C.RAPID_SECONDS, '#FACC15');
+    if (world.pierceTimer > 0) chip('관통', world.pierceTimer, C.PIERCE_SECONDS, '#FFB454');
+    if (world.homingTimer > 0) chip('유도', world.homingTimer, C.HOMING_SECONDS, '#F87171');
+    if (world.magnetTimer > 0) chip('자석', world.magnetTimer, C.MAGNET_SECONDS, '#22D3EE');
+    // the charm is not on a clock: it sits there until something takes it
+    if (world.charm) chip('부적', 1, 1, '#FACC15');
+  }
+
   function drawBanner() {
     if (fx.bannerTimer <= 0 || !fx.banner) return;
     const w = canvas._w, h = canvas._h;

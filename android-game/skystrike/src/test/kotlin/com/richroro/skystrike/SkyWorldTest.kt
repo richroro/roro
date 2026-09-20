@@ -805,4 +805,185 @@ class SkyWorldTest {
             w.clearShotsForTest()
         }
     }
+
+    // ---- ten pickups, on five different axes ----------------------------------------------------
+
+    /** Drops [kind] straight onto the player and lets them fly into it. */
+    private fun grab(w: SkyWorld, kind: SkyWorld.ItemKind) {
+        w.addItemForTest(kind, x = w.playerX, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+    }
+
+    @Test
+    fun `the drop table covers every pickup and nothing else`() {
+        val listed = SkyWorld.DROP_TABLE.map { it.first }
+        assertEquals("every kind should be droppable", SkyWorld.ItemKind.entries.toSet(), listed.toSet())
+        assertEquals("and listed once each", listed.size, listed.toSet().size)
+        assertTrue("every weight should be positive", SkyWorld.DROP_TABLE.all { it.second > 0 })
+    }
+
+    @Test
+    fun `a long run turns up all ten pickups`() {
+        val seen = HashSet<SkyWorld.ItemKind>()
+        for (seed in 1..6) {
+            val w = SkyWorld(seed).apply { start() }
+            val log = ArrayList<SkyWorld.Event>()
+            var frames = 0
+            while (frames++ < 60 * 60 * 3) {
+                w.update(1f / 60f)
+                w.setForTest(hp = SkyWorld.MAX_HP, mercy = 0f)
+                w.drainEvents(log)
+                if (w.state == SkyWorld.State.LEVEL_CLEAR) w.nextLevel()
+                if (w.state == SkyWorld.State.GAME_OVER) w.start()
+            }
+            for (item in w.items) seen.add(item.kind)
+            log.filter { it.type == SkyWorld.Event.Type.PICKUP }.forEach { it.item?.let(seen::add) }
+        }
+        assertEquals("all ten should actually fall, saw $seen", SkyWorld.ItemKind.entries.toSet(), seen)
+    }
+
+    @Test
+    fun `an escort flies beside you and fires with you`() {
+        val w = running()
+        w.soloModeForTest()
+        assertEquals(0, w.wingmen)
+        grab(w, SkyWorld.ItemKind.WINGMAN)
+        assertEquals(1, w.wingmen)
+        assertTrue("it sits off your wingtip", abs(w.wingmanX(0) - w.playerX) > 0.05f)
+        // one more gun line in the air than the same moment without an escort
+        val withEscort = shotsIn(w, 20)
+        val bare = SkyWorld(1).apply { startLevel(1); soloModeForTest() }
+        assertTrue("an escort should add fire, $withEscort vs ${shotsIn(bare, 20)}",
+            withEscort > shotsIn(bare, 20))
+    }
+
+    private fun shotsIn(w: SkyWorld, frames: Int): Int {
+        repeat(frames) { w.update(1f / 60f) }
+        return w.shots.count { it.fromPlayer }
+    }
+
+    @Test
+    fun `escorts cap out and a hit takes one before it takes a gun`() {
+        val w = running()
+        w.soloModeForTest()
+        repeat(SkyWorld.MAX_WINGMEN + 3) { grab(w, SkyWorld.ItemKind.WINGMAN) }
+        assertEquals(SkyWorld.MAX_WINGMEN, w.wingmen)
+        grab(w, SkyWorld.ItemKind.SPREAD)
+        val guns = w.spread
+        w.setForTest(mercy = 0f)
+        w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+        assertEquals("the escort takes it", SkyWorld.MAX_WINGMEN - 1, w.wingmen)
+        assertEquals("so the guns are untouched", guns, w.spread)
+    }
+
+    @Test
+    fun `a piercing round carries on through the aircraft behind`() {
+        val w = running()
+        w.soloModeForTest()
+        grab(w, SkyWorld.ItemKind.PIERCE)
+        assertTrue(w.pierceTimer > 0f)
+        // three in a line, one behind the other, right above the guns
+        val line = (0 until 3).map {
+            w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY - 0.18f - it * 0.09f, hp = 1)
+        }
+        var frames = 0
+        while (frames++ < 90 && line.any { it.alive }) {
+            w.update(1f / 60f)
+            line.forEachIndexed { i, e -> if (e.alive) e.y = w.playerY - 0.18f - i * 0.09f }
+        }
+        assertTrue("all three should have come down", line.none { it.alive })
+        assertTrue("and the chain should have run", w.combo >= 3)
+    }
+
+    @Test
+    fun `without pierce a round stops at the first thing it hits`() {
+        val w = running()
+        w.soloModeForTest()
+        val front = w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY - 0.18f, hp = 1)
+        val behind = w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY - 0.27f, hp = 1)
+        var frames = 0
+        while (frames++ < 24 && front.alive) {
+            w.update(1f / 60f)
+            behind.y = w.playerY - 0.27f
+        }
+        assertTrue("the front one goes", !front.alive)
+        assertTrue("the one behind it does not, not on that round", behind.alive)
+    }
+
+    @Test
+    fun `homing rounds lean towards what is up there`() {
+        fun offBy(homing: Boolean): Float {
+            val w = running()
+            w.soloModeForTest()
+            if (homing) grab(w, SkyWorld.ItemKind.HOMING)
+            val e = w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0.5f, y = 0.35f, hp = 9999)
+            var frames = 0
+            var closest = Float.MAX_VALUE
+            while (frames++ < 60) {
+                w.update(1f / 60f)
+                e.x = 0.5f; e.y = 0.35f
+                for (s in w.shots) {
+                    if (!s.fromPlayer) continue
+                    closest = minOf(closest, abs(s.x - e.x))
+                }
+            }
+            return closest
+        }
+        val straight = offBy(false)
+        val guided = offBy(true)
+        assertTrue("a guided round should end up nearer the target, $guided vs $straight", guided < straight)
+    }
+
+    @Test
+    fun `the magnet reels pickups in instead of letting them fall past`() {
+        fun caught(magnet: Boolean): Boolean {
+            val w = running()
+            w.soloModeForTest()
+            if (magnet) grab(w, SkyWorld.ItemKind.MAGNET)
+            val before = w.spread
+            // well off to one side, where it would otherwise sail past
+            w.addItemForTest(SkyWorld.ItemKind.SPREAD, x = w.playerX + 0.45f, y = w.playerY - 0.4f)
+            repeat(120) { w.update(1f / 60f) }
+            return w.spread > before
+        }
+        assertTrue("a pickup off to the side is normally lost", !caught(false))
+        assertTrue("the magnet should bring it to you", caught(true))
+    }
+
+    @Test
+    fun `the charm eats one chain break and then it is gone`() {
+        val w = running()
+        w.soloModeForTest()
+        chainKills(w, SkyWorld.COMBO_STEP)
+        grab(w, SkyWorld.ItemKind.CHARM)
+        assertTrue(w.charm)
+        val held = w.combo
+        assertTrue(held > 0)
+        w.setForTest(mercy = 0f)
+        w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+        assertEquals("the hit still lands", SkyWorld.MAX_HP - 1, w.hp)
+        assertEquals("but the chain is held", held, w.combo)
+        assertTrue("and the charm is spent", !w.charm)
+        // the next one costs the chain for real
+        w.setForTest(mercy = 0f)
+        w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+        assertEquals(0, w.combo)
+    }
+
+    @Test
+    fun `a new stage hands back a clean loadout`() {
+        val w = running()
+        w.soloModeForTest()
+        for (kind in SkyWorld.ItemKind.entries) grab(w, kind)
+        assertTrue(w.wingmen > 0 && w.pierceTimer > 0f && w.homingTimer > 0f && w.magnetTimer > 0f && w.charm)
+        w.startLevel(2)
+        assertEquals(0, w.wingmen)
+        assertEquals(0f, w.pierceTimer, 1e-5f)
+        assertEquals(0f, w.homingTimer, 1e-5f)
+        assertEquals(0f, w.magnetTimer, 1e-5f)
+        assertTrue(!w.charm)
+    }
 }
