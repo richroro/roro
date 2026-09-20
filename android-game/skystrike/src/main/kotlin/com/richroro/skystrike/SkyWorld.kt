@@ -21,7 +21,19 @@ class SkyWorld(private val seed: Int = 1) {
 
     enum class State { READY, RUNNING, LEVEL_CLEAR, GAME_OVER }
 
-    enum class Kind { DRONE, WEAVER, GUNNER, DIVER }
+    /**
+     * Eight ways to be in the way. The first four fall towards you in different lines; the last
+     * four each ask you to do something you would not otherwise do -- move off the centre line,
+     * finish what you started, deal with something that will not leave, or thin a crowd fast.
+     */
+    enum class Kind { DRONE, WEAVER, GUNNER, DIVER, SHIELDER, SPLITTER, TURRET, SWARM }
+
+    /** How big a target each kind is. A swarm bee is a much smaller thing to hit than a barge. */
+    fun halfOf(kind: Kind): Float = when (kind) {
+        Kind.SWARM -> ENEMY_HALF * 0.55f
+        Kind.SHIELDER, Kind.SPLITTER -> ENEMY_HALF * 1.2f
+        else -> ENEMY_HALF
+    }
 
     /**
      * Ten pickups on five different axes: more guns (SPREAD, WINGMAN), a faster gun (RAPID), a
@@ -70,6 +82,8 @@ class SkyWorld(private val seed: Int = 1) {
         var bank = 0f
             internal set
         internal var lastX = x
+        /** A turret holds station for a while, then gives up and carries on down. */
+        internal var anchor = 0f
     }
 
     class Boss(val kind: Int, hp: Int) {
@@ -133,7 +147,7 @@ class SkyWorld(private val seed: Int = 1) {
         enum class Type {
             SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
             BOSS_DOWN, BOSS_BREAK, KILL_BOSS, BOSS_PHASE,
-            COMBO_UP, COMBO_LOST, CHARM_USED, RUSH,
+            COMBO_UP, COMBO_LOST, CHARM_USED, RUSH, DEFLECT, SPLIT,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -193,6 +207,12 @@ class SkyWorld(private val seed: Int = 1) {
         private set
     var kills = 0
         private set
+    /** Hits taken on this stage, and the best chain held on it: what the stage is graded on. */
+    var stageHits = 0
+        private set
+    var stageBestCombo = 0
+        private set
+
     /** How many times this run can still pick itself up where it fell. */
     var continues = MAX_CONTINUES
         private set
@@ -330,6 +350,8 @@ class SkyWorld(private val seed: Int = 1) {
         flash = 0f
         combo = 0
         comboTimer = 0f
+        stageHits = 0
+        stageBestCombo = 0
         rushDone = false
         fireAccumulator = 0f
         elapsed = 0f
@@ -357,10 +379,12 @@ class SkyWorld(private val seed: Int = 1) {
         if (state != State.RUNNING || bombs <= 0) return false
         bombs--
         pendingEvents.add(Event(Event.Type.BOMB, playerX, playerY))
-        for (e in mutableEnemies) {
+        // iterate a copy: splitting adds to the list while we are walking it
+        for (e in mutableEnemies.toList()) {
             if (!e.alive) continue
             e.alive = false
             awardKill(e.kind, e.x, e.y)
+            if (e.kind == Kind.SPLITTER) splitInTwo(e)
         }
         for (s in mutableShots) if (!s.fromPlayer) s.alive = false
         boss?.let { b ->
@@ -440,7 +464,7 @@ class SkyWorld(private val seed: Int = 1) {
                     profile = profile,
                     kind = kind,
                     formation = formation,
-                    n = 3 + random.nextInt(3),
+                    n = max(2, flightSize(kind) - 1),
                     baseX = -0.5f + random.next() * 1.0f,
                     speed = profile.speed * RUSH_SPEED,
                     extraLead = i * RUSH_STACK,
@@ -456,13 +480,21 @@ class SkyWorld(private val seed: Int = 1) {
             profile = profile,
             kind = kind,
             formation = profile.formations[random.nextInt(profile.formations.size)],
-            n = 3 + random.nextInt(4),
+            n = flightSize(kind),
             baseX = -0.62f + random.next() * 1.24f,
             speed = profile.speed * (0.85f + random.next() * 0.3f),
             extraLead = 0f,
         )
         waveIndex++
         nextWaveAt = elapsed + WAVE_GAP * (0.8f + random.next() * 0.5f)
+    }
+
+    /** How many of [kind] fly together: a swarm is a crowd, a shielder comes in twos. */
+    private fun flightSize(kind: Kind): Int = when (kind) {
+        Kind.SWARM -> 7 + random.nextInt(4)
+        Kind.SHIELDER, Kind.SPLITTER -> 2 + random.nextInt(2)
+        Kind.TURRET -> 2 + random.nextInt(2)
+        else -> 3 + random.nextInt(4)
     }
 
     /** Lays one formation of [n] aircraft out along the top of the screen. */
@@ -475,7 +507,13 @@ class SkyWorld(private val seed: Int = 1) {
         speed: Float,
         extraLead: Float,
     ) {
-        val hpEach = 1 + (level - 1) / 3 + if (kind == Kind.GUNNER) 1 else 0
+        // a swarm bee always goes down in one; the heavies are worth the extra rounds
+        val hpEach = when (kind) {
+            Kind.SWARM -> 1
+            Kind.SHIELDER -> 3 + (level - 1) / 3
+            Kind.SPLITTER, Kind.TURRET, Kind.GUNNER -> 2 + (level - 1) / 3
+            else -> 1 + (level - 1) / 3
+        }
         for (i in 0 until n) {
             val t = if (n == 1) 0.5f else i / (n - 1).toFloat()
             val spreadX: Float
@@ -536,19 +574,45 @@ class SkyWorld(private val seed: Int = 1) {
                     e.x = e.homeX + sin(elapsed * 1.1f + e.phase) * 0.08f
                 }
                 Kind.DIVER -> e.y += e.speed * (1f + (e.y + 0.2f) * 1.6f) * dt
+                // heavy and slow, with a plate across its nose: you have to come at it from the side
+                Kind.SHIELDER -> {
+                    e.y += e.speed * 0.55f * dt
+                    e.x = e.homeX + sin(elapsed * 0.9f + e.phase) * 0.05f
+                }
+                // fat, and it does not die all at once
+                Kind.SPLITTER -> {
+                    e.y += e.speed * 0.72f * dt
+                    e.x = e.homeX + sin(elapsed * 1.6f + e.phase) * 0.12f
+                }
+                // comes in, stops, and makes the sky its own until you deal with it
+                Kind.TURRET -> {
+                    if (e.y < TURRET_STATION_Y && e.anchor <= 0f) {
+                        e.y += e.speed * 1.3f * dt
+                        if (e.y >= TURRET_STATION_Y) e.anchor = TURRET_SECONDS
+                    } else {
+                        e.anchor -= dt
+                        if (e.anchor <= 0f) e.y += e.speed * 1.1f * dt     // gives up and moves on
+                    }
+                }
+                // tiny, quick, and never alone
+                Kind.SWARM -> {
+                    e.y += e.speed * 1.35f * dt
+                    e.x = e.homeX + sin(elapsed * 5.2f + e.phase) * 0.09f
+                }
             }
             e.bank = ((e.x - e.lastX) / max(1e-4f, dt) * 0.9f).coerceIn(-1f, 1f)
 
-            if (e.kind == Kind.GUNNER || e.kind == Kind.WEAVER) {
+            if (e.kind == Kind.GUNNER || e.kind == Kind.WEAVER || e.kind == Kind.TURRET) {
                 e.cooldown -= dt
                 if (e.cooldown <= 0f && e.y > 0.04f && e.y < playerY - 0.08f) {
-                    e.cooldown = (1.5f - level * 0.04f).coerceAtLeast(0.55f) / profile.fireRate *
+                    val rate = if (e.kind == Kind.TURRET) TURRET_FIRE else 1f
+                    e.cooldown = (1.5f - level * 0.04f).coerceAtLeast(0.55f) / profile.fireRate * rate *
                         (0.7f + shotRandom.next() * 0.7f)
                     fireEnemyShot(e)
                 }
             }
             if (e.y > 1.12f) { e.alive = false; it.remove(); continue }
-            if (hitsPlayer(e.x, e.y, ENEMY_HALF)) {
+            if (hitsPlayer(e.x, e.y, halfOf(e.kind))) {
                 e.alive = false
                 it.remove()
                 hurtPlayer(RAM_DAMAGE, e.x, e.y)
@@ -559,7 +623,12 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun fireEnemyShot(e: Plane) {
         // Gunners lead the player; weavers just spit straight down.
-        val vx = if (e.kind == Kind.GUNNER) ((playerX - e.x) * 0.55f).coerceIn(-0.5f, 0.5f) else 0f
+        // gunners and turrets lead the player; weavers just spit straight down
+        val vx = if (e.kind == Kind.GUNNER || e.kind == Kind.TURRET) {
+            ((playerX - e.x) * 0.55f).coerceIn(-0.5f, 0.5f)
+        } else {
+            0f
+        }
         mutableShots.add(Shot(e.x, e.y + 0.04f, vx, ENEMY_SHOT_SPEED, fromPlayer = false))
         pendingEvents.add(Event(Event.Type.ENEMY_SHOT, e.x, e.y))
     }
@@ -788,6 +857,7 @@ class SkyWorld(private val seed: Int = 1) {
             combo = 0
             comboTimer = 0f
         }
+        stageHits++
         hp -= amount
         flash = FLASH_SECONDS
         mercy = MERCY_SECONDS
@@ -851,13 +921,22 @@ class SkyWorld(private val seed: Int = 1) {
                 var spent = false
                 for (e in mutableEnemies) {
                     if (!e.alive || e === s.lastHit) continue
-                    if (abs(e.x - s.x) < ENEMY_HALF && abs(e.y - s.y) < ENEMY_HALF) {
+                    val half = halfOf(e.kind)
+                    if (abs(e.x - s.x) < half && abs(e.y - s.y) < half) {
+                        // a shielder's plate throws off anything that comes straight at its nose
+                        if (e.kind == Kind.SHIELDER && abs(e.x - s.x) < half * SHIELD_ARC) {
+                            s.alive = false
+                            it.remove()
+                            pendingEvents.add(Event(Event.Type.DEFLECT, s.x, s.y))
+                            break
+                        }
                         e.hp -= s.damage
                         // a piercing round carries on to whatever is behind it
                         if (s.pierce > 0) { s.pierce--; s.lastHit = e } else spent = true
                         if (e.hp <= 0) {
                             e.alive = false
                             awardKill(e.kind, e.x, e.y)
+                            if (e.kind == Kind.SPLITTER) splitInTwo(e)
                             maybeDropItem(e.x, e.y)
                         } else {
                             pendingEvents.add(Event(Event.Type.HIT_ENEMY, s.x, s.y))
@@ -883,6 +962,25 @@ class SkyWorld(private val seed: Int = 1) {
                 if (state != State.RUNNING) return
             }
         }
+    }
+
+    /** A splitter does not die all at once: two smaller ones peel away from where it was. */
+    private fun splitInTwo(e: Plane) {
+        for (side in intArrayOf(-1, 1)) {
+            val x = (e.x + side * SPLIT_SPREAD).coerceIn(-0.9f, 0.9f)
+            mutableEnemies.add(
+                Plane(
+                    x = x,
+                    y = e.y,
+                    kind = Kind.DRONE,
+                    hp = 1,
+                    homeX = x,
+                    phase = random.next() * TAU,
+                    speed = e.speed * 1.15f,
+                ),
+            )
+        }
+        pendingEvents.add(Event(Event.Type.SPLIT, e.x, e.y))
     }
 
     private fun maybeDropItem(x: Float, y: Float) {
@@ -957,6 +1055,17 @@ class SkyWorld(private val seed: Int = 1) {
         }
     }
 
+    /**
+     * How the stage just flown is graded: 0 is S, 1 is A, and so on. Flying clean is what earns
+     * the top of it, and holding a chain through a whole stage is what separates S from A.
+     */
+    fun stageRank(): Int = when {
+        stageHits == 0 && stageBestCombo >= RANK_S_CHAIN -> 0
+        stageHits <= 1 && stageBestCombo >= RANK_A_CHAIN -> 1
+        stageHits <= 3 -> 2
+        else -> 3
+    }
+
     /** What a kill is worth right now: one more step of the chain for every [COMBO_STEP] kills. */
     fun comboMultiplier(): Int = (1 + combo / COMBO_STEP).coerceAtMost(MAX_COMBO_MULT)
 
@@ -966,6 +1075,7 @@ class SkyWorld(private val seed: Int = 1) {
         combo++
         comboTimer = COMBO_WINDOW
         bestCombo = max(bestCombo, combo)
+        stageBestCombo = max(stageBestCombo, combo)
         val mult = comboMultiplier()
         score += scoreFor(kind) * mult
         pendingEvents.add(Event(Event.Type.KILL_ENEMY, x, y, value = mult))
@@ -989,6 +1099,10 @@ class SkyWorld(private val seed: Int = 1) {
         Kind.WEAVER -> 15
         Kind.GUNNER -> 25
         Kind.DIVER -> 20
+        Kind.SHIELDER -> 35
+        Kind.SPLITTER -> 30
+        Kind.TURRET -> 40
+        Kind.SWARM -> 8
     }
 
     // ---- test hooks -----------------------------------------------------------------------
@@ -1044,6 +1158,27 @@ class SkyWorld(private val seed: Int = 1) {
         boss = Boss(kind, b.hp).also { it.y = BOSS_STATION_Y; it.engaged = true }
     }
 
+    /** Spawns one flight of [kind] and reports how many turned up. */
+    internal fun spawnFlightForTest(kind: Kind): Int {
+        val before = mutableEnemies.size
+        val profile = profileOf(level)
+        spawnFormation(profile, kind, profile.formations[0], flightSize(kind), 0f, profile.speed, 0f)
+        return mutableEnemies.size - before
+    }
+
+    /**
+     * Whether a shot at ([x], [y]) would connect with [e] -- the same test the shot loop runs,
+     * exposed so a test can ask about the hitbox without racing a weaving aircraft.
+     */
+    internal fun wouldHitForTest(e: Plane, x: Float, y: Float): Boolean {
+        val half = halfOf(e.kind)
+        return abs(e.x - x) < half && abs(e.y - y) < half
+    }
+
+    /** And whether that shot would bounce off a plate rather than land. */
+    internal fun wouldDeflectForTest(e: Plane, x: Float): Boolean =
+        e.kind == Kind.SHIELDER && abs(e.x - x) < halfOf(e.kind) * SHIELD_ARC
+
     internal fun clearShotsForTest() {
         mutableShots.clear()
     }
@@ -1092,6 +1227,12 @@ class SkyWorld(private val seed: Int = 1) {
         const val PLAYER_HALF_X = 0.055f
         const val PLAYER_HALF_Y = 0.045f
         const val ENEMY_HALF = 0.062f
+        /** A shot that comes at a shielder inside this much of its nose bounces off the plate. */
+        const val SHIELD_ARC = 0.55f
+        const val TURRET_STATION_Y = 0.30f
+        const val TURRET_SECONDS = 7f
+        const val TURRET_FIRE = 0.62f          // it fires faster than a gunner while it is parked
+        const val SPLIT_SPREAD = 0.075f
         const val BOSS_HALF = 0.2f
         const val SHOT_HALF = 0.012f
         const val ITEM_HALF = 0.05f
@@ -1100,6 +1241,8 @@ class SkyWorld(private val seed: Int = 1) {
         const val START_BOMBS = 2
         const val MAX_BOMBS = 5
         const val MAX_CONTINUES = 3
+        const val RANK_S_CHAIN = 12
+        const val RANK_A_CHAIN = 8
         const val MAX_SPREAD = 5
         const val RAM_DAMAGE = 1
         const val SHOT_DAMAGE = 1
@@ -1227,22 +1370,22 @@ class SkyWorld(private val seed: Int = 1) {
         val PROFILES = listOf(
             // The coast road: clean shapes, plenty of warning, nothing but the aircraft to read.
             Profile(
-                22, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER), 0.8f, 0.30f, 1.0f,
+                22, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER, Kind.SWARM), 0.8f, 0.30f, 1.0f,
                 listOf(Formation.LINE, Formation.VEE), Hazard.NONE, -0.12f,
             ),
             // Thunderhead pass: flown inside the weather, which pushes you off your line.
             Profile(
-                26, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER), 1.0f, 0.34f, 1.15f,
+                26, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER, Kind.SPLITTER), 1.0f, 0.34f, 1.15f,
                 listOf(Formation.TRAIL, Formation.LINE), Hazard.GUSTS, -0.12f,
             ),
             // The ember fields: the ground burns, and the fire reaches the altitude you are at.
             Profile(
-                30, listOf(Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.25f, 0.32f, 1.3f,
+                30, listOf(Kind.GUNNER, Kind.WEAVER, Kind.TURRET, Kind.SHIELDER), 1.25f, 0.32f, 1.3f,
                 listOf(Formation.ARC, Formation.SPLIT), Hazard.FLAK, -0.12f,
             ),
             // The long night: they are on you before you see them.
             Profile(
-                34, listOf(Kind.DIVER, Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.4f, 0.40f, 1.5f,
+                34, listOf(Kind.DIVER, Kind.GUNNER, Kind.SHIELDER, Kind.SPLITTER, Kind.SWARM), 1.4f, 0.40f, 1.5f,
                 listOf(Formation.SPLIT, Formation.TRAIL, Formation.VEE), Hazard.DARK, -0.03f,
             ),
         )
