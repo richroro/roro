@@ -291,4 +291,99 @@ class SkyWorldTest {
         assertTrue("bullets should be reaped, saw $worstShots", worstShots < 400)
         assertTrue("wrecks should be reaped, saw $worstEnemies", worstEnemies < 120)
     }
+
+    // ---- flying forward and back ------------------------------------------------------------
+
+    @Test
+    fun `the player can fly forward and back but not out of the band`() {
+        val w = running()
+        assertEquals("every stage starts on the back line", SkyWorld.PLAYER_Y, w.playerY, 1e-5f)
+        repeat(100) { w.movePlayerBy(0f, -0.05f) }
+        assertEquals(SkyWorld.PLAYER_Y_MIN, w.playerY, 1e-4f)
+        repeat(200) { w.movePlayerBy(0f, 0.05f) }
+        assertEquals(SkyWorld.PLAYER_Y_MAX, w.playerY, 1e-4f)
+    }
+
+    @Test
+    fun `flying forward takes the hitbox with you`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.movePlayerBy(0f, -0.2f)
+        // where the fighter used to sit is now empty sky
+        w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0f, y = SkyWorld.PLAYER_Y)
+        w.update(1f / 60f)
+        assertEquals("the back line is vacated once you push forward", SkyWorld.MAX_HP, w.hp)
+        // and where it sits now is not
+        w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0f, y = w.playerY)
+        w.update(1f / 60f)
+        assertEquals(SkyWorld.MAX_HP - 1, w.hp)
+    }
+
+    @Test
+    fun `guns fire from wherever the fighter is`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.movePlayerBy(0f, -0.25f)
+        repeat(12) { w.update(1f / 60f) }
+        val shot = w.shots.firstOrNull { it.fromPlayer }
+        assertNotNull("pushing forward should not stop the guns", shot)
+        assertTrue(
+            "bullets should leave the nose, not the old back line, saw ${shot!!.y}",
+            shot.y < SkyWorld.PLAYER_Y - 0.15f,
+        )
+    }
+
+    @Test
+    fun `pickups are caught at the height you are flying`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.movePlayerBy(0f, -0.3f)
+        w.addItemForTest(SkyWorld.ItemKind.SPREAD, x = 0f, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+        assertEquals(2, w.spread)
+    }
+
+    @Test
+    fun `the front of the band stays clear of the raider`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 400)
+        repeat(60) { w.movePlayerBy(0f, -0.05f) }
+        assertEquals(SkyWorld.PLAYER_Y_MIN, w.playerY, 1e-4f)
+        // the band has to end above the raider's hull, or the fight opens with a free ram
+        assertTrue(
+            "the front line sits inside the raider at y=${SkyWorld.PLAYER_Y_MIN}",
+            SkyWorld.PLAYER_Y_MIN > SkyWorld.BOSS_STATION_Y + SkyWorld.BOSS_HALF + SkyWorld.PLAYER_HALF_Y,
+        )
+        // and head on, before its first salvo can cross the gap, nothing touches you
+        repeat(12) { w.update(1f / 60f) }
+        assertEquals("sitting at the front line should not be a collision",
+            SkyWorld.MAX_HP, w.hp)
+    }
+
+    @Test
+    fun `a new stage puts the fighter back on the start line`() {
+        val w = running()
+        w.movePlayerBy(0.4f, -0.3f)
+        w.startLevel(2)
+        assertEquals(0f, w.playerX, 1e-5f)
+        assertEquals(SkyWorld.PLAYER_Y, w.playerY, 1e-5f)
+    }
+
+    @Test
+    fun `enemies still shoot at a fighter that has pushed forward`() {
+        val w = running(level = 3)
+        w.clearWavesForTest()
+        w.movePlayerBy(0f, -0.3f)
+        val e = w.addEnemyForTest(SkyWorld.Kind.GUNNER, x = 0.5f, y = 0.15f)
+        var fired = false
+        repeat(60 * 5) {
+            if (!fired) {
+                w.update(1f / 60f)
+                e.y = 0.15f
+                fired = w.shots.any { !it.fromPlayer }
+            }
+        }
+        assertTrue("a gunner above the band should still be able to fire on you", fired)
+    }
 }

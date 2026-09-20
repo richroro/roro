@@ -23,4 +23,6 @@
     <string name="course_gunners">Flak</string>
     <string name="course_divers">Divers</string>
     <string name="course_fast">Fast</string>
+    <string name="control_pad">STEER</string>
+    <string name="control_hint">drag any way</string>
 </resources>
