@@ -986,4 +986,201 @@ class SkyWorldTest {
         assertEquals(0f, w.magnetTimer, 1e-5f)
         assertTrue(!w.charm)
     }
+
+    // ---- eight ways to be in the way -------------------------------------------------------------
+
+    @Test
+    fun `a shielder turns away anything that comes straight at its nose`() {
+        val w = running()
+        w.soloModeForTest()
+        // it weaves, so chase it: the plate is only a plate for a shot on its centre line
+        val head = w.addEnemyForTest(SkyWorld.Kind.SHIELDER, x = 0f, y = w.playerY - 0.22f, hp = 3)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        while (frames++ < 240) {
+            w.setForTest(playerX = head.x)
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            if (head.alive) head.y = w.playerY - 0.22f
+        }
+        assertTrue("shooting a plate head on should do nothing", head.alive)
+        assertEquals("and it should not even be scratched", head.maxHp, head.hp)
+        assertTrue("the bounces should be announced",
+            log.count { it.type == SkyWorld.Event.Type.DEFLECT } > 5)
+    }
+
+    @Test
+    fun `but a shielder has sides, and they are open`() {
+        val w = running()
+        w.soloModeForTest()
+        val flanked = w.addEnemyForTest(SkyWorld.Kind.SHIELDER, x = 0f, y = w.playerY - 0.22f, hp = 3)
+        var frames = 0
+        while (frames++ < 480 && flanked.alive) {
+            // stand off its shoulder rather than its nose
+            w.setForTest(playerX = flanked.x - w.halfOf(SkyWorld.Kind.SHIELDER) * 0.8f)
+            w.update(1f / 60f)
+            if (flanked.alive) flanked.y = w.playerY - 0.22f
+        }
+        assertTrue("coming at it from the side should get through", !flanked.alive)
+    }
+
+    @Test
+    fun `a splitter leaves two behind it`() {
+        val w = running()
+        w.soloModeForTest()
+        val fat = w.addEnemyForTest(SkyWorld.Kind.SPLITTER, x = w.playerX, y = w.playerY - 0.3f, hp = 1)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        while (frames++ < 180 && fat.alive) {
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            if (fat.alive) fat.y = w.playerY - 0.3f
+        }
+        assertTrue("the splitter should have gone down", !fat.alive)
+        assertEquals("and said so", 1, log.count { it.type == SkyWorld.Event.Type.SPLIT })
+        val halves = w.enemies.filter { it.alive }
+        assertEquals("two smaller ones in its place", 2, halves.size)
+        assertTrue("on either side of where it was", halves.map { it.x }.toSet().size == 2)
+        assertTrue("and they are not splitters themselves",
+            halves.none { it.kind == SkyWorld.Kind.SPLITTER })
+    }
+
+    @Test
+    fun `a bomb splits them too, and counts every piece`() {
+        val w = running()
+        w.soloModeForTest()
+        repeat(3) { w.addEnemyForTest(SkyWorld.Kind.SPLITTER, x = -0.4f + it * 0.4f, y = 0.3f, hp = 2) }
+        assertTrue(w.useBomb())
+        assertEquals("three splitters become six drones", 6, w.enemies.count { it.alive })
+    }
+
+    @Test
+    fun `a turret takes station instead of flying past`() {
+        val w = running()
+        w.soloModeForTest()
+        val gun = w.addEnemyForTest(SkyWorld.Kind.TURRET, x = 0.3f, y = 0.05f, hp = 999)
+        var frames = 0
+        var parkedFor = 0
+        var lastY = gun.y
+        while (frames++ < 60 * 5) {
+            w.update(1f / 60f)
+            if (abs(gun.y - lastY) < 1e-4f) parkedFor++
+            lastY = gun.y
+        }
+        assertTrue("it should have stopped somewhere and stayed, parked $parkedFor frames", parkedFor > 60 * 3)
+        assertTrue("around its station, saw ${gun.y}", abs(gun.y - SkyWorld.TURRET_STATION_Y) < 0.05f)
+        assertTrue("and shot at you while it sat there", w.shots.any { !it.fromPlayer })
+    }
+
+    @Test
+    fun `a turret gives up eventually rather than blocking the stage forever`() {
+        val w = running()
+        w.soloModeForTest()
+        val gun = w.addEnemyForTest(SkyWorld.Kind.TURRET, x = 0.3f, y = 0.05f, hp = 999)
+        var frames = 0
+        while (frames++ < 60 * 30 && gun.alive && gun.y < 1.1f) w.update(1f / 60f)
+        assertTrue("it should be gone or on its way out, saw ${gun.y}", !gun.alive || gun.y > 1.0f)
+    }
+
+    @Test
+    fun `a swarm bee is a smaller thing to hit than a heavy`() {
+        val w = running()
+        assertTrue(w.halfOf(SkyWorld.Kind.SWARM) < w.halfOf(SkyWorld.Kind.DRONE))
+        assertTrue(w.halfOf(SkyWorld.Kind.SHIELDER) > w.halfOf(SkyWorld.Kind.DRONE))
+        // and a shot that would miss a bee still hits a drone in the same place
+        // the collision test itself, asked directly: a weaving bee cannot be pinned for a race
+        val edge = SkyWorld.ENEMY_HALF * 0.8f
+        val bee = w.addEnemyForTest(SkyWorld.Kind.SWARM, x = 0f, y = 0.4f)
+        val drone = w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0f, y = 0.4f)
+        assertTrue("a drone that wide is still hit", w.wouldHitForTest(drone, edge, 0.4f))
+        assertTrue("a bee that far out is missed", !w.wouldHitForTest(bee, edge, 0.4f))
+        assertTrue("but dead centre it goes down", w.wouldHitForTest(bee, 0f, 0.4f))
+        assertTrue("and a shielder is wider than either", w.wouldHitForTest(
+            w.addEnemyForTest(SkyWorld.Kind.SHIELDER, x = 0f, y = 0.4f), SkyWorld.ENEMY_HALF * 1.1f, 0.4f))
+    }
+
+    @Test
+    fun `the plate covers the nose and nothing further out`() {
+        val w = running()
+        val plate = w.addEnemyForTest(SkyWorld.Kind.SHIELDER, x = 0f, y = 0.4f)
+        val half = w.halfOf(SkyWorld.Kind.SHIELDER)
+        assertTrue("dead centre bounces", w.wouldDeflectForTest(plate, 0f))
+        assertTrue("just inside the arc bounces", w.wouldDeflectForTest(plate, half * SkyWorld.SHIELD_ARC * 0.9f))
+        assertTrue("outside it does not", !w.wouldDeflectForTest(plate, half * 0.95f))
+        // and nothing else in the sky has a plate at all
+        for (kind in SkyWorld.Kind.entries) {
+            if (kind == SkyWorld.Kind.SHIELDER) continue
+            assertTrue("$kind should have no plate",
+                !w.wouldDeflectForTest(w.addEnemyForTest(kind, x = 0f, y = 0.4f), 0f))
+        }
+    }
+
+    @Test
+    fun `every kind flies, and the stages between them use all eight`() {
+        val used = SkyWorld.PROFILES.flatMap { it.mix }.toSet()
+        assertEquals("all eight should show up somewhere", SkyWorld.Kind.entries.toSet(), used)
+        // and each stage keeps a roster of its own
+        val rosters = SkyWorld.PROFILES.map { it.mix.toSet() }
+        assertEquals("no two stages should field exactly the same roster", rosters.size, rosters.toSet().size)
+    }
+
+    @Test
+    fun `a swarm arrives as a crowd and a shielder does not`() {
+        val w = SkyWorld(3).apply { startLevel(1) }
+        fun flight(kind: SkyWorld.Kind): Int {
+            var most = 0
+            repeat(40) {
+                val g = SkyWorld(it + 1).apply { startLevel(1) }
+                g.clearWavesForTest()
+                most = maxOf(most, g.spawnFlightForTest(kind))
+            }
+            return most
+        }
+        assertTrue(w.state == SkyWorld.State.RUNNING)
+        assertTrue("a swarm should outnumber a shielder flight",
+            flight(SkyWorld.Kind.SWARM) > flight(SkyWorld.Kind.SHIELDER) + 2)
+    }
+
+    // ---- what the stage was worth -----------------------------------------------------------------
+
+    @Test
+    fun `flying a stage clean with a long chain earns the top grade`() {
+        val w = running()
+        w.soloModeForTest()
+        chainKills(w, SkyWorld.RANK_S_CHAIN)
+        assertEquals("no hits and a long chain is an S", 0, w.stageRank())
+        assertEquals(0, w.stageHits)
+    }
+
+    @Test
+    fun `taking hits walks the grade down`() {
+        fun rankAfter(hits: Int): Int {
+            val w = running()
+            w.soloModeForTest()
+            chainKills(w, SkyWorld.RANK_S_CHAIN)
+            repeat(hits) {
+                w.setForTest(hp = SkyWorld.MAX_HP, mercy = 0f)
+                w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.001f)
+                w.update(1f / 60f)
+            }
+            return w.stageRank()
+        }
+        assertEquals(0, rankAfter(0))
+        assertEquals("one hit drops you off the top", 1, rankAfter(1))
+        assertEquals(2, rankAfter(2))
+        assertEquals("four is the bottom", 3, rankAfter(4))
+    }
+
+    @Test
+    fun `the grade is per stage, not per run`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setForTest(mercy = 0f)
+        w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.001f)
+        w.update(1f / 60f)
+        assertEquals(1, w.stageHits)
+        w.startLevel(2)
+        assertEquals("a new stage starts clean", 0, w.stageHits)
+        assertEquals(0, w.stageBestCombo)
+    }
 }

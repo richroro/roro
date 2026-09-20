@@ -192,6 +192,23 @@ between `PLAYER_Y_MIN` (0.50) and `PLAYER_Y_MAX` (0.94). Pushing forward is a re
 reach the wave and the falling power-ups sooner, with less sky left to dodge in. The front of the
 band stops short of the raider's hull so a boss fight can never open with a free ram.
 
+**Eight ways to be in the way.** The first four fall towards you in different lines. The four
+added since each ask you to do something you would not otherwise do:
+
+| kind | what it makes you do |
+|---|---|
+| `SHIELDER` | a plate across its nose turns away anything inside `SHIELD_ARC` of its centre line. Get off the centre line, or spread your fire. |
+| `SPLITTER` | dies into two smaller ones. Finish what you started -- and it is two more links on the chain. |
+| `TURRET` | comes in, parks at `TURRET_STATION_Y` and owns that patch of sky until you take it away. It gives up after `TURRET_SECONDS` rather than wedging the stage open. |
+| `SWARM` | tiny, quick, one hit each, and never fewer than seven. |
+
+`halfOf(kind)` gives each one the hitbox it looks like it has, and the renderer scales the sprite
+from the same number, so what you see is what you can hit.
+
+**A grade for the stage, not just a clear.** `stageRank()` reads the hits you took and the best
+chain you held: flying clean earns the top of it, and holding a chain through a whole stage is
+what separates S from A. It resets per stage, so a bad stage does not follow you.
+
 **Chains.** Kills land in chains: each one inside `COMBO_WINDOW` of the last extends it, and every
 `COMBO_STEP` kills steps the multiplier up, to `MAX_COMBO_MULT`. The chain pays for every kill in
 it, so it is worth far more than the hit points it costs you to hold -- and taking a single hit

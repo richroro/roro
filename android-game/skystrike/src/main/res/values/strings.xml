@@ -38,4 +38,5 @@
     <string name="item_magnet">Magnet</string>
     <string name="item_charm">Charm</string>
     <string name="charm_saved">chain held</string>
+    <string name="rank_line">Rank %1$s · %2$d hits taken · best chain %3$d</string>
 </resources>

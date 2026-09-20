@@ -38,4 +38,5 @@
     <string name="item_magnet">자석</string>
     <string name="item_charm">부적</string>
     <string name="charm_saved">연쇄 지킴</string>
+    <string name="rank_line">평가 %1$s · 피격 %2$d회 · 최고 연쇄 %3$d</string>
 </resources>

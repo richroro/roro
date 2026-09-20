@@ -199,6 +199,10 @@ class SkyView @JvmOverloads constructor(
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_1_0), BitmapFactory.decodeResource(resources, R.drawable.foe_1_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_2_0), BitmapFactory.decodeResource(resources, R.drawable.foe_2_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_3_0), BitmapFactory.decodeResource(resources, R.drawable.foe_3_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_4_0), BitmapFactory.decodeResource(resources, R.drawable.foe_4_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_5_0), BitmapFactory.decodeResource(resources, R.drawable.foe_5_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_6_0), BitmapFactory.decodeResource(resources, R.drawable.foe_6_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_7_0), BitmapFactory.decodeResource(resources, R.drawable.foe_7_1)),
     )
     private val raiderFrames: Array<Array<Bitmap>> = arrayOf(
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_0_0), BitmapFactory.decodeResource(resources, R.drawable.raider_0_1)),
@@ -423,6 +427,16 @@ class SkyView @JvmOverloads constructor(
             SkyWorld.Event.Type.COMBO_LOST -> {
                 comboPop = 0f
                 floatText(context.getString(R.string.combo_lost), e.x, e.y - 0.06f, color(R.color.smoke))
+            }
+            SkyWorld.Event.Type.DEFLECT -> {
+                // a bounce off the plate: hard, bright, and it gets you nothing
+                sparks(e.x, e.y, 5, color(R.color.smoke), 0.3f, 0.007f)
+                play(sndHit, 1, 40, 0.35f, 0.15f, 1.6f)
+            }
+            SkyWorld.Event.Type.SPLIT -> {
+                sparks(e.x, e.y, 14, color(R.color.spark_good), 0.5f, 0.01f)
+                shakeTimer = max(shakeTimer, 0.12f)
+                play(sndDing, 2, 40, 0.45f, 0.2f, 0.75f)
             }
             SkyWorld.Event.Type.CHARM_USED -> {
                 sparks(e.x, e.y, 18, color(R.color.gold), 0.45f, 0.01f)
@@ -947,7 +961,8 @@ class SkyView @JvmOverloads constructor(
     private fun drawFoe(canvas: Canvas, e: SkyWorld.Plane, w: Float) {
         val frames = foeFrames[e.kind.ordinal.coerceIn(0, foeFrames.size - 1)]
         val frame = ((runTime * PROP_HZ).toInt() + e.kind.ordinal) and 1
-        val sh = w * FOE_SIZE
+        // drawn at the size it is actually hit at, so a swarm bee looks as small as it is
+        val sh = w * FOE_SIZE * (world.halfOf(e.kind) / SkyWorld.ENEMY_HALF)
         val sw = sh * 0.8f
         val hurt = e.hp < e.maxHp
         val paint = if (hurt) hitPaint else spritePaint
@@ -1256,8 +1271,10 @@ class SkyView @JvmOverloads constructor(
                 val next = stageIndex(world.level + 1)
                 pre = context.getString(R.string.stage_cleared, world.level)
                 title = stageClears[stage]
-                body = context.getString(R.string.kills_line, world.kills, world.score) +
-                    chainLine() + "\n" +
+                body = context.getString(
+                    R.string.rank_line, RANKS[world.stageRank()], world.stageHits, world.stageBestCombo,
+                ) + "\n" +
+                    context.getString(R.string.kills_line, world.kills, world.score) + chainLine() + "\n" +
                     context.getString(R.string.next_up, stagePlaces[next], stageTags[next])
                 accent = context.getString(R.string.tap_next_stage)
             }
@@ -1362,6 +1379,7 @@ class SkyView @JvmOverloads constructor(
         private const val PICKUP_SIZE = 0.1f
         private const val PROP_HZ = 22f
         private const val BANK_DEGREES = 18f
+        private val RANKS = arrayOf("S", "A", "B", "C")
         private const val HITSTOP_SCALE = 0.05f
         private const val TIME_RECOVERY = 1.1f     // back to full speed in a bit under a second
         private const val SCROLL_SPEED = 0.16f

@@ -150,7 +150,74 @@ def foe_diver(c: Canvas, frame: int):
     prop(p, 0, 100, 17, frame, col=(0xD4, 0x9C, 0x96))
 
 
-FOES = [foe_drone, foe_weaver, foe_gunner, foe_diver]
+def foe_shielder(c: Canvas, frame: int):
+    """Wide and slow, with a plate bolted across its nose. Do not come at it head on."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    for side in (-1, 1):
+        exhaust(p, side * 16, 32, 5, frame)
+    p.po_out([(-44, 60), (-44, 44), (44, 44), (44, 60), (22, 66), (-22, 66)],
+             (0x3E, 0x4C, 0x60), o=O)                                  # broad wing
+    p.po_out([(0, 92), (16, 70), (17, 42), (0, 30), (-17, 42), (-16, 70)], (0x5E, 0x70, 0x8A), o=O)
+    p.po([(0, 88), (7, 70), (7, 46), (0, 36)], (0x7E, 0x92, 0xAC))
+    p.el(0, 60, 7, 8, (0x8E, 0xD8, 0xFF), o=1.2)
+    p.el(-2, 58, 3, 3, WHITE)
+    # the plate: a bright slab across the nose, with two bolts so it reads as armour
+    p.rr(-26, 92, 26, 106, 5, (0xC8, 0xB0, 0x5A), o=1.8)
+    p.rr(-22, 95, 22, 101, 2, (0xE8, 0xD0, 0x7A))
+    for dx in (-15, 15):
+        p.ci(dx, 99, 3.2, (0x6E, 0x5E, 0x2A))
+
+
+def foe_splitter(c: Canvas, frame: int):
+    """Fat, and visibly made of two halves. Kill it and you get both of them."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    exhaust(p, 0, 32, 6, frame)
+    p.po_out([(-40, 56), (0, 68), (40, 56), (36, 44), (-36, 44)], (0x2E, 0x6E, 0x52), o=O)
+    for side in (-1, 1):                                               # two hulls, shoulder to shoulder
+        p.po_out([(side * 11, 96), (side * 22, 68), (side * 23, 42), (side * 11, 30),
+                  (side * 1, 42), (side * 1, 68)], (0x3E, 0x9A, 0x6E), o=O)
+        p.po([(side * 11, 90), (side * 16, 68), (side * 17, 46), (side * 11, 36)], (0x5E, 0xC2, 0x8E))
+        p.el(side * 12, 62, 5.5, 7, (0xFF, 0xD6, 0x6B), o=1.2)
+        p.ci(side * 12, 62, 2.5, (0x22, 0x44, 0x33))
+    p.rr(-2, 34, 2, 96, 1, (0x1E, 0x4E, 0x3A), o=1.0)                  # the seam it comes apart on
+    prop(p, 0, 94, 18, frame, col=(0x8A, 0xC4, 0xA8))
+
+
+def foe_turret(c: Canvas, frame: int):
+    """Comes in, stops, and owns that patch of sky until you take it away."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    for side in (-1, 1):
+        exhaust(p, side * 26, 40, 4, frame)
+    p.rr(-40, 44, 40, 62, 6, (0x5A, 0x46, 0x2E), o=O)                  # the mount
+    for side in (-1, 1):
+        p.rr(side * 32 - 9, 46, side * 32 + 9, 74, 5, (0x3E, 0x30, 0x20), o=1.4)
+    p.ci(0, 64, 22, (0x8A, 0x6E, 0x3E), o=O)                           # the ring
+    p.ci(0, 64, 15, (0xB0, 0x92, 0x52))
+    p.el(0, 62, 8, 7, (0xFF, 0x8A, 0x5A), o=1.2)
+    p.el(-2, 60, 3.5, 3, WHITE)
+    for dx in (-5.5, 5.5):                                             # twin barrels, pointed at you
+        p.rr(dx - 3, 76, dx + 3, 104, 1.5, (0x2A, 0x24, 0x18), o=1.3)
+    p.rr(-13, 74, 13, 82, 3, (0x6E, 0x58, 0x32), o=1.3)
+
+
+def foe_swarm(c: Canvas, frame: int):
+    """One bee. There is never one bee."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.4
+    exhaust(p, 0, 48, 3, frame)
+    p.po_out([(-20, 62), (0, 70), (20, 62), (18, 56), (-18, 56)], (0x9A, 0x7A, 0x1E), o=O)
+    p.po_out([(0, 82), (7, 66), (7, 50), (0, 42), (-7, 50), (-7, 66)], (0xE0, 0xB4, 0x2E), o=O)
+    p.po([(0, 78), (3, 66), (3, 52), (0, 46)], (0xFF, 0xDC, 0x6B))
+    p.el(0, 62, 4, 4.5, (0x2A, 0x2E, 0x38), o=1.0)
+    p.el(-1, 61, 1.8, 2, WHITE)
+    prop(p, 0, 80, 11, frame, col=(0xD8, 0xC4, 0x8A))
+
+
+FOES = [foe_drone, foe_weaver, foe_gunner, foe_diver,
+        foe_shielder, foe_splitter, foe_turret, foe_swarm]
 
 
 # ---------------------------------------------------------------- the stage-ending heavies
