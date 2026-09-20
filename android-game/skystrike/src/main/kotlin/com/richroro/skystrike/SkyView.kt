@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.LightingColorFilter
 import android.graphics.LinearGradient
 import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.RadialGradient
 import android.graphics.RectF
 import android.graphics.Shader
@@ -114,7 +115,18 @@ class SkyView @JvmOverloads constructor(
     private var runTime = 0f
     private var insetTop = 0f
     private var lastTouchX = 0f
+    private var lastTouchY = 0f
     private var dragging = false
+    /** Which finger is flying the plane, so a bomb tap with the other hand cannot steal it. */
+    private var dragPointer = -1
+    private var onPad = false
+    private var padKnobX = 0f
+    private var padKnobY = 0f
+    private var padGlow = 0f
+    /** Fades the flight-band ceiling in while you are steering, so the limit is visible. */
+    private var bandHint = 0f
+    private var padUsed = prefs.getBoolean(KEY_PAD_USED, false)
+    private val padRect = RectF()
 
     // ---- paint ------------------------------------------------------------------------------
     private val skyPaint = Paint()
@@ -136,6 +148,12 @@ class SkyView @JvmOverloads constructor(
     private val panelEdgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = color(R.color.panel_edge); style = Paint.Style.STROKE
     }
+    private val padPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+        color = color(R.color.panel_edge)
+    }
+    private val padFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.panel) }
     private val hpPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val hpTrackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.hp_track) }
     private val bossHpPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.boss_hp) }
@@ -402,6 +420,13 @@ class SkyView @JvmOverloads constructor(
         shakeTimer = max(0f, shakeTimer - dt)
         bombTimer = max(0f, bombTimer - dt)
         flashTimer = max(0f, flashTimer - dt * 2.2f)
+        padGlow = if (onPad) min(1f, padGlow + dt * 6f) else max(0f, padGlow - dt * 3f)
+        bandHint = if (dragging) min(1f, bandHint + dt * 4f) else max(0f, bandHint - dt * 1.4f)
+        if (!onPad) {
+            // the knob drifts home when you let go
+            padKnobX += (padRect.centerX() - padKnobX) * min(1f, dt * 9f)
+            padKnobY += (padRect.centerY() - padKnobY) * min(1f, dt * 9f)
+        }
         val pi = particles.iterator()
         while (pi.hasNext()) {
             val p = pi.next()
@@ -471,16 +496,18 @@ class SkyView @JvmOverloads constructor(
     // ---- input ------------------------------------------------------------------------------
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val w = width.toFloat()
+        val h = height.toFloat()
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                lastTouchX = event.x
-                dragging = true
+            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
+                val i = event.actionIndex
+                val x = event.getX(i)
+                val y = event.getY(i)
                 if (!running) resume()
-                if (bombButtonHit(event.x, event.y)) {
-                    dragging = false
+                if (bombButtonHit(x, y)) {
                     world.useBomb()
                     return true
                 }
+                if (dragPointer < 0) beginDrag(event.getPointerId(i), x, y, w, h)
                 when (world.state) {
                     SkyWorld.State.READY -> world.start()
                     SkyWorld.State.LEVEL_CLEAR -> world.nextLevel()
@@ -489,14 +516,70 @@ class SkyView @JvmOverloads constructor(
                 }
                 performClick()
             }
-            MotionEvent.ACTION_MOVE -> if (dragging && w > 0f) {
-                world.movePlayerBy((event.x - lastTouchX) / (w * 0.5f))
-                lastTouchX = event.x
+            MotionEvent.ACTION_MOVE -> {
+                val i = event.findPointerIndex(dragPointer)
+                if (dragging && i >= 0 && w > 0f && h > 0f) {
+                    val x = event.getX(i)
+                    val y = event.getY(i)
+                    // The pad multiplies your thumb, so a short stroke crosses the whole band;
+                    // dragging the plane itself stays one-to-one, the way it always has.
+                    val gain = if (onPad) PAD_GAIN else 1f
+                    world.movePlayerBy((x - lastTouchX) / (w * 0.5f) * gain, (y - lastTouchY) / h * gain)
+                    lastTouchX = x
+                    lastTouchY = y
+                    if (onPad) moveKnob(x, y, w)
+                }
             }
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> dragging = false
+            MotionEvent.ACTION_POINTER_UP -> {
+                if (event.getPointerId(event.actionIndex) == dragPointer) endDrag()
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> endDrag()
         }
         return true
     }
+
+    private fun beginDrag(pointerId: Int, x: Float, y: Float, w: Float, h: Float) {
+        layOutPad(w, h)
+        dragPointer = pointerId
+        dragging = true
+        lastTouchX = x
+        lastTouchY = y
+        onPad = padRect.contains(x, y)
+        if (onPad) {
+            moveKnob(x, y, w)
+            if (!padUsed) {
+                padUsed = true
+                prefs.edit().putBoolean(KEY_PAD_USED, true).apply()
+            }
+        }
+    }
+
+    private fun endDrag() {
+        dragging = false
+        onPad = false
+        dragPointer = -1
+    }
+
+    private fun moveKnob(x: Float, y: Float, w: Float) {
+        val r = w * PAD_KNOB
+        padKnobX = x.coerceIn(padRect.left + r, padRect.right - r)
+        padKnobY = y.coerceIn(padRect.top + r, padRect.bottom - r)
+    }
+
+    /** Parks the steering pad in the bottom-left corner, clear of the bomb button. */
+    private fun layOutPad(w: Float, h: Float) {
+        val pw = w * 0.44f
+        val ph = min(w * 0.30f, h * 0.22f)
+        val left = w * 0.05f
+        val bottom = h - w * 0.05f
+        padRect.set(left, bottom - ph, left + pw, bottom)
+        if (!padPlaced) {
+            padPlaced = true
+            padKnobX = padRect.centerX()
+            padKnobY = padRect.centerY()
+        }
+    }
+    private var padPlaced = false
 
     override fun performClick(): Boolean {
         super.performClick()
@@ -523,6 +606,8 @@ class SkyView @JvmOverloads constructor(
         if (w == 0f || h == 0f) return
 
         drawSky(canvas, w, h)
+        layOutPad(w, h)
+        if (world.state == SkyWorld.State.RUNNING) drawControlPad(canvas, w)
         canvas.save()
         if (shakeTimer > 0f) {
             canvas.translate(
@@ -541,10 +626,10 @@ class SkyView @JvmOverloads constructor(
         if (bombTimer > 0f) {
             val r = w * (1f - bombTimer / 0.45f) * 1.4f
             muzzlePaint.shader = RadialGradient(
-                sx(world.playerX), sy(SkyWorld.PLAYER_Y), max(1f, r),
+                sx(world.playerX), sy(world.playerY), max(1f, r),
                 intArrayOf(0x00FFFFFF, 0x66FFFFFF, 0x00FFFFFF), floatArrayOf(0f, 0.8f, 1f), Shader.TileMode.CLAMP,
             )
-            canvas.drawCircle(sx(world.playerX), sy(SkyWorld.PLAYER_Y), max(1f, r), muzzlePaint)
+            canvas.drawCircle(sx(world.playerX), sy(world.playerY), max(1f, r), muzzlePaint)
             muzzlePaint.shader = null
         }
         canvas.restore()
@@ -614,9 +699,81 @@ class SkyView @JvmOverloads constructor(
         canvas.restore()
     }
 
+    /**
+     * The steering area: a thumb-sized pad in the bottom corner you can fly from without your own
+     * hand covering the fighter. Dragging the plane directly still works, so this is an offer and
+     * not a cage -- it is just the only place where a short stroke crosses the whole band.
+     */
+    private fun drawControlPad(canvas: Canvas, w: Float) {
+        val round = w * 0.05f
+        padFillPaint.alpha = (34 + 40 * padGlow).toInt().coerceIn(0, 255)
+        canvas.drawRoundRect(padRect, round, round, padFillPaint)
+        padPaint.strokeWidth = max(1.5f, w * 0.004f)
+        padPaint.alpha = (65 + 110 * padGlow).toInt().coerceIn(0, 255)
+        canvas.drawRoundRect(padRect, round, round, padPaint)
+
+        // four chevrons pointing out of the pad, so "forward and back too" reads at a glance
+        val cx = padRect.centerX()
+        val cy = padRect.centerY()
+        val tip = min(padRect.width(), padRect.height()) * 0.40f
+        val v = w * 0.022f
+        padPaint.alpha = (92 + 112 * padGlow).toInt().coerceIn(0, 255)
+        padPaint.strokeWidth = max(1.5f, w * 0.006f)
+        padPaint.strokeJoin = Paint.Join.ROUND
+        chevron(canvas, cx, cy - tip, 0f, -1f, v)
+        chevron(canvas, cx, cy + tip, 0f, 1f, v)
+        chevron(canvas, cx - tip, cy, -1f, 0f, v)
+        chevron(canvas, cx + tip, cy, 1f, 0f, v)
+
+        // the knob rides your thumb and springs back to the middle when you let go
+        val kr = w * PAD_KNOB
+        padFillPaint.alpha = (95 + 110 * padGlow).toInt().coerceIn(0, 255)
+        canvas.drawCircle(padKnobX, padKnobY, kr, padFillPaint)
+        padFillPaint.alpha = 255
+        padPaint.alpha = (125 + 130 * padGlow).toInt().coerceIn(0, 255)
+        padPaint.strokeWidth = max(2f, w * 0.006f)
+        canvas.drawCircle(padKnobX, padKnobY, kr, padPaint)
+        padPaint.alpha = 255
+
+        // the words are for your first flight only; after that the chevrons say it
+        if (!padUsed) {
+            val caption = context.getString(R.string.control_pad) + " · " +
+                context.getString(R.string.control_hint)
+            label(canvas, caption, cx, padRect.top - w * 0.03f, w * 0.032f,
+                color(R.color.gold), color(R.color.text_stroke))
+        }
+
+        // the ceiling of the band, drawn only while you are actually steering into it
+        if (bandHint > 0.01f) {
+            padPaint.alpha = (115 * bandHint).toInt().coerceIn(0, 255)
+            padPaint.strokeWidth = max(1.5f, w * 0.004f)
+            val y = sy(SkyWorld.PLAYER_Y_MIN)
+            val dash = w * 0.028f
+            var x = w * 0.04f
+            while (x < w * 0.96f) {
+                canvas.drawLine(x, y, min(x + dash, w * 0.96f), y, padPaint)
+                x += dash * 2f
+            }
+            padPaint.alpha = 255
+        }
+    }
+
+    /** A single arrowhead at ([tx], [ty]) pointing along ([dx], [dy]), drawn with [padPaint]. */
+    private fun chevron(canvas: Canvas, tx: Float, ty: Float, dx: Float, dy: Float, v: Float) {
+        // the two barbs sit back along the direction of travel and out to either side
+        val bx = -dx * v
+        val by = -dy * v
+        chevronPath.reset()
+        chevronPath.moveTo(tx + bx - dy * v, ty + by + dx * v)
+        chevronPath.lineTo(tx, ty)
+        chevronPath.lineTo(tx + bx + dy * v, ty + by - dx * v)
+        canvas.drawPath(chevronPath, padPaint)
+    }
+    private val chevronPath = Path()
+
     private fun drawPlayer(canvas: Canvas, w: Float) {
         val cx = sx(world.playerX)
-        val cy = sy(SkyWorld.PLAYER_Y)
+        val cy = sy(world.playerY)
         val sh = w * PLAYER_SIZE
         val sw = sh * 0.8f
         rect.set(cx - sw * 0.34f, cy + sh * 0.3f, cx + sw * 0.34f, cy + sh * 0.44f)
@@ -788,12 +945,14 @@ class SkyView @JvmOverloads constructor(
         label(canvas, context.getString(R.string.best_label, max(bestLevel, world.bestLevel)),
             w * 0.84f, top + w * 0.035f, w * 0.04f, Color.WHITE, color(R.color.text_stroke))
 
-        // hit points as a row of pips
+        // hit points as a row of pips, up under the stage name: the bottom band is the
+        // steering area now, and a thumb resting on the pad must not cover your own health
         val pip = w * 0.032f
         val gap = pip * 0.6f
         val total = SkyWorld.MAX_HP * pip + (SkyWorld.MAX_HP - 1) * gap
         var px = w * 0.06f
-        val py = h - w * 0.055f
+        // clear of the raider's health bar, which hangs at insetTop + h * 0.075 during a boss
+        val py = insetTop + h * 0.075f + w * 0.075f
         for (i in 0 until SkyWorld.MAX_HP) {
             hpPaint.color = if (i < world.hp) {
                 if (world.hp <= 2) color(R.color.hp_low) else color(R.color.hp_full)
@@ -805,7 +964,7 @@ class SkyView @JvmOverloads constructor(
             px += pip + gap
         }
         if (world.rapidTimer > 0f) {
-            label(canvas, context.getString(R.string.item_rapid), w * 0.06f + total / 2f, py - pip * 1.8f,
+            label(canvas, context.getString(R.string.item_rapid), w * 0.06f + total / 2f, py + pip * 1.7f,
                 w * 0.035f, color(R.color.gold), color(R.color.text_stroke))
         }
 
@@ -895,6 +1054,10 @@ class SkyView @JvmOverloads constructor(
         private const val KEY_BEST_LEVEL = "best_level"
         private const val KEY_BEST_SCORE = "best_score"
         private const val KEY_MUTED = "muted"
+        private const val KEY_PAD_USED = "pad_used"
+        /** How much the pad multiplies thumb travel. One short stroke should cross the band. */
+        private const val PAD_GAIN = 1.55f
+        private const val PAD_KNOB = 0.055f
         private const val PLAYER_SIZE = 0.17f
         private const val FOE_SIZE = 0.135f
         private const val RAIDER_SIZE = 0.62f

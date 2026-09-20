@@ -11,8 +11,10 @@ import kotlin.math.sin
  * The whole game, with no Android in it.
  *
  * Screen space is x in [-1, 1] across and y in [0, 1] down, so the simulation does not care what
- * size the device is. The player sits near the bottom on [PLAYER_Y] and only moves sideways;
- * everything else falls towards them. Kept free of Canvas and Context so it can be unit tested on
+ * size the device is. The player flies in a band near the bottom -- sideways between
+ * [-PLAYER_LIMIT, PLAYER_LIMIT] and forward and back between [PLAYER_Y_MIN] and [PLAYER_Y_MAX] --
+ * and everything else falls towards them. Pushing forward buys reaction room the way a real
+ * fighter does: you meet the wave sooner, with less sky left to dodge in. Kept free of Canvas and Context so it can be unit tested on
  * a plain JVM, exactly like the crowd game's world.
  */
 class SkyWorld(private val seed: Int = 1) {
@@ -141,6 +143,9 @@ class SkyWorld(private val seed: Int = 1) {
 
     var playerX = 0f
         private set
+    /** How far up the screen the fighter has been pushed, inside the band. */
+    var playerY = PLAYER_Y
+        private set
     var hp = MAX_HP
         private set
     var bombs = START_BOMBS
@@ -206,6 +211,7 @@ class SkyWorld(private val seed: Int = 1) {
         pendingEvents.clear()
         boss = null
         playerX = 0f
+        playerY = PLAYER_Y
         hp = MAX_HP
         bombs = START_BOMBS
         shield = false
@@ -223,15 +229,20 @@ class SkyWorld(private val seed: Int = 1) {
         state = State.RUNNING
     }
 
-    fun movePlayerBy(dx: Float) {
+    /**
+     * Nudges the fighter. [dy] is positive downwards, like the rest of screen space, and both axes
+     * are clamped to the flight band so no drag can fling you into the raider's lap or off-screen.
+     */
+    fun movePlayerBy(dx: Float, dy: Float = 0f) {
         playerX = (playerX + dx).coerceIn(-PLAYER_LIMIT, PLAYER_LIMIT)
+        playerY = (playerY + dy).coerceIn(PLAYER_Y_MIN, PLAYER_Y_MAX)
     }
 
     /** Sets off the screen-clearing bomb, if one is left. Returns true when it fired. */
     fun useBomb(): Boolean {
         if (state != State.RUNNING || bombs <= 0) return false
         bombs--
-        pendingEvents.add(Event(Event.Type.BOMB, playerX, PLAYER_Y))
+        pendingEvents.add(Event(Event.Type.BOMB, playerX, playerY))
         for (e in mutableEnemies) {
             if (!e.alive) continue
             e.alive = false
@@ -374,7 +385,7 @@ class SkyWorld(private val seed: Int = 1) {
 
             if (e.kind == Kind.GUNNER || e.kind == Kind.WEAVER) {
                 e.cooldown -= dt
-                if (e.cooldown <= 0f && e.y > 0.04f && e.y < PLAYER_Y - 0.08f) {
+                if (e.cooldown <= 0f && e.y > 0.04f && e.y < playerY - 0.08f) {
                     e.cooldown = (1.5f - level * 0.04f).coerceAtLeast(0.55f) / profile.fireRate *
                         (0.7f + shotRandom.next() * 0.7f)
                     fireEnemyShot(e)
@@ -459,15 +470,15 @@ class SkyWorld(private val seed: Int = 1) {
             for (i in 0 until spread) {
                 val off = if (spread == 1) 0f else (i / (spread - 1f) - 0.5f)
                 mutableShots.add(
-                    Shot(playerX + off * 0.09f, PLAYER_Y - 0.05f, off * 0.35f, -SHOT_SPEED, true),
+                    Shot(playerX + off * 0.09f, playerY - 0.05f, off * 0.35f, -SHOT_SPEED, true),
                 )
             }
-            pendingEvents.add(Event(Event.Type.SHOT, playerX, PLAYER_Y - 0.05f))
+            pendingEvents.add(Event(Event.Type.SHOT, playerX, playerY - 0.05f))
         }
     }
 
     private fun hitsPlayer(x: Float, y: Float, half: Float): Boolean =
-        mercy <= 0f && abs(y - PLAYER_Y) < half + PLAYER_HALF_Y && abs(x - playerX) < half + PLAYER_HALF_X
+        mercy <= 0f && abs(y - playerY) < half + PLAYER_HALF_Y && abs(x - playerX) < half + PLAYER_HALF_X
 
     private fun hurtPlayer(amount: Int, x: Float, y: Float) {
         if (mercy > 0f) return
@@ -557,7 +568,7 @@ class SkyWorld(private val seed: Int = 1) {
             if (!item.alive) { it.remove(); continue }
             item.y += ITEM_FALL_SPEED * dt
             if (item.y > 1.1f) { it.remove(); continue }
-            if (abs(item.y - PLAYER_Y) < ITEM_HALF + PLAYER_HALF_Y &&
+            if (abs(item.y - playerY) < ITEM_HALF + PLAYER_HALF_Y &&
                 abs(item.x - playerX) < ITEM_HALF + PLAYER_HALF_X
             ) {
                 item.alive = false
@@ -607,6 +618,7 @@ class SkyWorld(private val seed: Int = 1) {
     internal fun setForTest(
         hp: Int = this.hp,
         playerX: Float = this.playerX,
+        playerY: Float = this.playerY,
         spread: Int = this.spread,
         bombs: Int = this.bombs,
         shield: Boolean = this.shield,
@@ -614,6 +626,7 @@ class SkyWorld(private val seed: Int = 1) {
     ) {
         this.hp = hp
         this.playerX = playerX
+        this.playerY = playerY
         this.spread = spread
         this.bombs = bombs
         this.shield = shield
@@ -667,7 +680,14 @@ class SkyWorld(private val seed: Int = 1) {
     }
 
     companion object {
+        /** Where the fighter starts every stage, and the back of the band it flies in. */
         const val PLAYER_Y = 0.86f
+        /**
+         * How far forward you may push. The raider parks at [BOSS_STATION_Y] and is [BOSS_HALF]
+         * deep, so this stays clear of its hull -- otherwise the boss fight would open with a ram.
+         */
+        const val PLAYER_Y_MIN = 0.50f
+        const val PLAYER_Y_MAX = 0.94f
         const val PLAYER_LIMIT = 0.88f
         const val PLAYER_HALF_X = 0.055f
         const val PLAYER_HALF_Y = 0.045f

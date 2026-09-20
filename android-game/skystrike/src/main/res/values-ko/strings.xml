@@ -23,4 +23,6 @@
     <string name="course_gunners">대공포</string>
     <string name="course_divers">급강하</string>
     <string name="course_fast">고속</string>
+    <string name="control_pad">조종</string>
+    <string name="control_hint">상하좌우 끌기</string>
 </resources>

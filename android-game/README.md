@@ -182,10 +182,20 @@ git tag villainrush-v1.9.0 && git push origin villainrush-v1.9.0
 
 ## Sky Strike (스카이 스트라이크) — `:skystrike`
 
-A vertical scrolling shooter. You fly along the bottom, the guns fire on their own, and
-everything else falls towards you. Four enemy types (straight-flying drones, weaving light
-fighters, flak gunners that lead their shots, and divers that accelerate into you), five
-power-ups, and a heavy bomber waiting at the end of every stage.
+A vertical scrolling shooter. You fly in a band across the bottom of the screen, the guns fire
+on their own, and everything else falls towards you. Four enemy types (straight-flying drones,
+weaving light fighters, flak gunners that lead their shots, and divers that accelerate into you),
+five power-ups, and a heavy bomber waiting at the end of every stage.
+
+You steer on both axes: sideways between `-PLAYER_LIMIT` and `PLAYER_LIMIT`, and forward and back
+between `PLAYER_Y_MIN` (0.50) and `PLAYER_Y_MAX` (0.94). Pushing forward is a real trade -- you
+reach the wave and the falling power-ups sooner, with less sky left to dodge in. The front of the
+band stops short of the raider's hull so a boss fight can never open with a free ram.
+
+Two ways to fly, and both are always live: drag the aircraft itself, one-to-one, the way it always
+worked; or drag inside the **steering pad** in the bottom-left corner, which multiplies your thumb
+by `PAD_GAIN` so one short stroke crosses the whole band without your hand covering the fight. The
+bomb button takes its own finger, so you can steer and bomb at the same time.
 
 - Simulation: `SkyWorld.kt`, pure Kotlin with no Android in it, unit tested on a plain JVM.
 - Renderer: `SkyView.kt`, a Canvas view. Screen space is x in [-1, 1] across, y in [0, 1] down.

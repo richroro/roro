@@ -33,10 +33,10 @@
   <span class="tag">스카이 스트라이크 <button id="mute" type="button" aria-label="소리 켜기/끄기" title="소리 (M)">🔊</button></span>
 </header>
 <div class="stage">
-  <canvas id="game" tabindex="0" aria-label="스카이 스트라이크 게임 화면. 좌우 드래그로 비행하고 자동으로 사격합니다."></canvas>
+  <canvas id="game" tabindex="0" aria-label="스카이 스트라이크 게임 화면. 왼쪽 아래 조종 영역을 끌어 상하좌우로 비행하고 자동으로 사격합니다."></canvas>
 </div>
 <div class="hints">
-  <span>드래그 또는 <kbd>←</kbd> <kbd>→</kbd> 로 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>M</kbd> 소리</span>
+  <span>왼쪽 아래 <b>조종 영역</b>을 끌거나 <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> 로 상하좌우 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>M</kbd> 소리</span>
   <span>자동 사격 · 아이템: ✦확산 ⚡연사 🛡방어막 💣폭탄 ✚수리</span>
 </div>
 
@@ -44,7 +44,8 @@
 (function () {
   // ---------- SkyWorld: pure simulation (mirrors skystrike/SkyWorld.kt) ----------
   const C = {
-    PLAYER_Y: 0.86, PLAYER_LIMIT: 0.88, PLAYER_HALF_X: 0.055, PLAYER_HALF_Y: 0.045,
+    PLAYER_Y: 0.86, PLAYER_Y_MIN: 0.50, PLAYER_Y_MAX: 0.94,
+    PLAYER_LIMIT: 0.88, PLAYER_HALF_X: 0.055, PLAYER_HALF_Y: 0.045,
     ENEMY_HALF: 0.062, BOSS_HALF: 0.2, SHOT_HALF: 0.012, ITEM_HALF: 0.05,
     MAX_HP: 5, START_BOMBS: 2, MAX_BOMBS: 5, MAX_SPREAD: 5,
     RAM_DAMAGE: 1, SHOT_DAMAGE: 1, MERCY_SECONDS: 1.1, FLASH_SECONDS: 0.3,
@@ -100,7 +101,8 @@
   class SkyWorld {
     constructor(seed) {
       this.seed = seed || 1; this.level = 1; this.bestLevel = 0; this.state = State.READY;
-      this.score = 0; this.kills = 0; this.playerX = 0; this.hp = C.MAX_HP; this.bombs = C.START_BOMBS;
+      this.score = 0; this.kills = 0; this.playerX = 0; this.playerY = C.PLAYER_Y;
+      this.hp = C.MAX_HP; this.bombs = C.START_BOMBS;
       this.shield = false; this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
       this.enemies = []; this.shots = []; this.items = []; this.flares = []; this.boss = null;
       this.events = []; this.gust = 0;
@@ -111,7 +113,8 @@
       this.sr = rng(this.seed * 31 + level * 17);
       const p = profileOf(level);
       this.enemies = []; this.shots = []; this.items = []; this.flares = []; this.events = []; this.boss = null;
-      this.playerX = 0; this.hp = C.MAX_HP; this.bombs = C.START_BOMBS; this.shield = false;
+      this.playerX = 0; this.playerY = C.PLAYER_Y;
+      this.hp = C.MAX_HP; this.bombs = C.START_BOMBS; this.shield = false;
       this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
       this.fireAcc = 0; this.elapsed = 0; this.waveIndex = 0; this.totalWaves = p.waves; this.nextWaveAt = 0.8;
       this.gust = 0; this.nextFlareAt = C.FLARE_GAP;
@@ -119,12 +122,15 @@
     }
     start() { this.startLevel(1); }
     nextLevel() { this.startLevel(this.level + 1); }
-    movePlayerBy(dx) { this.playerX = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + dx)); }
+    movePlayerBy(dx, dy = 0) {
+      this.playerX = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + dx));
+      this.playerY = Math.max(C.PLAYER_Y_MIN, Math.min(C.PLAYER_Y_MAX, this.playerY + dy));
+    }
 
     useBomb() {
       if (this.state !== State.RUNNING || this.bombs <= 0) return false;
       this.bombs--;
-      this.events.push({ t: 'BOMB', x: this.playerX, y: C.PLAYER_Y });
+      this.events.push({ t: 'BOMB', x: this.playerX, y: this.playerY });
       for (const e of this.enemies) {
         if (!e.alive) continue;
         e.alive = false; this.kills++; this.score += scoreFor(e.kind);
@@ -216,7 +222,7 @@
         e.bank = Math.max(-1, Math.min(1, (e.x - e.lastX) / Math.max(1e-4, dt) * 0.9));
         if (e.kind === 'GUNNER' || e.kind === 'WEAVER') {
           e.cooldown -= dt;
-          if (e.cooldown <= 0 && e.y > 0.04 && e.y < C.PLAYER_Y - 0.08) {
+          if (e.cooldown <= 0 && e.y > 0.04 && e.y < this.playerY - 0.08) {
             e.cooldown = Math.max(0.55, 1.5 - this.level * 0.04) / p.fireRate * (0.7 + this.sr() * 0.7);
             const vx = e.kind === 'GUNNER' ? Math.max(-0.5, Math.min(0.5, (this.playerX - e.x) * 0.55)) : 0;
             this.shots.push({ x: e.x, y: e.y + 0.04, vx, vy: C.ENEMY_SHOT_SPEED, fromPlayer: false, alive: true, damage: 1 });
@@ -282,15 +288,15 @@
         this.fireAcc -= 1;
         for (let i = 0; i < this.spread; i++) {
           const off = this.spread === 1 ? 0 : (i / (this.spread - 1) - 0.5);
-          this.shots.push({ x: this.playerX + off * 0.09, y: C.PLAYER_Y - 0.05, vx: off * 0.35,
+          this.shots.push({ x: this.playerX + off * 0.09, y: this.playerY - 0.05, vx: off * 0.35,
             vy: -C.SHOT_SPEED, fromPlayer: true, alive: true, damage: 1 });
         }
-        this.events.push({ t: 'SHOT', x: this.playerX, y: C.PLAYER_Y - 0.05 });
+        this.events.push({ t: 'SHOT', x: this.playerX, y: this.playerY - 0.05 });
       }
     }
 
     hitsPlayer(x, y, half) {
-      return this.mercy <= 0 && Math.abs(y - C.PLAYER_Y) < half + C.PLAYER_HALF_Y && Math.abs(x - this.playerX) < half + C.PLAYER_HALF_X;
+      return this.mercy <= 0 && Math.abs(y - this.playerY) < half + C.PLAYER_HALF_Y && Math.abs(x - this.playerX) < half + C.PLAYER_HALF_X;
     }
 
     hurt(amount, x, y) {
@@ -356,7 +362,7 @@
         const it = this.items[i];
         it.y += C.ITEM_FALL_SPEED * dt;
         if (it.y > 1.1) { this.items.splice(i, 1); continue; }
-        if (Math.abs(it.y - C.PLAYER_Y) < C.ITEM_HALF + C.PLAYER_HALF_Y && Math.abs(it.x - this.playerX) < C.ITEM_HALF + C.PLAYER_HALF_X) {
+        if (Math.abs(it.y - this.playerY) < C.ITEM_HALF + C.PLAYER_HALF_Y && Math.abs(it.x - this.playerX) < C.ITEM_HALF + C.PLAYER_HALF_X) {
           this.items.splice(i, 1);
           if (it.kind === 'SPREAD') this.spread = Math.min(C.MAX_SPREAD, this.spread + 1);
           else if (it.kind === 'RAPID') this.rapidTimer = C.RAPID_SECONDS;
@@ -492,6 +498,16 @@
       case 'BOSS_IN': floatText(stageOf(world.level).raider, 0, 0.3, '#FCA5A5'); fx.shake = 0.5; play('roar'); break;
       case 'CLEAR': play('clear'); break;
       case 'OVER': play('over'); break;
+    }
+  }
+
+  function updatePad(dt) {
+    pad.glow = onPad ? Math.min(1, pad.glow + dt * 6) : Math.max(0, pad.glow - dt * 3);
+    pad.band = dragging ? Math.min(1, pad.band + dt * 4) : Math.max(0, pad.band - dt * 1.4);
+    if (!onPad && pad.placed) {
+      const e = Math.min(1, dt * 9);
+      pad.knobX += ((pad.left + pad.right) / 2 - pad.knobX) * e;
+      pad.knobY += ((pad.top + pad.bottom) / 2 - pad.knobY) * e;
     }
   }
 
@@ -674,9 +690,87 @@
     }
   }
 
+  // ---------- the steering pad ----------
+  // A thumb-sized area in the bottom corner you can fly from without your hand covering the
+  // fighter. Dragging the plane directly still works; the pad just multiplies a short stroke.
+  const PAD_GAIN = 1.55, PAD_KNOB = 0.055;
+  const pad = { left: 0, top: 0, right: 0, bottom: 0, knobX: 0, knobY: 0, glow: 0, band: 0, placed: false };
+  let padUsed = false;
+  try { padUsed = localStorage.getItem('skystrike.padUsed') === '1'; } catch (e) {}
+  window.__pad = pad;
+
+  function layOutPad() {
+    const w = canvas._w, h = canvas._h;
+    const pw = w * 0.44, ph = Math.min(w * 0.30, h * 0.22);
+    pad.left = w * 0.05; pad.bottom = h - w * 0.05;
+    pad.top = pad.bottom - ph; pad.right = pad.left + pw;
+    if (!pad.placed) {
+      pad.placed = true;
+      pad.knobX = (pad.left + pad.right) / 2;
+      pad.knobY = (pad.top + pad.bottom) / 2;
+    }
+  }
+  const padHit = (x, y) => x >= pad.left && x <= pad.right && y >= pad.top && y <= pad.bottom;
+  function moveKnob(x, y) {
+    const r = canvas._w * PAD_KNOB;
+    pad.knobX = Math.max(pad.left + r, Math.min(pad.right - r, x));
+    pad.knobY = Math.max(pad.top + r, Math.min(pad.bottom - r, y));
+  }
+
+  function drawControlPad() {
+    const w = canvas._w;
+    const round = w * 0.05, pw = pad.right - pad.left, ph = pad.bottom - pad.top;
+    ctx.globalAlpha = 0.13 + 0.16 * pad.glow;
+    ctx.fillStyle = '#101A30';
+    ctx.beginPath(); ctx.roundRect(pad.left, pad.top, pw, ph, round); ctx.fill();
+    ctx.globalAlpha = 0.25 + 0.43 * pad.glow;
+    ctx.strokeStyle = '#3C5A8C'; ctx.lineWidth = Math.max(1.5, w * 0.004); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.roundRect(pad.left, pad.top, pw, ph, round); ctx.stroke();
+
+    // four chevrons pointing out of the pad, so "forward and back too" reads at a glance
+    const cx = (pad.left + pad.right) / 2, cy = (pad.top + pad.bottom) / 2;
+    const tip = Math.min(pw, ph) * 0.40, v = w * 0.022;
+    ctx.globalAlpha = 0.36 + 0.44 * pad.glow;
+    ctx.lineWidth = Math.max(1.5, w * 0.006);
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(cx - v, cy - tip + v); ctx.lineTo(cx, cy - tip); ctx.lineTo(cx + v, cy - tip + v);
+    ctx.moveTo(cx - v, cy + tip - v); ctx.lineTo(cx, cy + tip); ctx.lineTo(cx + v, cy + tip - v);
+    ctx.moveTo(cx - tip + v, cy - v); ctx.lineTo(cx - tip, cy); ctx.lineTo(cx - tip + v, cy + v);
+    ctx.moveTo(cx + tip - v, cy - v); ctx.lineTo(cx + tip, cy); ctx.lineTo(cx + tip - v, cy + v);
+    ctx.stroke();
+
+    // the knob rides your thumb and springs back to the middle when you let go
+    const kr = w * PAD_KNOB;
+    ctx.globalAlpha = 0.37 + 0.43 * pad.glow;
+    ctx.fillStyle = '#101A30';
+    ctx.beginPath(); ctx.arc(pad.knobX, pad.knobY, kr, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 0.49 + 0.51 * pad.glow;
+    ctx.lineWidth = Math.max(2, w * 0.006);
+    ctx.beginPath(); ctx.arc(pad.knobX, pad.knobY, kr, 0, Math.PI * 2); ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // the words are for your first flight only; after that the chevrons say it
+    if (!padUsed) label('조종 · 상하좌우 끌기', cx, pad.top - w * 0.03, w * 0.032, '#FACC15', '#0B1020');
+
+    // the ceiling of the band, drawn only while you are actually steering into it
+    if (pad.band > 0.01) {
+      ctx.globalAlpha = 0.45 * pad.band;
+      ctx.lineWidth = Math.max(1.5, w * 0.004);
+      const y = sy(C.PLAYER_Y_MIN), dash = w * 0.028;
+      ctx.beginPath();
+      for (let x = w * 0.04; x < w * 0.96; x += dash * 2) {
+        ctx.moveTo(x, y); ctx.lineTo(Math.min(x + dash, w * 0.96), y);
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    ctx.lineCap = 'butt'; ctx.lineJoin = 'miter';   // leave the context as we found it
+  }
+
   function drawPlayer() {
     const w = canvas._w;
-    const cx = sx(world.playerX), cy = sy(C.PLAYER_Y);
+    const cx = sx(world.playerX), cy = sy(world.playerY);
     const sh = w * SIZE.player, sw = sh * 0.8;
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.beginPath(); ctx.ellipse(cx, cy + sh * 0.37, sw * 0.34, sh * 0.07, 0, 0, Math.PI * 2); ctx.fill();
@@ -703,6 +797,8 @@
     const w = canvas._w, h = canvas._h;
     runTime += 0;
     drawSky();
+    layOutPad();
+    if (world.state === State.RUNNING) drawControlPad();
     ctx.save();
     if (fx.shake > 0) ctx.translate((Math.random() - 0.5) * fx.shake * w * 0.04, (Math.random() - 0.5) * fx.shake * w * 0.04);
 
@@ -781,9 +877,9 @@
     ctx.globalAlpha = 1;
     if (fx.bomb > 0) {
       const r = w * (1 - fx.bomb / 0.45) * 1.4;
-      const g = ctx.createRadialGradient(sx(world.playerX), sy(C.PLAYER_Y), 0, sx(world.playerX), sy(C.PLAYER_Y), Math.max(1, r));
+      const g = ctx.createRadialGradient(sx(world.playerX), sy(world.playerY), 0, sx(world.playerX), sy(world.playerY), Math.max(1, r));
       g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.8, 'rgba(255,255,255,0.4)'); g.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sx(world.playerX), sy(C.PLAYER_Y), Math.max(1, r), 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sx(world.playerX), sy(world.playerY), Math.max(1, r), 0, Math.PI * 2); ctx.fill();
     }
     ctx.restore();
     if (fx.flash > 0) { ctx.globalAlpha = Math.min(0.55, fx.flash); ctx.fillStyle = fx.flashColor; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1; }
@@ -799,14 +895,17 @@
     label(stageText, w * 0.17, h * 0.03 + w * 0.035, w * 0.045, '#FFFFFF', '#0B1020');
     label(`최고 ${Math.max(best, world.bestLevel)}`, w * 0.84, h * 0.03 + w * 0.035, w * 0.04, '#FFFFFF', '#0B1020');
 
+    // hit points up under the stage name: the bottom band is the steering area now, and a
+    // thumb resting on the pad must not cover your own health
     const pip = w * 0.032, gap = pip * 0.6;
-    let px = w * 0.06; const py = h - w * 0.055;
+    // clear of the raider's health bar, which hangs at h * 0.075 during a boss
+    let px = w * 0.06; const py = h * 0.075 + w * 0.075;
     for (let i = 0; i < C.MAX_HP; i++) {
       ctx.fillStyle = i < world.hp ? (world.hp <= 2 ? '#F87171' : '#34D399') : '#27354F';
       ctx.beginPath(); ctx.roundRect(px, py - pip / 2, pip, pip, pip * 0.3); ctx.fill();
       px += pip + gap;
     }
-    if (world.rapidTimer > 0) label('연사', w * 0.06 + (C.MAX_HP * pip + (C.MAX_HP - 1) * gap) / 2, py - pip * 1.8, w * 0.035, '#FACC15', '#0B1020');
+    if (world.rapidTimer > 0) label('연사', w * 0.06 + (C.MAX_HP * pip + (C.MAX_HP - 1) * gap) / 2, py + pip * 1.7, w * 0.035, '#FACC15', '#0B1020');
 
     const r = w * 0.085, bx = w - r - w * 0.05, by = h - r - w * 0.06;
     ctx.globalAlpha = world.bombs > 0 ? 0.9 : 0.43;
@@ -868,7 +967,7 @@
   }
 
   // ---------- Input ----------
-  let dragging = false, lastTouch = 0;
+  let dragging = false, onPad = false, lastTouch = 0, lastTouchY = 0, dragPointer = -1;
   function bombHit(px, py) {
     const w = canvas._w, h = canvas._h, r = w * 0.085;
     const bx = w - r - w * 0.05, by = h - r - w * 0.06;
@@ -882,27 +981,45 @@
   function onDown(ev) {
     ev.preventDefault(); canvas.focus(); ac();
     const p = canvasPoint(ev);
-    lastTouch = p.x; dragging = true;
-    if (bombHit(p.x, p.y)) { dragging = false; world.useBomb(); return; }
+    // a bomb tap with the other hand must not steal the finger that is flying the plane
+    if (bombHit(p.x, p.y)) { world.useBomb(); return; }
+    if (dragPointer < 0) {
+      layOutPad();
+      dragPointer = ev.pointerId;
+      dragging = true; lastTouch = p.x; lastTouchY = p.y;
+      onPad = padHit(p.x, p.y);
+      if (onPad) {
+        moveKnob(p.x, p.y);
+        if (!padUsed) { padUsed = true; try { localStorage.setItem('skystrike.padUsed', '1'); } catch (e) {} }
+      }
+    }
     if (world.state === State.READY) world.start();
     else if (world.state === State.LEVEL_CLEAR) world.nextLevel();
     else if (world.state === State.GAME_OVER) world.start();
   }
   function onMove(ev) {
-    if (!dragging) return;
+    if (!dragging || ev.pointerId !== dragPointer) return;
     const p = canvasPoint(ev);
-    world.movePlayerBy((p.x - lastTouch) / (canvas._w * 0.5));
-    lastTouch = p.x;
+    // the pad multiplies your thumb; dragging the plane itself stays one-to-one
+    const gain = onPad ? PAD_GAIN : 1;
+    world.movePlayerBy((p.x - lastTouch) / (canvas._w * 0.5) * gain, (p.y - lastTouchY) / canvas._h * gain);
+    lastTouch = p.x; lastTouchY = p.y;
+    if (onPad) moveKnob(p.x, p.y);
   }
-  function onUp() { dragging = false; }
+  function onUp(ev) {
+    if (ev && ev.pointerId !== undefined && ev.pointerId !== dragPointer) return;
+    dragging = false; onPad = false; dragPointer = -1;
+  }
   canvas.addEventListener('pointerdown', onDown);
   canvas.addEventListener('pointermove', onMove);
   window.addEventListener('pointerup', onUp);
   canvas.addEventListener('pointercancel', onUp);
-  let held = 0;
+  let held = 0, heldY = 0;
   window.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') held = -1;
-    else if (e.key === 'ArrowRight') held = 1;
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') held = -1;
+    else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') held = 1;
+    else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') heldY = -1;
+    else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') heldY = 1;
     else if (e.key === 'm' || e.key === 'M') toggleMute();
     else if (e.key === 'b' || e.key === 'B') world.useBomb();
     else if (e.key === ' ' || e.key === 'Enter') {
@@ -912,7 +1029,11 @@
     } else return;
     e.preventDefault();
   });
-  window.addEventListener('keyup', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') held = 0; });
+  window.addEventListener('keyup', e => {
+    const k = e.key;
+    if (k === 'ArrowLeft' || k === 'ArrowRight' || k === 'a' || k === 'A' || k === 'd' || k === 'D') held = 0;
+    if (k === 'ArrowUp' || k === 'ArrowDown' || k === 'w' || k === 'W' || k === 's' || k === 'S') heldY = 0;
+  });
 
   // ---------- Loop ----------
   let last = 0;
@@ -920,7 +1041,8 @@
     const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now;
     runTime += dt;
-    if (held) world.movePlayerBy(held * 1.6 * dt);
+    if (held || heldY) world.movePlayerBy(held * 1.6 * dt, heldY * 0.85 * dt);
+    updatePad(dt);
     world.update(dt);
     for (const ev of world.events) handleEvent(ev);
     world.events.length = 0;
