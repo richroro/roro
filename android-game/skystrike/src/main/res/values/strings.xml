@@ -25,4 +25,9 @@
     <string name="course_fast">Fast</string>
     <string name="control_pad">STEER</string>
     <string name="control_hint">drag any way</string>
+    <string name="combo_label">CHAIN</string>
+    <string name="combo_lost">chain lost</string>
+    <string name="rush_in">Formation inbound!</string>
+    <string name="boss_rage">ENRAGED</string>
+    <string name="best_chain">Best chain %1$d</string>
 </resources>

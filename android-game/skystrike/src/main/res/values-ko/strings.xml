@@ -25,4 +25,9 @@
     <string name="course_fast">고속</string>
     <string name="control_pad">조종</string>
     <string name="control_hint">상하좌우 끌기</string>
+    <string name="combo_label">연쇄</string>
+    <string name="combo_lost">연쇄 끊김</string>
+    <string name="rush_in">편대 돌입!</string>
+    <string name="boss_rage">분노</string>
+    <string name="best_chain">최고 연쇄 %1$d</string>
 </resources>

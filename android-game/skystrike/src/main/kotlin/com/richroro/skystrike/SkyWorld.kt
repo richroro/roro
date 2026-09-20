@@ -88,6 +88,16 @@ class SkyWorld(private val seed: Int = 1) {
             internal set
         internal var salvo = 0f
         internal var sweep = 0f
+        /**
+         * 0, 1, then 2. It sweeps harder and fires differently at each step, so the fight is three
+         * short fights rather than one long one.
+         */
+        var phase = 0
+            internal set
+        /** Non-zero for a moment after it steps up a phase; the view flashes it. */
+        var rage = 0f
+            internal set
+        internal var spin = 0f
         /** True once the last blast has gone off and the hull is no longer there to draw. */
         var finished = false
             internal set
@@ -110,7 +120,8 @@ class SkyWorld(private val seed: Int = 1) {
     ) {
         enum class Type {
             SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
-            BOSS_DOWN, BOSS_BREAK, KILL_BOSS,
+            BOSS_DOWN, BOSS_BREAK, KILL_BOSS, BOSS_PHASE,
+            COMBO_UP, COMBO_LOST, RUSH,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -173,6 +184,18 @@ class SkyWorld(private val seed: Int = 1) {
     var spread = 1
         private set
 
+    /**
+     * Kills land in chains: each one inside [COMBO_WINDOW] of the last extends it, and the chain
+     * multiplies what every kill is worth. Taking a hit drops it to nothing, so flying forward to
+     * keep the chain alive is the gamble the whole scoring system is built on.
+     */
+    var combo = 0
+        private set
+    var comboTimer = 0f
+        private set
+    var bestCombo = 0
+        private set
+
     /** Counts down while the player is briefly untouchable after a hit. */
     var mercy = 0f
         private set
@@ -204,6 +227,8 @@ class SkyWorld(private val seed: Int = 1) {
     private var nextWaveAt = 0f
     private var totalWaves = 0
     private var nextFlareAt = 0f
+    private var rushAt = 0
+    private var rushDone = false
 
     /** Moves queued events into [into] and clears the queue. */
     fun drainEvents(into: MutableList<Event>) {
@@ -235,10 +260,16 @@ class SkyWorld(private val seed: Int = 1) {
         spread = 1
         mercy = 0f
         flash = 0f
+        combo = 0
+        comboTimer = 0f
+        bestCombo = 0
+        rushDone = false
         fireAccumulator = 0f
         elapsed = 0f
         waveIndex = 0
         totalWaves = profile.waves
+        // one scripted surge halfway through, so the stage is not a metronome all the way down
+        rushAt = profile.waves / 2
         nextWaveAt = 0.8f
         gust = 0f
         nextFlareAt = FLARE_GAP
@@ -262,9 +293,7 @@ class SkyWorld(private val seed: Int = 1) {
         for (e in mutableEnemies) {
             if (!e.alive) continue
             e.alive = false
-            kills++
-            score += scoreFor(e.kind)
-            pendingEvents.add(Event(Event.Type.KILL_ENEMY, e.x, e.y, value = e.maxHp))
+            awardKill(e.kind, e.x, e.y)
         }
         for (s in mutableShots) if (!s.fromPlayer) s.alive = false
         boss?.let { b ->
@@ -285,6 +314,7 @@ class SkyWorld(private val seed: Int = 1) {
         rapidTimer = max(0f, rapidTimer - dt)
 
         updateHazard(dt)
+        updateCombo(dt)
         spawnWaves()
         updateEnemies(dt)
         updateBoss(dt)
@@ -328,11 +358,53 @@ class SkyWorld(private val seed: Int = 1) {
     private fun spawnWaves() {
         if (waveIndex >= totalWaves || elapsed < nextWaveAt) return
         val profile = profileOf(level)
+        // Halfway down the stage everything arrives at once: three formations of different
+        // kinds, a third faster, stacked back to back. It is the one place a chain can really
+        // run, and the one place the stage stops feeling like a metronome.
+        if (!rushDone && waveIndex >= rushAt) {
+            rushDone = true
+            for (i in 0 until RUSH_FORMATIONS) {
+                val kind = profile.mix[random.nextInt(profile.mix.size)]
+                val formation = profile.formations[random.nextInt(profile.formations.size)]
+                spawnFormation(
+                    profile = profile,
+                    kind = kind,
+                    formation = formation,
+                    n = 3 + random.nextInt(3),
+                    baseX = -0.5f + random.next() * 1.0f,
+                    speed = profile.speed * RUSH_SPEED,
+                    extraLead = i * RUSH_STACK,
+                )
+            }
+            waveIndex++
+            nextWaveAt = elapsed + WAVE_GAP * 1.6f
+            pendingEvents.add(Event(Event.Type.RUSH))
+            return
+        }
         val kind = profile.mix[random.nextInt(profile.mix.size)]
-        val n = 3 + random.nextInt(4)
-        val formation = profile.formations[random.nextInt(profile.formations.size)]
-        val baseX = -0.62f + random.next() * 1.24f
-        val speed = profile.speed * (0.85f + random.next() * 0.3f)
+        spawnFormation(
+            profile = profile,
+            kind = kind,
+            formation = profile.formations[random.nextInt(profile.formations.size)],
+            n = 3 + random.nextInt(4),
+            baseX = -0.62f + random.next() * 1.24f,
+            speed = profile.speed * (0.85f + random.next() * 0.3f),
+            extraLead = 0f,
+        )
+        waveIndex++
+        nextWaveAt = elapsed + WAVE_GAP * (0.8f + random.next() * 0.5f)
+    }
+
+    /** Lays one formation of [n] aircraft out along the top of the screen. */
+    private fun spawnFormation(
+        profile: Profile,
+        kind: Kind,
+        formation: Formation,
+        n: Int,
+        baseX: Float,
+        speed: Float,
+        extraLead: Float,
+    ) {
         val hpEach = 1 + (level - 1) / 3 + if (kind == Kind.GUNNER) 1 else 0
         for (i in 0 until n) {
             val t = if (n == 1) 0.5f else i / (n - 1).toFloat()
@@ -365,7 +437,7 @@ class SkyWorld(private val seed: Int = 1) {
             mutableEnemies.add(
                 Plane(
                     x = homeX,
-                    y = profile.entryY - lead,
+                    y = profile.entryY - lead - extraLead,
                     kind = kind,
                     hp = hpEach,
                     homeX = homeX,
@@ -374,8 +446,6 @@ class SkyWorld(private val seed: Int = 1) {
                 ),
             )
         }
-        waveIndex++
-        nextWaveAt = elapsed + WAVE_GAP * (0.8f + random.next() * 0.5f)
     }
 
     private fun updateEnemies(dt: Float) {
@@ -444,11 +514,13 @@ class SkyWorld(private val seed: Int = 1) {
             b.y = min(BOSS_STATION_Y, b.y + BOSS_ENTRY_SPEED * dt)
             if (b.y >= BOSS_STATION_Y - 1e-4f) b.engaged = true
         } else {
-            b.sweep += dt
-            b.x = sin(b.sweep * BOSS_SWEEP_RATE) * BOSS_SWEEP_X
+            b.rage = max(0f, b.rage - dt)
+            // each phase sweeps faster and wider, and leans on the salvo harder
+            b.sweep += dt * BOSS_PHASE_SWEEP[b.phase]
+            b.x = sin(b.sweep * BOSS_SWEEP_RATE) * BOSS_SWEEP_X * BOSS_PHASE_REACH[b.phase]
             b.salvo -= dt
             if (b.salvo <= 0f) {
-                b.salvo = (BOSS_SALVO_GAP - level * 0.03f).coerceAtLeast(0.45f)
+                b.salvo = ((BOSS_SALVO_GAP - level * 0.03f) * BOSS_PHASE_GAP[b.phase]).coerceAtLeast(0.32f)
                 fireBossSalvo(b)
             }
         }
@@ -457,6 +529,18 @@ class SkyWorld(private val seed: Int = 1) {
     }
 
     private fun fireBossSalvo(b: Boss) {
+        // Phase 2 turns the fan into a slow spiral, so the gap you slip through keeps moving.
+        if (b.phase >= 2) {
+            b.spin += BOSS_SPIN_STEP
+            for (i in 0 until BOSS_SPIRAL_ARMS) {
+                val ang = b.spin + i * (TAU / BOSS_SPIRAL_ARMS)
+                mutableShots.add(
+                    Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, abs(cos(ang)) * ENEMY_SHOT_SPEED, false),
+                )
+            }
+            pendingEvents.add(Event(Event.Type.ENEMY_SHOT, b.x, b.y))
+            return
+        }
         // A fan the player has to slip between, widening with the stage.
         val arms = 3 + (level - 1).coerceAtMost(4)
         for (i in 0 until arms) {
@@ -466,12 +550,36 @@ class SkyWorld(private val seed: Int = 1) {
                 Shot(b.x, b.y + 0.08f, sin(ang) * ENEMY_SHOT_SPEED, cos(ang) * ENEMY_SHOT_SPEED, false),
             )
         }
+        // From phase 1 it also picks you out of the fan and puts one straight at you.
+        if (b.phase >= 1) {
+            val dx = playerX - b.x
+            val dy = max(0.15f, playerY - b.y)
+            val len = kotlin.math.sqrt(dx * dx + dy * dy)
+            mutableShots.add(
+                Shot(b.x, b.y + 0.08f, dx / len * BOSS_AIMED_SPEED, dy / len * BOSS_AIMED_SPEED, false),
+            )
+        }
         pendingEvents.add(Event(Event.Type.ENEMY_SHOT, b.x, b.y))
     }
 
     private fun damageBoss(b: Boss, amount: Int) {
         b.hp = max(0, b.hp - amount)
-        if (b.hp > 0) return
+        if (b.hp > 0) {
+            // it changes its mind twice on the way down
+            val left = b.hp / max(1, b.maxHp).toFloat()
+            val want = when {
+                left <= BOSS_PHASE_3 -> 2
+                left <= BOSS_PHASE_2 -> 1
+                else -> 0
+            }
+            if (want > b.phase) {
+                b.phase = want
+                b.rage = BOSS_RAGE_SECONDS
+                b.salvo = max(b.salvo, BOSS_RAGE_SECONDS * 0.7f)   // one beat to read the change
+                pendingEvents.add(Event(Event.Type.BOSS_PHASE, b.x, b.y, value = b.phase))
+            }
+            return
+        }
         b.alive = false
         kills++
         score += BOSS_SCORE * level
@@ -543,6 +651,10 @@ class SkyWorld(private val seed: Int = 1) {
             pendingEvents.add(Event(Event.Type.SHIELD_USED, x, y))
             return
         }
+        // the chain is the price of being hit, and it hurts more than the hit point does
+        if (combo >= COMBO_STEP) pendingEvents.add(Event(Event.Type.COMBO_LOST, x, y, value = combo))
+        combo = 0
+        comboTimer = 0f
         hp -= amount
         flash = FLASH_SECONDS
         mercy = MERCY_SECONDS
@@ -575,9 +687,7 @@ class SkyWorld(private val seed: Int = 1) {
                         spent = true
                         if (e.hp <= 0) {
                             e.alive = false
-                            kills++
-                            score += scoreFor(e.kind)
-                            pendingEvents.add(Event(Event.Type.KILL_ENEMY, e.x, e.y, value = e.maxHp))
+                            awardKill(e.kind, e.x, e.y)
                             maybeDropItem(e.x, e.y)
                         } else {
                             pendingEvents.add(Event(Event.Type.HIT_ENEMY, s.x, s.y))
@@ -662,6 +772,33 @@ class SkyWorld(private val seed: Int = 1) {
         }
     }
 
+    /** What a kill is worth right now: one more step of the chain for every [COMBO_STEP] kills. */
+    fun comboMultiplier(): Int = (1 + combo / COMBO_STEP).coerceAtMost(MAX_COMBO_MULT)
+
+    /** Banks a kill, extends the chain, and pays out at the chain's rate. */
+    private fun awardKill(kind: Kind, x: Float, y: Float) {
+        kills++
+        combo++
+        comboTimer = COMBO_WINDOW
+        bestCombo = max(bestCombo, combo)
+        val mult = comboMultiplier()
+        score += scoreFor(kind) * mult
+        pendingEvents.add(Event(Event.Type.KILL_ENEMY, x, y, value = mult))
+        // the chain announces itself only when it actually steps up
+        if (combo % COMBO_STEP == 0 && mult <= MAX_COMBO_MULT) {
+            pendingEvents.add(Event(Event.Type.COMBO_UP, x, y, value = mult))
+        }
+    }
+
+    private fun updateCombo(dt: Float) {
+        if (combo == 0) return
+        comboTimer = max(0f, comboTimer - dt)
+        if (comboTimer > 0f) return
+        val lost = combo
+        combo = 0
+        if (lost >= COMBO_STEP) pendingEvents.add(Event(Event.Type.COMBO_LOST, playerX, playerY, value = lost))
+    }
+
     private fun scoreFor(kind: Kind): Int = when (kind) {
         Kind.DRONE -> 10
         Kind.WEAVER -> 15
@@ -717,6 +854,19 @@ class SkyWorld(private val seed: Int = 1) {
         boss = Boss(0, hp).also { it.y = BOSS_STATION_Y; it.engaged = true }
     }
 
+    internal fun forceBossPhaseForTest(phase: Int) {
+        boss?.phase = phase
+    }
+
+    /** Empty sky: no waves left to come, no raider either, so a test owns what is in the air. */
+    internal fun soloModeForTest() {
+        mutableEnemies.clear()
+        mutableShots.clear()
+        waveIndex = 0
+        rushDone = true
+        nextWaveAt = Float.MAX_VALUE
+    }
+
     internal fun clearWavesForTest() {
         waveIndex = totalWaves
         mutableEnemies.clear()
@@ -768,6 +918,14 @@ class SkyWorld(private val seed: Int = 1) {
         const val ENEMY_SHOT_SPEED = 0.72f
 
         const val WAVE_GAP = 2.1f
+        /** The chain: every [COMBO_STEP] kills inside the window is one more step of multiplier. */
+        const val COMBO_WINDOW = 2.3f
+        const val COMBO_STEP = 3
+        const val MAX_COMBO_MULT = 8
+        /** The surge halfway down the stage. */
+        const val RUSH_FORMATIONS = 3
+        const val RUSH_SPEED = 1.35f
+        const val RUSH_STACK = 0.46f
         const val ITEM_CHANCE = 0.13f
         const val ITEM_FALL_SPEED = 0.26f
         const val ITEM_SCORE = 30
@@ -787,6 +945,16 @@ class SkyWorld(private val seed: Int = 1) {
         const val BOSS_DRIFT = 0.075f          // sideways, away from the middle
         const val BOSS_ROLL = 0.34f            // turns per second
         const val BOSS_ENTRY_SPEED = 0.22f
+        /** Where the raider changes its mind, as a fraction of its health. */
+        const val BOSS_PHASE_2 = 0.62f
+        const val BOSS_PHASE_3 = 0.30f
+        const val BOSS_RAGE_SECONDS = 0.9f
+        val BOSS_PHASE_SWEEP = floatArrayOf(1f, 1.45f, 1.9f)
+        val BOSS_PHASE_REACH = floatArrayOf(1f, 1.08f, 1.15f)
+        val BOSS_PHASE_GAP = floatArrayOf(1f, 0.74f, 0.56f)
+        const val BOSS_AIMED_SPEED = 0.95f
+        const val BOSS_SPIRAL_ARMS = 5
+        const val BOSS_SPIN_STEP = 0.7f
         const val BOSS_SWEEP_RATE = 0.9f
         const val BOSS_SWEEP_X = 0.5f
         const val BOSS_SALVO_GAP = 1.15f

@@ -483,4 +483,189 @@ class SkyWorldTest {
         assertEquals("a won fight cannot be lost", 1, w.hp)
         assertTrue(w.state == SkyWorld.State.RUNNING || w.state == SkyWorld.State.LEVEL_CLEAR)
     }
+
+    // ---- chains, surges, and a raider that changes its mind -------------------------------------
+
+    /** Drops [n] enemies right on the player's guns, one after another, and returns the events. */
+    private fun chainKills(w: SkyWorld, n: Int, gapFrames: Int = 6): List<SkyWorld.Event> {
+        val log = ArrayList<SkyWorld.Event>()
+        w.soloModeForTest()
+        repeat(n) {
+            w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY - 0.25f, hp = 1)
+            var frames = 0
+            while (frames++ < 120 && w.enemies.any { it.alive }) {
+                w.update(1f / 60f)
+                w.drainEvents(log)
+            }
+            repeat(gapFrames) { w.update(1f / 60f); w.drainEvents(log) }
+        }
+        return log
+    }
+
+    @Test
+    fun `kills land in chains that multiply what they are worth`() {
+        val w = running()
+        assertEquals("a fresh stage starts with no chain", 0, w.combo)
+        assertEquals(1, w.comboMultiplier())
+        chainKills(w, SkyWorld.COMBO_STEP)
+        assertEquals(SkyWorld.COMBO_STEP, w.combo)
+        assertEquals("three in a row should be worth double", 2, w.comboMultiplier())
+        chainKills(w, SkyWorld.COMBO_STEP)
+        assertEquals(3, w.comboMultiplier())
+    }
+
+    @Test
+    fun `a chained kill pays more than the same kill cold`() {
+        val cold = running(seed = 3)
+        chainKills(cold, 1)
+        val single = cold.score
+
+        val hot = running(seed = 3)
+        chainKills(hot, SkyWorld.COMBO_STEP * 2 + 1)
+        assertTrue("the chain should be paying by now", hot.comboMultiplier() >= 3)
+        assertTrue(
+            "a chain of ${'$'}{hot.combo} paid ${'$'}{hot.score} for ${'$'}{hot.combo} kills, flat would be ${'$'}{single * hot.combo}",
+            hot.score > single * hot.combo,
+        )
+    }
+
+    @Test
+    fun `the chain never pays past its ceiling`() {
+        val w = running()
+        chainKills(w, SkyWorld.COMBO_STEP * (SkyWorld.MAX_COMBO_MULT + 3))
+        assertEquals(SkyWorld.MAX_COMBO_MULT, w.comboMultiplier())
+    }
+
+    @Test
+    fun `letting the window lapse drops the chain`() {
+        val w = running()
+        chainKills(w, SkyWorld.COMBO_STEP)
+        assertTrue(w.combo > 0)
+        repeat((SkyWorld.COMBO_WINDOW * 60).toInt() + 10) { w.update(1f / 60f) }
+        assertEquals("the chain should have run out", 0, w.combo)
+        assertEquals(1, w.comboMultiplier())
+    }
+
+    @Test
+    fun `taking a hit costs you the chain`() {
+        val w = running()
+        chainKills(w, SkyWorld.COMBO_STEP)
+        val held = w.combo
+        assertTrue(held > 0)
+        w.setForTest(mercy = 0f)
+        w.addEnemyShotForTest(x = w.playerX, y = w.playerY - 0.01f)
+        w.update(1f / 60f)
+        assertEquals(SkyWorld.MAX_HP - 1, w.hp)
+        assertEquals("a hit should cost the whole chain", 0, w.combo)
+        assertEquals("but the run remembers how far you got", held, w.bestCombo)
+    }
+
+    @Test
+    fun `every stage sends one surge partway down`() {
+        val w = running(seed = 11)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        // fly it out far enough to pass the halfway mark, shooting nothing
+        while (frames++ < 60 * 90 && w.state == SkyWorld.State.RUNNING && w.boss == null) {
+            w.update(1f / 60f)
+            w.enemies.forEach { it.y = -0.5f }          // park them so nothing rams the player
+            w.drainEvents(log)
+        }
+        assertEquals("exactly one surge per stage", 1, log.count { it.type == SkyWorld.Event.Type.RUSH })
+    }
+
+    @Test
+    fun `the surge arrives thicker than an ordinary wave`() {
+        val w = running(seed = 4)
+        var ordinary = 0
+        var surge = 0
+        var before = 0
+        var frames = 0
+        while (frames++ < 60 * 90 && w.boss == null) {
+            val was = w.enemies.size
+            w.update(1f / 60f)
+            val added = w.enemies.size - was
+            val log = ArrayList<SkyWorld.Event>()
+            w.drainEvents(log)
+            if (log.any { it.type == SkyWorld.Event.Type.RUSH }) surge = added else if (added > 0) {
+                ordinary = maxOf(ordinary, added)
+                before++
+            }
+            w.enemies.forEach { it.y = -0.5f }
+        }
+        assertTrue("there should have been ordinary waves first, saw ${'$'}before", before > 0)
+        assertTrue("the surge (${'$'}surge) should beat the biggest ordinary wave (${'$'}ordinary)", surge > ordinary)
+    }
+
+    @Test
+    fun `the raider changes its mind twice on the way down`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 300)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        while (frames++ < 60 * 180 && w.boss?.alive == true) {
+            w.update(1f / 60f)
+            // stay under it, or the sweep carries it out of your guns and nothing lands
+            w.boss?.let { w.movePlayerBy(((it.x - w.playerX) * 0.25f).coerceIn(-0.03f, 0.03f)) }
+            w.setForTest(hp = SkyWorld.MAX_HP, mercy = 0f)
+            w.drainEvents(log)
+        }
+        val phases = log.filter { it.type == SkyWorld.Event.Type.BOSS_PHASE }.map { it.value }
+        assertEquals("two steps, in order", listOf(1, 2), phases)
+    }
+
+    @Test
+    fun `each raider phase leans on you harder than the last`() {
+        fun salvoGap(phase: Int): Float {
+            val w = running()
+            w.clearWavesForTest()
+            w.forceBossForTest(hp = 100000)
+            w.forceBossPhaseForTest(phase)
+            var fired = 0
+            var frames = 0
+            var first = -1
+            while (frames++ < 60 * 20 && fired < 4) {
+                w.update(1f / 60f)
+                val log = ArrayList<SkyWorld.Event>()
+                w.drainEvents(log)
+                if (log.any { it.type == SkyWorld.Event.Type.ENEMY_SHOT }) {
+                    if (first < 0) first = frames
+                    fired++
+                }
+            }
+            return (frames - first) / 60f / 3f
+        }
+        val p0 = salvoGap(0)
+        val p1 = salvoGap(1)
+        val p2 = salvoGap(2)
+        assertTrue("phase 1 should fire faster than phase 0 (${'$'}p1 vs ${'$'}p0)", p1 < p0)
+        assertTrue("phase 2 should fire faster than phase 1 (${'$'}p2 vs ${'$'}p1)", p2 < p1)
+    }
+
+    @Test
+    fun `the raider aims at you once it is angry, and never before`() {
+        // an aimed shot travels at BOSS_AIMED_SPEED, faster than anything in the fan
+        fun aimedShots(phase: Int): Int {
+            val w = running()
+            w.clearWavesForTest()
+            w.forceBossForTest(hp = 100000)
+            w.forceBossPhaseForTest(phase)
+            repeat(40) { w.movePlayerBy(0.05f) }        // stand well off to one side
+            var frames = 0
+            var aimed = 0
+            while (frames++ < 60 * 6) {
+                w.update(1f / 60f)
+                w.setForTest(hp = SkyWorld.MAX_HP, mercy = 0f)
+                aimed += w.shots.count {
+                    !it.fromPlayer &&
+                        it.vx * it.vx + it.vy * it.vy >
+                        SkyWorld.ENEMY_SHOT_SPEED * SkyWorld.ENEMY_SHOT_SPEED * 1.2f
+                }
+            }
+            return aimed
+        }
+        assertEquals("a calm raider only throws its fan", 0, aimedShots(0))
+        assertTrue("an angry one picks you out of it", aimedShots(1) > 0)
+    }
 }
