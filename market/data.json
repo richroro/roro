@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T20:10:44.600981+09:00",
+  "updatedAt": "2026-09-21T00:56:55.443283+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1385.0,
-      "change": 5.05,
-      "changePercent": 0.37,
+      "price": 1385.95,
+      "change": 6.0,
+      "changePercent": 0.43,
       "currency": "KRW"
     }
   ],
@@ -112,7 +112,25 @@
   ],
   "news": [
     {
-      "title": "\"한국 오면 '때 타올'부터\"…외국인 하루 3만명 찾는 '이곳'",
+      "title": "석유유통협회 \"고속도로 주유소 100원 할인, 공정경쟁 흔들어\"",
+      "link": "https://www.yna.co.kr/view/AKR20260920037700003",
+      "pubDate": "Mon, 21 Sep 2026 00:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "“삼전닉스 추격한다”…CXMT, D램 미세공정 한단계 도약",
+      "link": "https://www.hankyung.com/article/202609206464i",
+      "pubDate": "Sun, 20 Sep 2026 20:02:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"집·차는 못 사도 이건 산다\"…'뜻밖의 소비'에 빠진 2030 [김기자의 알고리즘]",
+      "link": "https://www.hankyung.com/article/202609183185H",
+      "pubDate": "Sun, 20 Sep 2026 19:29:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"이걸 왜 사가요?\"…외국인들 쇼핑 목록 보니 '대반전'",
       "link": "https://www.hankyung.com/article/2026092063581",
       "pubDate": "Sun, 20 Sep 2026 18:24:41 +0900",
       "source": "한국경제"
@@ -157,18 +175,6 @@
       "title": "도심 속 소음을 지우는 마법…100명이 빠진 '싱잉볼 명상'",
       "link": "https://www.hankyung.com/article/2026092063431",
       "pubDate": "Sun, 20 Sep 2026 18:18:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "유튜브 890만뷰 'SNS 스타'도 공연 \"젊음의 열기 느껴져 행복\"",
-      "link": "https://www.hankyung.com/article/2026092063951",
-      "pubDate": "Sun, 20 Sep 2026 18:17:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"세습 없다\"던 버핏, 벅셔 회장직 아들에 넘겼다",
-      "link": "https://www.hankyung.com/article/2026092063921",
-      "pubDate": "Sun, 20 Sep 2026 18:15:00 +0900",
       "source": "한국경제"
     },
     {
@@ -223,12 +229,6 @@
       "title": "며느리는 '동거주택 상속공제' 못받던 옛 상증세법…헌재 \"합헌\"",
       "link": "https://www.yna.co.kr/view/AKR20260919037300004",
       "pubDate": "Sun, 20 Sep 2026 12:00:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "반도체 제조업서 법 위반 338건 적발…SK하이닉스 청주캠 119건",
-      "link": "https://www.yna.co.kr/view/AKR20260918158700530",
-      "pubDate": "Sun, 20 Sep 2026 12:00:10 +0900",
       "source": "연합뉴스"
     }
   ]
