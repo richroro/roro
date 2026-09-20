@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-19T22:56:58.409398+09:00",
+ "updatedAt": "2026-09-20T09:10:13.306870+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2077,7 +2077,7 @@
     "forwardPer": 35.06,
     "pbr": 45.67,
     "psr": 10.51,
-    "peg": 2.67,
+    "peg": 2.7,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 4905541566464,
@@ -2234,7 +2234,7 @@
     "forwardPer": 20.93,
     "pbr": 8.29,
     "psr": 11.05,
-    "peg": 1.59,
+    "peg": 1.6,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3666585845760,
@@ -2391,7 +2391,7 @@
     "forwardPer": 23.53,
     "pbr": 6.87,
     "psr": 9.59,
-    "peg": 1.23,
+    "peg": 1.27,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4274851676160,
@@ -2515,7 +2515,7 @@
     "forwardPer": 24.45,
     "pbr": 4.96,
     "psr": 3.53,
-    "peg": 1.44,
+    "peg": 1.51,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2736595664896,
@@ -2621,7 +2621,7 @@
     "forwardPer": 14.17,
     "pbr": 23.44,
     "psr": 17.72,
-    "peg": 0.45,
+    "peg": 0.47,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 5367153557504,
@@ -2884,7 +2884,7 @@
     "forwardPer": 22.24,
     "pbr": 7.65,
     "psr": 6.64,
-    "peg": 2.8,
+    "peg": 2.83,
     "roe": 25.74,
     "margin": 21.48,
     "marketCap": 650648485888,
@@ -3041,7 +3041,7 @@
     "forwardPer": 19.78,
     "pbr": 6.38,
     "psr": 3.91,
-    "peg": 3.76,
+    "peg": 3.75,
     "roe": 30.29,
     "margin": 18.44,
     "marketCap": 340016005120,
@@ -3198,7 +3198,7 @@
     "forwardPer": 25.03,
     "pbr": 10.5,
     "psr": 7.57,
-    "peg": 3.99,
+    "peg": 4.01,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 379699953664,
@@ -3355,7 +3355,7 @@
     "forwardPer": 14.46,
     "pbr": 8.02,
     "psr": 1.83,
-    "peg": 1.38,
+    "peg": 1.33,
     "roe": 51.51,
     "margin": 10.79,
     "marketCap": 177238507520,
@@ -3511,7 +3511,7 @@
     "per": 20.17,
     "forwardPer": 17.76,
     "psr": 6.34,
-    "peg": 2.15,
+    "peg": 2.14,
     "margin": 31.72,
     "marketCap": 175664939008,
     "beta": 0.41,
@@ -3824,7 +3824,7 @@
     "forwardPer": 13.99,
     "pbr": 2.63,
     "psr": 4.99,
-    "peg": 1.62,
+    "peg": 1.63,
     "roe": 17.79,
     "margin": 34.92,
     "marketCap": 929488044032,
@@ -4134,7 +4134,7 @@
     "position": 61.3
    },
    "valuation": {
-    "forwardPer": 3.7,
+    "forwardPer": 3.71,
     "psr": 3.53,
     "peg": 0.12,
     "roe": 30.79,
@@ -4291,7 +4291,7 @@
    "valuation": {
     "forwardPer": 3.96,
     "psr": 6.97,
-    "peg": 0.19,
+    "peg": 0.2,
     "roe": 92.68,
     "margin": 85.62,
     "marketCap": 1318200625070080,
@@ -5207,7 +5207,7 @@
     "position": 22.8
    },
    "valuation": {
-    "forwardPer": 10.8,
+    "forwardPer": 10.77,
     "psr": 0.34,
     "peg": 0.9,
     "roe": 2.21,
@@ -5970,7 +5970,7 @@
     "position": 42.9
    },
    "valuation": {
-    "forwardPer": 14.05,
+    "forwardPer": 13.93,
     "psr": 1.11,
     "peg": 0.45,
     "roe": 5.19,
@@ -6255,6 +6255,54 @@
  ],
  "news": [
   {
+   "title": "“호르무즈 막히자 수익률 치솟았다”…요즘 ETF 시장은 원유·농산물이 접수 [원자재로 살아남기]",
+   "link": "https://www.mk.co.kr/news/stock/12157282",
+   "pubDate": "Sun, 20 Sep 2026 08:55:48 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "유가 완화돼도 채권시장 단기금리 상승 부담 여전",
+   "link": "https://www.yna.co.kr/view/AKR20260919022200008",
+   "pubDate": "Sun, 20 Sep 2026 06:30:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "[마켓인사이트] 미중회담 빅이벤트·추석연휴…韓증시 어디로",
+   "link": "https://www.yna.co.kr/view/AKR20260918189100008",
+   "pubDate": "Sun, 20 Sep 2026 06:00:06 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "미국 국채금리 급등에 대미투자 '상업적 합리성' 막판 변수",
+   "link": "https://www.yna.co.kr/view/AKR20260919051000003",
+   "pubDate": "Sun, 20 Sep 2026 05:57:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "조달금리 올랐지만 카드론 금리 동결…\"중금리대출 영향\"",
+   "link": "https://www.yna.co.kr/view/AKR20260919051600002",
+   "pubDate": "Sun, 20 Sep 2026 05:57:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "주요국 금리인상에 기업 경영전략 '빨간불'…조달비용 커진다",
+   "link": "https://www.yna.co.kr/view/AKR20260918147200003",
+   "pubDate": "Sun, 20 Sep 2026 05:55:11 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "고금리에 깊어진 양극화…저신용 자영업 연체율 5년새 4∼5배로",
+   "link": "https://www.yna.co.kr/view/AKR20260919036700002",
+   "pubDate": "Sun, 20 Sep 2026 05:45:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "\"아파트 철거후 4년째 첫 삽도 못 떴다\" 수원 영통 재건축 장기표류 원인?",
+   "link": "https://www.chosun.com/economy/realty/redevelop/2026/09/20/GM4DSZJVGFSDINJWMRRDIMDFMM/",
+   "pubDate": "Sat, 19 Sep 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "하반기 나스닥 데뷔 목표 앤트로픽…몸값 2700조원 넘본다",
    "link": "https://www.mk.co.kr/news/stock/12157141",
    "pubDate": "Sat, 19 Sep 2026 17:34:12 +09:00",
@@ -6297,40 +6345,10 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "일본은행, 3개월만에 또 금리인상…1.25%로 31년만에 최고(종합2보)",
-   "link": "https://www.yna.co.kr/view/AKR20260918089052073",
-   "pubDate": "Fri, 18 Sep 2026 17:33:55 +0900",
-   "source": "연합뉴스"
-  },
-  {
    "title": "이억원 “증시 장기자금 확충”…레버리지 관리·투자자 보호 재강조",
    "link": "https://www.mk.co.kr/news/stock/12156653",
    "pubDate": "Fri, 18 Sep 2026 17:26:55 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "'SK그룹 상장사 투자' 등 ETF 4종 22일 신규 상장",
-   "link": "https://www.yna.co.kr/view/AKR20260918156800008",
-   "pubDate": "Fri, 18 Sep 2026 17:07:36 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "日 기준금리 인상에도 국고채 금리 일제히↓…유가 하락 등 영향(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20260918153551008",
-   "pubDate": "Fri, 18 Sep 2026 17:05:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…3년물 연 4.035%",
-   "link": "https://www.yna.co.kr/view/AKR20260918153500008",
-   "pubDate": "Fri, 18 Sep 2026 16:45:03 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "화성시, 장기미집행시설 정비 용역 추진…GB 해제된 2.56㎢ 대상",
-   "link": "https://www.yna.co.kr/view/AKR20260918146700061",
-   "pubDate": "Fri, 18 Sep 2026 16:18:43 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "외국인·기관 동반 매수에 코스피 2.66% 상승…지수 상승 이끈 삼전닉스",
@@ -6339,33 +6357,9 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "파병·대미투자 외교안보 난제 앞 고민 드러낸 李대통령",
-   "link": "https://www.yna.co.kr/view/AKR20260918132000001",
-   "pubDate": "Fri, 18 Sep 2026 15:47:36 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "정읍 첨단산단에 AI·친환경 비료 기업 '둥지'…31억 투자",
-   "link": "https://www.yna.co.kr/view/AKR20260918129000055",
-   "pubDate": "Fri, 18 Sep 2026 15:46:10 +0900",
-   "source": "연합뉴스"
-  },
-  {
    "title": "日도 금리 올렸다, 글로벌 긴축 확산",
    "link": "https://www.chosun.com/economy/economy_general/2026/09/19/P4FWD7EBVFAE7H6FT34YXEXTKE/",
    "pubDate": "Fri, 18 Sep 2026 15:39:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[특징주] 삼성전기, 3분기 실적 개선 기대감 등에 4% 상승 마감(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20260918047851008",
-   "pubDate": "Fri, 18 Sep 2026 15:37:31 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "금리 인상 페달 밟는 日… 집 나갔던 360조엔 돌아가나",
-   "link": "https://www.chosun.com/economy/economy_general/2026/09/19/46MCKNXUUNBIRCOUORD3ZNIANA/",
-   "pubDate": "Fri, 18 Sep 2026 15:34:00 +0000",
    "source": "조선일보"
   },
   {
@@ -6396,6 +6390,12 @@
    "title": "대주주는 전량 매각, 개미는 안분비례…“차라리 입법 말라”",
    "link": "https://www.mk.co.kr/news/stock/12156147",
    "pubDate": "Fri, 18 Sep 2026 09:37:49 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "미국 뉴욕증시 반등에…코스피도 2%대 상승 출발, 6800선 회복",
+   "link": "https://www.mk.co.kr/news/stock/12156144",
+   "pubDate": "Fri, 18 Sep 2026 09:35:46 +09:00",
    "source": "매일경제 증권"
   }
  ]
