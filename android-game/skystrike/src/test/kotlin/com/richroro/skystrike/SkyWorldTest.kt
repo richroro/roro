@@ -386,4 +386,101 @@ class SkyWorldTest {
         }
         assertTrue("a gunner above the band should still be able to fire on you", fired)
     }
+
+    // ---- the raider going down ----------------------------------------------------------------
+
+    /** Shoots the stationed raider down and returns every event the run produced. */
+    private fun downTheRaider(w: SkyWorld, seconds: Float = 0f): List<SkyWorld.Event> {
+        val log = ArrayList<SkyWorld.Event>()
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 1)
+        var frames = 0
+        while (frames++ < 600 && w.boss?.alive == true) {
+            w.update(1f / 60f)
+            w.drainEvents(log)
+        }
+        assertTrue("the raider should have been shot down", w.boss?.alive == false)
+        repeat((seconds * 60f).toInt()) { w.update(1f / 60f); w.drainEvents(log) }
+        return log
+    }
+
+    @Test
+    fun `killing the raider does not end the stage on the same frame`() {
+        val w = running()
+        downTheRaider(w)
+        assertEquals("the clear panel must wait for the wreck", SkyWorld.State.RUNNING, w.state)
+        assertTrue("the wreck should be coming apart", (w.boss?.dying ?: 0f) > 0f)
+    }
+
+    @Test
+    fun `the wreck falls and rolls instead of vanishing`() {
+        val w = running()
+        downTheRaider(w)
+        val b = w.boss!!
+        val y0 = b.y
+        val roll0 = b.roll
+        repeat(30) { w.update(1f / 60f) }
+        assertTrue("it should be falling, ${'$'}y0 -> ${'$'}{b.y}", b.y > y0)
+        assertTrue("it should be rolling over", b.roll > roll0)
+    }
+
+    @Test
+    fun `the hull comes apart in a run of blasts before the last one`() {
+        val w = running()
+        val log = downTheRaider(w, seconds = SkyWorld.BOSS_DEATH_SECONDS + 0.5f)
+        val downs = log.count { it.type == SkyWorld.Event.Type.BOSS_DOWN }
+        val breaks = log.count { it.type == SkyWorld.Event.Type.BOSS_BREAK }
+        val finale = log.count { it.type == SkyWorld.Event.Type.KILL_BOSS }
+        assertEquals("the kill should announce itself once", 1, downs)
+        assertEquals("every blast in the run should fire", SkyWorld.BOSS_BREAKS, breaks)
+        assertEquals("and exactly one of them is the last", 1, finale)
+        val order = log.filter {
+            it.type == SkyWorld.Event.Type.BOSS_DOWN || it.type == SkyWorld.Event.Type.KILL_BOSS
+        }
+        assertEquals(SkyWorld.Event.Type.BOSS_DOWN, order.first().type)
+        assertEquals("the finale comes last", SkyWorld.Event.Type.KILL_BOSS, order.last().type)
+    }
+
+    @Test
+    fun `the blasts walk along the hull rather than piling up in one place`() {
+        val w = running()
+        val log = downTheRaider(w, seconds = SkyWorld.BOSS_DEATH_SECONDS + 0.5f)
+        val spots = log.filter { it.type == SkyWorld.Event.Type.BOSS_BREAK }.map { it.x to it.y }
+        assertEquals(SkyWorld.BOSS_BREAKS, spots.size)
+        assertEquals("no two blasts should land on the same spot", spots.size, spots.toSet().size)
+    }
+
+    @Test
+    fun `the stage clears once the wreck is gone`() {
+        val w = running()
+        downTheRaider(w, seconds = SkyWorld.BOSS_DEATH_SECONDS + 0.5f)
+        assertEquals(SkyWorld.State.LEVEL_CLEAR, w.state)
+        assertEquals(0f, w.boss?.dying ?: 0f, 1e-4f)
+    }
+
+    @Test
+    fun `the raider going down clears the sky it filled`() {
+        val w = running()
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 1)
+        w.addEnemyShotForTest(x = 0.3f, y = 0.4f)
+        w.addEnemyShotForTest(x = -0.2f, y = 0.3f)
+        var frames = 0
+        while (frames++ < 600 && w.boss?.alive == true) w.update(1f / 60f)
+        assertTrue("no enemy fire should still be live", w.shots.none { !it.fromPlayer && it.alive })
+        w.update(1f / 60f)
+        assertTrue("and it should be reaped on the next frame", w.shots.none { !it.fromPlayer })
+    }
+
+    @Test
+    fun `nothing can take the stage back once the raider is down`() {
+        val w = running()
+        downTheRaider(w)
+        w.setForTest(hp = 1, mercy = 0f)
+        // a straggler flies straight through you during the fireworks
+        w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY)
+        repeat(20) { w.update(1f / 60f) }
+        assertEquals("a won fight cannot be lost", 1, w.hp)
+        assertTrue(w.state == SkyWorld.State.RUNNING || w.state == SkyWorld.State.LEVEL_CLEAR)
+    }
 }

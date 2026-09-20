@@ -77,8 +77,23 @@ class SkyWorld(private val seed: Int = 1) {
             internal set
         var bank = 0f
             internal set
+        /**
+         * Counts down while the hull comes apart. The stage does not end until it reaches zero,
+         * so a kill is a thing you watch rather than a switch that flips the panel up.
+         */
+        var dying = 0f
+            internal set
+        /** How far the wreck has rolled over, in turns, once it stops flying. */
+        var roll = 0f
+            internal set
         internal var salvo = 0f
         internal var sweep = 0f
+        /** True once the last blast has gone off and the hull is no longer there to draw. */
+        var finished = false
+            internal set
+        internal var driftX = 0f
+        internal var nextBreakAt = 0f
+        internal var breaks = 0
     }
 
     class Item(var x: Float, var y: Float, val kind: ItemKind) {
@@ -94,7 +109,8 @@ class SkyWorld(private val seed: Int = 1) {
         val item: ItemKind? = null,
     ) {
         enum class Type {
-            SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS, KILL_BOSS,
+            SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
+            BOSS_DOWN, BOSS_BREAK, KILL_BOSS,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -419,7 +435,10 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun updateBoss(dt: Float) {
         val b = boss ?: return
-        if (!b.alive) return
+        if (!b.alive) {
+            updateWreck(b, dt)
+            return
+        }
         val lastX = b.x
         if (!b.engaged) {
             b.y = min(BOSS_STATION_Y, b.y + BOSS_ENTRY_SPEED * dt)
@@ -452,10 +471,44 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun damageBoss(b: Boss, amount: Int) {
         b.hp = max(0, b.hp - amount)
-        if (b.hp == 0) {
-            b.alive = false
-            kills++
-            score += BOSS_SCORE * level
+        if (b.hp > 0) return
+        b.alive = false
+        kills++
+        score += BOSS_SCORE * level
+        // it stops flying here: nose over, roll, and slide out of its own wake
+        b.dying = BOSS_DEATH_SECONDS
+        b.driftX = if (b.x >= 0f) -BOSS_DRIFT else BOSS_DRIFT
+        b.nextBreakAt = BOSS_DEATH_SECONDS - BOSS_BREAK_GAP * 0.35f
+        b.breaks = 0
+        b.finished = false
+        // the sky clears with it: nothing already in the air may still kill you now
+        for (s in mutableShots) if (!s.fromPlayer) s.alive = false
+        pendingEvents.add(Event(Event.Type.BOSS_DOWN, b.x, b.y, value = b.kind))
+    }
+
+    /**
+     * The wreck. It falls, rolls, and lets go of a run of explosions that walk along the hull
+     * rather than piling up in one place, and only then does the stage end.
+     */
+    private fun updateWreck(b: Boss, dt: Float) {
+        if (b.dying <= 0f) return
+        b.dying = max(0f, b.dying - dt)
+        b.y += BOSS_SINK * dt
+        b.x += b.driftX * dt
+        b.roll += BOSS_ROLL * dt
+        while (b.breaks < BOSS_BREAKS && b.dying <= b.nextBreakAt) {
+            b.breaks++
+            b.nextBreakAt -= BOSS_BREAK_GAP
+            val ox = (random.next() - 0.5f) * BOSS_HALF * 1.6f
+            val oy = (random.next() - 0.5f) * BOSS_HALF * 0.9f
+            // value carries how far along the run this one is, so the fireworks grow
+            val t = (b.breaks * 100) / BOSS_BREAKS
+            pendingEvents.add(Event(Event.Type.BOSS_BREAK, b.x + ox, b.y + oy, value = t))
+        }
+        // The last blast takes the hull with it, and then the sky gets a beat to itself before
+        // the clear panel comes up -- otherwise the finale is a frame long and you miss it.
+        if (b.dying <= BOSS_AFTERGLOW && !b.finished) {
+            b.finished = true
             pendingEvents.add(Event(Event.Type.KILL_BOSS, b.x, b.y, value = b.kind))
         }
     }
@@ -482,6 +535,8 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun hurtPlayer(amount: Int, x: Float, y: Float) {
         if (mercy > 0f) return
+        // while the raider is coming apart the stage is over; nothing left flying may take it back
+        boss?.let { if (!it.alive && it.dying > 0f) return }
         if (shield) {
             shield = false
             mercy = MERCY_SECONDS
@@ -599,6 +654,7 @@ class SkyWorld(private val seed: Int = 1) {
             return
         }
         if (!b.alive) {
+            if (b.dying > 0f) return
             state = State.LEVEL_CLEAR
             bestLevel = max(bestLevel, level)
             score += CLEAR_BONUS * level
@@ -721,6 +777,15 @@ class SkyWorld(private val seed: Int = 1) {
         const val BOSS_KINDS = 4
         const val BOSS_BASE_HP = 70f
         const val BOSS_STATION_Y = 0.2f
+        /** How long the hull takes to come apart before the clear panel is allowed up. */
+        const val BOSS_DEATH_SECONDS = 2.6f
+        const val BOSS_BREAKS = 11
+        const val BOSS_BREAK_GAP = 0.16f
+        /** The tail of the sequence: the hull is gone, the debris is still in the air. */
+        const val BOSS_AFTERGLOW = 0.8f
+        const val BOSS_SINK = 0.085f           // screen heights per second, falling
+        const val BOSS_DRIFT = 0.075f          // sideways, away from the middle
+        const val BOSS_ROLL = 0.34f            // turns per second
         const val BOSS_ENTRY_SPEED = 0.22f
         const val BOSS_SWEEP_RATE = 0.9f
         const val BOSS_SWEEP_X = 0.5f

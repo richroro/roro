@@ -54,6 +54,8 @@
     CLEAR_BONUS: 250, BOSS_SCORE: 500,
     BOSS_KINDS: 4, BOSS_BASE_HP: 70, BOSS_STATION_Y: 0.2, BOSS_ENTRY_SPEED: 0.22,
     BOSS_SWEEP_RATE: 0.9, BOSS_SWEEP_X: 0.5, BOSS_SALVO_GAP: 1.15, BOSS_FAN: 1.5, BOMB_BOSS_RATIO: 0.16,
+    BOSS_DEATH_SECONDS: 2.6, BOSS_BREAKS: 11, BOSS_BREAK_GAP: 0.16, BOSS_AFTERGLOW: 0.8,
+    BOSS_SINK: 0.085, BOSS_DRIFT: 0.075, BOSS_ROLL: 0.34,
     MAX_FRAME_DT: 0.05, TAU: 6.2831855,
     GUST_RATE: 0.55, GUST_STRENGTH: 0.30,
     FLARE_GAP: 1.5, FLARE_RISE: 0.2, FLARE_LIFE: 4.6, FLARE_HALF: 0.055,
@@ -242,13 +244,15 @@
       const p = profileOf(this.level);
       const hp = Math.max(30, Math.floor(C.BOSS_BASE_HP * p.bossHp * (1 + (this.level - 1) * 0.45)));
       this.boss = { kind: (this.level - 1) % C.BOSS_KINDS, x: 0, y: -0.25, hp, max: hp, alive: true,
-        engaged: false, bank: 0, salvo: 0, sweep: 0 };
+        engaged: false, bank: 0, salvo: 0, sweep: 0,
+        dying: 0, roll: 0, driftX: 0, nextBreakAt: 0, breaks: 0, finished: false };
       this.events.push({ t: 'BOSS_IN', x: 0, y: 0 });
     }
 
     updateBoss(dt) {
       const b = this.boss;
-      if (!b || !b.alive) return;
+      if (!b) return;
+      if (!b.alive) { this.updateWreck(b, dt); return; }
       const lastX = b.x;
       if (!b.engaged) {
         b.y = Math.min(C.BOSS_STATION_Y, b.y + C.BOSS_ENTRY_SPEED * dt);
@@ -275,8 +279,41 @@
 
     damageBoss(b, amount) {
       b.hp = Math.max(0, b.hp - amount);
-      if (b.hp === 0) {
-        b.alive = false; this.kills++; this.score += C.BOSS_SCORE * this.level;
+      if (b.hp > 0) return;
+      b.alive = false; this.kills++; this.score += C.BOSS_SCORE * this.level;
+      // it stops flying here: nose over, roll, and slide out of its own wake
+      b.dying = C.BOSS_DEATH_SECONDS;
+      b.driftX = b.x >= 0 ? -C.BOSS_DRIFT : C.BOSS_DRIFT;
+      b.nextBreakAt = C.BOSS_DEATH_SECONDS - C.BOSS_BREAK_GAP * 0.35;
+      b.breaks = 0;
+      b.finished = false;
+      // the sky clears with it: nothing already in the air may still kill you now
+      for (const s of this.shots) if (!s.fromPlayer) s.alive = false;
+      this.events.push({ t: 'BOSS_DOWN', x: b.x, y: b.y });
+    }
+
+    /**
+     * The wreck. It falls, rolls, and lets go of a run of explosions that walk along the hull
+     * rather than piling up in one place, and only then does the stage end.
+     */
+    updateWreck(b, dt) {
+      if (b.dying <= 0) return;
+      b.dying = Math.max(0, b.dying - dt);
+      b.y += C.BOSS_SINK * dt;
+      b.x += b.driftX * dt;
+      b.roll += C.BOSS_ROLL * dt;
+      while (b.breaks < C.BOSS_BREAKS && b.dying <= b.nextBreakAt) {
+        b.breaks++;
+        b.nextBreakAt -= C.BOSS_BREAK_GAP;
+        const ox = (this.r() - 0.5) * C.BOSS_HALF * 1.6;
+        const oy = (this.r() - 0.5) * C.BOSS_HALF * 0.9;
+        this.events.push({ t: 'BOSS_BREAK', x: b.x + ox, y: b.y + oy,
+          value: Math.floor((b.breaks * 100) / C.BOSS_BREAKS) });
+      }
+      // The last blast takes the hull with it, and then the sky gets a beat to itself before
+      // the clear panel comes up -- otherwise the finale is a frame long and you miss it.
+      if (b.dying <= C.BOSS_AFTERGLOW && !b.finished) {
+        b.finished = true;
         this.events.push({ t: 'KILL_BOSS', x: b.x, y: b.y });
       }
     }
@@ -301,6 +338,9 @@
 
     hurt(amount, x, y) {
       if (this.mercy > 0) return;
+      // while the raider is coming apart the stage is over; nothing left flying may take it back
+      const b = this.boss;
+      if (b && !b.alive && b.dying > 0) return;
       if (this.shield) {
         this.shield = false; this.mercy = C.MERCY_SECONDS;
         this.events.push({ t: 'SHIELD_USED', x, y });
@@ -382,6 +422,7 @@
         return;
       }
       if (!b.alive) {
+        if (b.dying > 0) return;
         this.state = State.LEVEL_CLEAR;
         this.bestLevel = Math.max(this.bestLevel, this.level);
         this.score += C.CLEAR_BONUS * this.level;
@@ -470,6 +511,16 @@
         life: 0.3 + Math.random() * 0.35, max: 0.65, color, size: size + Math.random() * size, drag: 2.4 });
     }
   }
+  /** Chunks of hull: bigger than a spark, slower, and they keep going instead of stopping. */
+  function debris(x, y, n) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * C.TAU, v = 0.18 + Math.random() * 0.3;
+      fx.particles.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 0.05,
+        life: 0.8 + Math.random() * 0.7, max: 1.5, color: '#94A3B8',
+        size: 0.014 + Math.random() * 0.014, drag: 0.5 });
+    }
+  }
+
   function floatText(text, x, y, color) { fx.texts.push({ text, x, y, life: 0.85, max: 0.85, color }); }
   function screenFlash(color, strength) { fx.flash = strength; fx.flashColor = color; }
 
@@ -483,10 +534,28 @@
         sparks(ev.x, ev.y, 8, '#94A3B8', 0.3, 0.012);
         fx.shake = Math.max(fx.shake, 0.08); play('kill'); break;
       case 'HIT_BOSS': sparks(ev.x, ev.y, 3, '#FDE68A', 0.25); play('hit'); break;
+      case 'BOSS_DOWN':
+        // the moment it stops being an enemy: everything holds still for a beat
+        timeScale = HITSTOP_SCALE;
+        sparks(ev.x, ev.y, 34, '#FDE68A', 0.75, 0.013);
+        sparks(ev.x, ev.y, 14, '#94A3B8', 0.35, 0.022);
+        fx.shake = 0.55; screenFlash('#FFFFFF', 0.38);
+        play('boom'); break;
+      case 'BOSS_BREAK': {
+        // each blast walks a little further along the hull and hits a little harder
+        const t = (ev.value || 0) / 100;
+        sparks(ev.x, ev.y, 10 + Math.floor(t * 14), '#FDE68A', 0.45 + t * 0.35, 0.011);
+        sparks(ev.x, ev.y, 6 + Math.floor(t * 8), '#94A3B8', 0.28 + t * 0.2, 0.02);
+        debris(ev.x, ev.y, 3 + Math.floor(t * 4));
+        fx.shake = Math.max(fx.shake, 0.16 + t * 0.16);
+        screenFlash('#FFB454', 0.1 + t * 0.14);
+        play('kill'); break;
+      }
       case 'KILL_BOSS':
-        sparks(ev.x, ev.y, 60, '#FDE68A', 0.9, 0.014);
-        sparks(ev.x, ev.y, 30, '#94A3B8', 0.6, 0.02);
-        fx.shake = 0.6; screenFlash('#FFFFFF', 0.5);
+        sparks(ev.x, ev.y, 70, '#FDE68A', 1.1, 0.015);
+        sparks(ev.x, ev.y, 36, '#94A3B8', 0.7, 0.022);
+        debris(ev.x, ev.y, 16);
+        fx.shake = 0.7; screenFlash('#FFFFFF', 0.55);
         floatText(stageOf(world.level).raider + ' 격추!', ev.x, ev.y, '#FACC15');
         play('boom'); break;
       case 'HIT_PLAYER':
@@ -498,6 +567,21 @@
       case 'BOSS_IN': floatText(stageOf(world.level).raider, 0, 0.3, '#FCA5A5'); fx.shake = 0.5; play('roar'); break;
       case 'CLEAR': play('clear'); break;
       case 'OVER': play('over'); break;
+    }
+  }
+
+  let smokeTimer = 0;
+  function updateWreckSmoke(dt) {
+    const b = world.boss;
+    // a steady trail off the wreck, so the gaps between blasts are not empty
+    if (!b || b.alive || b.dying <= 0) { smokeTimer = 0; return; }
+    smokeTimer -= dt;
+    while (smokeTimer <= 0) {
+      smokeTimer += 0.035;
+      const px = b.x + (Math.random() - 0.5) * C.BOSS_HALF;
+      const py = b.y + (Math.random() - 0.5) * C.BOSS_HALF * 0.6;
+      sparks(px, py, 1, '#94A3B8', 0.12, 0.018);
+      if (Math.random() < 0.45) sparks(px, py, 1, '#FFB454', 0.2, 0.009);
     }
   }
 
@@ -515,7 +599,6 @@
     fx.muzzle = Math.max(0, fx.muzzle - dt);
     fx.shake = Math.max(0, fx.shake - dt);
     fx.bomb = Math.max(0, fx.bomb - dt);
-    fx.flash = Math.max(0, fx.flash - dt * 2.2);
     for (const p of fx.particles) {
       p.life -= dt; p.x += p.vx * dt; p.y += p.vy * dt;
       const k = Math.max(0, 1 - p.drag * dt); p.vx *= k; p.vy *= k; p.vy += 0.35 * dt;
@@ -525,6 +608,7 @@
     fx.texts = fx.texts.filter(t => t.life > 0);
     for (const c of clouds) { c.y += SCROLL_SPEED * dt * (c.far ? 0.45 : 1); if (c.y > 1.25) c.y -= 1.6; }
     updateAmbient(dt);
+    updateWreckSmoke(dt);
   }
 
   // ---------- Sprites (drawn by android-game/tools/generate_planes.py) ----------
@@ -637,9 +721,11 @@
     ctx.fillStyle = fill; ctx.fillText(text, x, y + size * 0.35);
   }
 
-  function banked(img, cx, cy, sw, sh, bank) {
+  function banked(img, cx, cy, sw, sh, bank, alpha, lit) {
     if (!img.complete || !img.naturalWidth) return;
     ctx.save(); ctx.translate(cx, cy); ctx.rotate(bank * BANK_DEG * Math.PI / 180);
+    if (alpha !== undefined) ctx.globalAlpha = alpha;
+    if (lit) ctx.filter = 'brightness(3.2)';
     ctx.drawImage(img, -sw / 2, -sh / 2, sw, sh);
     ctx.restore();
   }
@@ -852,15 +938,41 @@
       ctx.globalAlpha = 1;
     }
     const b = world.boss;
-    if (b && b.alive) {
-      const sw = w * SIZE.raider, sh = sw * 0.8;
-      banked(SPRITES.raiders[b.kind][Math.floor(runTime * PROP_HZ) & 1], sx(b.x), sy(b.y), sw, sh, b.bank * 0.5);
-      const bw = w * 0.76, bh = w * 0.035, by = h * 0.075;
-      ctx.fillStyle = '#6B1D1D';
-      ctx.beginPath(); ctx.roundRect((w - bw) / 2 - 2, by - 2, bw + 4, bh + 4, bh); ctx.fill();
-      ctx.fillStyle = '#F87171';
-      ctx.beginPath(); ctx.roundRect((w - bw) / 2, by, bw * (b.hp / Math.max(1, b.max)), bh, bh); ctx.fill();
-      label(stageOf(world.level).raider, w / 2, by + bh / 2, w * 0.042, '#FFFFFF', '#0B1020');
+    if (b && (b.alive || !b.finished)) {
+      const img = SPRITES.raiders[b.kind][Math.floor(runTime * PROP_HZ) & 1];
+      const sw = w * SIZE.raider, sh = sw * 0.8, bx = sx(b.x), by2 = sy(b.y);
+      let barAlpha = 1;
+      if (b.alive) {
+        banked(img, bx, by2, sw, sh, b.bank * 0.5);
+      } else {
+        // Falling. It rolls over, lights up white at each blast, and burns out at the very end.
+        const span = C.BOSS_DEATH_SECONDS - C.BOSS_AFTERGLOW;
+        const gone = 1 - Math.max(0, Math.min(1, (b.dying - C.BOSS_AFTERGLOW) / span));
+        const roll = Math.sin(b.roll * C.TAU) * (0.35 + gone * 0.65);
+        const lit = (Math.floor(b.dying * 26) & 1) === 0 && gone < 0.88;
+        const fade = 1 - Math.max(0, Math.min(1, (gone - 0.8) / 0.2));
+        banked(img, bx, by2, sw * (1 - gone * 0.06), sh, roll, fade, lit);
+        // it trails fire the whole way down
+        const glow = Math.max(1, w * 0.11 * (0.6 + Math.sin(runTime * 19) * 0.25) * (1 - gone * 0.4));
+        const g = ctx.createRadialGradient(bx, by2, 0, bx, by2, glow);
+        g.addColorStop(0, 'rgba(255,241,196,0.8)');
+        g.addColorStop(0.5, 'rgba(249,115,22,0.53)');
+        g.addColorStop(1, 'rgba(249,115,22,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(bx, by2, glow, 0, Math.PI * 2); ctx.fill();
+        barAlpha = 1 - Math.max(0, Math.min(1, gone / 0.25));   // the bar gets out of the way
+      }
+      if (barAlpha > 0) {
+        ctx.globalAlpha = barAlpha;
+        const bw = w * 0.76, bh = w * 0.035, by = h * 0.075;
+        ctx.fillStyle = '#6B1D1D';
+        ctx.beginPath(); ctx.roundRect((w - bw) / 2 - 2, by - 2, bw + 4, bh + 4, bh); ctx.fill();
+        if (b.hp > 0) {
+          ctx.fillStyle = '#F87171';
+          ctx.beginPath(); ctx.roundRect((w - bw) / 2, by, bw * (b.hp / Math.max(1, b.max)), bh, bh); ctx.fill();
+        }
+        label(stageOf(world.level).raider, w / 2, by + bh / 2, w * 0.042, '#FFFFFF', '#0B1020');
+        ctx.globalAlpha = 1;
+      }
     }
     if (world.state === State.RUNNING || world.state === State.LEVEL_CLEAR) drawPlayer();
 
@@ -942,19 +1054,53 @@
       body = `${st.place} 상공에서 격추됐다\n${world.kills}기 격추 · ${world.score}점`;
       accent = '탭하면 재출격';
     }
-    const lines = body.split('\n');
-    const panelH = h * 0.30 + lines.length * w * 0.052;
+    // The clear lines are whole sentences, so the title wraps too -- and drops a size when it
+    // has to, rather than running off the side of the panel.
+    let titleSize = w * 0.068;
+    let titleLines = wrapAt(title, w * 0.80, titleSize, true);
+    if (titleLines.length > 1) {
+      titleSize = w * 0.054;
+      titleLines = wrapAt(title, w * 0.80, titleSize, true);
+    }
+    const lines = wrapAt(body, w * 0.78, w * 0.042, false);
+    const panelH = h * 0.30 + lines.length * w * 0.052 + (titleLines.length - 1) * titleSize * 1.25;
     ctx.fillStyle = 'rgba(16,26,48,0.92)';
     ctx.beginPath(); ctx.roundRect(w * 0.07, h * 0.5 - panelH / 2, w * 0.86, panelH, w * 0.05); ctx.fill();
     ctx.strokeStyle = '#3C5A8C'; ctx.lineWidth = Math.max(2, w * 0.005); ctx.stroke();
     let y = h * 0.5 - panelH / 2 + w * 0.11;
     if (pre) { label(pre, w / 2, y, w * 0.045, '#FACC15', '#0B1020'); y += w * 0.075; }
-    label(title, w / 2, y, w * 0.068, '#FFFFFF', '#0B1020'); y += w * 0.09;
+    for (const line of titleLines) {
+      label(line, w / 2, y, titleSize, '#FFFFFF', '#0B1020');
+      y += titleSize * 1.25;
+    }
+    y += w * 0.09 - titleSize * 1.25;
     ctx.font = `400 ${w * 0.042}px "IBM Plex Sans", sans-serif`;
     ctx.textAlign = 'center'; ctx.fillStyle = '#F8FAFC';
     for (const line of lines) { ctx.fillText(line, w / 2, y); y += w * 0.052; }
     y += w * 0.03;
     label(accent, w / 2, y, w * 0.05, '#FACC15', '#0B1020');
+  }
+
+  /**
+   * Breaks `body` to fit `maxWidth` at `size`, keeping the author's own line breaks. Without
+   * this a long victory line runs off the side of the panel on a narrow phone.
+   */
+  function wrapAt(body, maxWidth, size, display) {
+    ctx.font = display
+      ? `400 ${size}px "Lilita One", Impact, sans-serif`
+      : `400 ${size}px "IBM Plex Sans", sans-serif`;
+    const out = [];
+    for (const paragraph of body.split('\n')) {
+      if (!paragraph) { out.push(''); continue; }
+      let line = '';
+      for (const word of paragraph.split(' ')) {
+        const candidate = line ? line + ' ' + word : word;
+        if (ctx.measureText(candidate).width <= maxWidth || !line) line = candidate;
+        else { out.push(line); line = word; }
+      }
+      out.push(line);
+    }
+    return out;
   }
 
   function courseBits() {
@@ -1036,21 +1182,29 @@
   });
 
   // ---------- Loop ----------
-  let last = 0;
+  let last = 0, timeScale = 1;
+  const HITSTOP_SCALE = 0.05, TIME_RECOVERY = 1.1;
   function frame(now) {
     const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now;
     runTime += dt;
+    // hitstop: the world nearly stops when the raider goes, then winds back up. The recovery
+    // runs on the real clock so the slow-motion itself cannot slow down.
+    timeScale = Math.min(1, timeScale + dt * TIME_RECOVERY);
+    const scaled = dt * timeScale;
     if (held || heldY) world.movePlayerBy(held * 1.6 * dt, heldY * 0.85 * dt);
     updatePad(dt);
-    world.update(dt);
+    world.update(scaled);
     for (const ev of world.events) handleEvent(ev);
     world.events.length = 0;
     if (world.state !== State.RUNNING && (world.bestLevel > best || world.score > bestScore)) {
       best = Math.max(best, world.bestLevel); bestScore = Math.max(bestScore, world.score);
       try { localStorage.setItem('skystrike.best', String(best)); localStorage.setItem('skystrike.bestScore', String(bestScore)); } catch (e) {}
     }
-    updateFx(dt);
+    updateFx(scaled);
+    // the flash is a camera effect, not a world one: it fades on the real clock, or the hitstop
+    // would hold a white screen over the whole moment you are meant to be watching
+    fx.flash = Math.max(0, fx.flash - dt * 2.2);
     draw();
     requestAnimationFrame(frame);
   }
