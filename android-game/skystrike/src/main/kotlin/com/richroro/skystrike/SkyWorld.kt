@@ -641,10 +641,10 @@ class SkyWorld(private val seed: Int = 1) {
          * gunners make you move, then everything at once and faster.
          */
         val PROFILES = listOf(
-            Profile(7, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER), 0.8f, 0.30f, 1.0f),
-            Profile(8, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER), 1.0f, 0.34f, 1.15f),
-            Profile(9, listOf(Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.25f, 0.32f, 1.3f),
-            Profile(10, listOf(Kind.DIVER, Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.4f, 0.40f, 1.5f),
+            Profile(16, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER), 0.8f, 0.30f, 1.0f),
+            Profile(18, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER), 1.0f, 0.34f, 1.15f),
+            Profile(21, listOf(Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.25f, 0.32f, 1.3f),
+            Profile(24, listOf(Kind.DIVER, Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.4f, 0.40f, 1.5f),
         )
 
         fun profileOf(level: Int): Profile = PROFILES[(level - 1).mod(PROFILES.size)]
