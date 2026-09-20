@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-19",
+  "updated": "2026-09-20T04:55:46+00:00",
+  "source": "영화진흥위원회 영화관입장권 통합전산망",
+  "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
+  "rows": [
+    {
+      "rank": 1,
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 26.3,
+      "audience": 115201,
+      "total": 305063,
+      "screens": 1372
+    },
+    {
+      "rank": 2,
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 31.0,
+      "audience": 108831,
+      "total": 11124870,
+      "screens": 1253
+    },
+    {
+      "rank": 3,
+      "title": "옵세션",
+      "open": "2026-09-02",
+      "share": 13.7,
+      "audience": 55081,
+      "total": 656776,
+      "screens": 762
+    },
+    {
+      "rank": 4,
+      "title": "레지던트 이블: 0번째 밤",
+      "open": "2026-09-17",
+      "share": 8.1,
+      "audience": 33155,
+      "total": 77412,
+      "screens": 665
+    },
+    {
+      "rank": 5,
+      "title": "스파이더맨: 브랜드 뉴 데이",
+      "open": "2026-07-29",
+      "share": 3.1,
+      "audience": 14834,
+      "total": 8977906,
+      "screens": 540
+    },
+    {
+      "rank": 6,
+      "title": "극장판 치이카와: 인어 섬의 비밀",
+      "open": "2026-09-30",
+      "share": 3.2,
+      "audience": 10640,
+      "total": 11109,
+      "screens": 78
+    },
+    {
+      "rank": 7,
+      "title": "디지몬 어드벤처 : 운명적 만남 & 우리들의 워 게임!",
+      "open": "2026-09-16",
+      "share": 1.3,
+      "audience": 5207,
+      "total": 13520,
+      "screens": 205
+    },
+    {
+      "rank": 8,
+      "title": "시간을 달리는 소녀",
+      "open": "2007-06-14",
+      "share": 1.2,
+      "audience": 4800,
+      "total": 128163,
+      "screens": 140
+    },
+    {
+      "rank": 9,
+      "title": "포가튼 아일랜드",
+      "open": "2026-09-23",
+      "share": 0.9,
+      "audience": 4005,
+      "total": 15777,
+      "screens": 20
+    },
+    {
+      "rank": 10,
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 1.1,
+      "audience": 3950,
+      "total": 16134,
+      "screens": 15
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "updatedAt": "2026-09-20T15:00:47.456843+09:00",
+  "indices": [
+    {
+      "symbol": "^KS11",
+      "name": "KOSPI",
+      "price": 6894.23,
+      "change": 178.82,
+      "changePercent": 2.66,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^KQ11",
+      "name": "KOSDAQ",
+      "price": 827.12,
+      "change": 4.94,
+      "changePercent": 0.6,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "^DJI",
+      "name": "다우존스",
+      "price": 51682.64,
+      "change": -95.4,
+      "changePercent": -0.18,
+      "currency": "USD"
+    },
+    {
+      "symbol": "^IXIC",
+      "name": "나스닥",
+      "price": 26522.54,
+      "change": 104.24,
+      "changePercent": 0.39,
+      "currency": "USD"
+    }
+  ],
+  "fx": [
+    {
+      "symbol": "KRW=X",
+      "name": "USD/KRW",
+      "price": 1385.0,
+      "change": 5.05,
+      "changePercent": 0.37,
+      "currency": "KRW"
+    }
+  ],
+  "stocks": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "price": 261000.0,
+      "change": 8500.0,
+      "changePercent": 3.37,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "price": 1857000.0,
+      "change": 112000.0,
+      "changePercent": 6.42,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "price": 197700.0,
+      "change": -1300.0,
+      "changePercent": -0.65,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "035720.KS",
+      "name": "카카오",
+      "price": 33550.0,
+      "change": 50.0,
+      "changePercent": 0.15,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "373220.KS",
+      "name": "LG에너지솔루션",
+      "price": 364000.0,
+      "change": -1000.0,
+      "changePercent": -0.27,
+      "currency": "KRW"
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "price": 336.13,
+      "change": -0.87,
+      "changePercent": -0.26,
+      "currency": "USD"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "price": 364.27,
+      "change": -1.93,
+      "changePercent": -0.53,
+      "currency": "USD"
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "price": 222.27,
+      "change": 2.93,
+      "changePercent": 1.34,
+      "currency": "USD"
+    }
+  ],
+  "news": [
+    {
+      "title": "커피만 있는 게 아니네…잠실 달군 '완벽한 블렌딩' 축제 [2026청춘커피페스티벌]",
+      "link": "https://www.hankyung.com/article/202609206070i",
+      "pubDate": "Sun, 20 Sep 2026 14:50:52 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[2026 청춘 커피 페스티벌 포토] 축제 열기 끌어올린 하이키…남다른 무대 장악력",
+      "link": "https://www.hankyung.com/article/202609206073i",
+      "pubDate": "Sun, 20 Sep 2026 14:43:53 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[단독] '美 월가 억만장자' 드러켄밀러 첫 방한…삼성·SK·두산과 투자 논의",
+      "link": "https://www.hankyung.com/article/202609205724i",
+      "pubDate": "Sun, 20 Sep 2026 14:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[단독] 85억 빌려주더니…대표 사생활 약점잡아 회사 '꿀꺽'",
+      "link": "https://www.hankyung.com/article/202609205938i",
+      "pubDate": "Sun, 20 Sep 2026 14:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[2026 청춘 커피 페스티벌 포토] 잔나비 목소리에 물든 잠실",
+      "link": "https://www.hankyung.com/article/202609206037i",
+      "pubDate": "Sun, 20 Sep 2026 13:55:51 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "혼인 세액공제 폐지 소식에 '울상'…알고 보니 더 이득?",
+      "link": "https://www.hankyung.com/article/202609206021i",
+      "pubDate": "Sun, 20 Sep 2026 13:39:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "중국서 '유황 훈증 죽순' 논란…식약처 \"농산물 형태 수입없어\"",
+      "link": "https://www.yna.co.kr/view/AKR20260920027000017",
+      "pubDate": "Sun, 20 Sep 2026 13:17:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "조선업 청년들이 말하는 일터의 조건…울산 동구서 원탁회의",
+      "link": "https://www.yna.co.kr/view/AKR20260918160900057",
+      "pubDate": "Sun, 20 Sep 2026 13:05:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'내 월급은 그대로인데?' 평균 임금 '431만원' 뚫은 이유 보니…",
+      "link": "https://www.hankyung.com/article/202609205975g",
+      "pubDate": "Sun, 20 Sep 2026 12:58:41 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "충주시, 중국 로봇 전문기업과 맞손…생산시설 확충 논의",
+      "link": "https://www.yna.co.kr/view/AKR20260920025500064",
+      "pubDate": "Sun, 20 Sep 2026 12:43:28 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "KRX애프터마켓 개장 일주일…거래대금 변화추이 살펴보니",
+      "link": "https://www.yna.co.kr/view/AKR20260919033200008",
+      "pubDate": "Sun, 20 Sep 2026 12:41:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"한국처럼 15% 달라\"…삼전닉스 따라 직원들 결국 움직였다 [김대영의 노무스쿨]",
+      "link": "https://www.hankyung.com/article/202609205920g",
+      "pubDate": "Sun, 20 Sep 2026 12:30:06 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'글자체 디자인' 출원은 더 간편히, 3D도면 출원은 더 정확히",
+      "link": "https://www.yna.co.kr/view/AKR20260918060900063",
+      "pubDate": "Sun, 20 Sep 2026 12:00:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "며느리는 '동거주택 상속공제' 못받던 옛 상증세법…헌재 \"합헌\"",
+      "link": "https://www.yna.co.kr/view/AKR20260919037300004",
+      "pubDate": "Sun, 20 Sep 2026 12:00:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "반도체 제조업서 법 위반 338건 적발…SK하이닉스 청주캠 119건",
+      "link": "https://www.yna.co.kr/view/AKR20260918158700530",
+      "pubDate": "Sun, 20 Sep 2026 12:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"일자리로 일하는 즐거움 찾으세요\"…25일까지 노인일자리 주간",
+      "link": "https://www.yna.co.kr/view/AKR20260919048100530",
+      "pubDate": "Sun, 20 Sep 2026 12:00:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중기중앙회, 국회에 '中企 협동조합 협의요청권' 도입 건의",
+      "link": "https://www.yna.co.kr/view/AKR20260919027500030",
+      "pubDate": "Sun, 20 Sep 2026 12:00:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한은 \"한미 장기금리 동조화, 글로벌 인플레 충격 영향\"",
+      "link": "https://www.yna.co.kr/view/AKR20260919018900002",
+      "pubDate": "Sun, 20 Sep 2026 12:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "기술보증기금, 충북 첨단산업 육성 위해 금융지원 나서",
+      "link": "https://www.hankyung.com/article/202609205921i",
+      "pubDate": "Sun, 20 Sep 2026 11:41:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "구광모, 청년들에 '1억' 건넨 이유…\"미래 인재로 AI 키운다\"",
+      "link": "https://www.hankyung.com/article/2026092058587",
+      "pubDate": "Sun, 20 Sep 2026 11:24:52 +0900",
+      "source": "한국경제"
+    }
+  ]
+}
