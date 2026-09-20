@@ -155,6 +155,9 @@ class SkyView @JvmOverloads constructor(
         colorFilter = LightingColorFilter(0xFFFFFFFF.toInt(), 0x00FF6060)
     }
     private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x33000000 }
+    private val mendPaint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG).apply {
+        colorFilter = LightingColorFilter(0xFF80FF80.toInt(), 0x0020FF40)
+    }
     private val tracerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.tracer) }
     private val tracerCorePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.tracer_core) }
     private val foeShotPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.foe_shot) }
@@ -203,6 +206,10 @@ class SkyView @JvmOverloads constructor(
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_5_0), BitmapFactory.decodeResource(resources, R.drawable.foe_5_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_6_0), BitmapFactory.decodeResource(resources, R.drawable.foe_6_1)),
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_7_0), BitmapFactory.decodeResource(resources, R.drawable.foe_7_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_8_0), BitmapFactory.decodeResource(resources, R.drawable.foe_8_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_9_0), BitmapFactory.decodeResource(resources, R.drawable.foe_9_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_10_0), BitmapFactory.decodeResource(resources, R.drawable.foe_10_1)),
+        arrayOf(BitmapFactory.decodeResource(resources, R.drawable.foe_11_0), BitmapFactory.decodeResource(resources, R.drawable.foe_11_1)),
     )
     private val raiderFrames: Array<Array<Bitmap>> = arrayOf(
         arrayOf(BitmapFactory.decodeResource(resources, R.drawable.raider_0_0), BitmapFactory.decodeResource(resources, R.drawable.raider_0_1)),
@@ -223,6 +230,10 @@ class SkyView @JvmOverloads constructor(
         SkyWorld.ItemKind.HOMING to BitmapFactory.decodeResource(resources, R.drawable.pickup_homing),
         SkyWorld.ItemKind.MAGNET to BitmapFactory.decodeResource(resources, R.drawable.pickup_magnet),
         SkyWorld.ItemKind.CHARM to BitmapFactory.decodeResource(resources, R.drawable.pickup_charm),
+        SkyWorld.ItemKind.SLOW to BitmapFactory.decodeResource(resources, R.drawable.pickup_slow),
+        SkyWorld.ItemKind.ORBIT to BitmapFactory.decodeResource(resources, R.drawable.pickup_orbit),
+        SkyWorld.ItemKind.VAMPIRE to BitmapFactory.decodeResource(resources, R.drawable.pickup_vampire),
+        SkyWorld.ItemKind.MEDAL to BitmapFactory.decodeResource(resources, R.drawable.pickup_medal),
     )
     private val wingmanFrames: Array<Bitmap> = arrayOf(
         BitmapFactory.decodeResource(resources, R.drawable.wingman_0),
@@ -428,6 +439,31 @@ class SkyView @JvmOverloads constructor(
                 comboPop = 0f
                 floatText(context.getString(R.string.combo_lost), e.x, e.y - 0.06f, color(R.color.smoke))
             }
+            SkyWorld.Event.Type.MINE_LAID -> play(sndHit, 1, 90, 0.25f, 0.1f, 0.6f)
+            SkyWorld.Event.Type.CHARGE -> {
+                // the moment it commits: you get a beat and a bark
+                sparks(e.x, e.y, 12, color(R.color.hp_low), 0.5f, 0.01f)
+                shakeTimer = max(shakeTimer, 0.14f)
+                play(sndRoar, 8, 120, 0.5f, 0f, 1.7f)
+            }
+            SkyWorld.Event.Type.HEAL -> {
+                sparks(e.x, e.y, 8, color(R.color.hp_full), 0.28f, 0.009f)
+                play(sndPickup, 6, 150, 0.35f, 0f, 1.5f)
+            }
+            SkyWorld.Event.Type.ORBIT_BLOCK -> {
+                sparks(e.x, e.y, 6, color(R.color.shield_ring), 0.3f, 0.008f)
+                play(sndHit, 1, 45, 0.3f, 0.15f, 1.35f)
+            }
+            SkyWorld.Event.Type.VAMP_HEAL -> {
+                sparks(e.x, e.y, 16, color(R.color.hp_full), 0.45f, 0.011f)
+                floatText(context.getString(R.string.item_vampire), e.x, e.y, color(R.color.hp_full))
+                play(sndPickup, 6, 0, 0.7f, 0f, 0.85f)
+            }
+            SkyWorld.Event.Type.MEDAL -> {
+                sparks(e.x, e.y, 20, color(R.color.gold), 0.5f, 0.012f)
+                floatText("+${'$'}{e.value}", e.x, e.y, color(R.color.gold))
+                play(sndPickup, 6, 0, 0.8f, 0f, 1.25f)
+            }
             SkyWorld.Event.Type.DEFLECT -> {
                 // a bounce off the plate: hard, bright, and it gets you nothing
                 sparks(e.x, e.y, 5, color(R.color.smoke), 0.3f, 0.007f)
@@ -536,6 +572,10 @@ class SkyView @JvmOverloads constructor(
         SkyWorld.ItemKind.HOMING -> R.string.item_homing
         SkyWorld.ItemKind.MAGNET -> R.string.item_magnet
         SkyWorld.ItemKind.CHARM -> R.string.item_charm
+        SkyWorld.ItemKind.SLOW -> R.string.item_slow
+        SkyWorld.ItemKind.ORBIT -> R.string.item_orbit
+        SkyWorld.ItemKind.VAMPIRE -> R.string.item_vampire
+        SkyWorld.ItemKind.MEDAL -> R.string.item_medal
     }
 
     private fun updateFx(dt: Float) {
@@ -930,6 +970,20 @@ class SkyView @JvmOverloads constructor(
             val wh = w * PLAYER_SIZE * 0.66f
             bankedSprite(canvas, wingmanFrames[frameIndex()], wx, wy, wh * 0.8f, wh, bankOf() * 0.7f, spritePaint)
         }
+        // the orbs circling you, drawn over the escorts so you can see what is covering you
+        for (i in 0 until world.orbs) {
+            val ox = sx(world.orbX(i))
+            val oy = sy(world.orbY(i))
+            val r = w * SkyWorld.ORBIT_HALF
+            muzzlePaint.shader = RadialGradient(
+                ox, oy, max(1f, r * 2.2f),
+                intArrayOf(0xCC8EE8FF.toInt(), 0x6622D3EE, 0x0022D3EE), null, Shader.TileMode.CLAMP,
+            )
+            canvas.drawCircle(ox, oy, r * 2.2f, muzzlePaint)
+            muzzlePaint.shader = null
+            hpPaint.color = color(R.color.shield_ring)
+            canvas.drawCircle(ox, oy, r, hpPaint)
+        }
         if (world.shield) {
             shieldPaint.strokeWidth = max(2f, w * 0.008f)
             shieldPaint.alpha = (140 + 90 * sin(runTime * 6f)).toInt().coerceIn(0, 255)
@@ -965,7 +1019,14 @@ class SkyView @JvmOverloads constructor(
         val sh = w * FOE_SIZE * (world.halfOf(e.kind) / SkyWorld.ENEMY_HALF)
         val sw = sh * 0.8f
         val hurt = e.hp < e.maxHp
-        val paint = if (hurt) hitPaint else spritePaint
+        // a mended one flashes as it comes back up, so you can see the healer undoing your work
+        val paint = if (e.mended > 0f && ((e.mended * 22f).toInt() and 1) == 0) {
+            mendPaint
+        } else if (hurt) {
+            hitPaint
+        } else {
+            spritePaint
+        }
         // On the long night you hear them before you see them: they surface out of the dark.
         val dark = SkyWorld.profileOf(world.level).hazard == SkyWorld.Hazard.DARK
         val reveal = if (dark) ((e.y - 0.04f) / 0.26f).coerceIn(0f, 1f) else 1f

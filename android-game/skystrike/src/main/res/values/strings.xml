@@ -39,4 +39,8 @@
     <string name="item_charm">Charm</string>
     <string name="charm_saved">chain held</string>
     <string name="rank_line">Rank %1$s · %2$d hits taken · best chain %3$d</string>
+    <string name="item_slow">Slow</string>
+    <string name="item_orbit">Orbit</string>
+    <string name="item_vampire">Drain</string>
+    <string name="item_medal">Medal</string>
 </resources>

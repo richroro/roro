@@ -26,12 +26,23 @@ class SkyWorld(private val seed: Int = 1) {
      * four each ask you to do something you would not otherwise do -- move off the centre line,
      * finish what you started, deal with something that will not leave, or thin a crowd fast.
      */
-    enum class Kind { DRONE, WEAVER, GUNNER, DIVER, SHIELDER, SPLITTER, TURRET, SWARM }
+    enum class Kind {
+        DRONE, WEAVER, GUNNER, DIVER, SHIELDER, SPLITTER, TURRET, SWARM,
+        /** Lays mines behind it. The mines themselves are [MINE]. */
+        MINER,
+        /** A mine: it barely moves, and it is still there when you come back. */
+        MINE,
+        /** Picks a lane, tells you it is coming, and then comes. */
+        CHARGER,
+        /** Mends whatever you just damaged. Deal with it first or deal with everything twice. */
+        HEALER,
+    }
 
     /** How big a target each kind is. A swarm bee is a much smaller thing to hit than a barge. */
     fun halfOf(kind: Kind): Float = when (kind) {
         Kind.SWARM -> ENEMY_HALF * 0.55f
-        Kind.SHIELDER, Kind.SPLITTER -> ENEMY_HALF * 1.2f
+        Kind.MINE -> ENEMY_HALF * 0.7f
+        Kind.SHIELDER, Kind.SPLITTER, Kind.MINER -> ENEMY_HALF * 1.2f
         else -> ENEMY_HALF
     }
 
@@ -40,7 +51,17 @@ class SkyWorld(private val seed: Int = 1) {
      * gun that behaves differently (PIERCE, HOMING), staying alive (SHIELD, REPAIR, BOMB), and
      * the two that look after the chain and the sky around you (CHARM, MAGNET).
      */
-    enum class ItemKind { SPREAD, RAPID, SHIELD, BOMB, REPAIR, WINGMAN, PIERCE, HOMING, MAGNET, CHARM }
+    enum class ItemKind {
+        SPREAD, RAPID, SHIELD, BOMB, REPAIR, WINGMAN, PIERCE, HOMING, MAGNET, CHARM,
+        /** Everything coming at you moves at a fraction of its speed for a while. */
+        SLOW,
+        /** Orbs that circle you and eat the fire that runs into them. */
+        ORBIT,
+        /** Every few kills mends the aircraft. Aggression pays for itself. */
+        VAMPIRE,
+        /** Points, there and then, at whatever your chain is paying. */
+        MEDAL,
+    }
 
     /** A bullet. Player shots travel up the screen, enemy shots down. */
     class Shot(
@@ -84,6 +105,20 @@ class SkyWorld(private val seed: Int = 1) {
         internal var lastX = x
         /** A turret holds station for a while, then gives up and carries on down. */
         internal var anchor = 0f
+        /** A charger's countdown: positive while it is winding up, negative while it is committed. */
+        internal var charge = 0f
+        /** The lane a charger picked when it started telling you about it. */
+        internal var lockX = 0f
+        /** Non-zero for a beat after a healer mends this one; the view flashes it green. */
+        var mended = 0f
+            internal set
+
+        internal fun hpForTest(value: Int) { hp = value }
+
+        init {
+            // a charger always starts in the open, telling you where it is going
+            if (kind == Kind.CHARGER) charge = CHARGE_TELL
+        }
     }
 
     class Boss(val kind: Int, hp: Int) {
@@ -148,6 +183,7 @@ class SkyWorld(private val seed: Int = 1) {
             SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
             BOSS_DOWN, BOSS_BREAK, KILL_BOSS, BOSS_PHASE,
             COMBO_UP, COMBO_LOST, CHARM_USED, RUSH, DEFLECT, SPLIT,
+            MINE_LAID, CHARGE, HEAL, ORBIT_BLOCK, VAMP_HEAL, MEDAL,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -244,6 +280,25 @@ class SkyWorld(private val seed: Int = 1) {
     /** A charm that eats one chain break. The hit still lands; the chain survives it. */
     var charm = false
         private set
+    /** While this runs, everything coming at you moves at [SLOW_FACTOR] of its speed. */
+    var slowTimer = 0f
+        private set
+    /** Orbs circling you, eating the fire that runs into them. */
+    var orbs = 0
+        private set
+    var orbitPhase = 0f
+        private set
+    /** While this runs, every [VAMP_KILLS] kills puts a hit point back. */
+    var vampTimer = 0f
+        private set
+    private var vampCount = 0
+
+    /** How fast the world coming at you is allowed to move right now. */
+    fun enemyTimeScale(): Float = if (slowTimer > 0f) SLOW_FACTOR else 1f
+
+    /** Where orb [index] is sitting, so the view can draw it and a test can ask. */
+    fun orbX(index: Int): Float = playerX + cos(orbitPhase + index * (TAU / max(1, orbs))) * ORBIT_R
+    fun orbY(index: Int): Float = playerY + sin(orbitPhase + index * (TAU / max(1, orbs))) * ORBIT_R * 0.72f
 
     /**
      * Kills land in chains: each one inside [COMBO_WINDOW] of the last extends it, and the chain
@@ -265,6 +320,8 @@ class SkyWorld(private val seed: Int = 1) {
         private set
 
     private val mutableEnemies = ArrayList<Plane>()
+    /** Anything spawned while the enemy list is being walked waits here until the walk is done. */
+    private val pendingSpawns = ArrayList<Plane>()
     private val mutableShots = ArrayList<Shot>()
     private val mutableItems = ArrayList<Item>()
     private val mutableFlares = ArrayList<Flare>()
@@ -329,6 +386,7 @@ class SkyWorld(private val seed: Int = 1) {
         shotRandom = Rng(seed * 31 + newLevel * 17)
         val profile = profileOf(newLevel)
         mutableEnemies.clear()
+        pendingSpawns.clear()
         mutableShots.clear()
         mutableItems.clear()
         mutableFlares.clear()
@@ -346,6 +404,11 @@ class SkyWorld(private val seed: Int = 1) {
         homingTimer = 0f
         magnetTimer = 0f
         charm = false
+        slowTimer = 0f
+        orbs = 0
+        orbitPhase = 0f
+        vampTimer = 0f
+        vampCount = 0
         mercy = 0f
         flash = 0f
         combo = 0
@@ -406,6 +469,9 @@ class SkyWorld(private val seed: Int = 1) {
         pierceTimer = max(0f, pierceTimer - dt)
         homingTimer = max(0f, homingTimer - dt)
         magnetTimer = max(0f, magnetTimer - dt)
+        slowTimer = max(0f, slowTimer - dt)
+        vampTimer = max(0f, vampTimer - dt)
+        if (orbs > 0) orbitPhase = (orbitPhase + ORBIT_RATE * dt) % TAU
 
         updateHazard(dt)
         updateCombo(dt)
@@ -492,8 +558,10 @@ class SkyWorld(private val seed: Int = 1) {
     /** How many of [kind] fly together: a swarm is a crowd, a shielder comes in twos. */
     private fun flightSize(kind: Kind): Int = when (kind) {
         Kind.SWARM -> 7 + random.nextInt(4)
-        Kind.SHIELDER, Kind.SPLITTER -> 2 + random.nextInt(2)
-        Kind.TURRET -> 2 + random.nextInt(2)
+        Kind.SHIELDER, Kind.SPLITTER, Kind.TURRET, Kind.CHARGER -> 2 + random.nextInt(2)
+        // one of each is quite enough
+        Kind.MINER, Kind.HEALER -> 1 + random.nextInt(2)
+        Kind.MINE -> 1
         else -> 3 + random.nextInt(4)
     }
 
@@ -509,9 +577,10 @@ class SkyWorld(private val seed: Int = 1) {
     ) {
         // a swarm bee always goes down in one; the heavies are worth the extra rounds
         val hpEach = when (kind) {
-            Kind.SWARM -> 1
+            Kind.SWARM, Kind.MINE -> 1
             Kind.SHIELDER -> 3 + (level - 1) / 3
-            Kind.SPLITTER, Kind.TURRET, Kind.GUNNER -> 2 + (level - 1) / 3
+            Kind.SPLITTER, Kind.TURRET, Kind.GUNNER, Kind.CHARGER -> 2 + (level - 1) / 3
+            Kind.MINER, Kind.HEALER -> 3 + (level - 1) / 3
             else -> 1 + (level - 1) / 3
         }
         for (i in 0 until n) {
@@ -556,7 +625,8 @@ class SkyWorld(private val seed: Int = 1) {
         }
     }
 
-    private fun updateEnemies(dt: Float) {
+    private fun updateEnemies(dtRaw: Float) {
+        val dt = dtRaw * enemyTimeScale()
         val profile = profileOf(level)
         val it = mutableEnemies.iterator()
         while (it.hasNext()) {
@@ -599,7 +669,47 @@ class SkyWorld(private val seed: Int = 1) {
                     e.y += e.speed * 1.35f * dt
                     e.x = e.homeX + sin(elapsed * 5.2f + e.phase) * 0.09f
                 }
+                // crosses slowly and leaves things behind it
+                Kind.MINER -> {
+                    e.y += e.speed * 0.5f * dt
+                    e.x = e.homeX + sin(elapsed * 0.7f + e.phase) * 0.28f
+                    e.charge -= dt
+                    if (e.charge <= 0f && e.y > 0.05f && e.y < playerY - 0.25f) {
+                        e.charge = MINE_GAP * (0.8f + shotRandom.next() * 0.5f)
+                        dropMine(e)
+                    }
+                }
+                // it hardly moves at all, and it is still there when you come back
+                Kind.MINE -> {
+                    e.y += MINE_DRIFT * dt
+                    e.x = e.homeX + sin(elapsed * 1.1f + e.phase) * 0.012f
+                }
+                // picks a lane, tells you it is coming, then comes
+                Kind.CHARGER -> {
+                    if (e.charge > 0f) {                      // winding up, in the open
+                        e.charge -= dt
+                        e.y += e.speed * 0.25f * dt
+                        if (e.charge <= 0f) {
+                            e.lockX = playerX
+                            pendingEvents.add(Event(Event.Type.CHARGE, e.x, e.y))
+                        }
+                    } else {                                  // committed: it goes where it aimed
+                        e.y += e.speed * CHARGE_SPEED * dt
+                        e.x += ((e.lockX - e.x) * CHARGE_TRACK * dt).coerceIn(-0.03f, 0.03f)
+                    }
+                }
+                // mends whatever you just damaged
+                Kind.HEALER -> {
+                    e.y += e.speed * 0.6f * dt
+                    e.x = e.homeX + sin(elapsed * 1.3f + e.phase) * 0.16f
+                    e.charge -= dt
+                    if (e.charge <= 0f) {
+                        e.charge = HEAL_GAP
+                        mendSomeone(e)
+                    }
+                }
             }
+            e.mended = max(0f, e.mended - dt)
             e.bank = ((e.x - e.lastX) / max(1e-4f, dt) * 0.9f).coerceIn(-1f, 1f)
 
             if (e.kind == Kind.GUNNER || e.kind == Kind.WEAVER || e.kind == Kind.TURRET) {
@@ -616,9 +726,54 @@ class SkyWorld(private val seed: Int = 1) {
                 e.alive = false
                 it.remove()
                 hurtPlayer(RAM_DAMAGE, e.x, e.y)
-                if (state != State.RUNNING) return
+                if (state != State.RUNNING) { drainSpawns(); return }
             }
         }
+        drainSpawns()
+    }
+
+    private fun drainSpawns() {
+        if (pendingSpawns.isEmpty()) return
+        mutableEnemies.addAll(pendingSpawns)
+        pendingSpawns.clear()
+    }
+
+    /** A miner lets one go: it sits where it was dropped and waits for you to fly into it. */
+    private fun dropMine(e: Plane) {
+        pendingSpawns.add(
+            Plane(
+                x = e.x,
+                y = e.y + 0.05f,
+                kind = Kind.MINE,
+                hp = 1,
+                homeX = e.x,
+                phase = random.next() * TAU,
+                speed = 0f,
+            ),
+        )
+        pendingEvents.add(Event(Event.Type.MINE_LAID, e.x, e.y + 0.05f))
+    }
+
+    /**
+     * A healer puts one hit point back into the worst-off aircraft near it. It will not mend
+     * itself, so a healer is always the thing to shoot first.
+     */
+    private fun mendSomeone(healer: Plane) {
+        var worst: Plane? = null
+        var worstGap = 0
+        for (other in mutableEnemies) {
+            if (other === healer || !other.alive || other.kind == Kind.MINE) continue
+            val gap = other.maxHp - other.hp
+            if (gap <= 0) continue
+            val dx = other.x - healer.x
+            val dy = other.y - healer.y
+            if (dx * dx + dy * dy > HEAL_RADIUS * HEAL_RADIUS) continue
+            if (gap > worstGap) { worstGap = gap; worst = other }
+        }
+        val patient = worst ?: return
+        patient.hp = min(patient.maxHp, patient.hp + 1)
+        patient.mended = HEAL_FLASH
+        pendingEvents.add(Event(Event.Type.HEAL, patient.x, patient.y))
     }
 
     private fun fireEnemyShot(e: Plane) {
@@ -646,7 +801,8 @@ class SkyWorld(private val seed: Int = 1) {
         pendingEvents.add(Event(Event.Type.BOSS_IN, 0f, 0f, value = kind))
     }
 
-    private fun updateBoss(dt: Float) {
+    private fun updateBoss(dtRaw: Float) {
+        val dt = dtRaw * enemyTimeScale()
         val b = boss ?: return
         if (!b.alive) {
             updateWreck(b, dt)
@@ -835,6 +991,16 @@ class SkyWorld(private val seed: Int = 1) {
 
     fun wingmanY(): Float = playerY + WINGMAN_TRAIL
 
+    /** Whether an incoming round has run into one of the orbs circling the aircraft. */
+    private fun blockedByOrb(s: Shot): Boolean {
+        for (i in 0 until orbs) {
+            val dx = s.x - orbX(i)
+            val dy = s.y - orbY(i)
+            if (dx * dx + dy * dy < (ORBIT_HALF + SHOT_HALF) * (ORBIT_HALF + SHOT_HALF)) return true
+        }
+        return false
+    }
+
     private fun hitsPlayer(x: Float, y: Float, half: Float): Boolean =
         mercy <= 0f && abs(y - playerY) < half + PLAYER_HALF_Y && abs(x - playerX) < half + PLAYER_HALF_X
 
@@ -913,8 +1079,10 @@ class SkyWorld(private val seed: Int = 1) {
         while (it.hasNext()) {
             val s = it.next()
             if (!s.alive) { it.remove(); continue }
-            s.x += s.vx * dt
-            s.y += s.vy * dt
+            // your own rounds keep their speed; theirs are what the clock is slowing
+            val sdt = if (s.fromPlayer) dt else dt * enemyTimeScale()
+            s.x += s.vx * sdt
+            s.y += s.vy * sdt
             if (s.y < -0.15f || s.y > 1.15f || abs(s.x) > 1.2f) { it.remove(); continue }
             if (s.fromPlayer) {
                 if (homingTimer > 0f) steerHoming(s, dt)
@@ -955,6 +1123,10 @@ class SkyWorld(private val seed: Int = 1) {
                     }
                 }
                 if (spent) { s.alive = false; it.remove() }
+            } else if (orbs > 0 && blockedByOrb(s)) {
+                s.alive = false
+                it.remove()
+                pendingEvents.add(Event(Event.Type.ORBIT_BLOCK, s.x, s.y))
             } else if (hitsPlayer(s.x, s.y, SHOT_HALF)) {
                 s.alive = false
                 it.remove()
@@ -968,7 +1140,7 @@ class SkyWorld(private val seed: Int = 1) {
     private fun splitInTwo(e: Plane) {
         for (side in intArrayOf(-1, 1)) {
             val x = (e.x + side * SPLIT_SPREAD).coerceIn(-0.9f, 0.9f)
-            mutableEnemies.add(
+            pendingSpawns.add(
                 Plane(
                     x = x,
                     y = e.y,
@@ -981,6 +1153,8 @@ class SkyWorld(private val seed: Int = 1) {
             )
         }
         pendingEvents.add(Event(Event.Type.SPLIT, e.x, e.y))
+        // the shot loop is not walking the enemy list with an iterator, so these can land now
+        drainSpawns()
     }
 
     private fun maybeDropItem(x: Float, y: Float) {
@@ -1033,6 +1207,15 @@ class SkyWorld(private val seed: Int = 1) {
             ItemKind.HOMING -> homingTimer = HOMING_SECONDS
             ItemKind.MAGNET -> magnetTimer = MAGNET_SECONDS
             ItemKind.CHARM -> charm = true
+            ItemKind.SLOW -> slowTimer = SLOW_SECONDS
+            ItemKind.ORBIT -> orbs = min(MAX_ORBS, orbs + 1)
+            ItemKind.VAMPIRE -> { vampTimer = VAMP_SECONDS; vampCount = 0 }
+            // a medal is worth whatever your chain is paying, so it rewards the run you are having
+            ItemKind.MEDAL -> {
+                val worth = MEDAL_SCORE * comboMultiplier()
+                score += worth
+                pendingEvents.add(Event(Event.Type.MEDAL, item.x, item.y, value = worth))
+            }
         }
         score += ITEM_SCORE
         pendingEvents.add(Event(Event.Type.PICKUP, item.x, item.y, item = item.kind))
@@ -1078,6 +1261,14 @@ class SkyWorld(private val seed: Int = 1) {
         stageBestCombo = max(stageBestCombo, combo)
         val mult = comboMultiplier()
         score += scoreFor(kind) * mult
+        if (vampTimer > 0f && hp < MAX_HP) {
+            vampCount++
+            if (vampCount >= VAMP_KILLS) {
+                vampCount = 0
+                hp = min(MAX_HP, hp + 1)
+                pendingEvents.add(Event(Event.Type.VAMP_HEAL, x, y))
+            }
+        }
         pendingEvents.add(Event(Event.Type.KILL_ENEMY, x, y, value = mult))
         // the chain announces itself only when it actually steps up
         if (combo % COMBO_STEP == 0 && mult <= MAX_COMBO_MULT) {
@@ -1103,6 +1294,10 @@ class SkyWorld(private val seed: Int = 1) {
         Kind.SPLITTER -> 30
         Kind.TURRET -> 40
         Kind.SWARM -> 8
+        Kind.MINER -> 45
+        Kind.MINE -> 5
+        Kind.CHARGER -> 30
+        Kind.HEALER -> 50
     }
 
     // ---- test hooks -----------------------------------------------------------------------
@@ -1179,6 +1374,17 @@ class SkyWorld(private val seed: Int = 1) {
     internal fun wouldDeflectForTest(e: Plane, x: Float): Boolean =
         e.kind == Kind.SHIELDER && abs(e.x - x) < halfOf(e.kind) * SHIELD_ARC
 
+    /** Runs the weighted drop choice once, skipping the chance gate, and says what came up. */
+    internal fun rollDropForTest(): ItemKind {
+        var roll = random.next() * DROP_WEIGHT_TOTAL
+        var kind = DROP_TABLE.last().first
+        for ((k, weight) in DROP_TABLE) {
+            roll -= weight
+            if (roll < 0f) { kind = k; break }
+        }
+        return kind
+    }
+
     internal fun clearShotsForTest() {
         mutableShots.clear()
     }
@@ -1233,6 +1439,14 @@ class SkyWorld(private val seed: Int = 1) {
         const val TURRET_SECONDS = 7f
         const val TURRET_FIRE = 0.62f          // it fires faster than a gunner while it is parked
         const val SPLIT_SPREAD = 0.075f
+        const val MINE_GAP = 1.5f
+        const val MINE_DRIFT = 0.035f          // barely falls: it is a place, not an aircraft
+        const val CHARGE_TELL = 1.1f           // how long it shows you the lane before taking it
+        const val CHARGE_SPEED = 4.2f
+        const val CHARGE_TRACK = 2.2f
+        const val HEAL_GAP = 1.8f
+        const val HEAL_RADIUS = 0.45f
+        const val HEAL_FLASH = 0.35f
         const val BOSS_HALF = 0.2f
         const val SHOT_HALF = 0.012f
         const val ITEM_HALF = 0.05f
@@ -1277,6 +1491,15 @@ class SkyWorld(private val seed: Int = 1) {
         const val HOMING_TURN = 5.5f           // how hard a round may lean, per second
         const val MAGNET_SECONDS = 9f
         const val MAGNET_PULL = 0.85f
+        const val SLOW_SECONDS = 6f
+        const val SLOW_FACTOR = 0.42f
+        const val MAX_ORBS = 3
+        const val ORBIT_R = 0.17f
+        const val ORBIT_RATE = 2.4f            // radians per second
+        const val ORBIT_HALF = 0.032f
+        const val VAMP_SECONDS = 12f
+        const val VAMP_KILLS = 8
+        const val MEDAL_SCORE = 120
 
         /**
          * What falls, and how often. Ten kinds at the same drop rate means more variety per
@@ -1293,6 +1516,10 @@ class SkyWorld(private val seed: Int = 1) {
             ItemKind.BOMB to 8,
             ItemKind.MAGNET to 6,
             ItemKind.CHARM to 5,
+            ItemKind.SLOW to 7,
+            ItemKind.ORBIT to 8,
+            ItemKind.VAMPIRE to 6,
+            ItemKind.MEDAL to 9,
         )
         val DROP_WEIGHT_TOTAL = DROP_TABLE.sumOf { it.second }.toFloat()
         const val CLEAR_BONUS = 250
@@ -1370,22 +1597,22 @@ class SkyWorld(private val seed: Int = 1) {
         val PROFILES = listOf(
             // The coast road: clean shapes, plenty of warning, nothing but the aircraft to read.
             Profile(
-                22, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER, Kind.SWARM), 0.8f, 0.30f, 1.0f,
+                22, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER, Kind.SWARM, Kind.CHARGER), 0.8f, 0.30f, 1.0f,
                 listOf(Formation.LINE, Formation.VEE), Hazard.NONE, -0.12f,
             ),
             // Thunderhead pass: flown inside the weather, which pushes you off your line.
             Profile(
-                26, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER, Kind.SPLITTER), 1.0f, 0.34f, 1.15f,
+                26, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER, Kind.SPLITTER, Kind.MINER), 1.0f, 0.34f, 1.15f,
                 listOf(Formation.TRAIL, Formation.LINE), Hazard.GUSTS, -0.12f,
             ),
             // The ember fields: the ground burns, and the fire reaches the altitude you are at.
             Profile(
-                30, listOf(Kind.GUNNER, Kind.WEAVER, Kind.TURRET, Kind.SHIELDER), 1.25f, 0.32f, 1.3f,
+                30, listOf(Kind.GUNNER, Kind.WEAVER, Kind.TURRET, Kind.SHIELDER, Kind.HEALER), 1.25f, 0.32f, 1.3f,
                 listOf(Formation.ARC, Formation.SPLIT), Hazard.FLAK, -0.12f,
             ),
             // The long night: they are on you before you see them.
             Profile(
-                34, listOf(Kind.DIVER, Kind.GUNNER, Kind.SHIELDER, Kind.SPLITTER, Kind.SWARM), 1.4f, 0.40f, 1.5f,
+                34, listOf(Kind.DIVER, Kind.CHARGER, Kind.SHIELDER, Kind.HEALER, Kind.MINER, Kind.SWARM), 1.4f, 0.40f, 1.5f,
                 listOf(Formation.SPLIT, Formation.TRAIL, Formation.VEE), Hazard.DARK, -0.03f,
             ),
         )

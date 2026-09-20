@@ -823,23 +823,37 @@ class SkyWorldTest {
     }
 
     @Test
-    fun `a long run turns up all ten pickups`() {
+    fun `the drop roll turns up every pickup, and the staples more often than the exotics`() {
+        // the roll itself rather than a three-minute lottery: a rare kind missing once proves nothing
+        val w = running()
+        val counts = HashMap<SkyWorld.ItemKind, Int>()
+        repeat(20000) { counts.merge(w.rollDropForTest(), 1) { a, b -> a + b } }
+        assertEquals("every kind should be reachable, saw ${counts.keys}",
+            SkyWorld.ItemKind.entries.toSet(), counts.keys)
+        // and the table's own ordering should show up in the frequencies
+        val heaviest = SkyWorld.DROP_TABLE.maxByOrNull { it.second }!!.first
+        val lightest = SkyWorld.DROP_TABLE.minByOrNull { it.second }!!.first
+        assertTrue("$heaviest should beat $lightest, saw $counts",
+            counts.getValue(heaviest) > counts.getValue(lightest))
+    }
+
+    @Test
+    fun `a run of ordinary play still drops a spread of kinds`() {
         val seen = HashSet<SkyWorld.ItemKind>()
-        for (seed in 1..6) {
+        for (seed in 1..4) {
             val w = SkyWorld(seed).apply { start() }
             val log = ArrayList<SkyWorld.Event>()
             var frames = 0
-            while (frames++ < 60 * 60 * 3) {
+            while (frames++ < 60 * 90) {
                 w.update(1f / 60f)
                 w.setForTest(hp = SkyWorld.MAX_HP, mercy = 0f)
                 w.drainEvents(log)
+                for (item in w.items) seen.add(item.kind)
                 if (w.state == SkyWorld.State.LEVEL_CLEAR) w.nextLevel()
                 if (w.state == SkyWorld.State.GAME_OVER) w.start()
             }
-            for (item in w.items) seen.add(item.kind)
-            log.filter { it.type == SkyWorld.Event.Type.PICKUP }.forEach { it.item?.let(seen::add) }
         }
-        assertEquals("all ten should actually fall, saw $seen", SkyWorld.ItemKind.entries.toSet(), seen)
+        assertTrue("real play should turn up most of the table, saw $seen", seen.size >= 8)
     }
 
     @Test
@@ -1116,9 +1130,12 @@ class SkyWorldTest {
     }
 
     @Test
-    fun `every kind flies, and the stages between them use all eight`() {
+    fun `every kind flies, and the stages between them use all of them`() {
         val used = SkyWorld.PROFILES.flatMap { it.mix }.toSet()
-        assertEquals("all eight should show up somewhere", SkyWorld.Kind.entries.toSet(), used)
+        // a mine is laid, never sent: everything else has to be in somebody's roster
+        val expected = SkyWorld.Kind.entries.toSet() - SkyWorld.Kind.MINE
+        assertEquals("every kind that flies itself should show up somewhere", expected, used)
+        assertTrue("and a mine is not something a stage sends", SkyWorld.Kind.MINE !in used)
         // and each stage keeps a roster of its own
         val rosters = SkyWorld.PROFILES.map { it.mix.toSet() }
         assertEquals("no two stages should field exactly the same roster", rosters.size, rosters.toSet().size)
@@ -1182,5 +1199,213 @@ class SkyWorldTest {
         w.startLevel(2)
         assertEquals("a new stage starts clean", 0, w.stageHits)
         assertEquals(0, w.stageBestCombo)
+    }
+
+    // ---- the miner, the charger and the healer -----------------------------------------------------
+
+    @Test
+    fun `a miner leaves mines behind it, and they stay put`() {
+        val w = running()
+        w.soloModeForTest()
+        val miner = w.addEnemyForTest(SkyWorld.Kind.MINER, x = 0f, y = 0.2f, hp = 999)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        while (frames++ < 60 * 6) {
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            miner.y = 0.2f
+        }
+        val laid = log.count { it.type == SkyWorld.Event.Type.MINE_LAID }
+        assertTrue("it should have laid several, saw $laid", laid >= 2)
+        val mines = w.enemies.filter { it.alive && it.kind == SkyWorld.Kind.MINE }
+        assertTrue("and they should still be there", mines.isNotEmpty())
+        // a mine barely moves: over a second it should drift far less than an aircraft would
+        val mine = mines.first()
+        val y0 = mine.y
+        repeat(60) { w.update(1f / 60f) }
+        val drift = mine.y - y0
+        assertTrue("a mine should hang about, drifted $drift", drift in 0f..0.08f)
+    }
+
+    @Test
+    fun `a mine is a thing you can shoot as well as a thing you can hit`() {
+        val w = running()
+        w.soloModeForTest()
+        val mine = w.addEnemyForTest(SkyWorld.Kind.MINE, x = w.playerX, y = w.playerY - 0.25f, hp = 1)
+        var frames = 0
+        while (frames++ < 180 && mine.alive) w.update(1f / 60f)
+        assertTrue("it should be clearable from a distance", !mine.alive)
+    }
+
+    @Test
+    fun `a charger tells you the lane before it takes it`() {
+        val w = running()
+        w.soloModeForTest()
+        val run = w.addEnemyForTest(SkyWorld.Kind.CHARGER, x = 0.5f, y = 0.1f, hp = 999)
+        w.setForTest(playerX = -0.5f)
+        val log = ArrayList<SkyWorld.Event>()
+        // it should hang about first rather than arriving immediately
+        var frames = 0
+        var yAtTell = 0f
+        while (frames++ < 60 * 3) {
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            if (log.any { it.type == SkyWorld.Event.Type.CHARGE } && yAtTell == 0f) yAtTell = run.y
+        }
+        assertEquals("the tell should fire once", 1, log.count { it.type == SkyWorld.Event.Type.CHARGE })
+        assertTrue("and it should still be well up the screen when it does, was $yAtTell", yAtTell < 0.4f)
+        assertTrue("then it comes, and fast, ended at ${run.y}", run.y > 0.8f || !run.alive)
+        assertTrue("down the lane you were in, ended at ${run.x}", run.x < 0.2f)
+    }
+
+    @Test
+    fun `a healer puts back what you just took off, and will not mend itself`() {
+        val w = running()
+        w.soloModeForTest()
+        // well off the firing line, or the player simply finishes the patient off
+        val medic = w.addEnemyForTest(SkyWorld.Kind.HEALER, x = 0.45f, y = 0.25f, hp = 3)
+        val patient = w.addEnemyForTest(SkyWorld.Kind.GUNNER, x = 0.55f, y = 0.3f, hp = 4)
+        patient.hpForTest(1)
+        medic.hpForTest(1)
+        val log = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        while (frames++ < 60 * 4) {
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            medic.y = 0.25f
+            patient.y = 0.3f
+        }
+        assertTrue("it should have mended somebody", log.any { it.type == SkyWorld.Event.Type.HEAL })
+        assertTrue("the damaged one comes back up, at ${patient.hp}", patient.hp > 1)
+        assertEquals("and the healer does not mend itself", 1, medic.hp)
+    }
+
+    @Test
+    fun `a healer out of range is no help at all`() {
+        val w = running()
+        w.soloModeForTest()
+        val medic = w.addEnemyForTest(SkyWorld.Kind.HEALER, x = -0.85f, y = 0.1f, hp = 3)
+        val patient = w.addEnemyForTest(SkyWorld.Kind.GUNNER, x = 0.85f, y = 0.9f, hp = 4)
+        patient.hpForTest(1)
+        var frames = 0
+        while (frames++ < 60 * 4) {
+            w.update(1f / 60f)
+            medic.y = 0.1f
+            patient.y = 0.9f
+        }
+        assertEquals("too far away to help", 1, patient.hp)
+    }
+
+    // ---- slow, orbit, drain, medal -------------------------------------------------------------------
+
+    @Test
+    fun `the clock slows what is coming at you and not what you are firing`() {
+        val w = running()
+        w.soloModeForTest()
+        val theirs = w.addEnemyShotForTest(x = 0.5f, y = 0.2f)
+        repeat(30) { w.update(1f / 60f) }
+        val theirFast = theirs.y - 0.2f
+        val mineFast = w.shots.filter { it.fromPlayer }.size
+
+        val g = running()
+        g.soloModeForTest()
+        g.addItemForTest(SkyWorld.ItemKind.SLOW, x = g.playerX, y = g.playerY - 0.001f)
+        g.update(1f / 60f)
+        assertTrue(g.slowTimer > 0f)
+        val slowed = g.addEnemyShotForTest(x = 0.5f, y = 0.2f)
+        repeat(30) { g.update(1f / 60f) }
+        val theirSlow = slowed.y - 0.2f
+        assertTrue("their fire should crawl, $theirSlow vs $theirFast", theirSlow < theirFast * 0.7f)
+        assertTrue("yours should not, ${g.shots.count { it.fromPlayer }} vs $mineFast",
+            g.shots.count { it.fromPlayer } >= mineFast - 2)
+    }
+
+    @Test
+    fun `orbs circle you and eat what runs into them`() {
+        val w = running()
+        w.soloModeForTest()
+        assertEquals(0, w.orbs)
+        grab(w, SkyWorld.ItemKind.ORBIT)
+        assertEquals(1, w.orbs)
+        assertTrue("an orb sits off the aircraft", abs(w.orbX(0) - w.playerX) > 0.01f ||
+            abs(w.orbY(0) - w.playerY) > 0.01f)
+        // drop a round right onto where the orb is and it should be eaten, not land
+        val log = ArrayList<SkyWorld.Event>()
+        val hpBefore = w.hp
+        w.setForTest(mercy = 0f)
+        var blocked = false
+        var frames = 0
+        while (frames++ < 240 && !blocked) {
+            w.addEnemyShotForTest(x = w.orbX(0), y = w.orbY(0) - 0.01f, vy = 0.05f)
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            blocked = log.any { it.type == SkyWorld.Event.Type.ORBIT_BLOCK }
+        }
+        assertTrue("the orb should have eaten one", blocked)
+        assertEquals("and nothing got through while it did", hpBefore, w.hp)
+    }
+
+    @Test
+    fun `orbs cap out`() {
+        val w = running()
+        w.soloModeForTest()
+        repeat(SkyWorld.MAX_ORBS + 3) { grab(w, SkyWorld.ItemKind.ORBIT) }
+        assertEquals(SkyWorld.MAX_ORBS, w.orbs)
+    }
+
+    @Test
+    fun `draining pays for aggression in hit points`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setForTest(hp = 2)
+        grab(w, SkyWorld.ItemKind.VAMPIRE)
+        assertTrue(w.vampTimer > 0f)
+        chainKills(w, SkyWorld.VAMP_KILLS)
+        assertEquals("eight kills should have put one back", 3, w.hp)
+    }
+
+    @Test
+    fun `draining never pushes past a full aircraft`() {
+        val w = running()
+        w.soloModeForTest()
+        grab(w, SkyWorld.ItemKind.VAMPIRE)
+        chainKills(w, SkyWorld.VAMP_KILLS * 2)
+        assertEquals(SkyWorld.MAX_HP, w.hp)
+    }
+
+    @Test
+    fun `a medal is worth whatever your chain is paying`() {
+        fun medalWorth(chainKills: Int): Int {
+            val w = running()
+            w.soloModeForTest()
+            if (chainKills > 0) chainKills(w, chainKills)
+            val before = w.score
+            val log = ArrayList<SkyWorld.Event>()
+            w.addItemForTest(SkyWorld.ItemKind.MEDAL, x = w.playerX, y = w.playerY - 0.001f)
+            w.update(1f / 60f)
+            w.drainEvents(log)
+            val medal = log.first { it.type == SkyWorld.Event.Type.MEDAL }
+            assertTrue("the score should have moved by it", w.score - before >= medal.value)
+            return medal.value
+        }
+        val cold = medalWorth(0)
+        val hot = medalWorth(SkyWorld.COMBO_STEP * 3)
+        assertEquals(SkyWorld.MEDAL_SCORE, cold)
+        assertTrue("a medal on a chain should pay more, $hot vs $cold", hot > cold)
+    }
+
+    @Test
+    fun `a new stage takes back the clock, the orbs and the drain`() {
+        val w = running()
+        w.soloModeForTest()
+        for (kind in listOf(SkyWorld.ItemKind.SLOW, SkyWorld.ItemKind.ORBIT, SkyWorld.ItemKind.VAMPIRE)) {
+            grab(w, kind)
+        }
+        assertTrue(w.slowTimer > 0f && w.orbs > 0 && w.vampTimer > 0f)
+        w.startLevel(2)
+        assertEquals(0f, w.slowTimer, 1e-5f)
+        assertEquals(0, w.orbs)
+        assertEquals(0f, w.vampTimer, 1e-5f)
+        assertEquals(1f, w.enemyTimeScale(), 1e-5f)
     }
 }

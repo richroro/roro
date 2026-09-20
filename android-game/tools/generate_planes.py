@@ -216,8 +216,71 @@ def foe_swarm(c: Canvas, frame: int):
     prop(p, 0, 80, 11, frame, col=(0xD8, 0xC4, 0x8A))
 
 
+def foe_miner(c: Canvas, frame: int):
+    """A slow crosser with a rack under it. What it leaves behind is the problem."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    for side in (-1, 1):
+        exhaust(p, side * 22, 34, 4.5, frame)
+    p.po_out([(-44, 58), (-44, 44), (44, 44), (44, 58), (20, 64), (-20, 64)], (0x3A, 0x46, 0x52), o=O)
+    p.po_out([(0, 92), (15, 70), (16, 42), (0, 30), (-16, 42), (-15, 70)], (0x56, 0x66, 0x76), o=O)
+    p.po([(0, 88), (7, 70), (7, 46), (0, 36)], (0x72, 0x84, 0x96))
+    p.el(0, 58, 7, 8, (0x8E, 0xD8, 0xFF), o=1.2)
+    p.el(-2, 56, 3, 3, WHITE)
+    p.rr(-24, 84, 24, 92, 3, (0x2A, 0x33, 0x3C), o=1.4)                # the rack
+    for dx in (-15, 0, 15):                                            # mines still on it
+        p.ci(dx, 96, 6, (0x4A, 0x3A, 0x22), o=1.3)
+        p.ci(dx, 96, 2.5, (0xFF, 0x8A, 0x4D))
+
+
+def foe_mine(c: Canvas, frame: int):
+    """It is not flying anywhere. It is just there."""
+    p = Pen(c, PW / 2, 1.0)
+    glow = (0xFF, 0x6B, 0x4D) if frame % 2 == 0 else (0xFF, 0xC4, 0x7A)
+    for a in range(0, 360, 45):                                        # spikes
+        rad = math.radians(a)
+        p.rot(math.cos(rad) * 17, 60 + math.sin(rad) * 17, 7, 13, -a, (0x3A, 0x33, 0x2A), o=1.2)
+    p.ci(0, 60, 16, (0x46, 0x3E, 0x33), o=1.8)
+    p.ci(0, 60, 11, (0x5E, 0x54, 0x44))
+    p.ci(0, 60, 6, glow, o=1.0)
+    p.ci(-2, 58, 2.5, WHITE)
+
+
+def foe_charger(c: Canvas, frame: int):
+    """All engine and no manners. It picks a lane and takes it."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    exhaust(p, 0, 26, 9, frame)
+    p.po_out([(-26, 50), (0, 62), (26, 50), (22, 40), (-22, 40)], (0x8A, 0x2E, 0x6B), o=O)
+    p.po_out([(0, 106), (10, 70), (13, 40), (0, 24), (-13, 40), (-10, 70)], (0xC2, 0x3E, 0x92), o=O)
+    p.po([(0, 100), (4, 70), (5, 44), (0, 30)], (0xE0, 0x6B, 0xB4))
+    for side in (-1, 1):                                               # stub winglets, swept hard back
+        p.po([(side * 12, 64), (side * 34, 40), (side * 36, 32), (side * 14, 54)], (0x6B, 0x22, 0x52))
+    p.el(0, 56, 5.5, 7, (0xFF, 0xE0, 0x6B), o=1.2)
+    p.ci(0, 56, 2.5, (0x3A, 0x1A, 0x2E))
+    p.po_out([(-13, 100), (0, 92), (13, 100), (13, 106), (-13, 106)], (0x8A, 0x2E, 0x6B), o=1.3)
+
+
+def foe_healer(c: Canvas, frame: int):
+    """It does not shoot. It undoes what you just did."""
+    p = Pen(c, PW / 2, 1.0)
+    O = 1.7
+    exhaust(p, 0, 34, 5, frame)
+    p.po_out([(-40, 60), (-12, 68), (12, 68), (40, 60), (38, 48), (-38, 48)], (0x1E, 0x6E, 0x52), o=O)
+    p.po_out([(0, 96), (13, 70), (14, 42), (0, 30), (-14, 42), (-13, 70)], (0x2E, 0x9A, 0x74), o=O)
+    p.po([(0, 92), (6, 70), (6, 46), (0, 36)], (0x52, 0xC2, 0x9A))
+    p.el(0, 60, 7, 8, (0xD8, 0xFF, 0xE8), o=1.2)
+    p.el(-2, 58, 3, 3, WHITE)
+    # the cross it wears, and the dish it mends with
+    p.rr(-4, 74, 4, 92, 1.5, WHITE, o=1.2)
+    p.rr(-12, 79, 12, 87, 1.5, WHITE, o=1.2)
+    for side in (-1, 1):
+        p.el(side * 28, 62, 8, 5, (0x8A, 0xE8, 0xC4), o=1.2)
+
+
 FOES = [foe_drone, foe_weaver, foe_gunner, foe_diver,
-        foe_shielder, foe_splitter, foe_turret, foe_swarm]
+        foe_shielder, foe_splitter, foe_turret, foe_swarm,
+        foe_miner, foe_mine, foe_charger, foe_healer]
 
 
 # ---------------------------------------------------------------- the stage-ending heavies
@@ -443,6 +506,50 @@ def _g_charm(p):
     p.rr(-4, 28, 4, 36, 2, WHITE)
 
 
+def _g_slow(p):
+    """A clock face with its hands barely apart: time, not going anywhere."""
+    p.ci(0, 32, 16, WHITE, o=1.2)
+    p.ci(0, 32, 12, (0x3E, 0x4C, 0x7A))
+    p.rr(-1.8, 22, 1.8, 33, 1, WHITE)
+    p.rr(0, 30.5, 11, 33.5, 1, WHITE)
+    for a in (0, 90, 180, 270):
+        rad = math.radians(a)
+        p.ci(math.cos(rad) * 14, 32 + math.sin(rad) * 14, 1.8, WHITE)
+
+
+def _g_orbit(p):
+    """A core with two beads going round it, on a path of dots rather than a filled ring."""
+    for a in range(0, 360, 24):
+        rad = math.radians(a)
+        p.ci(math.cos(rad) * 19, 32 + math.sin(rad) * 11, 1.5, (0xCE, 0xC0, 0xF0))
+    p.ci(0, 32, 7.5, WHITE, o=1.3)
+    p.ci(0, 32, 4, (0x5A, 0x3E, 0x9A))
+    for dx in (-19, 19):
+        p.ci(dx, 32, 5.5, WHITE, o=1.3)
+        p.ci(dx, 32, 2.6, (0x5A, 0x3E, 0x9A))
+
+
+def _g_vampire(p):
+    """A drop, and the fangs that filled it."""
+    p.po_out([(0, 16), (11, 34), (7, 46), (-7, 46), (-11, 34)], WHITE, o=1.2)
+    p.po([(0, 24), (6, 35), (4, 42), (-4, 42), (-6, 35)], (0xC2, 0x2E, 0x4C))
+    for dx in (-4, 4):
+        p.po([(dx - 2.5, 30), (dx + 2.5, 30), (dx, 38)], WHITE)
+
+
+def _g_medal(p):
+    """A star on a ribbon."""
+    pts = []
+    for i in range(10):
+        rad = math.radians(-90 + i * 36)
+        r = 14 if i % 2 == 0 else 6.5
+        pts.append((math.cos(rad) * r, 30 + math.sin(rad) * r))
+    p.po_out(pts, WHITE, o=1.2)
+    p.po([(px * 0.55, 30 + (py - 30) * 0.55) for px, py in pts], (0xC2, 0x9A, 0x1E))
+    for dx in (-7, 7):
+        p.po([(dx - 4, 42), (dx + 4, 42), (dx + 2, 52), (dx - 2, 52)], WHITE)
+
+
 PICKUPS = [
     ("spread", (0x2E, 0x8A, 0xD6), _g_spread),
     ("rapid", (0xE0, 0x9A, 0x1E), _g_rapid),
@@ -454,6 +561,10 @@ PICKUPS = [
     ("homing", (0xA8, 0x2E, 0x5A), _g_homing),
     ("magnet", (0x1A, 0x6E, 0x8A), _g_magnet),
     ("charm", (0x8A, 0x6E, 0x1E), _g_charm),
+    ("slow", (0x3E, 0x4C, 0x7A), _g_slow),
+    ("orbit", (0x5A, 0x3E, 0x9A), _g_orbit),
+    ("vampire", (0xC2, 0x2E, 0x4C), _g_vampire),
+    ("medal", (0xC2, 0x9A, 0x1E), _g_medal),
 ]
 
 
