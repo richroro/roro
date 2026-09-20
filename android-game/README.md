@@ -192,6 +192,23 @@ between `PLAYER_Y_MIN` (0.50) and `PLAYER_Y_MAX` (0.94). Pushing forward is a re
 reach the wave and the falling power-ups sooner, with less sky left to dodge in. The front of the
 band stops short of the raider's hull so a boss fight can never open with a free ram.
 
+**Chains.** Kills land in chains: each one inside `COMBO_WINDOW` of the last extends it, and every
+`COMBO_STEP` kills steps the multiplier up, to `MAX_COMBO_MULT`. The chain pays for every kill in
+it, so it is worth far more than the hit points it costs you to hold -- and taking a single hit
+drops it to nothing. That is the gamble the whole scoring system is built on, and it is what makes
+the forward half of the flight band worth flying in. The meter under the hit points shows the
+multiplier and the window you have left; the run's best chain goes on the end-of-stage panel.
+
+**The surge.** Halfway down every stage, `RUSH_FORMATIONS` formations of different kinds arrive
+back to back, a third faster than usual, stacked `RUSH_STACK` apart so they land as three pulses
+rather than one wall. It is the one place a chain can really run, and the one place the stage
+stops feeling like a metronome.
+
+**Three rounds, not one.** The raider changes its mind at `BOSS_PHASE_2` and `BOSS_PHASE_3` of its
+health -- the bar carries a tick at each, so you can see them coming. It sweeps faster and wider
+each time. From phase 1 it stops only throwing its fan and picks you out of it with an aimed shot;
+at phase 2 the fan becomes a slow spiral, so the gap you slip through keeps moving.
+
 When the raider's health runs out the stage does not end on that frame. The world nearly stops
 for a beat (`HITSTOP_SCALE`), then winds back up while the hull falls, rolls over and comes apart
 in a run of `BOSS_BREAKS` blasts that walk along it, trailing smoke and embers the whole way down.

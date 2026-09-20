@@ -82,13 +82,20 @@ class SkyView @JvmOverloads constructor(
         soundPool = null
     }
 
-    private fun play(id: Int, slot: Int, minIntervalMs: Long, volume: Float, rateJitter: Float = 0f) {
+    private fun play(
+        id: Int,
+        slot: Int,
+        minIntervalMs: Long,
+        volume: Float,
+        rateJitter: Float = 0f,
+        pitch: Float = 1f,
+    ) {
         if (muted) return
         val pool = soundPool ?: return
         val now = System.nanoTime()
         if (now - lastPlayedNanos[slot] < minIntervalMs * 1_000_000L) return
         lastPlayedNanos[slot] = now
-        val rate = 1f + (fxRandom.nextFloat() * 2f - 1f) * rateJitter
+        val rate = (pitch + (fxRandom.nextFloat() * 2f - 1f) * rateJitter).coerceIn(0.5f, 2f)
         pool.play(id, volume, volume, 1, 0, rate)
     }
 
@@ -124,6 +131,11 @@ class SkyView @JvmOverloads constructor(
     private var padKnobY = 0f
     private var padGlow = 0f
     private var smokeTimer = 0f
+    /** Kicks the chain counter up a size when it steps, then settles. */
+    private var comboPop = 0f
+    private var comboPitch = 1f
+    private var banner = ""
+    private var bannerTimer = 0f
     /** 1 normally; dips towards zero for the hitstop when the raider goes, then winds back. */
     private var timeScale = 1f
     /** Fades the flight-band ceiling in while you are steering, so the limit is visible. */
@@ -383,10 +395,36 @@ class SkyView @JvmOverloads constructor(
                 play(sndHit, 1, 35, 0.3f, 0.25f)
             }
             SkyWorld.Event.Type.KILL_ENEMY -> {
-                sparks(e.x, e.y, 16, color(R.color.spark_good), 0.5f, 0.008f)
+                // a kill deeper into a chain throws more and rings higher
+                val mult = e.value.coerceIn(1, SkyWorld.MAX_COMBO_MULT)
+                sparks(e.x, e.y, 14 + mult * 3, color(R.color.spark_good), 0.5f + mult * 0.04f, 0.008f)
                 sparks(e.x, e.y, 8, color(R.color.smoke), 0.3f, 0.012f)
                 shakeTimer = max(shakeTimer, 0.08f)
-                play(sndDing, 2, 40, 0.4f, 0.2f)
+                comboPitch = 1f + (mult - 1) * 0.085f
+                play(sndDing, 2, 40, 0.4f, 0.2f, comboPitch)
+            }
+            SkyWorld.Event.Type.COMBO_UP -> {
+                comboPop = 1f
+                floatText("x${'$'}{e.value}", e.x, e.y, color(R.color.gold))
+                play(sndPickup, 6, 60, 0.45f, 0f, 1f + e.value * 0.06f)
+            }
+            SkyWorld.Event.Type.COMBO_LOST -> {
+                comboPop = 0f
+                floatText(context.getString(R.string.combo_lost), e.x, e.y - 0.06f, color(R.color.smoke))
+            }
+            SkyWorld.Event.Type.RUSH -> {
+                banner = context.getString(R.string.rush_in)
+                bannerTimer = 1.5f
+                shakeTimer = max(shakeTimer, 0.25f)
+                play(sndRoar, 8, 0, 0.55f, 0f, 1.35f)
+            }
+            SkyWorld.Event.Type.BOSS_PHASE -> {
+                banner = context.getString(R.string.boss_rage)
+                bannerTimer = 1.2f
+                sparks(e.x, e.y, 26, color(R.color.spark_bad), 0.7f, 0.012f)
+                shakeTimer = max(shakeTimer, 0.45f)
+                screenFlash(color(R.color.hp_low), 0.3f)
+                play(sndRoar, 8, 0, 0.9f, 0f, 1f + e.value * 0.14f)
             }
             SkyWorld.Event.Type.HIT_BOSS -> {
                 sparks(e.x, e.y, 3, color(R.color.spark_good), 0.25f)
@@ -483,6 +521,8 @@ class SkyView @JvmOverloads constructor(
                 smokeTimer = 0f
             }
         }
+        comboPop = max(0f, comboPop - dt * 2.4f)
+        bannerTimer = max(0f, bannerTimer - dt)
         padGlow = if (onPad) min(1f, padGlow + dt * 6f) else max(0f, padGlow - dt * 3f)
         bandHint = if (dragging) min(1f, bandHint + dt * 4f) else max(0f, bandHint - dt * 1.4f)
         if (!onPad) {
@@ -924,7 +964,10 @@ class SkyView @JvmOverloads constructor(
         val cx = sx(b.x)
         val cy = sy(b.y)
         if (b.alive) {
-            bankedSprite(canvas, frames[frame], cx, cy, sw, sh, b.bank * 0.5f, spritePaint)
+            // it glows red for a beat each time it steps up a phase
+            val raging = b.rage > 0f && ((b.rage * 18f).toInt() and 1) == 0
+            bankedSprite(canvas, frames[frame], cx, cy, sw, sh, b.bank * 0.5f,
+                if (raging) hitPaint else spritePaint)
             drawRaiderBar(canvas, b, w, h, 255)
             return
         }
@@ -966,6 +1009,14 @@ class SkyView @JvmOverloads constructor(
             rect.set((w - bw) / 2f, by, (w - bw) / 2f + bw * (b.hp / max(1, b.maxHp).toFloat()), by + bh)
             canvas.drawRoundRect(rect, bh, bh, bossHpPaint)
             bossHpPaint.alpha = 255
+            // ticks where it changes its mind, so the fight reads as three rounds
+            padPaint.strokeWidth = max(1.5f, w * 0.004f)
+            padPaint.alpha = (alpha * 0.7f).toInt().coerceIn(0, 255)
+            for (mark in floatArrayOf(SkyWorld.BOSS_PHASE_2, SkyWorld.BOSS_PHASE_3)) {
+                val mx = (w - bw) / 2f + bw * mark
+                canvas.drawLine(mx, by, mx, by + bh, padPaint)
+            }
+            padPaint.alpha = 255
         }
         label(canvas, stageRaiders[stageIndex(world.level)], w / 2f, by + bh / 2f, w * 0.042f,
             Color.WHITE, color(R.color.text_stroke))
@@ -1063,8 +1114,9 @@ class SkyView @JvmOverloads constructor(
             canvas.drawRoundRect(rect, pip * 0.3f, pip * 0.3f, hpPaint)
             px += pip + gap
         }
+        drawCombo(canvas, w, py + pip * 1.8f)
         if (world.rapidTimer > 0f) {
-            label(canvas, context.getString(R.string.item_rapid), w * 0.06f + total / 2f, py + pip * 1.7f,
+            label(canvas, context.getString(R.string.item_rapid), w * 0.06f + total / 2f, py + pip * 4.4f,
                 w * 0.035f, color(R.color.gold), color(R.color.text_stroke))
         }
 
@@ -1085,8 +1137,46 @@ class SkyView @JvmOverloads constructor(
         }
         label(canvas, world.bombs.toString(), bx, by + r * 0.72f, w * 0.042f, Color.WHITE, color(R.color.text_stroke))
 
+        drawBanner(canvas, w, h)
         if (world.state != SkyWorld.State.RUNNING) drawOverlay(canvas, w, h, stage)
         lastPlayerX = world.playerX
+    }
+
+    /**
+     * The chain. It only shows once it is actually paying -- below that it would be noise -- and
+     * the bar under it is the window you have left to land the next kill.
+     */
+    private fun drawCombo(canvas: Canvas, w: Float, y: Float) {
+        val mult = world.comboMultiplier()
+        if (world.combo < SkyWorld.COMBO_STEP || mult < 2) return
+        val left = (world.comboTimer / SkyWorld.COMBO_WINDOW).coerceIn(0f, 1f)
+        val x = w * 0.06f
+        val size = w * (0.052f + comboPop * 0.022f)
+        label(canvas, "x${'$'}mult", x + size * 0.45f, y + size, size, color(R.color.gold), color(R.color.text_stroke))
+        label(canvas, context.getString(R.string.combo_label), x + size * 1.55f, y + size * 0.97f,
+            w * 0.028f, Color.WHITE, color(R.color.text_stroke))
+        // the window draining away
+        val bw = w * 0.17f
+        val bh = w * 0.012f
+        val by = y + size * 1.25f
+        rect.set(x, by, x + bw, by + bh)
+        canvas.drawRoundRect(rect, bh, bh, hpTrackPaint)
+        hpPaint.color = if (left < 0.3f) color(R.color.hp_low) else color(R.color.gold)
+        rect.set(x, by, x + bw * left, by + bh)
+        canvas.drawRoundRect(rect, bh, bh, hpPaint)
+    }
+
+    /** A line across the middle of the sky for the moments that deserve one. */
+    private fun drawBanner(canvas: Canvas, w: Float, h: Float) {
+        if (bannerTimer <= 0f || banner.isEmpty()) return
+        val k = (bannerTimer / 0.35f).coerceIn(0f, 1f)          // eases out at the end
+        val rise = (1f - k) * w * 0.05f
+        strokePaint.alpha = (255 * k).toInt().coerceIn(0, 255)
+        fillPaint.alpha = strokePaint.alpha
+        label(canvas, banner, w / 2f, h * 0.36f - rise, w * 0.072f,
+            color(R.color.gold), color(R.color.text_stroke))
+        strokePaint.alpha = 255
+        fillPaint.alpha = 255
     }
 
     private fun drawOverlay(canvas: Canvas, w: Float, h: Float, stage: Int) {
@@ -1104,14 +1194,15 @@ class SkyView @JvmOverloads constructor(
                 val next = stageIndex(world.level + 1)
                 pre = context.getString(R.string.stage_cleared, world.level)
                 title = stageClears[stage]
-                body = context.getString(R.string.kills_line, world.kills, world.score) + "\n" +
+                body = context.getString(R.string.kills_line, world.kills, world.score) +
+                    chainLine() + "\n" +
                     context.getString(R.string.next_up, stagePlaces[next], stageTags[next])
                 accent = context.getString(R.string.tap_next_stage)
             }
             else -> {
                 title = context.getString(R.string.game_over)
                 body = context.getString(R.string.lost_to_foes, stagePlaces[stage]) + "\n" +
-                    context.getString(R.string.kills_line, world.kills, world.score)
+                    context.getString(R.string.kills_line, world.kills, world.score) + chainLine()
                 accent = context.getString(R.string.tap_to_retry)
             }
         }
@@ -1171,6 +1262,11 @@ class SkyView @JvmOverloads constructor(
         }
         return out
     }
+
+    /** How far the chain got, if it got anywhere worth saying. */
+    private fun chainLine(): String =
+        if (world.bestCombo < SkyWorld.COMBO_STEP) ""
+        else " · " + context.getString(R.string.best_chain, world.bestCombo)
 
     private fun courseBits(stage: Int): String {
         val profile = SkyWorld.PROFILES[stage]
