@@ -1408,4 +1408,157 @@ class SkyWorldTest {
         assertEquals(0f, w.vampTimer, 1e-5f)
         assertEquals(1f, w.enemyTimeScale(), 1e-5f)
     }
+
+    // ---- what you pick between stages ---------------------------------------------------------
+
+    /** Flies the stage to its end so the boons come out. */
+    private fun clearStage(w: SkyWorld) {
+        w.clearWavesForTest()
+        w.forceBossForTest(hp = 1)
+        var frames = 0
+        while (frames++ < 60 * 30 && w.state == SkyWorld.State.RUNNING) {
+            w.update(1f / 60f)
+            w.setForTest(hp = w.maxHp(), mercy = 0f)
+        }
+        assertEquals(SkyWorld.State.LEVEL_CLEAR, w.state)
+    }
+
+    @Test
+    fun `clearing a stage lays out three to pick between`() {
+        val w = running()
+        assertTrue("nothing is on offer mid-stage", w.offered.isEmpty())
+        clearStage(w)
+        assertEquals(SkyWorld.BOONS_OFFERED, w.offered.size)
+        assertEquals("and no two the same", w.offered.size, w.offered.toSet().size)
+    }
+
+    @Test
+    fun `taking one keeps it, flies on, and clears the offer`() {
+        val w = running()
+        clearStage(w)
+        val picked = w.offered.first()
+        assertEquals(0, w.boonLevel(picked))
+        assertTrue(w.takeBoon(0))
+        assertEquals(1, w.boonLevel(picked))
+        assertEquals(SkyWorld.State.RUNNING, w.state)
+        assertEquals("you are on the next stage", 2, w.level)
+        assertTrue("and there is nothing left to pick", w.offered.isEmpty())
+    }
+
+    @Test
+    fun `you cannot take one that is not on offer, or take one twice`() {
+        val w = running()
+        clearStage(w)
+        assertTrue("there is no fourth card", !w.takeBoon(SkyWorld.BOONS_OFFERED))
+        assertTrue(!w.takeBoon(-1))
+        assertTrue(w.takeBoon(0))
+        assertTrue("and once taken the offer is closed", !w.takeBoon(0))
+    }
+
+    @Test
+    fun `a boon is for the run, not the stage`() {
+        val w = running()
+        clearStage(w)
+        // force the one we want to check rather than hoping for it
+        w.giveBoonForTest(SkyWorld.Boon.ARMOUR)
+        w.takeBoon(0)
+        assertEquals("armour raises the ceiling", SkyWorld.MAX_HP + 1, w.maxHp())
+        assertEquals("and you start the stage at it", w.maxHp(), w.hp)
+        w.startLevel(3)
+        assertEquals("still there two stages later", SkyWorld.MAX_HP + 1, w.maxHp())
+        assertEquals(w.maxHp(), w.hp)
+    }
+
+    @Test
+    fun `each boon actually changes the thing it says it changes`() {
+        fun withBoon(boon: SkyWorld.Boon, times: Int = 1): SkyWorld {
+            val g = running()
+            repeat(times) { g.giveBoonForTest(boon) }
+            g.startLevel(1)
+            return g
+        }
+        val plain = running()
+        assertEquals(SkyWorld.MAX_HP + 1, withBoon(SkyWorld.Boon.ARMOUR).maxHp())
+        assertEquals(SkyWorld.START_BOMBS + 1, withBoon(SkyWorld.Boon.BOMBS).bombs)
+        assertEquals(2, withBoon(SkyWorld.Boon.GUNS).spread)
+        assertEquals(1, withBoon(SkyWorld.Boon.ESCORT).wingmen)
+        assertTrue(withBoon(SkyWorld.Boon.RAPIDFIRE).fireRate() > plain.fireRate())
+        assertTrue(withBoon(SkyWorld.Boon.CHAINWINDOW).comboWindow() > plain.comboWindow())
+        assertTrue(withBoon(SkyWorld.Boon.CHARMED).charm)
+        assertTrue(withBoon(SkyWorld.Boon.MAGNETIC).standingPull() > 0f)
+        assertEquals(1, withBoon(SkyWorld.Boon.PIERCING).basePierce())
+        assertTrue(withBoon(SkyWorld.Boon.SUPPLY).itemChance() > plain.itemChance())
+        assertTrue(withBoon(SkyWorld.Boon.AGILITY).frontLimit() < plain.frontLimit())
+        assertTrue(withBoon(SkyWorld.Boon.CHAINCAP).maxComboMult() > plain.maxComboMult())
+    }
+
+    @Test
+    fun `a piercing core makes an ordinary round go through`() {
+        val w = running()
+        w.giveBoonForTest(SkyWorld.Boon.PIERCING)
+        w.startLevel(1)
+        w.soloModeForTest()
+        val line = (0 until 2).map {
+            w.addEnemyForTest(SkyWorld.Kind.DRONE, x = w.playerX, y = w.playerY - 0.18f - it * 0.09f, hp = 1)
+        }
+        var frames = 0
+        while (frames++ < 60 && line.any { it.alive }) {
+            w.update(1f / 60f)
+            line.forEachIndexed { i, e -> if (e.alive) e.y = w.playerY - 0.18f - i * 0.09f }
+        }
+        assertTrue("both should go down without a pickup", line.none { it.alive })
+    }
+
+    @Test
+    fun `an agile aircraft can fly further forward than a plain one`() {
+        val plain = running()
+        repeat(60) { plain.movePlayerBy(0f, -0.05f) }
+        val agile = running()
+        agile.giveBoonForTest(SkyWorld.Boon.AGILITY)
+        agile.startLevel(1)
+        repeat(60) { agile.movePlayerBy(0f, -0.05f) }
+        assertTrue("agility should buy you sky, ${agile.playerY} vs ${plain.playerY}",
+            agile.playerY < plain.playerY)
+        assertTrue("but never into the raider's hull",
+            agile.frontLimit() > SkyWorld.BOSS_STATION_Y + SkyWorld.BOSS_HALF + SkyWorld.PLAYER_HALF_Y)
+    }
+
+    @Test
+    fun `the offer stops showing what is already maxed out`() {
+        val w = running()
+        // fill a one-shot boon and check it drops out of every future offer
+        repeat(SkyWorld.boonCap(SkyWorld.Boon.CHARMED)) { w.giveBoonForTest(SkyWorld.Boon.CHARMED) }
+        var offers = 0
+        for (stage in 1..12) {
+            w.startLevel(stage)
+            clearStage(w)
+            offers++
+            assertTrue("a maxed boon should not be offered again", SkyWorld.Boon.CHARMED !in w.offered)
+            w.takeBoon(0)
+        }
+        assertTrue(offers >= 12)
+    }
+
+    @Test
+    fun `a fresh run drops everything the last one carried`() {
+        val w = running()
+        w.giveBoonForTest(SkyWorld.Boon.ARMOUR)
+        w.giveBoonForTest(SkyWorld.Boon.GUNS)
+        assertTrue(w.boons.isNotEmpty())
+        w.start()
+        assertTrue("a new run starts bare", w.boons.isEmpty())
+        assertEquals(SkyWorld.MAX_HP, w.maxHp())
+        assertEquals(1, w.spread)
+    }
+
+    @Test
+    fun `a continue keeps the run's boons`() {
+        val w = running()
+        w.giveBoonForTest(SkyWorld.Boon.ARMOUR)
+        w.startLevel(3)
+        die(w)
+        assertTrue(w.continueRun())
+        assertEquals("you resume with what you built", 1, w.boonLevel(SkyWorld.Boon.ARMOUR))
+        assertEquals(SkyWorld.MAX_HP + 1, w.hp)
+    }
 }

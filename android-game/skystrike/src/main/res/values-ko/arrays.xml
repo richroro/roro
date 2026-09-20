@@ -32,4 +32,32 @@
         <item>불길은 이제 알아서 사그라든다.</item>
         <item>결국 새벽이 왔다. 당신은 아직 날고 있다.</item>
     </string-array>
+    <string-array name="boon_name">
+        <item>장갑</item>
+        <item>예비 폭탄</item>
+        <item>추가 포문</item>
+        <item>호위대</item>
+        <item>속사</item>
+        <item>긴 연쇄</item>
+        <item>행운의 부적</item>
+        <item>자기장</item>
+        <item>관통 탄심</item>
+        <item>보급 증가</item>
+        <item>기동</item>
+        <item>연쇄 상한</item>
+    </string-array>
+    <string-array name="boon_desc">
+        <item>체력 1 증가, 런 내내 유지</item>
+        <item>스테이지 시작 시 폭탄 1개 추가</item>
+        <item>스테이지 시작 시 포문 1개 추가</item>
+        <item>스테이지 시작 시 요기 1기와 함께</item>
+        <item>발사 속도 15% 증가</item>
+        <item>연쇄 유지 시간 0.6초 증가</item>
+        <item>스테이지 시작 시 부적 보유</item>
+        <item>아이템이 항상 끌려옴</item>
+        <item>탄이 기체를 1대 더 관통</item>
+        <item>아이템 드롭 1.5배</item>
+        <item>전방으로 0.06만큼 더 전진 가능</item>
+        <item>연쇄 배율 상한 2단계 증가</item>
+    </string-array>
 </resources>

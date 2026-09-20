@@ -172,6 +172,7 @@ class SkyView @JvmOverloads constructor(
         color = color(R.color.panel_edge)
     }
     private val padFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.panel) }
+    private val cardPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.panel_edge); alpha = 70 }
     private val hpPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val hpTrackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.hp_track) }
     private val bossHpPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = color(R.color.boss_hp) }
@@ -242,6 +243,10 @@ class SkyView @JvmOverloads constructor(
 
     private val stagePlaces: Array<String> = resources.getStringArray(R.array.stage_place)
     private val bossNames: Array<String> = resources.getStringArray(R.array.boss_name)
+    private val boonNames: Array<String> = resources.getStringArray(R.array.boon_name)
+    private val boonDescs: Array<String> = resources.getStringArray(R.array.boon_desc)
+    /** Where the three cards were last drawn, so a tap can be matched to one. */
+    private val boonCards = Array(SkyWorld.BOONS_OFFERED) { RectF() }
     private fun bossName(kind: Int): String = bossNames[kind.mod(bossNames.size)]
     private val stageTags: Array<String> = resources.getStringArray(R.array.stage_tag)
     private val stageStories: Array<String> = resources.getStringArray(R.array.stage_story)
@@ -458,6 +463,12 @@ class SkyView @JvmOverloads constructor(
                 sparks(e.x, e.y, 16, color(R.color.hp_full), 0.45f, 0.011f)
                 floatText(context.getString(R.string.item_vampire), e.x, e.y, color(R.color.hp_full))
                 play(sndPickup, 6, 0, 0.7f, 0f, 0.85f)
+            }
+            SkyWorld.Event.Type.BOON_TAKEN -> {
+                val boon = SkyWorld.Boon.entries[e.value.coerceIn(0, SkyWorld.Boon.entries.size - 1)]
+                banner = boonNames[boon.ordinal]
+                bannerTimer = 1.4f
+                play(sndClear, 5, 0, 0.7f, 0f, 1.2f)
             }
             SkyWorld.Event.Type.MEDAL -> {
                 sparks(e.x, e.y, 20, color(R.color.gold), 0.5f, 0.012f)
@@ -689,7 +700,7 @@ class SkyView @JvmOverloads constructor(
                 if (dragPointer < 0) beginDrag(event.getPointerId(i), x, y, w, h)
                 when (world.state) {
                     SkyWorld.State.READY -> world.start()
-                    SkyWorld.State.LEVEL_CLEAR -> world.nextLevel()
+                    SkyWorld.State.LEVEL_CLEAR -> if (!takeCardAt(x, y)) world.nextLevel()
                     // a death picks the run back up where it fell, while you still have a resume
                     SkyWorld.State.GAME_OVER -> if (!world.continueRun()) world.start()
                     SkyWorld.State.RUNNING -> {}
@@ -716,6 +727,15 @@ class SkyView @JvmOverloads constructor(
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> endDrag()
         }
         return true
+    }
+
+    /** Matches a tap to one of the three cards, if it landed on one. */
+    private fun takeCardAt(x: Float, y: Float): Boolean {
+        if (world.offered.isEmpty()) return false
+        for (i in world.offered.indices) {
+            if (i < boonCards.size && boonCards[i].contains(x, y)) return world.takeBoon(i)
+        }
+        return false            // tapped the panel but not a card: wait rather than skipping a pick
     }
 
     private fun beginDrag(pointerId: Int, x: Float, y: Float, w: Float, h: Float) {
@@ -1343,6 +1363,7 @@ class SkyView @JvmOverloads constructor(
                 title = context.getString(R.string.game_over)
                 body = context.getString(R.string.lost_to_foes, stagePlaces[stage]) + "\n" +
                     context.getString(R.string.kills_line, world.kills, world.score) + chainLine() +
+                    boonLine() +
                     (if (world.continues == 0) "\n" + context.getString(R.string.continues_spent) else "")
                 accent = if (world.continues > 0) {
                     context.getString(R.string.tap_continue, world.level, world.continues)
@@ -1360,7 +1381,12 @@ class SkyView @JvmOverloads constructor(
             titleLines = wrap(title, w * 0.80f, titleSize)
         }
         val lines = wrap(body, w * 0.78f, w * 0.042f)
-        val panelH = h * 0.30f + lines.size * w * 0.052f + (titleLines.size - 1) * titleSize * 1.25f
+        // three cards to pick between, if there are any: they take the room the accent line had
+        val cards = world.offered
+        val cardH = w * 0.115f
+        val cardsH = if (cards.isEmpty()) 0f else cards.size * (cardH + w * 0.022f) + w * 0.05f
+        val panelH = h * 0.30f + lines.size * w * 0.052f +
+            (titleLines.size - 1) * titleSize * 1.25f + cardsH
         rect.set(w * 0.07f, h * 0.5f - panelH / 2f, w * 0.93f, h * 0.5f + panelH / 2f)
         canvas.drawRoundRect(rect, w * 0.05f, w * 0.05f, panelPaint)
         panelEdgePaint.strokeWidth = max(2f, w * 0.005f)
@@ -1381,7 +1407,30 @@ class SkyView @JvmOverloads constructor(
             y += w * 0.052f
         }
         y += w * 0.03f
-        label(canvas, accent, w / 2f, y, w * 0.05f, color(R.color.gold), color(R.color.text_stroke))
+        if (cards.isEmpty()) {
+            label(canvas, accent, w / 2f, y, w * 0.05f, color(R.color.gold), color(R.color.text_stroke))
+            for (card in boonCards) card.setEmpty()
+            return
+        }
+        label(canvas, context.getString(R.string.pick_one), w / 2f, y, w * 0.045f,
+            color(R.color.gold), color(R.color.text_stroke))
+        y += w * 0.045f
+        for ((i, boon) in cards.withIndex()) {
+            val top = y
+            val card = boonCards[i]
+            card.set(w * 0.11f, top, w * 0.89f, top + cardH)
+            canvas.drawRoundRect(card, cardH * 0.28f, cardH * 0.28f, cardPaint)
+            panelEdgePaint.strokeWidth = max(2f, w * 0.005f)
+            canvas.drawRoundRect(card, cardH * 0.28f, cardH * 0.28f, panelEdgePaint)
+            val held = world.boonLevel(boon)
+            val name = boonNames[boon.ordinal] + if (held > 0) "  x${'$'}{held + 1}" else ""
+            label(canvas, name, card.centerX(), top + cardH * 0.42f, w * 0.042f,
+                color(R.color.gold), color(R.color.text_stroke))
+            bodyPaint.textSize = w * 0.032f
+            canvas.drawText(boonDescs[boon.ordinal], card.centerX(), top + cardH * 0.80f, bodyPaint)
+            y += cardH + w * 0.022f
+        }
+        for (i in cards.size until boonCards.size) boonCards[i].setEmpty()
     }
 
     /**
@@ -1409,6 +1458,15 @@ class SkyView @JvmOverloads constructor(
     }
 
     /** How far the chain got, if it got anywhere worth saying. */
+    /** The boons this run is carrying, for the panel that ends it. */
+    private fun boonLine(): String {
+        if (world.boons.isEmpty()) return ""
+        val names = world.boons.entries
+            .sortedBy { it.key.ordinal }
+            .joinToString(" · ") { boonNames[it.key.ordinal] + if (it.value > 1) " x${'$'}{it.value}" else "" }
+        return "\n" + context.getString(R.string.boon_have, names)
+    }
+
     private fun chainLine(): String =
         if (world.bestCombo < SkyWorld.COMBO_STEP) ""
         else " · " + context.getString(R.string.best_chain, world.bestCombo)

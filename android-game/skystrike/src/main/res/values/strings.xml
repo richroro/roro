@@ -43,4 +43,6 @@
     <string name="item_orbit">Orbit</string>
     <string name="item_vampire">Drain</string>
     <string name="item_medal">Medal</string>
+    <string name="pick_one">Pick one</string>
+    <string name="boon_have">Carrying: %1$s</string>
 </resources>
