@@ -97,14 +97,34 @@ class SkyWorld(private val seed: Int = 1) {
         }
     }
 
-    /** What a stage is made of. Gives each one its own shape instead of a longer version of the last. */
+    /** The shapes a wave can fly in. Each stage draws from its own set. */
+    enum class Formation { LINE, VEE, ARC, TRAIL, SPLIT }
+
+    /** What the place itself does to you, on top of whatever is shooting. */
+    enum class Hazard { NONE, GUSTS, FLAK, DARK }
+
+    /**
+     * What a stage is made of. Wave count and enemy mix alone made every stage a longer version
+     * of the last one; the formation set, the hazard and how much warning you get are what make
+     * the four places fly differently.
+     */
     class Profile(
         val waves: Int,
         val mix: List<Kind>,
         val fireRate: Float,
         val speed: Float,
         val bossHp: Float,
+        val formations: List<Formation>,
+        val hazard: Hazard,
+        /** Where enemies cross into view. Nearer zero is less warning. */
+        val entryY: Float,
     )
+
+    /** A column of fire standing up off the burning ground. Stage 3 only. */
+    class Flare(var x: Float, var y: Float, var life: Float, val maxLife: Float, val phase: Float) {
+        var alive = true
+            internal set
+    }
 
     // ---- state ----------------------------------------------------------------------------
 
@@ -142,9 +162,15 @@ class SkyWorld(private val seed: Int = 1) {
     private val mutableEnemies = ArrayList<Plane>()
     private val mutableShots = ArrayList<Shot>()
     private val mutableItems = ArrayList<Item>()
+    private val mutableFlares = ArrayList<Flare>()
     val enemies: List<Plane> get() = mutableEnemies
     val shots: List<Shot> get() = mutableShots
     val items: List<Item> get() = mutableItems
+    val flares: List<Flare> get() = mutableFlares
+
+    /** The crosswind pushing you sideways right now, in lane widths per second. Zero off stage 2. */
+    var gust = 0f
+        private set
     var boss: Boss? = null
         private set
 
@@ -156,6 +182,7 @@ class SkyWorld(private val seed: Int = 1) {
     private var waveIndex = 0
     private var nextWaveAt = 0f
     private var totalWaves = 0
+    private var nextFlareAt = 0f
 
     /** Moves queued events into [into] and clears the queue. */
     fun drainEvents(into: MutableList<Event>) {
@@ -175,6 +202,7 @@ class SkyWorld(private val seed: Int = 1) {
         mutableEnemies.clear()
         mutableShots.clear()
         mutableItems.clear()
+        mutableFlares.clear()
         pendingEvents.clear()
         boss = null
         playerX = 0f
@@ -190,6 +218,8 @@ class SkyWorld(private val seed: Int = 1) {
         waveIndex = 0
         totalWaves = profile.waves
         nextWaveAt = 0.8f
+        gust = 0f
+        nextFlareAt = FLARE_GAP
         state = State.RUNNING
     }
 
@@ -227,6 +257,7 @@ class SkyWorld(private val seed: Int = 1) {
         mercy = max(0f, mercy - dt)
         rapidTimer = max(0f, rapidTimer - dt)
 
+        updateHazard(dt)
         spawnWaves()
         updateEnemies(dt)
         updateBoss(dt)
@@ -236,6 +267,35 @@ class SkyWorld(private val seed: Int = 1) {
         checkStageEnd()
     }
 
+    /** The place itself, acting on you: the pass blows you sideways, the fields burn upward. */
+    private fun updateHazard(dt: Float) {
+        val profile = profileOf(level)
+        gust = if (profile.hazard == Hazard.GUSTS) sin(elapsed * GUST_RATE) * GUST_STRENGTH else 0f
+        if (gust != 0f) movePlayerBy(gust * dt)
+
+        if (profile.hazard == Hazard.FLAK) {
+            nextFlareAt -= dt
+            if (nextFlareAt <= 0f) {
+                nextFlareAt = FLARE_GAP * (0.7f + random.next() * 0.7f)
+                mutableFlares.add(
+                    Flare(-0.8f + random.next() * 1.6f, 1.05f, FLARE_LIFE, FLARE_LIFE, random.next() * TAU),
+                )
+            }
+        }
+        val it = mutableFlares.iterator()
+        while (it.hasNext()) {
+            val f = it.next()
+            f.life -= dt
+            f.y -= FLARE_RISE * dt
+            if (f.life <= 0f || f.y < -0.2f) { f.alive = false; it.remove(); continue }
+            // only the body of the column bites, not its fading tail
+            if (f.life > FLARE_LIFE * 0.25f && hitsPlayer(f.x, f.y, FLARE_HALF)) {
+                hurtPlayer(RAM_DAMAGE, f.x, f.y)
+                if (state != State.RUNNING) return
+            }
+        }
+    }
+
     // ---- stage script ---------------------------------------------------------------------
 
     private fun spawnWaves() {
@@ -243,7 +303,7 @@ class SkyWorld(private val seed: Int = 1) {
         val profile = profileOf(level)
         val kind = profile.mix[random.nextInt(profile.mix.size)]
         val n = 3 + random.nextInt(4)
-        val formation = random.nextInt(3)
+        val formation = profile.formations[random.nextInt(profile.formations.size)]
         val baseX = -0.62f + random.next() * 1.24f
         val speed = profile.speed * (0.85f + random.next() * 0.3f)
         val hpEach = 1 + (level - 1) / 3 + if (kind == Kind.GUNNER) 1 else 0
@@ -252,24 +312,33 @@ class SkyWorld(private val seed: Int = 1) {
             val spreadX: Float
             val lead: Float
             when (formation) {
-                0 -> {                                   // line abreast
+                Formation.LINE -> {                      // abreast, all arriving together
                     spreadX = (t - 0.5f) * 0.72f
                     lead = 0f
                 }
-                1 -> {                                   // vee
+                Formation.VEE -> {                       // edges out front
                     spreadX = (t - 0.5f) * 0.8f
                     lead = abs(t - 0.5f) * 0.34f
                 }
-                else -> {                                // trail
+                Formation.ARC -> {                       // centre out front, edges trailing
+                    spreadX = (t - 0.5f) * 0.9f
+                    lead = (0.5f - abs(t - 0.5f)) * 0.42f
+                }
+                Formation.TRAIL -> {                     // one file, straight down
                     spreadX = 0f
                     lead = t * 0.5f
+                }
+                Formation.SPLIT -> {                     // two groups peeling apart, gap in the middle
+                    val side = if (t < 0.5f) -1f else 1f
+                    spreadX = side * (0.26f + abs(t - 0.5f) * 0.7f)
+                    lead = abs(t - 0.5f) * 0.3f
                 }
             }
             val homeX = (baseX + spreadX).coerceIn(-0.86f, 0.86f)
             mutableEnemies.add(
                 Plane(
                     x = homeX,
-                    y = -0.12f - lead,
+                    y = profile.entryY - lead,
                     kind = kind,
                     hp = hpEach,
                     homeX = homeX,
@@ -569,6 +638,12 @@ class SkyWorld(private val seed: Int = 1) {
         return s
     }
 
+    internal fun addFlareForTest(x: Float, y: Float): Flare {
+        val f = Flare(x, y, FLARE_LIFE, FLARE_LIFE, 0f)
+        mutableFlares.add(f)
+        return f
+    }
+
     internal fun forceBossForTest(hp: Int) {
         boss = Boss(0, hp).also { it.y = BOSS_STATION_Y; it.engaged = true }
     }
@@ -636,15 +711,38 @@ class SkyWorld(private val seed: Int = 1) {
         const val MAX_FRAME_DT = 0.05f
         const val TAU = 6.2831855f
 
+        const val GUST_RATE = 0.55f            // how quickly the crosswind swings round
+        const val GUST_STRENGTH = 0.30f        // lane widths per second at full push
+        const val FLARE_GAP = 1.5f             // seconds between fire columns
+        const val FLARE_RISE = 0.2f
+        const val FLARE_LIFE = 4.6f
+        const val FLARE_HALF = 0.055f
+
         /**
          * Stage shapes. The first is a gentle introduction, then the weavers arrive, then the
          * gunners make you move, then everything at once and faster.
          */
         val PROFILES = listOf(
-            Profile(16, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER), 0.8f, 0.30f, 1.0f),
-            Profile(18, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER), 1.0f, 0.34f, 1.15f),
-            Profile(21, listOf(Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.25f, 0.32f, 1.3f),
-            Profile(24, listOf(Kind.DIVER, Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.4f, 0.40f, 1.5f),
+            // The coast road: clean shapes, plenty of warning, nothing but the aircraft to read.
+            Profile(
+                22, listOf(Kind.DRONE, Kind.DRONE, Kind.WEAVER), 0.8f, 0.30f, 1.0f,
+                listOf(Formation.LINE, Formation.VEE), Hazard.NONE, -0.12f,
+            ),
+            // Thunderhead pass: flown inside the weather, which pushes you off your line.
+            Profile(
+                26, listOf(Kind.WEAVER, Kind.DRONE, Kind.DIVER), 1.0f, 0.34f, 1.15f,
+                listOf(Formation.TRAIL, Formation.LINE), Hazard.GUSTS, -0.12f,
+            ),
+            // The ember fields: the ground burns, and the fire reaches the altitude you are at.
+            Profile(
+                30, listOf(Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.25f, 0.32f, 1.3f,
+                listOf(Formation.ARC, Formation.SPLIT), Hazard.FLAK, -0.12f,
+            ),
+            // The long night: they are on you before you see them.
+            Profile(
+                34, listOf(Kind.DIVER, Kind.GUNNER, Kind.WEAVER, Kind.DRONE), 1.4f, 0.40f, 1.5f,
+                listOf(Formation.SPLIT, Formation.TRAIL, Formation.VEE), Hazard.DARK, -0.03f,
+            ),
         )
 
         fun profileOf(level: Int): Profile = PROFILES[(level - 1).mod(PROFILES.size)]

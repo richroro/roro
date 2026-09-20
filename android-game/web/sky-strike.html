@@ -54,13 +54,23 @@
     BOSS_KINDS: 4, BOSS_BASE_HP: 70, BOSS_STATION_Y: 0.2, BOSS_ENTRY_SPEED: 0.22,
     BOSS_SWEEP_RATE: 0.9, BOSS_SWEEP_X: 0.5, BOSS_SALVO_GAP: 1.15, BOSS_FAN: 1.5, BOMB_BOSS_RATIO: 0.16,
     MAX_FRAME_DT: 0.05, TAU: 6.2831855,
+    GUST_RATE: 0.55, GUST_STRENGTH: 0.30,
+    FLARE_GAP: 1.5, FLARE_RISE: 0.2, FLARE_LIFE: 4.6, FLARE_HALF: 0.055,
   };
   const KIND = ['DRONE', 'WEAVER', 'GUNNER', 'DIVER'];
   const PROFILES = [
-    { waves: 16, mix: ['DRONE', 'DRONE', 'WEAVER'], fireRate: 0.8, speed: 0.30, bossHp: 1.0 },
-    { waves: 18, mix: ['WEAVER', 'DRONE', 'DIVER'], fireRate: 1.0, speed: 0.34, bossHp: 1.15 },
-    { waves: 21, mix: ['GUNNER', 'WEAVER', 'DRONE'], fireRate: 1.25, speed: 0.32, bossHp: 1.3 },
-    { waves: 24, mix: ['DIVER', 'GUNNER', 'WEAVER', 'DRONE'], fireRate: 1.4, speed: 0.40, bossHp: 1.5 },
+    // The coast road: clean shapes, plenty of warning, nothing but the aircraft to read.
+    { waves: 22, mix: ['DRONE', 'DRONE', 'WEAVER'], fireRate: 0.8, speed: 0.30, bossHp: 1.0,
+      formations: ['LINE', 'VEE'], hazard: 'NONE', entryY: -0.12 },
+    // Thunderhead pass: flown inside the weather, which pushes you off your line.
+    { waves: 26, mix: ['WEAVER', 'DRONE', 'DIVER'], fireRate: 1.0, speed: 0.34, bossHp: 1.15,
+      formations: ['TRAIL', 'LINE'], hazard: 'GUSTS', entryY: -0.12 },
+    // The ember fields: the ground burns, and the fire reaches the altitude you are at.
+    { waves: 30, mix: ['GUNNER', 'WEAVER', 'DRONE'], fireRate: 1.25, speed: 0.32, bossHp: 1.3,
+      formations: ['ARC', 'SPLIT'], hazard: 'FLAK', entryY: -0.12 },
+    // The long night: they are on you before you see them.
+    { waves: 34, mix: ['DIVER', 'GUNNER', 'WEAVER', 'DRONE'], fireRate: 1.4, speed: 0.40, bossHp: 1.5,
+      formations: ['SPLIT', 'TRAIL', 'VEE'], hazard: 'DARK', entryY: -0.03 },
   ];
   const STAGES = [
     { place: '해안 항로', raider: '강철 갈매기', tag: '새벽부터 저 위를 돌고 있다',
@@ -92,17 +102,19 @@
       this.seed = seed || 1; this.level = 1; this.bestLevel = 0; this.state = State.READY;
       this.score = 0; this.kills = 0; this.playerX = 0; this.hp = C.MAX_HP; this.bombs = C.START_BOMBS;
       this.shield = false; this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
-      this.enemies = []; this.shots = []; this.items = []; this.boss = null; this.events = [];
+      this.enemies = []; this.shots = []; this.items = []; this.flares = []; this.boss = null;
+      this.events = []; this.gust = 0;
     }
     startLevel(level) {
       this.level = level;
       this.r = rng(this.seed * 7919 + level * 104729);
       this.sr = rng(this.seed * 31 + level * 17);
       const p = profileOf(level);
-      this.enemies = []; this.shots = []; this.items = []; this.events = []; this.boss = null;
+      this.enemies = []; this.shots = []; this.items = []; this.flares = []; this.events = []; this.boss = null;
       this.playerX = 0; this.hp = C.MAX_HP; this.bombs = C.START_BOMBS; this.shield = false;
       this.rapidTimer = 0; this.spread = 1; this.mercy = 0; this.flash = 0;
       this.fireAcc = 0; this.elapsed = 0; this.waveIndex = 0; this.totalWaves = p.waves; this.nextWaveAt = 0.8;
+      this.gust = 0; this.nextFlareAt = C.FLARE_GAP;
       this.state = State.RUNNING;
     }
     start() { this.startLevel(1); }
@@ -130,6 +142,7 @@
       this.flash = Math.max(0, this.flash - dt);
       this.mercy = Math.max(0, this.mercy - dt);
       this.rapidTimer = Math.max(0, this.rapidTimer - dt);
+      this.updateHazard(dt);
       this.spawnWaves();
       this.updateEnemies(dt);
       this.updateBoss(dt);
@@ -139,23 +152,51 @@
       this.checkEnd();
     }
 
+    /** The place itself, acting on you: the pass blows you sideways, the fields burn upward. */
+    updateHazard(dt) {
+      const p = profileOf(this.level);
+      this.gust = p.hazard === 'GUSTS' ? Math.sin(this.elapsed * C.GUST_RATE) * C.GUST_STRENGTH : 0;
+      if (this.gust !== 0) this.movePlayerBy(this.gust * dt);
+
+      if (p.hazard === 'FLAK') {
+        this.nextFlareAt -= dt;
+        if (this.nextFlareAt <= 0) {
+          this.nextFlareAt = C.FLARE_GAP * (0.7 + this.r() * 0.7);
+          this.flares.push({ x: -0.8 + this.r() * 1.6, y: 1.05, life: C.FLARE_LIFE,
+            max: C.FLARE_LIFE, phase: this.r() * C.TAU });
+        }
+      }
+      for (let i = this.flares.length - 1; i >= 0; i--) {
+        const f = this.flares[i];
+        f.life -= dt; f.y -= C.FLARE_RISE * dt;
+        if (f.life <= 0 || f.y < -0.2) { this.flares.splice(i, 1); continue; }
+        // only the body of the column bites, not its fading tail
+        if (f.life > C.FLARE_LIFE * 0.25 && this.hitsPlayer(f.x, f.y, C.FLARE_HALF)) {
+          this.hurt(C.RAM_DAMAGE, f.x, f.y);
+          if (this.state !== State.RUNNING) return;
+        }
+      }
+    }
+
     spawnWaves() {
       if (this.waveIndex >= this.totalWaves || this.elapsed < this.nextWaveAt) return;
       const p = profileOf(this.level);
       const kind = p.mix[Math.floor(this.r() * p.mix.length) % p.mix.length];
       const n = 3 + Math.floor(this.r() * 4);
-      const formation = Math.floor(this.r() * 3);
+      const formation = p.formations[Math.floor(this.r() * p.formations.length) % p.formations.length];
       const baseX = -0.62 + this.r() * 1.24;
       const speed = p.speed * (0.85 + this.r() * 0.3);
       const hpEach = 1 + Math.floor((this.level - 1) / 3) + (kind === 'GUNNER' ? 1 : 0);
       for (let i = 0; i < n; i++) {
         const t = n === 1 ? 0.5 : i / (n - 1);
         let spreadX, lead;
-        if (formation === 0) { spreadX = (t - 0.5) * 0.72; lead = 0; }
-        else if (formation === 1) { spreadX = (t - 0.5) * 0.8; lead = Math.abs(t - 0.5) * 0.34; }
-        else { spreadX = 0; lead = t * 0.5; }
+        if (formation === 'LINE') { spreadX = (t - 0.5) * 0.72; lead = 0; }
+        else if (formation === 'VEE') { spreadX = (t - 0.5) * 0.8; lead = Math.abs(t - 0.5) * 0.34; }
+        else if (formation === 'ARC') { spreadX = (t - 0.5) * 0.9; lead = (0.5 - Math.abs(t - 0.5)) * 0.42; }
+        else if (formation === 'TRAIL') { spreadX = 0; lead = t * 0.5; }
+        else { const side = t < 0.5 ? -1 : 1; spreadX = side * (0.26 + Math.abs(t - 0.5) * 0.7); lead = Math.abs(t - 0.5) * 0.3; }
         const homeX = Math.max(-0.86, Math.min(0.86, baseX + spreadX));
-        this.enemies.push({ x: homeX, y: -0.12 - lead, kind, hp: hpEach, max: hpEach, homeX,
+        this.enemies.push({ x: homeX, y: p.entryY - lead, kind, hp: hpEach, max: hpEach, homeX,
           phase: this.r() * C.TAU, speed, alive: true, cooldown: 0, bank: 0, lastX: homeX });
       }
       this.waveIndex++;
@@ -665,6 +706,22 @@
     ctx.save();
     if (fx.shake > 0) ctx.translate((Math.random() - 0.5) * fx.shake * w * 0.04, (Math.random() - 0.5) * fx.shake * w * 0.04);
 
+    for (const f of world.flares) {
+      // a column of fire off the burning ground: hot core, ragged crown, smoke haze
+      const fade = Math.max(0, Math.min(1, f.life / f.max)), grow = 1 - fade;
+      const cx = sx(f.x), cy = sy(f.y);
+      const rw = w * 0.075 * (0.55 + fade * 0.6);
+      const rh = w * (0.13 + grow * 0.05) * (0.5 + fade * 0.7);
+      const flick = 0.85 + 0.15 * Math.sin(runTime * 14 + f.phase);
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(1, rw * 2.1));
+      g.addColorStop(0, 'rgba(255,138,43,0)'); g.addColorStop(0.55, 'rgba(255,138,43,0.2)'); g.addColorStop(1, 'rgba(255,138,43,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, Math.max(1, rw * 2.1), 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 0.78 * fade; ctx.fillStyle = '#FFB454';
+      ctx.beginPath(); ctx.ellipse(cx, cy - rh * 0.27, rw * flick, rh * 0.73, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 0.59 * fade; ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath(); ctx.ellipse(cx, cy - rh * 0.2, rw * 0.38 * flick, rh * 0.4, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
     for (const it of world.items) {
       const img = SPRITES.pickups[it.kind];
       const s = w * SIZE.pickup * (1 + 0.06 * Math.sin(runTime * 5 + it.x * 8));
@@ -688,9 +745,15 @@
       const k = KIND.indexOf(e.kind);
       const sh = w * SIZE.foe, sw = sh * 0.8;
       const img = SPRITES.foes[k][(Math.floor(runTime * PROP_HZ) + k) & 1];
+      // On the long night you hear them before you see them: they surface out of the dark.
+      const dark = profileOf(world.level).hazard === 'DARK';
+      const reveal = dark ? Math.max(0, Math.min(1, (e.y - 0.04) / 0.26)) : 1;
+      if (reveal <= 0.02) continue;
+      ctx.globalAlpha = reveal;
       if (e.hp < e.max) ctx.filter = 'brightness(1.5) saturate(1.4)';
       banked(img, sx(e.x), sy(e.y), sw, sh, e.bank);
       ctx.filter = 'none';
+      ctx.globalAlpha = 1;
     }
     const b = world.boss;
     if (b && b.alive) {

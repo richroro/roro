@@ -188,6 +188,90 @@ class SkyWorldTest {
     }
 
     @Test
+    fun `the pass blows you off your line and the other stages do not`() {
+        val pass = SkyWorld(3).apply { startLevel(2) }     // Thunderhead Pass carries the gusts
+        pass.clearWavesForTest()
+        val start = pass.playerX
+        var pushed = false
+        repeat(60 * 3) {
+            pass.update(1f / 60f)
+            if (kotlin.math.abs(pass.playerX - start) > 0.05f) pushed = true
+        }
+        assertTrue("the crosswind should move you without any input", pushed)
+        assertTrue("and it should be blowing", kotlin.math.abs(pass.gust) > 0f)
+
+        val coast = SkyWorld(3).apply { startLevel(1) }
+        coast.clearWavesForTest()
+        repeat(60 * 3) { coast.update(1f / 60f) }
+        assertEquals("the coast road has no wind", 0f, coast.gust, 1e-6f)
+        assertEquals("so you hold your line", 0f, coast.playerX, 1e-4f)
+    }
+
+    @Test
+    fun `the crosswind reverses rather than pinning you to one edge`() {
+        val w = SkyWorld(1).apply { startLevel(2) }
+        w.clearWavesForTest()
+        var sawPush = false
+        var sawPull = false
+        repeat(60 * 14) {
+            w.update(1f / 60f)
+            if (w.gust > 0.05f) sawPush = true
+            if (w.gust < -0.05f) sawPull = true
+        }
+        assertTrue("the wind should blow both ways over a stage", sawPush && sawPull)
+    }
+
+    @Test
+    fun `the ember fields throw up fire columns that burn on contact`() {
+        val w = SkyWorld(4).apply { startLevel(3) }        // the Ember Fields carry the flak
+        w.clearWavesForTest()
+        var guard = 0
+        while (w.flares.isEmpty() && guard++ < 60 * 12) w.update(1f / 60f)
+        assertTrue("the burning ground should send something up", w.flares.isNotEmpty())
+
+        val hit = SkyWorld(4).apply { startLevel(3) }
+        hit.clearWavesForTest()
+        hit.setForTest(playerX = 0f)
+        hit.addFlareForTest(x = 0f, y = SkyWorld.PLAYER_Y)
+        hit.update(1f / 60f)
+        assertEquals("flying into the column should cost you", SkyWorld.MAX_HP - 1, hit.hp)
+    }
+
+    @Test
+    fun `the coast road never throws fire at you`() {
+        val w = SkyWorld(4).apply { startLevel(1) }
+        w.clearWavesForTest()
+        repeat(60 * 20) { w.update(1f / 60f) }
+        assertTrue("stage one's hazard is nothing at all", w.flares.isEmpty())
+    }
+
+    @Test
+    fun `the long night gives you far less warning than the coast road`() {
+        fun firstEntryY(level: Int): Float {
+            val w = SkyWorld(7).apply { startLevel(level) }
+            var guard = 0
+            while (w.enemies.isEmpty() && guard++ < 60 * 10) w.update(1f / 60f)
+            return w.enemies.maxOf { it.y }
+        }
+        val coast = firstEntryY(1)
+        val night = firstEntryY(4)
+        assertTrue("the night should put them almost on screen, saw $night", night > coast + 0.05f)
+    }
+
+    @Test
+    fun `each stage flies its own formations, not one shared shuffle`() {
+        // Trail is the pass's shape and arc is the ember fields'; neither belongs on the coast road.
+        for (level in 1..4) {
+            val allowed = SkyWorld.profileOf(level).formations.toSet()
+            assertTrue("stage $level should have its own set", allowed.isNotEmpty())
+        }
+        val coast = SkyWorld.profileOf(1).formations.toSet()
+        val fields = SkyWorld.profileOf(3).formations.toSet()
+        assertTrue("the coast road and the ember fields should not fly the same shapes",
+            coast != fields)
+    }
+
+    @Test
     fun `a long run never leaves bullets or wrecks piling up`() {
         val w = running(seed = 5)
         var frames = 0
