@@ -192,6 +192,13 @@ between `PLAYER_Y_MIN` (0.50) and `PLAYER_Y_MAX` (0.94). Pushing forward is a re
 reach the wave and the falling power-ups sooner, with less sky left to dodge in. The front of the
 band stops short of the raider's hull so a boss fight can never open with a free ram.
 
+When the raider's health runs out the stage does not end on that frame. The world nearly stops
+for a beat (`HITSTOP_SCALE`), then winds back up while the hull falls, rolls over and comes apart
+in a run of `BOSS_BREAKS` blasts that walk along it, trailing smoke and embers the whole way down.
+The last blast takes the hull with it and the sky gets `BOSS_AFTERGLOW` to itself before the clear
+panel comes up. The moment it dies, every enemy bullet in the air is wiped and nothing can hurt
+you any more -- a fight you have won cannot be taken back during the fireworks.
+
 Two ways to fly, and both are always live: drag the aircraft itself, one-to-one, the way it always
 worked; or drag inside the **steering pad** in the bottom-left corner, which multiplies your thumb
 by `PAD_GAIN` so one short stroke crosses the whole band without your hand covering the fight. The

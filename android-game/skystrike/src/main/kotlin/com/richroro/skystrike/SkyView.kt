@@ -123,6 +123,9 @@ class SkyView @JvmOverloads constructor(
     private var padKnobX = 0f
     private var padKnobY = 0f
     private var padGlow = 0f
+    private var smokeTimer = 0f
+    /** 1 normally; dips towards zero for the hitstop when the raider goes, then winds back. */
+    private var timeScale = 1f
     /** Fades the flight-band ceiling in while you are steering, so the limit is visible. */
     private var bandHint = 0f
     private var padUsed = prefs.getBoolean(KEY_PAD_USED, false)
@@ -267,12 +270,19 @@ class SkyView @JvmOverloads constructor(
             val dt = if (lastFrameNanos == 0L) 0f else (frameTimeNanos - lastFrameNanos) / 1_000_000_000f
             lastFrameNanos = frameTimeNanos
             runTime += dt
+            // hitstop: the world nearly stops when the raider goes, then winds back up. The
+            // recovery runs on the real clock so the slow-motion itself cannot slow down.
+            timeScale = min(1f, timeScale + dt * TIME_RECOVERY)
+            val scaled = dt * timeScale
             val before = world.state
-            world.update(dt)
+            world.update(scaled)
             world.drainEvents(events)
             for (e in events) handleEvent(e)
             events.clear()
-            updateFx(dt)
+            updateFx(scaled)
+            // the flash is a camera effect, not a world one: it fades on the real clock, or the
+            // hitstop would hold a white screen over the whole moment you are meant to be watching
+            flashTimer = max(0f, flashTimer - dt * 2.2f)
             if (before == SkyWorld.State.RUNNING && world.state != SkyWorld.State.RUNNING) onRunEnded()
             invalidate()
             Choreographer.getInstance().postFrameCallback(this)
@@ -335,6 +345,23 @@ class SkyView @JvmOverloads constructor(
         }
     }
 
+    /** Chunks of hull: bigger than a spark, slower, and they keep going instead of stopping. */
+    private fun debris(x: Float, y: Float, n: Int) {
+        repeat(n) {
+            val a = fxRandom.nextFloat() * SkyWorld.TAU
+            val v = 0.18f + fxRandom.nextFloat() * 0.3f
+            particles.add(
+                Particle(
+                    x = x, y = y,
+                    vx = kotlin.math.cos(a) * v, vy = sin(a) * v - 0.05f,
+                    life = 0.8f + fxRandom.nextFloat() * 0.7f, maxLife = 1.5f,
+                    color = color(R.color.smoke),
+                    size = 0.014f + fxRandom.nextFloat() * 0.014f, drag = 0.5f,
+                ),
+            )
+        }
+    }
+
     private fun floatText(text: String, x: Float, y: Float, color: Int) {
         floatTexts.add(FloatText(text, x, y, 0.85f, 0.85f, color))
     }
@@ -365,13 +392,35 @@ class SkyView @JvmOverloads constructor(
                 sparks(e.x, e.y, 3, color(R.color.spark_good), 0.25f)
                 play(sndHit, 1, 35, 0.3f, 0.25f)
             }
+            SkyWorld.Event.Type.BOSS_DOWN -> {
+                // the moment it stops being an enemy: everything holds still for a beat
+                timeScale = HITSTOP_SCALE
+                sparks(e.x, e.y, 34, color(R.color.spark_good), 0.75f, 0.013f)
+                sparks(e.x, e.y, 14, color(R.color.smoke), 0.35f, 0.022f)
+                shakeTimer = 0.55f
+                screenFlash(Color.WHITE, 0.38f)
+                play(sndBoom, 7, 0, 0.9f)
+                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+            }
+            SkyWorld.Event.Type.BOSS_BREAK -> {
+                // each blast walks a little further along the hull and hits a little harder
+                val t = e.value / 100f
+                sparks(e.x, e.y, 10 + (t * 14).toInt(), color(R.color.spark_good), 0.45f + t * 0.35f, 0.011f)
+                sparks(e.x, e.y, 6 + (t * 8).toInt(), color(R.color.smoke), 0.28f + t * 0.2f, 0.02f)
+                debris(e.x, e.y, 3 + (t * 4).toInt())
+                shakeTimer = max(shakeTimer, 0.16f + t * 0.16f)
+                screenFlash(color(R.color.s3_ember), 0.1f + t * 0.14f)
+                play(sndDing, 2, 30, 0.5f + t * 0.4f, 0.18f)
+            }
             SkyWorld.Event.Type.KILL_BOSS -> {
-                sparks(e.x, e.y, 60, color(R.color.spark_good), 0.9f, 0.014f)
-                sparks(e.x, e.y, 30, color(R.color.smoke), 0.6f, 0.02f)
-                shakeTimer = 0.6f
-                screenFlash(Color.WHITE, 0.5f)
+                sparks(e.x, e.y, 70, color(R.color.spark_good), 1.1f, 0.015f)
+                sparks(e.x, e.y, 36, color(R.color.smoke), 0.7f, 0.022f)
+                debris(e.x, e.y, 16)
+                shakeTimer = 0.7f
+                screenFlash(Color.WHITE, 0.55f)
                 floatText(context.getString(R.string.raider_down, stageRaiders[stageIndex(world.level)]), e.x, e.y, color(R.color.gold))
                 play(sndBoom, 7, 0, 1f)
+                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             }
             SkyWorld.Event.Type.HIT_PLAYER -> {
                 sparks(e.x, e.y, 22, color(R.color.spark_bad), 0.55f, 0.01f)
@@ -419,7 +468,21 @@ class SkyView @JvmOverloads constructor(
         muzzleTimer = max(0f, muzzleTimer - dt)
         shakeTimer = max(0f, shakeTimer - dt)
         bombTimer = max(0f, bombTimer - dt)
-        flashTimer = max(0f, flashTimer - dt * 2.2f)
+        world.boss?.let { b ->
+            // a steady trail off the wreck, so the gaps between blasts are not empty
+            if (!b.alive && b.dying > 0f) {
+                smokeTimer -= dt
+                while (smokeTimer <= 0f) {
+                    smokeTimer += 0.035f
+                    val sx = b.x + (fxRandom.nextFloat() - 0.5f) * SkyWorld.BOSS_HALF
+                    val sy = b.y + (fxRandom.nextFloat() - 0.5f) * SkyWorld.BOSS_HALF * 0.6f
+                    sparks(sx, sy, 1, color(R.color.smoke), 0.12f, 0.018f)
+                    if (fxRandom.nextFloat() < 0.45f) sparks(sx, sy, 1, color(R.color.s3_ember), 0.2f, 0.009f)
+                }
+            } else {
+                smokeTimer = 0f
+            }
+        }
         padGlow = if (onPad) min(1f, padGlow + dt * 6f) else max(0f, padGlow - dt * 3f)
         bandHint = if (dragging) min(1f, bandHint + dt * 4f) else max(0f, bandHint - dt * 1.4f)
         if (!onPad) {
@@ -619,7 +682,7 @@ class SkyView @JvmOverloads constructor(
         for (item in world.items) drawPickup(canvas, item, w)
         for (s in world.shots) drawShot(canvas, s, w)
         for (e in world.enemies) if (e.alive) drawFoe(canvas, e, w)
-        world.boss?.let { if (it.alive) drawRaider(canvas, it, w, h) }
+        world.boss?.let { if (it.alive || !it.finished) drawRaider(canvas, it, w, h) }
         if (world.state == SkyWorld.State.RUNNING || world.state == SkyWorld.State.LEVEL_CLEAR) drawPlayer(canvas, w)
         drawParticles(canvas, w)
         drawFloatTexts(canvas, w)
@@ -858,15 +921,52 @@ class SkyView @JvmOverloads constructor(
         val frame = ((runTime * PROP_HZ).toInt()) and 1
         val sw = w * RAIDER_SIZE
         val sh = sw * 0.8f
-        bankedSprite(canvas, frames[frame], sx(b.x), sy(b.y), sw, sh, b.bank * 0.5f, spritePaint)
+        val cx = sx(b.x)
+        val cy = sy(b.y)
+        if (b.alive) {
+            bankedSprite(canvas, frames[frame], cx, cy, sw, sh, b.bank * 0.5f, spritePaint)
+            drawRaiderBar(canvas, b, w, h, 255)
+            return
+        }
+
+        // Falling. It rolls over, lights up white at each blast, and burns out at the very end.
+        val span = SkyWorld.BOSS_DEATH_SECONDS - SkyWorld.BOSS_AFTERGLOW
+        val gone = 1f - ((b.dying - SkyWorld.BOSS_AFTERGLOW) / span).coerceIn(0f, 1f)
+        val roll = sin(b.roll * SkyWorld.TAU) * (0.35f + gone * 0.65f)
+        val lit = ((b.dying * 26f).toInt() and 1) == 0 && gone < 0.88f
+        val paint = if (lit) hitPaint else spritePaint
+        val fade = (255 * (1f - ((gone - 0.8f) / 0.2f).coerceIn(0f, 1f))).toInt()
+        paint.alpha = fade
+        bankedSprite(canvas, frames[frame], cx, cy, sw * (1f - gone * 0.06f), sh, roll, paint)
+        paint.alpha = 255
+        // it trails fire the whole way down
+        val glow = w * 0.11f * (0.6f + sin(runTime * 19f) * 0.25f) * (1f - gone * 0.4f)
+        muzzlePaint.shader = RadialGradient(
+            cx, cy, max(1f, glow),
+            intArrayOf(0xCCFFF1C4.toInt(), 0x88F97316.toInt(), 0x00F97316), null, Shader.TileMode.CLAMP,
+        )
+        canvas.drawCircle(cx, cy, max(1f, glow), muzzlePaint)
+        muzzlePaint.shader = null
+        // the bar empties, then gets out of the way
+        drawRaiderBar(canvas, b, w, h, (255 * (1f - (gone / 0.25f).coerceIn(0f, 1f))).toInt())
+    }
+
+    private fun drawRaiderBar(canvas: Canvas, b: SkyWorld.Boss, w: Float, h: Float, alpha: Int) {
+        if (alpha <= 0) return
         // health bar pinned under the status bar so it never fights the aircraft
         val bw = w * 0.76f
         val bh = w * 0.035f
         val by = insetTop + h * 0.075f
+        bossHpTrackPaint.alpha = alpha
         rect.set((w - bw) / 2f - 2f, by - 2f, (w + bw) / 2f + 2f, by + bh + 2f)
         canvas.drawRoundRect(rect, bh, bh, bossHpTrackPaint)
-        rect.set((w - bw) / 2f, by, (w - bw) / 2f + bw * (b.hp / max(1, b.maxHp).toFloat()), by + bh)
-        canvas.drawRoundRect(rect, bh, bh, bossHpPaint)
+        bossHpTrackPaint.alpha = 255
+        if (b.hp > 0) {
+            bossHpPaint.alpha = alpha
+            rect.set((w - bw) / 2f, by, (w - bw) / 2f + bw * (b.hp / max(1, b.maxHp).toFloat()), by + bh)
+            canvas.drawRoundRect(rect, bh, bh, bossHpPaint)
+            bossHpPaint.alpha = 255
+        }
         label(canvas, stageRaiders[stageIndex(world.level)], w / 2f, by + bh / 2f, w * 0.042f,
             Color.WHITE, color(R.color.text_stroke))
     }
@@ -1015,8 +1115,16 @@ class SkyView @JvmOverloads constructor(
                 accent = context.getString(R.string.tap_to_retry)
             }
         }
-        val lines = body.split("\n")
-        val panelH = h * 0.30f + lines.size * w * 0.052f
+        // The clear lines are whole sentences, so the title wraps too -- and drops a size when
+        // it has to, rather than running off the side of the panel.
+        var titleSize = w * 0.068f
+        var titleLines = wrap(title, w * 0.80f, titleSize)
+        if (titleLines.size > 1) {
+            titleSize = w * 0.054f
+            titleLines = wrap(title, w * 0.80f, titleSize)
+        }
+        val lines = wrap(body, w * 0.78f, w * 0.042f)
+        val panelH = h * 0.30f + lines.size * w * 0.052f + (titleLines.size - 1) * titleSize * 1.25f
         rect.set(w * 0.07f, h * 0.5f - panelH / 2f, w * 0.93f, h * 0.5f + panelH / 2f)
         canvas.drawRoundRect(rect, w * 0.05f, w * 0.05f, panelPaint)
         panelEdgePaint.strokeWidth = max(2f, w * 0.005f)
@@ -1026,8 +1134,11 @@ class SkyView @JvmOverloads constructor(
             label(canvas, pre, w / 2f, y, w * 0.045f, color(R.color.gold), color(R.color.text_stroke))
             y += w * 0.075f
         }
-        label(canvas, title, w / 2f, y, w * 0.068f, Color.WHITE, color(R.color.text_stroke))
-        y += w * 0.09f
+        for (line in titleLines) {
+            label(canvas, line, w / 2f, y, titleSize, Color.WHITE, color(R.color.text_stroke))
+            y += titleSize * 1.25f
+        }
+        y += w * 0.09f - titleSize * 1.25f
         bodyPaint.textSize = w * 0.042f
         for (line in lines) {
             canvas.drawText(line, w / 2f, y, bodyPaint)
@@ -1035,6 +1146,30 @@ class SkyView @JvmOverloads constructor(
         }
         y += w * 0.03f
         label(canvas, accent, w / 2f, y, w * 0.05f, color(R.color.gold), color(R.color.text_stroke))
+    }
+
+    /**
+     * Breaks [body] to fit [maxWidth] at [textSize], keeping the author's own line breaks.
+     * Without this a long victory line runs off the side of the panel on a narrow phone.
+     */
+    private fun wrap(body: String, maxWidth: Float, textSize: Float): List<String> {
+        bodyPaint.textSize = textSize
+        val out = ArrayList<String>()
+        for (paragraph in body.split("\n")) {
+            if (paragraph.isEmpty()) { out.add(""); continue }
+            var line = StringBuilder()
+            for (word in paragraph.split(" ")) {
+                val candidate = if (line.isEmpty()) word else "${'$'}line ${'$'}word"
+                if (bodyPaint.measureText(candidate) <= maxWidth || line.isEmpty()) {
+                    line = StringBuilder(candidate)
+                } else {
+                    out.add(line.toString())
+                    line = StringBuilder(word)
+                }
+            }
+            out.add(line.toString())
+        }
+        return out
     }
 
     private fun courseBits(stage: Int): String {
@@ -1064,6 +1199,8 @@ class SkyView @JvmOverloads constructor(
         private const val PICKUP_SIZE = 0.1f
         private const val PROP_HZ = 22f
         private const val BANK_DEGREES = 18f
+        private const val HITSTOP_SCALE = 0.05f
+        private const val TIME_RECOVERY = 1.1f     // back to full speed in a bit under a second
         private const val SCROLL_SPEED = 0.16f
     }
 }
