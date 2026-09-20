@@ -74,6 +74,21 @@ def draw_player(c: Canvas, frame: int):
 # ---------------------------------------------------------------- the four foes
 
 
+def draw_wingman(c: Canvas, frame: int):
+    """Your escort: the same lines as your fighter, two thirds the size, in squadron colours."""
+    p = Pen(c, PW / 2, 0.66)
+    exhaust(p, 0, 86, 7, frame)
+    body, body_l = (0x2E, 0x62, 0xA8), (0x4E, 0x8A, 0xD6)
+    p.po_out([(-46, 62), (-16, 52), (16, 52), (46, 62), (46, 72), (-46, 72)], (0x24, 0x4C, 0x82), o=1.6)
+    p.po_out([(0, 22), (13, 52), (14, 80), (0, 92), (-14, 80), (-13, 52)], body, o=1.8)
+    p.po([(0, 28), (6, 54), (6, 80), (0, 88)], body_l)
+    p.el(0, 48, 8, 9, GLASS, o=1.3)
+    p.el(-2, 45, 4, 4, WHITE)
+    for side in (-1, 1):
+        p.rr(side * 30 - 3, 60, side * 30 + 3, 78, 2, (0x8A, 0x96, 0xAA), o=1.2)
+    prop(p, 0, 18, 15, frame)
+
+
 def foe_drone(c: Canvas, frame: int):
     """Cheap, unarmed, flies straight at you."""
     p = Pen(c, PW / 2, 1.0)
@@ -315,12 +330,63 @@ def _g_repair(p):
     p.rr(-14, 27, 14, 37, 2, WHITE, o=1.2)
 
 
+def _g_wingman(p):
+    """Two little aircraft tucked in beside a third: an escort."""
+    for dx, dy, sc in ((-11, 36, 0.72), (11, 36, 0.72), (0, 26, 1.0)):
+        p.po_out([(dx, dy - 10 * sc), (dx + 7 * sc, dy + 6 * sc), (dx, dy + 2 * sc),
+                  (dx - 7 * sc, dy + 6 * sc)], WHITE, o=1.1)
+
+
+def _g_pierce(p):
+    """An arrow driven clean through two plates."""
+    for dy in (24, 38):
+        p.rr(-15, dy - 3, 15, dy + 3, 1.5, (0x8A, 0x96, 0xAA), o=1.1)
+    p.rr(-2.5, 14, 2.5, 44, 1.5, WHITE, o=1.2)
+    p.po([(0, 50), (8, 38), (-8, 38)], WHITE)
+
+
+def _g_homing(p):
+    """A round that has already turned, inside a ring it is locked onto."""
+    p.ci(0, 32, 15, (0xFF, 0xFF, 0xFF), o=0)
+    p.ci(0, 32, 11, (0xE0, 0x5A, 0x7A))
+    for a in (0, 90, 180, 270):
+        rad = math.radians(a)
+        p.rr(math.cos(rad) * 17 - 2, 32 + math.sin(rad) * 17 - 2,
+             math.cos(rad) * 17 + 2, 32 + math.sin(rad) * 17 + 2, 1, WHITE)
+    p.po([(0, 24), (5, 34), (0, 31), (-5, 34)], WHITE)
+
+
+def _g_magnet(p):
+    """A horseshoe, poles down, pulling."""
+    p.ci(0, 30, 15, WHITE, o=1.2)
+    p.ci(0, 30, 8, (0x1A, 0x6E, 0x8A))
+    p.rr(-15, 30, -7, 46, 1.5, WHITE, o=1.2)
+    p.rr(7, 30, 15, 46, 1.5, WHITE, o=1.2)
+    p.rr(-15, 40, -7, 46, 1.5, (0xE8, 0x4C, 0x3D))
+    p.rr(7, 40, 15, 46, 1.5, (0xE8, 0x4C, 0x3D))
+    p.rr(-7, 22, 7, 38, 1.5, (0x1A, 0x6E, 0x8A))
+
+
+def _g_charm(p):
+    """Two links that will not come apart: the chain, protected."""
+    for dx in (-6, 6):
+        p.ci(dx, 32, 11, WHITE, o=1.2)
+    for dx in (-6, 6):
+        p.ci(dx, 32, 6, (0xC2, 0x8A, 0x2E))
+    p.rr(-4, 28, 4, 36, 2, WHITE)
+
+
 PICKUPS = [
     ("spread", (0x2E, 0x8A, 0xD6), _g_spread),
     ("rapid", (0xE0, 0x9A, 0x1E), _g_rapid),
     ("shield", (0x14, 0x8A, 0x9A), _g_shield),
     ("bomb", (0x8A, 0x3A, 0xC2), _g_bomb),
     ("repair", (0x2E, 0x9A, 0x52), _g_repair),
+    ("wingman", (0x2E, 0x62, 0xA8), _g_wingman),
+    ("pierce", (0xA8, 0x4C, 0x2E), _g_pierce),
+    ("homing", (0xA8, 0x2E, 0x5A), _g_homing),
+    ("magnet", (0x1A, 0x6E, 0x8A), _g_magnet),
+    ("charm", (0x8A, 0x6E, 0x1E), _g_charm),
 ]
 
 
@@ -329,12 +395,15 @@ def main():
         os.path.dirname(os.path.abspath(__file__)), "..", "skystrike", "src", "main", "res", "drawable-nodpi")
     os.makedirs(out, exist_ok=True)
     for old in os.listdir(out):
-        if old.startswith(("player_", "foe_", "raider_", "pickup_")):
+        if old.startswith(("player_", "wingman_", "foe_", "raider_", "pickup_")):
             os.remove(os.path.join(out, old))
     for frame in range(FRAMES):
         c = Canvas(PW, PH)
         draw_player(c, frame)
         c.save(os.path.join(out, f"player_{frame}.png"))
+        wm = Canvas(PW, PH)
+        draw_wingman(wm, frame)
+        wm.save(os.path.join(out, f"wingman_{frame}.png"))
         for kind, fn in enumerate(FOES):
             f = Canvas(PW, PH)
             fn(f, frame)

@@ -32,4 +32,10 @@
     <string name="best_chain">Best chain %1$d</string>
     <string name="tap_continue">Tap to resume stage %1$d · %2$d left</string>
     <string name="continues_spent">No resumes left</string>
+    <string name="item_wingman">Escort</string>
+    <string name="item_pierce">Pierce</string>
+    <string name="item_homing">Homing</string>
+    <string name="item_magnet">Magnet</string>
+    <string name="item_charm">Charm</string>
+    <string name="charm_saved">chain held</string>
 </resources>

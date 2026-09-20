@@ -23,7 +23,12 @@ class SkyWorld(private val seed: Int = 1) {
 
     enum class Kind { DRONE, WEAVER, GUNNER, DIVER }
 
-    enum class ItemKind { SPREAD, RAPID, SHIELD, BOMB, REPAIR }
+    /**
+     * Ten pickups on five different axes: more guns (SPREAD, WINGMAN), a faster gun (RAPID), a
+     * gun that behaves differently (PIERCE, HOMING), staying alive (SHIELD, REPAIR, BOMB), and
+     * the two that look after the chain and the sky around you (CHARM, MAGNET).
+     */
+    enum class ItemKind { SPREAD, RAPID, SHIELD, BOMB, REPAIR, WINGMAN, PIERCE, HOMING, MAGNET, CHARM }
 
     /** A bullet. Player shots travel up the screen, enemy shots down. */
     class Shot(
@@ -36,6 +41,11 @@ class SkyWorld(private val seed: Int = 1) {
     ) {
         var alive = true
             internal set
+        /** How many more aircraft this shot can punch through before it is spent. */
+        var pierce = 0
+            internal set
+        /** The last thing it hit, so punching through does not mean hitting it four frames running. */
+        internal var lastHit: Any? = null
     }
 
     class Plane(
@@ -123,7 +133,7 @@ class SkyWorld(private val seed: Int = 1) {
         enum class Type {
             SHOT, ENEMY_SHOT, HIT_ENEMY, KILL_ENEMY, HIT_BOSS,
             BOSS_DOWN, BOSS_BREAK, KILL_BOSS, BOSS_PHASE,
-            COMBO_UP, COMBO_LOST, RUSH,
+            COMBO_UP, COMBO_LOST, CHARM_USED, RUSH,
             HIT_PLAYER, SHIELD_USED, PICKUP, BOMB, BOSS_IN, CLEAR, OVER,
         }
     }
@@ -201,6 +211,18 @@ class SkyWorld(private val seed: Int = 1) {
     var rapidTimer = 0f
         private set
     var spread = 1
+        private set
+    /** Escorts flying off your wingtips. They fire on their own and are the first thing a hit takes. */
+    var wingmen = 0
+        private set
+    var pierceTimer = 0f
+        private set
+    var homingTimer = 0f
+        private set
+    var magnetTimer = 0f
+        private set
+    /** A charm that eats one chain break. The hit still lands; the chain survives it. */
+    var charm = false
         private set
 
     /**
@@ -299,6 +321,11 @@ class SkyWorld(private val seed: Int = 1) {
         shield = false
         rapidTimer = 0f
         spread = 1
+        wingmen = 0
+        pierceTimer = 0f
+        homingTimer = 0f
+        magnetTimer = 0f
+        charm = false
         mercy = 0f
         flash = 0f
         combo = 0
@@ -352,6 +379,9 @@ class SkyWorld(private val seed: Int = 1) {
         flash = max(0f, flash - dt)
         mercy = max(0f, mercy - dt)
         rapidTimer = max(0f, rapidTimer - dt)
+        pierceTimer = max(0f, pierceTimer - dt)
+        homingTimer = max(0f, homingTimer - dt)
+        magnetTimer = max(0f, magnetTimer - dt)
 
         updateHazard(dt)
         updateCombo(dt)
@@ -712,13 +742,29 @@ class SkyWorld(private val seed: Int = 1) {
             fireAccumulator -= 1f
             for (i in 0 until spread) {
                 val off = if (spread == 1) 0f else (i / (spread - 1f) - 0.5f)
-                mutableShots.add(
-                    Shot(playerX + off * 0.09f, playerY - 0.05f, off * 0.35f, -SHOT_SPEED, true),
-                )
+                addPlayerShot(playerX + off * 0.09f, playerY - 0.05f, off * 0.35f)
+            }
+            // the escorts fire straight ahead from where they are sitting
+            for (i in 0 until wingmen) {
+                val side = if (i % 2 == 0) -1f else 1f
+                val rank = 1 + i / 2
+                addPlayerShot(playerX + side * WINGMAN_OFFSET * rank, playerY + WINGMAN_TRAIL, 0f)
             }
             pendingEvents.add(Event(Event.Type.SHOT, playerX, playerY - 0.05f))
         }
     }
+
+    private fun addPlayerShot(x: Float, y: Float, vx: Float) {
+        val shot = Shot(x, y, vx, -SHOT_SPEED, true)
+        if (pierceTimer > 0f) shot.pierce = PIERCE_HITS
+        mutableShots.add(shot)
+    }
+
+    /** Where the escort at [index] is sitting right now, so the view can draw it. */
+    fun wingmanX(index: Int): Float =
+        playerX + (if (index % 2 == 0) -1f else 1f) * WINGMAN_OFFSET * (1 + index / 2)
+
+    fun wingmanY(): Float = playerY + WINGMAN_TRAIL
 
     private fun hitsPlayer(x: Float, y: Float, half: Float): Boolean =
         mercy <= 0f && abs(y - playerY) < half + PLAYER_HALF_Y && abs(x - playerX) < half + PLAYER_HALF_X
@@ -733,14 +779,20 @@ class SkyWorld(private val seed: Int = 1) {
             pendingEvents.add(Event(Event.Type.SHIELD_USED, x, y))
             return
         }
-        // the chain is the price of being hit, and it hurts more than the hit point does
-        if (combo >= COMBO_STEP) pendingEvents.add(Event(Event.Type.COMBO_LOST, x, y, value = combo))
-        combo = 0
-        comboTimer = 0f
+        // the charm eats one chain break; the hit still lands, the chain survives it
+        if (charm) {
+            charm = false
+            pendingEvents.add(Event(Event.Type.CHARM_USED, x, y, value = combo))
+        } else {
+            if (combo >= COMBO_STEP) pendingEvents.add(Event(Event.Type.COMBO_LOST, x, y, value = combo))
+            combo = 0
+            comboTimer = 0f
+        }
         hp -= amount
         flash = FLASH_SECONDS
         mercy = MERCY_SECONDS
-        spread = max(1, spread - 1)            // losing armour costs you a gun
+        // an escort is the first thing a hit takes; only once they are gone does it cost a gun
+        if (wingmen > 0) wingmen-- else spread = max(1, spread - 1)
         pendingEvents.add(Event(Event.Type.HIT_PLAYER, x, y, value = amount))
         if (hp <= 0) {
             hp = 0
@@ -752,6 +804,40 @@ class SkyWorld(private val seed: Int = 1) {
 
     // ---- bullets and pickups --------------------------------------------------------------
 
+    /** Turns a player shot towards the nearest target, without letting it speed up or slow down. */
+    private fun steerHoming(s: Shot, dt: Float) {
+        var bestX = 0f
+        var bestY = 0f
+        var bestD = Float.MAX_VALUE
+        for (e in mutableEnemies) {
+            if (!e.alive || e.y > s.y) continue          // only things still ahead of it
+            val d = (e.x - s.x) * (e.x - s.x) + (e.y - s.y) * (e.y - s.y)
+            if (d < bestD) { bestD = d; bestX = e.x; bestY = e.y }
+        }
+        boss?.let { b ->
+            if (b.alive && b.y <= s.y) {
+                val d = (b.x - s.x) * (b.x - s.x) + (b.y - s.y) * (b.y - s.y)
+                if (d < bestD) { bestD = d; bestX = b.x; bestY = b.y }
+            }
+        }
+        if (bestD == Float.MAX_VALUE) return
+        val speed = kotlin.math.sqrt(s.vx * s.vx + s.vy * s.vy)
+        if (speed <= 1e-5f) return
+        val tx = bestX - s.x
+        val ty = bestY - s.y
+        val tl = kotlin.math.sqrt(tx * tx + ty * ty)
+        if (tl <= 1e-5f) return
+        val k = (HOMING_TURN * dt).coerceIn(0f, 1f)
+        var nx = s.vx / speed * (1f - k) + tx / tl * k
+        var ny = s.vy / speed * (1f - k) + ty / tl * k
+        val nl = kotlin.math.sqrt(nx * nx + ny * ny)
+        if (nl <= 1e-5f) return
+        nx /= nl
+        ny /= nl
+        s.vx = nx * speed
+        s.vy = ny * speed
+    }
+
     private fun updateShots(dt: Float) {
         val it = mutableShots.iterator()
         while (it.hasNext()) {
@@ -761,12 +847,14 @@ class SkyWorld(private val seed: Int = 1) {
             s.y += s.vy * dt
             if (s.y < -0.15f || s.y > 1.15f || abs(s.x) > 1.2f) { it.remove(); continue }
             if (s.fromPlayer) {
+                if (homingTimer > 0f) steerHoming(s, dt)
                 var spent = false
                 for (e in mutableEnemies) {
-                    if (!e.alive) continue
+                    if (!e.alive || e === s.lastHit) continue
                     if (abs(e.x - s.x) < ENEMY_HALF && abs(e.y - s.y) < ENEMY_HALF) {
                         e.hp -= s.damage
-                        spent = true
+                        // a piercing round carries on to whatever is behind it
+                        if (s.pierce > 0) { s.pierce--; s.lastHit = e } else spent = true
                         if (e.hp <= 0) {
                             e.alive = false
                             awardKill(e.kind, e.x, e.y)
@@ -779,8 +867,10 @@ class SkyWorld(private val seed: Int = 1) {
                 }
                 if (!spent) {
                     val b = boss
-                    if (b != null && b.alive && abs(b.x - s.x) < BOSS_HALF && abs(b.y - s.y) < BOSS_HALF) {
-                        spent = true
+                    if (b != null && b.alive && b !== s.lastHit &&
+                        abs(b.x - s.x) < BOSS_HALF && abs(b.y - s.y) < BOSS_HALF
+                    ) {
+                        if (s.pierce > 0) { s.pierce--; s.lastHit = b } else spent = true
                         damageBoss(b, s.damage)
                         if (b.alive) pendingEvents.add(Event(Event.Type.HIT_BOSS, s.x, s.y))
                     }
@@ -797,13 +887,11 @@ class SkyWorld(private val seed: Int = 1) {
 
     private fun maybeDropItem(x: Float, y: Float) {
         if (random.next() >= ITEM_CHANCE) return
-        val roll = random.next()
-        val kind = when {
-            roll < 0.26f -> ItemKind.SPREAD
-            roll < 0.5f -> ItemKind.RAPID
-            roll < 0.72f -> ItemKind.SHIELD
-            roll < 0.88f -> ItemKind.REPAIR
-            else -> ItemKind.BOMB
+        var roll = random.next() * DROP_WEIGHT_TOTAL
+        var kind = DROP_TABLE.last().first
+        for ((k, weight) in DROP_TABLE) {
+            roll -= weight
+            if (roll < 0f) { kind = k; break }
         }
         mutableItems.add(Item(x, y, kind))
     }
@@ -813,6 +901,16 @@ class SkyWorld(private val seed: Int = 1) {
         while (it.hasNext()) {
             val item = it.next()
             if (!item.alive) { it.remove(); continue }
+            if (magnetTimer > 0f) {
+                // reel it in: still falling, but now it is coming to you
+                val dx = playerX - item.x
+                val dy = playerY - item.y
+                val d = kotlin.math.sqrt(dx * dx + dy * dy)
+                if (d > 1e-4f) {
+                    item.x += dx / d * MAGNET_PULL * dt
+                    item.y += dy / d * MAGNET_PULL * dt
+                }
+            }
             item.y += ITEM_FALL_SPEED * dt
             if (item.y > 1.1f) { it.remove(); continue }
             if (abs(item.y - playerY) < ITEM_HALF + PLAYER_HALF_Y &&
@@ -832,6 +930,11 @@ class SkyWorld(private val seed: Int = 1) {
             ItemKind.SHIELD -> shield = true
             ItemKind.BOMB -> bombs = min(MAX_BOMBS, bombs + 1)
             ItemKind.REPAIR -> hp = min(MAX_HP, hp + 1)
+            ItemKind.WINGMAN -> wingmen = min(MAX_WINGMEN, wingmen + 1)
+            ItemKind.PIERCE -> pierceTimer = PIERCE_SECONDS
+            ItemKind.HOMING -> homingTimer = HOMING_SECONDS
+            ItemKind.MAGNET -> magnetTimer = MAGNET_SECONDS
+            ItemKind.CHARM -> charm = true
         }
         score += ITEM_SCORE
         pendingEvents.add(Event(Event.Type.PICKUP, item.x, item.y, item = item.kind))
@@ -1021,6 +1124,34 @@ class SkyWorld(private val seed: Int = 1) {
         const val ITEM_CHANCE = 0.13f
         const val ITEM_FALL_SPEED = 0.26f
         const val ITEM_SCORE = 30
+
+        const val MAX_WINGMEN = 4
+        const val WINGMAN_OFFSET = 0.115f      // how far off your wingtip the first one sits
+        const val WINGMAN_TRAIL = 0.035f       // and how far back
+        const val PIERCE_SECONDS = 8f
+        const val PIERCE_HITS = 3              // how many hulls one round can punch through
+        const val HOMING_SECONDS = 7f
+        const val HOMING_TURN = 5.5f           // how hard a round may lean, per second
+        const val MAGNET_SECONDS = 9f
+        const val MAGNET_PULL = 0.85f
+
+        /**
+         * What falls, and how often. Ten kinds at the same drop rate means more variety per
+         * drop rather than more power; the staples stay common and the exotics stay a treat.
+         */
+        val DROP_TABLE = listOf(
+            ItemKind.SPREAD to 14,
+            ItemKind.RAPID to 13,
+            ItemKind.SHIELD to 11,
+            ItemKind.REPAIR to 11,
+            ItemKind.PIERCE to 11,
+            ItemKind.HOMING to 11,
+            ItemKind.WINGMAN to 10,
+            ItemKind.BOMB to 8,
+            ItemKind.MAGNET to 6,
+            ItemKind.CHARM to 5,
+        )
+        val DROP_WEIGHT_TOTAL = DROP_TABLE.sumOf { it.second }.toFloat()
         const val CLEAR_BONUS = 250
         const val BOSS_SCORE = 500
 
