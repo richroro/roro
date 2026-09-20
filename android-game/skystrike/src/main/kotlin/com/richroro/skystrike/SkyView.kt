@@ -530,6 +530,7 @@ class SkyView @JvmOverloads constructor(
                 (fxRandom.nextFloat() - 0.5f) * shakeTimer * w * 0.04f,
             )
         }
+        for (f in world.flares) drawFlare(canvas, f, w)
         for (item in world.items) drawPickup(canvas, item, w)
         for (s in world.shots) drawShot(canvas, s, w)
         for (e in world.enemies) if (e.alive) drawFoe(canvas, e, w)
@@ -658,7 +659,41 @@ class SkyView @JvmOverloads constructor(
         val sh = w * FOE_SIZE
         val sw = sh * 0.8f
         val hurt = e.hp < e.maxHp
-        bankedSprite(canvas, frames[frame], sx(e.x), sy(e.y), sw, sh, e.bank, if (hurt) hitPaint else spritePaint)
+        val paint = if (hurt) hitPaint else spritePaint
+        // On the long night you hear them before you see them: they surface out of the dark.
+        val dark = SkyWorld.profileOf(world.level).hazard == SkyWorld.Hazard.DARK
+        val reveal = if (dark) ((e.y - 0.04f) / 0.26f).coerceIn(0f, 1f) else 1f
+        if (reveal <= 0.02f) return
+        val base = paint.alpha
+        if (reveal < 1f) paint.alpha = (base * reveal).toInt().coerceIn(0, 255)
+        bankedSprite(canvas, frames[frame], sx(e.x), sy(e.y), sw, sh, e.bank, paint)
+        paint.alpha = base
+    }
+
+    /** A column of fire off the burning ground: hot core, ragged crown, smoke going up. */
+    private fun drawFlare(canvas: Canvas, f: SkyWorld.Flare, w: Float) {
+        val fade = (f.life / f.maxLife).coerceIn(0f, 1f)
+        val grow = (1f - fade).coerceIn(0f, 1f)
+        val cx = sx(f.x)
+        val cy = sy(f.y)
+        val rw = w * 0.075f * (0.55f + fade * 0.6f)
+        val rh = w * (0.13f + grow * 0.05f) * (0.5f + fade * 0.7f)
+        val flick = 0.85f + 0.15f * sin(runTime * 14f + f.phase)
+        muzzlePaint.shader = RadialGradient(
+            cx, cy, max(1f, rw * 2.1f),
+            intArrayOf(0x00000000, 0x33FF8A2B, 0x00000000), floatArrayOf(0f, 0.55f, 1f), Shader.TileMode.CLAMP,
+        )
+        canvas.drawCircle(cx, cy, max(1f, rw * 2.1f), muzzlePaint)
+        muzzlePaint.shader = null
+        particlePaint.color = color(R.color.s3_ember)
+        particlePaint.alpha = (200 * fade).toInt().coerceIn(0, 255)
+        rect.set(cx - rw * flick, cy - rh, cx + rw * flick, cy + rh * 0.45f)
+        canvas.drawOval(rect, particlePaint)
+        particlePaint.color = Color.WHITE
+        particlePaint.alpha = (150 * fade).toInt().coerceIn(0, 255)
+        rect.set(cx - rw * 0.38f * flick, cy - rh * 0.6f, cx + rw * 0.38f * flick, cy + rh * 0.2f)
+        canvas.drawOval(rect, particlePaint)
+        particlePaint.alpha = 255
     }
 
     private fun drawRaider(canvas: Canvas, b: SkyWorld.Boss, w: Float, h: Float) {
