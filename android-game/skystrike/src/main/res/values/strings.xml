@@ -45,4 +45,8 @@
     <string name="item_medal">Medal</string>
     <string name="pick_one">Pick one</string>
     <string name="boon_have">Carrying: %1$s</string>
+    <string name="ai_label">AI</string>
+    <string name="ai_flying">AI FLYING · drag to take over</string>
+    <string name="ai_on">Autopilot on</string>
+    <string name="ai_off">You have the aircraft</string>
 </resources>

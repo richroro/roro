@@ -142,6 +142,7 @@ class SkyView @JvmOverloads constructor(
     private var bandHint = 0f
     private var padUsed = prefs.getBoolean(KEY_PAD_USED, false)
     private val padRect = RectF()
+    private val aiRect = RectF()
 
     // ---- paint ------------------------------------------------------------------------------
     private val skyPaint = Paint()
@@ -319,6 +320,9 @@ class SkyView @JvmOverloads constructor(
             timeScale = min(1f, timeScale + dt * TIME_RECOVERY)
             val scaled = dt * timeScale
             val before = world.state
+            // the autopilot flies on the same clock the world runs on, so a hitstop slows its
+            // hands too rather than handing it a free frame
+            world.aiTick(scaled)
             world.update(scaled)
             world.drainEvents(events)
             for (e in events) handleEvent(e)
@@ -697,6 +701,12 @@ class SkyView @JvmOverloads constructor(
                     world.useBomb()
                     return true
                 }
+                if (aiButtonHit(x, y)) {
+                    world.setAi(!world.ai)
+                    banner = context.getString(if (world.ai) R.string.ai_on else R.string.ai_off)
+                    bannerTimer = 1.1f
+                    return true
+                }
                 if (dragPointer < 0) beginDrag(event.getPointerId(i), x, y, w, h)
                 when (world.state) {
                     SkyWorld.State.READY -> world.start()
@@ -712,6 +722,12 @@ class SkyView @JvmOverloads constructor(
                 if (dragging && i >= 0 && w > 0f && h > 0f) {
                     val x = event.getX(i)
                     val y = event.getY(i)
+                    // a tap is for the panels; actually flying the thing is how you take it back
+                    if (world.ai) {
+                        world.setAi(false)
+                        banner = context.getString(R.string.ai_off)
+                        bannerTimer = 1.1f
+                    }
                     // The pad multiplies your thumb, so a short stroke crosses the whole band;
                     // dragging the plane itself stays one-to-one, the way it always has.
                     val gain = if (onPad) PAD_GAIN else 1f
@@ -784,6 +800,26 @@ class SkyView @JvmOverloads constructor(
     override fun performClick(): Boolean {
         super.performClick()
         return true
+    }
+
+    /**
+     * Parks the autopilot pill above the bomb button: the one corner that is neither the
+     * steering pad nor anything you need to read in a hurry.
+     */
+    private fun layOutAi(w: Float, h: Float) {
+        val pw = w * 0.19f
+        val ph = w * 0.078f
+        val right = w - w * 0.05f
+        val bottom = h - w * 0.27f
+        aiRect.set(right - pw, bottom - ph, right, bottom)
+    }
+
+    private fun aiButtonHit(px: Float, py: Float): Boolean {
+        val w = width.toFloat()
+        val h = height.toFloat()
+        if (w <= 0f || h <= 0f) return false
+        layOutAi(w, h)
+        return aiRect.contains(px, py)
     }
 
     private fun bombButtonHit(px: Float, py: Float): Boolean {
@@ -935,8 +971,13 @@ class SkyView @JvmOverloads constructor(
         canvas.drawCircle(padKnobX, padKnobY, kr, padPaint)
         padPaint.alpha = 255
 
-        // the words are for your first flight only; after that the chevrons say it
-        if (!padUsed) {
+        // the words are for your first flight only; after that the chevrons say it -- except
+        // while the autopilot has the aircraft, when the one thing worth saying is how to take
+        // it back
+        if (world.ai) {
+            label(canvas, context.getString(R.string.ai_flying), cx, padRect.top - w * 0.03f,
+                w * 0.032f, color(R.color.hp_full), color(R.color.text_stroke))
+        } else if (!padUsed) {
             val caption = context.getString(R.string.control_pad) + " · " +
                 context.getString(R.string.control_hint)
             label(canvas, caption, cx, padRect.top - w * 0.03f, w * 0.032f,
@@ -1271,7 +1312,33 @@ class SkyView @JvmOverloads constructor(
 
         drawBanner(canvas, w, h)
         if (world.state != SkyWorld.State.RUNNING) drawOverlay(canvas, w, h, stage)
+        // last, so it stays reachable over a panel: switching the autopilot on is exactly the
+        // thing you want to do from the start screen
+        drawAiButton(canvas, w, h)
         lastPlayerX = world.playerX
+    }
+
+    /**
+     * The autopilot switch. A lamp rather than a word for its state, so the pill reads the same
+     * whichever language the rest of the screen is in.
+     */
+    private fun drawAiButton(canvas: Canvas, w: Float, h: Float) {
+        layOutAi(w, h)
+        val round = aiRect.height() * 0.5f
+        panelPaint.alpha = if (world.ai) 245 else 185
+        canvas.drawRoundRect(aiRect, round, round, panelPaint)
+        panelPaint.alpha = 255
+        panelEdgePaint.strokeWidth = max(2f, w * 0.006f)
+        canvas.drawRoundRect(aiRect, round, round, panelEdgePaint)
+        // the lamp breathes while it is flying, so the pill is alive rather than merely lit
+        val pulse = if (world.ai) 0.7f + 0.3f * sin(runTime * 4.2f) else 1f
+        hpPaint.color = if (world.ai) color(R.color.hp_full) else color(R.color.hp_track)
+        hpPaint.alpha = (255 * pulse).toInt().coerceIn(0, 255)
+        canvas.drawCircle(aiRect.left + aiRect.height() * 0.5f, aiRect.centerY(), aiRect.height() * 0.17f, hpPaint)
+        hpPaint.alpha = 255
+        label(canvas, context.getString(R.string.ai_label), aiRect.centerX() + aiRect.height() * 0.28f,
+            aiRect.centerY(), w * 0.044f,
+            if (world.ai) color(R.color.gold) else Color.WHITE, color(R.color.text_stroke))
     }
 
     /**

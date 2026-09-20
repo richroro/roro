@@ -1561,4 +1561,118 @@ class SkyWorldTest {
         assertEquals("you resume with what you built", 1, w.boonLevel(SkyWorld.Boon.ARMOUR))
         assertEquals(SkyWorld.MAX_HP + 1, w.hp)
     }
+
+    // ---- flying itself ---------------------------------------------------------------------
+
+    private fun aiSeconds(w: SkyWorld, seconds: Float) {
+        val bag = ArrayList<SkyWorld.Event>()
+        repeat((seconds * 60f).toInt()) {
+            w.aiTick(1f / 60f)
+            w.update(1f / 60f)
+            bag.clear()
+            w.drainEvents(bag)
+        }
+    }
+
+    @Test
+    fun `flying itself starts the stage rather than waiting on a tap`() {
+        val w = SkyWorld(1)
+        w.setAi(true)
+        assertEquals(SkyWorld.State.READY, w.state)
+        aiSeconds(w, SkyWorld.AI_PAUSE * 0.5f)
+        assertEquals("it holds on the panel long enough to be read", SkyWorld.State.READY, w.state)
+        aiSeconds(w, SkyWorld.AI_PAUSE)
+        assertEquals(SkyWorld.State.RUNNING, w.state)
+    }
+
+    @Test
+    fun `flying itself gets out of the lane of an aimed round`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(hp = 5, playerX = 0f, playerY = 0.85f, mercy = 0f)
+        w.addEnemyShotForTest(0f, 0.45f)
+        aiSeconds(w, 1.5f)
+        assertEquals("it should have stepped aside rather than worn it", 5, w.hp)
+    }
+
+    @Test
+    fun `flying itself flies under what it is shooting`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(playerX = -0.8f, playerY = 0.9f)
+        val foe = w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0.5f, y = -0.5f, hp = 99)
+        aiSeconds(w, 2f)
+        assertTrue(
+            "it should line up on its target, not drift away from it",
+            abs(w.playerX - foe.x) < 0.2f,
+        )
+    }
+
+    @Test
+    fun `flying itself takes a boon rather than waving the panel through`() {
+        val w = running()
+        clearStage(w)
+        assertTrue(w.offered.isNotEmpty())
+        w.setAi(true)
+        aiSeconds(w, SkyWorld.AI_PAUSE + 0.5f)
+        assertTrue("it should take one of the three on offer", w.boons.isNotEmpty())
+    }
+
+    @Test
+    fun `flying itself picks the run back up where it fell`() {
+        val w = running()
+        w.startLevel(2)
+        die(w)
+        w.setAi(true)
+        aiSeconds(w, SkyWorld.AI_PAUSE + 0.5f)
+        assertEquals(SkyWorld.State.RUNNING, w.state)
+        assertEquals("and carries on from the stage it fell in", 2, w.level)
+    }
+
+    @Test
+    fun `switching it off hands the aircraft straight back`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(playerX = 0f, playerY = 0.85f)
+        w.addEnemyShotForTest(0f, 0.5f)
+        aiSeconds(w, 0.6f)
+        assertTrue("it moved while it was flying", abs(w.playerX) > 1e-3f)
+        w.setAi(false)
+        val parked = w.playerX
+        aiSeconds(w, 0.6f)
+        assertEquals("and stays put once you have it back", parked, w.playerX, 1e-5f)
+    }
+
+    @Test
+    fun `flying itself clears a stage without being shot down`() {
+        val w = SkyWorld(1)
+        w.setAi(true)
+        val bag = ArrayList<SkyWorld.Event>()
+        var frames = 0
+        var fell = false
+        while (frames++ < 60 * 180 && w.bestLevel < 1) {
+            w.aiTick(1f / 60f)
+            w.update(1f / 60f)
+            bag.clear()
+            w.drainEvents(bag)
+            if (w.state == SkyWorld.State.GAME_OVER) fell = true
+        }
+        assertTrue("it should get a stage down on its own", w.bestLevel >= 1)
+        assertTrue("and get there without falling", !fell)
+    }
+
+    @Test
+    fun `a diver stacked high above the screen still comes down`() {
+        val w = running()
+        w.soloModeForTest()
+        // a rush used to stack one high enough that its own acceleration ran backwards, and a
+        // stage with an aircraft that climbs away for ever is a stage that never ends
+        val diver = w.addEnemyForTest(SkyWorld.Kind.DIVER, x = 0f, y = -1.4f, hp = 99)
+        val start = diver.y
+        repeat(120) { w.update(1f / 60f) }
+        assertTrue("a diver only ever comes down", diver.y > start)
+    }
 }

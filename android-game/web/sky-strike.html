@@ -36,7 +36,7 @@
   <canvas id="game" tabindex="0" aria-label="스카이 스트라이크 게임 화면. 왼쪽 아래 조종 영역을 끌어 상하좌우로 비행하고 자동으로 사격합니다."></canvas>
 </div>
 <div class="hints">
-  <span>왼쪽 아래 <b>조종 영역</b>을 끌거나 <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> 로 상하좌우 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>M</kbd> 소리</span>
+  <span>왼쪽 아래 <b>조종 영역</b>을 끌거나 <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> 로 상하좌우 비행 · 탭/스페이스로 시작 · <kbd>B</kbd> 폭탄 · <kbd>I</kbd> 또는 <b>AI</b> 버튼으로 자동 비행 · <kbd>M</kbd> 소리</span>
   <span>적기 12종 · 아이템 14종 · 스테이지 클리어마다 강화 3장 중 1장 선택 · S~C 평가</span>
 </div>
 
@@ -78,6 +78,15 @@
     MAX_FRAME_DT: 0.05, TAU: 6.2831855,
     GUST_RATE: 0.55, GUST_STRENGTH: 0.30,
     FLARE_GAP: 1.5, FLARE_RISE: 0.2, FLARE_LIFE: 4.6, FLARE_HALF: 0.055,
+    // slowest a diver ever comes down, whatever its height
+    DIVE_CRAWL: 0.35,
+    // flying itself
+    AI_PAUSE: 1.6, AI_REACH: 0.12, AI_SPEED: 3.6, AI_LOOKAHEAD: 0.85, AI_SOON: 0.5,
+    AI_MERCY_TRUST: 0.25, AI_MERCY_DISCOUNT: 0.15,
+    AI_SHOT_CLEAR: 0.15, AI_SHOT_WEIGHT: 900, AI_BODY_CLEAR: 0.11, AI_BODY_WEIGHT: 700,
+    AI_FLARE_CLEAR: 0.23, AI_FLARE_WEIGHT: 1100, AI_EDGE_CLEAR: 0.16, AI_EDGE_WEIGHT: 120,
+    AI_ITEM_WEIGHT: 1.4, AI_AIM_WEIGHT: 11, AI_AIM_REACH: 0.5, AI_LEAD_SLACK: 0.35,
+    AI_REAR_WEIGHT: 2.0, AI_RANGE_WEIGHT: 5.0, AI_BOMB_AT: 300,
   };
   const KIND = ['DRONE', 'WEAVER', 'GUNNER', 'DIVER', 'SHIELDER', 'SPLITTER', 'TURRET', 'SWARM',
                 'MINER', 'MINE', 'CHARGER', 'HEALER'];
@@ -157,6 +166,61 @@
     SHIELDER: 35, SPLITTER: 30, TURRET: 40, SWARM: 8,
     MINER: 45, MINE: 5, CHARGER: 30, HEALER: 50 }[k]);
 
+  // ---------- Flying itself ----------
+  // Where it might step to, in units of AI_REACH: the eight around it, then four further out.
+  const AI_SAMPLES = [
+    -1, 0, 1, 0, 0, -1, 0, 1,
+    -0.7, -0.7, 0.7, -0.7, -0.7, 0.7, 0.7, 0.7,
+    -1.8, 0, 1.8, 0, 0, -1.7, 0, 1.7,
+  ];
+  // What it would rather take, best first.
+  const AI_BOON_ORDER = ['GUNS', 'PIERCING', 'ARMOUR', 'RAPIDFIRE', 'ESCORT', 'CHAINWINDOW',
+    'CHARMED', 'CHAINCAP', 'SUPPLY', 'MAGNETIC', 'BOMBS', 'AGILITY'];
+  // The things that get worse if you leave them.
+  const AI_TARGET_RANK = { HEALER: 400, TURRET: 300, MINER: 250, GUNNER: 200 };
+
+  /**
+   * How badly a thing at (rx, ry) travelling at (vx, vy) relative to a standing aircraft wants
+   * that square, judged at the closest it ever comes over AI_LOOKAHEAD.
+   */
+  function bite(rx, ry, vx, vy, clear, weight) {
+    const vv = vx * vx + vy * vy;
+    const t = vv > 1e-6 ? Math.max(0, Math.min(C.AI_LOOKAHEAD, -(rx * vx + ry * vy) / vv)) : 0;
+    const d = Math.hypot(rx + vx * t, ry + vy * t);
+    if (d >= clear) return 0;
+    const nip = 1 - d / clear;
+    // a round arriving now is worth more worry than one arriving at the end of the horizon
+    return nip * nip * weight * (1 - C.AI_SOON * t / C.AI_LOOKAHEAD);
+  }
+
+  /**
+   * What being `off` lanes away from what it is shooting costs. It flattens out rather than
+   * clipping, so being a whole screen off still leans it the right way instead of reading as no
+   * worse than half a screen off -- which is how it used to lose track of a lone aircraft.
+   */
+  const offAim = off => C.AI_AIM_WEIGHT * C.AI_AIM_REACH * off / (off + C.AI_AIM_REACH);
+
+  /** How fast an aircraft is actually coming down, per kind. A bad guess here is a dead player. */
+  function aiSpeedY(e) {
+    switch (e.kind) {
+      case 'DRONE': return e.speed;
+      case 'WEAVER': return e.speed * 0.92;
+      case 'GUNNER': return e.speed * 0.62;
+      // a diver is already accelerating, and will be faster still by the time it arrives
+      case 'DIVER': return e.speed * Math.max(C.DIVE_CRAWL, 1 + (e.y + 0.2) * 1.6) * 1.35;
+      case 'SHIELDER': return e.speed * 0.55;
+      case 'SPLITTER': return e.speed * 0.72;
+      case 'TURRET': return e.anchor > 0 ? 0 : e.speed * 1.2;
+      case 'SWARM': return e.speed * 1.35;
+      case 'MINER': return e.speed * 0.5;
+      case 'MINE': return C.MINE_DRIFT;
+      // a charger that has committed covers ground faster than anything else in the sky
+      case 'CHARGER': return e.charge > 0 ? e.speed * 0.25 : e.speed * C.CHARGE_SPEED;
+      case 'HEALER': return e.speed * 0.6;
+      default: return e.speed;
+    }
+  }
+
   class SkyWorld {
     constructor(seed) {
       this.seed = seed || 1; this.level = 1; this.bestLevel = 0; this.state = State.READY;
@@ -170,6 +234,9 @@
       this.slowTimer = 0; this.orbs = 0; this.orbitPhase = 0; this.vampTimer = 0; this.vampCount = 0;
       this.enemies = []; this.pendingSpawns = []; this.shots = []; this.items = []; this.flares = []; this.boss = null;
       this.events = []; this.gust = 0;
+      this.ai = false; this.aiDelay = 0; this.aiLastState = State.READY;
+      // worked out once a frame rather than once per candidate square: aiCost runs thirteen times
+      this.aiPick = null; this.aiDrift = 0;
     }
     startLevel(level) {
       this.level = level;
@@ -254,6 +321,169 @@
       return true;
     }
     nextLevel() { this.startLevel(this.level + 1); }
+    // ---- flying itself ------------------------------------------------------------------
+
+    /** Hands the aircraft to the autopilot, or takes it back. */
+    setAi(on) {
+      this.ai = on;
+      // switched on over a panel, it still reads the panel before it acts
+      this.aiDelay = this.state === State.RUNNING ? 0 : C.AI_PAUSE;
+      this.aiLastState = this.state;
+    }
+
+    /**
+     * One tick of flying itself. Called before update(), and it drives the whole run: it starts
+     * a stage, flies it, picks a boon at the end of one, and picks the run back up when it falls.
+     */
+    aiTick(dt) {
+      if (!this.ai) return;
+      if (this.state !== this.aiLastState) {
+        this.aiLastState = this.state;
+        // a beat on each panel, so a watcher can read what just happened
+        this.aiDelay = this.state === State.RUNNING ? 0 : C.AI_PAUSE;
+      }
+      this.aiDelay = Math.max(0, this.aiDelay - dt);
+      if (this.state === State.RUNNING) { this.flyAutopilot(Math.min(0.05, Math.max(0, dt))); return; }
+      if (this.aiDelay > 0) return;
+      if (this.state === State.READY) this.start();
+      else if (this.state === State.LEVEL_CLEAR) { if (!this.takeBoon(this.bestBoonIndex())) this.nextLevel(); }
+      else if (this.state === State.GAME_OVER) { if (!this.continueRun()) this.start(); }
+    }
+
+    /**
+     * Scores a ring of places it could be in a moment and steps towards the best one. Sampling
+     * beats steering rules here: it dodges a curtain and a diver with the same code, and it never
+     * argues with itself about which threat to run from.
+     */
+    flyAutopilot(dt) {
+      this.aiPick = this.aiTarget();
+      this.aiDrift = this.bossDriftX();
+      // the crosswind is going to push it before the next frame, so plan from where it lands
+      const drift = this.gust * dt;
+      let bestCost = this.aiCost(this.playerX + drift, this.playerY);
+      let bestX = this.playerX, bestY = this.playerY;
+      for (let i = 0; i < AI_SAMPLES.length; i += 2) {
+        const cx = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + AI_SAMPLES[i] * C.AI_REACH + drift));
+        const cy = Math.max(this.frontLimit(), Math.min(C.PLAYER_Y_MAX, this.playerY + AI_SAMPLES[i + 1] * C.AI_REACH));
+        const cost = this.aiCost(cx, cy);
+        if (cost < bestCost) { bestCost = cost; bestX = cx; bestY = cy; }
+      }
+      const step = C.AI_SPEED * dt;
+      this.movePlayerBy(
+        Math.max(-step, Math.min(step, bestX - this.playerX)),
+        Math.max(-step, Math.min(step, bestY - this.playerY)),
+      );
+      // a bomb when there is nowhere good left to stand, and sooner on the last of the hull
+      const patience = this.hp <= 1 ? C.AI_BOMB_AT * 0.45 : C.AI_BOMB_AT;
+      if (this.bombs > 0 && this.mercy <= 0 && bestCost > patience) this.useBomb();
+    }
+
+    /**
+     * What it would cost to be at (x, y). Staying alive is worth orders of magnitude more than
+     * lining up a shot, so danger is squared and heavy and everything else only breaks ties.
+     */
+    aiCost(x, y) {
+      // while the hull is still flashing nothing can touch it, so it may cross a curtain to
+      // pick something up rather than cower through the one window it has
+      const exposure = this.mercy > C.AI_MERCY_TRUST ? C.AI_MERCY_DISCOUNT : 1;
+      let danger = 0;
+      // incoming fire, at its closest approach rather than sampled: a round moving half a screen
+      // a second steps straight through any sampling coarse enough to be affordable
+      for (const s of this.shots) {
+        if (s.fromPlayer || !s.alive) continue;
+        danger += bite(s.x - x, s.y - y, s.vx, s.vy, C.AI_SHOT_CLEAR, C.AI_SHOT_WEIGHT);
+      }
+      // and anything solid, each kind projected the way it actually flies
+      for (const e of this.enemies) {
+        if (!e.alive) continue;
+        danger += bite(e.x - x, e.y - y, 0, aiSpeedY(e), C.AI_BODY_CLEAR + halfOf(e.kind), C.AI_BODY_WEIGHT);
+      }
+      // the fields burn upward, and a column you have not looked for is a column you fly into
+      for (const f of this.flares) {
+        // a spent column is dropped from the list outright, so life is the only liveness there is
+        if (f.life <= C.FLARE_LIFE * 0.25) continue;
+        danger += bite(f.x - x, f.y - y, 0, -C.FLARE_RISE, C.AI_FLARE_CLEAR, C.AI_FLARE_WEIGHT);
+      }
+      const b = this.boss;
+      if (b && b.alive) {
+        const clear = C.BOSS_HALF + C.AI_BODY_CLEAR;
+        const gap = Math.max(Math.abs(b.x - x), Math.abs(b.y - y));
+        if (gap < clear) { const nip = 1 - gap / clear; danger += nip * nip * C.AI_BODY_WEIGHT; }
+      }
+      // the edges are a trap: nowhere to run once you are in one
+      const edge = C.PLAYER_LIMIT - Math.abs(x);
+      if (edge < C.AI_EDGE_CLEAR) { const nip = 1 - edge / C.AI_EDGE_CLEAR; danger += nip * nip * C.AI_EDGE_WEIGHT; }
+      danger *= exposure;
+
+      let pull = 0;
+      // pickups are worth going for, and worth more the closer they already are
+      for (const item of this.items) {
+        if (!item.alive) continue;
+        pull -= C.AI_ITEM_WEIGHT / (0.08 + Math.hypot(item.x - x, item.y - y));
+      }
+      const target = this.aiPick;
+      if (target) {
+        // rounds take time to arrive and everything worth shooting is moving, so it stands where
+        // the target is going to be, not where it is
+        const flight = Math.max(0, y - target.y) / C.SHOT_SPEED;
+        // a shielder's plate means lining up on its nose is the one place that does nothing
+        const nose = target.kind === 'SHIELDER' ? halfOf(target.kind) * 0.8 : 0;
+        pull += offAim(Math.abs(target.x + nose - x) + flight * C.AI_LEAD_SLACK);
+        pull += (C.PLAYER_Y_MAX - y) * C.AI_REAR_WEIGHT;
+      } else if (b && b.alive) {
+        // the raider sweeps, and fast: aim off it by however far it travels while the round is
+        // in the air, and close the range so that lead is a guess worth making
+        const flight = Math.max(0, y - b.y) / C.SHOT_SPEED;
+        pull += offAim(Math.abs(b.x + this.aiDrift * flight - x));
+        pull += (y - this.frontLimit()) * C.AI_RANGE_WEIGHT;
+      } else {
+        pull += (C.PLAYER_Y_MAX - y) * C.AI_REAR_WEIGHT;
+      }
+      return danger + pull;
+    }
+
+    /** How fast the raider is sliding sideways right now, straight off its own sweep. */
+    bossDriftX() {
+      const b = this.boss;
+      if (!b || !b.engaged) return 0;
+      const kindly = bossProfileOf(b.kind);
+      const rate = C.BOSS_PHASE_SWEEP[b.phase] * kindly.sweepRate * C.BOSS_SWEEP_RATE;
+      return Math.cos(b.sweep * C.BOSS_SWEEP_RATE) * C.BOSS_SWEEP_X * C.BOSS_PHASE_REACH[b.phase] * kindly.reach * rate;
+    }
+
+    /**
+     * What it would rather be shooting: the things that get worse if you leave them. Once the
+     * raider is on station it is the only thing on the board worth the time, and anything else
+     * in the air is something to fly around rather than something to chase.
+     */
+    aiTarget() {
+      const b = this.boss;
+      if (b && b.alive && b.engaged) {
+        // except a healer, which will keep putting back whatever else is in the air
+        for (const e of this.enemies) if (e.alive && e.kind === 'HEALER') return e;
+        return null;
+      }
+      let best = null, bestRank = -1e9;
+      for (const e of this.enemies) {
+        if (!e.alive || e.kind === 'MINE') continue;
+        // and among equals, whatever is closest to the floor
+        const rank = (AI_TARGET_RANK[e.kind] || 100) + Math.floor(e.y * 60);
+        if (rank > bestRank) { bestRank = rank; best = e; }
+      }
+      return best;
+    }
+
+    /** Which of the three on offer it wants most. */
+    bestBoonIndex() {
+      let bestAt = 0, bestRank = -1e9;
+      this.offered.forEach((id, i) => {
+        const at = AI_BOON_ORDER.indexOf(id);
+        const rank = at < 0 ? 0 : AI_BOON_ORDER.length - at;
+        if (rank > bestRank) { bestRank = rank; bestAt = i; }
+      });
+      return bestAt;
+    }
+
     movePlayerBy(dx, dy = 0) {
       this.playerX = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + dx));
       this.playerY = Math.max(this.frontLimit(), Math.min(C.PLAYER_Y_MAX, this.playerY + dy));
@@ -450,7 +680,9 @@
         if (e.kind === 'DRONE') e.y += e.speed * dt;
         else if (e.kind === 'WEAVER') { e.y += e.speed * 0.92 * dt; e.x = e.homeX + Math.sin(this.elapsed * 2.4 + e.phase) * 0.22; }
         else if (e.kind === 'GUNNER') { e.y += e.speed * 0.62 * dt; e.x = e.homeX + Math.sin(this.elapsed * 1.1 + e.phase) * 0.08; }
-        else if (e.kind === 'DIVER') e.y += e.speed * (1 + (e.y + 0.2) * 1.6) * dt;
+        // it accelerates as it comes down, but never backwards: one stacked high enough by a
+        // rush used to climb away and leave a stage that could not end
+        else if (e.kind === 'DIVER') e.y += e.speed * Math.max(C.DIVE_CRAWL, 1 + (e.y + 0.2) * 1.6) * dt;
         // heavy and slow, with a plate across its nose: you have to come at it from the side
         else if (e.kind === 'SHIELDER') {
           e.y += e.speed * 0.55 * dt;
@@ -1429,6 +1661,7 @@
   // fighter. Dragging the plane directly still works; the pad just multiplies a short stroke.
   const PAD_GAIN = 1.55, PAD_KNOB = 0.055;
   const pad = { left: 0, top: 0, right: 0, bottom: 0, knobX: 0, knobY: 0, glow: 0, band: 0, placed: false };
+  const ai = { left: 0, top: 0, right: 0, bottom: 0 };
   let padUsed = false;
   try { padUsed = localStorage.getItem('skystrike.padUsed') === '1'; } catch (e) {}
   window.__pad = pad;
@@ -1484,8 +1717,10 @@
     ctx.beginPath(); ctx.arc(pad.knobX, pad.knobY, kr, 0, Math.PI * 2); ctx.stroke();
     ctx.globalAlpha = 1;
 
-    // the words are for your first flight only; after that the chevrons say it
-    if (!padUsed) label('조종 · 상하좌우 끌기', cx, pad.top - w * 0.03, w * 0.032, '#FACC15', '#0B1020');
+    // the words are for your first flight only; after that the chevrons say it -- except while
+    // the autopilot has the aircraft, when the one thing worth saying is how to take it back
+    if (world.ai) label('AI 비행 중 · 끌면 직접 조종', cx, pad.top - w * 0.03, w * 0.032, '#34D399', '#0B1020');
+    else if (!padUsed) label('조종 · 상하좌우 끌기', cx, pad.top - w * 0.03, w * 0.032, '#FACC15', '#0B1020');
 
     // the ceiling of the band, drawn only while you are actually steering into it
     if (pad.band > 0.01) {
@@ -1715,6 +1950,44 @@
     label(String(world.bombs), bx, by + r * 0.72, w * 0.042, '#FFFFFF', '#0B1020');
     drawBanner();
     if (world.state !== State.RUNNING) drawOverlay();
+    // last, so it stays reachable over a panel: switching the autopilot on is exactly the thing
+    // you want to do from the start screen
+    drawAiButton();
+  }
+
+  /**
+   * Parks the autopilot pill above the bomb button: the one corner that is neither the steering
+   * pad nor anything you need to read in a hurry.
+   */
+  function layOutAi() {
+    const w = canvas._w, h = canvas._h;
+    const pw = w * 0.19, ph = w * 0.078;
+    ai.right = w - w * 0.05; ai.left = ai.right - pw;
+    ai.bottom = h - w * 0.27; ai.top = ai.bottom - ph;
+  }
+  const aiHit = (x, y) => x >= ai.left && x <= ai.right && y >= ai.top && y <= ai.bottom;
+
+  /**
+   * The autopilot switch. A lamp rather than a word for its state, so the pill reads the same
+   * whichever language the rest of the screen is in.
+   */
+  function drawAiButton() {
+    const w = canvas._w;
+    layOutAi();
+    const pw = ai.right - ai.left, ph = ai.bottom - ai.top;
+    ctx.globalAlpha = world.ai ? 0.96 : 0.72;
+    ctx.fillStyle = '#101A30';
+    ctx.beginPath(); ctx.roundRect(ai.left, ai.top, pw, ph, ph / 2); ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = '#3C5A8C'; ctx.lineWidth = Math.max(2, w * 0.006);
+    ctx.beginPath(); ctx.roundRect(ai.left, ai.top, pw, ph, ph / 2); ctx.stroke();
+    // the lamp breathes while it is flying, so the pill is alive rather than merely lit
+    ctx.globalAlpha = world.ai ? 0.7 + 0.3 * Math.sin(runTime * 4.2) : 1;
+    ctx.fillStyle = world.ai ? '#34D399' : '#27354F';
+    ctx.beginPath(); ctx.arc(ai.left + ph * 0.5, ai.top + ph / 2, ph * 0.17, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+    label('AI', (ai.left + ai.right) / 2 + ph * 0.28, ai.top + ph / 2 + w * 0.015,
+      w * 0.044, world.ai ? '#FACC15' : '#FFFFFF', '#0B1020');
   }
 
   /**
@@ -1924,6 +2197,12 @@
     const p = canvasPoint(ev);
     // a bomb tap with the other hand must not steal the finger that is flying the plane
     if (bombHit(p.x, p.y)) { world.useBomb(); return; }
+    if (aiHit(p.x, p.y)) {
+      world.setAi(!world.ai);
+      fx.banner = world.ai ? '자동 비행 시작' : '직접 조종으로';
+      fx.bannerTimer = 1.1;
+      return;
+    }
     if (dragPointer < 0) {
       layOutPad();
       dragPointer = ev.pointerId;
@@ -1942,6 +2221,8 @@
   function onMove(ev) {
     if (!dragging || ev.pointerId !== dragPointer) return;
     const p = canvasPoint(ev);
+    // a tap is for the panels; actually flying the thing is how you take it back
+    if (world.ai) { world.setAi(false); fx.banner = '직접 조종으로'; fx.bannerTimer = 1.1; }
     // the pad multiplies your thumb; dragging the plane itself stays one-to-one
     const gain = onPad ? PAD_GAIN : 1;
     world.movePlayerBy((p.x - lastTouch) / (canvas._w * 0.5) * gain, (p.y - lastTouchY) / canvas._h * gain);
@@ -1964,6 +2245,11 @@
     else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') heldY = 1;
     else if (e.key === 'm' || e.key === 'M') toggleMute();
     else if (e.key === 'b' || e.key === 'B') world.useBomb();
+    else if (e.key === 'i' || e.key === 'I') {
+      world.setAi(!world.ai);
+      fx.banner = world.ai ? '자동 비행 시작' : '직접 조종으로';
+      fx.bannerTimer = 1.1;
+    }
     else if (e.key === ' ' || e.key === 'Enter') {
       ac();
       if (world.state === State.GAME_OVER) { if (!world.continueRun()) world.start(); }
@@ -1990,8 +2276,10 @@
     // runs on the real clock so the slow-motion itself cannot slow down.
     timeScale = Math.min(1, timeScale + dt * TIME_RECOVERY);
     const scaled = dt * timeScale;
-    if (held || heldY) world.movePlayerBy(held * 1.6 * dt, heldY * 0.85 * dt);
+    if (held || heldY) { if (world.ai) world.setAi(false); world.movePlayerBy(held * 1.6 * dt, heldY * 0.85 * dt); }
     updatePad(dt);
+    // the autopilot flies on the same clock the world runs on, so a hitstop slows its hands too
+    world.aiTick(scaled);
     world.update(scaled);
     for (const ev of world.events) handleEvent(ev);
     world.events.length = 0;

@@ -240,6 +240,11 @@ back to back, a third faster than usual, stacked `RUSH_STACK` apart so they land
 rather than one wall. It is the one place a chain can really run, and the one place the stage
 stops feeling like a metronome.
 
+The stack is also what turned up a stage that could never end: a diver accelerates by its own
+height, and one stacked far enough above the screen had that term go negative and climbed away
+for ever, leaving an aircraft alive that the boss check was waiting on. `DIVE_CRAWL` floors it, so
+a diver only ever comes down. Twenty minutes of the autopilot flying found it; a test pins it.
+
 **Three rounds, not one.** The raider changes its mind at `BOSS_PHASE_2` and `BOSS_PHASE_3` of its
 health -- the bar carries a tick at each, so you can see them coming. It sweeps faster and wider
 each time, and from phase 1 it also picks you out of its own pattern with an aimed shot.
@@ -283,6 +288,34 @@ and the two that look after the chain and the sky around you (`CHARM`, `MAGNET`)
 
 `DROP_TABLE` keeps the drop *rate* where it was, so fourteen kinds means more variety per drop
 rather than more power: the staples stay common and the exotics stay a treat.
+
+**It will fly itself.** The `AI` pill above the bomb button hands the aircraft to an autopilot
+that plays the whole run: it starts the stage, flies it, picks a boon off the clear panel, and
+picks the run back up when it falls. A drag takes it straight back -- a tap is for the panels, so
+tapping through a clear screen does not cost you the autopilot.
+
+It lives in `SkyWorld` rather than the view, so both ports fly identically and a test can watch it.
+`aiTick()` drives the states; `flyAutopilot()` scores a ring of places it could be in a moment and
+steps towards the cheapest one. Sampling positions rather than writing steering rules is what lets
+one piece of code dodge a curtain, a diver and a rising flare without ever arguing with itself
+about which threat to run from.
+
+`aiCost()` is where the judgement is. Staying alive is worth orders of magnitude more than lining
+up a shot, so danger is squared and heavy and everything else only breaks ties. Three things it
+took measurement to learn:
+
+- **Closest approach, not sampled positions.** Walking each round forward in four steps let a fast
+  one pass clean through the gaps between them. Every threat is now judged at the nearest it ever
+  comes over `AI_LOOKAHEAD`, solved rather than sampled.
+- **Each kind projected the way it actually flies.** `aiSpeedY()` knows a diver is still
+  accelerating and a committed charger is the fastest thing in the sky. One speed for all twelve
+  is a dead aircraft.
+- **Lead the target.** A round takes time to arrive and the raider sweeps at up to a lane and a
+  half a second, so it aims off by `bossDriftX()` times the flight time, and closes the range in a
+  raider fight so that guess is a short one.
+
+Sixteen six-minute runs on sixteen seeds: **no deaths at all**, stage 4.19 on average, and 45 of 67
+stage clears graded S.
 
 **Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
 you back on the stage you fell on with a fresh aircraft. The score, the kills and the best chain

@@ -6,6 +6,7 @@ import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sin
+import kotlin.math.sqrt
 
 /**
  * The whole game, with no Android in it.
@@ -525,6 +526,242 @@ class SkyWorld(private val seed: Int = 1) {
         return true
     }
 
+    // ---- flying itself --------------------------------------------------------------------
+
+    /** True while the aircraft is flying itself. */
+    var ai = false
+        private set
+    private var aiDelay = 0f
+    private var aiLastState = State.READY
+    /** Worked out once a frame rather than once per candidate square: aiCost runs thirteen times. */
+    private var aiPick: Plane? = null
+    private var aiDrift = 0f
+
+    fun setAi(on: Boolean) {
+        ai = on
+        // switched on over a panel, it still reads the panel before it acts
+        aiDelay = if (state == State.RUNNING) 0f else AI_PAUSE
+        aiLastState = state
+    }
+
+    /**
+     * One tick of flying itself. Called before [update], and it drives the whole run: it starts a
+     * stage, flies it, picks a boon at the end of one, and picks the run back up when it falls.
+     * It lives here rather than in the view so both ports fly identically and a test can watch it.
+     */
+    fun aiTick(dt: Float) {
+        if (!ai) return
+        if (state != aiLastState) {
+            aiLastState = state
+            // a beat on each panel, so a watcher can read what just happened
+            aiDelay = if (state == State.RUNNING) 0f else AI_PAUSE
+        }
+        aiDelay = max(0f, aiDelay - dt)
+        if (state == State.RUNNING) {
+            flyAutopilot(min(MAX_FRAME_DT, max(0f, dt)))
+            return
+        }
+        if (aiDelay > 0f) return
+        when (state) {
+            State.READY -> start()
+            State.LEVEL_CLEAR -> if (!takeBoon(bestBoonIndex())) nextLevel()
+            State.GAME_OVER -> if (!continueRun()) start()
+            State.RUNNING -> {}
+        }
+    }
+
+    /**
+     * Scores a ring of places it could be in a moment and steps towards the best one. Sampling
+     * beats steering rules here: it dodges a curtain and a diver with the same code, and it never
+     * argues with itself about which threat to run from.
+     */
+    private fun flyAutopilot(dt: Float) {
+        aiPick = aiTarget()
+        aiDrift = bossDriftX()
+        // the crosswind is going to push it before the next frame, so plan from where it lands
+        val drift = gust * dt
+        var bestCost = aiCost(playerX + drift, playerY)
+        var bestX = playerX
+        var bestY = playerY
+        var i = 0
+        while (i < AI_SAMPLES.size) {
+            val cx = (playerX + AI_SAMPLES[i] * AI_REACH + drift).coerceIn(-PLAYER_LIMIT, PLAYER_LIMIT)
+            val cy = (playerY + AI_SAMPLES[i + 1] * AI_REACH).coerceIn(frontLimit(), PLAYER_Y_MAX)
+            val cost = aiCost(cx, cy)
+            if (cost < bestCost) { bestCost = cost; bestX = cx; bestY = cy }
+            i += 2
+        }
+        val step = AI_SPEED * dt
+        movePlayerBy((bestX - playerX).coerceIn(-step, step), (bestY - playerY).coerceIn(-step, step))
+        // a bomb when there is nowhere good left to stand, and sooner on the last of the hull
+        val patience = if (hp <= 1) AI_BOMB_AT * 0.45f else AI_BOMB_AT
+        if (bombs > 0 && mercy <= 0f && bestCost > patience) useBomb()
+    }
+
+    /**
+     * What it would cost to be at ([x], [y]). Staying alive is worth orders of magnitude more
+     * than lining up a shot, so danger is squared and heavy and everything else only breaks ties.
+     */
+    private fun aiCost(x: Float, y: Float): Float {
+        // while the hull is still flashing nothing can touch it, so it may cross a curtain to
+        // pick something up rather than cower through the one window it has
+        val exposure = if (mercy > AI_MERCY_TRUST) AI_MERCY_DISCOUNT else 1f
+        var danger = 0f
+        // incoming fire, at its closest approach rather than sampled: a round moving half a
+        // screen a second steps straight through any sampling coarse enough to be affordable
+        for (s in mutableShots) {
+            if (s.fromPlayer || !s.alive) continue
+            danger += bite(s.x - x, s.y - y, s.vx, s.vy, AI_SHOT_CLEAR, AI_SHOT_WEIGHT)
+        }
+        // and anything solid, each kind projected the way it actually flies
+        for (e in mutableEnemies) {
+            if (!e.alive) continue
+            danger += bite(e.x - x, e.y - y, 0f, aiSpeedY(e), AI_BODY_CLEAR + halfOf(e.kind), AI_BODY_WEIGHT)
+        }
+        // the fields burn upward, and a column you have not looked for is a column you fly into
+        for (f in mutableFlares) {
+            if (!f.alive || f.life <= FLARE_LIFE * 0.25f) continue
+            danger += bite(f.x - x, f.y - y, 0f, -FLARE_RISE, AI_FLARE_CLEAR, AI_FLARE_WEIGHT)
+        }
+        boss?.let { b ->
+            if (b.alive) {
+                val clear = BOSS_HALF + AI_BODY_CLEAR
+                val gap = max(abs(b.x - x), abs(b.y - y))
+                if (gap < clear) {
+                    val nip = 1f - gap / clear
+                    danger += nip * nip * AI_BODY_WEIGHT
+                }
+            }
+        }
+        // the edges are a trap: nowhere to run once you are in one
+        val edge = PLAYER_LIMIT - abs(x)
+        if (edge < AI_EDGE_CLEAR) {
+            val nip = 1f - edge / AI_EDGE_CLEAR
+            danger += nip * nip * AI_EDGE_WEIGHT
+        }
+        danger *= exposure
+
+        var pull = 0f
+        // pickups are worth going for, and worth more the closer they already are
+        for (item in mutableItems) {
+            if (!item.alive) continue
+            val dx = item.x - x
+            val dy = item.y - y
+            pull -= AI_ITEM_WEIGHT / (0.08f + sqrt(dx * dx + dy * dy))
+        }
+        val target = aiPick
+        if (target != null) {
+            // rounds take time to arrive and everything worth shooting is moving, so it stands
+            // where the target is going to be, not where it is
+            val flight = max(0f, y - target.y) / SHOT_SPEED
+            // a shielder's plate means lining up on its nose is the one place that does nothing
+            val nose = if (target.kind == Kind.SHIELDER) halfOf(target.kind) * 0.8f else 0f
+            pull += offAim(abs(target.x + nose - x) + flight * AI_LEAD_SLACK)
+            pull += (PLAYER_Y_MAX - y) * AI_REAR_WEIGHT
+        } else {
+            val b = boss
+            if (b != null && b.alive) {
+                // the raider sweeps, and fast: aim off it by however far it travels while the
+                // round is in the air, and close the range so that lead is a guess worth making
+                val flight = max(0f, y - b.y) / SHOT_SPEED
+                pull += offAim(abs(b.x + aiDrift * flight - x))
+                pull += (y - frontLimit()) * AI_RANGE_WEIGHT
+            } else {
+                pull += (PLAYER_Y_MAX - y) * AI_REAR_WEIGHT
+            }
+        }
+        return danger + pull
+    }
+
+    /**
+     * What being [off] lanes away from what it is shooting costs. It flattens out rather than
+     * clipping, so being a whole screen off still leans it the right way instead of reading as
+     * no worse than half a screen off -- which is how it used to lose track of a lone aircraft.
+     */
+    private fun offAim(off: Float): Float = AI_AIM_WEIGHT * AI_AIM_REACH * off / (off + AI_AIM_REACH)
+
+    /**
+     * How badly a thing at ([rx], [ry]) travelling at ([vx], [vy]) relative to a standing
+     * aircraft wants that square, judged at the closest it ever comes over [AI_LOOKAHEAD].
+     */
+    private fun bite(rx: Float, ry: Float, vx: Float, vy: Float, clear: Float, weight: Float): Float {
+        val vv = vx * vx + vy * vy
+        val t = if (vv > 1e-6f) (-(rx * vx + ry * vy) / vv).coerceIn(0f, AI_LOOKAHEAD) else 0f
+        val dx = rx + vx * t
+        val dy = ry + vy * t
+        val d = sqrt(dx * dx + dy * dy)
+        if (d >= clear) return 0f
+        val nip = 1f - d / clear
+        // a round arriving now is worth more worry than one arriving at the end of the horizon
+        return nip * nip * weight * (1f - AI_SOON * t / AI_LOOKAHEAD)
+    }
+
+    /** How fast [e] is actually coming down, per kind. A bad guess here is a dead aircraft. */
+    private fun aiSpeedY(e: Plane): Float = when (e.kind) {
+        Kind.DRONE -> e.speed
+        Kind.WEAVER -> e.speed * 0.92f
+        Kind.GUNNER -> e.speed * 0.62f
+        // a diver is already accelerating, and will be faster still by the time it arrives
+        Kind.DIVER -> e.speed * max(DIVE_CRAWL, 1f + (e.y + 0.2f) * 1.6f) * 1.35f
+        Kind.SHIELDER -> e.speed * 0.55f
+        Kind.SPLITTER -> e.speed * 0.72f
+        Kind.TURRET -> if (e.anchor > 0f) 0f else e.speed * 1.2f
+        Kind.SWARM -> e.speed * 1.35f
+        Kind.MINER -> e.speed * 0.5f
+        Kind.MINE -> MINE_DRIFT
+        // a charger that has committed covers ground faster than anything else in the sky
+        Kind.CHARGER -> if (e.charge > 0f) e.speed * 0.25f else e.speed * CHARGE_SPEED
+        Kind.HEALER -> e.speed * 0.6f
+    }
+
+    /** How fast the raider is sliding sideways right now, straight off its own sweep. */
+    private fun bossDriftX(): Float {
+        val b = boss ?: return 0f
+        if (!b.engaged) return 0f
+        val kindly = bossProfileOf(b.kind)
+        val rate = BOSS_PHASE_SWEEP[b.phase] * kindly.sweepRate * BOSS_SWEEP_RATE
+        return cos(b.sweep * BOSS_SWEEP_RATE) * BOSS_SWEEP_X * BOSS_PHASE_REACH[b.phase] * kindly.reach * rate
+    }
+
+    /**
+     * What it would rather be shooting: the things that get worse if you leave them. Once the
+     * raider is on station it is the only thing on the board worth the time, and anything else
+     * in the air is something to fly around rather than something to chase.
+     */
+    private fun aiTarget(): Plane? {
+        val b = boss
+        if (b != null && b.alive && b.engaged) {
+            // except a healer, which will keep putting back whatever else is in the air
+            for (e in mutableEnemies) if (e.alive && e.kind == Kind.HEALER) return e
+            return null
+        }
+        var best: Plane? = null
+        var bestRank = Int.MIN_VALUE
+        for (e in mutableEnemies) {
+            if (!e.alive || e.kind == Kind.MINE) continue
+            val rank = when (e.kind) {
+                Kind.HEALER -> 400
+                Kind.TURRET -> 300
+                Kind.MINER -> 250
+                Kind.GUNNER -> 200
+                else -> 100
+            } + (e.y * 60f).toInt()          // and among equals, whatever is closest to the floor
+            if (rank > bestRank) { bestRank = rank; best = e }
+        }
+        return best
+    }
+
+    /** Which of the three on offer it wants most. */
+    private fun bestBoonIndex(): Int {
+        var bestAt = 0
+        var bestRank = Int.MIN_VALUE
+        for ((i, boon) in offered.withIndex()) {
+            val rank = AI_BOON_ORDER.indexOf(boon).let { if (it < 0) 0 else AI_BOON_ORDER.size - it }
+            if (rank > bestRank) { bestRank = rank; bestAt = i }
+        }
+        return bestAt
+    }
+
     fun update(dtSeconds: Float) {
         if (state != State.RUNNING) return
         val dt = min(MAX_FRAME_DT, max(0f, dtSeconds))
@@ -709,7 +946,9 @@ class SkyWorld(private val seed: Int = 1) {
                     e.y += e.speed * 0.62f * dt
                     e.x = e.homeX + sin(elapsed * 1.1f + e.phase) * 0.08f
                 }
-                Kind.DIVER -> e.y += e.speed * (1f + (e.y + 0.2f) * 1.6f) * dt
+                // it accelerates as it comes down, but never backwards: one stacked high enough
+                // by a rush used to climb away and leave a stage that could not end
+                Kind.DIVER -> e.y += e.speed * max(DIVE_CRAWL, 1f + (e.y + 0.2f) * 1.6f) * dt
                 // heavy and slow, with a plate across its nose: you have to come at it from the side
                 Kind.SHIELDER -> {
                     e.y += e.speed * 0.55f * dt
@@ -945,7 +1184,7 @@ class SkyWorld(private val seed: Int = 1) {
         if (b.phase >= 1) {
             val dx = playerX - b.x
             val dy = max(0.15f, playerY - b.y)
-            val len = kotlin.math.sqrt(dx * dx + dy * dy)
+            val len = sqrt(dx * dx + dy * dy)
             mutableShots.add(
                 Shot(b.x, b.y + 0.08f, dx / len * BOSS_AIMED_SPEED, dy / len * BOSS_AIMED_SPEED, false),
             )
@@ -1123,16 +1362,16 @@ class SkyWorld(private val seed: Int = 1) {
             }
         }
         if (bestD == Float.MAX_VALUE) return
-        val speed = kotlin.math.sqrt(s.vx * s.vx + s.vy * s.vy)
+        val speed = sqrt(s.vx * s.vx + s.vy * s.vy)
         if (speed <= 1e-5f) return
         val tx = bestX - s.x
         val ty = bestY - s.y
-        val tl = kotlin.math.sqrt(tx * tx + ty * ty)
+        val tl = sqrt(tx * tx + ty * ty)
         if (tl <= 1e-5f) return
         val k = (HOMING_TURN * dt).coerceIn(0f, 1f)
         var nx = s.vx / speed * (1f - k) + tx / tl * k
         var ny = s.vy / speed * (1f - k) + ty / tl * k
-        val nl = kotlin.math.sqrt(nx * nx + ny * ny)
+        val nl = sqrt(nx * nx + ny * ny)
         if (nl <= 1e-5f) return
         nx /= nl
         ny /= nl
@@ -1244,7 +1483,7 @@ class SkyWorld(private val seed: Int = 1) {
                 // reel it in: still falling, but now it is coming to you
                 val dx = playerX - item.x
                 val dy = playerY - item.y
-                val d = kotlin.math.sqrt(dx * dx + dy * dy)
+                val d = sqrt(dx * dx + dy * dy)
                 if (d > 1e-4f) {
                     item.x += dx / d * pull * dt
                     item.y += dy / d * pull * dt
@@ -1514,6 +1753,7 @@ class SkyWorld(private val seed: Int = 1) {
         const val MINE_GAP = 1.5f
         const val MINE_DRIFT = 0.035f          // barely falls: it is a place, not an aircraft
         const val CHARGE_TELL = 1.1f           // how long it shows you the lane before taking it
+        const val DIVE_CRAWL = 0.35f           // slowest a diver ever comes down, whatever its height
         const val CHARGE_SPEED = 4.2f
         const val CHARGE_TRACK = 2.2f
         const val HEAL_GAP = 1.8f
@@ -1572,6 +1812,45 @@ class SkyWorld(private val seed: Int = 1) {
         const val VAMP_SECONDS = 12f
         const val VAMP_KILLS = 8
         const val MEDAL_SCORE = 120
+
+        // ---- what the autopilot is made of ---------------------------------------------------
+        /** How long it looks at a panel before moving on, so a watcher can read it. */
+        const val AI_PAUSE = 1.6f
+        const val AI_REACH = 0.12f             // how far out it considers stepping
+        const val AI_SPEED = 3.6f              // and how fast it may actually travel
+        const val AI_LOOKAHEAD = 0.85f         // seconds of threat it plans against
+        const val AI_SOON = 0.5f               // how much a late threat is discounted
+        const val AI_MERCY_TRUST = 0.25f       // flashing, with time on it: nothing can touch it
+        const val AI_MERCY_DISCOUNT = 0.15f
+        const val AI_SHOT_CLEAR = 0.15f
+        const val AI_SHOT_WEIGHT = 900f
+        const val AI_BODY_CLEAR = 0.11f
+        const val AI_BODY_WEIGHT = 700f
+        const val AI_FLARE_CLEAR = 0.23f
+        const val AI_FLARE_WEIGHT = 1100f      // a column cannot be shot down, so give it the room
+        const val AI_EDGE_CLEAR = 0.16f
+        const val AI_EDGE_WEIGHT = 120f
+        const val AI_ITEM_WEIGHT = 1.4f
+        const val AI_AIM_WEIGHT = 11f
+        const val AI_AIM_REACH = 0.5f          // past which one lane is much like another
+        const val AI_LEAD_SLACK = 0.35f        // the longer the round is in the air, the worse
+        const val AI_REAR_WEIGHT = 2.0f        // room to dodge is worth something in itself
+        const val AI_RANGE_WEIGHT = 5.0f       // but in a raider fight, range is the thing
+        const val AI_BOMB_AT = 300f            // nowhere good left to stand
+
+        /** Where it steps to look: eight ways out, plus two longer ones sideways. */
+        val AI_SAMPLES = floatArrayOf(
+            -1f, 0f, 1f, 0f, 0f, -1f, 0f, 1f,
+            -0.7f, -0.7f, 0.7f, -0.7f, -0.7f, 0.7f, 0.7f, 0.7f,
+            -1.8f, 0f, 1.8f, 0f, 0f, -1.7f, 0f, 1.7f,
+        )
+
+        /** What it takes first when it gets the choice. */
+        val AI_BOON_ORDER = listOf(
+            Boon.GUNS, Boon.PIERCING, Boon.ARMOUR, Boon.RAPIDFIRE, Boon.ESCORT,
+            Boon.CHAINWINDOW, Boon.CHARMED, Boon.CHAINCAP, Boon.SUPPLY,
+            Boon.MAGNETIC, Boon.BOMBS, Boon.AGILITY,
+        )
 
         /** How many to lay out between stages, and how far each one may be stacked. */
         const val BOONS_OFFERED = 3
