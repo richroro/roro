@@ -606,7 +606,7 @@ class SkyWorld(private val seed: Int = 1) {
         // is also what gives the aircraft something to bank into. How sharply it may lean on it
         // is how badly it needs to: a pilot with room cruises, a pilot about to be hit yanks.
         // Easing all the time was smooth and cost it the flak stage.
-        val urgency = min(1f, hereCost / AI_BOMB_AT)
+        val urgency = min(1f, aiPress() / AI_BOMB_AT)
         val wantVx = ((bestX - playerX) / AI_REACH).coerceIn(-1f, 1f) * AI_SPEED
         val wantVy = ((bestY - playerY) / AI_REACH).coerceIn(-1f, 1f) * AI_SPEED
         val ease = min(1f, dt * (AI_AGILITY + urgency * AI_URGENT))
@@ -707,18 +707,45 @@ class SkyWorld(private val seed: Int = 1) {
 
     /**
      * How badly a thing at ([rx], [ry]) travelling at ([vx], [vy]) relative to a standing
-     * aircraft wants that square, judged at the closest it ever comes over [AI_LOOKAHEAD].
+     * aircraft wants that square, judged at the closest it ever comes over [horizon].
      */
-    private fun bite(rx: Float, ry: Float, vx: Float, vy: Float, clear: Float, weight: Float): Float {
+    private fun bite(
+        rx: Float, ry: Float, vx: Float, vy: Float,
+        clear: Float, weight: Float, horizon: Float = AI_LOOKAHEAD,
+    ): Float {
         val vv = vx * vx + vy * vy
-        val t = if (vv > 1e-6f) (-(rx * vx + ry * vy) / vv).coerceIn(0f, AI_LOOKAHEAD) else 0f
+        val t = if (vv > 1e-6f) (-(rx * vx + ry * vy) / vv).coerceIn(0f, horizon) else 0f
         val dx = rx + vx * t
         val dy = ry + vy * t
         val d = sqrt(dx * dx + dy * dy)
         if (d >= clear) return 0f
         val nip = 1f - d / clear
         // a round arriving now is worth more worry than one arriving at the end of the horizon
-        return nip * nip * weight * (1f - AI_SOON * t / AI_LOOKAHEAD)
+        return nip * nip * weight * (1f - AI_SOON * t / horizon)
+    }
+
+    /**
+     * What is about to be on top of it, as opposed to what it is planning around. It plans a
+     * second ahead, and yanking the stick for a round that will only graze it in a second looks
+     * like the aircraft bolting at nothing: from outside there is no reason for it yet. This is
+     * the same sum over a horizon short enough that whatever set it off is plainly there.
+     */
+    private fun aiPress(): Float {
+        if (mercy > AI_MERCY_TRUST) return 0f
+        var d = 0f
+        for (s in mutableShots) {
+            if (s.fromPlayer || !s.alive) continue
+            d += bite(s.x - playerX, s.y - playerY, s.vx, s.vy, AI_SHOT_CLEAR, AI_SHOT_WEIGHT, AI_PRESS)
+        }
+        for (e in mutableEnemies) {
+            if (!e.alive) continue
+            d += bite(e.x - playerX, e.y - playerY, 0f, aiSpeedY(e), AI_BODY_CLEAR + halfOf(e.kind), AI_BODY_WEIGHT, AI_PRESS)
+        }
+        for (f in mutableFlares) {
+            if (!f.alive || f.life <= FLARE_LIFE * 0.25f) continue
+            d += bite(f.x - playerX, f.y - playerY, 0f, -FLARE_RISE, AI_FLARE_CLEAR, AI_FLARE_WEIGHT, AI_PRESS)
+        }
+        return d
     }
 
     /** How fast [e] is actually coming down, per kind. A bad guess here is a dead aircraft. */
@@ -1846,6 +1873,7 @@ class SkyWorld(private val seed: Int = 1) {
         const val AI_AGILITY = 9f              // how quickly it may change its mind about that
         const val AI_URGENT = 200f             // and how much quicker with something about to hit
         const val AI_LOOKAHEAD = 0.85f         // seconds of threat it plans against
+        const val AI_PRESS = 0.65f             // and of threat close enough to be worth a yank
         const val AI_SOON = 0.5f               // how much a late threat is discounted
         const val AI_MERCY_TRUST = 0.25f       // flashing, with time on it: nothing can touch it
         const val AI_MERCY_DISCOUNT = 0.15f
