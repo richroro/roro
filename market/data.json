@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T06:25:24.249399+09:00",
+  "updatedAt": "2026-09-21T09:06:43.640674+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1384.61,
-      "change": 4.66,
-      "changePercent": 0.34,
+      "price": 1386.28,
+      "change": 0.33,
+      "changePercent": 0.02,
       "currency": "KRW"
     }
   ],
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "건설노동자, 전자카드 한달에 15일쓰면 2만원 상품권…홍보행사",
-      "link": "https://www.yna.co.kr/view/AKR20260918168800530",
-      "pubDate": "Mon, 21 Sep 2026 06:00:08 +0900",
+      "title": "센트럴터미널코리아, 울산에 액체화물 저장시설 1천200억 투자",
+      "link": "https://www.yna.co.kr/view/AKR20260920040900057",
+      "pubDate": "Mon, 21 Sep 2026 09:01:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "경제인협회 \"반도체 공장 가동 앞두고 도로·용수 아직\"",
-      "link": "https://www.yna.co.kr/view/AKR20260920032500003",
-      "pubDate": "Mon, 21 Sep 2026 06:00:05 +0900",
+      "title": "[1보] 9월 1∼20일 수출 714억달러, 78.3% 증가…일평균 89.8%↑",
+      "link": "https://www.yna.co.kr/view/AKR20260921031100002",
+      "pubDate": "Mon, 21 Sep 2026 09:00:53 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"'급여' 표시 안 하면 금리감면 못 받아\"…금감원, 소비자 당부",
-      "link": "https://www.yna.co.kr/view/AKR20260920043800002",
-      "pubDate": "Mon, 21 Sep 2026 06:00:05 +0900",
+      "title": "CJ프레시웨이, 단체급식서 김포금쌀 알려…CJ ENM 콘텐츠와 협업",
+      "link": "https://www.yna.co.kr/view/AKR20260921023800030",
+      "pubDate": "Mon, 21 Sep 2026 08:58:57 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "신세계百, 외국인 대상 '글로벌 쇼핑 페스타'…\"올해 최대규모\"",
-      "link": "https://www.yna.co.kr/view/AKR20260920038800030",
-      "pubDate": "Mon, 21 Sep 2026 06:00:01 +0900",
+      "title": "[게시판] NH농협은행, 추석 연휴 귀향길 이동점포",
+      "link": "https://www.yna.co.kr/view/AKR20260921028900002",
+      "pubDate": "Mon, 21 Sep 2026 08:53:58 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "KB국민은행, 정기예금 금리 추가 인상…최고 연 3.5%",
-      "link": "https://www.yna.co.kr/view/AKR20260920049000002",
-      "pubDate": "Mon, 21 Sep 2026 05:59:00 +0900",
+      "title": "호반그룹, 2027년 신입사원 세 자릿수 채용…24일부터 접수",
+      "link": "https://www.yna.co.kr/view/AKR20260921027700003",
+      "pubDate": "Mon, 21 Sep 2026 08:52:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한국 상장하며 몸집 불린 엔화 코인…일평균 거래 2억→450억원",
-      "link": "https://www.yna.co.kr/view/AKR20260919058400002",
-      "pubDate": "Mon, 21 Sep 2026 05:57:00 +0900",
+      "title": "남양주시, 도심지구 예정지 '이행강제금 부과·징수' 유예",
+      "link": "https://www.yna.co.kr/view/AKR20260921025500060",
+      "pubDate": "Mon, 21 Sep 2026 08:49:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"성인도 벌기 힘든 돈인데\"…'억대 연봉' 받는 미성년 사장 21명",
-      "link": "https://www.yna.co.kr/view/AKR20260918165100002",
-      "pubDate": "Mon, 21 Sep 2026 05:55:00 +0900",
+      "title": "한미글로벌, SK하이닉스 미국 인디애나 HBM 공장 건설사업관리",
+      "link": "https://www.yna.co.kr/view/AKR20260921024800003",
+      "pubDate": "Mon, 21 Sep 2026 08:46:43 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "민생 특사경, 수심위 없이도 수사 착수…\"불법사금융은 속도전\"",
-      "link": "https://www.yna.co.kr/view/AKR20260920030200002",
-      "pubDate": "Mon, 21 Sep 2026 05:53:00 +0900",
+      "title": "10월 전국 아파트 입주물량 1만6천567호…전월 대비 65%↑",
+      "link": "https://www.yna.co.kr/view/AKR20260921022900003",
+      "pubDate": "Mon, 21 Sep 2026 08:46:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "미성년자 미수거래 금지 명문화…증권사들 곧 선제조치할 듯",
-      "link": "https://www.yna.co.kr/view/AKR20260920033700002",
-      "pubDate": "Mon, 21 Sep 2026 05:51:00 +0900",
+      "title": "코스맥스그룹, 하반기 신입사원 공채…AI 활용 역량 우대",
+      "link": "https://www.yna.co.kr/view/AKR20260921022200030",
+      "pubDate": "Mon, 21 Sep 2026 08:45:57 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "석유유통협회 \"고속도로 주유소 100원 할인, 공정경쟁 흔들어\"",
-      "link": "https://www.yna.co.kr/view/AKR20260920037700003",
-      "pubDate": "Mon, 21 Sep 2026 00:00:00 +0900",
+      "title": "상속·고령농지 일괄처분 면제…'관행 임대차' 조건부 처분유예",
+      "link": "https://www.yna.co.kr/view/AKR20260921008700030",
+      "pubDate": "Mon, 21 Sep 2026 08:43:34 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "금값 4390달러로 반등…유가 하락에 숏포지션 청산",
+      "link": "https://www.hankyung.com/article/202609216802i",
+      "pubDate": "Mon, 21 Sep 2026 08:04:34 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[속보] 4분기 전기요금 동결…연료비조정단가 '+5'원 유지",
+      "link": "https://www.hankyung.com/article/2026092168607",
+      "pubDate": "Mon, 21 Sep 2026 08:04:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[밤 사이 해외 뉴스] 500조 현금 쌓은 벅셔…주가 폭락한 이유",
+      "link": "https://www.hankyung.com/article/202609216810i",
+      "pubDate": "Mon, 21 Sep 2026 08:00:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'1기에 20조원?'…美 원전 투자안, 신한울의 3배 넘는다",
+      "link": "https://www.hankyung.com/article/2026092167567",
+      "pubDate": "Mon, 21 Sep 2026 07:34:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 10년물 5% 뚫었는데 나스닥은 올랐다…미 증시 버틴 진짜 이유 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609206240i",
+      "pubDate": "Mon, 21 Sep 2026 07:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "홍콩서 '150억' 쓸어담았다…매출 170% 폭등한 한국 제품 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609183779i",
+      "pubDate": "Mon, 21 Sep 2026 07:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'왜 저기만 깎아줘?'…정부 발표에 주유소업계 뿔난 까닭",
+      "link": "https://www.hankyung.com/article/2026092166977",
+      "pubDate": "Mon, 21 Sep 2026 06:40:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"기저귀도 못 뗀 아이가 연봉 1억 사장\"…놀라운 현실",
+      "link": "https://www.hankyung.com/article/2026092166717",
+      "pubDate": "Mon, 21 Sep 2026 06:18:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"가전은 역시 LG\"라더니…삼성 TV 관심 폭발한 '진짜 이유' [텔레비전(戰) ①]",
+      "link": "https://www.hankyung.com/article/202609168699g",
+      "pubDate": "Mon, 21 Sep 2026 06:00:07 +0900",
+      "source": "한국경제"
     },
     {
       "title": "“삼전닉스 추격한다”…CXMT, D램 미세공정 한단계 도약",
       "link": "https://www.hankyung.com/article/202609206464i",
       "pubDate": "Sun, 20 Sep 2026 20:02:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"집·차는 못 사도 이건 산다\"…'뜻밖의 소비'에 빠진 2030 [김기자의 알고리즘]",
-      "link": "https://www.hankyung.com/article/202609183185H",
-      "pubDate": "Sun, 20 Sep 2026 19:29:34 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이걸 왜 사가요?\"…외국인들 쇼핑 목록 보니 '대반전'",
-      "link": "https://www.hankyung.com/article/2026092063581",
-      "pubDate": "Sun, 20 Sep 2026 18:24:41 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"환율, 1400원 뚫을 수 있지만 추세적 상승은 어려울 듯\"",
-      "link": "https://www.hankyung.com/article/2026092062831",
-      "pubDate": "Sun, 20 Sep 2026 18:23:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "작년 온실가스 배출…0.9% 감소한 6.5억t",
-      "link": "https://www.hankyung.com/article/2026092062851",
-      "pubDate": "Sun, 20 Sep 2026 18:23:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "8개월 공들인 기초연금 개편…발표 직전 돌연 무산된 까닭",
-      "link": "https://www.hankyung.com/article/2026092063201",
-      "pubDate": "Sun, 20 Sep 2026 18:22:40 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "연금 개혁 '바통' 다시 국회로…여야, 수급기준 대안 내놓나",
-      "link": "https://www.hankyung.com/article/2026092063191",
-      "pubDate": "Sun, 20 Sep 2026 18:21:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"북극권 활용 협력…한미일 이달 MOU\"",
-      "link": "https://www.hankyung.com/article/2026092063631",
-      "pubDate": "Sun, 20 Sep 2026 18:20:59 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"韓 커피 문화가 궁금했다\" 외국인도 '오픈런'",
-      "link": "https://www.hankyung.com/article/2026092063421",
-      "pubDate": "Sun, 20 Sep 2026 18:18:47 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "도심 속 소음을 지우는 마법…100명이 빠진 '싱잉볼 명상'",
-      "link": "https://www.hankyung.com/article/2026092063431",
-      "pubDate": "Sun, 20 Sep 2026 18:18:26 +0900",
       "source": "한국경제"
     }
   ]
