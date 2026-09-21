@@ -1,6 +1,7 @@
 package com.richroro.skystrike
 
 import kotlin.math.abs
+import kotlin.math.max
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -1674,5 +1675,48 @@ class SkyWorldTest {
         val start = diver.y
         repeat(120) { w.update(1f / 60f) }
         assertTrue("a diver only ever comes down", diver.y > start)
+    }
+
+    @Test
+    fun `flying itself eases onto the stick rather than snapping to full travel`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(playerX = 0f, playerY = 0.9f, mercy = 0f)
+        // something worth crossing for, far enough away that it wants all the speed it can get
+        w.addEnemyForTest(SkyWorld.Kind.DRONE, x = 0.8f, y = -0.6f, hp = 99)
+        w.aiTick(1f / 60f)
+        w.update(1f / 60f)
+        val first = abs(w.playerX)
+        val full = SkyWorld.AI_SPEED / 60f
+        assertTrue(
+            "it used to move a whole step on the first frame, which is what made it look wrong",
+            first in 1e-5f..full * 0.5f,
+        )
+        // and it is still an aircraft: given a moment it does get up to speed
+        var last = w.playerX
+        var fastest = 0f
+        repeat(40) {
+            w.aiTick(1f / 60f)
+            w.update(1f / 60f)
+            fastest = max(fastest, abs(w.playerX - last))
+            last = w.playerX
+        }
+        assertTrue("easing must not leave it crawling", fastest > full * 0.7f)
+    }
+
+    @Test
+    fun `flying itself yanks the stick when something is about to hit it`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(playerX = 0f, playerY = 0.85f, mercy = 0f)
+        w.addEnemyShotForTest(0f, 0.8f)          // right on top of it
+        w.aiTick(1f / 60f)
+        w.update(1f / 60f)
+        assertTrue(
+            "with a round on it, the first frame is worth all the travel there is",
+            abs(w.playerX) > SkyWorld.AI_SPEED / 60f * 0.5f,
+        )
     }
 }

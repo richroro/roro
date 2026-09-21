@@ -536,12 +536,18 @@ class SkyWorld(private val seed: Int = 1) {
     /** Worked out once a frame rather than once per candidate square: aiCost runs thirteen times. */
     private var aiPick: Plane? = null
     private var aiDrift = 0f
+    /** It flies on a stick rather than by teleporting a step at a time. */
+    private var aiVx = 0f
+    private var aiVy = 0f
 
     fun setAi(on: Boolean) {
         ai = on
         // switched on over a panel, it still reads the panel before it acts
         aiDelay = if (state == State.RUNNING) 0f else AI_PAUSE
         aiLastState = state
+        // it takes the stick as it finds it, not where it last left it
+        aiVx = 0f
+        aiVy = 0f
     }
 
     /**
@@ -561,6 +567,8 @@ class SkyWorld(private val seed: Int = 1) {
             flyAutopilot(min(MAX_FRAME_DT, max(0f, dt)))
             return
         }
+        aiVx = 0f
+        aiVy = 0f
         if (aiDelay > 0f) return
         when (state) {
             State.READY -> start()
@@ -580,7 +588,8 @@ class SkyWorld(private val seed: Int = 1) {
         aiDrift = bossDriftX()
         // the crosswind is going to push it before the next frame, so plan from where it lands
         val drift = gust * dt
-        var bestCost = aiCost(playerX + drift, playerY)
+        val hereCost = aiCost(playerX + drift, playerY)
+        var bestCost = hereCost
         var bestX = playerX
         var bestY = playerY
         var i = 0
@@ -591,8 +600,24 @@ class SkyWorld(private val seed: Int = 1) {
             if (cost < bestCost) { bestCost = cost; bestX = cx; bestY = cy }
             i += 2
         }
-        val step = AI_SPEED * dt
-        movePlayerBy((bestX - playerX).coerceIn(-step, step), (bestY - playerY).coerceIn(-step, step))
+        // How hard it wants to be going, not where it wants to be next frame. Moving the whole
+        // step the moment a square scores better and none of it otherwise is what made it flick
+        // between frozen and flat out; a stick it has to lean on has to be eased off too, which
+        // is also what gives the aircraft something to bank into. How sharply it may lean on it
+        // is how badly it needs to: a pilot with room cruises, a pilot about to be hit yanks.
+        // Easing all the time was smooth and cost it the flak stage.
+        val urgency = min(1f, hereCost / AI_BOMB_AT)
+        val wantVx = ((bestX - playerX) / AI_REACH).coerceIn(-1f, 1f) * AI_SPEED
+        val wantVy = ((bestY - playerY) / AI_REACH).coerceIn(-1f, 1f) * AI_SPEED
+        val ease = min(1f, dt * (AI_AGILITY + urgency * AI_URGENT))
+        aiVx += (wantVx - aiVx) * ease
+        aiVy += (wantVy - aiVy) * ease
+        val wasX = playerX
+        val wasY = playerY
+        movePlayerBy(aiVx * dt, aiVy * dt)
+        // it has run into the edge of the band: stop leaning on a stick that is doing nothing
+        if (abs(playerX - wasX) < abs(aiVx * dt) * 0.5f) aiVx = 0f
+        if (abs(playerY - wasY) < abs(aiVy * dt) * 0.5f) aiVy = 0f
         // a bomb when there is nowhere good left to stand, and sooner on the last of the hull
         val patience = if (hp <= 1) AI_BOMB_AT * 0.45f else AI_BOMB_AT
         if (bombs > 0 && mercy <= 0f && bestCost > patience) useBomb()
@@ -1818,6 +1843,8 @@ class SkyWorld(private val seed: Int = 1) {
         const val AI_PAUSE = 1.6f
         const val AI_REACH = 0.12f             // how far out it considers stepping
         const val AI_SPEED = 3.6f              // and how fast it may actually travel
+        const val AI_AGILITY = 9f              // how quickly it may change its mind about that
+        const val AI_URGENT = 200f             // and how much quicker with something about to hit
         const val AI_LOOKAHEAD = 0.85f         // seconds of threat it plans against
         const val AI_SOON = 0.5f               // how much a late threat is discounted
         const val AI_MERCY_TRUST = 0.25f       // flashing, with time on it: nothing can touch it

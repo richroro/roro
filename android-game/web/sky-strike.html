@@ -82,6 +82,7 @@
     DIVE_CRAWL: 0.35,
     // flying itself
     AI_PAUSE: 1.6, AI_REACH: 0.12, AI_SPEED: 3.6, AI_LOOKAHEAD: 0.85, AI_SOON: 0.5,
+    AI_AGILITY: 9, AI_URGENT: 200,
     AI_MERCY_TRUST: 0.25, AI_MERCY_DISCOUNT: 0.15,
     AI_SHOT_CLEAR: 0.15, AI_SHOT_WEIGHT: 900, AI_BODY_CLEAR: 0.11, AI_BODY_WEIGHT: 700,
     AI_FLARE_CLEAR: 0.23, AI_FLARE_WEIGHT: 1100, AI_EDGE_CLEAR: 0.16, AI_EDGE_WEIGHT: 120,
@@ -237,6 +238,8 @@
       this.ai = false; this.aiDelay = 0; this.aiLastState = State.READY;
       // worked out once a frame rather than once per candidate square: aiCost runs thirteen times
       this.aiPick = null; this.aiDrift = 0;
+      // it flies on a stick rather than by teleporting a step at a time
+      this.aiVx = 0; this.aiVy = 0;
     }
     startLevel(level) {
       this.level = level;
@@ -329,6 +332,8 @@
       // switched on over a panel, it still reads the panel before it acts
       this.aiDelay = this.state === State.RUNNING ? 0 : C.AI_PAUSE;
       this.aiLastState = this.state;
+      // it takes the stick as it finds it, not where it last left it
+      this.aiVx = 0; this.aiVy = 0;
     }
 
     /**
@@ -344,6 +349,7 @@
       }
       this.aiDelay = Math.max(0, this.aiDelay - dt);
       if (this.state === State.RUNNING) { this.flyAutopilot(Math.min(0.05, Math.max(0, dt))); return; }
+      this.aiVx = 0; this.aiVy = 0;
       if (this.aiDelay > 0) return;
       if (this.state === State.READY) this.start();
       else if (this.state === State.LEVEL_CLEAR) { if (!this.takeBoon(this.bestBoonIndex())) this.nextLevel(); }
@@ -360,7 +366,8 @@
       this.aiDrift = this.bossDriftX();
       // the crosswind is going to push it before the next frame, so plan from where it lands
       const drift = this.gust * dt;
-      let bestCost = this.aiCost(this.playerX + drift, this.playerY);
+      const hereCost = this.aiCost(this.playerX + drift, this.playerY);
+      let bestCost = hereCost;
       let bestX = this.playerX, bestY = this.playerY;
       for (let i = 0; i < AI_SAMPLES.length; i += 2) {
         const cx = Math.max(-C.PLAYER_LIMIT, Math.min(C.PLAYER_LIMIT, this.playerX + AI_SAMPLES[i] * C.AI_REACH + drift));
@@ -368,11 +375,22 @@
         const cost = this.aiCost(cx, cy);
         if (cost < bestCost) { bestCost = cost; bestX = cx; bestY = cy; }
       }
-      const step = C.AI_SPEED * dt;
-      this.movePlayerBy(
-        Math.max(-step, Math.min(step, bestX - this.playerX)),
-        Math.max(-step, Math.min(step, bestY - this.playerY)),
-      );
+      // How hard it wants to be going, not where it wants to be next frame. Moving the whole
+      // step the moment a square scores better and none of it otherwise is what made it flick
+      // between frozen and flat out; a stick it has to lean on has to be eased off too, which is
+      // also what gives the aircraft something to bank into. A pilot with room cruises and a
+      // pilot about to be hit yanks the stick, so how sharply it may move is how badly it needs to.
+      const wantVx = Math.max(-1, Math.min(1, (bestX - this.playerX) / C.AI_REACH)) * C.AI_SPEED;
+      const wantVy = Math.max(-1, Math.min(1, (bestY - this.playerY) / C.AI_REACH)) * C.AI_SPEED;
+      const urgency = Math.min(1, hereCost / C.AI_BOMB_AT);
+      const ease = Math.min(1, dt * (C.AI_AGILITY + urgency * C.AI_URGENT));
+      this.aiVx += (wantVx - this.aiVx) * ease;
+      this.aiVy += (wantVy - this.aiVy) * ease;
+      const wasX = this.playerX, wasY = this.playerY;
+      this.movePlayerBy(this.aiVx * dt, this.aiVy * dt);
+      // it has run into the edge of the band: stop leaning on a stick that is doing nothing
+      if (Math.abs(this.playerX - wasX) < Math.abs(this.aiVx * dt) * 0.5) this.aiVx = 0;
+      if (Math.abs(this.playerY - wasY) < Math.abs(this.aiVy * dt) * 0.5) this.aiVy = 0;
       // a bomb when there is nowhere good left to stand, and sooner on the last of the hull
       const patience = this.hp <= 1 ? C.AI_BOMB_AT * 0.45 : C.AI_BOMB_AT;
       if (this.bombs > 0 && this.mercy <= 0 && bestCost > patience) this.useBomb();

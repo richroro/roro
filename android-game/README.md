@@ -314,7 +314,24 @@ took measurement to learn:
   half a second, so it aims off by `bossDriftX()` times the flight time, and closes the range in a
   raider fight so that guess is a short one.
 
-Sixteen six-minute runs on sixteen seeds: **no deaths at all**, stage 4.19 on average, and 45 of 67
+**It flies on a stick.** The first version moved the whole step the moment a square scored better
+and none of it otherwise: measured over a minute of flight, it was **motionless for 72% of frames
+and at full travel for 18%**, with nothing in between. That is what made it look wrong, and it made
+the aircraft snap between level and full bank as well, since the view reads bank off how far it
+moved last frame.
+
+So it flies a stick instead. `flyAutopilot()` turns the chosen square into a *speed* it wants to be
+going and eases onto it at `AI_AGILITY`. Easing all the time was smooth and cost it the flak stage,
+so how sharply it may lean on the stick is how badly it needs to: `AI_URGENT` scales the easing by
+how bad the square it is standing in already is, which gives a pilot who cruises with room and
+yanks when something is about to hit. Frames at full travel went 18% to 1%, motionless 72% to 12%.
+
+Two things that sounded right and measured wrong, both reverted: planning from where momentum is
+carrying it (a feedback loop -- the projected spot keeps sliding downrange, so "keep going" always
+wins, 7.1 deaths a run), and a deadband on how much better a square must be before it moves (safe,
+but it stops chasing aim and the score halves).
+
+Sixteen six-minute runs on sixteen seeds: **0.13 deaths**, stage 3.88 on average, and 36 of 62
 stage clears graded S.
 
 **Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
