@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T22:54:48.252900+09:00",
+  "updatedAt": "2026-09-22T04:16:42.081246+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51823.17,
-      "change": 140.53,
-      "changePercent": 0.27,
+      "price": 52106.48,
+      "change": 423.84,
+      "changePercent": 0.82,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26842.58,
-      "change": 320.03,
-      "changePercent": 1.21,
+      "price": 27135.79,
+      "change": 613.25,
+      "changePercent": 2.31,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1372.93,
-      "change": -13.02,
-      "changePercent": -0.94,
+      "price": 1374.77,
+      "change": -11.18,
+      "changePercent": -0.81,
       "currency": "KRW"
     }
   ],
@@ -88,37 +88,61 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 335.98,
-      "change": -0.15,
-      "changePercent": -0.05,
+      "price": 338.93,
+      "change": 2.8,
+      "changePercent": 0.83,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 377.44,
-      "change": 13.18,
-      "changePercent": 3.62,
+      "price": 375.57,
+      "change": 11.3,
+      "changePercent": 3.1,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 224.28,
-      "change": 2.0,
-      "changePercent": 0.9,
+      "price": 227.34,
+      "change": 5.06,
+      "changePercent": 2.28,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "오픈AI에 올인한 이 회사,또 15조원 정크본드 발행 추진",
+      "title": "브렌트유 100달러 아래로…美채권과 주식 일제 상승",
+      "link": "https://www.hankyung.com/article/202609229353i",
+      "pubDate": "Tue, 22 Sep 2026 00:12:51 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "AI주 올라도 지금 맞서면 안되는 3가지 [박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609219323i",
+      "pubDate": "Mon, 21 Sep 2026 23:41:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "베선트 \"AI 모델이 해킹 사고 내면 해당 AI 회사 경영진 책임\"",
+      "link": "https://www.hankyung.com/article/202609219335i",
+      "pubDate": "Mon, 21 Sep 2026 23:26:57 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "굴스비 \"AI 투자가 총생산 증가 시킬 경우 금리 인상 필요\"",
+      "link": "https://www.hankyung.com/article/202609219320i",
+      "pubDate": "Mon, 21 Sep 2026 23:14:59 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "오픈AI에 올인한 이 회사, 또 15조원 정크본드 발행 추진",
       "link": "https://www.hankyung.com/article/202609219285i",
       "pubDate": "Mon, 21 Sep 2026 22:06:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"3년 만에 오른 미 금리, 5% 상회 대비해야\"…'금리 쇼크' 오나 [분석+]",
+      "title": "\"또 사이드카 쏟아지나\"…한숨 돌리던 개미들 떨게 한 '경고' [분석+]",
       "link": "https://www.hankyung.com/article/2026092181966",
       "pubDate": "Mon, 21 Sep 2026 22:00:04 +0900",
       "source": "한국경제"
@@ -158,30 +182,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260921089451530",
       "pubDate": "Mon, 21 Sep 2026 20:26:03 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "\"월급 꼬박꼬박 넣었는데 왜?\"…대출 우대금리 날아간 이유",
-      "link": "https://www.hankyung.com/article/2026092192377",
-      "pubDate": "Mon, 21 Sep 2026 20:24:46 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"기름 미리 넣지 마세요\"…추석 고속도로 주유소 가야하는 이유",
-      "link": "https://www.hankyung.com/article/2026092192237",
-      "pubDate": "Mon, 21 Sep 2026 20:12:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"술 없이 아침부터 춤추고 떼창\"…2030이 주말 보내는 법 [박수림의 요즘 여기]",
-      "link": "https://www.hankyung.com/article/202609218204g",
-      "pubDate": "Mon, 21 Sep 2026 20:00:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이름·주소까지 샜는데\"…쿠팡, 대만 과징금 6489만원",
-      "link": "https://www.hankyung.com/article/2026092191887",
-      "pubDate": "Mon, 21 Sep 2026 19:25:18 +0900",
-      "source": "한국경제"
     },
     {
       "title": "웨스팅하우스 지분율 등 상업적 합리성 암초…대미투자 '위태'(종합)",
