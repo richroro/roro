@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T04:16:42.081246+09:00",
+  "updatedAt": "2026-09-22T08:11:00.539902+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52106.48,
-      "change": 423.84,
-      "changePercent": 0.82,
+      "price": 52048.83,
+      "change": 366.19,
+      "changePercent": 0.71,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27135.79,
-      "change": 613.25,
-      "changePercent": 2.31,
+      "price": 27122.09,
+      "change": 599.55,
+      "changePercent": 2.26,
       "currency": "USD"
     }
   ],
@@ -38,8 +38,8 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1374.77,
-      "change": -11.18,
+      "price": 1374.72,
+      "change": -11.23,
       "changePercent": -0.81,
       "currency": "KRW"
     }
@@ -88,148 +88,148 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 338.93,
-      "change": 2.8,
-      "changePercent": 0.83,
+      "price": 338.98,
+      "change": 2.85,
+      "changePercent": 0.85,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 375.57,
-      "change": 11.3,
-      "changePercent": 3.1,
+      "price": 375.3,
+      "change": 11.03,
+      "changePercent": 3.03,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 227.34,
-      "change": 5.06,
-      "changePercent": 2.28,
+      "price": 227.38,
+      "change": 5.11,
+      "changePercent": 2.3,
       "currency": "USD"
     }
   ],
   "news": [
     {
+      "title": "\"미래 창업 방향 모색\"…관악구, 내달 '관악S밸리 창업페스티벌'",
+      "link": "https://www.yna.co.kr/view/AKR20260922021300004",
+      "pubDate": "Tue, 22 Sep 2026 08:06:52 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "캠코, 지역인재 장학금·숲 조성에 9억8천만원 쾌척",
+      "link": "https://www.yna.co.kr/view/AKR20260922020000051",
+      "pubDate": "Tue, 22 Sep 2026 08:05:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "부산시, 인구 감소 대응 교육혁신선도지역 공동 추진",
+      "link": "https://www.yna.co.kr/view/AKR20260922019900051",
+      "pubDate": "Tue, 22 Sep 2026 08:02:25 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "iM금융, 차기 회장 인선 곧 돌입…황병우 연임 여부 관심",
+      "link": "https://www.yna.co.kr/view/AKR20260921157300053",
+      "pubDate": "Tue, 22 Sep 2026 08:01:23 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "최대주주·임원 지분매각 한달뒤 30% 폭락 기업 300곳 넘어",
+      "link": "https://www.yna.co.kr/view/AKR20260921161100008",
+      "pubDate": "Tue, 22 Sep 2026 08:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "유령 와이파이 1643곳, 석 달간 아무도 안 썼다",
+      "link": "https://www.hankyung.com/article/2026092295447",
+      "pubDate": "Tue, 22 Sep 2026 07:36:44 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20260922013800011",
+      "pubDate": "Tue, 22 Sep 2026 07:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"이젠 헤어도 K-뷰티\"…조연에서 주연 등판 예고 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609229534g",
+      "pubDate": "Tue, 22 Sep 2026 07:29:29 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "李대통령 \"강남불패·부동산투기공화국, 과거 이야기 될 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20260922014900001",
+      "pubDate": "Tue, 22 Sep 2026 07:22:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"한 번 가봤는데 굳이 또?\"…여행객 잡으려 22년 만에 '결단' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609206088i",
+      "pubDate": "Tue, 22 Sep 2026 07:00:16 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"80% 싸게 득템했어요\"…2030 직장인 점심마다 몰리는 곳 [장서우의 하입:hype]",
+      "link": "https://www.hankyung.com/article/202609219296i",
+      "pubDate": "Tue, 22 Sep 2026 07:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[우분투칼럼] 2026 잠비아 선거, 아프리카 신권위주의로 퇴행인가",
+      "link": "https://www.yna.co.kr/view/AKR20260914033400898",
+      "pubDate": "Tue, 22 Sep 2026 07:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"미국 주식 더 사자\"…중국인들 '우르르' 안달난 까닭 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609218274i",
+      "pubDate": "Tue, 22 Sep 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[팩트체크] 채용 때 나이·학력 제한 무조건 금지? 사기업은 괜찮다?",
+      "link": "https://www.yna.co.kr/view/AKR20260918082500518",
+      "pubDate": "Tue, 22 Sep 2026 06:30:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "직장 괴롭힘 신고, 1위도 3위도 '쿠팡 계열사'",
+      "link": "https://www.hankyung.com/article/2026092294577",
+      "pubDate": "Tue, 22 Sep 2026 06:25:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"대출 풀린 지 한 달도 안 됐는데\"…5대 은행 '한도 바닥'",
+      "link": "https://www.hankyung.com/article/2026092294467",
+      "pubDate": "Tue, 22 Sep 2026 06:14:19 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "1인 가구 46% 속마음 나눌 상대 적어…다인가구보다 18%p↑",
+      "link": "https://www.yna.co.kr/view/AKR20260921107000530",
+      "pubDate": "Tue, 22 Sep 2026 06:11:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"삼성·LG에 안 밀리네\"…2030 '중국산 TV' 사는 이유 [텔레비전(戰) ②]",
+      "link": "https://www.hankyung.com/article/202609179916g",
+      "pubDate": "Tue, 22 Sep 2026 06:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "역대급 경상흑자라는데…체감경기는 왜 팍팍할까",
+      "link": "https://www.hankyung.com/article/2026092188491",
+      "pubDate": "Tue, 22 Sep 2026 06:00:06 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "브렌트유 100달러 아래로…美채권과 주식 일제 상승",
       "link": "https://www.hankyung.com/article/202609229353i",
       "pubDate": "Tue, 22 Sep 2026 00:12:51 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "AI주 올라도 지금 맞서면 안되는 3가지 [박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202609219323i",
-      "pubDate": "Mon, 21 Sep 2026 23:41:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "베선트 \"AI 모델이 해킹 사고 내면 해당 AI 회사 경영진 책임\"",
-      "link": "https://www.hankyung.com/article/202609219335i",
-      "pubDate": "Mon, 21 Sep 2026 23:26:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "굴스비 \"AI 투자가 총생산 증가 시킬 경우 금리 인상 필요\"",
-      "link": "https://www.hankyung.com/article/202609219320i",
-      "pubDate": "Mon, 21 Sep 2026 23:14:59 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "오픈AI에 올인한 이 회사, 또 15조원 정크본드 발행 추진",
-      "link": "https://www.hankyung.com/article/202609219285i",
-      "pubDate": "Mon, 21 Sep 2026 22:06:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"또 사이드카 쏟아지나\"…한숨 돌리던 개미들 떨게 한 '경고' [분석+]",
-      "link": "https://www.hankyung.com/article/2026092181966",
-      "pubDate": "Mon, 21 Sep 2026 22:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"마트 갔다간 8만원 더 쓴다\"…추석 장보기 가장 싼 곳은",
-      "link": "https://www.hankyung.com/article/2026092192797",
-      "pubDate": "Mon, 21 Sep 2026 21:45:18 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "생보사, '700 종신보험' 못 판다…금감원 감독행정 제동",
-      "link": "https://www.yna.co.kr/view/AKR20260921178400002",
-      "pubDate": "Mon, 21 Sep 2026 21:37:51 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"아파트 샀으니 그 다음은\"…2030 반도체맨 지갑 열린 곳",
-      "link": "https://www.hankyung.com/article/2026092188681",
-      "pubDate": "Mon, 21 Sep 2026 21:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "암호화폐 겨울 끝났나…비트코인 美서 8만5000달러 회복",
-      "link": "https://www.hankyung.com/article/202609219260i",
-      "pubDate": "Mon, 21 Sep 2026 20:57:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美·中 AI 불신벽 높은데…'AI위험 알림시스템' 논의 될까",
-      "link": "https://www.hankyung.com/article/202609219239i",
-      "pubDate": "Mon, 21 Sep 2026 20:26:15 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "메가특구 사회적 대화, 내일 실무회의…의제 선정 본격화(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260921089451530",
-      "pubDate": "Mon, 21 Sep 2026 20:26:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "웨스팅하우스 지분율 등 상업적 합리성 암초…대미투자 '위태'(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260921126051003",
-      "pubDate": "Mon, 21 Sep 2026 19:20:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "셀리드, 100억원 유상증자…휴니버스글로벌에 제3자배정",
-      "link": "https://www.yna.co.kr/view/AKR20260921171600008",
-      "pubDate": "Mon, 21 Sep 2026 18:48:30 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "제논·옵토닉스 등 2개사 코스닥 상장예심 통과",
-      "link": "https://www.yna.co.kr/view/AKR20260921169900008",
-      "pubDate": "Mon, 21 Sep 2026 18:43:14 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "신한금융, 신한은행장 등 자회사 대표이사 승계절차 개시",
-      "link": "https://www.yna.co.kr/view/AKR20260921168400002",
-      "pubDate": "Mon, 21 Sep 2026 18:22:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대우버스 노조 \"울산공장 용지 매각 시도, 울산시가 막아달라\"",
-      "link": "https://www.yna.co.kr/view/AKR20260921166100057",
-      "pubDate": "Mon, 21 Sep 2026 18:08:23 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "키움운용, '미국S&P500모멘텀' ETF 구성종목 절반 이상 교체",
-      "link": "https://www.yna.co.kr/view/AKR20260921167500008",
-      "pubDate": "Mon, 21 Sep 2026 18:08:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260921160300011",
-      "pubDate": "Mon, 21 Sep 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "삼성바이오 노사 내일 사후조정…노조 \"타결 가능성 없어\"",
-      "link": "https://www.yna.co.kr/view/AKR20260921164600017",
-      "pubDate": "Mon, 21 Sep 2026 17:47:18 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
