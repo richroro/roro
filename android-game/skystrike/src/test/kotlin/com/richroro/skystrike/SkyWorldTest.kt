@@ -1712,11 +1712,40 @@ class SkyWorldTest {
         w.setAi(true)
         w.setForTest(playerX = 0f, playerY = 0.85f, mercy = 0f)
         w.addEnemyShotForTest(0f, 0.8f)          // right on top of it
+        var fastest = 0f
+        var last = w.playerX
+        // a tenth of a second: long enough to be out of the way, short enough that a frame of it
+        // is still an aircraft accelerating rather than an aircraft teleporting
+        repeat(6) {
+            w.aiTick(1f / 60f)
+            w.update(1f / 60f)
+            fastest = max(fastest, abs(w.playerX - last))
+            last = w.playerX
+        }
+        assertTrue(
+            "with a round on it, it should be out of the lane inside a tenth of a second",
+            abs(w.playerX) > SkyWorld.SHOT_HALF + SkyWorld.PLAYER_HALF_X,
+        )
+        assertTrue(
+            "but no frame of it may be the whole dodge",
+            fastest <= SkyWorld.AI_SPEED / 60f + 1e-5f,
+        )
+    }
+
+    @Test
+    fun `flying itself does not bolt at a round that is still a long way off`() {
+        val w = running()
+        w.soloModeForTest()
+        w.setAi(true)
+        w.setForTest(playerX = 0f, playerY = 0.9f, mercy = 0f)
+        // dead ahead and on its way, but most of a second out: from outside there is no reason
+        // to move yet, so moving hard would read as the aircraft bolting at nothing
+        w.addEnemyShotForTest(0f, 0.25f)
         w.aiTick(1f / 60f)
         w.update(1f / 60f)
         assertTrue(
-            "with a round on it, the first frame is worth all the travel there is",
-            abs(w.playerX) > SkyWorld.AI_SPEED / 60f * 0.5f,
+            "a distant round is something to ease away from, not to bolt from",
+            abs(w.playerX) < SkyWorld.AI_SPEED / 60f * 0.5f,
         )
     }
 }

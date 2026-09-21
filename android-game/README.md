@@ -331,7 +331,16 @@ carrying it (a feedback loop -- the projected spot keeps sliding downrange, so "
 wins, 7.1 deaths a run), and a deadband on how much better a square must be before it moves (safe,
 but it stops chasing aim and the score halves).
 
-Sixteen six-minute runs on sixteen seeds: **0.13 deaths**, stage 3.88 on average, and 36 of 62
+**And it yanks the stick only for what is actually there.** The sharp move is load-bearing --
+softening it costs runs however it is softened, and capping the acceleration was worse still --
+but it was firing off the whole planning horizon. A round that will graze the aircraft in a second
+is worth planning around; bolting from it looks, from outside, like the aircraft moving for no
+reason. `aiPress()` is the same danger sum over `AI_PRESS`, short enough that whatever set the
+yank off is plainly on the screen, and only that decides how hard it may pull. Over fourteen
+minutes of flight the sudden accelerations went from 119 to 68, and the ones with nothing within
+a plane's length of the aircraft from 66 to 32 -- at identical survival and score.
+
+Sixteen six-minute runs on sixteen seeds: **0.13 deaths**, stage 3.88 on average, and 35 of 62
 stage clears graded S.
 
 **Falling is not the end of the run.** A death costs one of `MAX_CONTINUES`, and the next tap puts
