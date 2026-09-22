@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T03:44:27.615251+09:00",
+  "updatedAt": "2026-09-23T06:58:31.640272+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51877.78,
-      "change": -171.05,
-      "changePercent": -0.33,
+      "price": 51863.69,
+      "change": -185.14,
+      "changePercent": -0.36,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27254.78,
-      "change": 132.69,
-      "changePercent": 0.49,
+      "price": 27244.28,
+      "change": 122.18,
+      "changePercent": 0.45,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1358.67,
-      "change": -17.06,
-      "changePercent": -1.24,
+      "price": 1355.13,
+      "change": -20.6,
+      "changePercent": -1.5,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,77 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 341.32,
-      "change": 2.34,
-      "changePercent": 0.69,
+      "price": 339.75,
+      "change": 0.77,
+      "changePercent": 0.23,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 379.34,
-      "change": 4.13,
-      "changePercent": 1.1,
+      "price": 378.9,
+      "change": 3.69,
+      "changePercent": 0.98,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 229.45,
-      "change": 2.07,
-      "changePercent": 0.91,
+      "price": 228.87,
+      "change": 1.49,
+      "changePercent": 0.66,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "[AI프리즘] \"한국, 아태 AI 수도로\"…블랙록 20조 투자 1년째 '답보'",
+      "link": "https://www.yna.co.kr/view/AKR20260922183300017",
+      "pubDate": "Wed, 23 Sep 2026 06:33:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"명절 음식만 먹나요\"…대형마트, 간편한 델리·버거 '특수'",
+      "link": "https://www.yna.co.kr/view/AKR20260922169100030",
+      "pubDate": "Wed, 23 Sep 2026 06:30:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "BTS·임영웅 무대 빛낸 '남성복 거장'…이번엔 4060 여심 노린다 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609222024i",
+      "pubDate": "Wed, 23 Sep 2026 06:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "9월 소비심리 한 달 만에 반등…\"집값 상승 기대 여전히 높아\"",
+      "link": "https://www.yna.co.kr/view/AKR20260922176500002",
+      "pubDate": "Wed, 23 Sep 2026 06:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"집에 TV 놓기 싫었는데…\" 30대 새댁 마음 돌린 이유 [텔레비전(戰) ③]",
+      "link": "https://www.hankyung.com/article/202609183258g",
+      "pubDate": "Wed, 23 Sep 2026 06:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "주금공, 주택신용보증 구상채권 2조8천억…6년만에 배 넘게 늘어",
+      "link": "https://www.yna.co.kr/view/AKR20260922185800002",
+      "pubDate": "Wed, 23 Sep 2026 05:51:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국제유가, 사우디 원유 공급 회복 조짐에 100달러 아래로",
+      "link": "https://www.yna.co.kr/view/AKR20260923008200075",
+      "pubDate": "Wed, 23 Sep 2026 04:51:17 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "트럼프 \"미국산 경유 수출금지 입장\"…美재무 \"실현가능성 검토\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923006900071",
+      "pubDate": "Wed, 23 Sep 2026 04:18:34 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "\"AI비서에 쇼핑 맡겼다 돈 날릴 수도\"…글로벌은행들 경고",
       "link": "https://www.hankyung.com/article/202609222136i",
@@ -172,63 +220,15 @@
       "source": "한국경제"
     },
     {
-      "title": "\"車 팔아도 돈 안 된다\"…잘나가던 포르쉐에 무슨 일이?",
-      "link": "https://www.hankyung.com/article/2026092219257",
-      "pubDate": "Tue, 22 Sep 2026 19:15:56 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "이형일 \"국부펀드 차질 없이 준비…성과는 국민께 돌아가도록\"(종합2보)",
       "link": "https://www.yna.co.kr/view/AKR20260922073652002",
       "pubDate": "Tue, 22 Sep 2026 19:12:43 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"수억대 연봉 날아갔다\"…SK하이닉스 신입 4명 결국 짐 쌌다",
-      "link": "https://www.hankyung.com/article/2026092219317",
-      "pubDate": "Tue, 22 Sep 2026 19:12:19 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "셀리드, 30억원 유상증자…센트러스트투자조합 등에 3자 배정",
       "link": "https://www.yna.co.kr/view/AKR20260922182600008",
       "pubDate": "Tue, 22 Sep 2026 18:29:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국토장관, 취임 첫 현장은 부천대장…\"주택공급, 계획보다 실행\"",
-      "link": "https://www.yna.co.kr/view/AKR20260922180900003",
-      "pubDate": "Tue, 22 Sep 2026 18:07:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260922174500011",
-      "pubDate": "Tue, 22 Sep 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "우버, 배민 인수 본격화…공정위, 기업결합 사전심사 개시(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260922122051002",
-      "pubDate": "Tue, 22 Sep 2026 17:39:31 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "우리금융, 복지부와 취약청년 자립에 30억원 지원",
-      "link": "https://www.yna.co.kr/view/AKR20260922157400002",
-      "pubDate": "Tue, 22 Sep 2026 17:29:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "삼성바이오 노사 내달 3차 조정…노조 \"단체행동 준비\"",
-      "link": "https://www.yna.co.kr/view/AKR20260922173800017",
-      "pubDate": "Tue, 22 Sep 2026 17:21:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "청주시, 2027∼2035 주택정책 기본계획 연구 추진",
-      "link": "https://www.yna.co.kr/view/AKR20260922166300064",
-      "pubDate": "Tue, 22 Sep 2026 17:18:19 +0900",
       "source": "연합뉴스"
     }
   ]
