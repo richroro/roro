@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T20:22:35.333570+09:00",
+  "updatedAt": "2026-09-24T01:44:58.386055+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51863.69,
-      "change": -185.11,
-      "changePercent": -0.36,
+      "price": 51550.33,
+      "change": -313.36,
+      "changePercent": -0.6,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27244.28,
-      "change": 122.18,
-      "changePercent": 0.45,
+      "price": 26919.21,
+      "change": -325.07,
+      "changePercent": -1.19,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1364.55,
-      "change": 9.01,
-      "changePercent": 0.66,
+      "price": 1366.66,
+      "change": 11.12,
+      "changePercent": 0.82,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,85 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 339.75,
-      "change": 0.77,
-      "changePercent": 0.23,
+      "price": 336.67,
+      "change": -3.08,
+      "changePercent": -0.91,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 378.9,
-      "change": 3.69,
-      "changePercent": 0.98,
+      "price": 379.64,
+      "change": 0.74,
+      "changePercent": 0.2,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 228.87,
-      "change": 1.49,
-      "changePercent": 0.66,
+      "price": 224.21,
+      "change": -4.66,
+      "changePercent": -2.04,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"고향 가느니 쉰다\"…귀성 포기하고 배달 누르는 2030 [트렌드+]",
+      "title": "美10년물 국채금리 5.079%로 폭등…PMI호조로 인플레압력 부각",
+      "link": "https://www.hankyung.com/article/202609244510i",
+      "pubDate": "Thu, 24 Sep 2026 00:56:49 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 공급압박속 9월 기업활동 PMI 58.4 …5년만에 최고",
+      "link": "https://www.hankyung.com/article/202609244494i",
+      "pubDate": "Thu, 24 Sep 2026 00:18:48 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "메타 '뮤즈AI'가 스테이블코인 키운다 [박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609234485i",
+      "pubDate": "Wed, 23 Sep 2026 23:59:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美'경유수출중단' 자충수 될수도…에너지장관,석유업계 반발",
+      "link": "https://www.hankyung.com/article/202609234483i",
+      "pubDate": "Wed, 23 Sep 2026 23:45:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "메타 AI비서 뮤즈…사람이 대신 전화 걸어주는 '인간컨시어지'실험",
+      "link": "https://www.hankyung.com/article/202609234444i",
+      "pubDate": "Wed, 23 Sep 2026 22:17:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"관세 더 내라\"…인도, 삼성·LG OLED 부품 관세 조사 중 [로이터]",
+      "link": "https://www.hankyung.com/article/202609234426i",
+      "pubDate": "Wed, 23 Sep 2026 21:07:35 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"비행기표 다 나갔네\" 좌절했는데…포기하긴 이른 이유 있었다 [플라잇톡]",
+      "link": "https://www.hankyung.com/article/202609233111g",
+      "pubDate": "Wed, 23 Sep 2026 21:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美·中 앞에선 AI패권경쟁…뒤로는 상대 기술주 사들여",
+      "link": "https://www.hankyung.com/article/202609234365i",
+      "pubDate": "Wed, 23 Sep 2026 20:02:41 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "OECD \"올해 세계 경제 2.9% 성장…한국은 3.7% 성장\"",
+      "link": "https://www.hankyung.com/article/202609234359i",
+      "pubDate": "Wed, 23 Sep 2026 19:30:41 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"고향 안 가고 전도 안 부쳐요\"…2030 '혼추족' 늘자 대박난 곳 [트렌드+]",
       "link": "https://www.hankyung.com/article/202609232940g",
       "pubDate": "Wed, 23 Sep 2026 19:00:03 +0900",
       "source": "한국경제"
@@ -124,22 +178,10 @@
       "source": "연합뉴스"
     },
     {
-      "title": "\"이걸 호텔방서 시켜 먹는다고?\"…외국인들 푹 빠진 한국 음식 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609221250g",
-      "pubDate": "Wed, 23 Sep 2026 18:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
       "link": "https://www.yna.co.kr/view/AKR20260923170500011",
       "pubDate": "Wed, 23 Sep 2026 18:00:01 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "시몬스 \"온라인 전용 침대도 누워보고 고르세요\"",
-      "link": "https://www.hankyung.com/article/202609234238i",
-      "pubDate": "Wed, 23 Sep 2026 17:52:08 +0900",
-      "source": "한국경제"
     },
     {
       "title": "쿠팡 '현장조사 불복' 집행정지 기각…공정위 \"과태료 부과\"(종합)",
@@ -154,12 +196,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "OECD, 올해 한국 성장률 3.7%로 올렸다…상향폭 G20중 최고",
-      "link": "https://www.hankyung.com/article/2026092340921",
-      "pubDate": "Wed, 23 Sep 2026 17:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "OECD, 한국 올해 성장률 전망 2.6%→3.7%…G20 중 최대 폭 상향",
       "link": "https://www.yna.co.kr/view/AKR20260923144200002",
       "pubDate": "Wed, 23 Sep 2026 17:00:00 +0900",
@@ -170,12 +206,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260923166200062",
       "pubDate": "Wed, 23 Sep 2026 16:58:59 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "\"화려한 로고는 됐어요\"…GS샵, 고급 소재 앞세운 FW 신제품 선봬",
-      "link": "https://www.hankyung.com/article/202609234104g",
-      "pubDate": "Wed, 23 Sep 2026 16:50:33 +0900",
-      "source": "한국경제"
     },
     {
       "title": "국고채 금리 일제히 하락…3년물 연 4.006%",
@@ -194,36 +224,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260923164200030",
       "pubDate": "Wed, 23 Sep 2026 16:47:12 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "MBK, 네파 손절…K2그룹에 매각",
-      "link": "https://www.hankyung.com/article/2026092340251",
-      "pubDate": "Wed, 23 Sep 2026 16:46:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "포스코, 잭니클라우스GC 매각 착수",
-      "link": "https://www.hankyung.com/article/2026092340221",
-      "pubDate": "Wed, 23 Sep 2026 16:45:44 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "LG전자·SK엔무브, AI센터 냉각기술 개발",
-      "link": "https://www.hankyung.com/article/2026092340271",
-      "pubDate": "Wed, 23 Sep 2026 16:45:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HL로보틱스·삼성물산, 주차 로봇 서비스 협약",
-      "link": "https://www.hankyung.com/article/2026092340261",
-      "pubDate": "Wed, 23 Sep 2026 16:44:40 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "中자본 유치 나선 형지, 부동산 매각 타진",
-      "link": "https://www.hankyung.com/article/2026092340191",
-      "pubDate": "Wed, 23 Sep 2026 16:44:10 +0900",
-      "source": "한국경제"
     },
     {
       "title": "[게시판] 남재헌 해수차관, 추석 수산 성수품 가격·수급 동향 점검",
