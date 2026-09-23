@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T05:10:14.382539+09:00",
+  "updatedAt": "2026-09-24T08:35:16.376622+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1366.3,
-      "change": 10.76,
-      "changePercent": 0.79,
+      "price": 1365.38,
+      "change": -0.53,
+      "changePercent": -0.04,
       "currency": "KRW"
     }
   ],
@@ -112,10 +112,76 @@
   ],
   "news": [
     {
-      "title": "李대통령 \"농지전수조사 꼭 필요…회피하지 않겠다\"",
-      "link": "https://www.yna.co.kr/view/AKR20260924003700001",
-      "pubDate": "Thu, 24 Sep 2026 01:42:51 +0900",
+      "title": "[반려동물] 귀성·여행에 펫 돌봄 수요 증가…위탁관리업도 동반 성장",
+      "link": "https://www.yna.co.kr/view/AKR20260923151500030",
+      "pubDate": "Thu, 24 Sep 2026 08:30:01 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "추석 앞두고 경남 8개 사업장서 임금 8천690만원 체불 적발",
+      "link": "https://www.yna.co.kr/view/AKR20260923070300052",
+      "pubDate": "Thu, 24 Sep 2026 08:15:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "우수관 공사 굴착기 작업 중 사망사고…공사 관계자들 집유",
+      "link": "https://www.yna.co.kr/view/AKR20260923109200056",
+      "pubDate": "Thu, 24 Sep 2026 08:10:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"이렇게 비싸지 않은데\"…집값 과하게 오르는 이유 '담합'",
+      "link": "https://www.yna.co.kr/view/AKR20260923084000003",
+      "pubDate": "Thu, 24 Sep 2026 08:05:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "저가커피 공세 속에…본사 매출 464% 뛸 때 점주는 10% 늘어",
+      "link": "https://www.yna.co.kr/view/AKR20260923193600002",
+      "pubDate": "Thu, 24 Sep 2026 08:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "군산시, 착한가격업소 신규 모집…맞춤형 혜택 제공",
+      "link": "https://www.yna.co.kr/view/AKR20260923051400055",
+      "pubDate": "Thu, 24 Sep 2026 08:00:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[부고] 문찬걸(IBK투자증권 금융소비자보호본부장)씨 모친상",
+      "link": "https://www.yna.co.kr/view/AKR20260924014800008",
+      "pubDate": "Thu, 24 Sep 2026 07:44:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "추석 연휴 앞두고 '올빼미 공시' 줄줄이…매각 무산·상폐 우려",
+      "link": "https://www.yna.co.kr/view/AKR20260924013300008",
+      "pubDate": "Thu, 24 Sep 2026 07:38:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중국산이 한국산으로?…'국산둔갑 우회수출' 6년 새 12배 증가",
+      "link": "https://www.yna.co.kr/view/AKR20260923170900001",
+      "pubDate": "Thu, 24 Sep 2026 07:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'서학개미 큰손' 잡아라…美 ETF 브랜드 대표들 잇단 방한",
+      "link": "https://www.yna.co.kr/view/AKR20260921153800008",
+      "pubDate": "Thu, 24 Sep 2026 07:05:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"GPU를 원유처럼 거래\"…CME, 엔비디아 H100·B200 선물 출시 임박 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609221656i",
+      "pubDate": "Thu, 24 Sep 2026 07:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'한국 드라마서 봤어요' 외국인 몰리는 곳이…'대박' 터졌다",
+      "link": "https://www.hankyung.com/article/2026092339561",
+      "pubDate": "Thu, 24 Sep 2026 06:00:01 +0900",
+      "source": "한국경제"
     },
     {
       "title": "美10년물 국채금리 5.079%로 폭등…PMI호조로 인플레압력 부각",
@@ -164,72 +230,6 @@
       "link": "https://www.hankyung.com/article/202609234365i",
       "pubDate": "Wed, 23 Sep 2026 20:02:41 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "OECD \"올해 세계 경제 2.9% 성장…한국은 3.7% 성장\"",
-      "link": "https://www.hankyung.com/article/202609234359i",
-      "pubDate": "Wed, 23 Sep 2026 19:30:41 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"고향 안 가고 전도 안 부쳐요\"…2030 '혼추족' 늘자 대박난 곳 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609232940g",
-      "pubDate": "Wed, 23 Sep 2026 19:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "케이쓰리아이, 30억 제3자배정 유상증자",
-      "link": "https://www.yna.co.kr/view/AKR20260923183100008",
-      "pubDate": "Wed, 23 Sep 2026 18:33:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260923170500011",
-      "pubDate": "Wed, 23 Sep 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "쿠팡 '현장조사 불복' 집행정지 기각…공정위 \"과태료 부과\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260923168651004",
-      "pubDate": "Wed, 23 Sep 2026 17:46:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리 유가 하락에 동반 하락…3년물 연 4.006%(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260923163051008",
-      "pubDate": "Wed, 23 Sep 2026 17:14:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "OECD, 한국 올해 성장률 전망 2.6%→3.7%…G20 중 최대 폭 상향",
-      "link": "https://www.yna.co.kr/view/AKR20260923144200002",
-      "pubDate": "Wed, 23 Sep 2026 17:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "춘천시, 중소기업 육성자금 500억원으로 확대…골목상권 '숨통'",
-      "link": "https://www.yna.co.kr/view/AKR20260923166200062",
-      "pubDate": "Wed, 23 Sep 2026 16:58:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리 일제히 하락…3년물 연 4.006%",
-      "link": "https://www.yna.co.kr/view/AKR20260923163000008",
-      "pubDate": "Wed, 23 Sep 2026 16:47:52 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "GH-이천시, '반도체 산업단지 클러스터' 조성 업무협약",
-      "link": "https://www.yna.co.kr/view/AKR20260923164300061",
-      "pubDate": "Wed, 23 Sep 2026 16:47:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "K2코리아그룹, 아웃도어 브랜드 '네파' 인수…\"해외 진출 검토\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923164200030",
-      "pubDate": "Wed, 23 Sep 2026 16:47:12 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
