@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T06:58:31.640272+09:00",
+  "updatedAt": "2026-09-23T09:16:15.865968+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1355.13,
-      "change": -20.6,
-      "changePercent": -1.5,
+      "price": 1349.18,
+      "change": -6.36,
+      "changePercent": -0.47,
       "currency": "KRW"
     }
   ],
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "[AI프리즘] \"한국, 아태 AI 수도로\"…블랙록 20조 투자 1년째 '답보'",
-      "link": "https://www.yna.co.kr/view/AKR20260922183300017",
-      "pubDate": "Wed, 23 Sep 2026 06:33:01 +0900",
+      "title": "농심, 대한항공 라운지 '라면 라이브러리'에 라면 21종 공급",
+      "link": "https://www.yna.co.kr/view/AKR20260923037700030",
+      "pubDate": "Wed, 23 Sep 2026 09:09:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"명절 음식만 먹나요\"…대형마트, 간편한 델리·버거 '특수'",
-      "link": "https://www.yna.co.kr/view/AKR20260922169100030",
-      "pubDate": "Wed, 23 Sep 2026 06:30:01 +0900",
+      "title": "경기도, 28일 국회서 '3기 신도시 자족강화·신속추진' 토론회",
+      "link": "https://www.yna.co.kr/view/AKR20260923036300061",
+      "pubDate": "Wed, 23 Sep 2026 09:06:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "BTS·임영웅 무대 빛낸 '남성복 거장'…이번엔 4060 여심 노린다 [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202609222024i",
-      "pubDate": "Wed, 23 Sep 2026 06:00:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "9월 소비심리 한 달 만에 반등…\"집값 상승 기대 여전히 높아\"",
-      "link": "https://www.yna.co.kr/view/AKR20260922176500002",
-      "pubDate": "Wed, 23 Sep 2026 06:00:02 +0900",
+      "title": "원주시-지역 대학, 청년 정주·창업·일자리 협력 강화",
+      "link": "https://www.yna.co.kr/view/AKR20260923038600062",
+      "pubDate": "Wed, 23 Sep 2026 09:05:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"집에 TV 놓기 싫었는데…\" 30대 새댁 마음 돌린 이유 [텔레비전(戰) ③]",
-      "link": "https://www.hankyung.com/article/202609183258g",
-      "pubDate": "Wed, 23 Sep 2026 06:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "주금공, 주택신용보증 구상채권 2조8천억…6년만에 배 넘게 늘어",
-      "link": "https://www.yna.co.kr/view/AKR20260922185800002",
-      "pubDate": "Wed, 23 Sep 2026 05:51:00 +0900",
+      "title": "코스피, 반도체 강세에 장 초반 1%대 상승",
+      "link": "https://www.yna.co.kr/view/AKR20260923038400008",
+      "pubDate": "Wed, 23 Sep 2026 09:04:19 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "국제유가, 사우디 원유 공급 회복 조짐에 100달러 아래로",
-      "link": "https://www.yna.co.kr/view/AKR20260923008200075",
-      "pubDate": "Wed, 23 Sep 2026 04:51:17 +0900",
+      "title": "유튜버 지원 회사 '공짜노동' 점검…노동부, MCN 5곳 기획감독",
+      "link": "https://www.yna.co.kr/view/AKR20260922158800530",
+      "pubDate": "Wed, 23 Sep 2026 09:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "트럼프 \"미국산 경유 수출금지 입장\"…美재무 \"실현가능성 검토\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923006900071",
-      "pubDate": "Wed, 23 Sep 2026 04:18:34 +0900",
+      "title": "ADB, 올해 한국 성장률 전망치 3.2%로 상향…내년 2.3%",
+      "link": "https://www.yna.co.kr/view/AKR20260923030400002",
+      "pubDate": "Wed, 23 Sep 2026 09:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"AI비서에 쇼핑 맡겼다 돈 날릴 수도\"…글로벌은행들 경고",
-      "link": "https://www.hankyung.com/article/202609222136i",
-      "pubDate": "Tue, 22 Sep 2026 23:47:38 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "연속 유가 하락에 美증시 상승…나스닥 개장초 사상최고 경신",
-      "link": "https://www.hankyung.com/article/202609222117i",
-      "pubDate": "Tue, 22 Sep 2026 23:08:50 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "호르무즈 재개방 기대…국제유가 2주 만에 '뚝'",
-      "link": "https://www.hankyung.com/article/2026092221051",
-      "pubDate": "Tue, 22 Sep 2026 22:52:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"트럼프 보란 듯 터트렸다\"…중국이 꺼낸 최강 'AI 비밀병기' [강경주의 테크X]",
-      "link": "https://www.hankyung.com/article/2026092220826",
-      "pubDate": "Tue, 22 Sep 2026 22:26:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "유가 80불대로 떨어지나?…사우디 송유관 재가동에 이란도 깜짝 제안",
-      "link": "https://www.hankyung.com/article/202609222069i",
-      "pubDate": "Tue, 22 Sep 2026 22:10:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "메타, 뮤즈 AI 인기 폭발에도 '신뢰' 문제…아마존, 접속 차단",
-      "link": "https://www.hankyung.com/article/202609222022i",
-      "pubDate": "Tue, 22 Sep 2026 20:57:42 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "메가특구 사회적 대화 본격화…주 1∼2회 실무협의체 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260922191700530",
-      "pubDate": "Tue, 22 Sep 2026 20:21:34 +0900",
+      "title": "롯데리아 \"'리아 두툼새우' 출시 2주 만에 100만개 판매\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923035300030",
+      "pubDate": "Wed, 23 Sep 2026 08:59:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "'1만원→10만원'…도수치료 막았더니 '어떻게 이럴 수가'",
-      "link": "https://www.hankyung.com/article/2026092217451",
-      "pubDate": "Tue, 22 Sep 2026 20:00:02 +0900",
+      "title": "타임폴리오운용, 'TIME KOREA플러스배당액티브' 9월 특별배당",
+      "link": "https://www.yna.co.kr/view/AKR20260923035700008",
+      "pubDate": "Wed, 23 Sep 2026 08:58:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'포스트 위고비' 찾는 노보…투자자는 청사진에 '냉담'",
+      "link": "https://www.hankyung.com/article/202609232584i",
+      "pubDate": "Wed, 23 Sep 2026 08:55:49 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'회생절차' 제이알글로벌리츠, 감사의견 '거절'…상폐 사유 발생",
-      "link": "https://www.yna.co.kr/view/AKR20260922188400008",
-      "pubDate": "Tue, 22 Sep 2026 19:23:53 +0900",
+      "title": "식품업계, 추석 맞아 나눔 활동…국가유공자·지역사회 지원",
+      "link": "https://www.yna.co.kr/view/AKR20260923034500030",
+      "pubDate": "Wed, 23 Sep 2026 08:54:56 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "파라마운트+워너 합병…디즈니 가입자 넘고 넷플릭스 위협",
-      "link": "https://www.hankyung.com/article/202609221922i",
-      "pubDate": "Tue, 22 Sep 2026 19:22:19 +0900",
+      "title": "中 어린이 3명 중 1명은 착용…스마트워치 시장 급성장",
+      "link": "https://www.hankyung.com/article/202609232540i",
+      "pubDate": "Wed, 23 Sep 2026 08:49:40 +0900",
       "source": "한국경제"
     },
     {
-      "title": "이형일 \"국부펀드 차질 없이 준비…성과는 국민께 돌아가도록\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260922073652002",
-      "pubDate": "Tue, 22 Sep 2026 19:12:43 +0900",
+      "title": "설탕·밀가루 왜 비싼가 했더니…\"기업 담합으로 15조원 매출\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923030900055",
+      "pubDate": "Wed, 23 Sep 2026 08:48:34 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "셀리드, 30억원 유상증자…센트러스트투자조합 등에 3자 배정",
-      "link": "https://www.yna.co.kr/view/AKR20260922182600008",
-      "pubDate": "Tue, 22 Sep 2026 18:29:50 +0900",
-      "source": "연합뉴스"
+      "title": "\"10분 만에 다 팔렸다\"…29CM, 나이키스킴스 신제품 판매 호조",
+      "link": "https://www.hankyung.com/article/202609232438g",
+      "pubDate": "Wed, 23 Sep 2026 08:44:31 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"쿠팡 다음은 알리·테무\"…한국 쇼핑앱 순위 뒤집혔다",
+      "link": "https://www.hankyung.com/article/202609232466g",
+      "pubDate": "Wed, 23 Sep 2026 08:36:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"AI칩 잘 팔릴 줄 알았는데\"…반도체 호황 '복병' 있었다 [이슈+]",
+      "link": "https://www.hankyung.com/article/202609222135g",
+      "pubDate": "Wed, 23 Sep 2026 08:30:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"통행료 0원인데 먹는 데 7만원 썼다\"…휴게소 물가에 '헉' [이슈+]",
+      "link": "https://www.hankyung.com/article/202609232391g",
+      "pubDate": "Wed, 23 Sep 2026 08:17:50 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"귀하신 '골드키즈' 모셔라\"…백화점 450평 싹 바꾼 이유가",
+      "link": "https://www.hankyung.com/article/2026092216331",
+      "pubDate": "Wed, 23 Sep 2026 08:00:17 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "명절만 되면 또 품절…다이소 5000원짜리 '이것' 뭐길래 [권 기자의 장바구니]",
+      "link": "https://www.hankyung.com/article/202609222014i",
+      "pubDate": "Wed, 23 Sep 2026 08:00:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "경유 저장할 물량도 없다…글로벌 공급난 내년까지",
+      "link": "https://www.hankyung.com/article/202609222130i",
+      "pubDate": "Wed, 23 Sep 2026 08:00:14 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "은행장 선임 앞두고…이찬진 \"금융사 CEO 선정 특정계파 매몰 안돼\"",
+      "link": "https://www.hankyung.com/article/2026092215246",
+      "pubDate": "Wed, 23 Sep 2026 07:30:04 +0900",
+      "source": "한국경제"
     }
   ]
 }
