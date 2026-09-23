@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T01:44:58.386055+09:00",
+  "updatedAt": "2026-09-24T05:10:14.382539+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51550.33,
-      "change": -313.36,
-      "changePercent": -0.6,
+      "price": 51511.59,
+      "change": -352.1,
+      "changePercent": -0.68,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26919.21,
-      "change": -325.07,
-      "changePercent": -1.19,
+      "price": 26936.04,
+      "change": -308.24,
+      "changePercent": -1.13,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1366.66,
-      "change": 11.12,
-      "changePercent": 0.82,
+      "price": 1366.3,
+      "change": 10.76,
+      "changePercent": 0.79,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 336.67,
-      "change": -3.08,
-      "changePercent": -0.91,
+      "price": 337.02,
+      "change": -2.73,
+      "changePercent": -0.8,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 379.64,
-      "change": 0.74,
-      "changePercent": 0.2,
+      "price": 380.12,
+      "change": 1.22,
+      "changePercent": 0.32,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 224.21,
-      "change": -4.66,
-      "changePercent": -2.04,
+      "price": 225.51,
+      "change": -3.36,
+      "changePercent": -1.47,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "李대통령 \"농지전수조사 꼭 필요…회피하지 않겠다\"",
+      "link": "https://www.yna.co.kr/view/AKR20260924003700001",
+      "pubDate": "Thu, 24 Sep 2026 01:42:51 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "美10년물 국채금리 5.079%로 폭등…PMI호조로 인플레압력 부각",
       "link": "https://www.hankyung.com/article/202609244510i",
@@ -223,12 +229,6 @@
       "title": "K2코리아그룹, 아웃도어 브랜드 '네파' 인수…\"해외 진출 검토\"",
       "link": "https://www.yna.co.kr/view/AKR20260923164200030",
       "pubDate": "Wed, 23 Sep 2026 16:47:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 남재헌 해수차관, 추석 수산 성수품 가격·수급 동향 점검",
-      "link": "https://www.yna.co.kr/view/AKR20260923162300030",
-      "pubDate": "Wed, 23 Sep 2026 16:41:11 +0900",
       "source": "연합뉴스"
     }
   ]
