@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-09-23T14:48:54.470053+09:00",
+  "updatedAt": "2026-09-23T20:22:35.333570+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 7044.5,
-      "change": 26.59,
-      "changePercent": 0.38,
+      "price": 7080.92,
+      "change": 63.01,
+      "changePercent": 0.9,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 840.47,
-      "change": 4.2,
-      "changePercent": 0.5,
+      "price": 844.48,
+      "change": 8.21,
+      "changePercent": 0.98,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1354.98,
-      "change": -0.56,
-      "changePercent": -0.04,
+      "price": 1364.55,
+      "change": 9.01,
+      "changePercent": 0.66,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 284000.0,
-      "change": 7500.0,
-      "changePercent": 2.71,
+      "price": 285500.0,
+      "change": 9000.0,
+      "changePercent": 3.25,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1842500.0,
-      "change": 2500.0,
-      "changePercent": 0.14,
+      "price": 1862000.0,
+      "change": 22000.0,
+      "changePercent": 1.2,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 194500.0,
-      "change": -6500.0,
-      "changePercent": -3.23,
+      "price": 194700.0,
+      "change": -6300.0,
+      "changePercent": -3.13,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 33700.0,
-      "change": -450.0,
-      "changePercent": -1.32,
+      "price": 33450.0,
+      "change": -700.0,
+      "changePercent": -2.05,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 351000.0,
-      "change": 500.0,
-      "changePercent": 0.14,
+      "price": 351500.0,
+      "change": 1000.0,
+      "changePercent": 0.29,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "'공모주 청약 대행 사기' 신라자산·제니스투자, 시장서 퇴출",
-      "link": "https://www.yna.co.kr/view/AKR20260923127400002",
-      "pubDate": "Wed, 23 Sep 2026 14:41:06 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "포천시, 내년 생활임금 1만1천890원…3.7% 인상",
-      "link": "https://www.yna.co.kr/view/AKR20260923116900060",
-      "pubDate": "Wed, 23 Sep 2026 14:36:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "알테오젠, 유럽서 키트루다 피하주사 조성물 특허 등록",
-      "link": "https://www.yna.co.kr/view/AKR20260923124600017",
-      "pubDate": "Wed, 23 Sep 2026 14:34:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "LH, 성대야구장에 토지비축제도 활용…'공급 속도전'",
-      "link": "https://www.yna.co.kr/view/AKR20260923125000003",
-      "pubDate": "Wed, 23 Sep 2026 14:33:39 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "바클레이즈 \"韓 장기 국고채 신중 접근…회사채도 '비중 축소'\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923122800008",
-      "pubDate": "Wed, 23 Sep 2026 14:30:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
-      "link": "https://www.yna.co.kr/view/AKR20260923117800011",
-      "pubDate": "Wed, 23 Sep 2026 14:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] NH농협은행, '올원트래블' 서비스…24종 통화 조회·환전",
-      "link": "https://www.yna.co.kr/view/AKR20260923122100002",
-      "pubDate": "Wed, 23 Sep 2026 14:25:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 강태영 NH농협은행장, 추석 앞두고 비상대응 체계 점검",
-      "link": "https://www.yna.co.kr/view/AKR20260923119300002",
-      "pubDate": "Wed, 23 Sep 2026 14:24:41 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "상지대 창업보육센터, 강원도 경영평가 8년 연속 S등급",
-      "link": "https://www.yna.co.kr/view/AKR20260923118700062",
-      "pubDate": "Wed, 23 Sep 2026 14:14:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "강원 제2청사·강릉시, 주문진시장서 추석 장보기 행사",
-      "link": "https://www.yna.co.kr/view/AKR20260923116800062",
-      "pubDate": "Wed, 23 Sep 2026 14:06:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "中 경공업 성장공식 바꾼다…AI 입혀 매출 30조위안으로 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202609233495i",
-      "pubDate": "Wed, 23 Sep 2026 13:48:36 +0900",
+      "title": "\"고향 가느니 쉰다\"…귀성 포기하고 배달 누르는 2030 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609232940g",
+      "pubDate": "Wed, 23 Sep 2026 19:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "샤인머스캣 인기 시들하더니…백화점에 등장한 새 '명품 과일' [트렌드+]",
-      "link": "https://www.hankyung.com/article/202609232892g",
-      "pubDate": "Wed, 23 Sep 2026 13:40:31 +0900",
+      "title": "케이쓰리아이, 30억 제3자배정 유상증자",
+      "link": "https://www.yna.co.kr/view/AKR20260923183100008",
+      "pubDate": "Wed, 23 Sep 2026 18:33:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"이걸 호텔방서 시켜 먹는다고?\"…외국인들 푹 빠진 한국 음식 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202609221250g",
+      "pubDate": "Wed, 23 Sep 2026 18:00:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "추석 앞두고 벽돌 된 삼성 냉장고…내일 중 모든 오류 해결",
-      "link": "https://www.hankyung.com/article/202609233433g",
-      "pubDate": "Wed, 23 Sep 2026 13:31:47 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20260923170500011",
+      "pubDate": "Wed, 23 Sep 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "시몬스 \"온라인 전용 침대도 누워보고 고르세요\"",
+      "link": "https://www.hankyung.com/article/202609234238i",
+      "pubDate": "Wed, 23 Sep 2026 17:52:08 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] GTX-C, 6년 만에 투자유치 성사…3.8조 모집 성공",
-      "link": "https://www.hankyung.com/article/202609221086i",
-      "pubDate": "Wed, 23 Sep 2026 13:25:01 +0900",
+      "title": "쿠팡 '현장조사 불복' 집행정지 기각…공정위 \"과태료 부과\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260923168651004",
+      "pubDate": "Wed, 23 Sep 2026 17:46:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국고채 금리 유가 하락에 동반 하락…3년물 연 4.006%(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260923163051008",
+      "pubDate": "Wed, 23 Sep 2026 17:14:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "OECD, 올해 한국 성장률 3.7%로 올렸다…상향폭 G20중 최고",
+      "link": "https://www.hankyung.com/article/2026092340921",
+      "pubDate": "Wed, 23 Sep 2026 17:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 교육기업 데이원컴퍼니, AX 사업 진출…\"전공·경력 불문 100명 채용\"",
-      "link": "https://www.hankyung.com/article/202609229824i",
-      "pubDate": "Wed, 23 Sep 2026 13:00:18 +0900",
+      "title": "OECD, 한국 올해 성장률 전망 2.6%→3.7%…G20 중 최대 폭 상향",
+      "link": "https://www.yna.co.kr/view/AKR20260923144200002",
+      "pubDate": "Wed, 23 Sep 2026 17:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "춘천시, 중소기업 육성자금 500억원으로 확대…골목상권 '숨통'",
+      "link": "https://www.yna.co.kr/view/AKR20260923166200062",
+      "pubDate": "Wed, 23 Sep 2026 16:58:59 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"화려한 로고는 됐어요\"…GS샵, 고급 소재 앞세운 FW 신제품 선봬",
+      "link": "https://www.hankyung.com/article/202609234104g",
+      "pubDate": "Wed, 23 Sep 2026 16:50:33 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'규모의 전쟁' 끝낸 中 차 음료 시장…미쉐 울고 구밍 웃고",
-      "link": "https://www.hankyung.com/article/202609017234i",
-      "pubDate": "Wed, 23 Sep 2026 13:00:13 +0900",
+      "title": "국고채 금리 일제히 하락…3년물 연 4.006%",
+      "link": "https://www.yna.co.kr/view/AKR20260923163000008",
+      "pubDate": "Wed, 23 Sep 2026 16:47:52 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "GH-이천시, '반도체 산업단지 클러스터' 조성 업무협약",
+      "link": "https://www.yna.co.kr/view/AKR20260923164300061",
+      "pubDate": "Wed, 23 Sep 2026 16:47:33 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "K2코리아그룹, 아웃도어 브랜드 '네파' 인수…\"해외 진출 검토\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923164200030",
+      "pubDate": "Wed, 23 Sep 2026 16:47:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "MBK, 네파 손절…K2그룹에 매각",
+      "link": "https://www.hankyung.com/article/2026092340251",
+      "pubDate": "Wed, 23 Sep 2026 16:46:26 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"인구감소 걱정했지만\"…해외 공략으로 조단위 매출 넘보는 'K-급식'",
-      "link": "https://www.hankyung.com/article/202609183405g",
-      "pubDate": "Wed, 23 Sep 2026 13:00:05 +0900",
+      "title": "포스코, 잭니클라우스GC 매각 착수",
+      "link": "https://www.hankyung.com/article/2026092340221",
+      "pubDate": "Wed, 23 Sep 2026 16:45:44 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"59세 직장인들, 월급날마다 따박따박 25년 넣었더니…\" 깜짝 [박신영의 월가 아나토미]",
-      "link": "https://www.hankyung.com/article/202609233289i",
-      "pubDate": "Wed, 23 Sep 2026 11:50:53 +0900",
+      "title": "LG전자·SK엔무브, AI센터 냉각기술 개발",
+      "link": "https://www.hankyung.com/article/2026092340271",
+      "pubDate": "Wed, 23 Sep 2026 16:45:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"반도체 '잭팟' 같이 터졌는데…\" 한국만 썰렁한 진짜 이유 [분석+]",
-      "link": "https://www.hankyung.com/article/2026092332006",
-      "pubDate": "Wed, 23 Sep 2026 11:24:21 +0900",
+      "title": "HL로보틱스·삼성물산, 주차 로봇 서비스 협약",
+      "link": "https://www.hankyung.com/article/2026092340261",
+      "pubDate": "Wed, 23 Sep 2026 16:44:40 +0900",
       "source": "한국경제"
     },
     {
-      "title": "공정위 조사 후엔 1등으로 자진 신고해도 '과징금'…제도 개편",
-      "link": "https://www.hankyung.com/article/202609233159g",
-      "pubDate": "Wed, 23 Sep 2026 11:10:37 +0900",
+      "title": "中자본 유치 나선 형지, 부동산 매각 타진",
+      "link": "https://www.hankyung.com/article/2026092340191",
+      "pubDate": "Wed, 23 Sep 2026 16:44:10 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "[게시판] 남재헌 해수차관, 추석 수산 성수품 가격·수급 동향 점검",
+      "link": "https://www.yna.co.kr/view/AKR20260923162300030",
+      "pubDate": "Wed, 23 Sep 2026 16:41:11 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
