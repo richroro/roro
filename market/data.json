@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T23:53:09.092354+09:00",
+  "updatedAt": "2026-09-25T04:00:29.958460+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51255.56,
-      "change": -256.03,
-      "changePercent": -0.5,
+      "price": 51357.0,
+      "change": -154.59,
+      "changePercent": -0.3,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26776.64,
-      "change": -159.4,
-      "changePercent": -0.59,
+      "price": 26943.95,
+      "change": 7.91,
+      "changePercent": 0.03,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1367.98,
-      "change": 2.07,
-      "changePercent": 0.15,
+      "price": 1367.19,
+      "change": 1.28,
+      "changePercent": 0.09,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 336.51,
-      "change": -0.51,
-      "changePercent": -0.15,
+      "price": 337.32,
+      "change": 0.3,
+      "changePercent": 0.09,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 377.3,
-      "change": -2.82,
-      "changePercent": -0.74,
+      "price": 379.9,
+      "change": -0.22,
+      "changePercent": -0.06,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 221.84,
-      "change": -3.67,
-      "changePercent": -1.63,
+      "price": 224.15,
+      "change": -1.36,
+      "changePercent": -0.6,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"오라클,뉴멕시코 데이터센터 '불가항력'선언\" [블룸버그]",
+      "link": "https://www.hankyung.com/article/202609245339i",
+      "pubDate": "Fri, 25 Sep 2026 00:11:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "아이온큐,양자오류정정 분야 진전에 엔비디아에 양자컴 공급",
+      "link": "https://www.hankyung.com/article/202609245306i",
+      "pubDate": "Thu, 24 Sep 2026 23:12:32 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "美 30년물 국채 수익률 5.44%…저금리시대 종말 신호",
       "link": "https://www.hankyung.com/article/202609245261i",
@@ -190,22 +202,10 @@
       "source": "연합뉴스"
     },
     {
-      "title": "\"시세보다 40% 싸게 전세 줬는데\"…60대 집주인 '날벼락' [고정삼의 절세GPT]",
-      "link": "https://www.hankyung.com/article/2026092334526",
-      "pubDate": "Thu, 24 Sep 2026 13:10:14 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "경북도, 지역 양자산업 육성 나선다…글로벌 기업과 맞손(종합)",
       "link": "https://www.yna.co.kr/view/AKR20260924027951053",
       "pubDate": "Thu, 24 Sep 2026 12:41:58 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "\"홍대 골목인 줄\"…북유럽서 인기 폭발한 길거리 간식 뭐길래 [씬메이커]",
-      "link": "https://www.hankyung.com/article/202609106359g",
-      "pubDate": "Thu, 24 Sep 2026 12:13:54 +0900",
-      "source": "한국경제"
     },
     {
       "title": "경북도, 지역 양자산업 육성 나선다…글로벌 기업과 맞손",
