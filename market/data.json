@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T08:35:16.376622+09:00",
+  "updatedAt": "2026-09-24T13:32:21.265394+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -13,15 +13,15 @@
       "symbol": "^KQ11",
       "name": "KOSDAQ",
       "price": 844.48,
-      "change": 8.21,
-      "changePercent": 0.98,
+      "change": 10.1,
+      "changePercent": 1.21,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51511.59,
-      "change": -352.1,
+      "change": -352.11,
       "changePercent": -0.68,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1365.38,
-      "change": -0.53,
-      "changePercent": -0.04,
+      "price": 1370.2,
+      "change": 4.29,
+      "changePercent": 0.31,
       "currency": "KRW"
     }
   ],
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "[반려동물] 귀성·여행에 펫 돌봄 수요 증가…위탁관리업도 동반 성장",
-      "link": "https://www.yna.co.kr/view/AKR20260923151500030",
-      "pubDate": "Thu, 24 Sep 2026 08:30:01 +0900",
+      "title": "경북도, 지역 양자산업 육성 나선다…글로벌 기업과 맞손(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260924027951053",
+      "pubDate": "Thu, 24 Sep 2026 12:41:58 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "추석 앞두고 경남 8개 사업장서 임금 8천690만원 체불 적발",
-      "link": "https://www.yna.co.kr/view/AKR20260923070300052",
-      "pubDate": "Thu, 24 Sep 2026 08:15:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "우수관 공사 굴착기 작업 중 사망사고…공사 관계자들 집유",
-      "link": "https://www.yna.co.kr/view/AKR20260923109200056",
-      "pubDate": "Thu, 24 Sep 2026 08:10:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"이렇게 비싸지 않은데\"…집값 과하게 오르는 이유 '담합'",
-      "link": "https://www.yna.co.kr/view/AKR20260923084000003",
-      "pubDate": "Thu, 24 Sep 2026 08:05:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "저가커피 공세 속에…본사 매출 464% 뛸 때 점주는 10% 늘어",
-      "link": "https://www.yna.co.kr/view/AKR20260923193600002",
-      "pubDate": "Thu, 24 Sep 2026 08:01:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "군산시, 착한가격업소 신규 모집…맞춤형 혜택 제공",
-      "link": "https://www.yna.co.kr/view/AKR20260923051400055",
-      "pubDate": "Thu, 24 Sep 2026 08:00:14 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[부고] 문찬걸(IBK투자증권 금융소비자보호본부장)씨 모친상",
-      "link": "https://www.yna.co.kr/view/AKR20260924014800008",
-      "pubDate": "Thu, 24 Sep 2026 07:44:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "추석 연휴 앞두고 '올빼미 공시' 줄줄이…매각 무산·상폐 우려",
-      "link": "https://www.yna.co.kr/view/AKR20260924013300008",
-      "pubDate": "Thu, 24 Sep 2026 07:38:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중국산이 한국산으로?…'국산둔갑 우회수출' 6년 새 12배 증가",
-      "link": "https://www.yna.co.kr/view/AKR20260923170900001",
-      "pubDate": "Thu, 24 Sep 2026 07:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'서학개미 큰손' 잡아라…美 ETF 브랜드 대표들 잇단 방한",
-      "link": "https://www.yna.co.kr/view/AKR20260921153800008",
-      "pubDate": "Thu, 24 Sep 2026 07:05:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"GPU를 원유처럼 거래\"…CME, 엔비디아 H100·B200 선물 출시 임박 [김주완의 글로벌머니 X파일]",
-      "link": "https://www.hankyung.com/article/202609221656i",
-      "pubDate": "Thu, 24 Sep 2026 07:00:11 +0900",
+      "title": "\"한국 길거리 간식인데\"…덴마크인들 푹 빠진 '뜻밖의 K푸드' [씬메이커]",
+      "link": "https://www.hankyung.com/article/202609106359g",
+      "pubDate": "Thu, 24 Sep 2026 12:13:54 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'한국 드라마서 봤어요' 외국인 몰리는 곳이…'대박' 터졌다",
-      "link": "https://www.hankyung.com/article/2026092339561",
-      "pubDate": "Thu, 24 Sep 2026 06:00:01 +0900",
+      "title": "대미투자 새 축으로 떠오른 원전…'K원전' 美진출 넓어지나",
+      "link": "https://www.hankyung.com/article/202609234053i",
+      "pubDate": "Thu, 24 Sep 2026 12:08:35 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美10년물 국채금리 5.079%로 폭등…PMI호조로 인플레압력 부각",
-      "link": "https://www.hankyung.com/article/202609244510i",
-      "pubDate": "Thu, 24 Sep 2026 00:56:49 +0900",
+      "title": "[속보] 머스크 \"시진핑은 뛰어난 지도자…중국 엄청나게 번영\"",
+      "link": "https://www.hankyung.com/article/2026092449617",
+      "pubDate": "Thu, 24 Sep 2026 11:48:21 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美 공급압박속 9월 기업활동 PMI 58.4 …5년만에 최고",
-      "link": "https://www.hankyung.com/article/202609244494i",
-      "pubDate": "Thu, 24 Sep 2026 00:18:48 +0900",
+      "title": "경북도, 지역 양자산업 육성 나선다…글로벌 기업과 맞손",
+      "link": "https://www.yna.co.kr/view/AKR20260924027900053",
+      "pubDate": "Thu, 24 Sep 2026 11:31:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"연휴 끝나면 '6억 잭팟' 터지나\"…삼성 반도체 직원들 '들썩'",
+      "link": "https://www.hankyung.com/article/2026092449257",
+      "pubDate": "Thu, 24 Sep 2026 11:04:21 +0900",
       "source": "한국경제"
     },
     {
-      "title": "메타 '뮤즈AI'가 스테이블코인 키운다 [박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202609234485i",
-      "pubDate": "Wed, 23 Sep 2026 23:59:05 +0900",
+      "title": "증권가 추석 보너스는…귀성비에 백돈 세트도",
+      "link": "https://www.yna.co.kr/view/AKR20260923145500008",
+      "pubDate": "Thu, 24 Sep 2026 11:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20260924024200011",
+      "pubDate": "Thu, 24 Sep 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "추석 차례상 30만원 시대…고물가에 가성비 명절 간편식 '불티'",
+      "link": "https://www.hankyung.com/article/202609233237i",
+      "pubDate": "Thu, 24 Sep 2026 10:25:02 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美'경유수출중단' 자충수 될수도…에너지장관,석유업계 반발",
-      "link": "https://www.hankyung.com/article/202609234483i",
-      "pubDate": "Wed, 23 Sep 2026 23:45:39 +0900",
+      "title": "용인시, 신축 공동주택 승강기에 에어컨 설치 의무화 추진",
+      "link": "https://www.yna.co.kr/view/AKR20260921074500061",
+      "pubDate": "Thu, 24 Sep 2026 10:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'디센트' 해킹 피해 일파만파?…리플 1천만개 탈취 추정도",
+      "link": "https://www.yna.co.kr/view/AKR20260923182400002",
+      "pubDate": "Thu, 24 Sep 2026 10:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"독일·대만 벤치마킹했다더니\"…보상 쏙 뺀 '무늬만 해외식'?",
+      "link": "https://www.hankyung.com/article/202609233881i",
+      "pubDate": "Thu, 24 Sep 2026 10:00:17 +0900",
       "source": "한국경제"
     },
     {
-      "title": "메타 AI비서 뮤즈…사람이 대신 전화 걸어주는 '인간컨시어지'실험",
-      "link": "https://www.hankyung.com/article/202609234444i",
-      "pubDate": "Wed, 23 Sep 2026 22:17:08 +0900",
+      "title": "\"장례 치르면 쓰는 돈인 줄 알았는데\"…상조업계 뜻밖의 '대박'",
+      "link": "https://www.hankyung.com/article/202609229842i",
+      "pubDate": "Thu, 24 Sep 2026 10:00:12 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"관세 더 내라\"…인도, 삼성·LG OLED 부품 관세 조사 중 [로이터]",
-      "link": "https://www.hankyung.com/article/202609234426i",
-      "pubDate": "Wed, 23 Sep 2026 21:07:35 +0900",
+      "title": "AI분석·숏폼·커뮤니티 확대까지…증권사 MTS 개선 잇달아",
+      "link": "https://www.yna.co.kr/view/AKR20260919030600008",
+      "pubDate": "Thu, 24 Sep 2026 10:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[AI프리즘] AI 투자 '환멸의 골짜기'…사람 줄이기가 답일까",
+      "link": "https://www.yna.co.kr/view/AKR20260923085800017",
+      "pubDate": "Thu, 24 Sep 2026 09:33:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"중국산만 쓰더니 갑자기 왜?\"…테슬라, 韓 공장 찾아다닌 이유",
+      "link": "https://www.hankyung.com/article/202609233829i",
+      "pubDate": "Thu, 24 Sep 2026 09:30:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"비행기표 다 나갔네\" 좌절했는데…포기하긴 이른 이유 있었다 [플라잇톡]",
-      "link": "https://www.hankyung.com/article/202609233111g",
-      "pubDate": "Wed, 23 Sep 2026 21:00:04 +0900",
+      "title": "우리은행 영업점 10곳 통폐합…오프라인 채널 효율화",
+      "link": "https://www.yna.co.kr/view/AKR20260923181300002",
+      "pubDate": "Thu, 24 Sep 2026 09:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'매출 높은 기업'에 신보 보증 쏠림…100억 초과 승인액 65%↑",
+      "link": "https://www.yna.co.kr/view/AKR20260923197500002",
+      "pubDate": "Thu, 24 Sep 2026 09:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "AI·로봇 기업 어디가 뜨나…'유니콘' 쏟아진다",
+      "link": "https://www.hankyung.com/article/202609233759i",
+      "pubDate": "Thu, 24 Sep 2026 09:00:26 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美·中 앞에선 AI패권경쟁…뒤로는 상대 기술주 사들여",
-      "link": "https://www.hankyung.com/article/202609234365i",
-      "pubDate": "Wed, 23 Sep 2026 20:02:41 +0900",
+      "title": "열리기 시작한 휴머노이드 시장…산업현장도 걸음마 수준 [AI노스트라다무스⑩]",
+      "link": "https://www.hankyung.com/article/202609221125i",
+      "pubDate": "Thu, 24 Sep 2026 09:00:23 +0900",
       "source": "한국경제"
     }
   ]
