@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T03:28:34.711549+09:00",
+  "updatedAt": "2026-09-26T07:12:10.226397+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51752.54,
-      "change": 402.56,
-      "changePercent": 0.78,
+      "price": 51828.62,
+      "change": 478.64,
+      "changePercent": 0.93,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27059.56,
-      "change": 120.19,
-      "changePercent": 0.45,
+      "price": 27068.72,
+      "change": 129.34,
+      "changePercent": 0.48,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1355.62,
-      "change": -9.97,
-      "changePercent": -0.73,
+      "price": 1355.28,
+      "change": -10.31,
+      "changePercent": -0.75,
       "currency": "KRW"
     }
   ],
@@ -88,33 +88,93 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 339.75,
-      "change": 3.83,
-      "changePercent": 1.14,
+      "price": 341.07,
+      "change": 5.15,
+      "changePercent": 1.53,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 372.68,
-      "change": -5.26,
-      "changePercent": -1.39,
+      "price": 372.11,
+      "change": -5.83,
+      "changePercent": -1.54,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 224.44,
-      "change": -0.14,
-      "changePercent": -0.06,
+      "price": 225.07,
+      "change": 0.49,
+      "changePercent": 0.22,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "美재무 \"日 경제 기초여건 반영한 엔화 강세 바람직\"",
-      "link": "https://www.yna.co.kr/view/AKR20260926002300071",
-      "pubDate": "Sat, 26 Sep 2026 02:08:23 +0900",
+      "title": "지루한 박스권 장세…상한가·52주 신고가 종목수도 '뚝'",
+      "link": "https://www.yna.co.kr/view/AKR20260923192300008",
+      "pubDate": "Sat, 26 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "공항 밥값 비싼 이유 있었네…매출 30% 넘는 임대료 이용객에 전가",
+      "link": "https://www.yna.co.kr/view/AKR20260923197800004",
+      "pubDate": "Sat, 26 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "건설 기술 좋아졌다는데 아파트 하자판정은 3년 새 2.4배로",
+      "link": "https://www.yna.co.kr/view/AKR20260923084100003",
+      "pubDate": "Sat, 26 Sep 2026 06:11:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중기부, 보조금 부정수급 6년간 26억원 적발…바우처 사업 최다",
+      "link": "https://www.yna.co.kr/view/AKR20260924032300030",
+      "pubDate": "Sat, 26 Sep 2026 06:10:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "육아휴직 복귀, 작은 회사일수록 힘들다…중소기업 70% 그쳐",
+      "link": "https://www.yna.co.kr/view/AKR20260923141900530",
+      "pubDate": "Sat, 26 Sep 2026 06:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[부동산캘린더] 내주 광명시티프라디움에듀하임 등 전국서 3천641가구 분양",
+      "link": "https://www.yna.co.kr/view/AKR20260922190400003",
+      "pubDate": "Sat, 26 Sep 2026 06:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"폐업 선불거래 피해구제 3년 새 7배↑…필라테스·헬스장 74%\"",
+      "link": "https://www.yna.co.kr/view/AKR20260924046300001",
+      "pubDate": "Sat, 26 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"4년새 저축은행 자영업자 대출잔액 절반 되고 연체율은 3.6배\"",
+      "link": "https://www.yna.co.kr/view/AKR20260922164700001",
+      "pubDate": "Sat, 26 Sep 2026 06:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'차 한 대 값' 컴퓨터 뜯던 소년…30년 넘게 '코딩' 못놓는 이유 [권용훈의 직업불만족(族)]",
+      "link": "https://www.hankyung.com/article/202607045653i",
+      "pubDate": "Sat, 26 Sep 2026 06:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"집값 비싼 곳 청소년 자살률 낮아\"…주거환경 밀접성 연구 결과",
+      "link": "https://www.yna.co.kr/view/AKR20260923138700004",
+      "pubDate": "Sat, 26 Sep 2026 05:55:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'자산토큰화반' 신설한 한은, 국채 토큰화 속도내나",
+      "link": "https://www.yna.co.kr/view/AKR20260923196200002",
+      "pubDate": "Sat, 26 Sep 2026 05:51:00 +0900",
       "source": "연합뉴스"
     },
     {
@@ -148,40 +208,10 @@
       "source": "한국경제"
     },
     {
-      "title": "수은, 멕시코 대외무역개발은행과 1억달러 금융협력",
-      "link": "https://www.yna.co.kr/view/AKR20260924040400002",
-      "pubDate": "Fri, 25 Sep 2026 15:45:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한-멕시코 투자보장 협정 개정 협상 타결…개시 이후 7년만",
-      "link": "https://www.yna.co.kr/view/AKR20260925033600504",
-      "pubDate": "Fri, 25 Sep 2026 15:41:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "\"나도 명절에 좀 쉬고 싶다\"…앞치마 벗어 던지더니 '불티' [트렌드+]",
       "link": "https://www.hankyung.com/article/202609170045g",
       "pubDate": "Fri, 25 Sep 2026 15:38:50 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "한-멕시코 세관당국 MOU…마약·K브랜드 위조 단속 협력 강화",
-      "link": "https://www.yna.co.kr/view/AKR20260924037200002",
-      "pubDate": "Fri, 25 Sep 2026 15:18:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20260925030300011",
-      "pubDate": "Fri, 25 Sep 2026 15:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "다시 고개 든 엔저…日 \"트럼프, 우려 표명\" 이례적 공개",
-      "link": "https://www.yna.co.kr/view/AKR20260925030000073",
-      "pubDate": "Fri, 25 Sep 2026 14:24:12 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "\"주문 감당하기 힘들 지경\"…한국·일본 빈틈 노렸더니 '대박'",
@@ -199,36 +229,6 @@
       "title": "\"지금 놓치면 못 먹는다고?\"…사람들 몰리는 '한정판' 정체 [류은혁의 유통기한]",
       "link": "https://www.hankyung.com/article/202609255344i",
       "pubDate": "Fri, 25 Sep 2026 13:00:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "K-윤활기유, 하반기도 '맑음'…반사이익 넘어 공급망 대안으로",
-      "link": "https://www.yna.co.kr/view/AKR20260923056600003",
-      "pubDate": "Fri, 25 Sep 2026 11:31:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'시총미달 상폐' 코스닥서 속출…내달부터 동전주까지 무더기 위기",
-      "link": "https://www.yna.co.kr/view/AKR20260924025000008",
-      "pubDate": "Fri, 25 Sep 2026 11:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "여야, 추석 맞아 한목소리로 민생 강조…경제 진단은 엇갈려",
-      "link": "https://www.yna.co.kr/view/AKR20260925022700001",
-      "pubDate": "Fri, 25 Sep 2026 10:46:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "미국 경유 수출금지 거론에 EU 화들짝 놀라 설득전 돌입",
-      "link": "https://www.yna.co.kr/view/AKR20260925022100009",
-      "pubDate": "Fri, 25 Sep 2026 10:39:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"年 15%대 고수익\"…가족이라 6000만원 넣었다가 '날벼락'",
-      "link": "https://www.hankyung.com/article/202609233737i",
-      "pubDate": "Fri, 25 Sep 2026 10:32:51 +0900",
       "source": "한국경제"
     }
   ]
