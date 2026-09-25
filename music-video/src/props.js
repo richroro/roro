@@ -23,10 +23,10 @@ function stars(t, n = 80, seed = 3, alpha = 1, yMax = H * 0.7) {
     const x = hash(i, seed) * W, y = hash(i, seed + 1) * yMax;
     const tw = 0.55 + 0.45 * Math.sin(t * (1.5 + hash(i, 4) * 3) + i);
     const r = 1.5 + hash(i, 5) * 3;
-    ctx.globalAlpha = alpha * tw;
+    ctx.save(); ctx.globalAlpha *= alpha * tw;
     if (hash(i, 6) > 0.9) sparkle(x, y, r * 3, '#FFFFFF', t * 0.3);
     else circle(x, y, r, { fill: '#FFFFFF', stroke: null });
-    ctx.globalAlpha = 1;
+    ctx.restore();
   }
 }
 
