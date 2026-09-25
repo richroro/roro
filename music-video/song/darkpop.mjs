@@ -5,6 +5,8 @@
 // space. No voice: the words run underneath as subtitles.
 //
 //   node song/darkpop.mjs gajang/song/score.mjs   -> gajang/out/song.wav, assets/song.m4a, src/song.js
+//   node song/darkpop.mjs gajang/song/rap.mjs     the same beat, harder, with a rap voice (a score
+//                                                 with RAP = true; see song/rapvox.mjs)
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -30,6 +32,7 @@ const h = (a, b = 0) => { const x = Math.sin(a * 127.1 + b * 311.7) * 43758.5453
 
 const sub = new Bus(), beat = new Bus(), keys = new Bus(), lead = new Bus(), pad = new Bus(), air = new Bus(), fx = new Bus();
 const kicks = [];
+const RAP = !!S.RAP;             // a rapped score: a busier kit from the first verse, the tune only where it is sung
 
 // ---- instruments --------------------------------------------------------------------------------
 
@@ -141,7 +144,7 @@ const play808 = (t, dur, midi, drive, gain) => { eight08(t, dur, midi, last808, 
 
 function bar808(bar) {
   const sec = sectionAt(bar);
-  if ((sec === 'intro' && bar < 4) || (sec === 'verse1' && bar < 10) || (sec === 'bridge' && bar < 54)) { last808 = null; return; }
+  if ((sec === 'intro' && bar < 4) || (sec === 'verse1' && bar < (RAP ? 8 : 10)) || (sec === 'bridge' && bar < (RAP ? 52 : 54))) { last808 = null; return; }
   const r = rootOf(bar), b = beat => T(bar, beat);
   if (sec === 'end') { play808(b(0), S.BAR * 1.4, r, 1.6, 1.1); return; }
   if (sec === 'intro') { play808(b(0), S.BAR * 0.95, r, 1.1, 0.8); return; }
@@ -186,10 +189,10 @@ function beatBar(bar) {
   const pre = sec.startsWith('pre');
   const preEnd = pre && S.SECTIONS.find(s => s.id === sec).bar + 3 === bar;
   if (chorus) { kick(b(0)); kick(b(2.5), 0.85); }
-  else if (sec !== 'verse1' || bar >= 10) kick(b(0), 0.8);
+  else if (sec !== 'verse1' || bar >= 10 || RAP) { kick(b(0), 0.8); if (RAP) kick(b(2.5), 0.6); }
   snap(b(1), 1, -0.15); snap(b(3), 1, 0.15);
   if (chorus || sec === 'verse2') { clap(b(1), chorus ? 0.9 : 0.5); clap(b(3), chorus ? 0.9 : 0.5); }
-  const hats = chorus || pre || sec === 'verse2' || (sec === 'verse1' && bar >= 12) || sec === 'bridge';
+  const hats = chorus || pre || sec === 'verse2' || (sec === 'verse1' && (bar >= 12 || RAP)) || sec === 'bridge';
   if (hats) {
     for (let e = 0; e < 8; e++) {
       if (preEnd && e >= 7) break;            // the half beat of nothing before the drop
@@ -227,7 +230,7 @@ function padBar(bar) {
 }
 
 function leadLines() {
-  const lines = S.LINES.map(S.layLine);
+  const lines = (S.MELODY || S.LINES).map(S.layLine);
   for (const l of lines) {
     const sec = sectionAt(l.bar);
     const chorus = isChorus(sec) || sec === 'outro';
@@ -266,14 +269,18 @@ for (let bar = 0; bar <= S.END_BAR; bar++) { bar808(bar); beatBar(bar); keysBar(
 step('band');
 leadLines(); step('lead');
 cueSounds(S, fx, () => {}); step('effects');
+let vox = null;
+if (RAP) { const { rapVocals } = await import('./rapvox.mjs'); vox = rapVocals(S, ROOT); step('rap voice'); }
 
 darken(keys, 1500);
 duck(pad, 0.4, kicks); duck(keys, 0.2, kicks);
-const parts = { sub, beat, keys, lead, pad, air, fx };
-const GAIN = { sub: 0.46, beat: 1.5, keys: 1.4, lead: 0.92, pad: 0.56, air: 4.0, fx: 0.45 };
+const parts = { sub, beat, keys, lead, pad, air, fx, ...(vox ? { vox } : {}) };
+const GAIN = { sub: 0.46, beat: 1.5, keys: 1.4, lead: 0.92, pad: 0.56, air: 4.0, fx: 0.45, vox: 1.0 };
+if (vox) { GAIN.lead = 0.6; GAIN.keys = 1.1; GAIN.vox = 0.8 / Math.max(1e-6, peak(vox)); }
 const sendL = new Float32Array(N), sendR = new Float32Array(N);
-for (const [name, amt] of [['lead', 0.3], ['keys', 0.35], ['pad', 0.5], ['beat', 0.16], ['air', 0.25], ['fx', 0.3]]) {
+for (const [name, amt] of [['lead', 0.3], ['keys', 0.35], ['pad', 0.5], ['beat', 0.16], ['air', 0.25], ['fx', 0.3], ['vox', 0.12]]) {
   const bus = parts[name];
+  if (!bus) continue;
   for (let n = 0; n < N; n++) { sendL[n] += bus.L[n] * amt; sendR[n] += bus.R[n] * amt; }
 }
 const [vL, vR] = freeverb(sendL, sendR, 0.9, 0.5); step('reverb');
