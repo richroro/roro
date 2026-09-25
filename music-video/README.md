@@ -1,5 +1,7 @@
 # 고딩 라이프 · 뮤직비디오
 
+▶ 완성본: [`dist/goding-life-720p.mp4`](dist/goding-life-720p.mp4) (2:11, 720p). 1080p 는 아래 방법으로 직접 렌더링하면 `out/goding-life.mp4` 로 나온다.
+
 고등학생의 하루하루를 담은 2분 11초짜리 뮤직비디오. 곡도 영상도 이 폴더의 코드가 처음부터 만든다.
 샘플 음원도, 이미지 에셋도 없다 (폰트 두 개만 빼고).
 
@@ -45,7 +47,7 @@ ffmpeg 가 없으면 `pip install imageio-ffmpeg` 로 받은 정적 빌드를 �
 cd music-video
 npm install                       # playwright-core 하나
 node song/synth.mjs               # 곡 합성 (20초 정도)
-node render.mjs --frames          # 프레임 3,927장 -> out/frames (이어서 그리기 가능)
+node render.mjs --frames          # 프레임 3,926장 (4 워커로 1–2분) -> out/frames (이어서 그리기 가능)
 node render.mjs --encode          # out/goding-life.mp4
 ```
 
