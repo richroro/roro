@@ -5,7 +5,8 @@
 function bgBeat(t) {
   const s = SONG.slow;
   if (t < s.t) return (t - SONG.offset) / SONG.beat;
-  return (s.t - SONG.offset) / SONG.beat + (t - s.t) / s.beat;
+  // the slow ending starts on a beat of its own, so count from a whole beat there
+  return Math.ceil((s.t - SONG.offset) / SONG.beat - 1e-6) + (t - s.t) / s.beat;
 }
 const bgBeatN = t => Math.floor(bgBeat(t) + 1e-6);
 /** 1 on every beat, falling away after it. */
