@@ -121,7 +121,7 @@
     stroke([[610, 600], [660, 590]], '#7A5244', 7, { ink: null });
     zzz(t, 730, 560, 1, 0.9);
     // 아빠 on his back, face to us, eyes on the ceiling
-    const blink = frac(t / 3.1 + 0.3) < 0.04;
+    const blink = (t > 7.25 && t < 7.37) || (t > 2.9 && t < 3.0);
     const look = t < 4.5 ? 1 : 1 - 0.6 * ease(seg(t, 7.2, 7.8));
     dad(900, 725, 1, t, {
       rot: -Math.PI / 2, shadow: false, jacket: false, eyes: blink ? 'closed' : 'open', mouth: 'flat',
@@ -697,8 +697,8 @@
       stroke([[fx - 60, fy - 80], [fx - 30, fy - 110]], '#FFFFFF', 8, { ink: null, alpha: 0.5 * pressK });
     }
     // light sweeping over the car in the tunnel
-    if (station < 1) {
-      ctx.save(); ctx.globalAlpha = 0.18 * (1 - station);
+    if (scroll > 0) {
+      ctx.save(); ctx.globalAlpha = 0.18 * (1 - station) + 0.12 * station;
       for (let i = 0; i < 3; i++) {
         const x = ((i * 900 - scroll * 1.1) % 2700 + 2700) % 2700 - 500;
         ctx.fillStyle = '#FFF0C0'; ctx.beginPath(); ctx.moveTo(x, carY); ctx.lineTo(x + 160, carY); ctx.lineTo(x + 60, floorY); ctx.lineTo(x - 100, floorY); ctx.fill();
@@ -717,9 +717,9 @@
       const x = ((i * 400 - scroll * 1.2) % 3200 + 3200) % 3200 - 400;
       rrect(x, floorY + 60, 160, 12, 6, { fill: '#FFE9A8', stroke: null, alpha: 0.7 });
     }
-    if (station > 0 && scroll > 0) for (let i = 0; i < 3; i++) {
-      const x = ((1500 + i * 1100 - scroll * 1.5) % 3300 + 3300) % 3300 - 600;
-      rrect(x, -300, 110, 1600, 0, { fill: '#8C94A4', lw: 6, alpha: station });
+    if (station > 0 && scroll > 0) for (let i = 0; i < 16; i++) {
+      const x = ((i * 220 - scroll * 1.1) % 3520 + 3520) % 3520 - 600;
+      rrect(x, floorY + 40, 110, 14, 4, { fill: '#6E7584', stroke: null, alpha: station });
     }
     camEnd();
     streaks(t, 0.8 * seg(scroll, 300, 1200), '#FFFFFF', 7, -1);
