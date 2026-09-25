@@ -2,7 +2,7 @@
 //
 //   node render.mjs --frames[=0:130.9] [--workers=4] [--w=1920] [--fps=30] [--force]
 //                                      every frame into out/frames (skips ones already there)
-//   node render.mjs --encode [--out=out/goding-life.mp4] [--fps=30] [--crf=20]
+//   node render.mjs --encode [--out=out/goding-life.mp4] [--fps=30] [--crf=20] [--audio=track.m4a]
 //   node render.mjs --sheet=12,12.5,13 [--cols=3] [--cw=640] [--out=out/check/sheet.jpg]
 //   node render.mjs --stills=12,40.2 [--out=out/check/still]      full-size JPEGs
 //
@@ -87,11 +87,14 @@ function encode() {
   const fps = num('fps', 30), crf = num('crf', 20);
   const out = resolve(ROOT, typeof args.out === 'string' ? args.out : args.project ? 'out/mv.mp4' : 'out/goding-life.mp4');
   mkdirSync(dirname(out), { recursive: true });
+  // The project's own song, or --audio=<file> (a track you have yourself), or no sound at all.
+  const audio = typeof args.audio === 'string' ? resolve(args.audio) : join(ROOT, 'assets', 'song.m4a');
+  const withAudio = existsSync(audio);
   execFileSync(ffmpegPath(), ['-y', '-loglevel', 'error', '-stats', '-framerate', String(fps),
-    '-i', join(ROOT, 'out', 'frames', '%05d.jpg'), '-i', join(ROOT, 'assets', 'song.m4a'),
+    '-i', join(ROOT, 'out', 'frames', '%05d.jpg'), ...(withAudio ? ['-i', audio] : []),
     '-c:v', 'libx264', '-preset', 'slow', '-crf', String(crf), '-pix_fmt', 'yuv420p', '-movflags', '+faststart',
-    '-c:a', 'copy', '-shortest', out], { stdio: 'inherit' });
-  console.log('wrote', out);
+    ...(withAudio ? ['-c:a', 'aac', '-b:a', '192k', '-shortest'] : ['-an']), out], { stdio: 'inherit' });
+  console.log('wrote', out, withAudio ? `with ${audio}` : '(no sound)');
 }
 
 async function sheet() {
