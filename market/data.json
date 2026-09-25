@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T07:12:47.685756+09:00",
+  "updatedAt": "2026-09-25T10:22:51.749912+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -13,8 +13,8 @@
       "symbol": "^KQ11",
       "name": "KOSDAQ",
       "price": 844.48,
-      "change": 10.1,
-      "changePercent": 1.21,
+      "change": 8.21,
+      "changePercent": 0.98,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1365.24,
-      "change": -0.67,
-      "changePercent": -0.05,
+      "price": 1364.25,
+      "change": -1.34,
+      "changePercent": -0.1,
       "currency": "KRW"
     }
   ],
@@ -112,67 +112,91 @@
   ],
   "news": [
     {
-      "title": "인류안전 위해 경쟁 멈추자?…힘 잃는 AI 속도조절론",
-      "link": "https://www.yna.co.kr/view/AKR20260922103700008",
-      "pubDate": "Fri, 25 Sep 2026 07:05:01 +0900",
+      "title": "연소득 '1천200만원 이하' 자영업 사업장 4년새 43% 증가",
+      "link": "https://www.yna.co.kr/view/AKR20260924030600001",
+      "pubDate": "Fri, 25 Sep 2026 10:10:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "동해안서 어항 폐기물 수거량 절반 이상…관리선은 가장 적어",
-      "link": "https://www.yna.co.kr/view/AKR20260923134200051",
-      "pubDate": "Fri, 25 Sep 2026 07:01:02 +0900",
+      "title": "삼성 더 프레임 프로, 글로벌 IT매체 선정 '최고의 프레임 TV'",
+      "link": "https://www.yna.co.kr/view/AKR20260923100500003",
+      "pubDate": "Fri, 25 Sep 2026 10:05:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "세입자보다 어린 집주인?…20세 미만이 산 주택, 올해만 115건",
-      "link": "https://www.yna.co.kr/view/AKR20260923148000002",
-      "pubDate": "Fri, 25 Sep 2026 07:01:02 +0900",
+      "title": "전남광주시, 정신건강 등 복합위기 지원 안내서 1만부 배포",
+      "link": "https://www.yna.co.kr/view/AKR20260922143000054",
+      "pubDate": "Fri, 25 Sep 2026 10:02:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "코스맥스, 10년간 매출 4.5배·수출 3배…R&D 투자 12배 확대",
-      "link": "https://www.yna.co.kr/view/AKR20260924031700030",
-      "pubDate": "Fri, 25 Sep 2026 07:01:01 +0900",
+      "title": "\"코로나19때 학교 안 가니 엄마 취업자 줄어…아빠는 영향 없어\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923179500002",
+      "pubDate": "Fri, 25 Sep 2026 10:01:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "서울 아파트는 신축보다 재건축…20년 초과, 매매가 상승폭 압도",
-      "link": "https://www.yna.co.kr/view/AKR20260924031200003",
-      "pubDate": "Fri, 25 Sep 2026 07:01:00 +0900",
+      "title": "\"기업 고충 챙긴다\"…전주시 팀장급 223명, 전담 매니저 활동",
+      "link": "https://www.yna.co.kr/view/AKR20260923089700055",
+      "pubDate": "Fri, 25 Sep 2026 10:00:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "탈세 유튜버에 칼 빼든 국세청…작년 17명에 239억원 부과",
-      "link": "https://www.yna.co.kr/view/AKR20260922179600001",
-      "pubDate": "Fri, 25 Sep 2026 07:00:06 +0900",
+      "title": "전남광주 농수산식품 수출액, 지난해 보다 8.2% 늘어",
+      "link": "https://www.yna.co.kr/view/AKR20260923139900054",
+      "pubDate": "Fri, 25 Sep 2026 10:00:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "명절 휴게소 편의점 인기 품목은…내려갈 때 커피, 귀경 땐 과자",
-      "link": "https://www.yna.co.kr/view/AKR20260923129400030",
-      "pubDate": "Fri, 25 Sep 2026 07:00:03 +0900",
+      "title": "숙취해소제도 제로슈거·젤리 시대…제약사 제품 다양화",
+      "link": "https://www.yna.co.kr/view/AKR20260923041400017",
+      "pubDate": "Fri, 25 Sep 2026 10:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"6년간 농업정책자금 부당수령 2천억원…미회수액만 898억원\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923140700030",
-      "pubDate": "Fri, 25 Sep 2026 07:00:02 +0900",
+      "title": "美 장기금리 상승의 국내 영향은?…\"환율↑·외인 자본 유출\"",
+      "link": "https://www.yna.co.kr/view/AKR20260919035800008",
+      "pubDate": "Fri, 25 Sep 2026 10:00:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "소득 다 털어도 빚 갚기 빠듯한 차주 3년 반 만에 반등",
-      "link": "https://www.yna.co.kr/view/AKR20260923199400002",
-      "pubDate": "Fri, 25 Sep 2026 06:01:00 +0900",
+      "title": "수출입은행 한계기업 여신 5.5조…17개 대기업에 4.1조 집중",
+      "link": "https://www.yna.co.kr/view/AKR20260924037400002",
+      "pubDate": "Fri, 25 Sep 2026 09:30:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "주금공 대위변제 3년새 138%↑…\"전세대출 못 갚는 서민 늘어\"",
-      "link": "https://www.yna.co.kr/view/AKR20260924044300001",
-      "pubDate": "Fri, 25 Sep 2026 05:58:00 +0900",
+      "title": "면접 보면 7만원, 첫 취업 땐 50만원…경북, 청년 지원",
+      "link": "https://www.yna.co.kr/view/AKR20260923113500053",
+      "pubDate": "Fri, 25 Sep 2026 09:13:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"오라클,뉴멕시코 데이터센터 '불가항력'선언\" [블룸버그]",
+      "title": "은행·증권부터 보험까지…자본확충 비상에 신종자본증권 '러시'",
+      "link": "https://www.hankyung.com/article/202609234124i",
+      "pubDate": "Fri, 25 Sep 2026 09:05:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "최대 85% 할인? 연휴 겨냥해 가구업체들 세일한다",
+      "link": "https://www.hankyung.com/article/202609234353i",
+      "pubDate": "Fri, 25 Sep 2026 09:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "점유율 23% 쥔 쏘렌토·싼타페, 수입 중형SUV에 안방 흔들",
+      "link": "https://www.hankyung.com/article/202609234356i",
+      "pubDate": "Fri, 25 Sep 2026 08:00:33 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "물 대신 단백질·에너지젤…식품업계 '러닝족' 잡기 경쟁 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202609220334i",
+      "pubDate": "Fri, 25 Sep 2026 08:00:12 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"오라클, 뉴멕시코 데이터센터 '불가항력' 선언\" [블룸버그]",
       "link": "https://www.hankyung.com/article/202609245339i",
       "pubDate": "Fri, 25 Sep 2026 00:11:32 +0900",
       "source": "한국경제"
@@ -205,30 +229,6 @@
       "title": "\"홍준표 닮았다\" 뒷말…혈세 '6억' 박정희 동상의 운명은? [혈세 누수 탐지기]",
       "link": "https://www.hankyung.com/article/202609233010H",
       "pubDate": "Thu, 24 Sep 2026 16:53:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "같은 집에 서로 다른 보유세 '논란'…1주택자들 '불만 폭발'",
-      "link": "https://www.hankyung.com/article/202609245131i",
-      "pubDate": "Thu, 24 Sep 2026 16:53:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"하루만 맡겨도 이자 준대\" 들썩…'103조원' 출혈 경쟁 터졌다",
-      "link": "https://www.hankyung.com/article/2026092336926",
-      "pubDate": "Thu, 24 Sep 2026 16:37:17 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"카니발 독주에 도전장\"…테슬라까지 뛰어든 3열 패밀리카 전쟁 [맞짱대결]",
-      "link": "https://www.hankyung.com/article/202609220758g",
-      "pubDate": "Thu, 24 Sep 2026 16:33:44 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"월급 꼬박 이체했는데\"…금리 우대 못 받은 황당한 이유",
-      "link": "https://www.hankyung.com/article/202609229909i",
-      "pubDate": "Thu, 24 Sep 2026 16:10:01 +0900",
       "source": "한국경제"
     }
   ]
