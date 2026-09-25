@@ -224,15 +224,16 @@
     ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
     const w = 320, h = 210;
     ell(0, 4, 190, 22, { fill: 'rgba(0,0,0,0.25)', stroke: null });
-    rrect(-w / 2, -h, w, h, 14, { fill: '#1B1524', lw: 6 });
-    rrect(-w / 2 + 14, -h + 16, w - 28, h - 32, 10, { fill: null, stroke: LIME, lw: 5 });
-    for (let i = 0; i < 5; i++) poly(starShape(-110 + i * 55, -h + 50 + (i % 2) * 110, 16, 0.45), { fill: i % 2 ? PINK : LIME, stroke: null });
-    letter('장난감', 0, -h / 2 + 4, 52, PINK, { font: 'bold', lw: 7, color2: BLK, shadow: null });
+    rrect(-w / 2, -h, w, h, 14, { fill: PINK, lw: 6 });
+    rrect(-w / 2 + 16, -h + 16, w - 32, h - 32, 10, { fill: '#E02A8C', stroke: rgba(PAL.ink, 0.5), lw: 3 });
+    for (const [i, sx] of [-0.36, 0.36].entries()) poly(starShape(sx * w, -h * 0.72, h * 0.11, 0.45, 5, -Math.PI / 2 + i * 0.3), { fill: i ? '#FFFFFF' : LIME, lw: 3.5 });
+    letter('TOYS', 4, -h * 0.42, h * 0.28, LIME, { lw: 6, rot: -0.04 });
     // the lid, hinged at the back left corner; the dark wedge under it, and whatever is in there
     const hx = -w / 2 - 6, hy = -h, L = w + 12;
     const ex = hx + Math.cos(lid) * L, ey = hy - Math.sin(lid) * L;
-    if (lid > 0.001) {
-      poly([[hx + 8, hy], [w / 2 - 4, hy], [ex, ey]], { fill: '#05030A', stroke: null });
+    if (lid > 0.001 && lid < 0.7) {
+      const wl = lid;
+      poly([[hx + 8, hy], [w / 2 - 4, hy], [hx + Math.cos(wl) * L, hy - Math.sin(wl) * L]], { fill: '#05030A', stroke: null });
       if (o.peek > 0) {
         const gx = w / 2 - 70, gy = hy - Math.sin(lid) * (gx - hx) * 0.55;
         for (const sx of [-20, 20]) rrect(gx + sx - 16, gy - 7, 32, 14, 6, { fill: '#000000', stroke: PINK, lw: 3, alpha: o.peek });
@@ -241,8 +242,8 @@
       }
     }
     ctx.save(); ctx.translate(hx, hy); ctx.rotate(-lid);
-    rrect(0, -26, L, 30, 10, { fill: '#2A2138', lw: 6 });
-    stroke([[16, -12], [L - 16, -12]], PINK, 5, { ink: null });
+    rrect(0, -30, L, 34, 10, { fill: '#E02A8C', lw: 6 });
+    stroke([[16, -14], [L - 16, -14]], '#FF6BC0', 6, { ink: null });
     ctx.restore();
     ctx.restore();
   }

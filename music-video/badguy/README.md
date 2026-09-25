@@ -1,5 +1,7 @@
 # 누가 진짜 나쁜 녀석? · "bad guy" 팬 뮤직비디오
 
+▶ 완성본(무음): [`dist/nuga-jinjja-nappeun-nyeoseok-720p.mp4`](dist/nuga-jinjja-nappeun-nyeoseok-720p.mp4) (3:14, 720p)
+
 Billie Eilish **"bad guy"** 에 맞춰 보는 팬 뮤직비디오. **음악도 가사도 들어 있지 않은 무음 영상**이다.
 원곡은 저작권이 있어서 여기서 만들거나 넣지 않는다. 보는 사람이 갖고 있는 원곡을 같이 튼다.
 이야기와 그림은 전부 오리지널이다. 센 척하는 부장님과, 진짜 나쁜 녀석인 공룡 티셔츠 꼬마

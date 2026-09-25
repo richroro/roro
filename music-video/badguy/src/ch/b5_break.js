@@ -90,7 +90,7 @@
   /** The toy box. gy = floor, gap = how far the lid is lifted (px), eyes peek out of the gap. */
   function toyBox(cx, gy, w, h, o = {}) {
     const gap = o.gap || 0, t = o.t || 0;
-    const body = o.body || '#3A2F8F', band = o.band || cPink(t), deco = o.deco || cLime(t);
+    const body = o.body || '#FF3DA5', band = o.band || '#E02A8C', deco = o.deco || cLime(t);   // the pink TOYS box from b1-b4
     if (gap > 2) {
       rrect(cx - w / 2 + 14, gy - h - gap - 8, w - 28, gap + 16, 6, { fill: '#050307', stroke: null });
       if (o.eyes && gap > 16) peekEyes(cx + (o.eyesX || 0), gy - h - gap / 2 - 2, Math.min(1, gap / 50), o);
@@ -98,13 +98,13 @@
     rrect(cx - w / 2, gy - h, w, h, 18, { fill: body, lw: 6 });
     rrect(cx - w / 2 + 4, gy - h + 22, w - 8, 18, 2, { fill: band, stroke: null });
     rrect(cx - w / 2 + 4, gy - 44, w - 8, 18, 2, { fill: band, stroke: null });
-    letter('장난감', cx, gy - h * 0.5 + 8, Math.min(w * 0.16, h * 0.26), deco, { font: 'round', lw: 7, shadow: null });
+    letter('TOYS', cx, gy - h * 0.5 + 8, Math.min(w * 0.2, h * 0.3), deco, { lw: 6, rot: -0.04 });
     for (let i = 0; i < 4; i++) {
       const sx = cx + (i < 2 ? -1 : 1) * w * (0.36 + (i % 2) * 0.04), sy = gy - h * (i % 2 ? 0.3 : 0.66);
       poly(starShape(sx, sy, h * 0.07, 0.45), { fill: i % 2 ? deco : '#FFFFFF', lw: 3 });
     }
     ctx.save(); ctx.translate(cx, gy - h - gap); ctx.rotate(o.lidRot || 0);
-    rrect(-w / 2 - 16, -50, w + 32, 54, 16, { fill: o.lid || mix(body, '#FFFFFF', 0.12), lw: 6 });
+    rrect(-w / 2 - 16, -50, w + 32, 54, 16, { fill: o.lid || '#FF6BC0', lw: 6 });
     rrect(-34, -6, 68, 22, 6, { fill: PAL.gold, lw: 4 });
     ctx.restore();
   }
