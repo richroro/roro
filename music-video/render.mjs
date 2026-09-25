@@ -6,6 +6,9 @@
 //   node render.mjs --sheet=12,12.5,13 [--cols=3] [--cw=640] [--out=out/check/sheet.jpg]
 //   node render.mjs --stills=12,40.2 [--out=out/check/still]      full-size JPEGs
 //
+// --project=gajang renders another video that shares this kit (its own studio.html, song and
+// out/ folder); paths in --out are then relative to that project.
+//
 // Chromium: $CHROME, else the Playwright build in $PLAYWRIGHT_BROWSERS_PATH, else Playwright's
 // own lookup.
 
@@ -16,11 +19,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium } from 'playwright-core';
 import { ffmpegPath } from './tools/ffmpeg.mjs';
 
-const ROOT = dirname(fileURLToPath(import.meta.url));
+const HERE = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(process.argv.slice(2).map(a => {
   const m = /^--([^=]+)(?:=(.*))?$/.exec(a);
   return m ? [m[1], m[2] ?? true] : [a, true];
 }));
+const ROOT = typeof args.project === 'string' ? resolve(HERE, args.project) : HERE;
 const num = (k, d) => (args[k] === undefined || args[k] === true ? d : Number(args[k]));
 
 function chromePath() {
@@ -81,7 +85,7 @@ async function frames() {
 
 function encode() {
   const fps = num('fps', 30), crf = num('crf', 20);
-  const out = resolve(ROOT, typeof args.out === 'string' ? args.out : 'out/goding-life.mp4');
+  const out = resolve(ROOT, typeof args.out === 'string' ? args.out : args.project ? 'out/mv.mp4' : 'out/goding-life.mp4');
   mkdirSync(dirname(out), { recursive: true });
   execFileSync(ffmpegPath(), ['-y', '-loglevel', 'error', '-stats', '-framerate', String(fps),
     '-i', join(ROOT, 'out', 'frames', '%05d.jpg'), '-i', join(ROOT, 'assets', 'song.m4a'),

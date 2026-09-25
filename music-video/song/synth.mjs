@@ -1,6 +1,9 @@
 // Renders the song from score.mjs: no samples, no libraries, every sound is made here.
 //
-//   node song/synth.mjs            -> out/song.wav, assets/song.m4a, src/song.js
+//   node song/synth.mjs                          -> out/song.wav, assets/song.m4a, src/song.js
+//   node song/synth.mjs gajang/song/score.mjs    -> the same files under gajang/
+//
+// The outputs land in the project that owns the score (the folder above its song/).
 //
 // The voice is a small formant synthesiser that reads Hangul: each syllable is split into its
 // initial, vowel and final, the vowel picks the formants a sawtooth is filtered through, and the
@@ -11,10 +14,15 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import * as S from './score.mjs';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
 import { ffmpegPath } from '../tools/ffmpeg.mjs';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const scorePath = process.argv[2] ? resolve(process.argv[2]) : join(dirname(fileURLToPath(import.meta.url)), 'score.mjs');
+const S = await import(pathToFileURL(scorePath).href);
+const ROOT = join(dirname(scorePath), '..');
+// A score may colour the band: every field is optional.
+const SOUND = { voice: 1, pad: 1, arp: 1, lead: { gain: 0.16, duty: 0.5, cutoff: 4200 }, ...(S.SOUND || {}) };
 const SR = 44100;
 const N = Math.ceil(S.LENGTH * SR);
 const TAU = Math.PI * 2;
@@ -218,8 +226,8 @@ function padChord(t, dur, notes, cutoff, gain = 1) {
 function padBar(bar) {
   const sec = sectionAt(bar);
   const notes = voicing(chordAt(bar), 52, 69);
-  const cut = { intro: 900, verse1: 1300, verse2: 1300, bridge: 800 + (bar - 48) * 180, build: 2600, end: 3200 }[sec]
-    ?? (sec.startsWith('pre') ? 1800 : 2700);
+  const cut = SOUND.pad * ({ intro: 900, verse1: 1300, verse2: 1300, bridge: 800 + (bar - 48) * 180, build: 2600, end: 3200 }[sec]
+    ?? (sec.startsWith('pre') ? 1800 : 2700));
   const gain = sec === 'intro' && bar < 4 ? 0.35 + bar * 0.15 : sec === 'bridge' ? 1.25 : 1;
   padChord(T(bar), sec === 'end' ? S.BAR * 1.5 : S.BAR, notes, cut, gain);
 }
@@ -242,7 +250,7 @@ function arpBar(bar) {
   if ((sec === 'intro' && bar < 2) || sec === 'end' || (sec === 'bridge' && bar < 52)) return;
   const tones = voicing(chordAt(bar), 64, 76).sort((a, b) => a - b);
   const seq = [tones[0], tones[1], tones[2], tones[0] + 12, tones[2], tones[1]];
-  const loud = sec.startsWith('chorus') || sec === 'outro' ? 0.13 : sec === 'intro' ? 0.05 + bar * 0.012 : 0.085;
+  const loud = SOUND.arp * (sec.startsWith('chorus') || sec === 'outro' ? 0.13 : sec === 'intro' ? 0.05 + bar * 0.012 : 0.085);
   for (let s = 0; s < 16; s++) {
     if (bar === 57 && s >= 12) break;
     pluck(arp, T(bar, s / 4), seq[(bar * 16 + s) % seq.length], S.BEAT * 0.2, loud, 0.25, 3200, s % 2 ? 0.35 : -0.35);
@@ -250,7 +258,7 @@ function arpBar(bar) {
 }
 
 function leadLines() {
-  for (const r of S.RIFF.map(S.layRiff)) for (const n of r.notes) pluck(lead, n.t, n.midi, n.dur * 0.92, 0.16, 0.5, 4200);
+  for (const r of S.RIFF.map(S.layRiff)) for (const n of r.notes) pluck(lead, n.t, n.midi, n.dur * 0.92, SOUND.lead.gain, SOUND.lead.duty, SOUND.lead.cutoff);
   // In the choruses the tune is doubled an octave up, quietly, so the hook carries.
   for (const l of S.LINES.map(S.layLine)) {
     const sec = sectionAt(l.bar);
@@ -326,7 +334,7 @@ function consonantNoise(t, ini, vowelF) {
 function lerp3(a, b, k) { return [0, 1, 2].map(i => a[i] + (b[i] - a[i]) * k); }
 
 function sing(note, prev, next) {
-  const V = VOWEL[note.vowel];
+  const V = VOWEL[note.vowel].map(f => f * SOUND.voice);
   const start = note.t, end = note.t + note.dur;
   const legato = next && Math.abs(next.t - end) < 0.02;
   const vStart = start - (['n', 'm'].includes(note.ini) ? 0.045 : note.ini === 'r' ? 0.02 : 0);
@@ -336,7 +344,7 @@ function sing(note, prev, next) {
   const keys = [];
   if (note.ini === 'n' || note.ini === 'm') keys.push([vStart, CODA[note.ini], 0.45], [start + 0.01, CODA[note.ini], 0.5]);
   else if (note.ini === 'r') keys.push([vStart, CODA.l, 0.6]);
-  if (note.glide) keys.push([start, VOWEL[note.glide], 1], [start + Math.min(0.07, note.dur * 0.35), V, 1]);
+  if (note.glide) keys.push([start, VOWEL[note.glide].map(f => f * SOUND.voice), 1], [start + Math.min(0.07, note.dur * 0.35), V, 1]);
   else keys.push([start + (note.ini === 'r' ? 0.03 : 0), V, 1]);
   if (['n', 'm', 'ng', 'l'].includes(note.fin)) {
     const coda = Math.min(0.14, note.dur * 0.35);
@@ -427,6 +435,10 @@ function sfx() {
         break;
       case 'ticks':
         for (let s = 0; s < 28; s++) tone(fx, t + s * S.BEAT / 4, s % 2 ? 1700 : 2300, 0.03, 0.05 + s * 0.002, 120, s % 2 ? 0.4 : -0.4);
+        break;
+      case 'clink':
+        // two glasses: a bright, inharmonic ping, twice
+        for (const off of [0, 0.05]) for (const [r, g] of [[1, 1], [2.32, 0.6], [4.1, 0.35]]) tone(fx, t + off, 2350 * r, 0.9, 0.05 * g, 6);
         break;
       case 'stamp':
         tone(fx, t, 90, 0.4, 0.45, 14);
