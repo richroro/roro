@@ -613,202 +613,220 @@
     const shut = S.subway + 0.5;                      // 29.30, the doors thump shut
     const yank = S.subway + 1.1;                      // 29.90, the briefcase pops in
     const go = 30.0;
-    const scroll = t < go ? 0 : 0.5 * 520 * Math.pow(t - go, 2);
-    const sway = t < go ? 0 : Math.sin(beatOf(t) * Math.PI) * 0.06 * seg(t, go, go + 0.6);
-    const push = easeInOut(seg(t, 31.5, 33.2));
+    const scroll = t < go ? 0 : 0.5 * 700 * Math.pow(t - go, 2);
+    const moving = seg(t, go, go + 0.6);
+    const sway = Math.sin(beatOf(t) * Math.PI) * 0.06 * moving;
+    const push = easeInOut(seg(t, 31.4, 33.0));
     const [shx, shy] = shakeXY(t, shut, 14, 0.3);
-    fillScreen('#3A3E4E');
-    camBegin(lerp(960, 960, push) + shx + sway * 60, lerp(560, 470, push) + shy, lerp(1, 1.9, push));
-    // the station behind us is a wall; once we move, the tunnel
-    const station = 1 - seg(scroll, 1400, 2200);
-    fillRectW(-400, -300, 2800, 1700, mix('#20232E', '#C9CFD8', station));
-    if (station > 0) {
-      ctx.save(); ctx.globalAlpha = station;
-      for (let i = 0; i < 14; i++) {
-        const x = ((i * 300 - scroll) % 4200 + 4200) % 4200 - 600;
-        rrect(x, -300, 70, 1500, 0, { fill: '#B6BDC9', stroke: null });
-      }
-      ctx.restore();
-    }
-    // tunnel lights streak by
-    if (station < 1) for (let i = 0; i < 10; i++) {
-      const x = ((i * 420 - scroll * 1.2) % 4200 + 4200) % 4200 - 600;
-      rrect(x, 120, 180, 14, 7, { fill: '#FFE9A8', stroke: null, alpha: 1 - station });
-      rrect(x, 960, 180, 14, 7, { fill: '#FFE9A8', stroke: null, alpha: 1 - station });
-    }
+    const DX = 860;                                    // where he ends up: the left door's window
+    const gap = 440, pw = gap / 2 + 10, carY = 170, carH = 760, floorY = 930;
+    fillScreen('#2A2E3C');
+    camBegin(lerp(960, DX, push) + shx + sway * 80, lerp(560, 470, push) + shy, lerp(1.22, 2.35, push));
+    // behind the train: the station, then the dark tunnel
+    const station = 1 - seg(scroll, 1600, 2600);
+    fillRectW(-400, -300, 2800, 1700, mix('#1E2130', '#C9CFD8', station));
     // inside the car: light walls, straps, a crowd
-    const carX = -200, carW = 2320, carY = 190, carH = 720;
+    const carX = -300, carW = 2520;
     ctx.save(); ctx.beginPath(); ctx.rect(carX, carY, carW, carH); ctx.clip();
     fillRectW(carX, carY, carW, carH, '#EDE8DC');
     rrect(carX, carY + 20, carW, 26, 0, { fill: '#C9C2B2', stroke: null });
-    for (let i = 0; i < 16; i++) {
-      const sx = carX + 60 + i * 150, a = sway * 1.6;
-      stroke([[sx, carY + 34], [sx + Math.sin(a) * 60, carY + 94]], '#9AA3B5', 5, { ink: null });
-      ell(sx + Math.sin(a) * 70, carY + 110, 18, 22, { fill: null, lw: 6, stroke: '#F2F2F2' });
+    for (let i = 0; i < 18; i++) {
+      const sx = carX + 60 + i * 150, a = sway * 2;
+      stroke([[sx, carY + 34], [sx + Math.sin(a) * 60, carY + 90]], '#9AA3B5', 5, { ink: null });
+      ell(sx + Math.sin(a) * 66, carY + 106, 16, 20, { fill: null, lw: 6, stroke: '#F2F2F2' });
     }
-    // the crowd, swaying on the beat
+    // the crowd, swaying on the beat (each a little late)
     for (let row = 0; row < 2; row++) {
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 15; i++) {
         const x = carX + 40 + i * 170 + row * 85 + hash(i, row) * 30;
-        if (Math.abs(x - 960) < 130 && row === 1) continue;
-        const y = 610 + row * 60 + hash(i, row + 7) * 30;
+        if (Math.abs(x - 960) < 170 && row === 1) continue;
+        const y = 560 + row * 56 + hash(i, row + 7) * 24;
         const lag = hash(i, row + 3) * 0.3;
-        const r = Math.sin((beatOf(t) - lag) * Math.PI) * 0.07 * seg(t, go, go + 0.6);
-        commuter(x, y, 0.95 + row * 0.1, i + row * 14, { rot: r });
+        const r = Math.sin((beatOf(t) - lag) * Math.PI) * 0.08 * moving;
+        commuter(x, y, 0.95 + row * 0.1, i + row * 15, { rot: r });
       }
     }
-    // 아빠 in the door, squeezed
+    // 아빠 in the door; once the doors shut he is squashed against the glass
     const doorOpen = t < shut ? 1 - easeIn(seg(t, S.subway + 0.05, shut)) : 0;
     const squeeze = hitK(t, shut, 0.8);
-    const dr = Math.sin((beatOf(t) - 0.15) * Math.PI) * 0.11 * seg(t, go, go + 0.6);
-    const dadPress = push;
-    dad(960 + dr * 120, 915 + dadPress * 10, 1.05, t, {
-      rot: dr, sq: 0.08 * squeeze - 0.02, aL: 0.15, aR: 0.15, eL: 0, eR: 0,
-      eyes: t < shut ? 'wide' : t < go ? 'x' : (dadPress > 0.5 ? 'closed' : 'sleepy'),
-      mouth: t < shut ? 'o' : dadPress > 0.5 ? 'wavy' : 'flat', turn: dadPress * 0.1, blush: 0.4 + dadPress * 0.3, bags: 0.5,
+    const dr = Math.sin((beatOf(t) - 0.15) * Math.PI) * 0.1 * moving;
+    const dx = t < shut ? 960 : lerp(960, DX, easeOut(seg(t, shut - 0.1, shut + 0.25)));
+    const pressK = t < shut ? 0 : Math.max(0.5, push);
+    ctx.save();
+    ctx.translate(dx, 540); ctx.scale(1 + pressK * 0.08, 1 - pressK * 0.05); ctx.translate(-dx, -540);
+    dad(dx + dr * 90, floorY - 20, 1.08, t, {
+      rot: dr, sq: 0.08 * squeeze - 0.02, aL: 0.15, aR: 0.15, eL: 0, eR: 0, shadow: false,
+      eyes: t < shut ? 'wide' : t < go + 0.6 ? 'x' : (push > 0.5 ? 'closed' : 'sleepy'),
+      mouth: t < shut ? 'o' : push > 0.5 ? 'wavy' : 'flat', blush: 0.45 + push * 0.35, bags: 0.5,
       emote: t > go && t < 31.2 ? 'sweat' : null, emoteK: seg(t, go, go + 0.2),
     });
     ctx.restore();
-    // the car shell with window holes
+    ctx.restore();
+    // the car shell with window holes and the doorway
+    const wins = [[-250, 260, 520, 320], [1470, 260, 520, 320]];
     ctx.save();
-    ctx.beginPath(); ctx.rect(-400, carY - 60, 2800, carH + 200);
-    const wins = [[-110, 300, 460, 250], [1380, 300, 460, 250], [1990, 300, 400, 250]];
-    for (const [x, y, w, h] of wins) ctx.roundRect(x, y, w, h, 20);
-    // the doorway
-    const gap = 330;
-    ctx.rect(960 - gap / 2, 210, gap, 700);
+    ctx.beginPath(); ctx.rect(-400, carY - 60, 2800, carH + 90);
+    for (const [x, y, w, h] of wins) ctx.roundRect(x, y, w, h, 24);
+    ctx.rect(960 - gap / 2, 200, gap, floorY - 200);
     ctx.fillStyle = '#D5DAE2'; ctx.fill('evenodd');
     ctx.lineWidth = 6; ctx.strokeStyle = PAL.ink; ctx.stroke();
     ctx.restore();
-    // green line-2 stripe
-    rrect(-400, 580, 960 - gap / 2 + 400, 30, 0, { fill: '#3CB44A', stroke: null });
-    rrect(960 + gap / 2, 580, 1600, 30, 0, { fill: '#3CB44A', stroke: null });
-    for (const [x, y, w, h] of wins) rrect(x, y, w, h, 20, { fill: 'rgba(200,225,240,0.22)', lw: 6 });
-    // door panels: slide in from the sides; windows in them
-    const pw = gap / 2 + 10;
+    rrect(-400, 640, 960 - gap / 2 + 400, 34, 0, { fill: '#3CB44A', stroke: null });
+    rrect(960 + gap / 2, 640, 1600, 34, 0, { fill: '#3CB44A', stroke: null });
+    for (const [x, y, w, h] of wins) {
+      rrect(x, y, w, h, 24, { fill: 'rgba(200,225,240,0.2)', lw: 6 });
+      stroke([[x + 40, y + h - 40], [x + 140, y + 40]], '#FFFFFF', 12, { ink: null, alpha: 0.3 });
+    }
+    // door panels slide in from the sides; each has a big window
     for (const side of [-1, 1]) {
-      const px = side < 0 ? 960 - gap / 2 - pw * doorOpen - 10 : 960 + pw * doorOpen - 0;
-      const bump = hitK(t, shut, 0.25) * 10 * side;
-      const x0 = side < 0 ? px + bump : px + bump;
-      ctx.save(); ctx.beginPath(); ctx.rect(960 - gap / 2 - 12, 150, gap + 24, 800); ctx.clip();
-      ctx.beginPath(); ctx.rect(x0, 210, pw, 700); ctx.roundRect(x0 + 26, 280, pw - 52, 290, 18);
+      const bump = hitK(t, shut, 0.25) * 12 * side;
+      const x0 = (side < 0 ? 960 - gap / 2 - (pw - 10) * doorOpen - 10 : 960 + (pw - 10) * doorOpen) + bump;
+      ctx.save(); ctx.beginPath(); ctx.rect(960 - gap / 2 - 12, 150, gap + 24, 820); ctx.clip();
+      ctx.beginPath(); ctx.rect(x0, 200, pw, floorY - 200); ctx.roundRect(x0 + 22, 250, pw - 44, 390, 20);
       ctx.fillStyle = '#C9CFD8'; ctx.fill('evenodd'); ctx.lineWidth = 6; ctx.strokeStyle = PAL.ink; ctx.stroke();
-      rrect(x0 + 26, 280, pw - 52, 290, 18, { fill: 'rgba(200,225,240,0.25)', lw: 5 });
-      rrect(x0, 580, pw, 30, 0, { fill: '#3CB44A', stroke: null });
+      rrect(x0 + 22, 250, pw - 44, 390, 20, { fill: 'rgba(200,225,240,0.18)', lw: 5 });
+      rrect(x0, 660, pw, 34, 0, { fill: '#3CB44A', stroke: null });
       ctx.restore();
     }
-    // his face against the door glass: a squashed cheek print and fog
-    if (dadPress > 0.2) {
-      const a = seg(dadPress, 0.2, 0.8);
-      ell(960 + dr * 120, 560, 90 * a, 60 * a, { fill: 'rgba(255,255,255,0.35)', stroke: null });
-      ell(960 + dr * 120 + 10, 600, 30 * a, 16 * a, { fill: 'rgba(255,255,255,0.6)', stroke: null });
+    // his cheek against the door glass: a pale print, a little fog from his breath
+    if (pressK > 0) {
+      const fx = dx + dr * 90, fy = floorY - 20 - 1.08 * 330;
+      rrect(fx + 40, fy - 60, 50 * pressK, 110 * pressK, 24, { fill: 'rgba(255,255,255,0.28)', stroke: null });
+      for (let i = 0; i < 3; i++) stroke([[fx + 104, fy - 40 + i * 34], [fx + 124, fy - 46 + i * 34]], '#FFFFFF', 5, { ink: null, alpha: pressK * 0.8 });
+      ell(fx - 10, fy + 90, 40 * pressK, 18 * pressK, { fill: 'rgba(255,255,255,0.45)', stroke: null });
+      stroke([[fx - 60, fy - 80], [fx - 30, fy - 110]], '#FFFFFF', 8, { ink: null, alpha: 0.5 * pressK });
+    }
+    // light sweeping over the car in the tunnel
+    if (station < 1) {
+      ctx.save(); ctx.globalAlpha = 0.18 * (1 - station);
+      for (let i = 0; i < 3; i++) {
+        const x = ((i * 900 - scroll * 1.1) % 2700 + 2700) % 2700 - 500;
+        ctx.fillStyle = '#FFF0C0'; ctx.beginPath(); ctx.moveTo(x, carY); ctx.lineTo(x + 160, carY); ctx.lineTo(x + 60, floorY); ctx.lineTo(x - 100, floorY); ctx.fill();
+      }
+      ctx.restore();
     }
     // the briefcase caught in the door, then yanked in
     if (t >= shut - 0.05 && t < yank) {
       const wig = Math.sin(t * 40) * 0.08;
-      briefcase(960, 690, 1.1, wig + 0.05);
+      briefcase(960, 720, 1.2, wig + 0.05);
     }
-    if (t >= yank) sfx('쏙', 1080, 640, 70, '#FFFFFF', t - yank, { life: 0.6 });
-    // platform edge, only while in the station
-    if (station > 0) {
-      rrect(-400, 910, 2800, 200, 0, { fill: '#9AA1AE', stroke: null, alpha: station });
-      rrect(-400, 910, 2800, 22, 0, { fill: '#FFD45C', stroke: null, alpha: station });
+    // the platform: floor, edge and pillars going by
+    rrect(-400, floorY, 2800, 300, 0, { fill: mix('#15171F', '#9AA1AE', station), stroke: null });
+    if (station > 0) rrect(-400, floorY, 2800, 22, 0, { fill: '#FFD45C', stroke: null, alpha: station });
+    else for (let i = 0; i < 8; i++) {
+      const x = ((i * 400 - scroll * 1.2) % 3200 + 3200) % 3200 - 400;
+      rrect(x, floorY + 60, 160, 12, 6, { fill: '#FFE9A8', stroke: null, alpha: 0.7 });
+    }
+    if (station > 0 && scroll > 0) for (let i = 0; i < 3; i++) {
+      const x = ((1500 + i * 1100 - scroll * 1.5) % 3300 + 3300) % 3300 - 600;
+      rrect(x, -300, 110, 1600, 0, { fill: '#8C94A4', lw: 6, alpha: station });
     }
     camEnd();
-    // 딩동 on the door chime
-    sfx('딩동♪', 420, 170, 76, '#FFFFFF', t - S.subway, { life: 1.1, rot: -0.08 });
-    if (t >= shut) sfx('끼익', 1540, 170, 70, '#FFE08A', t - shut, { life: 0.7, rot: 0.08 });
+    streaks(t, 0.8 * seg(scroll, 300, 1200), '#FFFFFF', 7, -1);
+    // 딩동 on the door chime, and the thump
+    sfx('딩동♪', 380, 170, 80, '#FFFFFF', t - S.subway, { life: 1.1, rot: -0.08 });
+    if (t >= yank) sfx('쏙', 1150, 560, 80, '#FFFFFF', t - yank, { life: 0.6 });
   }
 
   // ---- 33.60 up the exit stairs into the sun -------------------------------------------------------
 
   function exitStairs(t, lt, dur) {
     const top = 36.0;                   // he reaches the street
-    const pat = [36.6, 37.1];           // smoothing his hair
+    const pat = [36.5, 37.0];           // smoothing his hair
     const fist = sylT(14, 10);          // 37.50 "야"
     fillScreen('#EAF0F4');
-    camDrift(t, 960, 520, 1.0 + easeInOut(seg(t, 34.5, 38.4)) * 0.18, 0, 0.6);
+    camDrift(t, 960, 560, 1.04 + easeInOut(seg(t, 34.0, 38.4)) * 0.14, 0, 0.6);
     // a cold pale morning: sky, soft sun, grey-blue towers
     fillRectW(-200, -200, 2400, 1000, lgrad(0, -100, 0, 760, [[0, '#BFD4E6'], [0.7, '#EEE6DA'], [1, '#FFE8C8']]));
-    sun(1480, 260, 90, '#FFF0C0');
+    sun(1560, 200, 90, '#FFF0C0');
     for (let i = 0; i < 10; i++) {
-      const x = -100 + i * 220, bw = 180, bh = 260 + hash(i, 21) * 280;
-      rrect(x, 760 - bh, bw, bh + 10, 6, { fill: mix('#A9B6C8', '#D8DEE6', hash(i, 22)), stroke: null });
-      for (let r = 0; r < Math.floor(bh / 60); r++) rrect(x + 20, 760 - bh + 26 + r * 60, bw - 40, 18, 3, { fill: '#C8D6E6', stroke: null });
+      const x = -100 + i * 220, bw = 180, bh = 300 + hash(i, 21) * 300;
+      rrect(x, 720 - bh, bw, bh + 10, 6, { fill: mix('#A9B6C8', '#D8DEE6', hash(i, 22)), stroke: null });
+      for (let r = 0; r < Math.floor(bh / 60); r++) rrect(x + 20, 720 - bh + 26 + r * 60, bw - 40, 18, 3, { fill: '#C8D6E6', stroke: null });
+    }
+    // pavement
+    const pavement = () => {
+      rrect(-200, 720, 2400, 600, 0, { fill: '#CFC9C2', stroke: null });
+      for (let i = 0; i < 16; i++) stroke([[i * 160 - 300, 720], [i * 300 - 1300, 1150]], '#BDB6AF', 3, { ink: null });
+    };
+    pavement();
+    // passers-by in the distance, off to work too
+    for (let i = 0; i < 6; i++) {
+      const px = ((i * 430 + lt * (i % 2 ? 110 : -110)) % 2400 + 2400) % 2400 - 200;
+      const py = 740, b = Math.abs(Math.sin(lt * 6 + i)) * 4;
+      rrect(px - 16, py - 120 - b, 32, 80, 12, { fill: '#8A93A6', stroke: null, alpha: 0.6 });
+      circle(px, py - 138 - b, 17, { fill: '#8A93A6', stroke: null, alpha: 0.6 });
     }
     // light shafts
-    ctx.save(); ctx.globalAlpha = 0.18;
+    ctx.save(); ctx.globalAlpha = 0.16;
     for (let i = 0; i < 4; i++) {
-      ctx.beginPath(); ctx.moveTo(1480, 260);
-      ctx.lineTo(1480 - 1300 - i * 120, 1100); ctx.lineTo(1480 - 1000 - i * 120, 1100); ctx.fillStyle = '#FFF4D8'; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(1560, 200);
+      ctx.lineTo(1560 - 1400 - i * 140, 1150); ctx.lineTo(1560 - 1080 - i * 140, 1150); ctx.fillStyle = '#FFF4D8'; ctx.fill();
     }
     ctx.restore();
-    // pavement
-    rrect(-200, 760, 2400, 500, 0, { fill: '#C9C4BE', stroke: null });
-    for (let i = 0; i < 14; i++) stroke([[i * 170 - 200, 760], [i * 260 - 800, 1100]], '#B8B2AC', 3, { ink: null });
-    // passers-by in the distance
-    for (let i = 0; i < 5; i++) {
-      const px = ((i * 430 + lt * (i % 2 ? 90 : -90)) % 2400 + 2400) % 2400 - 200;
-      const py = 770;
-      rrect(px - 16, py - 120, 32, 80, 12, { fill: '#8A93A6', stroke: null, alpha: 0.7 });
-      circle(px, py - 136, 16, { fill: '#8A93A6', stroke: null, alpha: 0.7 });
+    // the exit: a hole with stairs going down, under a glass canopy
+    const ox = 960, ow = 680, lip = 830, roof = 300;
+    ctx.save(); ctx.beginPath(); ctx.rect(ox - ow / 2, roof, ow, lip - roof); ctx.clip();
+    fillRectW(ox - ow / 2, roof, ow, lip - roof, lgrad(0, roof, 0, lip, [[0, '#2A2E40'], [0.6, '#3A4058'], [1, '#5A6078']]));
+    // steps and handrails receding down into the dark
+    for (let i = 0; i < 9; i++) {
+      const k = i / 9, y = lip - 30 - Math.pow(k, 0.8) * 330, half = ow / 2 - 30 - k * 180;
+      stroke([[ox - half, y], [ox + half, y]], rgba('#E8ECF4', 0.5 - k * 0.45), 7, { ink: null });
     }
-    // the exit: the hole, the stairs going down, the glass canopy
-    const ox = 960, ow = 520, lip = 800;
-    fillRectW(ox - ow / 2, 470, ow, lip - 470, lgrad(0, 470, 0, lip, [[0, '#4A5068'], [1, '#2A2E40']]));
-    for (let i = 0; i < 7; i++) {
-      const y = lip - 20 - i * 40;
-      stroke([[ox - ow / 2 + 20 + i * 8, y], [ox + ow / 2 - 20 - i * 8, y]], rgba('#FFFFFF', 0.18 - i * 0.02), 6, { ink: null });
+    for (const side of [-1, 1]) stroke([[ox + side * (ow / 2 - 26), lip - 120], [ox + side * 150, lip - 390]], '#9AA3B5', 9, { ink: null, alpha: 0.8 });
+    glow(ox, lip - 380, 260, '#E8F4FF', 0.2);
+    ctx.restore();
+    // the canopy: posts, glass sides, roof and sign
+    for (const side of [-1, 1]) {
+      const px = ox + side * (ow / 2 + 16);
+      rrect(px - (side < 0 ? 40 : 0), roof + 40, 40, lip - roof - 40, 0, { fill: 'rgba(190,220,240,0.35)', stroke: null });
+      stroke([[px, lip], [px, roof + 20]], '#6A7288', 16, { olw: 7 });
     }
+    rrect(ox - ow / 2 - 70, roof - 60, ow + 140, 80, 14, { fill: '#5A6380', lw: 6 });
+    circle(ox - ow / 2 + 10, roof - 20, 40, { fill: '#FFD45C', lw: 5 });
+    letter('3', ox - ow / 2 + 10, roof - 17, 52, PAL.ink, { lw: 0, shadow: null });
+    letter('지하철 출구', ox + 40, roof - 18, 50, '#FFFFFF', { lw: 0, shadow: null });
     // 아빠 comes up a step on every beat
-    const steps = Math.min(beatOf(t) - beatOf(S.exit), beatOf(top) - beatOf(S.exit));
-    const stepK = steps - Math.floor(steps);
-    const climb = (Math.floor(steps) + easeOut(clamp(stepK * 2.5))) / (beatOf(top) - beatOf(S.exit));
-    const fy = t < top ? lerp(1180, lip, climb) : lerp(lip, 870, easeOut(seg(t, top, top + 1.2)));
-    const s = t < top ? lerp(0.82, 0.95, climb) : lerp(0.95, 1.05, easeOut(seg(t, top, top + 1.2)));
-    const sunK = seg(fy, 1000, lip);
-    const smooth1 = seg(t, pat[0], pat[0] + 0.3) - seg(t, pat[1], pat[1] + 0.3);
-    const fk = seg(t, fist - 0.1, fist + 0.05);
+    const nb = beatOf(top) - beatOf(S.exit);
+    const steps = Math.min(beatOf(t) - beatOf(S.exit), nb);
+    const climb = (Math.floor(steps) + easeOut(clamp((steps - Math.floor(steps)) * 2.5))) / nb;
+    const out = easeOut(seg(t, top, top + 1.3));
+    const fy = t < top ? lerp(1280, lip, climb) : lerp(lip, 915, out);
+    const s = t < top ? lerp(0.9, 1.05, climb) : lerp(1.05, 1.18, out);
+    const sunK = seg(fy, 1080, lip);
+    const smooth1 = seg(t, pat[0], pat[0] + 0.25) - seg(t, pat[1], pat[1] + 0.25);
+    const fk = seg(t, fist - 0.12, fist + 0.03);
     const pump = t > fist ? Math.sin((t - fist) * 16) * Math.exp(-(t - fist) * 4) : 0;
     const o = {
-      aL: 0.2, aR: 0.2, eL: 0.2, eR: 0.2,
+      aL: 0.2, aR: 0.2, eL: 0.2, eR: 0.2, shadow: fy >= lip,
       holdL: (hx, hy) => briefcase(hx, hy - 6, 0.55),
-      eyes: sunK < 0.6 ? 'sleepy' : t < top + 0.4 ? 'closed' : (t > fist ? 'determined' : 'happy'),
-      mouth: t > fist ? 'grin' : sunK > 0.6 ? 'smile' : 'flat', bags: 0.5, blush: 0.25,
-      walk: t < top ? steps * 0.5 : t < top + 1.2 ? (t - top) * 1.3 : undefined,
+      eyes: sunK < 0.5 ? 'sleepy' : t < top + 0.35 ? 'closed' : (t > fist ? 'determined' : 'happy'),
+      mouth: t > fist ? 'grin' : sunK > 0.5 ? 'smile' : 'flat', bags: 0.5, blush: 0.25,
+      walk: t < top ? steps * 0.5 : t < top + 1.3 ? (t - top) * 1.2 : undefined,
     };
-    if (smooth1 > 0) { o.aR = 2.8; o.eR = 1.0 + Math.sin(t * 16) * 0.2 * smooth1; o.headRot = -0.05; }
+    if (smooth1 > 0) { o.aR = 2.8; o.eR = 1.0 + Math.sin(t * 16) * 0.25 * smooth1; }
     if (fk > 0) { o.aR = lerp(0.2, 0.35, fk); o.eR = lerp(0.2, -2.7, fk) + pump * 0.3; o.dy = pump * 8; }
-    if (fy < lip + 1) {
-      dad(ox, fy, s, t, o);
+    dad(ox, fy, s, t, o);
+    if (fy > lip) {
       // the pavement in front of the hole hides his legs
-      rrect(ox - ow / 2 - 40, lip, ow + 80, 460, 0, { fill: '#C9C4BE', stroke: null });
-      stroke([[ox - ow / 2, lip], [ox + ow / 2, lip]], '#8A8580', 8, { ink: null });
-    } else {
-      stroke([[ox - ow / 2, lip], [ox + ow / 2, lip]], '#8A8580', 8, { ink: null });
-      dad(ox, fy, s, t, o);
+      ctx.save(); ctx.beginPath(); ctx.rect(ox - ow / 2 - 60, lip, ow + 120, 500); ctx.clip(); pavement(); ctx.restore();
     }
+    stroke([[ox - ow / 2, lip], [ox + ow / 2, lip]], '#8A8580', 8, { ink: null });
     // his hair, messed up by the train, until he smooths it
-    const tuft = 1 - seg(t, pat[0], pat[1] + 0.2);
+    const tuft = 1 - seg(t, pat[0], pat[1] + 0.15);
     if (tuft > 0) {
       const hx = ox, hy = fy - (455 + (o.dy || 0)) * s;
       for (let i = 0; i < 3; i++) {
         const a = -0.6 + i * 0.6 + Math.sin(t * 6 + i) * 0.1;
-        stroke([[hx - 20 + i * 20, hy + 10], [hx - 20 + i * 20 + Math.sin(a) * 50 * tuft, hy + 10 - Math.cos(a) * 60 * tuft]], '#2B2733', 12, { olw: 8 });
+        stroke([[hx - 24 + i * 24, hy + 12], [hx - 24 + i * 24 + Math.sin(a) * 52 * tuft * s, hy + 12 - Math.cos(a) * 62 * tuft * s]], '#2B2733', 12, { olw: 8 });
       }
     }
-    // the canopy over the exit
-    stroke([[ox - ow / 2 - 20, lip], [ox - ow / 2 - 20, 420]], '#6A7288', 14, { olw: 7 });
-    stroke([[ox + ow / 2 + 20, lip], [ox + ow / 2 + 20, 420]], '#6A7288', 14, { olw: 7 });
-    rrect(ox - ow / 2 - 30, 470, 30, lip - 470, 0, { fill: 'rgba(190,220,240,0.35)', stroke: null });
-    rrect(ox + ow / 2, 470, 30, lip - 470, 0, { fill: 'rgba(190,220,240,0.35)', stroke: null });
-    rrect(ox - ow / 2 - 60, 390, ow + 120, 60, 12, { fill: '#5A6380', lw: 6 });
-    circle(ox - ow / 2 + 10, 420, 34, { fill: '#FFD45C', lw: 5 });
-    letter('3', ox - ow / 2 + 10, 422, 44, PAL.ink, { lw: 0, shadow: null });
-    letter('지하철 출구', ox + 40, 422, 42, '#FFFFFF', { lw: 0, shadow: null });
     // the sun touching him as he comes up
-    if (sunK > 0) glow(ox + 40, fy - 330 * s, 360, '#FFE6A8', 0.35 * sunK);
-    if (t > fist) { sparkle(ox + 150, fy - 380 * s, 26 * hitK(t, fist, 1.2) + 4, '#FFFFFF', t); sparkle(ox + 190, fy - 300 * s, 14 * hitK(t, fist, 1.0), PAL.gold, -t); }
+    if (sunK > 0) glow(ox + 60, fy - 340 * s, 380, '#FFE6A8', 0.35 * sunK);
+    if (t > fist) {
+      sparkle(ox + 170, fy - 400 * s, 30 * hitK(t, fist, 1.2) + 4, '#FFFFFF', t);
+      sparkle(ox + 220, fy - 310 * s, 16 * hitK(t, fist, 1.0), PAL.gold, -t);
+    }
     camEnd();
   }
 
