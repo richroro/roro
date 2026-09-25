@@ -7,7 +7,7 @@
 
 | 경로 | 내용 |
 |---|---|
-| [`song/score.mjs`](song/score.mjs) | 악보: 100 BPM, D 장조, 마지막 후렴에서 한 음 위로. 가사·멜로디·코드·효과음 큐. 목소리 없이 피아노가 멜로디를 치고 가사는 자막으로 ([`../song/ballad.mjs`](../song/ballad.mjs)) |
+| [`song/score.mjs`](song/score.mjs) | 악보: 100 BPM, D 단조, 마지막 후렴에서 한 음 위로. 가사·멜로디·코드·효과음 큐. D 단조 다크 팝: 808 서브 베이스, 핑거 스냅, 트랩 하이햇, 먹먹한 피아노, 숨소리. 목소리 없이 숨결 섞인 신스가 멜로디를 부르고 가사는 자막으로 ([`../song/darkpop.mjs`](../song/darkpop.mjs)) |
 | [`STORYBOARD.md`](STORYBOARD.md) | 샷 단위 계획 |
 | [`src/family.js`](src/family.js) | 아빠·엄마·막내·부장님·동료·스무 살의 아빠, 서류가방·소주·기타 |
 | [`src/ch/`](src/ch/) | 여섯 챕터: 새벽 · 회사 · 숫자들 · 막차 · 현관 · 가족 |
@@ -18,7 +18,8 @@
 `music-video/` 에서:
 
 ```bash
-node song/ballad.mjs gajang/song/score.mjs         # 곡(피아노 발라드) -> gajang/assets/song.m4a, gajang/src/song.js
+node song/darkpop.mjs gajang/song/score.mjs        # 곡(다크 팝) -> gajang/assets/song.m4a, gajang/src/song.js
+node song/ballad.mjs gajang/song/score.mjs         # (같은 악보를 피아노 발라드로)
 node render.mjs --project=gajang --frames          # 프레임 -> gajang/out/frames
 node render.mjs --project=gajang --encode          # gajang/out/mv.mp4
 ```

@@ -241,7 +241,7 @@
     filmFx(t, 1);
     // the projector starts, then the memory burns out warm
     const fin = seg(t, 115.2, 115.75);
-    fillScreen('#140C06', (1 - fin) * (0.75 + 0.25 * hash(Math.floor(t * 24), 5)));
+    fillScreen('#4A3420', (1 - fin) * (0.55 + 0.25 * hash(Math.floor(t * 24), 5)));
     fillScreen('#FFF1D8', easeIn(seg(t, 119.55, 120.0)) * 0.85);
   }
 
@@ -368,7 +368,12 @@
       const th = open * 1.35, zz = 1 / (1 + 0.9 * Math.sin(th));
       const fx = VPX + (DX0 + (DX1 - DX0) * Math.cos(th) - VPX) * zz;
       const top = VPY + (DY0 - VPY) * zz, bot = VPY + (DY1 - VPY) * zz;
-      poly([[DX0, DY0], [fx, top], [fx, bot], [DX0, DY1]], { fill: '#5A6278', lw: 5 });
+      poly([[DX0, DY0], [fx, top], [fx, bot], [DX0, DY1]], { fill: '#5A4A6E', lw: 5 });
+      if (open < 0.3) {
+        const px = lerp(DX0, fx, 0.5), py = lerp(DY0, top, 0.5) + 110, pw = 120 * Math.cos(th);
+        rrect(px - pw / 2, py - 24, pw, 48, 6, { fill: '#D9CFB8', lw: 4 });
+        letter('1504', px, py, 36, PAL.ink, { lw: 0, shadow: null });
+      }
       const hx = lerp(DX0, fx, 0.86), hy = lerp(560, VPY + (560 - VPY) * zz, 0.86);
       rrect(hx - 14, hy - 60, 28 * Math.max(0.3, Math.cos(th)), 96, 8, { fill: '#2A2A34', lw: 3 });
       if (open <= 0) {

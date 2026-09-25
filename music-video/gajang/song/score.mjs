@@ -3,7 +3,8 @@
 // A forty-something father's day, from the 5:30 alarm to the last train home, and the one word
 // at the door that makes it worth it. Same machinery as the high-school song (../../song/score.mjs):
 // notes are "syllable:pitch:beats", "_" is a rest, and validate() checks every line. It is
-// arranged as a piano ballad by ../../song/ballad.mjs.
+// arranged as dark, minimal pop by ../../song/darkpop.mjs (../../song/ballad.mjs also plays it,
+// as a piano ballad).
 
 export const BPM = 100;
 export const BEAT = 60 / BPM;
@@ -29,46 +30,47 @@ export const SECTIONS = [
 export const END_BAR = 70;
 export const LENGTH = END_BAR * BAR + 3.6;
 
-// D major, the pop-ballad walk down (D A Bm F#m G D Em A) under the verses.
-const VERSE = ['D', 'A', 'Bm', 'F#m', 'G', 'D', 'Em', 'A'];
-const PRE = ['Em', 'F#m', 'G', 'A'];
-const CHORUS = ['D', 'A', 'Bm', 'F#m', 'G', 'D', 'G', 'A'];
+// D minor: the old D-major walk-down moved into minor, with A kept major where it pulls home.
+const VERSE = ['Dm', 'Am', 'A#', 'F', 'Gm', 'Dm', 'Gm', 'A'];
+const PRE = ['Gm', 'F', 'Gm', 'A'];
+const CHORUS = ['Dm', 'Am', 'A#', 'F', 'Gm', 'Dm', 'Gm', 'A'];
 
 export const CHORDS = [
-  'D', 'D', 'D', 'D', 'D', 'A', 'Bm', 'G',    // intro     0-7
+  'Dm', 'Dm', 'Dm', 'Dm', 'Dm', 'Am', 'A#', 'Gm', // intro 0-7
   ...VERSE,                                    // verse 1   8-15
   ...PRE,                                      // pre 1     16-19
   ...CHORUS,                                   // chorus 1  20-27
   ...VERSE,                                    // verse 2   28-35
   ...PRE,                                      // pre 2     36-39
   ...CHORUS,                                   // chorus 2  40-47
-  'Bm', 'Bm', 'G', 'G', 'Em', 'Em', 'A', 'A',  // bridge    48-55
-  'G', 'B',                                    // build     56-57 (B is V of the new key)
+  'A#', 'A#', 'Gm', 'Gm', 'Gm', 'Gm', 'A', 'A', // bridge 48-55
+  'Gm', 'B',                                   // build     56-57 (B is V of the new key)
   ...CHORUS,                                   // chorus 3  58-65 (+2)
-  'G', 'A', 'D', 'A',                          // outro     66-69 (+2)
-  'D',                                         // the hit   70    (+2)
+  'Gm', 'A', 'Dm', 'A',                        // outro     66-69 (+2)
+  'Dm',                                        // the hit   70    (+2)
 ];
 
-// The tune is played, not sung: a piano carries it, and the words run underneath as subtitles.
-// Verses sit low and talk; the chorus leaps up a sixth on "오늘도" and settles back down.
+// The tune is played, not sung, and the words run underneath as subtitles. Verses sit low and
+// talk; the chorus leaps up a sixth on "오늘도" and settles back down. D minor, with C# where
+// the A-major chord pulls home.
 const V = [
-  '_:.5 A4:.5 A4:.5 A4:.5 B4:.5 A4:.5 F#4:.5 E4:.5 E4:1 F#4:.5 A4:.5 D5:.5 C#5:.5 A4:1',
-  '_:.5 B4:.5 B4:.5 A4:.5 B4:.5 D5:.5 C#5:.5 B4:.5 A4:1 F#4:.5 A4:.5 A4:.5 E4:.5 F#4:1',
-  '_:.5 B4:.5 B4:.5 B4:.5 C#5:.5 D5:.5 B4:.5 G4:.5 A4:1 F#4:.5 A4:.5 D5:1 A4:1',
-  '_:.5 G4:.5 G4:.5 A4:.5 B4:1 A4:.5 G4:.5 E4:.5 E4:.5 A4:1 G4:.5 E4:1.5',
+  '_:.5 A4:.5 A4:.5 A4:.5 Bb4:.5 A4:.5 F4:.5 E4:.5 E4:1 F4:.5 A4:.5 D5:.5 C5:.5 A4:1',
+  '_:.5 Bb4:.5 Bb4:.5 A4:.5 Bb4:.5 D5:.5 C5:.5 Bb4:.5 A4:1 F4:.5 A4:.5 A4:.5 E4:.5 F4:1',
+  '_:.5 Bb4:.5 Bb4:.5 Bb4:.5 C5:.5 D5:.5 Bb4:.5 G4:.5 A4:1 F4:.5 A4:.5 D5:1 A4:1',
+  '_:.5 G4:.5 G4:.5 A4:.5 Bb4:1 A4:.5 G4:.5 E4:.5 E4:.5 A4:1 G4:.5 E4:1.5',
 ];
 const PRE_TUNE = [
-  'G4:.5 G4:.5 G4:.5 A4:.5 B4:1 A4:.5 G4:.5 A4:1.5 A4:.5 B4:.5 C#5:.5 A4:1',
-  'B4:1 A4:.5 B4:1.5 D5:1 A4:1 C#5:1 E5:2',
+  'G4:.5 G4:.5 G4:.5 A4:.5 Bb4:1 A4:.5 G4:.5 A4:1.5 A4:.5 Bb4:.5 C5:.5 A4:1',
+  'Bb4:1 A4:.5 Bb4:1.5 D5:1 A4:1 C#5:1 E5:2',
 ];
-const HOOK = 'A4:.5 D5:.5 F#5:1 E5:.5 D5:.5 D5:1';          // 오늘도 수고했 — the 어 lands on the bar
+const HOOK = 'A4:.5 D5:.5 F5:1 E5:.5 D5:.5 D5:1';          // 오늘도 수고했 — the 어 lands on the bar
 const CH = [
-  `${HOOK} E5:1 C#5:.5 C#5:.5 B4:.5 A4:.5 B4:.5 A4:.5`,
-  'B4:.5 B4:.5 D5:1 D5:.5 C#5:.5 B4:.5 C#5:.5 C#5:1 A4:.5 B4:.5 C#5:.5 A4:1.5',
-  'B4:.5 D5:.5 G5:1 F#5:.5 E5:.5 D5:1 F#5:1 E5:.5 D5:.5 A4:1 B4:.5 A4:.5',
-  'B4:.5 B4:.5 D5:1 D5:.5 E5:.5 D5:1 E5:1 C#5:1 A4:2',
+  `${HOOK} E5:1 C5:.5 C5:.5 Bb4:.5 A4:.5 Bb4:.5 A4:.5`,
+  'Bb4:.5 Bb4:.5 D5:1 D5:.5 C5:.5 Bb4:.5 C5:.5 C5:1 A4:.5 Bb4:.5 C5:.5 A4:1.5',
+  'Bb4:.5 D5:.5 G5:1 F5:.5 E5:.5 D5:1 F5:1 E5:.5 D5:.5 A4:1 Bb4:.5 A4:.5',
+  'Bb4:.5 Bb4:.5 D5:1 D5:.5 E5:.5 D5:1 E5:1 C#5:1 A4:2',
 ];
-const CH_LAST = 'B4:.5 B4:.5 D5:1 D5:.5 E5:.5 F#5:.5 G5:.5 E5:1 C#5:1 A4:2';
+const CH_LAST = 'Bb4:.5 Bb4:.5 D5:1 D5:.5 E5:.5 F5:.5 G5:.5 E5:1 C#5:1 A4:2';
 
 export const LINES = [
   [8, '알람보다 먼저 깨는 새벽 다섯 시', V[0]],
@@ -93,26 +95,26 @@ export const LINES = [
   [44, '오늘도 수고했어, 소주 한 잔에', CH[2]],
   [46, '내일도 다시 웃어 볼게', CH[3]],
 
-  [48, '기타 치던 스무 살은 어디 갔을까', '_:.5 F#4:.5 F#4:.5 F#4:.5 A4:.5 B4:.5 A4:.5 F#4:.5 D4:1 F#4:.5 A4:.5 B4:.5 A4:.5 F#4:1'],
-  [50, '거울 속엔 낯선 아저씨 하나', '_:.5 D4:.5 G4:.5 G4:.5 A4:.5 B4:1 A4:.5 G4:.5 G4:.5 B4:1 A4:.5 G4:1.5'],
-  [52, '그런데 문 열면 달려오는 아이', 'E4:.5 G4:.5 B4:1 B4:.5 A4:.5 B4:1 B4:.5 D5:.5 E5:.5 D5:.5 B4:.5 G4:1.5'],
+  [48, '기타 치던 스무 살은 어디 갔을까', '_:.5 F4:.5 F4:.5 F4:.5 A4:.5 Bb4:.5 A4:.5 F4:.5 D4:1 F4:.5 A4:.5 Bb4:.5 A4:.5 F4:1'],
+  [50, '거울 속엔 낯선 아저씨 하나', '_:.5 D4:.5 G4:.5 G4:.5 A4:.5 Bb4:1 A4:.5 G4:.5 G4:.5 Bb4:1 A4:.5 G4:1.5'],
+  [52, '그런데 문 열면 달려오는 아이', 'E4:.5 G4:.5 Bb4:1 Bb4:.5 A4:.5 Bb4:1 Bb4:.5 D5:.5 E5:.5 D5:.5 Bb4:.5 G4:1.5'],
   [54, '아빠! 그 한마디면 충분해', 'E5:1 C#5:1 A4:.5 B4:.5 C#5:.5 D5:.5 E5:1 E5:.5 D5:.5 C#5:2'],
 
   [58, '오늘도 수고했어, 마흔의 나에게', CH[0]],
   [60, '어깨 위 무게만큼 사랑하니까', CH[1]],
   [62, '오늘도 수고했어, 소주 한 잔에', CH[2]],
   [64, '내일도 너를 위해 달릴게', CH_LAST],
-  [66, '고마워 오늘의 나', 'D5:1 B4:.5 A4:1.5 B4:1 C#5:.5 B4:.5 A4:3'],
+  [66, '고마워 오늘의 나', 'D5:1 Bb4:.5 A4:1.5 Bb4:1 C#5:.5 Bb4:.5 A4:3'],
   [68, '오늘도 수고했어', `${HOOK} E5:4`],
 ];
 
-// The piano's own tune: the chorus hook, previewed over the intro, and the climb in the build.
+// The lead's own tune: the chorus hook, previewed over the intro, and the climb in the build.
 export const RIFF = [
-  [4, 'A4:.5 D5:.5 F#5:1 E5:.5 D5:.5 D5:1'],
-  [5, 'E5:2 C#5:1 A4:1'],
-  [6, 'B4:.5 D5:.5 F#5:1 E5:.5 D5:.5 C#5:1'],
-  [7, 'D5:2 B4:1 A4:1'],
-  [56, 'G4:.5 B4:.5 D5:.5 G5:1 F#5:.5 D5:.5 B4:.5'],
+  [4, 'A4:.5 D5:.5 F5:1 E5:.5 D5:.5 D5:1'],
+  [5, 'E5:2 C5:1 A4:1'],
+  [6, 'Bb4:.5 D5:.5 F5:1 E5:.5 D5:.5 C5:1'],
+  [7, 'D5:2 Bb4:1 A4:1'],
+  [56, 'G4:.5 Bb4:.5 D5:.5 G5:1 F5:.5 D5:.5 Bb4:.5'],
   [57, 'B4:.5 D#5:.5 F#5:.5 B5:1 A5:.5 _:1'],
 ];
 

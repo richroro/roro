@@ -13,7 +13,7 @@ import { pathToFileURL } from 'node:url';
 import { ffmpegPath } from '../tools/ffmpeg.mjs';
 import {
   SR, TAU, N, init, rnd, noise, hz, clamp, blep, SVF, Bus, idx, cueSounds,
-  freeverb, pingpong, peak, scale, master, wav,
+  freeverb, pingpong, peak, scale, master, wav, epiano, glock, bowed,
 } from './dsp.mjs';
 
 if (!process.argv[2]) { console.error('usage: node song/ballad.mjs <project>/song/score.mjs'); process.exit(1); }
@@ -30,65 +30,6 @@ const isChorus = sec => sec.startsWith('chorus');
 const drums = new Bus(), bass = new Bus(), keys = new Bus(), tune = new Bus(), strings = new Bus(), fx = new Bus();
 
 // ---- instruments --------------------------------------------------------------------------------
-
-/**
- * An FM electric piano: a 1:1 pair for the body and a 1:14 pair for the bell of the tine, which
- * fades in a few tens of milliseconds. High notes die away faster, as they do on the real thing.
- */
-function epiano(bus, t, midi, dur, vel, pan = 0, bright = 1) {
-  const f = hz(midi), i0 = idx(t), rel = 0.4;
-  const len = Math.floor((dur + rel + 0.05) * SR);
-  const decay = 0.45 + f / 900;
-  const det = 1 + (rnd() - 0.5) * 0.001;
-  let pc = rnd(), pm = rnd(), pt = rnd();
-  // A 1:1 FM pair puts a sideband at 0 Hz; a DC blocker takes it back out.
-  let xPrev = 0, yPrev = 0;
-  const dcR = 1 - TAU * 25 / SR;
-  for (let n = 0; n < len; n++) {
-    const s = n / SR;
-    const env = Math.min(1, s / 0.003) * Math.exp(-s * decay) * (s > dur ? Math.exp(-(s - dur) / rel * 4) : 1);
-    const I1 = (0.35 + 1.3 * vel * bright) * Math.exp(-s * 3.5) + 0.18;
-    const I2 = 1.8 * vel * bright * Math.exp(-s * 26);
-    pc += f / SR; pm += f * det / SR; pt += f * 14 / SR;
-    if (pc > 1) pc -= 1; if (pm > 1) pm -= 1; if (pt > 1) pt -= 1;
-    const body = Math.sin(TAU * pc + I1 * Math.sin(TAU * pm));
-    const tine = Math.sin(TAU * pc + I2 * Math.sin(TAU * pt)) - Math.sin(TAU * pc);
-    const x = (body + 0.55 * tine) * env * vel * 0.3;
-    const y = x - xPrev + dcR * yPrev; xPrev = x; yPrev = y;
-    bus.add(i0 + n, y, clamp(pan + 0.12 * Math.sin(TAU * 3.2 * (t + s)), -1, 1));
-  }
-}
-
-/** A small glockenspiel: bright inharmonic FM, for sparkle over the last chorus. */
-function glock(bus, t, midi, vel) {
-  const f = hz(midi), i0 = idx(t);
-  let pc = 0, pm = 0;
-  for (let n = 0; n < SR * 1.4; n++) {
-    const s = n / SR;
-    pc += f / SR; pm += f * 3.5 / SR;
-    const y = Math.sin(TAU * pc + 1.2 * Math.exp(-s * 8) * Math.sin(TAU * pm));
-    bus.add(i0 + n, y * Math.exp(-s * 3.2) * Math.min(1, s / 0.002) * vel * 0.12, 0.3);
-  }
-}
-
-/** A string section: three detuned saws with vibrato, a slow bow and a soft filter. */
-function bowed(bus, t, midi, dur, gain, cutoff = 1900, attack = 0.45, pan = 0) {
-  const i0 = idx(t), rel = 0.8, len = Math.floor((dur + rel) * SR);
-  for (const [det, p] of [[-0.08, -0.6], [0, 0], [0.08, 0.6]]) {
-    const f = new SVF();
-    let ph = rnd();
-    for (let n = 0; n < len; n++) {
-      const s = n / SR;
-      const vib = s > 0.3 ? 0.06 * Math.sin(TAU * 5.2 * s + det * 40) * Math.min(1, (s - 0.3) / 0.4) : 0;
-      const dt = hz(midi + det + vib) / SR;
-      const saw = 2 * ph - 1 - blep(ph, dt);
-      ph += dt; if (ph >= 1) ph -= 1;
-      f.run(saw, cutoff, 1.2);
-      const env = Math.min(1, s / attack) * (s > dur ? Math.exp(-(s - dur) / rel * 4) : 1);
-      bus.add(i0 + n, f.lp * env * gain * 0.33, clamp(pan + p * 0.7, -1, 1));
-    }
-  }
-}
 
 function bassNote(t, dur, midi, gain = 1) {
   const i0 = idx(t), f = new SVF(), dt = hz(midi) / SR, len = Math.floor((dur + 0.08) * SR);
