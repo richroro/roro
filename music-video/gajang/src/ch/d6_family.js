@@ -627,7 +627,7 @@
     }
     ctx.save(); ctx.globalAlpha = easeOut(seg(t, 169.2, 170.0));
     ctx.font = `44px ${FONT.round}`; ctx.fillStyle = '#6A5A70'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('노래·영상 · Claude Code 로 만들었어요', 960, 920);
+    ctx.fillText(window.CREDIT || '노래·영상 · Claude Code 로 만들었어요', 960, 920);
     ctx.restore();
     // in from the night, out gently at the very end
     fillScreen('#0E1230', 1 - easeInOut(seg(t, 168.0, 168.7)));

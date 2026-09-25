@@ -55,7 +55,7 @@ async function frames() {
   const fps = num('fps', 30), width = num('w', 1920), workers = num('workers', 4);
   const length = await (async () => {
     const b = await launch(); const p = await openPage(b, 320);
-    const l = await p.evaluate(() => SONG.length); await b.close(); return l;
+    const l = await p.evaluate(() => window.VIDEO_LENGTH || SONG.length); await b.close(); return l;
   })();
   const [a, b] = (typeof args.frames === 'string' ? args.frames : `0:${length}`).split(':').map(Number);
   const dir = join(ROOT, 'out', 'frames');

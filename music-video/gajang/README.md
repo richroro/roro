@@ -25,3 +25,20 @@ node song/ballad.mjs gajang/song/score.mjs         # (같은 악보를 피아노
 node render.mjs --project=gajang --frames          # 프레임 -> gajang/out/frames
 node render.mjs --project=gajang --encode          # gajang/out/mv.mp4
 ```
+
+## 싸이 "아버지"에 맞춘 버전 (`psy/`)
+
+▶ [`dist/abeoji-psy-sync-720p.mp4`](dist/abeoji-psy-sync-720p.mp4) (4:04, 720p, **무음**)
+
+같은 그림을 싸이 **"아버지"** 원곡 길이와 구성에 맞춰 늘린 버전. 원곡은 저작권이 있어서 넣지 않았고,
+보는 사람이 갖고 있는 원곡을 같이 튼다. 우리 곡 가사 자막은 빼고, 엔딩 크레딧은 원곡 표기로 바꿨다.
+
+- 브라우저: `psy/studio.html` 을 열고 "🎵 내 음원 불러오기" 로 원곡을 고른 뒤 ▶.
+- 새로 그린 게 아니라 [`psy/map.mjs`](psy/map.mjs) 의 시간 지도로 각 프레임을 원래 영상의 다른 시점에서
+  가져온다. 지도의 시간은 원곡을 분석한 게 아니라 **추정치**라, 어긋나면 숫자를 고친 뒤:
+
+```bash
+node gajang/psy/map.mjs
+node render.mjs --project=gajang/psy --frames --force
+node render.mjs --project=gajang/psy --encode      # 원곡을 붙여 개인 감상용으로: --audio=내/아버지.m4a
+```
