@@ -7,6 +7,7 @@
 <style>
   @font-face { font-family: "Black Han Sans"; src: url("../assets/fonts/BlackHanSans.ttf"); }
   @font-face { font-family: "Jua"; src: url("../assets/fonts/Jua.ttf"); }
+  @font-face { font-family: "Nanum Myeongjo"; src: url("../assets/fonts/NanumMyeongjo-ExtraBold.ttf"); }
   html, body { margin: 0; background: #1b1530; color: #fff; font-family: "Jua", sans-serif; }
   body.render { background: #000; }
   #stage { display: block; width: 100vw; max-width: calc(100vh * 16 / 9 - 60px * 16 / 9); margin: 0 auto; aspect-ratio: 16 / 9; }
@@ -34,6 +35,7 @@
 <script src="../src/props.js"></script>
 <script src="../src/timeline.js"></script>
 <script src="src/caption.js"></script>
+<script src="src/cinema.js"></script>
 <script src="src/ch/e1_start.js"></script>
 <script src="src/ch/e2_rise.js"></script>
 <script src="src/ch/e3_grammys.js"></script>
@@ -53,6 +55,7 @@
   window.ready = Promise.all([
     document.fonts.load('80px "Black Han Sans"', '빌리아일리시그래미오스카2015'),
     document.fonts.load('80px "Jua"', '빌리아일리시오빠피니어스'),
+    document.fonts.load('80px "Nanum Myeongjo"', '모든이야기는작은방에서시작됐다'),
   ]).then(() => document.fonts.ready);
 
   window.renderAt = t => { renderFrame(t); };

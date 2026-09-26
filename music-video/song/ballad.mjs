@@ -214,7 +214,7 @@ function stringsBar(bar) {
 }
 
 function tuneLines() {
-  for (const l of S.LINES.map(S.layLine)) {
+  for (const l of (S.MELODY || S.LINES).map(S.layLine)) {
     const sec = sectionAt(l.bar);
     const chorus = isChorus(sec) || sec === 'outro';
     for (const n of l.notes) {

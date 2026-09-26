@@ -3,7 +3,7 @@
 // with the tune kept only in the choruses and outro, so the verses leave room for the captions,
 // and no lyrics on screen.
 //
-//   node song/darkpop.mjs bio/song/score.mjs   -> bio/assets/song.m4a, bio/src/song.js
+//   node song/ballad.mjs bio/song/score.mjs    -> bio/assets/song.m4a, bio/src/song.js  (piano and strings)
 
 import * as base from '../../gajang/song/score.mjs';
 
