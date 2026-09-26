@@ -1,546 +1,683 @@
-// e6_now (139.20 – 172.20): the last chorus goes up a key and the picture bursts open: bright
-// sea and a flock of birds (2024); a dotted globe with the tour route drawn across it; one
-// golden gramophone with wildflowers blooming around it (2026); a cinema, a 3D screen and a big
-// pair of 3D glasses; and the lime waveform from the opening, fading out under the last words.
+// e6_now (139.20 – 172.20) · 6막 · 당신의 방
+//
+// 139.20  Out of the white, the release: a stadium bowl filled with a sea of phone lights, a tiny
+//         faceless figure on a far stage under beams; at 141.60 a wave of light runs from the
+//         stage over the crowd to the lens. The camera cranes back through the raised phones.
+// 148.80  Dawn over a field of wildflowers; they open and sway, a golden gramophone stands among
+//         them; at 151.20 the sun breaks over the hills and the field turns gold.
+// 158.40  Someone else's small room, framed like the film's first shot: a sliver of light in a
+//         dark doorway. We push through: night, a desk lamp, a child in headphones at an old
+//         laptop reaches out and presses record; a waveform is born on the screen.
+// 166.00  From that window the camera pulls back over a night city of lit windows, a first hint
+//         of dawn on the horizon. "다음은, 당신 차례다". The letterbox closes.
+//
+// Faces are never drawn (silhouettes, backs, hands). No logos, covers or posters.
 (() => {
-  const T_SEA = 139.2, T_GLOBE = 148.8, T_FLOWER = 158.4, T_CINEMA = 163.2, T_END = 168.0, T_OUT = 172.2;
-  const GOLD = { hi: '#FFF3C4', light: '#FFD96A', mid: '#F0AE2E', dark: '#A8700E', edge: '#6E480A' };
-  const D2R = Math.PI / 180;
+  const T_SEA = 139.2, T_WAVE = 141.6, T_FIELD = 148.8, T_SUN = 151.2, T_ROOM = 158.4, T_REC = 160.8,
+    T_CITY = 166.0, T_OUT = 172.2;
+  const GOLD = { hi: '#FFF6D8', light: '#FFD978', mid: '#E9A93A', dark: '#9A6414', deep: '#5A3808' };
 
   const scr = fn => { ctx.save(); ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0); fn(); ctx.restore(); };
-  /** A decaying 0..1 kick after t0. */
+  const shoot = (t, cx, cy, z, amt = 1, rot = 0) => {
+    const [hx, hy, hr] = handheld(t, amt);
+    camBegin(cx + hx / z, cy + hy / z, z, hr + rot);
+  };
+  const fillRectG = (x, y, w, h, style) => { ctx.fillStyle = style; ctx.fillRect(x, y, w, h); };
   const kick = (t, t0, len = 0.5) => (t < t0 ? 0 : Math.exp(-(t - t0) / len * 3));
-
-  // ---- 139.20 sea and birds ---------------------------------------------------------------------
-
-  /** A gull-like bird in flight: (x, y) body, s scale, ph wing phase (cycles). */
-  function bird(x, y, s, ph, color, rot = 0) {
-    const f = Math.sin(ph * TAU);
-    const tipY = -f * 22, midY = 4 - f * 6;
-    ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
-    ctx.beginPath();
-    ctx.moveTo(-40, tipY - 4);
-    ctx.quadraticCurveTo(-22, midY - 16, -3, 2);
-    ctx.quadraticCurveTo(0, 6, 3, 2);
-    ctx.quadraticCurveTo(22, midY - 16, 40, tipY - 4);
-    ctx.quadraticCurveTo(22, midY - 6, 3, 8);
-    ctx.quadraticCurveTo(0, 11, -3, 8);
-    ctx.quadraticCurveTo(-22, midY - 6, -40, tipY - 4);
-    ctx.fillStyle = color; ctx.fill();
-    ctx.restore();
+  function addSmooth(pts) {
+    const n = pts.length, P = i => pts[(i + n) % n];
+    ctx.moveTo(P(0)[0], P(0)[1]);
+    for (let i = 0; i < n; i++) {
+      const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      ctx.bezierCurveTo(p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6,
+        p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6, p2[0], p2[1]);
+    }
+    ctx.closePath();
   }
 
-  function softCloud(x, y, s, a) {
-    ctx.save(); ctx.globalAlpha *= a; ctx.translate(x, y); ctx.scale(s, s);
-    ctx.beginPath();
-    for (const [px, py, r] of [[-120, 10, 60], [-50, -20, 85], [40, -12, 75], [115, 12, 55], [0, 20, 70]]) { ctx.moveTo(px + r, py); ctx.arc(px, py, r, 0, TAU); }
-    ctx.fillStyle = lgrad(0, -100, 0, 80, [[0, '#FFFFFF'], [1, '#D7ECFF']]); ctx.fill();
-    ctx.restore();
+  /** Paint fn() into a small offscreen layer, blur it once there, and lay it over the frame. */
+  const POOL = [];
+  let poolDepth = 0;
+  const pooled = (i, w, h) => {
+    let c = POOL[i];
+    if (!c) c = POOL[i] = document.createElement('canvas');
+    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+    const g = c.getContext('2d');
+    g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over'; g.filter = 'none';
+    g.clearRect(0, 0, w, h);
+    return [c, g];
+  };
+  function layer(px, fn, o = {}) {
+    const main = ctx, res = o.res ?? (px >= 6 ? 0.25 : 0.5);
+    const w = Math.round(cv.width * res), h = Math.round(cv.height * res);
+    const [off, g] = pooled(poolDepth * 2, w, h);
+    const m = main.getTransform();
+    g.setTransform(m.a * res, m.b * res, m.c * res, m.d * res, m.e * res, m.f * res);
+    poolDepth++; ctx = g;
+    try { fn(); } finally { ctx = main; poolDepth--; }
+    let src = off;
+    if (px > 0) {
+      const [bl, bg] = pooled(poolDepth * 2 + 1, w, h);
+      bg.filter = `blur(${px * SCALE * res}px)`; bg.drawImage(off, 0, 0); bg.filter = 'none';
+      src = bl;
+    }
+    main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
+    if (o.alpha !== undefined) main.globalAlpha = o.alpha;
+    if (o.op) main.globalCompositeOperation = o.op;
+    main.imageSmoothingEnabled = true; main.imageSmoothingQuality = 'high';
+    main.drawImage(src, 0, 0, cv.width, cv.height);
+    main.restore();
   }
 
-  function sea(t, lt, dur) {
-    const hit = kick(t, 141.6, 0.6), boom = kick(t, T_SEA, 0.8);
-    const [sx, sy] = shakeXY(t, T_SEA, 22, 0.5), [hx, hy] = shakeXY(t, 141.6, 12, 0.4);
-    const zoom = lerp(1.12, 1.0, easeOut(seg(t, T_SEA, 141.0))) + 0.02 * hit;
-    camBegin(960 + sx + hx + lt * 6, 540 + sy + hy - lt * 4, zoom, 0);
-    const HZ = 640;
-    // sky
-    rrect(-300, -300, 2520, HZ + 300, 0, { fill: lgrad(0, -300, 0, HZ, [[0, '#123FB8'], [0.45, '#2E78E8'], [0.85, '#8CCBFF'], [1, '#DDF1FF']]), stroke: null });
-    // sun, low on the right
-    glow(1460, 560, 700, '#FFF1C8', 0.55 + 0.25 * hit + 0.3 * boom);
-    circle(1460, 560, 64, { fill: '#FFFBEA', stroke: null });
-    for (let i = 0; i < 4; i++) {
-      const x = ((hash(i, 51) * 2600 + t * (14 + i * 6)) % 2600) - 400;
-      softCloud(x, 420 + hash(i, 52) * 130, 0.45 + hash(i, 53) * 0.5, 0.5 + 0.3 * hash(i, 54));
-    }
-    // sea
-    rrect(-300, HZ, 2520, 800, 0, { fill: lgrad(0, HZ, 0, 1380, [[0, '#4C9AF0'], [0.25, '#1F66D0'], [1, '#08307E']]), stroke: null });
-    rrect(-300, HZ - 2, 2520, 5, 0, { fill: rgba('#FFFFFF', 0.7), stroke: null });
-    // the sun's path on the water
-    for (let i = 0; i < 60; i++) {
-      const v = hash(i, 61), y = HZ + 6 + Math.pow(v, 1.5) * 460;
-      const spread = 30 + (y - HZ) * 0.5, x = 1460 + (hash(i, 62) - 0.5) * 2 * spread;
-      const on = 0.5 + 0.5 * Math.sin(t * (3 + hash(i, 63) * 4) + i);
-      const w = (8 + (y - HZ) * 0.14) * (0.5 + on);
-      rrect(x - w / 2, y, w, 3 + (y - HZ) * 0.01, 2, { fill: rgba('#FFF6DA', (0.35 + 0.5 * on) * (0.6 + 0.4 * pulse(t, 4))), stroke: null });
-    }
-    // wave lines, wider apart as they come closer
-    for (let j = 0; j < 16; j++) {
-      const k = j / 15, y = HZ + 12 + Math.pow(k, 1.7) * 460, sc = 0.3 + k * 1.8;
-      for (let i = 0; i < 9; i++) {
-        const x = ((hash(i, j + 70) * 2600 - t * (20 + 40 * k)) % 2600 + 2600) % 2600 - 300;
-        const len = (60 + hash(i, j + 90) * 120) * sc;
-        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + len / 2, y - 8 * sc, x + len, y);
-        ctx.strokeStyle = rgba('#CFE8FF', 0.35 * (0.4 + 0.6 * k)); ctx.lineWidth = 2 + 2.5 * k; ctx.lineCap = 'round'; ctx.stroke();
-      }
-    }
+  // ---- 139.20 · the stadium ----------------------------------------------------------------------
 
-    // the flock: bursts out of the centre on the key change, gathers, swoops on the hit
-    const C = [900 + lt * 42, 440 - lt * 10];
-    const spread = kf(lt, [[0, 0], [0.7, 1.35], [2.2, 1]], easeOut);
-    const N = 54;
-    const order = [];
-    for (let i = 0; i < N; i++) order.push([hash(i, 3), i]);
-    order.sort((a, b) => a[0] - b[0]);
-    for (const [depth, i] of order) {
-      const ang = hash(i, 1) * TAU, rr = Math.sqrt(hash(i, 2));
-      const ox = Math.cos(ang) * rr * 620, oy = Math.sin(ang) * rr * 250;
-      const s = 0.55 + depth * 1.4;
-      const swoop = t >= 141.6 ? Math.sin(clamp((t - 141.6 - (ox + 620) / 2400) / 0.9) * Math.PI) * 90 : 0;
-      const x = C[0] + ox * spread + Math.sin(t * 0.8 + i) * 18;
-      const y = C[1] + oy * spread + Math.cos(t * 0.9 + i * 1.3) * 12 + swoop * (0.6 + depth * 0.6);
-      const ph = beatOf(t) * 0.9 + hash(i, 4);
-      const col = depth < 0.35 ? '#1A3F8E' : '#FFFFFF';
-      if (depth >= 0.35) bird(x + 4, y + 6, s, ph, 'rgba(10,30,90,0.25)', -0.05);
-      bird(x, y, s, ph, col, Math.sin(t + i) * 0.08);
+  const STAGE = { x: 960, y: 470 };
+  const floorY = d => 482 + 470 / d;                  // depth d (1 near .. 16 at the stage) to screen y
+  const floorX = (X, d) => 960 + X * 800 / d;
+
+  function stadium(t) {
+    const k = easeOut(seg(t, T_SEA, T_FIELD));
+    const [ax, ay] = shakeXY(t, T_SEA, 16, 0.6), [bx, by] = shakeXY(t, T_WAVE, 7, 0.4);
+    shoot(t, 960 + ax + bx, lerp(470, 530, k) + ay + by, lerp(1.3, 1.0, k), 1.1);
+    const beat = pulse(t, 5);
+    const waveAt = t - T_WAVE;
+
+    // night sky and the haze the lights live in
+    fillRectG(-800, -700, W + 1600, H + 1400, lgrad(0, -300, 0, 560, [[0, '#020309'], [0.55, '#0A1330'], [1, '#1E2E66']]));
+    glow(STAGE.x, STAGE.y - 60, 900, '#3E64D8', 0.35 + 0.15 * beat);
+    glow(STAGE.x, STAGE.y - 30, 420, '#BFD2FF', 0.25 + 0.2 * beat);
+
+    // the bowl: tiers of stands wrapping round the floor and down the sides toward us
+    const A0 = Math.PI - 0.32, A1 = TAU + 0.32;
+    const tier = j => [760 + 105 * j, 110 + 34 * j, 476];
+    for (let j = 11; j >= 0; j--) {
+      const [rx, ry, cy] = tier(j);
+      ctx.beginPath(); ctx.ellipse(960, cy, rx, ry, 0, A0, A1); ctx.closePath();
+      ctx.fillStyle = lgrad(0, cy - ry, 0, cy + ry, [[0, mix('#0A0F26', '#141C44', j / 11)], [1, '#070A18']]);
+      ctx.fill();
+      ctx.strokeStyle = rgba('#3A4A8A', 0.12); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(960, cy, rx, ry, 0, A0, A1); ctx.stroke();
     }
-    // on the hit, a few big birds sweep right past the camera
-    if (t >= 141.3 && t < 143.4) {
-      for (let i = 0; i < 4; i++) {
-        const q = seg(t, 141.3 + i * 0.12, 142.8 + i * 0.12);
-        if (q <= 0 || q >= 1) continue;
-        const x = lerp(-300, 2200, easeInOut(q)), y = 260 + i * 150 + Math.sin(q * Math.PI) * -120;
-        bird(x, y, 3.4 - i * 0.5, beatOf(t) * 1.2 + i * 0.3, '#FFFFFF', -0.15 + q * 0.2);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let j = 0; j < 12; j++) {
+      const [rx, ry, cy] = tier(j), n = Math.round((rx + ry) * 1.4 / 6);
+      for (let row = 0; row < 3; row++) {
+        const rr = 1 - row * 0.012 - 0.004;
+        for (let i = 0; i < n; i++) {
+          const u = (i + hash(i, j * 7 + row) * 0.9) / n, a = lerp(A0, A1, u);
+          const x = 960 + Math.cos(a) * rx * rr, y = cy + Math.sin(a) * ry * (rr - 0.03 * row);
+          if (x < -150 || x > W + 150 || y > 1000) continue;
+          const ang = Math.abs(u - 0.5) * 2;
+          const wave = waveAt > 0 ? Math.exp(-Math.pow(ang * 3.2 - waveAt * 2.4, 2) * 1.5) : 0;
+          const tw = 0.45 + 0.35 * Math.sin(t * (1.5 + hash(i, j + 7)) + i + row) + 0.2 * beat;
+          const a2 = clamp((hash(i, j + 3 + row) * 0.7 + 0.4) * tw + wave * 0.9);
+          if (a2 < 0.08) continue;
+          ctx.fillStyle = hash(i, j + 9 + row) < 0.18 ? `rgba(255,226,180,${a2})` : `rgba(226,236,255,${a2})`;
+          const r = (2 + j * 0.2) * (y > cy ? 1 + (y - cy) / 200 : 1) + wave * 1.6;
+          ctx.fillRect(x - r / 2, y - r / 2, r, r);
+        }
       }
     }
-    // spray of light on the hit
-    if (t >= 141.6 && t < 142.6) {
-      const a = t - 141.6;
+    ctx.restore();
+
+    // the stage: a low platform, two tall screens of blue light, a truss of lamps
+    const sx = STAGE.x, sy = STAGE.y;
+    fillRectG(sx - 330, sy - 6, 660, 30, lgrad(0, sy - 6, 0, sy + 24, [[0, '#8FA6E8'], [0.3, '#34426E'], [1, '#0C1024']]));
+    [[-420, 1], [340, -1]].forEach(([dx]) => {
+      fillRectG(sx + dx, sy - 230, 80, 210, lgrad(0, sy - 230, 0, sy - 20, [[0, '#3C6BFF'], [0.5, '#A8C6FF'], [1, '#2A4AB0']]));
+      glow(sx + dx + 40, sy - 120, 190, '#6A92FF', 0.35 + 0.2 * beat);
+    });
+    fillRectG(sx - 360, sy - 262, 720, 8, '#1A2030');
+    for (let i = 0; i < 14; i++) glow(sx - 338 + i * 52, sy - 256, 18, '#FFFFFF', 0.8);
+    // beams from the truss, sweeping slowly
+    layer(2.5, () => {
+      ctx.save(); ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 10; i++) {
+        const ox = sx - 300 + i * 66, oy = sy - 256;
+        const a = -Math.PI / 2 + Math.sin(t * 0.6 + i * 0.9) * 0.55 + (i - 4.5) * 0.06;
+        const len = 1200, w = 0.035;
+        const c = i % 3 === 0 ? '#C8B6FF' : i % 3 === 1 ? '#A8C8FF' : '#FFFFFF';
+        ctx.fillStyle = lgrad(ox, oy, ox + Math.cos(a) * len, oy + Math.sin(a) * len, [[0, rgba(c, 0.55 + 0.25 * beat)], [1, rgba(c, 0)]]);
+        ctx.beginPath(); ctx.moveTo(ox, oy);
+        ctx.lineTo(ox + Math.cos(a - w) * len, oy + Math.sin(a - w) * len); ctx.lineTo(ox + Math.cos(a + w) * len, oy + Math.sin(a + w) * len);
+        ctx.fill();
+      }
+      ctx.restore();
+    }, { op: 'screen' });
+    // the singer: tiny, faceless, in a white spot
+    glow(sx, sy - 40, 120, '#FFFFFF', 0.6 + 0.3 * kick(t, T_WAVE, 1));
+    silhouette(sx, sy - 2, 0.11, { t, hair: '#1A1320', pose: t > T_WAVE - 0.2 ? 'arms' : 'mic', body: '#05060C' });
+
+    // the floor: thousands of phones, a wave of light rolling from the stage at 141.60
+    fillRectG(-800, sy + 22, W + 1600, 800, lgrad(0, sy + 22, 0, H, [[0, '#18224A'], [0.5, '#0C1230'], [1, '#05060E']]));
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 3200; i++) {
+      const d = lerp(0.95, 15, Math.pow(hash(i, 71), 0.9));
+      const X = (hash(i, 72) * 2 - 1) * 1.3 * d;
+      const sway = Math.sin(t * 2.1 + i * 0.37) * 0.06 + hop(t) * 0.02;
+      const x = floorX(X + sway, d), y = floorY(d) + Math.sin(t * 3 + i) * 1.5;
+      const wave = waveAt > 0 ? Math.exp(-Math.pow((15 - d) - waveAt * 7, 2) * 0.35) : 0;
+      const tw = 0.5 + 0.3 * Math.sin(t * (1.2 + hash(i, 73) * 2) + i) + 0.2 * beat;
+      const a = clamp((0.35 + 0.5 * hash(i, 74)) * tw + wave);
+      const r = (2.2 + 5 / d) * (1 + wave * 0.8);
+      ctx.fillStyle = hash(i, 75) < 0.15 ? `rgba(255,228,190,${a})` : `rgba(230,240,255,${a})`;
+      ctx.fillRect(x - r / 2, y - r / 2, r, r);
+    }
+    ctx.restore();
+    // the haze glowing over the crowd, and the crest of the wave as a band of light
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = lgrad(0, sy, 0, H, [[0, rgba('#6D8CFF', 0.22)], [1, rgba('#2A3A80', 0.08)]]); ctx.fillRect(-800, sy, W + 1600, 700);
+    if (waveAt > 0 && waveAt < 2.4) {
+      const dW = 15 - waveAt * 7, yW = floorY(Math.max(0.95, dW)), hW = 30 + 400 / Math.max(1, dW);
+      ctx.fillStyle = lgrad(0, yW - hW, 0, yW + hW, [[0, 'rgba(0,0,0,0)'], [0.5, rgba('#DCE8FF', 0.3 * clamp(dW + 1))], [1, 'rgba(0,0,0,0)']]);
+      ctx.fillRect(-800, yW - hW, W + 1600, hW * 2);
+    }
+    ctx.restore();
+
+    // the people right in front of us: heads and shoulders against the haze, phones up, filming
+    layer(3.5, () => {
       for (let i = 0; i < 14; i++) {
-        const q = a / 1.0, ang = -Math.PI * hash(i, 81);
-        sparkle(1460 + Math.cos(ang) * 400 * easeOut(q), 560 + Math.sin(ang) * 260 * easeOut(q), 22 * (1 - q), '#FFFFFF', q * 3);
+        const hx = -80 + i * 150 + hash(i, 84) * 70, hy = 905 + hash(i, 85) * 60 + hop(t) * 6 * hash(i, 86);
+        const hr = 50 + hash(i, 87) * 22;
+        ell(hx, hy + hr * 1.9, hr * 2.1, hr * 1.4, { fill: '#04050A', stroke: null });
+        ell(hx, hy, hr * 0.82, hr, { fill: '#05060C', stroke: null });
       }
-    }
+      for (let i = 0; i < 6; i++) {
+        const bxp = 80 + i * 340 + hash(i, 81) * 120, sw = Math.sin(t * 2.2 + i * 1.7) * 18 + hop(t) * 8;
+        const lift = waveAt > 0 && waveAt < 3 ? 50 * Math.sin(Math.PI * clamp(waveAt / 3)) : 0;
+        const px = bxp + sw + 30, py = 760 + hash(i, 82) * 90 - lift;
+        stroke([[bxp - 20, 1100], [bxp + sw * 0.5 + 10, 900], [px, py + 34]], '#05060C', 34, { ink: null });
+        ctx.save(); ctx.translate(px, py); ctx.rotate(sw * 0.004 + (hash(i, 88) - 0.5) * 0.2);
+        rrect(-26, -44, 52, 88, 8, { fill: '#07080E', stroke: null });
+        rrect(-22, -40, 44, 80, 5, { fill: lgrad(0, -40, 0, 40, [[0, '#0A1030'], [0.5, '#2C4CB0'], [1, '#0A1030']]), stroke: null });
+        glow(0, -2, 16, '#FFFFFF', 0.8);
+        ctx.restore();
+        ell(px - 4, py + 42, 16, 12, { fill: '#05060C', stroke: null });
+      }
+    });
     camEnd();
 
-    // the burst on the key change: white, a ring, speed lines
-    flash(0.95 * kick(t, T_SEA, 0.35), '#FFFFFF');
-    if (lt < 1.2) {
-      scr(() => {
-        const q = easeOut(lt / 1.2);
-        ctx.globalAlpha = 1 - q; ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 30 * (1 - q) + 2;
-        ctx.beginPath(); ctx.arc(960, 480, 60 + q * 1100, 0, TAU); ctx.stroke();
-      });
-      speedLines(t, 960, 480, 1 - lt / 1.2, '#FFFFFF');
-    }
-    flash(0.35 * kick(t, 141.6, 0.25), '#FFFFFF');
-
+    // out of the white; a lift at the wave
+    scr(() => {
+      ctx.fillStyle = `rgba(255,252,246,${1 - easeOut(seg(t, T_SEA, T_SEA + 0.9))})`; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = rgba('#CFE0FF', 0.3 * kick(t, T_WAVE, 0.6)); ctx.fillRect(0, 0, W, H);
+    });
     yearTag(t, 139.8, '2024');
-    caption(t, 140.4, T_GLOBE - 0.05, '세 번째 정규 앨범 〈Hit Me Hard and Soft〉', '2024년 5월 · “Birds of a Feather”');
+    caption(t, 140.2, 148.3, '〈Hit Me Hard and Soft〉 월드 투어', '2024년 9월 – 2025년 11월');
   }
 
-  // ---- 148.80 the globe and the tour route ------------------------------------------------------
+  // ---- 148.80 · wildflowers at sunrise --------------------------------------------------------------
 
-  const LAND = [
-    [[-168, 65], [-140, 70], [-95, 72], [-80, 63], [-60, 55], [-65, 45], [-80, 32], [-81, 25], [-97, 26], [-97, 18], [-88, 15], [-83, 9], [-78, 8], [-90, 14], [-105, 20], [-117, 32], [-124, 40], [-124, 48], [-135, 58], [-150, 60], [-165, 60]],
-    [[-50, 60], [-20, 70], [-20, 80], [-60, 82], [-72, 76]],
-    [[-80, 10], [-60, 11], [-50, 0], [-35, -7], [-40, -22], [-55, -35], [-68, -55], [-75, -50], [-72, -20], [-81, -5]],
-    [[-10, 36], [-9, 43], [0, 50], [5, 54], [10, 58], [5, 62], [15, 69], [30, 71], [40, 66], [40, 45], [28, 41], [20, 40], [15, 45], [12, 38], [0, 38]],
-    [[-6, 50], [1, 51], [-2, 56], [-5, 58], [-6, 55]],
-    [[-17, 15], [-17, 21], [-10, 30], [-5, 36], [10, 37], [32, 31], [43, 12], [51, 12], [40, -15], [32, -28], [20, -35], [12, -17], [9, 4], [-8, 5]],
-    [[40, 45], [40, 66], [60, 70], [80, 73], [110, 77], [140, 72], [180, 68], [160, 60], [142, 50], [130, 42], [122, 40], [121, 30], [110, 20], [106, 10], [100, 14], [98, 8], [92, 22], [80, 15], [77, 8], [72, 21], [60, 25], [55, 27], [50, 30], [44, 13], [35, 30], [36, 37], [28, 41]],
-    [[130, 31], [141, 36], [142, 43], [140, 41], [135, 34]],
-    [[95, 5], [105, -6], [120, -9], [140, -8], [130, 0], [118, 5], [100, 0]],
-    [[114, -22], [122, -18], [131, -12], [137, -12], [142, -11], [146, -19], [153, -26], [150, -37], [140, -38], [132, -32], [115, -34]],
-    [[172, -34], [178, -38], [168, -46], [172, -41]],
-  ];
-  const inPoly = (x, y, P) => {
-    let c = false;
-    for (let i = 0, j = P.length - 1; i < P.length; j = i++) {
-      const [xi, yi] = P[i], [xj, yj] = P[j];
-      if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c;
+  const HORIZON = 540;
+  const FLOWER_COLS = ['#FFFFFF', '#FFD1E2', '#C9B8FF', '#FFE27A', '#FF9F9F', '#A8D4FF', '#FFFFFF', '#F7B6F0'];
+
+  /** A wildflower: stem from (x, y) up h, head opening with `open` (0..1). */
+  function flower(x, y, h, open, col, seed, t, wind, sunK) {
+    const bend = wind * h * 0.12;
+    const tx = x + bend, ty = y - h;
+    ctx.strokeStyle = mix('#2E5A3A', '#6E9A48', sunK * 0.6); ctx.lineWidth = Math.max(1.2, h * 0.025); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + bend * 0.2, y - h * 0.55, tx, ty); ctx.stroke();
+    if (h > 50) {                                      // a leaf
+      ctx.fillStyle = mix('#2F5E3A', '#78A850', sunK * 0.6);
+      ctx.save(); ctx.translate(x + bend * 0.1, y - h * 0.3); ctx.rotate(-0.8 + (seed % 2) * 1.6 + wind * 0.2);
+      ctx.beginPath(); ctx.ellipse(h * 0.07, 0, h * 0.09, h * 0.022, 0, 0, TAU); ctx.fill(); ctx.restore();
     }
-    return c;
-  };
-  const vec = (lon, lat) => [Math.cos(lat * D2R) * Math.sin(lon * D2R), Math.sin(lat * D2R), Math.cos(lat * D2R) * Math.cos(lon * D2R)];
-  // land dots on an even grid (a constant table, the same for every frame)
-  const DOTS = [];
-  for (let lat = -58; lat <= 82; lat += 2.6) {
-    const n = Math.round(140 * Math.cos(lat * D2R));
+    const o = easeOut(clamp(open));
+    if (o <= 0.02) { circle(tx, ty, h * 0.03 + 1.5, { fill: mix('#4A7A40', col, 0.3), stroke: null }); return; }
+    const pr = (6 + h * 0.11) * (0.35 + 0.65 * o), n = 5 + (seed % 3);
+    const lit = mix(col, '#FFE6B0', sunK * 0.25);
+    ctx.fillStyle = rgrad(tx, ty, pr * 0.1, pr * 1.3, [[0, '#FFFFFF'], [0.5, lit], [1, mix(lit, '#6A5A7A', 0.35)]]);
     for (let i = 0; i < n; i++) {
-      const lon = -180 + (i + 0.5) * 360 / n;
-      if (LAND.some(P => inPoly(lon, lat, P))) DOTS.push(vec(lon, lat));
+      const a = i * TAU / n + seed + Math.sin(t * 0.8 + seed) * 0.1;
+      ctx.beginPath(); ctx.ellipse(tx + Math.cos(a) * pr * 0.6 * o, ty + Math.sin(a) * pr * 0.45 * o, pr * 0.62, pr * 0.3 * (0.4 + 0.6 * o), a, 0, TAU); ctx.fill();
     }
-  }
-  // an illustrative route (no names): North America, across the Pacific, Europe, and home
-  const STOPS = [[-71, 47], [-79, 44], [-88, 42], [-122, 38], [-118, 34], [151, -34], [145, -38], [0, 52], [5, 52], [13, 52], [2, 49], [-74, 41], [-118, 34]];
-  const LEGS = [[0.5, 0.9], [0.9, 1.3], [1.3, 1.8], [1.8, 2.3], [2.4, 3.6], [3.6, 4.0], [4.2, 5.6], [5.6, 6.0], [6.0, 6.4], [6.4, 6.8], [7.0, 8.2], [8.2, 8.9]];
-  const unwrapped = (() => {
-    const out = [STOPS[0][0]];
-    for (let i = 1; i < STOPS.length; i++) {
-      let l = STOPS[i][0];
-      while (l > out[i - 1] + 5) l -= 360;
-      out.push(l);
-    }
-    return out;
-  })();
-  const SV = STOPS.map(([lo, la]) => vec(lo, la));
-
-  function globe(t, lt, dur) {
-    skyFill([[0, '#050B24'], [0.6, '#0B1A46'], [1, '#12245A']]);
-    stars(t, 90, 17, 0.7, H);
-    const hit = kick(t, 151.2, 0.5), clink = kick(t, 153.0, 0.4);
-    // where the route head is, for the camera
-    let head = 0; // fractional stop index
-    for (let i = 0; i < LEGS.length; i++) if (lt >= LEGS[i][0]) head = i + easeInOut(seg(lt, LEGS[i][0], LEGS[i][1]));
-    const hi = Math.min(Math.floor(head), STOPS.length - 2), hk = head - hi;
-    const hLon = lerp(unwrapped[hi], unwrapped[hi + 1], hk), hLat = lerp(STOPS[hi][1], STOPS[hi + 1][1], hk);
-    const lon0 = (hLon + 25 - 18 * Math.sin(lt * 0.3)) * D2R, lat0 = clamp(hLat * 0.55 + 8, -20, 35) * D2R;
-    const cl = Math.cos(lon0), sl = Math.sin(lon0), cp = Math.cos(lat0), sp = Math.sin(lat0);
-    const rot = v => {
-      const x = v[0] * cl - v[2] * sl, z1 = v[2] * cl + v[0] * sl;
-      return [x, v[1] * cp - z1 * sp, v[1] * sp + z1 * cp];
-    };
-    const intro = easeOut(seg(t, T_GLOBE, T_GLOBE + 0.9));
-    const cx = 1200, cy = 440, R = (330 + 30 * hit) * lerp(0.7, 1, intro) * (1 + 0.004 * Math.sin(t * 2));
-    const P = (v, lift = 0) => { const r = rot(v); return [cx + R * r[0] * (1 + lift), cy - R * r[1] * (1 + lift), r[2], r]; };
-
-    ctx.save(); ctx.globalAlpha *= intro;
-    // atmosphere and the sphere
-    glow(cx, cy, R * 1.6, '#4FA0FF', 0.35 + 0.3 * hit);
-    circle(cx, cy, R, { fill: rgrad(cx - R * 0.35, cy - R * 0.4, R * 0.1, R * 1.1, [[0, '#2A6AE0'], [0.6, '#123C9A'], [1, '#081F5C']]), stroke: null });
-    // graticule
-    ctx.save(); ctx.strokeStyle = rgba('#8FD3FF', 0.13); ctx.lineWidth = 1.5;
-    for (let m = -180; m < 180; m += 30) {
-      ctx.beginPath(); let pen = false;
-      for (let la = -90; la <= 90; la += 6) {
-        const [x, y, z] = P(vec(m, la));
-        if (z > 0) { if (pen) ctx.lineTo(x, y); else ctx.moveTo(x, y); pen = true; } else pen = false;
-      }
-      ctx.stroke();
-    }
-    for (let la = -60; la <= 60; la += 30) {
-      ctx.beginPath(); let pen = false;
-      for (let m = -180; m <= 180; m += 6) {
-        const [x, y, z] = P(vec(m, la));
-        if (z > 0) { if (pen) ctx.lineTo(x, y); else ctx.moveTo(x, y); pen = true; } else pen = false;
-      }
-      ctx.stroke();
-    }
-    ctx.restore();
-    // land dots
-    const ds = R * 0.0125;
-    for (const v of DOTS) {
-      const r = rot(v);
-      if (r[2] <= 0.02) continue;
-      ctx.fillStyle = rgba('#BFE6FF', 0.25 + 0.65 * r[2]);
-      ctx.fillRect(cx + R * r[0] - ds, cy - R * r[1] - ds, ds * 2, ds * 2);
-    }
-    // rim light
-    ctx.save(); ctx.globalCompositeOperation = 'lighter';
-    circle(cx, cy, R, { fill: rgrad(cx, cy, R * 0.8, R, [[0, 'rgba(120,190,255,0)'], [1, 'rgba(120,190,255,0.35)']]), stroke: null });
-    ctx.restore();
-
-    // the route
-    const drawLeg = (i, upto) => {
-      const a = SV[i], b = SV[i + 1];
-      const dot = clamp(a[0] * b[0] + a[1] * b[1] + a[2] * b[2], -1, 1), om = Math.acos(dot);
-      const lift = 0.02 + 0.09 * om / Math.PI, n = Math.max(6, Math.ceil(om * 40));
-      const pts = [];
-      for (let k = 0; k <= n * upto; k++) {
-        const s = Math.min(k / n, upto), so = Math.sin(om) || 1;
-        const w0 = Math.sin((1 - s) * om) / so, w1 = Math.sin(s * om) / so;
-        const v = [a[0] * w0 + b[0] * w1, a[1] * w0 + b[1] * w1, a[2] * w0 + b[2] * w1];
-        pts.push(P(v, lift * Math.sin(Math.PI * s)));
-      }
-      const last = P((() => {
-        const s = upto, so = Math.sin(om) || 1, w0 = Math.sin((1 - s) * om) / so, w1 = Math.sin(s * om) / so;
-        return [a[0] * w0 + b[0] * w1, a[1] * w0 + b[1] * w1, a[2] * w0 + b[2] * w1];
-      })(), lift * Math.sin(Math.PI * upto));
-      pts.push(last);
-      for (let k = 1; k < pts.length; k++) {
-        const [x0, y0, z0] = pts[k - 1], [x1, y1, z1] = pts[k];
-        const behind = z0 < 0;
-        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = rgba(BIO.lime, behind ? 0.08 : 0.25); ctx.lineWidth = 14; ctx.stroke();
-        ctx.strokeStyle = rgba(BIO.lime, behind ? 0.25 : 1); ctx.lineWidth = 4.5; ctx.stroke();
-      }
-      return last;
-    };
-    let headPt = null;
-    for (let i = 0; i < LEGS.length; i++) {
-      const u = easeInOut(seg(lt, LEGS[i][0], LEGS[i][1]));
-      if (u <= 0) break;
-      headPt = drawLeg(i, u);
-    }
-    // stops: a pink dot once reached, with a ring as it lands
-    for (let i = 0; i < STOPS.length; i++) {
-      const reachT = i === 0 ? LEGS[0][0] : LEGS[i - 1][1];
-      if (lt < reachT) continue;
-      const [x, y, z] = P(SV[i]);
-      if (z <= 0) continue;
-      const a = lt - reachT;
-      if (a < 0.8) { ctx.save(); ctx.globalAlpha *= 1 - a / 0.8; circle(x, y, 8 + a * 50, { fill: null, stroke: BIO.pink, lw: 3 }); ctx.restore(); }
-      circle(x, y, 7 + 2 * pulse(t, 5), { fill: BIO.pink, stroke: '#FFFFFF', lw: 2.5 });
-    }
-    if (headPt && lt < 8.95) {
-      const [x, y] = headPt;
-      glow(x, y, 60, BIO.lime, 0.6);
-      circle(x, y, 7, { fill: '#FFFFFF', stroke: null });
-    }
-    // the hit: a ripple off the globe
-    if (t >= 151.2 && t < 152.4) {
-      const q = (t - 151.2) / 1.2;
-      ctx.save(); ctx.globalAlpha *= 1 - q;
-      circle(cx, cy, R * (1 + q * 0.7), { fill: null, stroke: BIO.lime, lw: 8 * (1 - q) + 1 });
-      ctx.restore();
-    }
-    if (clink > 0.01 && headPt) sparkle(headPt[0], headPt[1] - 20, 40 * clink, '#FFFFFF', t * 3);
-    ctx.restore();
-
-    caption(t, 149.4, T_FLOWER - 0.05, '〈Hit Me Hard and Soft〉 월드 투어', '2024년 9월 – 2025년 11월');
+    circle(tx, ty, pr * 0.24, { fill: seed % 4 === 0 ? '#5A3A2A' : '#FFB83A', stroke: null });
   }
 
-  // ---- 158.40 the gramophone and the wildflowers ------------------------------------------------
-
-  /** A golden gramophone trophy. (x, y) = bottom of the base; ~430 tall at s = 1. */
-  function gramophone(x, y, s, o = {}) {
+  /** The golden gramophone: plinth, turntable, tone arm, and a flared horn. (x, y) = bottom. */
+  function gramophone(x, y, s, sunK, glint) {
     ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-    const G = (x0, x1, st) => lgrad(x0, 0, x1, 0, st);
-    const band = [[0, GOLD.dark], [0.35, GOLD.light], [0.55, GOLD.hi], [0.75, GOLD.mid], [1, GOLD.dark]];
-    rrect(-125, -66, 250, 66, 10, { fill: G(-125, 125, band), stroke: GOLD.edge, lw: 3 });
-    rrect(-104, -98, 208, 36, 8, { fill: G(-104, 104, band), stroke: GOLD.edge, lw: 3 });
-    rrect(-96, -40, 192, 6, 3, { fill: rgba(GOLD.edge, 0.4), stroke: null });
-    // the disc
-    ell(0, -104, 112, 20, { fill: GOLD.mid, stroke: GOLD.edge, lw: 3 });
-    ell(0, -108, 92, 15, { fill: lgrad(-92, 0, 92, 0, [[0, GOLD.dark], [0.5, GOLD.light], [1, GOLD.dark]]), stroke: null });
-    ell(0, -108, 14, 4, { fill: GOLD.hi, stroke: null });
-    // tone arm up to the horn
-    stroke([[78, -106], [70, -168], [30, -214], [6, -236]], GOLD.mid, 12, { ink: GOLD.edge, olw: 5, smooth: true });
-    circle(78, -106, 11, { fill: GOLD.light, stroke: GOLD.edge, lw: 3 });
-    // the horn: a flare from the neck to a wide bell facing up and to the right
-    const N = [6, -236], B = [120, -412], d = [B[0] - N[0], B[1] - N[1]], L = Math.hypot(d[0], d[1]);
-    const u = [d[0] / L, d[1] / L], p = [-u[1], u[0]], Rb = 128, nw = 12;
+    const band = [[0, GOLD.deep], [0.3, GOLD.mid], [0.5, GOLD.hi], [0.72, GOLD.light], [1, GOLD.dark]];
+    // soft contact shadow in the grass
+    ell(0, 4, 170, 22, { fill: 'rgba(10,20,10,0.45)', stroke: null });
+    rrect(-120, -64, 240, 64, 8, { fill: lgrad(-120, 0, 120, 0, band), stroke: null });
+    fillRectG(-120, -64, 240, 64, lgrad(0, -64, 0, 0, [[0, 'rgba(255,255,255,0.15)'], [1, 'rgba(60,30,0,0.35)']]));
+    rrect(-100, -96, 200, 34, 8, { fill: lgrad(-100, 0, 100, 0, band), stroke: null });
+    ell(0, -102, 108, 20, { fill: lgrad(-108, 0, 108, 0, [[0, GOLD.dark], [0.45, GOLD.light], [1, GOLD.dark]]), stroke: null });
+    ell(0, -106, 90, 14, { fill: lgrad(-90, 0, 90, 0, [[0, GOLD.deep], [0.5, GOLD.mid], [1, GOLD.deep]]), stroke: null });
+    ell(0, -106, 12, 3.5, { fill: GOLD.hi, stroke: null });
+    stroke([[76, -104], [70, -166], [34, -210], [8, -232]], GOLD.mid, 11, { ink: null, smooth: true });
+    circle(76, -104, 10, { fill: GOLD.light, stroke: null });
+    // the horn
+    const N = [6, -232], B = [118, -410], d = [B[0] - N[0], B[1] - N[1]], L = Math.hypot(d[0], d[1]);
+    const u = [d[0] / L, d[1] / L], p = [-u[1], u[0]], Rb = 126, nw = 11;
     const e1 = [B[0] + p[0] * Rb, B[1] + p[1] * Rb], e2 = [B[0] - p[0] * Rb, B[1] - p[1] * Rb];
-    const c1 = [N[0] + u[0] * L * 0.78 + p[0] * nw * 1.4, N[1] + u[1] * L * 0.78 + p[1] * nw * 1.4];
-    const c2 = [N[0] + u[0] * L * 0.78 - p[0] * nw * 1.4, N[1] + u[1] * L * 0.78 - p[1] * nw * 1.4];
+    const c1 = [N[0] + u[0] * L * 0.8 + p[0] * nw * 1.5, N[1] + u[1] * L * 0.8 + p[1] * nw * 1.5];
+    const c2 = [N[0] + u[0] * L * 0.8 - p[0] * nw * 1.5, N[1] + u[1] * L * 0.8 - p[1] * nw * 1.5];
     ctx.beginPath();
     ctx.moveTo(N[0] + p[0] * nw, N[1] + p[1] * nw);
     ctx.quadraticCurveTo(c1[0], c1[1], e1[0], e1[1]);
     ctx.lineTo(e2[0], e2[1]);
     ctx.quadraticCurveTo(c2[0], c2[1], N[0] - p[0] * nw, N[1] - p[1] * nw);
     ctx.closePath();
-    paint({ fill: lgrad(e2[0], e2[1], e1[0], e1[1], [[0, GOLD.dark], [0.3, GOLD.mid], [0.6, GOLD.hi], [0.8, GOLD.light], [1, GOLD.dark]]), stroke: GOLD.edge, lw: 3 });
+    ctx.fillStyle = lgrad(e2[0], e2[1], e1[0], e1[1], [[0, GOLD.deep], [0.3, GOLD.mid], [0.55, GOLD.hi], [0.78, GOLD.light], [1, GOLD.dark]]);
+    ctx.fill();
     const ang = Math.atan2(p[1], p[0]);
-    ell(B[0], B[1], Rb, Rb * 0.36, { fill: rgrad(B[0] - u[0] * 20, B[1] - u[1] * 20, 4, Rb, [[0, '#4A2C04'], [0.6, GOLD.dark], [1, GOLD.light]]), stroke: GOLD.hi, lw: 6 }, ang);
-    // a glint running up the horn
-    if (o.glint > 0 && o.glint < 1) {
-      const g = o.glint, q = [lerp(N[0], B[0], g), lerp(N[1], B[1], g)];
-      sparkle(q[0] + p[0] * lerp(nw, Rb, g * g) * 0.4, q[1] + p[1] * lerp(nw, Rb, g * g) * 0.4, 30, '#FFFFFF', g * 4);
+    ell(B[0], B[1], Rb, Rb * 0.36, { fill: rgrad(B[0] - u[0] * 20, B[1] - u[1] * 20, 4, Rb, [[0, '#3A2204'], [0.6, GOLD.dark], [1, GOLD.light]]), stroke: null }, ang);
+    ctx.save(); ctx.globalCompositeOperation = 'screen';
+    ctx.strokeStyle = rgba(GOLD.hi, 0.5 + 0.5 * sunK); ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.ellipse(B[0], B[1], Rb, Rb * 0.36, ang, Math.PI * 0.9, Math.PI * 2.1); ctx.stroke();
+    if (glint > 0 && glint < 1) {
+      const q = [lerp(N[0], B[0], glint), lerp(N[1], B[1], glint)], r = lerp(nw, Rb, glint * glint) * 0.4;
+      glow(q[0] + p[0] * r, q[1] + p[1] * r, 34, '#FFF4D8', 0.55);
     }
     ctx.restore();
-    return [x + B[0] * s, y + B[1] * s];
+    ctx.restore();
   }
 
-  const FLOWER_COLS = ['#FFFFFF', '#FFC9DE', '#D8C8FF', '#FFE58A', '#FF9E9E', '#BFE9FF'];
+  function field(t) {
+    const sunK = easeOut(seg(t, T_SUN - 0.3, T_SUN + 2.6)), pre = seg(t, T_FIELD, T_SUN);
+    const push = easeInOut(seg(t, T_FIELD, T_ROOM));
+    shoot(t, lerp(940, 990, push), lerp(560, 520, push), lerp(1.03, 1.16, push), 0.8);
+    const wind = x => Math.sin(t * 1.1 - x * 0.004) * 0.6 + Math.sin(t * 2.3 - x * 0.011) * 0.25;
+    const sunX = 700, sunY = HORIZON + 30 - 140 * easeOut(seg(t, T_SUN - 0.6, T_ROOM));
 
-  function flower(x, y, h, grow, open, col, seed, t) {
-    if (grow <= 0) return;
-    const sway = Math.sin(t * 1.3 + seed) * h * 0.06;
-    const tx = x + sway * grow, ty = y - h * easeOut(grow);
-    stroke([[x, y], [x + sway * 0.3, y - h * 0.5 * grow], [tx, ty]], '#3F8F4E', 3 + h * 0.012, { ink: null, smooth: true });
-    if (grow > 0.5) {
-      const lk = (grow - 0.5) * 2;
-      ell(x + h * 0.08 * lk, y - h * 0.35, h * 0.09 * lk, h * 0.035 * lk, { fill: '#4FA85E', stroke: null }, -0.5);
+    // sky: violet before the sun, then gold
+    fillRectG(-600, -600, W + 1200, HORIZON + 700, lgrad(0, -200, 0, HORIZON, [
+      [0, mix('#1C1E48', '#35508A', sunK)], [0.55, mix('#6A4E88', '#D88E78', sunK)], [1, mix('#E89AA0', '#F6C890', sunK)]]));
+    glow(sunX, sunY, 800, '#FFB070', 0.2 + 0.25 * pre + 0.15 * sunK);
+    if (sunK > 0) {
+      glow(sunX, sunY, 240, '#FFF4D8', 0.6 * sunK);
+      circle(sunX, sunY, 44, { fill: rgba('#FFFBF0', sunK), stroke: null });
     }
-    if (open <= 0) return;
-    const o = backOut(clamp(open)), pr = (8 + h * 0.1) * o, n = 5 + (seed % 2);
-    for (let i = 0; i < n; i++) {
-      const a = i * TAU / n + seed + t * 0.2;
-      ell(tx + Math.cos(a) * pr * 0.75, ty + Math.sin(a) * pr * 0.75, pr * 0.8, pr * 0.42, { fill: col, stroke: null }, a);
-    }
-    circle(tx, ty, pr * 0.34, { fill: '#FFB53D', stroke: null });
-  }
-
-  function wildflower(t, lt, dur) {
-    const k = easeInOut(seg(t, T_FLOWER, T_CINEMA));
-    camBegin(960, lerp(560, 540, k), lerp(1.0, 1.08, k), 0);
-    rrect(-300, -300, 2520, 1120, 0, { fill: lgrad(0, -300, 0, 800, [[0, '#0B2430'], [0.45, '#1D5058'], [0.8, '#D99A5C'], [1, '#F6D49A']]), stroke: null });
-    glow(960, 700, 900, '#FFD08A', 0.45);
-    // far hills and the meadow
-    smooth([[-300, 780], [200, 700], [700, 740], [1200, 690], [1700, 730], [2220, 700], [2220, 1400], [-300, 1400]], { fill: '#2E5A3E', stroke: null });
-    smooth([[-300, 820], [400, 770], [960, 790], [1500, 765], [2220, 800], [2220, 1400], [-300, 1400]], { fill: lgrad(0, 760, 0, 1100, [[0, '#23503A'], [1, '#0E2A1E']]), stroke: null });
-
-    // flowers behind the trophy
-    const FL = 64, drawFlowers = back => {
-      for (let i = 0; i < FL; i++) {
-        const fx = 180 + hash(i, 11) * 1560, depth = hash(i, 12);
-        const isBack = depth < 0.45;
-        if (isBack !== back) continue;
-        const fy = 790 + depth * 250, h = 60 + depth * 170;
-        const dist = Math.abs(fx - 960) / 800;
-        const t0 = 158.7 + dist * 2.2 + hash(i, 13) * 0.35;
-        flower(fx, fy, h, seg(t, t0, t0 + 0.55), seg(t, t0 + 0.4, t0 + 0.85), FLOWER_COLS[i % FLOWER_COLS.length], i, t);
+    // soft clouds lit from below
+    layer(4, () => {
+      for (let i = 0; i < 7; i++) {
+        const cx = -200 + i * 360 + frac(t * 0.004 + hash(i, 5)) * 200, cy = 160 + hash(i, 6) * 200;
+        ell(cx, cy, 220 + hash(i, 7) * 160, 26 + hash(i, 8) * 20, { fill: rgba(mix('#B77FA8', '#FFD6A0', sunK), 0.55), stroke: null });
       }
-    };
-    drawFlowers(true);
-    // the trophy
-    const rise = easeOut(seg(t, T_FLOWER, T_FLOWER + 0.7));
-    glow(960, 560, 420, '#FFE08A', 0.35 + 0.15 * pulse(t, 4));
-    ell(960, 812, 170, 22, { fill: 'rgba(10,30,20,0.45)', stroke: null });
-    const bell = gramophone(960, 812 + (1 - rise) * 60, 1.2, { glint: seg(t, 159.6, 160.6) });
-    // petals streaming out of the horn like music
-    for (let i = 0; i < 24; i++) {
-      const born = 159.0 + i * 0.16;
-      const a = t - born;
-      if (a < 0 || a > 3.2) continue;
-      const q = a / 3.2;
-      const x = bell[0] + 40 + a * (120 + hash(i, 21) * 160) + Math.sin(a * 3 + i) * 30;
-      const y = bell[1] - 30 - a * (70 + hash(i, 22) * 90) + a * a * 10;
-      ctx.save(); ctx.globalAlpha *= Math.sin(Math.PI * q); ctx.translate(x, y); ctx.rotate(a * 3 + i);
-      ell(0, 0, 13, 7, { fill: FLOWER_COLS[i % FLOWER_COLS.length], stroke: null });
-      ctx.restore();
+      // far hills
+      ctx.beginPath(); ctx.moveTo(-600, HORIZON + 80);
+      for (let i = 0; i <= 30; i++) { const x = -600 + i * 110; ctx.lineTo(x, HORIZON - 20 - 36 * Math.sin(i * 0.5) - 20 * Math.sin(i * 1.3)); }
+      ctx.lineTo(W + 600, HORIZON + 80); ctx.fillStyle = mix('#3A3060', '#8A7A9A', sunK * 0.6); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-600, HORIZON + 80);
+      for (let i = 0; i <= 30; i++) { const x = -600 + i * 110; ctx.lineTo(x, HORIZON + 14 - 20 * Math.sin(i * 0.7 + 2)); }
+      ctx.lineTo(W + 600, HORIZON + 80); ctx.fillStyle = mix('#2A3848', '#6A7A5A', sunK * 0.6); ctx.fill();
+    });
+    if (sunK > 0) godRays(t, sunX, sunY, Math.PI * 0.35, 2.2, 1500, '#FFE2B0', 0.28 * sunK);
+
+    // the meadow: a far band of colour dots, then flowers, then the gramophone
+    fillRectG(-600, HORIZON + 20, W + 1200, 900, lgrad(0, HORIZON + 20, 0, H, [[0, mix('#3A4A58', '#9AA86A', sunK)], [0.4, mix('#23402E', '#5E8A3E', sunK)], [1, mix('#10241A', '#2E4A22', sunK)]]));
+    layer(1.4, () => {
+      for (let i = 0; i < 700; i++) {
+        const v = Math.pow(hash(i, 11), 1.6), y = HORIZON + 26 + v * 150, x = -300 + hash(i, 12) * (W + 600);
+        ctx.fillStyle = rgba(mix(FLOWER_COLS[i % FLOWER_COLS.length], '#8A7A9A', 0.3 - sunK * 0.2), 0.8);
+        const r = 1.5 + v * 3.5; ctx.fillRect(x, y, r, r * 0.8);
+      }
+    });
+    // flowers, far to near, opening one by one from the start of the shot
+    const flowers = [];
+    for (let i = 0; i < 260; i++) {
+      const v = Math.pow(hash(i, 21), 0.8), y = HORIZON + 170 + v * 340, x = -260 + hash(i, 22) * (W + 520);
+      flowers.push([y, x, v, i]);
     }
-    drawFlowers(false);
+    flowers.sort((a, b) => a[0] - b[0]);
+    let gramDone = false;
+    for (const [y, x, v, i] of flowers) {
+      if (!gramDone && y > 780) {
+        gramDone = true;
+        glow(1350, 470, 260, '#FFD27A', 0.1 + 0.2 * sunK);
+        gramophone(1270, 790, 0.82, sunK, t > T_SUN ? frac((t - T_SUN) / 3.2) * 1.4 : 0);
+      }
+      const h = 36 + v * 170 * (0.7 + 0.5 * hash(i, 23));
+      const open = seg(t, T_FIELD + 0.2 + hash(i, 24) * 3.2, T_FIELD + 1.6 + hash(i, 24) * 3.2 + 0.8);
+      flower(x, y, h, open, FLOWER_COLS[i % FLOWER_COLS.length], i, t, wind(x), sunK);
+    }
+    // blades of grass in front
+    ctx.strokeStyle = mix('#1A3424', '#46703A', sunK); ctx.lineCap = 'round';
+    for (let i = 0; i < 260; i++) {
+      const v = hash(i, 32), x = -200 + hash(i, 31) * (W + 400), y = 640 + v * 460, h = (30 + hash(i, 33) * 60) * (0.6 + v * 2.2);
+      ctx.strokeStyle = i % 3 ? mix('#1A3424', '#46703A', sunK) : mix('#24402C', '#7A9A48', sunK);
+      ctx.lineWidth = (1 + hash(i, 34) * 2) * (0.6 + v * 1.5);
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + wind(x) * 20, y - h * 0.6, x + wind(x) * h * 0.35 + (hash(i, 35) - 0.5) * 60, y - h); ctx.stroke();
+    }
+    // pollen in the sun
+    dust(t, 0, 200, W, 700, 70, '#FFF0C8');
+    // the nearest flowers and grass, out of focus
+    layer(9, () => {
+      for (let i = 0; i < 9; i++) {
+        const x = -100 + i * 260 + hash(i, 41) * 100, y = 1250;
+        flower(x, y, 380 + hash(i, 42) * 200, seg(t, T_FIELD + hash(i, 43) * 2, T_FIELD + 2.5 + hash(i, 43) * 2), FLOWER_COLS[(i * 3) % 8], i + 5, t, wind(x) * 1.4, sunK);
+      }
+    });
     camEnd();
-    flash(0.5 * kick(t, T_FLOWER, 0.3), '#FFF1C8');
-
-    yearTag(t, 158.8, '2026');
-    caption(t, 159.2, T_CINEMA - 0.05, '그래미 올해의 노래 · “Wildflower”', '2026년 2월 · 세 번째 올해의 노래상');
+    if (sunK > 0) scr(() => flare(sunX + (960 - sunX) * 0.1, sunY - 20, 1.2 * sunK, '#FFE7B0'));
+    // the whole field warms the moment the sun is up
+    scr(() => {
+      ctx.globalCompositeOperation = 'soft-light';
+      ctx.fillStyle = rgba(sunK > 0 ? '#FFB45A' : '#6A7AE0', sunK > 0 ? 0.25 * sunK : 0.25 * (1 - pre));
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = rgba('#FFE7C0', 0.35 * kick(t, T_SUN, 0.8)); ctx.fillRect(0, 0, W, H);
+    });
+    yearTag(t, 149.4, '2026');
+    caption(t, 149.8, 157.9, '“Wildflower” 그래미 올해의 노래', '2026년 2월 · 세 번째 올해의 노래상');
   }
 
-  // ---- 163.20 3D cinema -------------------------------------------------------------------------
+  // ---- 158.40 · someone else's small room -------------------------------------------------------------
 
-  const SCR = { x: 300, y: 70, w: 1320, h: 590 };
+  const DESK = 700;                                          // desk top y in the room
 
-  function concert(t, d) {
-    const { x: X, y: Y, w: Wd, h: Hd } = SCR;
-    ctx.save(); rrectPath(X, Y, Wd, Hd, 6); ctx.clip();
-    rrect(X, Y, Wd, Hd, 0, { fill: lgrad(0, Y, 0, Y + Hd, [[0, '#12071F'], [1, '#3A1240']]), stroke: null });
-    // beams
-    ctx.save(); ctx.globalCompositeOperation = 'lighter';
-    for (let i = 0; i < 6; i++) {
-      const bx = X + 140 + i * 210, sw = Math.sin(t * 1.4 + i * 1.1) * 0.35;
-      const c = i % 3 === 0 ? BIO.lime : i % 3 === 1 ? BIO.pink : '#FFFFFF';
-      const ex = bx + Math.sin(sw) * 520, ey = Y + Hd;
-      poly([[bx - 8, Y], [bx + 8, Y], [ex + 90, ey], [ex - 90, ey]], { fill: lgrad(0, Y, 0, ey, [[0, rgba(c, 0.35 + 0.25 * pulse(t, 5))], [1, rgba(c, 0)]]), stroke: null });
+  /** A child seen from behind in headphones, seated (y = seat). reach 0..1 lifts the right arm. */
+  function childBack(x, y, s, t, o = {}) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    const body = '#0E0D16', nod = Math.sin(t * Math.PI / 0.6) * 2 * (o.sing || 0);
+    const parts = [
+      () => addSmooth([[-60, 20], [-66, -90], [-82, -170], [-66, -204], [-28, -216], [28, -216], [66, -204], [82, -170], [66, -90], [60, 20]]),
+      () => ctx.rect(-16, -240, 32, 36),
+      () => { ctx.moveTo(44, -272 + nod); ctx.arc(0, -272 + nod, 44, 0, TAU); },
+      () => addSmooth([[-46, -276 + nod], [-42, -304 + nod], [-18, -322 + nod], [16, -324 + nod], [44, -306 + nod], [48, -276 + nod], [30, -256 + nod], [-30, -256 + nod]]),
+    ];
+    const fillAll = style => { ctx.fillStyle = style; for (const p of parts) { ctx.beginPath(); p(); ctx.fill(); } };
+    ctx.save(); ctx.shadowColor = rgba(o.rim || '#FFC98A', 0.8); ctx.shadowBlur = 14 * s * SCALE; ctx.shadowOffsetX = -3 * SCALE;
+    fillAll(body); ctx.restore();
+    fillAll(body);
+    // the right arm reaching forward to the interface
+    const r = o.reach || 0;
+    if (r > 0) {
+      const hx = lerp(70, 150, r), hy = lerp(-120, -150, r) + (o.press || 0) * 8;
+      stroke([[62, -190], [lerp(92, 128, r), lerp(-120, -150, r)], [hx, hy]], body, 30, { ink: null });
+      ell(hx + 6, hy, 18, 13, { fill: body, stroke: null });
     }
+    // headphones: the band over the crown and two cups, their edges catching the lamp
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#1D1B26'; ctx.lineWidth = 10;
+    ctx.beginPath(); ctx.arc(0, -272 + nod, 52, Math.PI * 1.02, Math.PI * 1.98); ctx.stroke();
+    ctx.strokeStyle = rgba('#FFC98A', 0.55); ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(0, -272 + nod, 57, Math.PI * 1.08, Math.PI * 1.5); ctx.stroke();
+    for (const side of [-1, 1]) {
+      ell(side * 50, -266 + nod, 15, 27, { fill: lgrad(side * 50 - 15, 0, side * 50 + 15, 0, [[0, '#262433'], [1, '#14121C']]), stroke: null });
+      if (side < 0) { ctx.strokeStyle = rgba('#FFC98A', 0.6); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.ellipse(-50, -266 + nod, 15, 27, 0, Math.PI * 0.6, Math.PI * 1.5); ctx.stroke(); }
+    }
+    // chair back
+    rrect(-60, -104, 120, 134, 20, { fill: lgrad(-72, 0, 72, 0, [[0, '#08070C'], [0.4, '#1A1822'], [1, '#08070C']]), stroke: null });
     ctx.restore();
-    // the stage and the singer, with the red/cyan fringes of an unfused 3D image
-    rrect(X, Y + Hd - 80, Wd, 80, 0, { fill: '#0A0510', stroke: null });
-    const sing = (dx, body, hair, a) => {
-      silhouette(960 + dx, Y + Hd - 70, 0.8, { t, pose: 'mic', body, hair, alpha: a });
-      for (let i = 0; i < 16; i++) {
-        const hx = X + 30 + i * 85 + dx * 1.6, hy = Y + Hd + 6 - hop(t + i * 0.13) * 8;
-        const cc = dx === 0 ? '#2A1838' : body;
-        circle(hx, hy - 20, 34, { fill: cc, stroke: null, alpha: a });
-        if (i % 3 === 1) stroke([[hx + 18, hy - 40], [hx + 34, hy - 110 - hop(t + i * 0.2) * 16]], cc, 16, { ink: null, alpha: a });
+  }
+
+  /** The room at night. rec = time since record was pressed (negative before). */
+  function kidRoom(t, rec, reach, press) {
+    // wall: deep blue night, warmed around the lamp
+    fillRectG(-600, -500, W + 1200, DESK + 500, lgrad(0, -300, 0, DESK, [[0, '#0A0D1C'], [1, '#161A30']]));
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = rgrad(640, 520, 20, 820, [[0, rgba('#FFB463', 0.5)], [0.5, rgba('#8A4A20', 0.15)], [1, 'rgba(0,0,0,0)']]);
+    ctx.fillRect(-600, -500, W + 1200, DESK + 500);
+    ctx.fillStyle = rgrad(1060, 560, 20, 700, [[0, rgba('#5A8CFF', 0.3)], [1, 'rgba(0,0,0,0)']]);
+    ctx.fillRect(-600, -500, W + 1200, DESK + 500);
+    ctx.restore();
+    // the window: a night city far away, out of focus
+    const WX = 1180, WY = 210, WW = 460, WH = 380;
+    layer(4, () => {
+      fillRectG(WX, WY, WW, WH, lgrad(0, WY, 0, WY + WH, [[0, '#0B1230'], [0.7, '#1E2A58'], [1, '#34305A']]));
+      for (let i = 0; i < 70; i++) {
+        const x = WX + hash(i, 91) * WW, y = WY + WH * (0.45 + 0.55 * Math.pow(hash(i, 92), 0.6));
+        circle(x, y, 3 + hash(i, 93) * 6, { fill: i % 4 ? rgba('#FFD08A', 0.8) : rgba('#BFD8FF', 0.8), stroke: null });
       }
-    };
-    if (d > 0.5) {
-      ctx.save(); ctx.globalCompositeOperation = 'lighter';
-      sing(-d, '#FF2448', '#FF2448', 0.75);
-      sing(d, '#18D8FF', '#18D8FF', 0.75);
+    });
+    ctx.fillStyle = '#05060C';
+    ctx.fillRect(WX - 16, WY - 16, WW + 32, 16); ctx.fillRect(WX - 16, WY + WH, WW + 32, 20);
+    ctx.fillRect(WX - 16, WY, 16, WH); ctx.fillRect(WX + WW, WY, 16, WH); ctx.fillRect(WX + WW / 2 - 5, WY, 10, WH);
+    // notes stuck on the wall: lyrics in progress (scribbles, no words)
+    [[760, 300, -0.05], [850, 280, 0.06], [800, 390, 0.03], [930, 360, -0.08]].forEach(([nx, ny, r], i) => {
+      ctx.save(); ctx.translate(nx, ny); ctx.rotate(r);
+      rrect(-40, -40, 80, 80, 3, { fill: ['#E8D9A0', '#E8B8C8', '#C8D8E8', '#E8D9A0'][i], stroke: null, alpha: 0.75 });
+      ctx.strokeStyle = 'rgba(40,40,70,0.5)'; ctx.lineWidth = 2;
+      for (let l = 0; l < 4; l++) { ctx.beginPath(); ctx.moveTo(-30, -24 + l * 15); for (let q = 0; q < 6; q++) ctx.lineTo(-30 + q * 10, -24 + l * 15 + Math.sin(q * 2 + i + l) * 3); ctx.stroke(); }
       ctx.restore();
-    }
-    glow(960, Y + 250, 260, BIO.pink, 0.25);
-    sing(0, '#07040C', '#1A1320', 1);
-    // crowd lights
-    for (let i = 0; i < 30; i++) {
-      const lx = X + 20 + hash(i, 91) * (Wd - 40), ly = Y + Hd - 40 - hash(i, 92) * 60 - hop(t + i * 0.1) * 6;
-      circle(lx, ly, 4, { fill: i % 2 ? BIO.lime : '#FFFFFF', stroke: null });
-    }
-    ctx.restore();
-  }
-
-  function cinemaRoom(t, d) {
-    skyFill([[0, '#0A0610'], [1, '#140B18']]);
-    glow(960, 360, 1100, '#6A4AA0', 0.25);
-    // screen frame and the screen
-    rrect(SCR.x - 18, SCR.y - 18, SCR.w + 36, SCR.h + 36, 10, { fill: '#050308', stroke: null });
-    concert(t, d);
-    // light spill on the room
+    });
+    // the desk
+    fillRectG(-600, DESK, W + 1200, 22, lgrad(0, DESK, 0, DESK + 22, [[0, '#6A4A34'], [1, '#2A1C14']]));
+    fillRectG(-600, DESK + 22, W + 1200, 600, lgrad(0, DESK + 22, 0, DESK + 400, [[0, '#120C0C'], [1, '#06050A']]));
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
-    poly([[SCR.x, SCR.y + SCR.h], [SCR.x + SCR.w, SCR.y + SCR.h], [SCR.x + SCR.w + 300, H], [SCR.x - 300, H]], { fill: lgrad(0, SCR.y + SCR.h, 0, H, [[0, 'rgba(160,110,220,0.18)'], [1, 'rgba(160,110,220,0)']]), stroke: null });
+    ell(640, DESK + 10, 360, 40, { fill: rgrad(640, DESK + 10, 0, 360, [[0, rgba('#FFC070', 0.55)], [1, 'rgba(0,0,0,0)']]), stroke: null });
     ctx.restore();
-    // two rows of seats and heads, seen from behind
-    for (let row = 0; row < 2; row++) {
-      const y = row ? 900 : 770, s = row ? 1.25 : 0.9, n = row ? 8 : 11;
+    // the lamp: base, arm, shade, and its cone of warm light
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    polyPath([[560, 395], [660, 395], [860, DESK + 10], [360, DESK + 10]]);
+    ctx.fillStyle = lgrad(0, 395, 0, DESK, [[0, rgba('#FFD08A', 0.35)], [1, rgba('#FFB060', 0.05)]]); ctx.fill();
+    ctx.restore();
+    ell(470, DESK - 4, 60, 12, { fill: '#1A1612', stroke: null });
+    stroke([[470, DESK - 8], [430, 520], [560, 380]], '#2A2420', 9, { ink: null });
+    poly([[520, 395], [690, 395], [650, 330], [560, 330]], { fill: lgrad(520, 0, 690, 0, [[0, '#1A1612'], [0.5, '#3A322A'], [1, '#1A1612']]), stroke: null });
+    glow(610, 400, 120, '#FFE0A8', 0.8);
+    fillRectG(560, 392, 90, 6, '#FFF0D0');
+    dust(t, 380, 400, 480, 300, 40, '#FFE8C8');
+    // a mug and a notebook in the lamplight
+    rrect(700, DESK - 50, 44, 50, 6, { fill: lgrad(700, 0, 744, 0, [[0, '#6A5A58'], [0.4, '#C8B0A0'], [1, '#4A3A38']]), stroke: null });
+    poly([[340, DESK - 4], [600, DESK - 8], [620, DESK], [360, DESK + 4]], { fill: '#D8C8B0', stroke: null });
+
+    // the old laptop, screen toward the child (and us)
+    const LX = 900, LY = DESK - 250, LW = 360, LH = 230;
+    poly([[LX - 20, DESK], [LX + LW + 20, DESK], [LX + LW, DESK - 18], [LX, DESK - 18]], { fill: '#2A2A32', stroke: null });
+    rrect(LX - 10, LY - 10, LW + 20, LH + 22, 10, { fill: '#1C1C22', stroke: null });
+    rrect(LX, LY, LW, LH, 3, { fill: lgrad(0, LY, 0, LY + LH, [[0, '#101A30'], [1, '#0A0F1E']]), stroke: null });
+    // the recording app: a record dot, a track, and a waveform being born
+    const recOn = rec >= 0;
+    circle(LX + 22, LY + 20, 8, { fill: recOn ? '#FF3B3B' : '#5A2A2A', stroke: null });
+    if (recOn) glow(LX + 22, LY + 20, 40, '#FF3B3B', 0.7 * (0.7 + 0.3 * Math.sin(t * 6)));
+    fillRectG(LX + 40, LY + 14, 120, 12, 'rgba(120,150,210,0.35)');
+    fillRectG(LX + 10, LY + 40, LW - 20, 1, 'rgba(160,190,255,0.3)');
+    const mid = LY + 120, x0 = LX + 16, span = LW - 32;
+    fillRectG(x0, mid, span, 1, 'rgba(120,160,255,0.35)');
+    if (recOn) {
+      const prog = clamp(rec / 5.2), n = Math.floor(prog * 120);
+      fillRectG(x0, mid - 60, span * prog, 120, 'rgba(255,70,70,0.12)');
+      ctx.fillStyle = '#FF7A7A';
       for (let i = 0; i < n; i++) {
-        const x = (i + (row ? 0.3 : 0.75)) * (W / n) - 40 + Math.sin(i * 7.3) * 20;
-        if (hash(i, row + 40) > 0.18) {
-          const hy = y - 40 * s - hop(t + i * 0.17) * 6 * s;
-          circle(x, hy, 44 * s, { fill: '#0A060E', stroke: null });
-          ctx.save(); ctx.globalCompositeOperation = 'lighter';
-          ctx.beginPath(); ctx.arc(x, hy, 44 * s, Math.PI * 1.15, Math.PI * 1.85);
-          ctx.strokeStyle = 'rgba(190,150,255,0.35)'; ctx.lineWidth = 4 * s; ctx.stroke();
-          ctx.restore();
-          stroke([[x - 44 * s, hy - 4 * s], [x - 20 * s, hy - 8 * s]], i % 2 ? '#FF3A5A' : '#3AD8FF', 4 * s, { ink: null, alpha: 0.8 });
-        }
-        rrect(x - 78 * s, y, 156 * s, 220 * s, 34 * s, { fill: row ? '#1B0F20' : '#170C1C', stroke: null });
-        rrect(x - 78 * s, y, 156 * s, 12 * s, 6 * s, { fill: 'rgba(170,120,220,0.18)', stroke: null });
+        const env = Math.max(0, Math.sin(i * 0.11) * 0.6 + 0.5) * (0.6 + 0.4 * hash(i, 97)) * clamp(i / 6);
+        const a = 2 + env * 46;
+        ctx.fillRect(x0 + i * span / 120, mid - a, span / 120 * 0.6, a * 2);
       }
+      fillRectG(x0 + span * prog, LY + 36, 2, LH - 44, '#FFFFFF');
     }
+    glow(LX + LW / 2, LY + LH / 2, 360, recOn ? '#8FA8FF' : '#6A8CFF', 0.3);
+    // the audio interface with its red button
+    rrect(1300, DESK - 44, 150, 44, 6, { fill: lgrad(0, DESK - 44, 0, DESK, [[0, '#3A3A44'], [1, '#1A1A22']]), stroke: null });
+    circle(1340, DESK - 22, 12, { fill: '#2A2A30', stroke: null });
+    circle(1405, DESK - 22, 9, { fill: recOn ? '#FF3030' : '#6A2020', stroke: null });
+    if (recOn) glow(1405, DESK - 22, 40, '#FF4040', 0.8);
+    // the mic on a little desk stand, cable trailing
+    stroke([[1130, DESK - 4], [1130, 470]], '#15141A', 6, { ink: null });
+    rrect(1112, 400, 36, 86, 16, { fill: lgrad(1112, 0, 1148, 0, [[0, '#2A2833'], [0.45, '#8A8494'], [1, '#2A2833']]), stroke: null });
+    ell(1110, 450, 8, 44, { fill: 'rgba(20,20,30,0.5)', stroke: null });
+
+    // the child, headphones on, reaching for the button
+    childBack(1250, 830, 1.15, t, { reach, press, sing: recOn ? clamp(rec) : 0 });
   }
 
-  function cinema(t, lt, dur) {
-    // the picture on the screen is doubled red/cyan until the glasses land, then it snaps sharp
-    const snap = easeInOut(seg(lt, 0.95, 1.5));
-    const d = (16 + 5 * Math.sin(t * 2.2)) * (1 - snap);
-    const drift = seg(t, T_CINEMA, T_END);
-    camBegin(960, 520 - drift * 20, 1.0 + drift * 0.05 + 0.015 * kick(t, T_CINEMA + 1.2, 0.4), 0);
-    cinemaRoom(t, d);
-    if (snap > 0 && lt < 2.2) {
-      ctx.save(); ctx.globalAlpha = 0.35 * (1 - seg(lt, 1.2, 2.2));
-      rrect(SCR.x, SCR.y, SCR.w, SCR.h, 6, { fill: '#FFFFFF', stroke: null });
-      ctx.restore();
+  function room(t) {
+    const rec = t - T_REC;
+    const reach = easeInOut(seg(t, 159.9, 160.7)) * (1 - easeInOut(seg(t, 161.4, 162.3)));
+    const press = Math.exp(-Math.pow((t - T_REC) / 0.12, 2));
+    const k = easeInOut(seg(t, 158.9, 161.0));                     // through the door
+    const push = easeInOut(seg(t, 160.4, T_CITY));
+    shoot(t, lerp(1000, 1180, push), lerp(560, 560, push), lerp(1.0, 1.18, push) * lerp(1.12, 1, k), 0.7);
+    kidRoom(t, rec, reach, press);
+    camEnd();
+
+    // the doorway: two dark leaves and a sliver of warm light between them, as in the first shot
+    const gap = lerp(18, 2400, easeIn(k));
+    scr(() => {
+      const L = W / 2 - gap / 2, R = W / 2 + gap / 2;
+      const door = lgrad(0, 0, 0, H, [[0, '#050409'], [1, '#0C0A10']]);
+      ctx.fillStyle = door; ctx.fillRect(-10, -10, L + 10, H + 20); ctx.fillRect(R, -10, W - R + 10, H + 20);
+      if (k < 0.98) {
+        ctx.globalCompositeOperation = 'lighter';
+        const edge = lgrad(L - 90, 0, L, 0, [[0, 'rgba(0,0,0,0)'], [1, rgba('#FFC080', 0.35 * (1 - k))]]);
+        ctx.fillStyle = edge; ctx.fillRect(L - 90, 0, 90, H);
+        ctx.fillStyle = lgrad(R, 0, R + 90, 0, [[0, rgba('#FFC080', 0.35 * (1 - k))], [1, 'rgba(0,0,0,0)']]); ctx.fillRect(R, 0, 90, H);
+        // light spilling on the floor toward us
+        polyPath([[L, 820], [R, 820], [R + 520, H + 20], [L - 380, H + 20]]);
+        ctx.fillStyle = lgrad(0, 820, 0, H, [[0, rgba('#FFC080', 0.4 * (1 - k))], [1, rgba('#FFC080', 0.05)]]); ctx.fill();
+      }
+    });
+    if (k < 0.5) scr(() => { ctx.save(); ctx.beginPath(); ctx.rect(W / 2 - gap / 2 - 30, 0, gap + 60, H); ctx.clip(); dust(t, W / 2 - 60, 132, 120, 816, 30, '#FFE8C8'); ctx.restore(); });
+    // up from the white of the field's last frame? no: a soft dip to black at the cut
+    scr(() => { ctx.fillStyle = `rgba(0,0,0,${1 - easeOut(seg(t, T_ROOM, T_ROOM + 0.5))})`; ctx.fillRect(0, 0, W, H); });
+    scr(() => fillRectG(0, 640, W, 320, lgrad(0, 640, 0, 948, [[0, 'rgba(4,4,8,0)'], [1, 'rgba(4,4,8,0.6)']])));
+    narration(t, 159.0, 165.6, '지금 이 순간에도\n어느 작은 방에서, 누군가 첫 노래를 만든다', { y: 836, size: 54 });
+  }
+
+  // ---- 166.00 · a city of small rooms ------------------------------------------------------------
+
+  // the child's building and its grid; the hero window is one cell of it
+  const BLD = { x: 990, y: 380, w: 320, h: 900, cols: 6, rows: 20, wh: 44 };
+  const CELL = BLD.w / BLD.cols;
+  const HERO = { x: BLD.x + 2 * CELL + CELL * 0.2, y: BLD.y + 20 + 5 * BLD.wh, w: CELL * 0.6, h: BLD.wh * 0.6 };
+
+  /** One lit window: a warm or cool room glow, blinds or a curtain, now and then a figure at a desk. */
+  function cityWindow(x, y, w, h, i, on) {
+    fillRectG(x - w * 0.06, y - h * 0.06, w * 1.12, h * 1.16, '#080A14');
+    if (on <= 0.01) { fillRectG(x, y, w, h, lgrad(0, y, 0, y + h, [[0, '#141A30'], [1, '#0B0E1A']])); return; }
+    const warm = hash(i, 101) < 0.7;
+    const c1 = warm ? mix('#FFD9A0', '#FFB870', hash(i, 106)) : '#B8D2FF', c2 = warm ? '#B8662E' : '#3E5AB8';
+    ctx.save(); ctx.globalAlpha = on;
+    fillRectG(x, y, w, h, lgrad(x, y, x + w * 0.3, y + h, [[0, c1], [1, c2]]));
+    const kind = hash(i, 102);
+    if (kind < 0.3) {                                      // blinds
+      ctx.fillStyle = 'rgba(255,245,225,0.22)';
+      for (let q = 0; q < 7; q++) ctx.fillRect(x, y + q * h / 7, w, h * 0.05);
+    } else if (kind < 0.55) {                              // a curtain drawn half across
+      fillRectG(x, y, w * 0.35, h, lgrad(x, 0, x + w * 0.35, 0, [[0, rgba(c2, 0.9)], [1, rgba(c2, 0.4)]]));
+    } else if (kind < 0.7) {                               // someone up late at a desk
+      ctx.fillStyle = 'rgba(14,10,20,0.92)';
+      ctx.beginPath(); ctx.arc(x + w * 0.58, y + h * 0.5, h * 0.12, 0, TAU); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(x + w * 0.42, y + h); ctx.quadraticCurveTo(x + w * 0.44, y + h * 0.64, x + w * 0.58, y + h * 0.63);
+      ctx.quadraticCurveTo(x + w * 0.72, y + h * 0.64, x + w * 0.74, y + h); ctx.fill();
+    }
+    fillRectG(x, y + h * 0.9, w, h * 0.1, 'rgba(0,0,0,0.25)');   // sill shadow
+    ctx.restore();
+  }
+
+  function block(bx, by, bw, bh, seed, t, cols, rows) {
+    fillRectG(bx, by, bw, bh, lgrad(bx, 0, bx + bw, 0, [[0, '#0C0F20'], [0.5, '#131730'], [1, '#090B16']]));
+    const ww = bw / cols, wh = 40;
+    for (let r = 0; r * wh < bh - 20; r++) for (let c = 0; c < cols; c++) {
+      const i = seed * 1000 + r * 50 + c;
+      const on = hash(i, 103) < 0.5 ? 1 : clamp((t - (166.4 + hash(i, 104) * 5)) / 0.3) * (hash(i, 105) < 0.6 ? 1 : 0);
+      cityWindow(bx + c * ww + ww * 0.22, by + 16 + r * wh, ww * 0.56, wh * 0.55, i, on);
+    }
+    if (hash(seed, 7) < 0.5) { fillRectG(bx + bw * 0.6, by - 40, 3, 40, '#0A0C18'); glow(bx + bw * 0.6 + 1, by - 40, 14, '#FF4040', 0.4 + 0.4 * Math.sin(t * 3 + seed)); }
+  }
+
+  function city(t) {
+    const k = easeInOut(seg(t, T_CITY, 171.4));
+    const Z = Math.exp(lerp(Math.log(9), Math.log(1.0), k));
+    const [hx, hy, hr] = handheld(t, 0.6);
+    const par = f => 1 + (Z - 1) * f;
+    const cxW = lerp(HERO.x + HERO.w / 2, 960, k), cyW = lerp(HERO.y + HERO.h / 2, 560, k);
+    const layerCam = f => camBegin(lerp(960, cxW, f) + hx / par(f), lerp(560, cyW, f) + hy / par(f), par(f), hr);
+
+    // sky: night, with the first thin light of dawn along the horizon
+    scr(() => {
+      fillRectG(0, 0, W, H, lgrad(0, 0, 0, H, [[0, '#03050F'], [0.5, '#0E1636'], [0.72, '#262A58'], [0.86, '#5A3E66'], [1, '#8A5A6A']]));
+      for (let i = 0; i < 140; i++) {
+        const x = hash(i, 111) * W, y = 132 + hash(i, 112) * 420;
+        ctx.globalAlpha = (0.25 + 0.6 * hash(i, 113)) * (0.6 + 0.4 * Math.sin(t * 2 + i));
+        fillRectG(x, y, 2, 2, '#FFFFFF');
+      }
+      ctx.globalAlpha = 1;
+      glow(1250, 820, 1000, '#FFB08A', 0.16 + 0.14 * k);
+    });
+    // the far skyline, soft
+    layerCam(0.3);
+    layer(3, () => {
+      for (let i = 0; i < 30; i++) {
+        const bx = -500 + i * 105 + hash(i, 121) * 40, bh = 110 + hash(i, 122) * 250, bw = 80 + hash(i, 123) * 70;
+        fillRectG(bx, 700 - bh, bw, bh + 600, '#0B0F22');
+        for (let j = 0; j < bh / 16; j++) for (let c = 0; c < 5; c++) {
+          if (hash(i * 97 + j, c) < 0.45) continue;
+          fillRectG(bx + 6 + c * (bw - 12) / 5, 700 - bh + 10 + j * 16, 5, 7, hash(i + j, c + 9) < 0.7 ? '#FFC77A' : '#9CC0FF');
+        }
+      }
+      ctx.fillStyle = lgrad(0, 560, 0, 900, [[0, 'rgba(120,90,140,0)'], [1, 'rgba(120,90,140,0.35)']]); ctx.fillRect(-1500, 560, 5000, 400);
+    });
+    camEnd();
+    // the middle blocks
+    layerCam(0.65);
+    for (let i = 0; i < 11; i++) {
+      const bw = 170 + hash(i, 133) * 90, bx = -420 + i * 250 + hash(i, 131) * 40, bh = 260 + hash(i, 132) * 320;
+      if (i === 5 || i === 6) continue;
+      block(bx, 800 - bh, bw, bh + 500, i + 10, t, Math.max(3, Math.round(bw / 55)));
     }
     camEnd();
-    // the 3D glasses fly in and settle in the front row, bottom right
-    const fly = easeOut(seg(lt, 0.2, 1.1));
-    const gx = lerp(2300, 1450, fly), gy = lerp(1250, 800, fly) + Math.sin(t * 1.6) * 5 - backOut(fly) * 0 ;
-    const gs = 0.66 * (1 + seg(lt, 1.1, 4.8) * 0.06), grot = lerp(-0.6, -0.1, fly) + Math.sin(t * 1.1) * 0.015;
-    const lens = [[-295, 0, '#FF2E4E'], [295, 0, '#22D6FF']];
-    const LW = 500, LH = 290;
-    ctx.save(); ctx.translate(gx, gy); ctx.rotate(grot); ctx.scale(gs, gs);
-    // temples reaching back
-    for (const side of [-1, 1]) stroke([[side * 570, -80], [side * 700, -150]], '#F2ECE0', 26, { ink: BIO.ink, olw: 6 });
-    for (const [lx, ly, c] of lens) {
-      rrect(lx - LW / 2, ly - LH / 2, LW, LH, 70, { fill: rgba(c, 0.42), stroke: null });
-      ctx.save(); rrectPath(lx - LW / 2, ly - LH / 2, LW, LH, 70); ctx.clip();
-      poly([[lx - 140, ly + 200], [lx - 80, ly + 200], [lx + 40, ly - 200], [lx - 20, ly - 200]], { fill: 'rgba(255,255,255,0.22)', stroke: null });
-      poly([[lx - 40, ly + 200], [lx - 20, ly + 200], [lx + 100, ly - 200], [lx + 80, ly - 200]], { fill: 'rgba(255,255,255,0.14)', stroke: null });
-      ctx.restore();
-    }
-    // the cardboard frame
-    ctx.beginPath();
-    ctx.roundRect(-600, -LH / 2 - 44, 1200, LH + 88, 90);
-    for (const [lx, ly] of lens) ctx.roundRect(lx - LW / 2, ly - LH / 2, LW, LH, 70);
-    ctx.fillStyle = '#F2ECE0'; ctx.fill('evenodd');
-    ctx.strokeStyle = BIO.ink; ctx.lineWidth = 6; ctx.stroke();
-    // nose notch
-    ctx.beginPath(); ctx.moveTo(-50, LH / 2 + 46); ctx.quadraticCurveTo(0, LH / 2 - 30, 50, LH / 2 + 46); ctx.closePath();
-    ctx.fillStyle = BIO.ink; ctx.fill();
-    ctx.restore();
-
-    fillScreen('#000000', 0.8 * seg(t, 167.5, T_END));
-    caption(t, 163.8, T_END - 0.05, '투어 실황 3D 영화 개봉', '2026년 5월 · 제임스 캐머런과 공동 연출');
-  }
-
-  // ---- 168.00 back to the waveform --------------------------------------------------------------
-
-  function ending(t, lt, dur) {
-    fillScreen(BIO.ink);
-    const fade = 1 - seg(t, 170.2, 171.6);
-    const amp = 150 * (1 - 0.85 * seg(t, 168.4, 171.4)) * (0.75 + 0.25 * Math.sin(t * 2.6));
-    const reach = easeOut(seg(t, T_END, 168.7));
-    const cy = 600, half = 760 * reach;
-    if (fade > 0 && half > 1) {
-      const pts = [];
-      for (let x = -half; x <= half; x += 8) {
-        const u = x / 760, env = Math.pow(Math.cos(u * Math.PI / 2), 2);
-        const y = cy + amp * env * (0.6 * Math.sin(x * 0.021 - t * 5) + 0.4 * Math.sin(x * 0.047 + t * 3.1)) * Math.sin(x * 0.006 + 1.3 + t * 0.4);
-        pts.push([960 + x, y]);
+    // the child's building
+    layerCam(1);
+    const B = BLD;
+    fillRectG(B.x, B.y, B.w, B.h, lgrad(B.x, 0, B.x + B.w, 0, [[0, '#10132A'], [0.5, '#171B36'], [1, '#0C0E1E']]));
+    fillRectG(B.x - 6, B.y - 10, B.w + 12, 10, '#0A0C18');
+    for (let r = 0; r < B.rows; r++) {
+      fillRectG(B.x, B.y + 12 + r * B.wh, B.w, 2, 'rgba(0,0,0,0.25)');
+      for (let c = 0; c < B.cols; c++) {
+        if (r === 5 && c === 2) continue;
+        const i = 5000 + r * 50 + c;
+        const on = hash(i, 103) < 0.45 ? 1 : clamp((t - (166.6 + hash(i, 104) * 4.5)) / 0.3) * (hash(i, 105) < 0.6 ? 1 : 0);
+        cityWindow(B.x + c * CELL + CELL * 0.2, B.y + 20 + r * B.wh, HERO.w, HERO.h, i, on);
       }
-      glow(960, cy, 700, BIO.lime, 0.12 * fade);
-      stroke(pts, rgba(BIO.lime, 0.18 * fade), 26, { ink: null });
-      stroke(pts, BIO.lime, 6, { ink: null, alpha: fade });
     }
-    bigFact(t, 168.4, 171.6, '이야기는 계속된다', 960, 400, 110);
-    const ck = Math.min(clamp((t - 169.0) / 0.6), clamp((171.6 - t) / 0.5));
-    if (ck > 0) letter('영상·음악 · Claude Code 로 만들었어요 (원곡 미사용)', 960, 960, 34, '#CFC8DE', { font: 'round', lw: 0, shadow: null, alpha: ck });
+    // the hero window: lamp light on the left, the laptop's blue, the child in headphones
+    const { x: wx, y: wy, w: w0, h: h0 } = HERO;
+    fillRectG(wx - 2, wy - 2, w0 + 4, h0 + 4.5, '#080A14');
+    fillRectG(wx, wy, w0, h0, lgrad(wx, wy, wx + w0, wy + h0, [[0, '#FFD89A'], [0.5, '#B8703A'], [1, '#3A4A8A']]));
+    ctx.save(); ctx.beginPath(); ctx.rect(wx, wy, w0, h0); ctx.clip();
+    glow(wx + 6, wy + 8, 14, '#FFF0C8', 0.9);                    // the lamp
+    fillRectG(wx + 3, wy + 7.5, 6, 1.4, '#2A2018');
+    fillRectG(wx, wy + h0 * 0.78, w0, h0 * 0.22, '#1A120E');       // desk edge
+    const cx0 = wx + w0 * 0.6;
+    glow(cx0, wy + h0 * 0.62, 12, '#8FB0FF', 0.7);                // the laptop, facing the child
+    ctx.fillStyle = '#0C0A12';                                    // the child, facing us, a silhouette
+    ctx.beginPath(); ctx.arc(cx0, wy + h0 * 0.36, 2.9, 0, TAU); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx0 - 5.5, wy + h0); ctx.quadraticCurveTo(cx0 - 5, wy + h0 * 0.52, cx0, wy + h0 * 0.52);
+    ctx.quadraticCurveTo(cx0 + 5, wy + h0 * 0.52, cx0 + 5.5, wy + h0); ctx.fill();
+    ctx.strokeStyle = '#0C0A12'; ctx.lineWidth = 0.9;
+    ctx.beginPath(); ctx.arc(cx0, wy + h0 * 0.36, 3.7, Math.PI * 1.0, Math.PI * 2.0); ctx.stroke();
+    ell(cx0 - 3.6, wy + h0 * 0.39, 1.1, 1.8, { fill: '#0C0A12', stroke: null }); ell(cx0 + 3.6, wy + h0 * 0.39, 1.1, 1.8, { fill: '#0C0A12', stroke: null });
+    ctx.strokeStyle = rgba('#FFD08A', 0.6); ctx.lineWidth = 0.35;
+    ctx.beginPath(); ctx.arc(cx0, wy + h0 * 0.36, 3.95, Math.PI * 1.05, Math.PI * 1.45); ctx.stroke();
+    fillRectG(cx0 - 4.5, wy + h0 * 0.64, 9, 5.5, '#101018');     // the laptop's back, lit at the edge
+    fillRectG(cx0 - 4.5, wy + h0 * 0.64, 9, 0.4, rgba('#9CC0FF', 0.8));
+    fillRectG(wx + w0 * 0.22, wy, w0 * 0.1, h0, 'rgba(255,230,190,0.18)'); // a sheer curtain
+    ctx.restore();
+    fillRectG(wx + w0 / 2 - 0.35, wy, 0.7, h0, '#0A0C18');
+    fillRectG(wx - 3, wy + h0 + 1, w0 + 6, 1.4, '#262B44');
+    glow(wx + w0 / 2, wy + h0 / 2, 80, '#FFC07A', 0.22);
+    camEnd();
+    // near rooftops, soft, sliding in at the bottom
+    layerCam(1.25);
+    layer(5, () => {
+      fillRectG(-500, 950, 1250, 600, '#05060C');
+      fillRectG(1560, 915, 900, 600, '#05060C');
+      fillRectG(1700, 860, 6, 60, '#05060C');
+      glow(1703, 860, 30, '#FF5050', 0.5 + 0.3 * Math.sin(t * 2.4));
+    });
+    camEnd();
+    // a soft dark bed for the last words
+    scr(() => { ctx.fillStyle = rgrad(W / 2, 330, 40, 700, [[0, 'rgba(4,5,12,0.5)'], [1, 'rgba(4,5,12,0)']]); ctx.fillRect(0, 0, W, 800); });
+
+    narration(t, 166.4, 170.4, '다음은, 당신 차례다', { y: 330, size: 66, per: 0.07 });
+    // the credit, small, in the lower bar as it closes
+    const ck = Math.min(clamp((t - 168.0) / 0.6), clamp((171.2 - t) / 0.5));
+    if (ck > 0) {
+      const draw = () => {
+        ctx.save(); ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+        ctx.globalAlpha = ck; ctx.font = `28px ${FONT.round}`; ctx.fillStyle = '#B9B3C8';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('영상·음악 · Claude Code 로 만들었어요 (원곡 미사용)', W / 2, H - 66);
+        ctx.restore();
+      };
+      if (typeof barCaptions !== 'undefined') barCaptions.push(draw); else draw();
+    }
   }
 
-  chapter('now', T_SEA, T_OUT, [[T_SEA, sea], [T_GLOBE, globe], [T_FLOWER, wildflower], [T_CINEMA, cinema], [T_END, ending]]);
+  chapter('now', T_SEA, T_OUT, [[T_SEA, stadium], [T_FIELD, field], [T_ROOM, room], [T_CITY, city]]);
 })();

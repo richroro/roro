@@ -158,8 +158,24 @@ function quote(t, t0, t1, text, who) {
 
 // ---- realism helpers ----------------------------------------------------------------------------
 
+// Paint fn() into an offscreen layer, then blur the whole layer once (a filter on the main
+// context would blur every draw call separately, which is slow).
+const blurLayers = [];
 function withBlur(px, fn) {
-  ctx.save(); ctx.filter = `blur(${px * SCALE}px)`; fn(); ctx.restore();
+  const depth = blurLayers.length;
+  if (!blurLayers[depth]) blurLayers[depth] = document.createElement('canvas');
+  const layer = blurLayers[depth];
+  if (layer.width !== cv.width || layer.height !== cv.height) { layer.width = cv.width; layer.height = cv.height; }
+  const lctx = layer.getContext('2d');
+  lctx.setTransform(1, 0, 0, 1, 0, 0); lctx.clearRect(0, 0, layer.width, layer.height);
+  lctx.setTransform(ctx.getTransform()); lctx.globalAlpha = ctx.globalAlpha;
+  const main = ctx;
+  blurLayers.length = depth + 1;
+  ctx = lctx;
+  try { fn(); } finally { ctx = main; blurLayers.length = depth; blurLayers[depth] = layer; }
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  ctx.filter = `blur(${px * SCALE}px)`; ctx.drawImage(layer, 0, 0);
+  ctx.restore();
 }
 
 function godRays(t, x, y, angle, spread, len, color, alpha = 0.25) {
