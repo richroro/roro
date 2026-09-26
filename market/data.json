@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T04:44:05.494664+09:00",
+  "updatedAt": "2026-09-27T07:39:10.439694+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,96 @@
   ],
   "news": [
     {
+      "title": "1천조 시장 열리는 AI반도체…\"정부, 공급망 진출 지원해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923100300003",
+      "pubDate": "Sun, 27 Sep 2026 07:31:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상장사 3분기 실적 전망치 변화는…삼전닉스 상향 조정",
+      "link": "https://www.yna.co.kr/view/AKR20260923161100008",
+      "pubDate": "Sun, 27 Sep 2026 07:15:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "경기도, 내년 개발제한구역 주민지원사업 국비 123억원 확보",
+      "link": "https://www.yna.co.kr/view/AKR20260923130100061",
+      "pubDate": "Sun, 27 Sep 2026 07:01:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"AI 전기 너무 먹네\" 골치였는데…삼성도 꽂힌 신기술 나왔다",
+      "link": "https://www.hankyung.com/article/202609276925i",
+      "pubDate": "Sun, 27 Sep 2026 07:00:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "스테이블코인도 '은행업'처럼…Fed, 2영업일 환매·100% 준비금 추진 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609266710i",
+      "pubDate": "Sun, 27 Sep 2026 07:00:14 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"농기계 회사가 자율주행 한다고?\"…75년 기업의 '대변신'",
+      "link": "https://www.hankyung.com/article/202609229954i",
+      "pubDate": "Sun, 27 Sep 2026 07:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "입법조사처 \"가축전염병 느는데…수의직 공무원 결원율 34%\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923179400030",
+      "pubDate": "Sun, 27 Sep 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"35년 삼성맨인데 인턴입니다\"…62세에 다시 출근한 이유 [장서우의 하입:hype]",
+      "link": "https://www.hankyung.com/article/202609234199i",
+      "pubDate": "Sun, 27 Sep 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[마켓인사이트] 추석 연휴서 돌아온 韓증시, 상승흐름 이어갈까",
+      "link": "https://www.yna.co.kr/view/AKR20260926021000008",
+      "pubDate": "Sun, 27 Sep 2026 07:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"직원은 수억원 주면서 우리는?\"…반도체 성과급 잔치의 그늘 [강진구의 회사법 뜨락]",
+      "link": "https://www.hankyung.com/article/202609234174i",
+      "pubDate": "Sun, 27 Sep 2026 07:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[반려동물] \"펫로스는 노령기부터 지원 필요…동물병원비 부담은 낮춰야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923177200030",
+      "pubDate": "Sun, 27 Sep 2026 06:30:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "작년 360억원 쏟은 K푸드 수출 지원…지원 기업 53% 수출액 감소",
+      "link": "https://www.yna.co.kr/view/AKR20260926039900030",
+      "pubDate": "Sun, 27 Sep 2026 06:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"8월 오디세이·스파이더맨에 4명 중 1명 2회 이상 영화관람\"",
+      "link": "https://www.yna.co.kr/view/AKR20260926043700002",
+      "pubDate": "Sun, 27 Sep 2026 06:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "최수진 \"한중 FTA 10년…경제적 효과는 정부예상치 4 분의 1\"",
+      "link": "https://www.yna.co.kr/view/AKR20260922148900001",
+      "pubDate": "Sun, 27 Sep 2026 06:00:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"조달청, 외부선임 소송 패소율 41%…직접 수행 두배\"",
+      "link": "https://www.yna.co.kr/view/AKR20260926036400002",
+      "pubDate": "Sun, 27 Sep 2026 05:59:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "\"이러다 中에 빼앗긴다\"…삼전닉스 동시에 달려간 '이 나라'",
       "link": "https://www.hankyung.com/article/202609217576i",
       "pubDate": "Sat, 26 Sep 2026 22:30:01 +0900",
@@ -140,96 +230,6 @@
       "link": "https://www.hankyung.com/article/202609221940i",
       "pubDate": "Sat, 26 Sep 2026 15:00:07 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "20대부터 80대까지, 한눈에 보는 은퇴 자산관리",
-      "link": "https://www.hankyung.com/article/202609171357i",
-      "pubDate": "Sat, 26 Sep 2026 15:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"한국이란 나라는 몰라도…\" 네덜란드 마트 싹쓸이한 '이것' [현장+]",
-      "link": "https://www.hankyung.com/article/202609168429g",
-      "pubDate": "Sat, 26 Sep 2026 14:59:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"10년 전 1억 주고 샀다면 지금쯤…\" 압도적 수익률 1위는",
-      "link": "https://www.hankyung.com/article/2026092665447",
-      "pubDate": "Sat, 26 Sep 2026 14:03:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "농지 전수조사가 던진 숙제, 세제도 함께 점검해야 [고인선의 택스인사이트]",
-      "link": "https://www.hankyung.com/article/202609266328i",
-      "pubDate": "Sat, 26 Sep 2026 14:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "잘 팔리는 韓 무기, 유럽의 'SAFE'가 걸림돌 된다는데…왜?",
-      "link": "https://www.hankyung.com/article/202609266550i",
-      "pubDate": "Sat, 26 Sep 2026 13:25:50 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한국제품 수입규제 상반기 241건…작년 하반기보다 11건 늘어",
-      "link": "https://www.yna.co.kr/view/AKR20260923164700003",
-      "pubDate": "Sat, 26 Sep 2026 11:31:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "UAE와 방산협력에 수혜 기대…\"방산주 추세전환 동력 전망\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923166300008",
-      "pubDate": "Sat, 26 Sep 2026 11:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20260926022700011",
-      "pubDate": "Sat, 26 Sep 2026 10:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[바이오사이언스] 신약 찾고 스타트업 키우고…협력 넓히는 K바이오",
-      "link": "https://www.yna.co.kr/view/AKR20260923099000017",
-      "pubDate": "Sat, 26 Sep 2026 10:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "환율 하락에 항공주는 웃고 해운주 울고…식음료는 딜레마",
-      "link": "https://www.yna.co.kr/view/AKR20260923156800008",
-      "pubDate": "Sat, 26 Sep 2026 10:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "전세사기 막을 공인중개사 설명의무 위반 3년 새 4.6배↑",
-      "link": "https://www.yna.co.kr/view/AKR20260923181000003",
-      "pubDate": "Sat, 26 Sep 2026 09:31:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "주금공 PF보증 예상손실률 3년 새 13배로…충당부채 15배",
-      "link": "https://www.yna.co.kr/view/AKR20260924048600002",
-      "pubDate": "Sat, 26 Sep 2026 09:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "채명기 경기도의원 \"개발사업 때 교통·교육 평가 명확해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923082700061",
-      "pubDate": "Sat, 26 Sep 2026 09:05:11 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "전남광주 통합 공무원 시험 '거주지 제한' 대폭 완화",
-      "link": "https://www.yna.co.kr/view/AKR20260923156300054",
-      "pubDate": "Sat, 26 Sep 2026 09:05:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "울산시, 다태아 가정 안심보험 지원…의료비 최대 500만원 보장",
-      "link": "https://www.yna.co.kr/view/AKR20260923128900057",
-      "pubDate": "Sat, 26 Sep 2026 09:00:08 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
