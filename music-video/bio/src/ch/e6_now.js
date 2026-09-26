@@ -423,8 +423,9 @@
       silhouette(960 + dx, Y + Hd - 70, 0.8, { t, pose: 'mic', body, hair, alpha: a });
       for (let i = 0; i < 16; i++) {
         const hx = X + 30 + i * 85 + dx * 1.6, hy = Y + Hd + 6 - hop(t + i * 0.13) * 8;
-        circle(hx, hy - 20, 34, { fill: body, stroke: null, alpha: a });
-        if (i % 3 === 1) stroke([[hx + 18, hy - 40], [hx + 34, hy - 110 - hop(t + i * 0.2) * 16]], body, 16, { ink: null, alpha: a });
+        const cc = dx === 0 ? '#2A1838' : body;
+        circle(hx, hy - 20, 34, { fill: cc, stroke: null, alpha: a });
+        if (i % 3 === 1) stroke([[hx + 18, hy - 40], [hx + 34, hy - 110 - hop(t + i * 0.2) * 16]], cc, 16, { ink: null, alpha: a });
       }
     };
     if (d > 0.5) {
@@ -474,33 +475,32 @@
   }
 
   function cinema(t, lt, dur) {
-    const d = 16 + 5 * Math.sin(t * 2.2);
+    // the picture on the screen is doubled red/cyan until the glasses land, then it snaps sharp
+    const snap = easeInOut(seg(lt, 0.95, 1.5));
+    const d = (16 + 5 * Math.sin(t * 2.2)) * (1 - snap);
     const drift = seg(t, T_CINEMA, T_END);
-    camBegin(960, 520 - drift * 20, 1.0 + drift * 0.05, 0);
+    camBegin(960, 520 - drift * 20, 1.0 + drift * 0.05 + 0.015 * kick(t, T_CINEMA + 1.2, 0.4), 0);
     cinemaRoom(t, d);
+    if (snap > 0 && lt < 2.2) {
+      ctx.save(); ctx.globalAlpha = 0.35 * (1 - seg(lt, 1.2, 2.2));
+      rrect(SCR.x, SCR.y, SCR.w, SCR.h, 6, { fill: '#FFFFFF', stroke: null });
+      ctx.restore();
+    }
     camEnd();
-    // the 3D glasses drop in front of the camera: through the lenses the picture is sharp
-    const gy = kf(lt, [[0.25, -300], [1.05, 395]], easeOut) + Math.sin(t * 1.6) * 5;
-    const gs = 0.62 * (1 + seg(lt, 1.1, 4.8) * 0.12), gx = 777, grot = -0.04 + Math.sin(t * 1.1) * 0.012;
+    // the 3D glasses fly in and settle in the front row, bottom right
+    const fly = easeOut(seg(lt, 0.2, 1.1));
+    const gx = lerp(2300, 1450, fly), gy = lerp(1250, 800, fly) + Math.sin(t * 1.6) * 5 - backOut(fly) * 0 ;
+    const gs = 0.66 * (1 + seg(lt, 1.1, 4.8) * 0.06), grot = lerp(-0.6, -0.1, fly) + Math.sin(t * 1.1) * 0.015;
     const lens = [[-295, 0, '#FF2E4E'], [295, 0, '#22D6FF']];
     const LW = 500, LH = 290;
     ctx.save(); ctx.translate(gx, gy); ctx.rotate(grot); ctx.scale(gs, gs);
     // temples reaching back
     for (const side of [-1, 1]) stroke([[side * 570, -80], [side * 700, -150]], '#F2ECE0', 26, { ink: BIO.ink, olw: 6 });
     for (const [lx, ly, c] of lens) {
-      ctx.save();
-      rrectPath(lx - LW / 2, ly - LH / 2, LW, LH, 70); ctx.clip();
-      // the crisp picture behind this lens
-      ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
-      camBegin(960, 520 - drift * 20, 1.05 + drift * 0.05, 0);
-      cinemaRoom(t, 0);
-      camEnd();
-      ctx.fillStyle = rgba(c, 0.1); ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = 'rgba(255,255,255,0.05)'; ctx.fillRect(0, 0, W, H);
-      ctx.restore();
-      // sheen on the lens
+      rrect(lx - LW / 2, ly - LH / 2, LW, LH, 70, { fill: rgba(c, 0.42), stroke: null });
       ctx.save(); rrectPath(lx - LW / 2, ly - LH / 2, LW, LH, 70); ctx.clip();
-      poly([[lx - 140, ly + 200], [lx - 80, ly + 200], [lx + 40, ly - 200], [lx - 20, ly - 200]], { fill: 'rgba(255,255,255,0.12)', stroke: null });
+      poly([[lx - 140, ly + 200], [lx - 80, ly + 200], [lx + 40, ly - 200], [lx - 20, ly - 200]], { fill: 'rgba(255,255,255,0.22)', stroke: null });
+      poly([[lx - 40, ly + 200], [lx - 20, ly + 200], [lx + 100, ly - 200], [lx + 80, ly - 200]], { fill: 'rgba(255,255,255,0.14)', stroke: null });
       ctx.restore();
     }
     // the cardboard frame
