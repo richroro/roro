@@ -1,0 +1,845 @@
+<title>아이랑 나들이 수첩</title>
+<meta name="description" content="초등학생 아이와 함께 가기 좋은 전국 나들이 장소를 지역·종류·날씨·학년별로 골라 보는 추천 앱">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#F4F7F2;
+  --surface:#FFFFFF;
+  --surface-2:#EAF0E6;
+  --ink:#1E2A22;
+  --ink-soft:#56645A;
+  --line:#D5DED0;
+  --green:#2C8A55;
+  --green-ink:#FFFFFF;
+  --yellow:#FFC83D;
+  --yellow-ink:#3A2C00;
+  --stamp:#D23F36;
+  --focus:#1F6FD1;
+  --t-sci:#2F78C4;
+  --t-hist:#A0662A;
+  --t-nat:#2C8A55;
+  --t-ani:#138A8A;
+  --t-play:#C9468E;
+  --t-art:#7457C2;
+  --shadow:0 1px 2px rgba(30,42,34,.06),0 6px 18px rgba(30,42,34,.06);
+  --display:"Jua","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#131915;
+    --surface:#1B231E;
+    --surface-2:#232E27;
+    --ink:#E6EEE7;
+    --ink-soft:#9DAEA2;
+    --line:#2F3C33;
+    --green:#4DB57A;
+    --green-ink:#0C1A11;
+    --yellow:#F2BE3A;
+    --yellow-ink:#2A1F00;
+    --stamp:#F0675D;
+    --focus:#7FB2FF;
+    --t-sci:#6FA8E8;
+    --t-hist:#D39A5C;
+    --t-nat:#5CC48A;
+    --t-ani:#4CC2C2;
+    --t-play:#EA7DB6;
+    --t-art:#A58BEA;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#131915;
+  --surface:#1B231E;
+  --surface-2:#232E27;
+  --ink:#E6EEE7;
+  --ink-soft:#9DAEA2;
+  --line:#2F3C33;
+  --green:#4DB57A;
+  --green-ink:#0C1A11;
+  --yellow:#F2BE3A;
+  --yellow-ink:#2A1F00;
+  --stamp:#F0675D;
+  --focus:#7FB2FF;
+  --t-sci:#6FA8E8;
+  --t-hist:#D39A5C;
+  --t-nat:#5CC48A;
+  --t-ani:#4CC2C2;
+  --t-play:#EA7DB6;
+  --t-art:#A58BEA;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.25}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand h1{font-size:30px;letter-spacing:-.01em}
+.brand p{margin:0;color:var(--ink-soft);font-size:14px}
+.stamp-count{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;
+  padding:6px 14px 6px 6px;font-size:14px;
+}
+.stamp-count .dot{
+  width:34px;height:34px;border-radius:50%;
+  border:2px solid var(--stamp);color:var(--stamp);
+  display:grid;place-items:center;font-family:var(--display);font-size:13px;transform:rotate(-12deg);
+}
+.stamp-count b{font-variant-numeric:tabular-nums}
+
+/* pick panel */
+.pick{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:18px;
+  background:var(--yellow);color:var(--yellow-ink);
+  border-radius:20px;padding:20px;
+}
+.pick-intro{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.pick-intro h2{font-size:28px}
+.pick-intro p{margin:0;font-size:14px;opacity:.85}
+.pick-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pick-row label{font-size:13px;font-weight:700}
+.pick select{
+  background:rgba(255,255,255,.75);border:1px solid rgba(58,44,0,.25);border-radius:10px;
+  padding:8px 10px;color:#3A2C00;
+}
+.btn-draw{
+  border:0;border-radius:12px;padding:10px 18px;cursor:pointer;
+  background:#1E2A22;color:#FFF7DD;font-family:var(--display);font-size:18px;
+  transition:transform .12s ease;
+}
+.btn-draw:hover{transform:translateY(-1px)}
+.btn-draw:active{transform:translateY(1px)}
+.pick-card{
+  background:var(--surface);color:var(--ink);border-radius:16px;padding:18px;
+  display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-height:180px;
+}
+.pick-card .eyebrow{font-size:12px;letter-spacing:.06em;color:var(--ink-soft);font-weight:700}
+.pick-card h3{font-size:24px}
+.pick-card p{margin:0}
+.pick-card.flash{animation:pop .35s ease}
+@keyframes pop{from{transform:scale(.97);opacity:.6}to{transform:none;opacity:1}}
+
+/* filters */
+.filters{display:flex;flex-direction:column;gap:12px}
+.search{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface);font-size:15px;
+}
+.chip-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.chip-label{flex:none;font-size:12px;font-weight:700;color:var(--ink-soft);align-self:center;min-width:34px;letter-spacing:.04em}
+.chip{
+  flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 13px;font-size:14px;cursor:pointer;white-space:nowrap;
+}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--green-ink);font-weight:700}
+.chip .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.opts{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--green)}
+.opts select{padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+
+/* tabs + result bar */
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px}
+.tab{
+  border:0;background:none;padding:10px 12px;cursor:pointer;font-size:15px;color:var(--ink-soft);
+  border-bottom:3px solid transparent;margin-bottom:-1px;
+}
+.tab[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--green)}
+.tab small{font-variant-numeric:tabular-nums;margin-left:3px}
+.result-note{font-size:13px;color:var(--ink-soft);padding-block:6px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{
+  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:16px;display:flex;flex-direction:column;gap:10px;
+}
+.card-head{display:flex;flex-direction:column;gap:3px;padding-right:64px}
+.type{font-size:12px;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:6px}
+.type::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.card h3{font-size:21px}
+.where{font-size:13px;color:var(--ink-soft)}
+.where b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-size:12px;padding:2px 8px;border-radius:6px;background:var(--surface-2);color:var(--ink)}
+.badge.free{background:var(--green);color:var(--green-ink);font-weight:700}
+.desc{margin:0;font-size:14.5px}
+details{font-size:14px;border-top:1px dashed var(--line);padding-top:8px}
+summary{cursor:pointer;color:var(--ink-soft);font-weight:500}
+details dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 10px}
+details dt{font-weight:700;font-size:13px;color:var(--ink-soft)}
+details dd{margin:0}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.act{
+  border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 11px;
+  font-size:13.5px;cursor:pointer;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:5px;
+}
+.act:hover{background:var(--surface-2)}
+.act.fav[aria-pressed="true"]{border-color:var(--stamp);color:var(--stamp);font-weight:700}
+.act.visit[aria-pressed="true"]{background:var(--stamp);border-color:var(--stamp);color:#fff;font-weight:700}
+.act svg{width:15px;height:15px}
+.seal{
+  position:absolute;top:14px;right:14px;width:62px;height:62px;border-radius:50%;
+  border:2.5px solid var(--stamp);color:var(--stamp);
+  display:grid;place-items:center;text-align:center;
+  font-family:var(--display);font-size:15px;line-height:1.05;
+  transform:rotate(-14deg);opacity:.9;
+  box-shadow:inset 0 0 0 3px var(--surface),inset 0 0 0 4.5px var(--stamp);
+}
+.seal.new{animation:thump .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes thump{from{transform:rotate(-14deg) scale(1.6);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:.9}}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--ink-soft);
+  border:2px dashed var(--line);border-radius:16px;
+}
+.empty button{margin-top:10px}
+.foot{font-size:13px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:4px}
+.foot p{margin:0}
+
+@media (max-width:760px){
+  .pick{grid-template-columns:1fr;padding:16px}
+  .brand h1{font-size:26px}
+  .grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>아이랑 나들이 수첩</h1>
+      <p>초등학생과 함께 가기 좋은 전국 <span id="total-count">0</span>곳, 골라 보고 다녀오면 도장 꾹</p>
+    </div>
+    <div class="stamp-count" aria-live="polite">
+      <span class="dot">도장</span>
+      <span>모은 도장 <b id="stamp-num">0</b> / <b id="stamp-total">0</b></span>
+    </div>
+  </header>
+
+  <section class="pick" aria-labelledby="pick-title">
+    <div class="pick-intro">
+      <h2 id="pick-title">이번 주말, 어디 갈까?</h2>
+      <p>아래에서 고른 조건 안에서 한 곳을 뽑아 드려요. 출발지를 정하면 가까운 순으로도 볼 수 있어요.</p>
+      <div class="pick-row">
+        <label for="origin">출발지</label>
+        <select id="origin"></select>
+        <button class="btn-draw" id="draw" type="button">한 곳 뽑기</button>
+      </div>
+    </div>
+    <article class="pick-card" id="pick-card" aria-live="polite"></article>
+  </section>
+
+  <section class="filters" aria-label="검색과 필터">
+    <input class="search" id="q" type="search" placeholder="장소 이름, 도시, 키워드로 찾기 (예: 공룡, 과학, 경주)" autocomplete="off">
+    <div class="chip-row" id="region-chips" role="group" aria-label="지역"></div>
+    <div class="chip-row" id="type-chips" role="group" aria-label="종류"></div>
+    <div class="opts">
+      <label class="toggle"><input type="checkbox" id="rain"> 비 와도 OK (실내)</label>
+      <label class="toggle"><input type="checkbox" id="free"> 무료만</label>
+      <label class="toggle">학년
+        <select id="grade">
+          <option value="">전체</option>
+          <option value="low">저학년 (1~3학년)</option>
+          <option value="high">고학년 (4~6학년)</option>
+        </select>
+      </label>
+      <label class="toggle">정렬
+        <select id="sort">
+          <option value="near">출발지에서 가까운 순</option>
+          <option value="name">이름 순</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section aria-label="장소 목록" style="display:flex;flex-direction:column;gap:14px">
+    <div class="bar">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="all" aria-selected="true" id="tab-all">전체<small id="c-all"></small></button>
+        <button class="tab" role="tab" data-tab="fav" aria-selected="false" id="tab-fav">찜한 곳<small id="c-fav"></small></button>
+        <button class="tab" role="tab" data-tab="visit" aria-selected="false" id="tab-visit">다녀온 곳<small id="c-visit"></small></button>
+      </div>
+      <div class="result-note" id="result-note"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer class="foot">
+    <p>운영 시간, 요금, 예약 방식, 휴관일은 자주 바뀌어요. 출발 전에 꼭 공식 홈페이지나 지도 앱에서 확인해 주세요.</p>
+    <p>거리는 출발 도시 중심에서 잰 직선거리라 실제 이동 거리와 달라요. 찜과 도장은 이 기기의 브라우저에만 저장돼요.</p>
+  </footer>
+</div>
+
+<script>
+const TYPES = {
+  sci:  {label:"과학·체험", color:"var(--t-sci)"},
+  hist: {label:"역사·박물관", color:"var(--t-hist)"},
+  nat:  {label:"자연·생태", color:"var(--t-nat)"},
+  ani:  {label:"동물·수족관", color:"var(--t-ani)"},
+  play: {label:"놀이·테마파크", color:"var(--t-play)"},
+  art:  {label:"문화·마을", color:"var(--t-art)"}
+};
+const REGIONS = {
+  seoul:"서울", gyeonggi:"경기·인천", gangwon:"강원", chung:"충청·대전",
+  jeolla:"전라·광주", gyeong:"경상·부산·대구", jeju:"제주"
+};
+const ORIGINS = [
+  ["서울",37.5665,126.9780],["인천",37.4563,126.7052],["수원",37.2636,127.0286],["고양",37.6584,126.8320],
+  ["성남",37.4200,127.1270],["춘천",37.8813,127.7298],["원주",37.3420,127.9200],["강릉",37.7519,128.8761],
+  ["대전",36.3504,127.3845],["세종",36.4800,127.2890],["청주",36.6424,127.4890],["천안",36.8151,127.1139],
+  ["전주",35.8242,127.1480],["광주",35.1595,126.8526],["대구",35.8714,128.6014],["부산",35.1796,129.0756],
+  ["울산",35.5384,129.3114],["창원",35.2279,128.6811],["포항",36.0190,129.3435],["제주",33.4996,126.5312]
+];
+const FEE = {free:"무료", part:"일부 유료", paid:"유료"};
+const IO = {in:"실내", out:"야외", mix:"실내+야외"};
+const GRADE = {all:"전 학년", low:"저학년 추천", high:"고학년 추천"};
+
+// id, name, region, city, type, io, fee, grade, time, lat, lng, desc, tip, learn
+const PLACES = [
+  ["p01","국립중앙박물관","seoul","서울 용산구","hist","in","free","all","반나절",37.5239,126.9803,
+   "선사 시대부터 조선까지 교과서에 나오는 유물을 한자리에서 보는 곳. 안에 어린이박물관이 따로 있어요.",
+   "어린이박물관은 시간대별 예약제로 운영될 때가 많아요. 상설전은 무료, 특별전은 유료인 경우가 많아요.",
+   "한국사 흐름, 유물 보는 법"],
+  ["p02","국립민속박물관","seoul","서울 종로구","hist","in","free","low","2~3시간",37.5815,126.9790,
+   "옛사람들의 하루와 한 해 살이를 보여 주는 박물관. 어린이박물관에서 놀이하듯 전통 생활을 체험해요.",
+   "경복궁 안쪽에 있어 궁궐 나들이와 묶기 좋아요. 어린이박물관은 예약 여부를 먼저 확인하세요.",
+   "세시풍속, 전통 놀이, 옛 생활 도구"],
+  ["p03","경복궁","seoul","서울 종로구","hist","out","part","high","2~3시간",37.5796,126.9770,
+   "조선의 첫 번째 법궁. 근정전, 경회루, 향원정을 따라 걸으며 조선 왕실 이야기를 들려주기 좋아요.",
+   "수문장 교대식 시간에 맞춰 가면 아이들이 특히 좋아해요. 한복을 입으면 입장료가 면제돼요.",
+   "조선 왕조, 궁궐 건축"],
+  ["p04","전쟁기념관","seoul","서울 용산구","hist","mix","free","high","반나절",37.5365,126.9772,
+   "야외에 실물 비행기와 전차가 늘어선 박물관. 안에는 어린이박물관이 있어 저학년도 함께 즐길 수 있어요.",
+   "야외 전시장은 그늘이 적어 여름엔 모자가 필요해요. 어린이박물관은 회차별 예약을 확인하세요.",
+   "6·25 전쟁, 평화의 의미"],
+  ["p05","국립어린이과학관","seoul","서울 종로구","sci","in","paid","low","2~3시간",37.5842,126.9960,
+   "초등학생 눈높이에 맞춘 과학관. 만지고 움직여 보는 전시가 많고 천체투영관도 있어요.",
+   "창경궁과 가까워 오후에 궁궐 산책을 이어 가도 좋아요. 주말엔 온라인 예매가 편해요.",
+   "힘과 운동, 우주, 몸의 원리"],
+  ["p06","서울어린이대공원","seoul","서울 광진구","ani","out","free","low","반나절",37.5480,127.0746,
+   "무료로 들어가는 넓은 공원 안에 동물원, 식물원, 놀이터가 모여 있어요.",
+   "돗자리를 챙기면 잔디밭에서 쉬기 좋아요. 안에 있는 서울상상나라와 함께 돌아보세요.",
+   "동물 관찰, 계절 식물"],
+  ["p07","서울상상나라","seoul","서울 광진구","play","in","paid","low","2~3시간",37.5470,127.0810,
+   "몸으로 놀면서 배우는 어린이 전용 체험관. 물놀이, 역할놀이, 미술 공간이 층마다 달라요.",
+   "초등 저학년까지가 딱 좋아요. 회차 입장 방식이라 시간을 맞춰 가세요.",
+   "감각 놀이, 역할놀이, 창작"],
+  ["p08","서울숲","seoul","서울 성동구","nat","out","free","all","2~3시간",37.5444,127.0374,
+   "꽃사슴 우리, 곤충식물원, 넓은 잔디밭이 있는 도심 숲. 자전거 타기에도 좋아요.",
+   "가을 은행나무길이 특히 예뻐요. 근처 성수동에서 점심을 해결하기 쉬워요.",
+   "도시 생태, 곤충과 나비"],
+  ["p09","서울식물원","seoul","서울 강서구","nat","mix","part","all","2~3시간",37.5694,126.8350,
+   "열대와 지중해 기후의 식물을 커다란 유리 온실에서 만나요. 야외 호수원은 무료예요.",
+   "비 오는 날엔 온실만 돌아도 알차요. 어린이정원학교 같은 프로그램도 자주 열려요.",
+   "세계의 기후와 식물"],
+  ["p10","국립항공박물관","seoul","서울 강서구","sci","in","free","all","2~3시간",37.5600,126.8030,
+   "김포공항 옆 항공 전문 박물관. 실물 비행기 전시와 비행 시뮬레이터 체험이 있어요.",
+   "체험 프로그램은 유료이거나 사전 예약인 경우가 많아요. 공항 전망대와 함께 가면 좋아요.",
+   "비행의 원리, 항공 역사"],
+  ["p11","서울시립과학관","seoul","서울 노원구","sci","in","paid","high","2~3시간",37.6340,127.0770,
+   "질문하고 실험하는 방식의 과학관. 전시가 생각할 거리를 던져 줘서 고학년에게 잘 맞아요.",
+   "주말 과학 교육 프로그램이 알차니 미리 일정을 확인해 보세요.",
+   "생명·환경·에너지 탐구"],
+  ["p12","롯데월드 어드벤처","seoul","서울 송파구","play","mix","paid","all","하루",37.5111,127.0980,
+   "실내 놀이공원이라 날씨와 상관없이 하루 종일 놀 수 있어요. 야외 매직아일랜드도 있어요.",
+   "놀이기구마다 키 제한이 있으니 아이 키를 미리 확인하세요. 평일 방문이 훨씬 여유로워요.",
+   "안전 규칙, 줄 서기 연습"],
+  ["p13","코엑스아쿠아리움","seoul","서울 강남구","ani","in","paid","low","2~3시간",37.5130,127.0590,
+   "도심 한가운데 있는 수족관. 바닷속 터널과 다양한 테마 수조를 둘러봐요.",
+   "코엑스 별마당도서관과 묶으면 비 오는 날 코스로 좋아요.",
+   "바다 생물, 수중 생태계"],
+  ["p14","여의도 한강공원","seoul","서울 영등포구","nat","out","free","all","2~3시간",37.5283,126.9340,
+   "자전거와 킥보드를 빌려 달리고 돗자리 피크닉을 즐기는 서울 대표 강변 공원.",
+   "봄에는 벚꽃, 가을에는 불꽃축제로 붐벼요. 여름 저녁엔 물빛광장 분수가 시원해요.",
+   "강 생태, 자전거 안전"],
+
+  ["g01","국립과천과학관","gyeonggi","경기 과천시","sci","mix","paid","all","하루",37.4370,126.9990,
+   "국내 대표 과학관. 기초과학, 자연사, 첨단기술관에 천체관측소와 야외 공룡 전시까지 있어요.",
+   "하루로도 모자랄 만큼 넓어요. 어린이탐구체험관과 천체투영관은 예약을 먼저 확인하세요.",
+   "우주, 공룡, 로봇, 과학 원리"],
+  ["g02","서울대공원","gyeonggi","경기 과천시","ani","out","part","all","하루",37.4270,127.0170,
+   "코끼리 열차를 타고 들어가는 큰 동물원. 식물원과 캠핑장도 함께 있어요.",
+   "동물원이 언덕에 넓게 퍼져 있어 편한 신발이 필요해요. 과천과학관과 가까워 1박 코스로도 좋아요.",
+   "포유류·조류 관찰, 멸종위기 동물"],
+  ["g03","국립수목원 (광릉숲)","gyeonggi","경기 포천시","nat","out","paid","high","반나절",37.7520,127.1580,
+   "오래된 광릉숲 속 수목원. 산림박물관과 산림생물표본관에서 숲 공부를 제대로 할 수 있어요.",
+   "사전 예약제로 운영돼요. 조용한 곳이라 뛰어놀기보다 걷고 관찰하는 날에 맞아요.",
+   "숲 생태, 나무 이름 알기"],
+  ["g04","에버랜드","gyeonggi","경기 용인시","play","out","paid","all","하루",37.2940,127.2020,
+   "놀이기구, 사파리, 판다월드가 모두 있는 테마파크. 동물과 놀이를 한 번에 즐겨요.",
+   "인기 시설은 앱 예약을 쓰면 대기를 줄일 수 있어요. 아침 일찍 입장하는 게 좋아요.",
+   "동물 생태, 계절 축제"],
+  ["g05","한국민속촌","gyeonggi","경기 용인시","hist","out","paid","all","하루",37.2590,127.1180,
+   "조선 시대 마을을 재현한 곳. 사또, 거지 같은 캐릭터 공연과 전통 체험이 재미있어요.",
+   "놀이마을 구역에 놀이기구도 있어요. 경기도어린이박물관과 차로 가까워요.",
+   "조선 생활, 전통 가옥, 전통 놀이"],
+  ["g06","경기도어린이박물관","gyeonggi","경기 용인시","sci","in","paid","low","2~3시간",37.2690,127.1100,
+   "몸으로 부딪치며 배우는 체험형 어린이박물관. 공룡, 건축, 환경 같은 주제관이 있어요.",
+   "회차별 사전 예약으로 운영되는 경우가 많아요. 저학년까지 만족도가 가장 높아요.",
+   "공룡, 건축, 환경"],
+  ["g07","광명동굴","gyeonggi","경기 광명시","sci","in","paid","all","2~3시간",37.4260,126.8660,
+   "옛 금속 광산을 테마 동굴로 꾸민 곳. 사계절 서늘해서 한여름 피서지로 인기예요.",
+   "동굴 안은 늘 쌀쌀하니 얇은 겉옷을 챙기세요. 계단이 많아 유모차는 불편해요.",
+   "광산의 역사, 지하 자원"],
+  ["g08","수원화성","gyeonggi","경기 수원시","hist","out","part","high","반나절",37.2820,127.0140,
+   "정조가 쌓은 유네스코 세계유산 성곽. 성곽길을 걷고 화성행궁을 둘러봐요.",
+   "성곽 한 바퀴는 길어서 방화수류정 쪽 일부 구간만 걸어도 충분해요. 화성어차를 타는 방법도 있어요.",
+   "정조와 정약용, 거중기, 성곽 구조"],
+  ["g09","인천 차이나타운·동화마을","gyeonggi","인천 중구","art","out","free","low","2~3시간",37.4750,126.6180,
+   "알록달록한 차이나타운 골목과 동화 속 장면을 벽화로 꾸민 송월동 동화마을을 함께 걸어요.",
+   "짜장면박물관이 바로 근처에 있어요. 월미도까지 이어 가면 하루 코스가 돼요.",
+   "개항의 역사, 다문화"],
+  ["g10","국립생물자원관","gyeonggi","인천 서구","nat","in","free","all","2~3시간",37.5690,126.6360,
+   "우리나라 생물 표본을 전시하는 무료 전시관. 멸종위기 생물과 자생 식물을 자세히 볼 수 있어요.",
+   "서천의 국립생태원과는 다른 곳이에요. 인천 서구 경인아라뱃길 근처에 있어요.",
+   "한반도 생물 다양성"],
+  ["g11","인천어린이과학관","gyeonggi","인천 계양구","sci","in","paid","low","2~3시간",37.5450,126.7310,
+   "어린이 전용 과학관. 몸, 마을, 지구 같은 주제로 놀면서 과학을 익혀요.",
+   "회차 입장제라 예약하고 가는 게 좋아요.",
+   "생활 속 과학, 인체"],
+  ["g12","파주 헤이리 예술마을","gyeonggi","경기 파주시","art","mix","part","all","반나절",37.7890,126.6980,
+   "작은 박물관, 갤러리, 체험 공방이 모여 있는 마을. 취향대로 골라 들어가요.",
+   "공간마다 입장료가 따로 있어요. 옛날 물건 박물관이나 체험 공방이 아이들에게 인기예요.",
+   "미술, 공예 체험"],
+  ["g13","임진각 평화누리","gyeonggi","경기 파주시","hist","out","part","high","반나절",37.8900,126.7400,
+   "바람개비 언덕이 있는 넓은 공원. 분단의 역사를 보여 주는 전시와 곤돌라가 있어요.",
+   "넓은 잔디밭에서 연 날리기 좋아요. 곤돌라와 일부 시설은 유료예요.",
+   "분단과 통일, 평화"],
+  ["g14","아침고요수목원","gyeonggi","경기 가평군","nat","out","paid","all","반나절",37.7440,127.3530,
+   "잘 가꾼 정원을 따라 걷는 수목원. 겨울 밤에는 오색별빛정원전 불빛 축제가 열려요.",
+   "경사가 있는 길이 많아 편한 신발을 신으세요.",
+   "정원 식물, 계절 변화"],
+  ["g15","쁘띠프랑스","gyeonggi","경기 가평군","art","out","paid","low","2~3시간",37.7160,127.4870,
+   "어린왕자를 주제로 꾸민 프랑스풍 마을. 인형극과 오르골 시연을 볼 수 있어요.",
+   "《어린 왕자》 책을 미리 읽고 가면 훨씬 재밌어요.",
+   "세계 문화, 책 속 이야기"],
+  ["g16","전곡선사박물관","gyeonggi","경기 연천군","hist","mix","free","all","2~3시간",38.0130,127.0640,
+   "주먹도끼가 처음 발견된 전곡리 유적 옆 박물관. 원시인 모형과 선사 체험이 알차요.",
+   "야외 유적 공원이 넓어 봄가을 소풍 장소로 좋아요. 주말 체험 프로그램을 확인해 보세요.",
+   "구석기 시대, 주먹도끼"],
+
+  ["k01","레고랜드 코리아","gangwon","강원 춘천시","play","out","paid","low","하루",37.8850,127.7020,
+   "레고 블록으로 만든 테마파크. 초등 저학년이 타기 좋은 놀이기구와 미니랜드가 있어요.",
+   "고학년에게는 놀이기구가 다소 쉬울 수 있어요. 휴장일과 운영 시간을 꼭 확인하세요.",
+   "만들기, 건축 모형"],
+  ["k02","강릉 오죽헌","gangwon","강원 강릉시","hist","out","paid","all","1~2시간",37.7790,128.8780,
+   "율곡 이이와 신사임당이 태어난 집. 지폐에 나오는 인물을 직접 만나는 느낌이에요.",
+   "오천 원권, 오만 원권 지폐를 챙겨 가서 비교해 보세요. 경포호와 바다가 가까워요.",
+   "율곡 이이, 신사임당"],
+  ["k03","국립산악박물관","gangwon","강원 속초시","sci","in","free","all","1~2시간",38.1720,128.4920,
+   "설악산 입구 쪽에 있는 산 전문 박물관. 클라이밍, 고산 체험 같은 활동이 있어요.",
+   "체험 시설은 키나 나이 제한이 있을 수 있어요. 속초 바다 여행 중 비 오는 날 들르기 좋아요.",
+   "산의 생김새, 등산 안전"],
+  ["k04","정선 화암동굴","gangwon","강원 정선군","sci","in","paid","all","2~3시간",37.3230,128.7600,
+   "금을 캐던 광산과 천연 석회 동굴이 이어진 동굴. 금광 이야기를 따라 걷는 구성이에요.",
+   "모노레일로 입구까지 올라가요. 계단이 많고 서늘하니 겉옷을 챙기세요.",
+   "석회 동굴, 금광"],
+  ["k05","뮤지엄 산","gangwon","강원 원주시","art","mix","paid","high","반나절",37.4140,127.8250,
+   "산속에 지은 미술관. 물과 돌, 빛으로 설계한 건물 자체가 작품이에요.",
+   "조용히 감상하는 곳이라 고학년에게 맞아요. 명상관 등 일부 프로그램은 나이 제한이 있어요.",
+   "건축, 현대미술"],
+  ["k06","대관령 양떼목장","gangwon","강원 평창군","ani","out","paid","low","1~2시간",37.6880,128.7520,
+   "초록 언덕을 한 바퀴 걷고 양에게 건초를 주는 목장.",
+   "대관령은 여름에도 서늘해요. 비 온 뒤엔 길이 미끄러우니 운동화를 신으세요.",
+   "가축과 목장, 고원 기후"],
+  ["k07","삼척 해양레일바이크","gangwon","강원 삼척시","play","out","paid","all","1~2시간",37.3200,129.2600,
+   "바다를 옆에 두고 페달을 밟아 달리는 레일바이크. 조명 터널 구간이 재밌어요.",
+   "인기가 많아 예약하고 가는 게 좋아요.",
+   "동해안 풍경"],
+
+  ["c01","국립생태원","chung","충남 서천군","nat","mix","paid","all","하루",36.0290,126.7260,
+   "열대에서 극지까지 세계 기후대를 커다란 온실 에코리움에서 여행해요.",
+   "야외 습지와 전시관까지 보려면 하루가 필요해요. 경내 이동 차량을 활용하세요.",
+   "기후대, 생물 다양성"],
+  ["c02","독립기념관","chung","충남 천안시","hist","mix","free","high","반나절",36.7830,127.2230,
+   "일제강점기와 독립운동의 역사를 전시관 여러 곳에 나눠 보여 줘요.",
+   "부지가 매우 넓어요. 단풍나무 숲길이 유명해 가을에 가기 좋아요.",
+   "독립운동, 근현대사"],
+  ["c03","국립중앙과학관","chung","대전 유성구","sci","mix","part","all","하루",36.3760,127.3750,
+   "대전 대덕연구단지의 대표 과학관. 자연사관, 과학기술관, 창의나래관이 있어요.",
+   "상설전은 무료, 일부 체험관과 천체관은 유료이거나 예약제예요.",
+   "과학 기술, 자연사"],
+  ["c04","대전 오월드","chung","대전 중구","ani","out","paid","low","하루",36.2880,127.3980,
+   "동물원, 놀이동산, 꽃동산을 한 번에 즐기는 대전의 테마공원.",
+   "사파리 버스는 탑승 시간이 정해져 있으니 먼저 확인하세요.",
+   "동물 관찰"],
+  ["c05","국립공주박물관·공산성","chung","충남 공주시","hist","mix","part","high","반나절",36.4630,127.1250,
+   "무령왕릉에서 나온 유물을 보고, 백제 산성 공산성을 걸어요.",
+   "박물관은 무료, 공산성과 무령왕릉 전시관은 유료예요. 셋을 묶으면 백제 코스가 완성돼요.",
+   "백제 역사, 무령왕릉"],
+  ["c06","부여 백제문화단지","chung","충남 부여군","hist","out","paid","high","반나절",36.3050,126.9070,
+   "백제 왕궁과 사찰, 마을을 실물 크기로 재현한 곳.",
+   "그늘이 적어 여름엔 모자가 필요해요. 궁남지, 정림사지와 함께 돌아보세요.",
+   "백제 건축, 삼국 시대"],
+  ["c07","단양 다누리아쿠아리움","chung","충북 단양군","ani","in","paid","all","1~2시간",36.9840,128.3650,
+   "민물고기 전문 아쿠아리움. 남한강에 사는 물고기와 세계의 민물고기를 봐요.",
+   "근처 고수동굴과 묶으면 비 오는 날 단양 여행으로 좋아요.",
+   "민물 생태, 강의 물고기"],
+  ["c08","단양 고수동굴","chung","충북 단양군","sci","in","paid","high","1~2시간",36.9900,128.3800,
+   "종유석과 석순이 가득한 천연 석회 동굴. 좁은 철계단을 오르내리며 탐험해요.",
+   "좁고 가파른 구간이 있어 어린 동생이 있다면 조심하세요.",
+   "석회암 지형, 종유석"],
+
+  ["j01","전주 한옥마을","jeolla","전북 전주시","art","out","part","all","반나절",35.8150,127.1530,
+   "700여 채 한옥이 모인 마을. 경기전, 전동성당을 보고 한복을 입고 걸어요.",
+   "경기전에는 태조 이성계 어진이 있어요. 전통 공예 체험은 공방마다 요금이 달라요.",
+   "한옥, 조선 왕조, 전통 음식"],
+  ["j02","국립광주과학관","jeolla","광주 북구","sci","in","paid","all","반나절",35.2280,126.8480,
+   "빛과 예술을 주제로 한 과학관. 인공지능 체험관과 천체투영관도 있어요.",
+   "어린이관은 저학년, 인공지능관은 고학년이 특히 좋아해요.",
+   "빛의 성질, 인공지능"],
+  ["j03","순천만국가정원·순천만습지","jeolla","전남 순천시","nat","out","paid","all","하루",34.9300,127.5000,
+   "세계 여러 나라 정원을 둘러보고 스카이큐브를 타고 갈대숲 습지로 넘어가요.",
+   "습지 용산전망대 해 질 녘 풍경이 유명해요. 걷는 거리가 길어 운동화가 필수예요.",
+   "습지 생태, 철새"],
+  ["j04","아쿠아플라넷 여수","jeolla","전남 여수시","ani","in","paid","all","2~3시간",34.7460,127.7480,
+   "벨루가를 볼 수 있는 대형 아쿠아리움. 생활 설명회 시간을 맞춰 가면 좋아요.",
+   "여수 해상케이블카, 이순신광장과 가까워 하루 코스를 짜기 좋아요.",
+   "해양 포유류, 바다 생태"],
+  ["j05","담양 죽녹원","jeolla","전남 담양군","nat","out","paid","all","1~2시간",35.3270,126.9860,
+   "하늘 높이 뻗은 대나무 숲길을 걷는 곳. 한여름에도 시원한 바람이 불어요.",
+   "메타세쿼이아길과 관방제림까지 이어 걸으면 좋아요.",
+   "대나무의 특징, 숲길 산책"],
+  ["j06","고창 고인돌 유적","jeolla","전북 고창군","hist","out","paid","high","2~3시간",35.4400,126.6400,
+   "유네스코 세계유산 고인돌 유적. 박물관을 보고 모로모로 탐방 열차로 고인돌 군락을 돌아봐요.",
+   "고인돌 모양이 다른 탁자식과 바둑판식을 비교해 보세요.",
+   "청동기 시대, 고인돌"],
+  ["j07","군산 근대역사박물관","jeolla","전북 군산시","hist","in","paid","high","2~3시간",35.9900,126.7120,
+   "항구 도시 군산의 근대 역사를 보여 주는 박물관. 주변에 근대 건축물이 많아요.",
+   "통합 관람권으로 주변 근대 건축관, 미술관까지 둘러볼 수 있어요.",
+   "개항, 일제강점기 수탈의 역사"],
+
+  ["s01","국립경주박물관","gyeong","경북 경주시","hist","mix","free","all","2~3시간",35.8290,129.2280,
+   "신라 천 년의 보물을 모은 박물관. 금관과 성덕대왕신종을 직접 볼 수 있어요.",
+   "신라 역사 공부의 출발점으로 좋아요. 어린이박물관도 함께 있어요.",
+   "신라 역사, 금관"],
+  ["s02","불국사·석굴암","gyeong","경북 경주시","hist","out","free","high","반나절",35.7900,129.3320,
+   "다보탑, 석가탑, 석굴암 본존불까지 교과서 속 신라 문화유산을 직접 봐요.",
+   "십 원짜리 동전 속 다보탑을 찾아보세요. 석굴암은 셔틀버스나 차로 올라가요.",
+   "불교 문화, 신라 건축"],
+  ["s03","첨성대·대릉원·동궁과 월지","gyeong","경북 경주시","hist","out","part","all","반나절",35.8350,129.2190,
+   "첨성대와 거대한 고분이 모인 대릉원을 걷고, 저녁엔 동궁과 월지 야경을 봐요.",
+   "천마총 안에 들어가 무덤 내부 구조를 볼 수 있어요. 자전거를 빌려 돌아보면 편해요.",
+   "신라 고분, 천문 관측"],
+  ["s04","국립대구과학관","gyeong","대구 달성군","sci","in","paid","all","반나절",35.6860,128.4480,
+   "생활 속 과학과 산업 기술을 체험하는 과학관. 어린이관 만족도가 높아요.",
+   "천체투영관과 체험 프로그램은 예약을 확인하세요.",
+   "생활 과학, 산업 기술"],
+  ["s05","국립해양박물관","gyeong","부산 영도구","sci","in","free","all","2~3시간",35.0790,129.0800,
+   "바다의 역사와 과학을 다루는 박물관. 커다란 수족관 터널과 배 모형이 있어요.",
+   "상설 전시는 무료예요. 영도 흰여울문화마을과 묶어 보세요.",
+   "해양 과학, 배와 항해"],
+  ["s06","SEA LIFE 부산아쿠아리움","gyeong","부산 해운대구","ani","in","paid","all","2~3시간",35.1590,129.1600,
+   "해운대 해변 바로 앞 수족관. 상어와 가오리가 머리 위로 지나가는 터널이 인기예요.",
+   "해운대 해변 산책과 함께 계획하기 좋아요.",
+   "바다 생물"],
+  ["s07","부산 감천문화마을","gyeong","부산 사하구","art","out","free","all","1~2시간",35.0970,129.0110,
+   "산비탈을 따라 알록달록 집이 층층이 쌓인 마을. 골목마다 작품이 숨어 있어요.",
+   "마을 안내 지도로 스탬프 투어를 할 수 있어요. 오르막이 많아요.",
+   "피란민 마을의 역사, 공공미술"],
+  ["s08","국립부산과학관","gyeong","부산 기장군","sci","in","paid","all","반나절",35.2050,129.2140,
+   "자동차, 선박, 우주 같은 교통·에너지 기술을 체험하는 과학관.",
+   "어린이 체험관은 회차별 입장이에요. 기장 바닷가와 함께 가면 좋아요.",
+   "교통과 에너지, 우주"],
+  ["s09","안동 하회마을","gyeong","경북 안동시","hist","out","paid","high","반나절",36.5390,128.5180,
+   "강이 마을을 휘감아 도는 유네스코 세계유산 전통 마을. 하회탈 공연이 유명해요.",
+   "하회별신굿탈놀이 상설 공연 일정을 확인하세요. 부용대에서 마을 전체를 내려다볼 수 있어요.",
+   "양반 마을, 탈춤"],
+  ["s10","국립김해박물관","gyeong","경남 김해시","hist","in","free","all","2~3시간",35.2420,128.8740,
+   "잊힌 왕국 가야의 철기와 토기를 볼 수 있는 박물관.",
+   "근처 대성동고분군과 수로왕릉을 함께 걸으면 가야 역사 코스가 돼요.",
+   "가야, 철기 문화"],
+  ["s11","울산 대왕암공원","gyeong","울산 동구","nat","out","free","all","2~3시간",35.4920,129.4340,
+   "송림을 지나 바위섬까지 다리를 건너는 해안 공원. 출렁다리도 있어요.",
+   "출렁다리 운영 여부와 휴무일을 확인하세요. 바닷바람이 세니 겉옷을 챙기세요.",
+   "해안 지형, 문무대왕 전설"],
+  ["s12","창녕 우포늪","gyeong","경남 창녕군","nat","out","free","high","2~3시간",35.5540,128.4150,
+   "우리나라에서 가장 큰 내륙 습지. 따오기와 철새를 관찰할 수 있어요.",
+   "우포늪생태관에서 먼저 공부하고 걸으면 훨씬 재밌어요. 자전거를 빌릴 수 있어요.",
+   "습지 생태, 따오기 복원"],
+  ["s13","고성공룡박물관","gyeong","경남 고성군","sci","mix","paid","low","2~3시간",34.9290,128.2150,
+   "공룡 발자국 화석이 남은 상족암 해안 옆 공룡 박물관.",
+   "물때가 맞으면 상족암 해안에서 진짜 공룡 발자국을 볼 수 있어요.",
+   "공룡, 화석"],
+  ["s14","통영 동피랑 벽화마을","gyeong","경남 통영시","art","out","free","all","1~2시간",34.8450,128.4270,
+   "통영항이 내려다보이는 언덕 마을. 벽화 골목을 따라 올라가요.",
+   "통영 케이블카나 이순신공원과 함께 계획하면 좋아요.",
+   "항구 도시, 벽화"],
+
+  ["z01","성산일출봉","jeju","제주 서귀포시","nat","out","paid","all","1~2시간",33.4590,126.9420,
+   "바다에서 솟은 화산이 만든 유네스코 세계자연유산. 분화구 정상까지 걸어 올라가요.",
+   "정상까지 계단이 이어져요. 오르기 힘들면 광치기해변 쪽에서 바라보기만 해도 좋아요.",
+   "화산 지형"],
+  ["z02","제주 에코랜드","jeju","제주 제주시","nat","out","paid","low","2~3시간",33.4560,126.6680,
+   "곶자왈 숲속을 작은 기차를 타고 역마다 내려 산책하는 테마파크.",
+   "근처 제주돌문화공원, 절물자연휴양림과 묶기 좋아요.",
+   "곶자왈 숲"],
+  ["z03","아쿠아플라넷 제주","jeju","제주 서귀포시","ani","in","paid","all","2~3시간",33.4330,126.9280,
+   "큰 수조와 해양 생물 공연이 있는 제주 대표 아쿠아리움.",
+   "성산일출봉과 가까워 비 오면 이곳, 맑으면 일출봉으로 순서를 바꾸기 좋아요.",
+   "바다 생물, 해녀 문화"],
+  ["z04","제주돌문화공원","jeju","제주 제주시","hist","mix","paid","high","2~3시간",33.4430,126.6600,
+   "설문대할망 신화와 제주 돌 문화를 보여 주는 넓은 공원과 박물관.",
+   "걷는 구간이 길어요. 제주 신화 이야기를 미리 들려주고 가면 좋아요.",
+   "제주 신화, 화산석"],
+  ["z05","절물자연휴양림","jeju","제주 제주시","nat","out","paid","all","1~2시간",33.4400,126.6280,
+   "삼나무 숲 사이 평탄한 산책로가 있어 아이와 걷기 좋은 휴양림.",
+   "장생의 숲길은 길어요. 짧은 숲길만 골라 걸어도 충분해요.",
+   "숲 생태, 삼나무"],
+  ["z06","제주항공우주박물관","jeju","제주 서귀포시","sci","in","paid","all","2~3시간",33.3040,126.2750,
+   "실물 비행기 전시와 우주 체험관이 있는 박물관. 비 오는 날 제주 코스로 인기예요.",
+   "체험 시설은 키 제한이 있을 수 있어요.",
+   "항공, 우주 탐사"],
+  ["z07","넥슨컴퓨터박물관","jeju","제주 제주시","sci","in","paid","high","2~3시간",33.4710,126.4870,
+   "컴퓨터의 역사를 보고 옛날 게임기를 직접 해 보는 박물관.",
+   "옛날 게임을 부모와 함께 해 보는 재미가 있어요.",
+   "컴퓨터와 게임의 역사"],
+  ["z08","국립제주박물관","jeju","제주 제주시","hist","in","free","all","1~2시간",33.5130,126.5490,
+   "탐라국부터 이어진 제주 역사와 문화를 보여 주는 무료 박물관.",
+   "제주 공항에서 가까워 여행 첫날이나 마지막 날에 들르기 좋아요.",
+   "탐라, 제주 역사"]
+].map(a => ({id:a[0],name:a[1],region:a[2],city:a[3],type:a[4],io:a[5],fee:a[6],grade:a[7],time:a[8],lat:a[9],lng:a[10],desc:a[11],tip:a[12],learn:a[13]}));
+
+/* storage (per-viewer convenience) */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const state = {
+  q:"", region:"", type:"", rain:false, free:false, grade:"", sort:"near",
+  tab:"all",
+  origin: store.get("kp-origin", "서울"),
+  fav: new Set(store.get("kp-fav", [])),
+  visit: new Set(store.get("kp-visit", [])),
+  justStamped: null
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function km(lat1, lng1, lat2, lng2){
+  const R = 6371, rad = Math.PI/180;
+  const dLat = (lat2-lat1)*rad, dLng = (lng2-lng1)*rad;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*rad)*Math.cos(lat2*rad)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(a));
+}
+function distOf(p){
+  const o = ORIGINS.find(x => x[0] === state.origin) || ORIGINS[0];
+  return km(o[1], o[2], p.lat, p.lng);
+}
+function fmtKm(d){ return "약 " + (d < 20 ? Math.max(1, Math.round(d)) : Math.round(d/5)*5) + "km"; }
+
+function matches(p){
+  if (state.region && p.region !== state.region) return false;
+  if (state.type && p.type !== state.type) return false;
+  if (state.rain && p.io === "out") return false;
+  if (state.free && p.fee !== "free") return false;
+  if (state.grade && !(p.grade === "all" || p.grade === state.grade)) return false;
+  if (state.q){
+    const hay = [p.name, p.city, REGIONS[p.region], TYPES[p.type].label, p.desc, p.learn].join(" ").toLowerCase();
+    if (!state.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+function filtered(){
+  let list = PLACES.filter(matches);
+  if (state.sort === "near") list.sort((a,b) => distOf(a) - distOf(b));
+  else list.sort((a,b) => a.name.localeCompare(b.name, "ko"));
+  return list;
+}
+
+const ICON_MAP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+const ICON_HEART = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg>';
+const ICON_HEART_O = ICON_HEART.replace('fill="currentColor"', 'fill="none"');
+
+function badges(p){
+  return `<div class="badges">
+    <span class="badge">${IO[p.io]}</span>
+    <span class="badge${p.fee === "free" ? " free" : ""}">${FEE[p.fee]}</span>
+    <span class="badge">${GRADE[p.grade]}</span>
+    <span class="badge">${p.time}</span>
+  </div>`;
+}
+function mapLinks(p){
+  const q = encodeURIComponent(p.name.replace(/\s*\(.*\)/, "").split("·")[0]);
+  return `<a class="act" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${ICON_MAP}네이버</a>
+          <a class="act" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">${ICON_MAP}카카오</a>`;
+}
+
+function cardHTML(p){
+  const t = TYPES[p.type], fav = state.fav.has(p.id), vis = state.visit.has(p.id);
+  return `<article class="card" data-id="${p.id}">
+    ${vis ? `<div class="seal${state.justStamped === p.id ? " new" : ""}" aria-label="다녀온 곳">다녀<br>왔어요</div>` : ""}
+    <div class="card-head">
+      <span class="type" style="color:${t.color}">${t.label}</span>
+      <h3>${esc(p.name)}</h3>
+      <span class="where">${esc(p.city)} · ${state.origin}에서 <b>${fmtKm(distOf(p))}</b></span>
+    </div>
+    ${badges(p)}
+    <p class="desc">${esc(p.desc)}</p>
+    <details>
+      <summary>가기 전에 알아 둘 것</summary>
+      <dl>
+        <dt>꿀팁</dt><dd>${esc(p.tip)}</dd>
+        <dt>배움</dt><dd>${esc(p.learn)}</dd>
+      </dl>
+    </details>
+    <div class="actions">
+      <button class="act fav" type="button" data-act="fav" aria-pressed="${fav}">${fav ? ICON_HEART : ICON_HEART_O}${fav ? "찜했어요" : "찜"}</button>
+      <button class="act visit" type="button" data-act="visit" aria-pressed="${vis}">${vis ? "도장 취소" : "다녀왔어요 도장"}</button>
+      ${mapLinks(p)}
+    </div>
+  </article>`;
+}
+
+function renderList(){
+  let list = filtered();
+  const counts = {
+    all: list.length,
+    fav: list.filter(p => state.fav.has(p.id)).length,
+    visit: list.filter(p => state.visit.has(p.id)).length
+  };
+  if (state.tab === "fav") list = list.filter(p => state.fav.has(p.id));
+  if (state.tab === "visit") list = list.filter(p => state.visit.has(p.id));
+  $("#c-all").textContent = counts.all;
+  $("#c-fav").textContent = counts.fav;
+  $("#c-visit").textContent = counts.visit;
+
+  const note = [];
+  if (state.region) note.push(REGIONS[state.region]);
+  if (state.type) note.push(TYPES[state.type].label);
+  if (state.rain) note.push("실내");
+  if (state.free) note.push("무료");
+  if (state.grade) note.push(state.grade === "low" ? "저학년" : "고학년");
+  $("#result-note").textContent = note.length ? note.join(" · ") + ` 조건 ${list.length}곳` : `${list.length}곳`;
+
+  const grid = $("#grid");
+  if (!list.length){
+    const msg = state.tab === "fav" ? "아직 찜한 곳이 없어요. 마음에 드는 곳에서 ‘찜’을 눌러 보세요."
+              : state.tab === "visit" ? "아직 도장이 없어요. 다녀온 곳에서 ‘다녀왔어요 도장’을 눌러 보세요."
+              : "조건에 맞는 곳이 없어요. 필터를 조금 풀어 보세요.";
+    grid.innerHTML = `<div class="empty"><p>${msg}</p>${state.tab === "all" ? '<button class="act" type="button" id="reset">필터 모두 풀기</button>' : ""}</div>`;
+  } else {
+    grid.innerHTML = list.map(cardHTML).join("");
+  }
+  $("#stamp-num").textContent = state.visit.size;
+  state.justStamped = null;
+}
+
+function renderPick(p, flash){
+  const el = $("#pick-card");
+  if (!p){
+    el.innerHTML = `<span class="eyebrow">추천할 곳이 없어요</span><p>지금 고른 조건에 맞는 곳이 없어요. 필터를 조금 풀고 다시 뽑아 보세요.</p>`;
+    return;
+  }
+  const t = TYPES[p.type];
+  el.innerHTML = `
+    <span class="eyebrow">${state.origin}에서 ${fmtKm(distOf(p))} · <span style="color:${t.color}">${t.label}</span></span>
+    <h3>${esc(p.name)}</h3>
+    ${badges(p)}
+    <p>${esc(p.desc)}</p>
+    <p style="font-size:13.5px;color:var(--ink-soft)">꿀팁: ${esc(p.tip)}</p>
+    <div class="actions">${mapLinks(p)}</div>`;
+  if (flash){ el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }
+}
+let lastPick = null;
+function draw(flash){
+  const list = PLACES.filter(matches);
+  if (!list.length){ renderPick(null); return; }
+  // Prefer places within a day trip (under 150km) and not yet visited
+  let pool = list.filter(p => distOf(p) < 150 && !state.visit.has(p.id));
+  if (!pool.length) pool = list.filter(p => !state.visit.has(p.id));
+  if (!pool.length) pool = list;
+  if (pool.length > 1) pool = pool.filter(p => p !== lastPick);
+  lastPick = pool[Math.floor(Math.random()*pool.length)];
+  renderPick(lastPick, flash);
+}
+
+function chips(el, entries, key, colorOf){
+  const label = el.getAttribute("aria-label");
+  el.innerHTML = `<span class="chip-label">${label}</span>` +
+    [["", "전체"], ...entries].map(([v, l]) =>
+      `<button type="button" class="chip" data-v="${v}" aria-pressed="${state[key] === v}">${colorOf && v ? `<span class="sw" style="background:${colorOf(v)}"></span>` : ""}${l}</button>`
+    ).join("");
+  el.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    state[key] = b.dataset.v;
+    el.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.v === state[key]));
+    renderList();
+  });
+}
+
+function init(){
+  $("#total-count").textContent = PLACES.length;
+  $("#stamp-total").textContent = PLACES.length;
+
+  const origin = $("#origin");
+  origin.innerHTML = ORIGINS.map(o => `<option${o[0] === state.origin ? " selected" : ""}>${o[0]}</option>`).join("");
+  if (!ORIGINS.some(o => o[0] === state.origin)) state.origin = "서울";
+  origin.addEventListener("change", () => {
+    state.origin = origin.value; store.set("kp-origin", state.origin);
+    renderList(); draw(true);
+  });
+
+  chips($("#region-chips"), Object.entries(REGIONS), "region");
+  chips($("#type-chips"), Object.entries(TYPES).map(([k, v]) => [k, v.label]), "type", k => TYPES[k].color);
+
+  $("#q").addEventListener("input", e => { state.q = e.target.value.trim(); renderList(); });
+  $("#rain").addEventListener("change", e => { state.rain = e.target.checked; renderList(); });
+  $("#free").addEventListener("change", e => { state.free = e.target.checked; renderList(); });
+  $("#grade").addEventListener("change", e => { state.grade = e.target.value; renderList(); });
+  $("#sort").addEventListener("change", e => { state.sort = e.target.value; renderList(); });
+  $("#draw").addEventListener("click", () => draw(true));
+
+  document.querySelector(".tabs").addEventListener("click", e => {
+    const b = e.target.closest(".tab"); if (!b) return;
+    state.tab = b.dataset.tab;
+    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t === b));
+    renderList();
+  });
+
+  $("#grid").addEventListener("click", e => {
+    if (e.target.id === "reset"){
+      Object.assign(state, {q:"", region:"", type:"", rain:false, free:false, grade:""});
+      $("#q").value = ""; $("#rain").checked = false; $("#free").checked = false; $("#grade").value = "";
+      document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.v === ""));
+      renderList(); return;
+    }
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const id = b.closest(".card").dataset.id;
+    const set = b.dataset.act === "fav" ? state.fav : state.visit;
+    if (set.has(id)) set.delete(id);
+    else { set.add(id); if (b.dataset.act === "visit") state.justStamped = id; }
+    store.set("kp-fav", [...state.fav]);
+    store.set("kp-visit", [...state.visit]);
+    renderList();
+  });
+
+  renderList();
+  draw(false);
+}
+init();
+</script>
