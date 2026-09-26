@@ -12,6 +12,7 @@
 
   // ---- off-screen buffers ------------------------------------------------------------------------
   const pool = {};
+  /** A pooled, cleared off-screen canvas (q = its scale against the main canvas). */
   function buf(k, q = 1) {
     const cw = Math.max(1, Math.round(cv.width * q)), ch = Math.max(1, Math.round(cv.height * q));
     let c = pool[k];
@@ -19,16 +20,47 @@
     if (c.width !== cw || c.height !== ch) { c.width = cw; c.height = ch; }
     const g = c.getContext('2d');
     g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over'; g.filter = 'none';
-    g.clearRect(0, 0, cw, ch);
+    g.clearRect(0, 0, cw, ch);   // always all of it: a blur reads the whole buffer
     return [c, g];
   }
-  /** Lay src (a full-size buffer) over the main canvas blurred by px device pixels, cheaply (at 1/4 size). */
-  function blurBlit(src, px, alpha = 1, mode = 'source-over') {
-    const q = 0.25, [c, g] = buf('Q', q);
-    g.filter = `blur(${Math.max(0.5, px * q).toFixed(1)}px)`; g.drawImage(src, 0, 0, c.width, c.height); g.filter = 'none';
+  const FULL = () => [0, 0, cv.width, cv.height];
+  /** The device-pixel rectangle covering world box [x, y, w, h] under the current transform, padded. */
+  function devRect(box, pad = 0) {
+    if (!box) return FULL();
+    const m = ctx.getTransform();
+    const xs = [], ys = [];
+    for (const [x, y] of [[box[0], box[1]], [box[0] + box[2], box[1]], [box[0], box[1] + box[3]], [box[0] + box[2], box[1] + box[3]]]) {
+      xs.push(m.a * x + m.c * y + m.e); ys.push(m.b * x + m.d * y + m.f);
+    }
+    const x0 = clamp(Math.floor(Math.min(...xs) - pad), 0, cv.width), y0 = clamp(Math.floor(Math.min(...ys) - pad), 0, cv.height);
+    const x1 = clamp(Math.ceil(Math.max(...xs) + pad), 0, cv.width), y1 = clamp(Math.ceil(Math.max(...ys) + pad), 0, cv.height);
+    return [x0, y0, Math.max(1, x1 - x0), Math.max(1, y1 - y0)];
+  }
+  const blitR = (g, src, R, dx = 0, dy = 0) => g.drawImage(src, R[0], R[1], R[2], R[3], R[0] + dx, R[1] + dy, R[2], R[3]);
+  /**
+   * Lay src (a full-size buffer) over the main canvas blurred by about px device pixels. A mip-chain
+   * blur (halve down, smooth back up): canvas filters are far too slow in the renderer.
+   */
+  function blurBlit(src, px, alpha = 1, mode = 'source-over', R = FULL()) {
+    const levels = clamp(Math.round(Math.log2(Math.max(2, px))), 1, 6), chain = [];
+    // only the region R (device px, padded by the blur) goes through the chain
+    const P = [Math.max(0, R[0] - px * 2), Math.max(0, R[1] - px * 2)];
+    P.push(Math.min(cv.width, R[0] + R[2] + px * 2) - P[0], Math.min(cv.height, R[1] + R[3] + px * 2) - P[1]);
+    let cur = src, q = 1;
+    for (let l = 1; l <= levels; l++) {
+      const [c, g] = buf('M' + l, 1 / (1 << l)), q2 = 1 / (1 << l);
+      g.drawImage(cur, P[0] * q, P[1] * q, P[2] * q, P[3] * q, P[0] * q2, P[1] * q2, P[2] * q2, P[3] * q2);
+      chain.push(c); cur = c; q = q2;
+    }
+    for (let l = levels - 1; l >= 1; l--) {
+      const c = chain[l - 1], g = c.getContext('2d'), q2 = 1 / (1 << l);
+      g.globalCompositeOperation = 'copy';
+      g.drawImage(cur, P[0] * q, P[1] * q, P[2] * q, P[3] * q, P[0] * q2, P[1] * q2, P[2] * q2, P[3] * q2);
+      g.globalCompositeOperation = 'source-over'; cur = c; q = q2;
+    }
     const main = ctx;
     main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha *= alpha; main.globalCompositeOperation = mode;
-    main.imageSmoothingQuality = 'high'; main.drawImage(c, 0, 0, cv.width, cv.height);
+    main.drawImage(cur, P[0] * q, P[1] * q, P[2] * q, P[3] * q, P[0], P[1], P[2], P[3]);
     main.restore();
   }
   /** Run fn with the global ctx pointed at g (same transform as the main canvas has now). */
@@ -36,9 +68,9 @@
     const main = ctx; g.setTransform(main.getTransform()); ctx = g;
     try { fn(); } finally { ctx = main; }
   }
-  function tinted(src, color, key = 'T') {
+  function tinted(src, color, R, key = 'T') {
     const [c, g] = buf(key);
-    g.drawImage(src, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = color; g.fillRect(0, 0, c.width, c.height);
+    blitR(g, src, R); g.globalCompositeOperation = 'source-in'; g.fillStyle = color; g.fillRect(R[0], R[1], R[2], R[3]);
     return c;
   }
   const BIG = 6000;
@@ -46,51 +78,55 @@
    * A cel figure: fn() paints it off screen, then it goes back with a thick ink outline, an optional
    * hard two-tone shade, a tint (to sit it in the scene's light), a crisp rim of light on the side
    * facing `light`, and a soft glow.
-   * o: { ink (world px, 0 = none), inkColor, tint: [color, a], shade: { x0, y0, x1, y1, color, a },
-   *      rim: color, light: [dx, dy], rimW, rimA, rimGlow, glow: [color, a, blurPx], alpha, zoom }
+   * o: { box: [x, y, w, h] world rect that holds the figure (speeds things up a lot), ink (world px,
+   *      0 = none), inkColor, tint: [color, a], shade: { x0, y0, x1, y1, color, a }, rim: color,
+   *      light: [dx, dy], rimW, rimA, rimGlow, glow: [color, a, blurPx], alpha }
    */
   function fig(fn, o = {}) {
+    const m = ctx.getTransform(), S = Math.hypot(m.a, m.b);   // world px -> device px
+    const pad = ((o.glow ? (o.glow[2] ?? 30) * 2.5 : 0) + (o.rimGlow ? 30 : 0) + (o.ink ?? 6) + 12) * S;
+    const R = devRect(o.box, pad);
     const [A, a] = buf('A');
+    a.save(); a.beginPath(); a.rect(R[0], R[1], R[2], R[3]); a.clip();
     paintTo(a, fn);
     if (o.shade) paintTo(a, () => {
       const s = o.shade; ctx.globalCompositeOperation = 'source-atop';
       ctx.fillStyle = lgrad(s.x0, s.y0, s.x1, s.y1, [[0, rgba(s.color, 0)], [0.5, rgba(s.color, 0)], [0.5, rgba(s.color, s.a ?? 0.4)], [1, rgba(s.color, s.a ?? 0.4)]]);
       ctx.fillRect(-BIG, -BIG, BIG * 2, BIG * 2);
     });
-    if (o.tint) paintTo(a, () => {
-      ctx.globalCompositeOperation = 'source-atop'; ctx.globalAlpha = o.tint[1]; ctx.fillStyle = o.tint[0];
-      ctx.fillRect(-BIG, -BIG, BIG * 2, BIG * 2);
-    });
-    const main = ctx, m = main.getTransform(), S = Math.hypot(m.a, m.b);   // world px -> device px
+    if (o.tint) {
+      a.setTransform(1, 0, 0, 1, 0, 0); a.globalCompositeOperation = 'source-atop'; a.globalAlpha = o.tint[1]; a.fillStyle = o.tint[0];
+      a.fillRect(R[0], R[1], R[2], R[3]);
+    }
+    a.restore();
+    const main = ctx;
     main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
     if (o.alpha !== undefined) main.globalAlpha *= o.alpha;
     const base = main.globalAlpha;
-    if (o.glow) {
-      blurBlit(tinted(A, o.glow[0]), (o.glow[2] ?? 30) * S, o.glow[1] ?? 0.8, 'lighter');
-    }
+    if (o.glow) blurBlit(tinted(A, o.glow[0], R), (o.glow[2] ?? 30) * S, o.glow[1] ?? 0.8, 'lighter', R);
     if (o.ink !== 0) {
-      const w = (o.ink ?? 6) * S, T = tinted(A, o.inkColor || ANI.ink);
-      for (let i = 0; i < 8; i++) { const an = i / 8 * TAU; main.drawImage(T, Math.cos(an) * w, Math.sin(an) * w); }
+      const w = (o.ink ?? 6) * S, T = tinted(A, o.inkColor || ANI.ink, R);
+      for (let i = 0; i < 8; i++) { const an = i / 8 * TAU; blitR(main, T, R, Math.cos(an) * w, Math.sin(an) * w); }
     }
-    main.drawImage(A, 0, 0);
+    blitR(main, A, R);
     if (o.rim) {
       const [lx, ly] = o.light || [1, -0.4], L = Math.hypot(lx, ly) || 1, w = (o.rimW ?? 8) * S;
       const dx = lx / L * w, dy = ly / L * w;
-      const [R, r] = buf('R');
-      r.drawImage(A, 0, 0); r.globalCompositeOperation = 'source-in'; r.fillStyle = o.rim; r.fillRect(0, 0, R.width, R.height);
-      r.globalCompositeOperation = 'destination-out'; r.drawImage(A, -dx, -dy);
-      main.globalAlpha = base * (o.rimA ?? 1); main.drawImage(R, 0, 0);
-      if (o.rimGlow) { main.globalAlpha = base; blurBlit(R, 10 * S, o.rimGlow, 'lighter'); }
+      const [Rc, r] = buf('R');
+      blitR(r, A, R); r.globalCompositeOperation = 'source-in'; r.fillStyle = o.rim; r.fillRect(R[0], R[1], R[2], R[3]);
+      r.globalCompositeOperation = 'destination-out'; blitR(r, A, R, -dx, -dy);
+      main.globalAlpha = base * (o.rimA ?? 1); blitR(main, Rc, R);
+      if (o.rimGlow) { main.globalAlpha = base; blurBlit(Rc, 10 * S, o.rimGlow, 'lighter', R); }
     }
     main.restore();
   }
 
-  /** Paint fn() out of focus (for depth of field and bokeh). */
-  function blurLayer(px, fn, alpha = 1) {
+  /** Paint fn() out of focus (for depth of field and bokeh); box as in fig(). */
+  function blurLayer(px, fn, alpha = 1, box = null) {
+    const m = ctx.getTransform(), S = Math.hypot(m.a, m.b), R = devRect(box, px * S * 3);
     const [A, a] = buf('B');
     paintTo(a, fn);
-    const m = ctx.getTransform();
-    blurBlit(A, px * Math.hypot(m.a, m.b), alpha);
+    blurBlit(A, px * S, alpha, 'source-over', R);
   }
 
   // ---- camera ------------------------------------------------------------------------------------
@@ -191,7 +227,10 @@
     return pts;
   }
 
-  window.S12 = { buf, blurBlit, paintTo, fig, blurLayer, handheld, cam, shakes, jitter, softEll, beam, dot, dust, scrim, white, noteGlyph, phone, crackPts };
+  /** A world box that holds heroine(x, y, s) in any pose. */
+  const hbox = (x, y, s) => [x - 440 * s, y - 1300 * s, 880 * s, 1360 * s];
+
+  window.S12 = { hbox, buf, blurBlit, paintTo, fig, blurLayer, handheld, cam, shakes, jitter, softEll, beam, dot, dust, scrim, white, noteGlyph, phone, crackPts };
 
   // =============================== chapter 1 ======================================================
   const HAIR_KID = '#6B4A3A', HAIR_BLUE = '#5B8CFF';
@@ -268,7 +307,7 @@
       circle(px, py, (22 + hash(i, 5) * 30) * (1 - r * 0.5), { fill: '#3A3348', stroke: null, alpha: 0.8 * (1 - r) });
     }
     fig(() => shoe(540, (after > 0 ? FY : fallY(t)) - bounce, 1.35, rot, t, { lift: after > 0 ? clamp(1 - after * 3) : 1 }),
-      { ink: 0, rim: '#FFF6DA', light: [0.2, -1], rimW: 7, rimGlow: 0.6 });
+      { box: [80, (after > 0 ? FY : fallY(t)) - 480, 920, 700], ink: 0, rim: '#FFF6DA', light: [0.2, -1], rimW: 7, rimGlow: 0.6 });
     // the landing: shock ring, dust, cracks
     if (after >= 0) {
       const r = easeOut(clamp(after / 0.45));
@@ -326,7 +365,6 @@
     ctx.globalAlpha = 0.55;
     heroine(0, 0, 0.5, { t, view: 'front', pose: 'spin', hair: HAIR_KID, outfit: 'dance', age: 0.75, wind: 0.7, flip: sgn < 0 });
     ctx.restore();
-    fillScreen('#6F88B2', 0.0);
     ctx.restore();
     stroke([[p.x, p.y + p.h * 0.45], [p.x + p.w, p.y + p.h * 0.45]], '#C58A55', 12, { ink: '#2B2238', olw: 6 });   // the barre
     // floor planks
@@ -343,7 +381,7 @@
       ctx.save(); ctx.translate(cx, fy); ctx.scale(sxk, 1);
       heroine(0, 0, 0.78, { t, view: 'back', pose: 'spin', hair: HAIR_KID, outfit: 'dance', age: 0.75, wind: 0.8, flip: sgn < 0 });
       ctx.restore();
-    }, { ink: 5, rim: '#FFE6B0', light: [1, -0.5], rimW: 7, shade: { x0: cx - 60, y0: 0, x1: cx + 60, y1: 0, color: '#2A1840', a: 0 } });
+    }, { box: hbox(cx, fy, 0.78), ink: 5, rim: '#FFE6B0', light: [1, -0.5], rimW: 7 });
     sparkles(t, 10, p.x, p.y + 40, p.w, p.h * 0.6, '#FFFFFF');
   }
 
@@ -364,7 +402,7 @@
     // her silhouette mid-turn, cropped at the hips
     const jx = Math.sin(t * 70) * 6 * Math.exp(-age * 2);
     fig(() => heroine(cx + 20 + jx, cy + 330, 0.95, { t, view: 'back', pose: 'spin', hair: HAIR_KID, outfit: 'dance', age: 0.75, wind: 0.4 }),
-      { ink: 5, tint: ['#16060C', 0.82], rim: '#FF4A62', light: [-1, -0.3], rimW: 9, rimGlow: 0.8 });
+      { box: hbox(cx + 20, cy + 330, 0.95), ink: 5, tint: ['#16060C', 0.82], rim: '#FF4A62', light: [-1, -0.3], rimW: 9, rimGlow: 0.8 });
     // the crack of pain at the hip: a red bolt with a white-hot core
     const hx = cx + 10, hy = cy + 40, grow = easeOut(clamp(age / 0.14));
     for (const [ang, len, sd] of [[-0.35, 230, 1], [Math.PI + 0.25, 220, 2], [1.2, 150, 3], [-1.9, 140, 4]]) {
@@ -395,12 +433,10 @@
         const age = t - OFF[i];
         circle(lx, ly + 4, 14, { fill: '#3A3048', stroke: null });
         dot(lx, ly + 4, 60, '#FFB070', 0.9 * Math.exp(-age * 5));
-        if (age < 0.12) flash(0.0);
       }
     }
     // the shoe, alone on the floor
-    fig(() => shoe(cx + 40, fy + 20, 0.5, 0.05, t, { lift: 0 }), { ink: 0, rim: '#FFF6DA', light: [0, -1], rimW: 5, alpha: 0.35 + 0.65 * lit / 3 });
-    if (lit === 0) fillScreen('#000000', 0);
+    fig(() => shoe(cx + 40, fy + 20, 0.5, 0.05, t, { lift: 0 }), { box: [cx - 140, fy - 120, 300, 180], ink: 0, rim: '#FFF6DA', light: [0, -1], rimW: 5, alpha: 0.35 + 0.65 * lit / 3 });
     const dark = 1 - lit / 3;
     ctx.save(); ctx.fillStyle = rgba('#05040A', 0.75 * dark); ctx.fillRect(p.x - 40, p.y - 40, p.w + 80, p.h + 80); ctx.restore();
     screentone(p.x, p.y, p.w, p.h, 12, '#000000', 0.25 + 0.3 * dark);
@@ -450,15 +486,13 @@
     ctx.save(); ctx.strokeStyle = rgba('#FFFFFF', 0.9 * screenA); ctx.lineWidth = 3; ctx.beginPath();
     for (let i = 0; i <= 60; i++) { const xx = -110 + i * 3.7, a = Math.sin(i * 0.9 + t * 8) * (6 + 10 * pulse(t, 5)) * Math.sin(i / 60 * Math.PI); ctx.lineTo(xx, -40 + a); }
     ctx.stroke(); ctx.restore();
-    stroke([[-20 + frac(t / (B * 8)) * 0, -178], [-20, -12]], '#FFFFFF', 2, { ink: null, alpha: 0 });
     ctx.restore();
     dot(x, y - 100 * s, 260 * s, '#6FA8FF', 0.35 * screenA);
   }
 
   function bedroom(t, lt) {
-    const [sx, sy] = shakes(t, [], 0);
     const z = kf(lt, [[0, 1.22], [3.64, 1.08]], easeOut);
-    cam(t, 560 + lt * 8 + sx, 1090 + sy, z, 0, 0.8);
+    cam(t, 560 + lt * 8, 1090, z, 0, 0.8);
     // wall
     ctx.fillStyle = lgrad(0, 300, 0, 1700, [[0, '#1C1E4E'], [1, '#110F2E']]);
     ctx.fillRect(-300, 0, 1700, 1800);
@@ -526,11 +560,11 @@
       rrect(210, 1400, 160, 60, 20, { fill: '#2B2440', stroke: ANI.ink, lw: 5 });
       rrect(280, 1460, 20, 90, 4, { fill: '#1B1726', stroke: null });
       stroke([[230, 1590], [290, 1550], [350, 1590]], '#1B1726', 10, { ink: null });
-    }, { ink: 5, rim: '#8FB8FF', light: [0.6, -1], rimW: 6, rimGlow: 0.3 });
+    }, { box: [60, 1000, 460, 620], ink: 5, rim: '#8FB8FF', light: [0.6, -1], rimW: 6, rimGlow: 0.3 });
     // the girl at the mic, backlit by the window
     const bob = hop(t) * 6;
     fig(() => heroine(760, 1640 - bob, 0.86, { t, view: 'side', pose: 'sing', hair: HAIR_BLUE, wind: 0.25, flip: true, rim: '#CFE4FF', rimK: 0.9 }),
-      { ink: 6, rim: '#BFD8FF', light: [-0.4, -1], rimW: 8, rimGlow: 0.5 });
+      { box: hbox(760, 1640, 0.86), ink: 6, rim: '#BFD8FF', light: [-0.4, -1], rimW: 8, rimGlow: 0.5 });
     // notes pouring out of the mic and the laptop, drifting up to the window
     for (let i = 0; i < 16; i++) {
       const ts = 5.45 + i * B / 2 - 1.2, age = t - ts;
@@ -595,6 +629,7 @@
     poly(DECK, { fill: '#2C2A3E', stroke: ANI.ink, lw: 8 });
     const pressK = t < 9.5 ? 1 : 1 - easeOut(seg(t, 9.5, 9.8));
     const KX = 7, KY = 8, keyHit = [4, 5];
+    let keyPos = [600, 1420];
     for (let r = 0; r < KX - 3 + 2; r++) for (let c = 0; c < KY + 3; c++) {
       const u0 = 0.06 + c * 0.08, v0 = 0.08 + r * 0.14;
       if (u0 > 0.92 || v0 > 0.78) continue;
@@ -608,11 +643,11 @@
         const r2 = easeOut(clamp(lt / 0.35));
         ctx.save(); ctx.globalAlpha = 1 - r2; ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 10 * (1 - r2) + 2;
         ctx.beginPath(); ctx.ellipse(kx, ky, 60 + r2 * 360, 24 + r2 * 150, 0, 0, TAU); ctx.stroke(); ctx.restore();
-        S12.keyPos = [kx, ky];
+        keyPos = [kx, ky];
       }
     }
     // the hand: a sleeve from the lower right, index finger on the key
-    const [kx, ky] = S12.keyPos || [600, 1420];
+    const [kx, ky] = keyPos;
     const lift = (1 - pressK) * 90;
     fig(() => {
       // fingertip at the origin; the finger runs down-right to the hand, the sleeve comes in from the corner
@@ -631,7 +666,7 @@
       stroke([[60, 10], [150, 14]], SH, 8, { ink: null, alpha: 0.8 });
       smooth([[200, 40], [290, 30], [276, 96], [190, 104]], { fill: SH, stroke: null, alpha: 0.6 });                       // cel shadow
       ctx.restore();
-    }, { ink: 6, rim: '#BFE4FF', light: [-0.6, -1], rimW: 7, rimGlow: 0.4 });
+    }, { box: [kx - 120, ky - 300, 900, 900], ink: 6, rim: '#BFE4FF', light: [-0.6, -1], rimW: 7, rimGlow: 0.4 });
     // the light shoots out of the screen
     if (t > launch - 0.05) {
       const k = clamp((t - launch) / 0.4);
