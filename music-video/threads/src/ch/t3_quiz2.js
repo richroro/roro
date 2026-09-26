@@ -220,7 +220,8 @@
     camBegin(540 + sh[0] + (o.dx ?? 0), 960 + sh[1] + (o.dy ?? 0), (o.zoom ?? 1) + 0.012 * pulse(t, 6) + 0.05 * p);
   }
 
-  window.T34 = { B, CAST, STIFF, STAGE, FLOOR_Y, ROW_Y, R, squashAt, punch, at, cut, link, glassesProp, tieProp, sweat, sprout, mark, stage, valance, podium, row, stageCam };
+  window.T34 = { B, CAST, STIFF, STAGE, FLOOR_Y, ROW_Y, R, squashAt, punch, at, cut, link, glassesProp, tieProp, sweat, sprout, mark, stage, valance, podium, row, stageCam,
+    curtains: (t, al = 0) => { curtainPanel(t, -1, al); curtainPanel(t, 1, al); } };
 
   // ---- a quiz question (the same beat plan and layout as questions 1–2) ---------------------------
   const CARD_Y = 565, TIMER = [540, 985], ANS_Y = 990, SUB_Y = 800;
@@ -254,6 +255,11 @@
     if (t >= Q.q0 && t < Q.q0 + 0.5) sfx('쾅!', 870, CARD_Y - 200, 90, YARN.red, t - Q.q0, { life: 0.5, rot: 0.15 });
     if (t < Q.ans) timer(t, Q.tim, TIMER[0], TIMER[1], 115);
     ctx.save(); ctx.translate(1300 * out, 0);
+    if (Q.ansTo) {
+      // make room under the answer for what happens next
+      const k = easeInOut(seg(t, Q.sub - 0.25, Q.sub + 0.05));
+      ctx.translate(540, lerp(ANS_Y, Q.ansTo[0], k)); ctx.scale(lerp(1, Q.ansTo[1], k), lerp(1, Q.ansTo[1], k)); ctx.translate(-540, -ANS_Y);
+    }
     answer(t, Q.ans, Q.answer, { y: ANS_Y, size: Q.asize || 92, fill: Q.afill });
     ctx.restore();
     if (t >= Q.ans && t < Q.ans + 0.6) {
@@ -308,7 +314,7 @@
       if (!sp) return;
       ell(sp.x, SPROUT_Y + SR - 4, SR * 0.85, 14, { fill: 'rgba(20,10,30,0.4)', stroke: null });
       sprout(sp.x, sp.y, SR, { t: tt, face: sp.face, arms: sp.arms, rot: sp.rot, squash: sp.sq, look: 1 });
-      if (tt < TRIP - 0.1) sfx('뒤뚱', sp.x + (beatN(tt) % 2 ? 40 : -40), sp.y - 150, 56, '#FFFFFF', frac(beatOf(tt)) * B, { life: B * 0.95, rot: beatN(tt) % 2 ? 0.14 : -0.14 });
+      if (tt < TRIP - 0.1) sfx('뒤뚱', sp.x + (beatN(tt) % 2 ? 50 : -30), sp.y - 175, 70, '#FFFFFF', frac(beatOf(tt)) * B, { life: B * 0.95, rot: beatN(tt) % 2 ? 0.14 : -0.14 });
       sfx('꽈당!', 700, 1440, 100, YARN.red, tt - TRIP, { life: 0.75, rot: 0.1 });
       if (tt >= UP + 0.2) for (let k = 0; k < 3; k++) sparkle(sp.x + [-110, 105, 70][k], sp.y - [70, 100, -20][k], 24 * (0.4 + 0.6 * pulse(tt + k * 0.15, 4)), YARN.mustard, tt * 3 + k);
     });
@@ -318,7 +324,7 @@
   const Q4 = {
     q0: 29.0909, tim: 30.0, ans: 31.8182, sub: 33.6364, end: 36.3636, hits: [30.9091],
     word: '쓰하', q: 'Q.4', answer: '스레드 하이!\n= 안녕!', subText: '들어오면 인사부터',
-    fill: YARN.pink, afill: YARN.mustard, asize: 84,
+    fill: YARN.pink, afill: YARN.mustard, asize: 84, ansTo: [955, 0.8],
   };
   // a new sprout comes in from the right; it says hi first, then everyone waves back, one a beat
   const HELLO = [{ who: -1, t: Q4.sub + B }, { who: 3, t: Q4.sub + 2 * B }, { who: 2, t: Q4.sub + 3 * B }, { who: 1, t: Q4.sub + 4 * B }, { who: 0, t: Q4.sub + 5 * B }];
@@ -331,7 +337,7 @@
       const said = HELLO.find(h => h.who === i), hot = tt >= said.t;
       return {
         face: hot ? ['grin', 'love', 'grin', 'love'][i] : 'happy', arms: hot ? 'wave' : 'none',
-        dy: hop(tt + i * 0.06) * (hot ? 30 : 16), sq: pulse(tt + i * 0.06, 9) * 0.3, look: clamp((nx - CAST[i].x) / 150, -1, 1),
+        dy: 22 + hop(tt + i * 0.06) * (hot ? 26 : 14), sq: pulse(tt + i * 0.06, 9) * 0.3, look: clamp((nx - CAST[i].x) / 150, -1, 1),
         rot: hot ? 0.1 * Math.sin(tt * 6 + i) : 0,
       };
     }, (tt, S) => {
@@ -344,9 +350,9 @@
       for (const h of HELLO) {
         const age = tt - h.t; if (age < 0) continue;
         const me = h.who < 0;
-        const x = me ? nx - 70 : S[h.who].x + (h.who === 0 ? 20 : 0), y = me ? SPROUT_Y - 175 : ROW_Y - S[h.who].dy - R - 95;
+        const x = me ? nx - 70 : S[h.who].x + (h.who === 0 ? 20 : 0), y = me ? SPROUT_Y - 175 : 1104 - Math.sin(tt * 4 + h.who) * 4;
         const s = backOut(clamp(age / 0.2)) * (1 + 0.05 * pulse(tt, 8));
-        bubble(x, y, me ? '쓰하!' : '쓰하~', me ? 54 : 46, { tail: me ? 1 : -1, scale: s, rot: me ? 0.06 : (h.who - 1.5) * 0.05, fill: me ? YARN.mustard : '#FFFFFF' });
+        bubble(x, y, me ? '쓰하!' : '쓰하~', me ? 54 : 44, { tail: me ? 1 : -1, scale: s, rot: me ? 0.06 : (h.who - 1.5) * 0.05, fill: me ? YARN.mustard : '#FFFFFF' });
       }
     });
     if (t > Q4.sub + 5 * B) { ctx.save(); ctx.globalAlpha = seg(t, Q4.sub + 5 * B, Q4.sub + 5.5 * B); hearts(t, 10, 120, 1150, 840, 250, { alpha: 0.7 }); ctx.restore(); }

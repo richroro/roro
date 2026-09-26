@@ -78,9 +78,10 @@ function yarnBall(x, y, r, o = {}) {
 
   // formal armour: collar + necktie
   if (o.tie) {
-    poly([[-r * 0.42, r * 0.5], [0, r * 0.62], [-r * 0.2, r * 0.8]], { fill: '#FFFFFF', stroke: YARN.ink, lw: 5 });
-    poly([[r * 0.42, r * 0.5], [0, r * 0.62], [r * 0.2, r * 0.8]], { fill: '#FFFFFF', stroke: YARN.ink, lw: 5 });
-    poly([[-r * 0.08, r * 0.62], [r * 0.08, r * 0.62], [r * 0.12, r * 0.95], [0, r * 1.08], [-r * 0.12, r * 0.95]], { fill: YARN.blue, stroke: YARN.ink, lw: 5 });
+    // a shirt collar low on the ball (well below the mouth) and a tie that hangs past the bottom
+    poly([[-r * 0.46, r * 0.76], [-r * 0.04, r * 0.84], [-r * 0.3, r * 0.98]], { fill: '#FFFFFF', stroke: YARN.ink, lw: 5 });
+    poly([[r * 0.46, r * 0.76], [r * 0.04, r * 0.84], [r * 0.3, r * 0.98]], { fill: '#FFFFFF', stroke: YARN.ink, lw: 5 });
+    poly([[-r * 0.07, r * 0.84], [r * 0.07, r * 0.84], [r * 0.11, r * 1.12], [0, r * 1.24], [-r * 0.11, r * 1.12]], { fill: YARN.blue, stroke: YARN.ink, lw: 5 });
   }
 
   // face
