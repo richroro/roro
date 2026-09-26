@@ -142,9 +142,9 @@
     }
     camEnd();
 
-    // in from the gold-and-ink fade that ends the chapter before, one lime blink on the downbeat
+    // in from the gold-and-ink fade that ends the chapter before, one gold blink on the downbeat
     fillScreen(BIO.ink, 0.6 * (1 - ease(seg(lt, 0, 0.6))));
-    if (lt < 0.1) fillScreen(LIME, 0.35 * (1 - lt / 0.1));
+    if (lt < 0.1) fillScreen(GOLD, 0.3 * (1 - lt / 0.1));
     fillScreen('#FFE6A0', 0.28 * after(t, TL[4], 5));
     yearTag(t, 67.5, '2020');
     caption(t, 67.9, 76.65, '그래미 5관왕', '2020년 1월 · 열여덟 살', { accent: GOLD });
