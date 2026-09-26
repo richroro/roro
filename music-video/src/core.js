@@ -6,7 +6,8 @@
 // once. Use hash() wherever you would reach for Math.random().
 
 /* eslint-disable no-unused-vars */
-const W = 1920, H = 1080, TAU = Math.PI * 2;
+// A page may set window.FRAME = { w, h } before this file for another shape (e.g. a 1080x1920 short).
+const W = (typeof window !== 'undefined' && window.FRAME?.w) || 1920, H = (typeof window !== 'undefined' && window.FRAME?.h) || 1080, TAU = Math.PI * 2;
 let cv = null, ctx = null, SCALE = 1;
 
 function setupCanvas(canvas) {

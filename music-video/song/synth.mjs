@@ -222,6 +222,15 @@ function leadLines() {
     if (!(sec.startsWith('chorus') || sec === 'outro')) continue;
     for (const n of l.notes) pluck(lead, n.t, n.midi + 12, n.dur * 0.9, 0.055, 0.5, 5000);
   }
+  // A score with MELODY and no voice: the lead sings the tune itself, everywhere, at full voice.
+  if (S.MELODY) {
+    for (const l of S.MELODY.map(S.layLine)) {
+      for (const n of l.notes) {
+        pluck(lead, n.t, n.midi, n.dur * 0.95, 0.2, 0.5, 3800);
+        pluck(lead, n.t + 0.008, n.midi + 12, n.dur * 0.9, 0.06, 0.25, 6000, 0.3);
+      }
+    }
+  }
 }
 
 // ---- the voice ----------------------------------------------------------------------------------
@@ -361,7 +370,8 @@ voice(); step('voice');
 cueSounds(S, fx, crash); step('effects');
 
 duck(pad, 0.45, kicks); duck(arp, 0.35, kicks); duck(bass, 0.3, kicks);
-scale(vox, 0.42 / peak(vox));
+const voxPeak = peak(vox);
+if (voxPeak > 0) scale(vox, 0.42 / voxPeak);        // an instrumental score has no voice to scale
 widen(vox);
 const sendL = new Float32Array(N), sendR = new Float32Array(N);
 for (const [bus, amt] of [[vox, 0.35], [pad, 0.5], [lead, 0.4], [drums, 0.07], [fx, 0.35], [arp, 0.25]]) {
