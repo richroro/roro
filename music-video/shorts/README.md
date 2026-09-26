@@ -1,6 +1,6 @@
 # 다음은 너야 · 빌리 아일리시 이야기 (애니 쇼츠)
 
-▶ 완성본: [`dist/next-is-you-short-1080x1920.mp4`](dist/next-is-you-short-1080x1920.mp4) (0:58, 세로 1080×1920)
+▶ 완성본: [`dist/next-is-you-short-1080x1920.mp4`](dist/next-is-you-short-1080x1920.mp4) (0:58, 세로 1080×1920) · 가벼운 버전 [`dist/next-is-you-short-720p.mp4`](dist/next-is-you-short-720p.mp4)
 
 긴 영상 [〈작은 방에서〉](../bio/README.md) 를 애니 오프닝처럼 압축한 세로 쇼츠. 춤을 잃은 열세 살, 오빠와 침실에서
 만든 노래, 1위, 무대 밖의 싸움, 그래미와 오스카, 그리고 마지막에 보는 사람에게 건네는 한마디: **다음은 너야.**
