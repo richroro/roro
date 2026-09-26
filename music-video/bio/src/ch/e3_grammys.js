@@ -87,19 +87,6 @@
     ctx.drawImage(out, 0, 0, cv.width, cv.height);
     ctx.restore();
   }
-  /** Out-of-focus lights, all in one blurred layer. */
-  function bokehL(t, n, colors, x0, x1, y0, y1, px, seed = 1, a = 1, rMax = 26) {
-    layer(px, () => {
-      ctx.globalCompositeOperation = 'lighter';
-      for (let i = 0; i < n; i++) {
-        const x = lerp(x0, x1, hash(i, seed)) + Math.sin(t * 0.3 + i) * 10, y = lerp(y0, y1, hash(i, seed + 1));
-        ctx.globalAlpha = a * (0.3 + 0.4 * (0.5 + 0.5 * Math.sin(t * (0.5 + hash(i, seed + 2)) + i)));
-        ctx.fillStyle = colors[i % colors.length];
-        ctx.beginPath(); ctx.arc(x, y, 5 + hash(i, seed + 3) * rMax, 0, TAU); ctx.fill();
-      }
-    }, { op: 'lighter', box: [x0 - 40, y0 - 40, x1 - x0 + 80, y1 - y0 + 80] });
-  }
-
   /** A soft cone of light from (x0, y0) toward (x1, y1); w0/w1 are the half widths. */
   function cone(x0, y0, x1, y1, w0, w1, color, a) {
     if (a <= 0.002) return;
@@ -154,12 +141,24 @@
 
   // A back view, shoulders at (0, 0), ~720 down to below the frame. Hoodie + long hair, or a suit.
   const HOODIE = [[-198, 70], [-184, 8], [-132, -30], [-62, -44], [62, -44], [132, -30], [184, 8], [198, 70], [218, 320], [238, 760], [-238, 760], [-218, 320]];
-  const LONG_HAIR = [[0, -226], [46, -216], [72, -182], [82, -126], [86, -64], [94, -4], [100, 46], [86, 72], [70, 60], [54, 86], [34, 70], [14, 90], [-8, 72], [-30, 92], [-50, 68], [-68, 84], [-88, 58], [-98, 16], [-90, -50], [-82, -126], [-72, -182], [-46, -216]];
+  const LONG_HAIR = [[4, -228], [44, -218], [64, -190], [70, -140], [74, -96], [88, -52], [104, -6], [112, 40], [100, 66], [84, 58], [66, 84], [44, 70], [22, 92], [0, 74], [-22, 94], [-44, 72], [-66, 88], [-86, 60], [-104, 38], [-108, -8], [-92, -54], [-76, -98], [-70, -142], [-64, -192], [-40, -220]];
 
   function figureShape(o, fill, hairFill) {
     smooth(HOODIE, { fill, stroke: null });
     ell(0, -34, 92, 40, { fill, stroke: null });                    // the hood bunched at the neck
+    ctx.save(); ctx.translate(0, -40); ctx.rotate(o.tilt ?? -0.05); ctx.translate(0, 40);
     smooth(LONG_HAIR, { fill: hairFill || fill, stroke: null });
+    if (o.strands && hairFill !== fill) {                          // a few fine strands catching light
+      ctx.save(); smoothPath(LONG_HAIR); ctx.clip();
+      ctx.lineWidth = 1.3; ctx.lineCap = 'round';
+      for (let i = 0; i < 16; i++) {
+        const x0 = -50 + i * 6.5 + (hash(i, 7) - 0.5) * 9, x1 = -100 + i * 13 + (hash(i, 9) - 0.5) * 26;
+        ctx.strokeStyle = rgba(o.strands, 0.05 + 0.1 * hash(i, 8));
+        ctx.beginPath(); ctx.moveTo(x0, -214); ctx.quadraticCurveTo(x0 * 1.5, -120, x1, 80); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    ctx.restore();
   }
 
   /** A faceless figure seen from behind, rim-lit from in front of her. */
@@ -352,10 +351,20 @@
     layer(2.5, () => { ph1 = crowdRow(t, 850, 0.72, 20, 21, { arms: 0.3, jump: 1 }); phoneLights(ph1, 0.8 * (0.5 + 0.5 * cut)); }, { box: [-200, 560, W + 400, 440] });
     const fl = camFlashes(t, 67.3, 76.0, 34, 250, 1670, 730, 860, 5, 0.8)
       + camFlashes(t, 67.3, 76.0, 10, 150, 1770, 220, 680, 15, 0.55);
-    layer(10, () => { ph2 = crowdRow(t, 1040, 1.5, 9, 41, { arms: 0.45, jump: 1.3, fill: '#010102' }); phoneLights(ph2, 0.7 * (0.5 + 0.5 * cut)); }, { box: [-200, 600, W + 400, 600] });
+    layer(10, () => {
+      ph2 = crowdRow(t, 1040, 1.5, 9, 41, { arms: 0.45, jump: 1.3, fill: '#010102' });
+      phoneLights(ph2, 0.7 * (0.5 + 0.5 * cut));
+      lit(() => {                                          // phones and lighters right in front of the lens
+        for (let i = 0; i < 24; i++) {
+          const x = -100 + hash(i, 3) * (W + 200) + Math.sin(t * 0.3 + i) * 10, y = 800 + hash(i, 4) * 220;
+          ctx.globalAlpha = 0.5 * (0.6 + 0.4 * Math.sin(t * (0.5 + hash(i, 5)) + i)) * (0.5 + 0.5 * cut);
+          ctx.fillStyle = ['#DDE8FF', '#B6FF3B', '#FFFFFF'][i % 3];
+          ctx.beginPath(); ctx.arc(x, y, 6 + hash(i, 6) * 20, 0, TAU); ctx.fill();
+        }
+      });
+    }, { box: [-200, 600, W + 400, 600] });
     camEnd();
 
-    bokehL(t, 26, ['#DDE8FF', '#B6FF3B', '#FFFFFF'], 0, W, 820, 1000, 9, 3, 0.6, 20);
     black(0.08 * fl * cut, '#FFFFFF');
     black(0.3 * after(t, 73.8, 5), '#F4FFE8');
     // arriving: the city lights of the globe rack-focus into the crowd, with the first hit
@@ -488,7 +497,7 @@
 
     // her, on a stool with her back to us, head a little bowed; the bulbs rim her hair and hood
     const breathe = Math.sin(t * 1.3) * 3;
-    backFigure(935, 640 + breathe, 1.05, { hair: GREEN, rim: '#FFC98A', rimA: 0.55 * on, rimBlur: 14, rot: -0.015, body: '#060505' });
+    backFigure(935, 640 + breathe, 1.05, { hair: GREEN, strands: '#E8D0A0', rim: '#FFC98A', rimA: 0.55 * on, rimBlur: 14, rot: -0.015, body: '#060505' });
 
     // foreground: the door frame at the left, a jacket on a hook at the right, both soft
     layer(12, () => {

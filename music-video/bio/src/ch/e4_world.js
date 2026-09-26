@@ -8,7 +8,7 @@
 // then an endless festival crowd at pink dusk (a generic field, no landmark), fading toward the
 // empty cinema of act 5.
 (() => {
-  const GREEN = '#7ED321', LIME = BIO.lime;
+  const GREEN = '#7ED321';
 
   // ---- kit --------------------------------------------------------------------------------------
 
@@ -76,30 +76,6 @@
     main.drawImage(out, rx, ry, rw, rh, rx / q, ry / q, rw / q, rh / q);
     main.restore();
   }
-  /** Throw the whole frame so far out of focus (a rack focus). */
-  function defocus(px, a = 1) {
-    if (px < 0.3) return;
-    const [c, g] = buf(0);
-    g.clearRect(0, 0, c.width, c.height);
-    g.drawImage(cv, 0, 0, c.width, c.height);
-    const out = blurDown(c, px, [0, 0, c.width, c.height], 1);
-    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a;
-    ctx.drawImage(out, 0, 0, cv.width, cv.height);
-    ctx.restore();
-  }
-  /** Out-of-focus lights, all in one blurred layer. */
-  function bokehL(t, n, colors, x0, x1, y0, y1, px, seed = 1, a = 1, rMax = 26) {
-    layer(px, () => {
-      ctx.globalCompositeOperation = 'lighter';
-      for (let i = 0; i < n; i++) {
-        const x = lerp(x0, x1, hash(i, seed)) + Math.sin(t * 0.3 + i) * 10, y = lerp(y0, y1, hash(i, seed + 1));
-        ctx.globalAlpha = a * (0.3 + 0.4 * (0.5 + 0.5 * Math.sin(t * (0.5 + hash(i, seed + 2)) + i)));
-        ctx.fillStyle = colors[i % colors.length];
-        ctx.beginPath(); ctx.arc(x, y, 5 + hash(i, seed + 3) * rMax, 0, TAU); ctx.fill();
-      }
-    }, { op: 'lighter', box: [x0 - 40, y0 - 40, x1 - x0 + 80, y1 - y0 + 80] });
-  }
-
   /** A soft cone of light from (x0, y0) toward (x1, y1); w0/w1 are the half widths. */
   function cone(x0, y0, x1, y1, w0, w1, color, a) {
     if (a <= 0.002) return;
@@ -154,7 +130,7 @@
 
   // A back view, shoulders at (0, 0), ~720 down to below the frame. Hoodie + long hair, or a suit.
   const HOODIE = [[-198, 70], [-184, 8], [-132, -30], [-62, -44], [62, -44], [132, -30], [184, 8], [198, 70], [218, 320], [238, 760], [-238, 760], [-218, 320]];
-  const LONG_HAIR = [[0, -226], [46, -216], [72, -182], [82, -126], [86, -64], [94, -4], [100, 46], [86, 72], [70, 60], [54, 86], [34, 70], [14, 90], [-8, 72], [-30, 92], [-50, 68], [-68, 84], [-88, 58], [-98, 16], [-90, -50], [-82, -126], [-72, -182], [-46, -216]];
+  const LONG_HAIR = [[4, -228], [44, -218], [64, -190], [70, -140], [74, -96], [88, -52], [104, -6], [112, 40], [100, 66], [84, 58], [66, 84], [44, 70], [22, 92], [0, 74], [-22, 94], [-44, 72], [-66, 88], [-86, 60], [-104, 38], [-108, -8], [-92, -54], [-76, -98], [-70, -142], [-64, -192], [-40, -220]];
 
   const SUIT = [[-204, 60], [-196, 4], [-150, -22], [-60, -34], [60, -34], [150, -22], [196, 4], [204, 60], [212, 320], [222, 760], [-222, 760], [-212, 320]];
   function figureShape(o, fill, hairFill) {
@@ -167,7 +143,19 @@
     }
     smooth(HOODIE, { fill, stroke: null });
     ell(0, -34, 92, 40, { fill, stroke: null });                    // the hood bunched at the neck
+    ctx.save(); ctx.translate(0, -40); ctx.rotate(o.tilt ?? -0.05); ctx.translate(0, 40);
     smooth(LONG_HAIR, { fill: hairFill || fill, stroke: null });
+    if (o.strands && hairFill !== fill) {                          // a few fine strands catching light
+      ctx.save(); smoothPath(LONG_HAIR); ctx.clip();
+      ctx.lineWidth = 1.3; ctx.lineCap = 'round';
+      for (let i = 0; i < 16; i++) {
+        const x0 = -50 + i * 6.5 + (hash(i, 7) - 0.5) * 9, x1 = -100 + i * 13 + (hash(i, 9) - 0.5) * 26;
+        ctx.strokeStyle = rgba(o.strands, 0.05 + 0.1 * hash(i, 8));
+        ctx.beginPath(); ctx.moveTo(x0, -214); ctx.quadraticCurveTo(x0 * 1.5, -120, x1, 80); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    ctx.restore();
   }
 
   /** A faceless figure seen from behind, rim-lit from in front of her. */
@@ -216,7 +204,7 @@
       limb([[20, -452], [6, -478]], 10); circle(4, -482, 11, F);
       limb([[-sh + 8, -418], [-80 + sway, -336]], sw); limb([[-80 + sway, -336], [-96 + sway, -262]], fw); circle(-97 + sway, -254, 12, F);
     } else if (o.pose === 'arms') {
-      for (const d of [-1, 1]) { limb([[d * (sh - 8), -418], [d * 92, -500]], sw); limb([[d * 92, -500], [d * (112 + sway), -590]], fw); circle(d * (114 + sway), -600, 12, F); }
+      for (const d of [-1, 1]) { limb([[d * (sh - 8), -418], [d * 92, -500]], sw); limb([[d * 92, -500], [d * (112 + sway), -590]], fw); circle(d * (114 + sway), -598, 9, F); }
     } else {
       for (const d of [-1, 1]) { limb([[d * (sh - 8), -418], [d * 78, -336]], sw); limb([[d * 78, -336], [d * 80, -262]], fw); circle(d * 80, -254, 12, F); }
     }
@@ -482,7 +470,7 @@
 
     // the two of them from behind, standing either side of it, slightly soft, rimmed by the spot
     layer(2.5, () => {
-      backFigure(560, 870, 0.66, { hair: GREEN, rim: '#FFE7C4', rimA: 0.5, rimBlur: 10, body: '#060404' });
+      backFigure(560, 870, 0.66, { hair: GREEN, strands: '#FFE7C4', rim: '#FFE7C4', rimA: 0.5, rimBlur: 10, body: '#060404' });
       backFigure(1440, 858, 0.74, { suit: true, rim: '#FFE7C4', rimA: 0.5, rimBlur: 10, body: '#050404' });
     }, { box: [300, 700, 1400, 500] });
     camEnd();
@@ -642,9 +630,10 @@
       }
     }, { op: 'lighter' });
     // her at the lip of the stage, from behind, arms up; the stage floor under our feet
-    rrect(-300, 985, W + 600, 300, 0, { fill: lgrad(0, 985, 0, 1100, [[0, '#0C080C'], [1, '#040305']]), stroke: null });
-    rrect(-300, 983, W + 600, 3, 0, { fill: rgba('#FFC7C0', 0.25), stroke: null });
-    rimPerson(960, 992, 0.6, { t, pose: 'arms', hair: '#1A1320', body: '#060408' }, '#FFD6E0', 0.7, 14);
+    rrect(-300, 900, W + 600, 400, 0, { fill: lgrad(0, 900, 0, 1100, [[0, '#140C14'], [0.3, '#08050A'], [1, '#030204']]), stroke: null });
+    rrect(-300, 898, W + 600, 3, 0, { fill: rgba('#FFC7C0', 0.3), stroke: null });
+    for (const x of [640, 1280]) poly([[x - 70, 905], [x + 70, 905], [x + 58, 862], [x - 50, 872]], { fill: '#07050A', stroke: null });
+    rimPerson(960, 912, 0.56, { t, pose: 'arms', hair: '#1A1320', body: '#060408' }, '#FFD6E0', 0.7, 14);
     camEnd();
     black(0.7 * after(t, 111.6, 4), '#000000');
     black(easeIn(seg(t, 114.55, 115.2)) * 0.92, '#1A0E16');
