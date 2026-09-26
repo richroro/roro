@@ -43,7 +43,7 @@ function caption(t, t0, t1, title, sub, o = {}) {
 function bigFact(t, t0, t1, text, x = W / 2, y = H / 2, size = 110, o = {}) {
   const k = Math.min(clamp((t - t0) / 0.35), clamp((t1 - t) / 0.3));
   if (k <= 0) return;
-  letter(text, x, y, size, o.color || '#FFFFFF', { pop: clamp((t - t0) / 0.35), alpha: k, color2: BIO.ink, shadow: o.shadow ?? BIO.ink });
+  letter(text, x, y, size, o.color || '#FFFFFF', { pop: clamp((t - t0) / 0.35), alpha: k, color2: BIO.ink, shadow: o.shadow === undefined ? BIO.ink : o.shadow });
 }
 
 /**
