@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T16:29:49.265797+09:00",
+  "updatedAt": "2026-09-26T21:58:18.244672+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,8 +20,8 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51828.6,
-      "change": 478.6,
+      "price": 51828.62,
+      "change": 478.62,
       "changePercent": 0.93,
       "currency": "USD"
     },
@@ -112,6 +112,24 @@
   ],
   "news": [
     {
+      "title": "\"수익률 1위 덜컥 샀다간…\" 노후자금 굴리다 멘붕 온 개미들 [김연지의 연금빌드업]",
+      "link": "https://www.hankyung.com/article/2026092336196",
+      "pubDate": "Sat, 26 Sep 2026 19:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"돈잔치 할 때 아냐\"…삼전닉스 호황에 소환된 '이건희 승부수' [분석+]",
+      "link": "https://www.hankyung.com/article/2026092180476",
+      "pubDate": "Sat, 26 Sep 2026 17:29:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"SUV가 왜 이렇게 조용해?\"…16년차 연구원도 놀란 '역발상'",
+      "link": "https://www.hankyung.com/article/202609182599g",
+      "pubDate": "Sat, 26 Sep 2026 16:18:12 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "AI 시대 보험사 경쟁력, 특허에 달렸다",
       "link": "https://www.hankyung.com/article/202609221940i",
       "pubDate": "Sat, 26 Sep 2026 15:00:07 +0900",
@@ -154,18 +172,6 @@
       "source": "한국경제"
     },
     {
-      "title": "으악! 내가 뭘 먹은 거야…김치·돼지고기 '이렇게 팔았어?'",
-      "link": "https://www.hankyung.com/article/2026092665327",
-      "pubDate": "Sat, 26 Sep 2026 12:29:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "대출심사 파고드는 핀테크…2금융권과 잇달아 '동맹'",
-      "link": "https://www.hankyung.com/article/202609266145i",
-      "pubDate": "Sat, 26 Sep 2026 12:17:43 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "한국제품 수입규제 상반기 241건…작년 하반기보다 11건 늘어",
       "link": "https://www.yna.co.kr/view/AKR20260923164700003",
       "pubDate": "Sat, 26 Sep 2026 11:31:00 +0900",
@@ -176,12 +182,6 @@
       "link": "https://www.yna.co.kr/view/AKR20260923166300008",
       "pubDate": "Sat, 26 Sep 2026 11:00:00 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "1억1000만원대 회복한 비트코인…고금리에도 상승세 이어갈까",
-      "link": "https://www.hankyung.com/article/202609255801i",
-      "pubDate": "Sat, 26 Sep 2026 10:56:12 +0900",
-      "source": "한국경제"
     },
     {
       "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
