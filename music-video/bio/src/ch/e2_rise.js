@@ -108,7 +108,7 @@
   }
   function singer(t, x, y, s) {
     const body = lgrad(-130, 0, 130, 0, [[0, '#2A1A14'], [0.25, DARK], [0.75, DARK], [1, '#101826']]);
-    rimmed(-1.6, -1.2, '#B07850', (f) => silhouette(x, y, s, { t: t * 0.4, body: f || body, hair: f || '#1C130F' }));
+    rimmed(-1.6, -1.2, '#B07850', (f) => silhouette(x, y, s, { t: t * 0.4, body: f || body, hair: f || DARK }));
     // headphones
     ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
     ctx.strokeStyle = '#08070A'; ctx.lineWidth = 12; ctx.beginPath(); ctx.arc(0, -448, 66, Math.PI * 1.08, Math.PI * 1.92); ctx.stroke();
@@ -201,10 +201,10 @@
   }
   const SHOES = { x: 1040, y: 905, s: 0.9 };
   function darkStudio(t, lt, dur) {
-    const push = easeInOut(seg(t, 50.6, 57.6));
-    const z = lerp(1.06, 2.25, push), cx = lerp(990, SHOES.x, push), cy = lerp(560, 850, push);
+    const push = easeInOut(seg(t, 50.4, 57.6));
+    const z = lerp(1.0, 2.25, push) + 0.03 * seg(t, 48, 50.4), cx = lerp(990, SHOES.x, push), cy = lerp(600, 850, push);
     const L = OFFS.map(o => lampLevel(t, o));
-    const moon = t < 50.4 ? 0.35 : lerp(0.35, 1, easeOut(seg(t, 50.4, 51.6))) + 0.25 * Math.exp(-(t - 50.4) * 2.5);
+    const moon = t < 50.4 ? 0.35 : lerp(0.35, 1.15, easeOut(seg(t, 50.4, 51.2))) + 0.35 * Math.exp(-(t - 50.4) * 2.5);
     skyFill([[0, '#040406'], [1, '#040406']]);
     cam(t, cx, cy, z, 0, 0.7);
     const lit = L.reduce((a, b) => a + b, 0) / 4;
@@ -288,7 +288,7 @@
         const flick = 1 + 1.4 * Math.exp(-(t - tj) * 5);
         dot(x, y, (7 + wgt * 3) * big * sc * flick, hash(ci, j + 400) > 0.75 ? '#DDEBFF' : '#FFC26E', kk * fade * 0.9);
       }
-      if (t < t0 + 1.2) { const [x, y, depth] = g.proj(vec(lat, lon)); if (depth > 0) { const r = (t - t0) * 90; ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = rgba(WAVE, 0.4 * (1 - (t - t0) / 1.2) * clamp(depth * 5)); ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x, y, r, r * clamp(depth + 0.2), 0, 0, TAU); ctx.stroke(); ctx.restore(); } }
+      if (t < t0 + 1.2) { const [x, y, depth] = g.proj(vec(lat, lon)); if (depth > 0) { const r = (t - t0) * 90; ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = rgba(WAVE, 0.22 * (1 - (t - t0) / 1.2) * clamp(depth * 5)); ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x, y, r, r * clamp(depth + 0.2), 0, 0, TAU); ctx.stroke(); ctx.restore(); } }
     });
     // the song travelling: arcs from Los Angeles
     ARCS.forEach((ci, i) => {
@@ -373,7 +373,7 @@
     caption(t, 62.0, 67.0, '2015년 11월 사운드클라우드 공개', '입소문을 타고 세상으로 퍼져 나가다');
     black(1 - easeOut(seg(t, 57.6, 58.1)));
     wash(burst * 0.12, '#CFEFFF');
-    wash(easeIn(seg(t, 66.75, 67.2)) * 0.55, '#FFF4E0');
+    wash(easeIn(seg(t, 66.8, 67.2)) * 0.45, '#FFF4E0');
   }
 
   chapter('rise', 38.4, 67.2, [[38.4, bedroom], [48.0, darkStudio], [57.6, worldwide]]);

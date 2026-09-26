@@ -38,37 +38,42 @@
     return [c, g];
   }
   /** The half-res pixel box [x, y, w, h] covering box (in the current transform) plus a margin. */
-  function region(box, px) {
+  function region(box, px, q) {
     const w = Math.round(cv.width * Q), h = Math.round(cv.height * Q);
     if (!box) return [0, 0, w, h];
     const m = ctx.getTransform(), [x, y, bw, bh] = box;
-    const pts = [[x, y], [x + bw, y], [x, y + bh], [x + bw, y + bh]].map(([u, v]) => [(m.a * u + m.c * v + m.e) * Q, (m.b * u + m.d * v + m.f) * Q]);
+    const pts = [[x, y], [x + bw, y], [x, y + bh], [x + bw, y + bh]].map(([u, v]) => [(m.a * u + m.c * v + m.e) * q, (m.b * u + m.d * v + m.f) * q]);
     const pad = px * SCALE * Q * 2.5 + 2;
     const x0 = Math.max(0, Math.floor(Math.min(...pts.map(p => p[0])) - pad)), y0 = Math.max(0, Math.floor(Math.min(...pts.map(p => p[1])) - pad));
     const x1 = Math.min(w, Math.ceil(Math.max(...pts.map(p => p[0])) + pad)), y1 = Math.min(h, Math.ceil(Math.max(...pts.map(p => p[1])) + pad));
     return [x0, y0, Math.max(1, x1 - x0), Math.max(1, y1 - y0)];
   }
-  function blurDown(src, px, r) {
-    const [c, g] = buf(1), [x, y, w, h] = r;
+  function blurDown(src, px, r, i) {
+    const [c, g] = buf(i), [x, y, w, h] = r;
     g.clearRect(x - 3, y - 3, w + 6, h + 6);
     g.filter = `blur(${Math.max(0.1, px * SCALE * Q)}px)`;
     g.drawImage(src, x, y, w, h, x, y, w, h);
     g.filter = 'none';
     return c;
   }
-  /** Paint fn() (in the current camera) out of focus by px. o: { alpha, op, box: [x, y, w, h] }. */
+  let depth = 0;
+  /**
+   * Paint fn() (in the current camera) out of focus by px. o: { alpha, op, box: [x, y, w, h] }.
+   * Layers nest: inside another layer, the scratch is already at half size, so no rescale.
+   */
   function layer(px, fn, o = {}) {
-    const r = region(o.box, px), [rx, ry, rw, rh] = r;
-    const [c, g] = buf(0), m = ctx.getTransform(), main = ctx;
+    const d = depth, q = d > 0 ? 1 : Q;
+    const r = region(o.box, px, q), [rx, ry, rw, rh] = r;
+    const [c, g] = buf(2 * d), m = ctx.getTransform(), main = ctx;
     g.clearRect(rx - 3, ry - 3, rw + 6, rh + 6);
     g.save(); g.beginPath(); g.rect(rx, ry, rw, rh); g.clip();
-    g.setTransform(m.a * Q, m.b * Q, m.c * Q, m.d * Q, m.e * Q, m.f * Q);
-    ctx = g;
-    try { fn(); } finally { ctx = main; g.restore(); }
-    const out = px > 0 ? blurDown(c, px, r) : c;
+    g.setTransform(m.a * q, m.b * q, m.c * q, m.d * q, m.e * q, m.f * q);
+    ctx = g; depth++;
+    try { fn(); } finally { ctx = main; depth--; g.restore(); }
+    const out = px > 0 ? blurDown(c, px, r, 2 * d + 1) : c;
     main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
     main.globalAlpha = o.alpha ?? 1; main.globalCompositeOperation = o.op || 'source-over';
-    main.drawImage(out, rx, ry, rw, rh, rx / Q, ry / Q, rw / Q, rh / Q);
+    main.drawImage(out, rx, ry, rw, rh, rx / q, ry / q, rw / q, rh / q);
     main.restore();
   }
   /** Throw the whole frame so far out of focus (a rack focus). */
@@ -77,7 +82,7 @@
     const [c, g] = buf(0);
     g.clearRect(0, 0, c.width, c.height);
     g.drawImage(cv, 0, 0, c.width, c.height);
-    const out = blurDown(c, px, [0, 0, c.width, c.height]);
+    const out = blurDown(c, px, [0, 0, c.width, c.height], 1);
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = a;
     ctx.drawImage(out, 0, 0, cv.width, cv.height);
     ctx.restore();

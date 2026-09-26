@@ -14,7 +14,7 @@
   // =============================== kit (shared with e2_rise.js) ==================================
 
   // ---- layers: paint a group off screen at half size and lay it back blurred ----------------------
-  const pool = []; let depth = 0;
+  const pool = [], blurPool = []; let depth = 0;
   /** Paint fn() out of focus as one group (much cheaper than blurring each shape). */
   function layer(px, fn, alpha = 1) {
     if (px < 0.6) { if (alpha < 1) { ctx.save(); ctx.globalAlpha *= alpha; fn(); ctx.restore(); } else fn(); return; }
@@ -30,10 +30,19 @@
     o.setTransform(m.a * q, m.b * q, m.c * q, m.d * q, m.e * q, m.f * q);
     depth++; ctx = o;
     try { fn(); } finally { ctx = main; depth--; }
+    // blur at half size (a quarter of the work), then lay it back up to full size
+    let bc = blurPool[depth];
+    if (!bc) bc = blurPool[depth] = document.createElement('canvas');
+    if (bc.width !== w || bc.height !== h) { bc.width = w; bc.height = h; }
+    const bg = bc.getContext('2d');
+    bg.setTransform(1, 0, 0, 1, 0, 0); bg.globalAlpha = 1; bg.globalCompositeOperation = 'copy';
+    bg.filter = `blur(${(px * SCALE * q).toFixed(2)}px)`;
+    bg.drawImage(c, 0, 0);
+    bg.filter = 'none'; bg.globalCompositeOperation = 'source-over';
     main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
     main.globalAlpha *= alpha;
-    main.filter = `blur(${(px * SCALE).toFixed(1)}px)`;
-    main.drawImage(c, 0, 0, cw, ch);
+    main.imageSmoothingQuality = 'high';
+    main.drawImage(bc, 0, 0, cw, ch);
     main.restore();
   }
 
@@ -102,7 +111,7 @@
 
   /** A standing child seen from the front, feet at (x, y), h tall. o: { hair, style, fold, sway, t, body, rim, lx, ly }. */
   function child(x, y, h, o = {}) {
-    const s = h / 260, sway = o.sway || 0, body = o.body || DARK, hairC = o.hair || '#1A1418';
+    const s = h / 260, sway = o.sway || 0, body = o.body || DARK, hairC = o.hair || body;
     const draw = (f, hf) => {
       const b = f || body, hc = hf || hairC;
       stroke([[-12, -92], [-13, -8]], b, 17, { ink: null });
@@ -126,7 +135,7 @@
       ctx.restore();
     };
     ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-    if (o.rim) rimmed(o.lx ?? 0, o.ly ?? -3, o.rim, draw); else draw(null, null);
+    if (o.rim) { ctx.save(); ctx.translate(o.lx ?? 0, o.ly ?? -3); draw(o.rim, o.hairRim || o.rim); ctx.restore(); draw(null, null); } else draw(null, null);
     // the open folder's pages catch the light
     if (o.pages) {
       ctx.save(); ctx.rotate(sway * 0.03);
@@ -358,7 +367,7 @@
     // the cold shaft that ends on the shoes
     if (o.moon > 0 && o.shoes) {
       const sx = o.shoes.x, x0 = 930, x1 = 1030;
-      for (let q = 0; q < 4; q++) { const f = 1 - q * 0.2, mx = (x0 + x1) / 2, bx = sx + 5; beam(mx - 50 * f, mx + 50 * f, 236, bx - 115 * f, bx + 115 * f, 905, moonC, 0.05 * o.moon, 0.6); }
+      for (let q = 0; q < 4; q++) { const f = 1 - q * 0.2, mx = (x0 + x1) / 2, bx = sx + 5; beam(mx - 50 * f, mx + 50 * f, 236, bx - 115 * f, bx + 115 * f, 905, moonC, 0.065 * o.moon, 0.6); }
       softEll(sx, 900, 190, 44, moonC, 0.30 * o.moon, 'lighter');
       dustIn(t, [[x0, 236], [x1, 236], [sx + 120, 905], [sx - 110, 905]], 850, 230, 400, 700, 70, '#DDE8FF');
     }
@@ -661,7 +670,7 @@
     const [fx, fy, fh] = FOCUS;
     const breath = Math.sin(t * TAU / 2.4) * 0.5 + pulse(t, 4) * 0.3;
     softEll(fx, fy + 2, 60, 10, '#000000', 0.5);
-    child(fx, fy, fh, { style: 'long', hair: '#140E0C', sway: breath, rim: '#F2C590', lx: 0.6, ly: -2.2, pages: '#E8CFA8' });
+    child(fx, fy, fh, { style: 'long', hairRim: '#C8894E', sway: breath, rim: '#F2C590', lx: 0.6, ly: -2.2, pages: '#E8CFA8' });
     glow(fx, fy - fh * 0.52, 70, '#FFE6C0', 0.15);
     dust(t, 200, 150, 1600, 800, 120, '#FFF0D0');
     camEnd();

@@ -58,9 +58,6 @@ function silhouette(x, y, s, o = {}) {
   const body = o.body || BIO.ink;
   if (o.glow) glow(0, -260, 380, o.glow, 0.35);
   const sway = Math.sin(t * 2) * 4;
-  // long hair behind the head, falling to the shoulders (its tint marks the era)
-  smooth([[-78 + sway, -470], [-92 + sway, -380], [-88, -300], [-40, -290], [40, -290], [88, -300], [92 + sway, -380], [78 + sway, -470], [0, -528]],
-    { fill: o.hair || body, stroke: null });
   // wide trousers and an oversized hoodie
   smooth([[-92, -170], [-100, -10], [-18, -10], [-4, -150], [4, -150], [18, -10], [100, -10], [92, -170]], { fill: body, stroke: null });
   smooth([[-104, -372], [-60, -392], [60, -392], [104, -372], [118, -250], [104, -150], [0, -140], [-104, -150], [-118, -250]], { fill: body, stroke: null });
@@ -71,8 +68,13 @@ function silhouette(x, y, s, o = {}) {
   else if (o.pose === 'arms') { arm(-1, 60, -110); arm(1, 60, -110); }
   else if (o.pose === 'wave') { arm(-1, 12, 120); arm(1, 70, -100); }
   else { arm(-1, 14, 120); arm(1, 14, 120); }
-  // the head, with no face, and a thin rim of light on the hair
+  // the head, then the long hair over it (seen as if from behind, so a tinted head reads as hair,
+  // not as a hood around a face)
   circle(sway * 0.3, -445, 60, { fill: body, stroke: null });
+  // hair covering the head and falling to the shoulders (its tint marks the era)
+  smooth([[-78 + sway, -470], [-92 + sway, -380], [-88, -300], [-40, -290], [40, -290], [88, -300], [92 + sway, -380], [78 + sway, -470], [0, -528]],
+    { fill: o.hair || body, stroke: null });
+
   if (o.hair) { ctx.save(); ctx.globalAlpha *= 0.55; stroke([[-66 + sway, -470], [-40 + sway, -505], [0, -516], [40 + sway, -505], [66 + sway, -470]], o.hair, 8, { ink: null, smooth: true }); ctx.restore(); }
   ctx.restore();
 }
