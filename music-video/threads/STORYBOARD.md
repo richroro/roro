@@ -27,7 +27,7 @@
 - `strand(pts, color, { t, w, wob })` 털실 가닥, `knitBg(t, a, b)`, `feltCard(x, y, w, h, { fill, rot, fn })`
 - `quizWord(t, t0, word, { x, y, w, h, size, fill, q })`, `timer(t, t0, x, y, r)` (t0 다음 세 박자에 3·2·1, 넷째 박에 땡!),
   `answer(t, t0, text, { x, y, size, fill })`
-- `stitchTag(t, t0, t1, text, { size, y, colors })` 큰 자막, `stitchSub(...)` 손글씨(개구체) 작은 자막
+- `stitchTag(t, t0, t1, text, { size, y, colors })` 큰 자막, `stitchSub(...)` 작은 자막(주아체)
 - `bubble(x, y, text, size, { tail, fill })`, `hearts()`, `phoneFeed(x, y, s, fn)`, `post(x, y, w, text, { t, name, face, color, liked })`,
   `bigNum(t, t0, value, suffix, x, y, size, { dur, decimals, color })`, `handText(txt, x, y, size, color, o)`
 - core.js 의 `camBegin/camEnd`, `shakeXY`, `kf`, `pulse`, `hop`, `confetti`, `speedLines`, `sunburst`, `flash`.

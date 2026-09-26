@@ -17,7 +17,7 @@
 //   quizWord(t, t0, word, o)  the big question word on a felt card, pops in at t0
 //   timer(t, t0, x, y, r)  3-2-1 ring that ticks on the beat after t0 (3 beats) then "땡!"
 //   answer(t, t0, text, o) the answer on a stitched label, pops in at t0
-//   stitchTag(t, t0, t1, text, o) / stitchSub(...)  captions (top third), Gaegu handwriting font
+//   stitchTag(t, t0, t1, text, o) / stitchSub(...)  captions (top third), in Jua
 //   bubble(x, y, text, size, o) a speech bubble · hearts(...) · phoneFeed(x, y, s, fn, o)
 //   bigNum(t, t0, text, x, y, size, o)  a number that counts up and slams
 /* eslint-disable no-unused-vars */
@@ -27,7 +27,7 @@ const YARN = {
   mint: '#6BD3B0', teal: '#3FA7B5', blue: '#6C8CFF', lilac: '#B48CFF', pink: '#FF8CC6',
   cream: '#FFF8EE', brown: '#8A5A44', night: '#2B2140',
 };
-const HAND = '"Gaegu"';
+const HAND = FONT.round;   // Jua: round and bold enough to read on a phone
 
 // ---- a ball of yarn with a face ---------------------------------------------------------------
 
@@ -184,7 +184,7 @@ function feltCard(x, y, w, h, o = {}) {
 
 function handText(txt, x, y, size, color = YARN.ink, o = {}) {
   ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
-  ctx.font = `${o.weight || 700} ${size}px ${o.font || HAND}`; ctx.textAlign = o.align || 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `${o.weight || 400} ${size}px ${o.font || HAND}`; ctx.textAlign = o.align || 'center'; ctx.textBaseline = 'middle';
   if (o.outline) { ctx.lineWidth = o.outline; ctx.strokeStyle = o.outlineColor || YARN.ink; ctx.lineJoin = 'round'; ctx.strokeText(txt, 0, 0); }
   ctx.fillStyle = color; ctx.fillText(txt, 0, 0);
   ctx.restore();
@@ -226,7 +226,7 @@ function answer(t, t0, text, o = {}) {
   const k = clamp((t - t0) / 0.28); if (k <= 0) return;
   const lines = text.split('\n'), size = o.size || 78, x = o.x ?? W / 2, y = o.y ?? 900;
   ctx.save(); ctx.translate(x, y); const s = backOut(k); ctx.scale(s, s); ctx.rotate(o.rot ?? 0.02);
-  ctx.font = `700 ${size}px ${HAND}`;
+  ctx.font = `${size}px ${HAND}`;
   const w = Math.max(...lines.map(l => ctx.measureText(l).width)) + 110, h = lines.length * size * 1.15 + 70;
   feltCard(0, 0, w, h, { fill: o.fill || YARN.mint });
   lines.forEach((ln, i) => handText(ln, 0, (i - (lines.length - 1) / 2) * size * 1.15 + 4, size, o.color || YARN.ink));
@@ -265,7 +265,7 @@ function stitchSub(t, t0, t1, text, o = {}) {
 
 function bubble(x, y, text, size, o = {}) {
   ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0); if (o.scale !== undefined) ctx.scale(o.scale, o.scale);
-  ctx.font = `700 ${size}px ${HAND}`;
+  ctx.font = `${size}px ${HAND}`;
   const lines = String(text).split('\n');
   const tw = Math.max(...lines.map(l => ctx.measureText(l).width)), w = tw + size * 1.0, h = lines.length * size * 1.1 + size * 0.6;
   const fill = o.fill || '#FFFFFF', tail = o.tail ?? -1;

@@ -7,7 +7,6 @@
 <style>
   @font-face { font-family: "Black Han Sans"; src: url("../assets/fonts/BlackHanSans.ttf"); }
   @font-face { font-family: "Jua"; src: url("../assets/fonts/Jua.ttf"); }
-  @font-face { font-family: "Gaegu"; font-weight: 700; src: url("../assets/fonts/Gaegu-Bold.ttf"); }
   html, body { margin: 0; background: #1b1530; color: #fff; font-family: "Jua", sans-serif; }
   body.render { background: #000; }
   #stage { display: block; height: calc(100vh - 70px); margin: 0 auto; aspect-ratio: 9 / 16; }
@@ -51,7 +50,6 @@
   window.ready = Promise.all([
     document.fonts.load('80px "Black Han Sans"', '스레드반말스친스하리쓰하'),
     document.fonts.load('80px "Jua"', '스친스린이'),
-    document.fonts.load('700 80px "Gaegu"', '스레드친구반말스치다하트리포스트'),
   ]).then(() => document.fonts.ready);
 
   window.renderAt = t => { renderFrame(t); };
