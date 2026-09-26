@@ -250,7 +250,7 @@
       pts.push(last);
       for (let k = 1; k < pts.length; k++) {
         const [x0, y0, z0] = pts[k - 1], [x1, y1, z1] = pts[k];
-        const behind = z0 < 0 && Math.hypot(x0 - cx, y0 - cy) < R;
+        const behind = z0 < 0;
         ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
         ctx.lineCap = 'round';
         ctx.strokeStyle = rgba(BIO.lime, behind ? 0.08 : 0.25); ctx.lineWidth = 14; ctx.stroke();

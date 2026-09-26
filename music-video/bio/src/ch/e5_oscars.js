@@ -174,7 +174,6 @@
     poly([[520, 300], [960, 88], [1400, 300]], { fill: PASTEL.roofDk, stroke: null, alpha: 0.35 });
     rrect(412, 330, 1096, 470, 10, { fill: PASTEL.wall, stroke: PASTEL.trim, lw: 10 });
     // the two wings, two floors each
-    const col = [[440, 332], [1148, 332]];
     const rooms = [
       [440, 350, 332, 205, PASTEL.lilac, () => { // bedroom: little bed and a window
         rrect(470, 420, 110, 80, 10, { fill: '#FFFFFF', stroke: null });
@@ -203,7 +202,6 @@
       }],
     ];
     for (const [x, y, w, h, c, d] of rooms) room(x, y, w, h, c, d);
-    void col;
     // floor dividers
     rrect(430, 556, 350, 16, 4, { fill: PASTEL.trim, stroke: null });
     rrect(1140, 556, 350, 16, 4, { fill: PASTEL.trim, stroke: null });
