@@ -1,16 +1,19 @@
 // Cuts the Short's bars out of the full render: the audio from FROM_BAR to TO_BAR (plus a short
 // fade-out tail), and src/song.js with every time moved so the Short starts at 0.
 //
-//   node rescene/song/cut.mjs      (after: node song/synth.mjs rescene/song/score.mjs)
+//   node rescene/song/cut.mjs                          (after: node song/synth.mjs rescene/song/score.mjs)
+//   node rescene/song/cut.mjs threads/song/score.mjs   another project's score (same FROM_BAR/TO_BAR/TAIL)
 
 import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import * as S from './score.mjs';
+import { pathToFileURL } from 'node:url';
 import { ffmpegPath } from '../../tools/ffmpeg.mjs';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const scorePath = process.argv[2] ? resolve(process.argv[2]) : join(dirname(fileURLToPath(import.meta.url)), 'score.mjs');
+const S = await import(pathToFileURL(scorePath).href);
+const ROOT = join(dirname(scorePath), '..');
 const from = S.barTime(S.FROM_BAR), to = S.barTime(S.TO_BAR), len = to - from + S.TAIL;
 execFileSync(ffmpegPath(), ['-y', '-loglevel', 'error', '-ss', from.toFixed(4), '-t', len.toFixed(4),
   '-i', join(ROOT, 'out', 'song.wav'),
