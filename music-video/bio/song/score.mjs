@@ -1,5 +1,5 @@
-// Background music for the Billie Eilish career video: an original instrumental, no voice and
-// nothing from her records. It is the father song's dark-pop score (../../gajang/song/score.mjs)
+// Background music for the Billie Eilish film: an original piano-and-strings instrumental, no voice and
+// nothing from her records. It is the father song's score (../../gajang/song/score.mjs)
 // with the tune kept only in the choruses and outro, so the verses leave room for the captions,
 // and no lyrics on screen.
 //
