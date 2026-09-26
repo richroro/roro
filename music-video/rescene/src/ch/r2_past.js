@@ -11,7 +11,7 @@
 //
 // Helpers from r1_night.js: window.R12.
 (() => {
-  const { B, BT, squash, twinkles, sparkBurst, beatSfx, moonWindow } = window.R12;
+  const { camAt, B, BT, squash, twinkles, sparkBurst, beatSfx, moonWindow } = window.R12;
   const T0 = 14.55;
   const bt2 = n => T0 + n * B;          // beats since the top of this chapter
 
@@ -29,10 +29,10 @@
 
   function sStage(t) {
     const lt = t - T0;
-    const on = clamp(lt / 0.12);
+    const on = clamp(lt / 0.05);
     fillScreen(lgrad(0, 0, 0, H, [[0, '#1B1433'], [1, '#2A1F4A']]));
     const z = lerp(1.1, 1.0, easeOut(clamp(lt / 1.2))) * (1 + 0.012 * pulse(t, 6));
-    camBegin(540, 1150, z);
+    camAt(540, 1150, z);
     // backdrop: a pastel curtain with scallops
     ctx.save(); ctx.globalAlpha = 0.25 + 0.75 * on;
     ctx.fillStyle = lgrad(0, 400, 0, 1300, [[0, '#6D4FB5'], [1, '#B58AE6']]); ctx.fillRect(-100, 380, W + 200, 960);
@@ -40,7 +40,7 @@
     for (let x = -100; x < W + 100; x += 120) ell(x + 60, 400, 70, 50, { fill: POP.rose, stroke: POP.ink, lw: 6 });
     // a string of little bulbs
     for (let i = 0; i < 12; i++) {
-      const x = 40 + i * 92, y = 470 + Math.sin(i * 0.9) * 10 + Math.pow((i - 5.5) / 5.5, 2) * -30;
+      const x = 40 + i * 92, y = 600 + Math.sin(i * 0.9) * 10 + Math.pow((i - 5.5) / 5.5, 2) * -30;
       const lit = (beatN(t) + i) % 2 === 0;
       circle(x, y, 13, { fill: lit ? POP.lemon : '#FFF6D6', stroke: POP.ink, lw: 4 });
       if (lit) glow(x, y, 40, POP.lemon, 0.5);
@@ -57,7 +57,7 @@
     // the little stage
     rrect(-60, 1330, W + 120, 110, 20, { fill: '#F2C7A5', stroke: POP.ink, lw: 8 });
     ctx.fillStyle = '#D69C77'; ctx.fillRect(-60, 1400, W + 120, 40);
-    for (let i = 0; i < 5; i++) ell(540 + (i - 2) * 190, 1368, 80, 18, { fill: rgba('#FFFFFF', 0.35 * on), stroke: null });
+    for (let i = 0; i < 5; i++) ell(540 + (i - 2) * 200, 1374, 84, 18, { fill: rgba('#FFFFFF', 0.35 * on), stroke: null });
     // five: bow, then wave
     const bowing = t < bt2(4);
     for (let i = 0; i < 5; i++) {
@@ -69,11 +69,11 @@
         pose = bk ? 'bow' : 'stand';
       } else { bob = hop(t + i * 0.08) * 0.8; mouth = i % 2 ? 'open' : 'smile'; }
       const [qx, qy] = squash(t, bowing ? (t < bt2(3) ? bt2(1) : bt2(3)) : bt2(4), 0.1);
-      ctx.save(); ctx.translate(540 + u * 190, 1370); ctx.scale(qx, qy);
-      chibi(0, 0, 0.58, { t: t + i * 0.3, look: i, pose, mouth, bob, sticker: true, flip: !bowing && u < 0 });
+      ctx.save(); ctx.translate(540 + u * 200, 1380); ctx.scale(qx, qy);
+      chibi(0, 0, 0.66, { t: t + i * 0.3, look: i, pose, mouth, bob, sticker: true, flip: !bowing && u < 0 });
       ctx.restore();
     }
-    if (bowing) sfx('꾸벅', 540, 900, 110, POP.lemon, t - bt2(1), { life: 1.0 });
+    if (bowing) sfx('꾸벅', 540, 700, 120, POP.lemon, t - bt2(1), { life: 1.0 });
     // the audience: dark heads and only a few lights
     for (let i = 0; i < 16; i++) {
       const x = hrange(-40, 1120, i, 3), y = 1560 + hrange(0, 260, i, 4);
@@ -82,8 +82,8 @@
     [[190, 1580], [470, 1650], [760, 1600], [930, 1720], [320, 1790]].forEach(([x, y], i) => lightstick(x, y, 0.8, t, i));
     camEnd();
     popTag(t, T0 + 0.15, bt2(8) + 0.3, '2024년 3월, 데뷔', { y: 330, bg: POP.white });
-    popSub(t, T0 + 0.6, bt2(8) + 0.3, '리센느 · 원이 리브 미나미 메이 제나', { y: 470, size: 54 });
-    flash(0.3 * Math.exp(-lt * 8));
+    popSub(t, T0 + 0.6, bt2(8) + 0.3, '리센느 · 원이 리브 미나미 메이 제나', { y: 475, size: 60 });
+    flash(0.22 * Math.exp(-lt * 10), '#FFE3F1');
   }
 
   // ---- 18.18 – 21.82: the heart bursts, then 904위 -----------------------------------------------
@@ -99,7 +99,7 @@
     ctx.restore();
     halftone(0, 1100, W, 820, '#FFFFFF', 0.25);
     const [sx, sy] = shakeXY(t, HIT, 16, 0.4);
-    camBegin(540 - sx, 1100 - sy, lerp(1.08, 1.0, easeOut(clamp(lt / 0.6))));
+    camAt(540, 1100, lerp(1.08, 1.0, easeOut(clamp(lt / 0.6)))); ctx.translate(sx, sy);
 
     // the big heart: pops on 18.18, beats, bursts on 19.09
     const BURST = bt2(10);
@@ -146,7 +146,7 @@
       const dk = clamp((t - DROP) / 0.5), y = t < HIT ? lerp(-120, 160, easeIn(dk)) : 160 + Math.sin((t - HIT) * 22) * 18 * Math.exp(-(t - HIT) * 6);
       rankHUD(t, 904, { y, label: 'MELON 일간', flash: 0.6 * Math.exp(-Math.max(0, t - HIT) * 6) });
     }
-    if (after) sfx('쿵!', 840, 560, 130, POP.white, t - HIT, { life: 0.9, rot: 0.12 });
+    if (after) sfx('쿵!', 935, 110, 100, POP.lemon, t - HIT, { life: 0.9, rot: 0.14 });
     popTag(t, s0 + 0.12, bt2(16) + 0.3, '2024년 8월 “러브 어택”', { y: 350, bg: POP.white, colors: [POP.ink] });
     popSub(t, HIT + 0.1, bt2(16) + 0.3, '첫 성적, 멜론 일간 904위', { y: 500, size: 58 });
     flash(0.5 * Math.exp(-lt * 10) + 0.4 * Math.exp(-Math.max(0, t - BURST) * 10) * (t >= BURST ? 1 : 0));
@@ -211,7 +211,7 @@
     const s0 = bt2(16), lt = t - s0;
     const z = lerp(1.08, 1.0, easeOut(clamp(lt / 0.6))) * (1 + 0.01 * pulse(t, 6));
     fillScreen('#2C2350');
-    camBegin(540, 1100, z);
+    camAt(540, 1100, z);
     // wall
     ctx.fillStyle = lgrad(0, 0, 0, 1420, [[0, '#3B2F6B'], [1, '#54448F']]); ctx.fillRect(-100, -100, W + 200, 1520);
     halftone(-100, 0, W + 200, 1420, '#FFFFFF', 0.05, 30);
@@ -268,25 +268,31 @@
     fillScreen(lgrad(0, 0, 0, H, [[0, '#FFD6E8'], [1, '#D9C8FF']]));
     halftone(0, 0, W, H, POP.pink, 0.12, 28);
     const z = lerp(1.12, 1.0, easeOut(clamp(lt / 0.7)));
-    camBegin(540, 1150, z);
+    camAt(540, 1150, z);
     fairyLights(t, 700);
+    hearts(t, 9, 120, 640, 840, 700, { scale: 1.1 });
     // ring light behind her
-    circle(540, 1080, 250, { fill: null, stroke: '#FFFFFF', lw: 30 });
-    glow(540, 1080, 420, '#FFFFFF', 0.4);
+    circle(540, 1120, 280, { fill: null, stroke: '#FFFFFF', lw: 30 });
+    glow(540, 1120, 460, '#FFFFFF', 0.4);
     // her, sitting, waving at the camera
     const [qx, qy] = squash(t, s0 + 0.05, 0.12);
-    ctx.save(); ctx.translate(540, 1440); ctx.scale(qx, qy);
-    chibi(0, 0, 0.8, { t, look: CAMLOOK, pose: 'wave', mouth: beatN(t) % 2 ? 'open' : 'smile', bob: hop(t) * 0.5, sticker: true, flip: true });
+    ctx.save(); ctx.translate(540, 1500); ctx.scale(qx, qy);
+    chibi(0, 0, 0.95, { t, look: CAMLOOK, pose: 'wave', mouth: beatN(t) % 2 ? 'open' : 'smile', bob: hop(t) * 0.5, sticker: true, flip: true });
     ctx.restore();
     // the desk and the laptop, seen from behind its lid
     rrect(-60, 1420, W + 120, 70, 16, { fill: '#F2C7A5', stroke: POP.ink, lw: 8 });
     ctx.fillStyle = '#E2AF8B'; ctx.fillRect(-60, 1490, W + 120, 500);
-    poly([[310, 1425], [770, 1425], [740, 1215], [340, 1215]], { fill: '#E9E6F2', stroke: POP.ink, lw: 8 });
-    poly(heartPts(540, 1320, 34), { fill: POP.rose, stroke: POP.ink, lw: 5 });   // a sticker on the lid
-    circle(430, 1270, 18, { fill: POP.mint, stroke: POP.ink, lw: 4 });
-    sparkle(655, 1290, 22, POP.lemon);
+    poly([[330, 1425], [750, 1425], [725, 1290], [355, 1290]], { fill: '#E9E6F2', stroke: POP.ink, lw: 8 });
+    poly(heartPts(540, 1360, 30), { fill: POP.rose, stroke: POP.ink, lw: 5 });   // a sticker on the lid
+    circle(440, 1335, 16, { fill: POP.mint, stroke: POP.ink, lw: 4 });
+    sparkle(640, 1345, 20, POP.lemon);
+    // a mug and a little plant on the desk
+    rrect(130, 1330, 90, 100, 18, { fill: POP.mint, stroke: POP.ink, lw: 6 });
+    ctx.save(); ctx.lineWidth = 12; ctx.strokeStyle = POP.ink; ctx.beginPath(); ctx.arc(225, 1380, 24, -1.2, 1.2); ctx.stroke(); ctx.restore();
+    for (let i = 0; i < 3; i++) stroke([[160 + i * 16, 1310 - Math.sin(t * 3 + i) * 8], [170 + i * 16, 1270], [160 + i * 16, 1240]], '#FFFFFF', 6, { ink: null, alpha: 0.6, smooth: true });
+    rrect(860, 1350, 90, 80, 14, { fill: POP.peach, stroke: POP.ink, lw: 6 });
+    for (let i = 0; i < 3; i++) ell(905 + (i - 1) * 26, 1320 - (i === 1 ? 20 : 0), 18, 34, { fill: '#7CCB6A', stroke: POP.ink, lw: 5 }, (i - 1) * 0.5 + Math.sin(t * 2 + i) * 0.08);
     camEnd();
-    hearts(t, 9, 120, 600, 840, 700, { scale: 1.1 });
     popTag(t, s0 + 0.12, bt2(32) + 0.3, '2026년 2월,\n원이의 유튜브 채널', { y: 320, bgs: [POP.white, POP.lemon] });
   }
 
@@ -306,11 +312,11 @@
     halftone(x0, y0, w, h, '#FFFFFF', 0.25, 26);
     fairyLights(t, y0 + 60);
     glow(540, 1150, 460, '#FFFFFF', 0.45);
-    const [qx, qy] = squash(t, bt2(beatN(t) - beatN(T0)), 0.06);
-    ctx.save(); ctx.translate(540, y0 + h + 60); ctx.scale(qx, qy);
-    chibi(0, 0, 1.0, { t, look: CAMLOOK, pose: 'wave', mouth: beatN(t) % 2 ? 'open' : 'smile', bob: hop(t) * 0.6, flip: true });
-    ctx.restore();
     hearts(t, 8, x0 + 60, y0 + 200, w - 120, h - 250, { scale: 1.2 });
+    const [qx, qy] = squash(t, bt2(beatN(t) - beatN(T0)), 0.06);
+    ctx.save(); ctx.translate(540, y0 + h + 10); ctx.scale(qx, qy);
+    chibi(0, 0, 1.05, { t, look: CAMLOOK, pose: 'wave', mouth: beatN(t) % 2 ? 'open' : 'smile', bob: hop(t) * 0.6, flip: true });
+    ctx.restore();
     // recording UI
     ctx.fillStyle = 'rgba(20,14,40,0.55)'; ctx.fillRect(x0, y0, w, 110);
     ctx.font = `58px ${FONT.bold}`; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';

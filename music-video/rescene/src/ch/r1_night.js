@@ -19,6 +19,12 @@
 
   // ---- small shared helpers ----------------------------------------------------------------------
 
+  /** A camera that zooms/rotates about world point (px, py), which stays put on screen. */
+  function camAt(px, py, z = 1, rot = 0) {
+    ctx.save(); camDepth++;
+    ctx.translate(px, py); ctx.rotate(rot); ctx.scale(z, z); ctx.translate(-px, -py);
+  }
+
   /** A squash-and-stretch pop that lands at t0: returns [sx, sy]. */
   function squash(t, t0, amt = 0.25, len = 0.35) {
     const a = t - t0;
@@ -235,7 +241,7 @@
   function sWide(t) {
     const lt = t;
     const z = lerp(1, 1.07, ease(clamp(lt / 2.73)));
-    camBegin(W / 2, 1080, z);
+    camAt(W / 2, 1080, z);
     ctx.fillStyle = NIGHT.wall; ctx.fillRect(-100, -100, W + 200, 960);
     halftone(-100, 0, W + 200, 880, '#FFFFFF', 0.05, 30);
     floorTopDown(-100, 860, W + 200, 1300);
@@ -256,7 +262,7 @@
     halftone(0, 0, W, H, POP.lav, 0.1, 34);
     glow(260, 700, 700, '#BFB2FF', 0.25);
     const z = lerp(1.06, 1.0, easeOut(clamp(lt / 0.5)));
-    camBegin(W / 2, 1100, z);
+    camAt(W / 2, 1100, z);
     clock(540, 1100, 330, t, { rock: 2 });
     camEnd();
     beatSfx(t, BT(6), BT(10), ['똑', '딱'], [[190, 700], [890, 720]], 120, POP.white);
@@ -266,7 +272,7 @@
   function sCreep(t) {
     const lt = t - BT(10);
     const z = lerp(1.0, 1.22, easeInOut(clamp(lt / 1.82)));
-    camBegin(540, 1180, z, -0.03);
+    camAt(540, 1180, z, -0.03);
     floorTopDown(-200, -200, W + 400, H + 400);
     moonShaft([[-200, 300], [500, 300], [1100, 1920], [-200, 1920]], 0.12);
     sleeperAt(130, 880, 0.85, 0.08, 1, t);
@@ -282,13 +288,11 @@
     const lt = t - BT(14);
     const [sx, sy] = shakeXY(t, BT(14), 34, 0.5);
     fillScreen('#2A2150');
-    ctx.save(); ctx.translate(540, 1150);
-    sunburst(0, 0, rgba(POP.pink, 0.55), rgba('#FFB3D6', 0.18), t * 0.8, 20, 1800);
-    ctx.restore();
     const z = lerp(1.35, 1.12, backOut(clamp(lt / 0.3)));
-    camBegin(540 - sx, 1180 - sy, z, -0.03);
+    camAt(540, 1180, z, -0.03); ctx.translate(sx, sy);
     floorTopDown(-200, -200, W + 400, H + 400);
-    ctx.save(); ctx.translate(540, 1150);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    sunburst(540, 1200, rgba(POP.pink, 0.22), rgba(POP.pink, 0), t * 0.8, 20, 1800);
     ctx.restore();
     glow(540, 1200, 700, POP.pink, 0.6);
     sleeperAt(130, 880, 0.85, 0.08, 1, t, { jolt: pulse2(t, 6) });
@@ -321,7 +325,7 @@
   function sJump(t) {
     const lt = t - BT(15);
     const [sx, sy] = shakeXY(t, BT(15), 26, 0.4);
-    camBegin(540 + sx, 1100 + sy, lerp(1.08, 1.0, easeOut(clamp(lt / 1.2))));
+    camAt(540, 1100, lerp(1.08, 1.0, easeOut(clamp(lt / 1.2)))); ctx.translate(sx, sy);
     ROOMFRONT(t);
     glow(540, 1650, 600, POP.pink, 0.4 * (0.6 + 0.4 * pulse2(t)));
     ctx.save(); ctx.translate(540, 1000); sunburst(0, 0, rgba('#FFFFFF', 0.10), rgba('#FFFFFF', 0), t * 0.4, 18, 1400); ctx.restore();
@@ -332,18 +336,18 @@
       rrect(-100, -40, 200, 80, 30, { fill: LOOKS[i].outfit, stroke: POP.ink, lw: 6 });
       ctx.restore();
     }
-    for (let i = 0; i < 5; i++) {
-      const u = i - 2, k = clamp((lt - i * 0.03) / 0.28), up = (1 - backOut(k)) * 380;
-      const [qx, qy] = squash(t, BT(15) + 0.28 + i * 0.03, 0.18);
-      ctx.save(); ctx.translate(540 + u * 200, 1440 + up); ctx.scale(qx, qy);
-      chibi(0, 0, 0.6, { t: t + i * 0.3, look: i, pose: 'jump', mouth: 'o', sticker: true });
-      ctx.restore();
-    }
     // pillows flying up and over
     for (let i = 0; i < 5; i++) {
       const a = lt - 0.05 * i; if (a < 0) continue;
       const x = 540 + (i - 2) * 200 + hrange(-420, 420, i, 3) * a, y = 1300 - hrange(1500, 2100, i, 4) * a + 1500 * a * a;
       pillow(x, y, 0.9, a * hrange(-9, 9, i, 5), ['#FFFFFF', '#FFE3F1', '#EFE6FF', '#E3F7FF', '#FFF6D6'][i]);
+    }
+    for (let i = 0; i < 5; i++) {
+      const u = i - 2, k = clamp((lt - i * 0.03) / 0.28), up = (1 - backOut(k)) * 380;
+      const [qx, qy] = squash(t, BT(15) + 0.28 + i * 0.03, 0.12);
+      ctx.save(); ctx.translate(540 + u * 200, 1440 + up); ctx.scale(qx, qy);
+      chibi(0, 0, 0.6, { t: t + i * 0.3, look: i, pose: 'jump', mouth: 'o', sticker: true });
+      ctx.restore();
     }
     camEnd();
     sfx('벌떡!', 540, 860, 190, POP.lemon, lt, { life: 1.3, rot: -0.08 });
@@ -353,7 +357,7 @@
   // 8.18 – 9.55: they stampede towards the phone (the camera)
   function sRun(t) {
     const lt = t - BT(18), k = clamp(lt / 1.36);
-    camBegin(540, 1100, lerp(1.0, 1.15, easeIn(k)));
+    camAt(540, 1100, lerp(1.0, 1.15, easeIn(k)));
     ROOMFRONT(t);
     camEnd();
     speedLines(t, 540, 1050, 0.8, '#FFFFFF', 64, 5);
@@ -385,7 +389,7 @@
     ctx.restore();
     glow(540, 950, 760, POP.pink, 0.55);
     const [qx, qy] = squash(t, BT(21), 0.12);
-    camBegin(540, 1000, lerp(1.1, 1.0, easeOut(clamp(lt / 0.5))));
+    camAt(540, 1000, lerp(1.1, 1.0, easeOut(clamp(lt / 0.5))));
     ctx.save(); ctx.translate(540, 920); ctx.scale(qx, qy);
     phone(0, 0, 0.92, lockScreen(t, 1, BT(14)), { rot: Math.sin(t * 60) * 0.01, glow: POP.pink });
     ctx.restore();
@@ -493,5 +497,5 @@
     [BT(24), sRewind],
   ]);
 
-  window.R12 = { B, BT, NIGHT, squash, twinkles, sparkBurst, zzz, beatSfx, pillow, layer, moonWindow, clock, floorTopDown };
+  window.R12 = { camAt, B, BT, NIGHT, squash, twinkles, sparkBurst, zzz, beatSfx, pillow, layer, moonWindow, clock, floorTopDown };
 })();
