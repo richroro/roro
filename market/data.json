@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T22:49:26.748478+09:00",
+  "updatedAt": "2026-09-28T03:15:36.081963+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 27068.72,
-      "change": 129.34,
+      "change": 129.32,
       "changePercent": 0.48,
       "currency": "USD"
     }
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1354.4,
-      "change": -11.19,
-      "changePercent": -0.82,
+      "price": 1355.28,
+      "change": -10.31,
+      "changePercent": -0.75,
       "currency": "KRW"
     }
   ],
@@ -166,7 +166,7 @@
       "source": "한국경제"
     },
     {
-      "title": "데이터센터發 수요 폭발…비철금속 수출 급증",
+      "title": "데이터센터發 수요 폭발…비철금속 수출도 '맑음'",
       "link": "https://www.hankyung.com/article/2026092775571",
       "pubDate": "Sun, 27 Sep 2026 17:46:48 +0900",
       "source": "한국경제"
