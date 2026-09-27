@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T03:15:36.081963+09:00",
+  "updatedAt": "2026-09-28T06:59:10.294532+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1355.28,
-      "change": -10.31,
-      "changePercent": -0.75,
+      "price": 1354.2,
+      "change": -11.39,
+      "changePercent": -0.83,
       "currency": "KRW"
     }
   ],
@@ -112,9 +112,63 @@
   ],
   "news": [
     {
-      "title": "[동포의 창] 인천서 한상 네트워크 구축하는 '동행의 밤' 개최",
-      "link": "https://www.yna.co.kr/view/AKR20260927055400371",
-      "pubDate": "Sun, 27 Sep 2026 22:32:10 +0900",
+      "title": "\"다주택 규제 피하자\"…집합건물 다소유자 7년9개월만에 최저",
+      "link": "https://www.yna.co.kr/view/AKR20260926024500003",
+      "pubDate": "Mon, 28 Sep 2026 06:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상가 8곳 중 1곳은 비어있다…공실률, 2021년 이후 최고치",
+      "link": "https://www.yna.co.kr/view/AKR20260927038100003",
+      "pubDate": "Mon, 28 Sep 2026 06:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "단체급식장에 무알코올 맥주 증가세…군부대·구내식당서도 인기",
+      "link": "https://www.yna.co.kr/view/AKR20260927040800030",
+      "pubDate": "Mon, 28 Sep 2026 06:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울시, 공시가격 검증지원센터 세미나…지자체 역할 확대 논의",
+      "link": "https://www.yna.co.kr/view/AKR20260927017800004",
+      "pubDate": "Mon, 28 Sep 2026 06:00:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중동 긴장 재고조에…기업 경기전망 한달만에 다시 '부정적'",
+      "link": "https://www.yna.co.kr/view/AKR20260927029600003",
+      "pubDate": "Mon, 28 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "건설공사 2분기 계약액 작년보다 27%↑…반도체 시설 등 영향",
+      "link": "https://www.yna.co.kr/view/AKR20260927035800003",
+      "pubDate": "Mon, 28 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신보, 보증사고로 9조원 회수 못 해…10년 넘은 채권도 1조원대",
+      "link": "https://www.yna.co.kr/view/AKR20260922166600001",
+      "pubDate": "Mon, 28 Sep 2026 06:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중국이 쓸어담는 휴머노이드 특허…한국 점유율은 한자릿수",
+      "link": "https://www.yna.co.kr/view/AKR20260925026700001",
+      "pubDate": "Mon, 28 Sep 2026 06:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국내 최대 자본시장 IR행사 '코리아 프리미엄 위크' 개막",
+      "link": "https://www.yna.co.kr/view/AKR20260927047700002",
+      "pubDate": "Mon, 28 Sep 2026 06:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "외국 가버린 뒤엔 빚 상환 6%뿐…캠코 미회수액 6천억 육박",
+      "link": "https://www.yna.co.kr/view/AKR20260927049900002",
+      "pubDate": "Mon, 28 Sep 2026 05:59:01 +0900",
       "source": "연합뉴스"
     },
     {
@@ -122,18 +176,6 @@
       "link": "https://www.hankyung.com/article/202609277830i",
       "pubDate": "Sun, 27 Sep 2026 21:00:37 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "예탁원, 결제촉진대금에 증권납부 허용…국채 담보인정 최대 98%",
-      "link": "https://www.yna.co.kr/view/AKR20260927051600008",
-      "pubDate": "Sun, 27 Sep 2026 20:28:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일, 첫 경제현안간담회…전기차 정책·퇴직연금 개선 논의",
-      "link": "https://www.yna.co.kr/view/AKR20260927051000002",
-      "pubDate": "Sun, 27 Sep 2026 20:04:30 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "車업계 휴머노이드 대전…中 샤오펑·둥펑 연내 공장 투입",
@@ -188,48 +230,6 @@
       "link": "https://www.hankyung.com/article/2026092776191",
       "pubDate": "Sun, 27 Sep 2026 17:43:31 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20260927032100011",
-      "pubDate": "Sun, 27 Sep 2026 15:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한화에어로, '경력직 채용 지침' 사과…재발방지책 마련키로(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260927027051003",
-      "pubDate": "Sun, 27 Sep 2026 13:17:36 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한화에어로, '경력직 채용 지침' 사과…재발방지책 마련키로",
-      "link": "https://www.yna.co.kr/view/AKR20260927027000003",
-      "pubDate": "Sun, 27 Sep 2026 12:54:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"전력망 유연성 높이는 에너지저장장치 특허 한국이 주도\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923088200063",
-      "pubDate": "Sun, 27 Sep 2026 12:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "윤호중, UN 사회연대경제 고위급 회의 참석…햇빛소득마을 소개",
-      "link": "https://www.yna.co.kr/view/AKR20260926046000530",
-      "pubDate": "Sun, 27 Sep 2026 12:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중장년 인생2막 활짝…노동부 '중장년고용 강조 주간' 실시",
-      "link": "https://www.yna.co.kr/view/AKR20260926044400530",
-      "pubDate": "Sun, 27 Sep 2026 12:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "직장인 72% \"기간제 2+2년 메가특구법, 정규직 일자리 줄여\" 우려",
-      "link": "https://www.yna.co.kr/view/AKR20260927010300004",
-      "pubDate": "Sun, 27 Sep 2026 12:00:02 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
