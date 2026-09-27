@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T07:39:10.439694+09:00",
+  "updatedAt": "2026-09-27T10:18:05.684502+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,22 +112,112 @@
   ],
   "news": [
     {
-      "title": "1천조 시장 열리는 AI반도체…\"정부, 공급망 진출 지원해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923100300003",
-      "pubDate": "Sun, 27 Sep 2026 07:31:00 +0900",
+      "title": "나이키·아디다스에 들어간 K소재…러닝 붐 타고 매출 '쑥'",
+      "link": "https://www.hankyung.com/article/202609233761i",
+      "pubDate": "Sun, 27 Sep 2026 10:00:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "광주 아파트 매매가격 상승세 전환…'통합·반도체 효과'",
+      "link": "https://www.yna.co.kr/view/AKR20260923075800054",
+      "pubDate": "Sun, 27 Sep 2026 10:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "상장사 3분기 실적 전망치 변화는…삼전닉스 상향 조정",
-      "link": "https://www.yna.co.kr/view/AKR20260923161100008",
-      "pubDate": "Sun, 27 Sep 2026 07:15:02 +0900",
+      "title": "[마켓人] 이영곤 토스증권 리서치센터장 \"AI사이클 관건은 기업 여력\"",
+      "link": "https://www.yna.co.kr/view/AKR20260922105800008",
+      "pubDate": "Sun, 27 Sep 2026 10:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "경기도, 내년 개발제한구역 주민지원사업 국비 123억원 확보",
-      "link": "https://www.yna.co.kr/view/AKR20260923130100061",
-      "pubDate": "Sun, 27 Sep 2026 07:01:04 +0900",
+      "title": "\"땅도 전기도 부족하다더니\"…K조선, 바다에 '이것' 띄운다",
+      "link": "https://www.hankyung.com/article/202609266658i",
+      "pubDate": "Sun, 27 Sep 2026 09:54:44 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "박홍근 \"호남 반도체, 기업 팔 비틀기 아냐…팹 증설도 구상\"",
+      "link": "https://www.yna.co.kr/view/AKR20260927016000002",
+      "pubDate": "Sun, 27 Sep 2026 09:52:17 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "'재생에너지 투자 선구자' 트러스톤, 신안 풍력 발전소 투자… 리파워링도 추진",
+      "link": "https://www.hankyung.com/article/202609220854i",
+      "pubDate": "Sun, 27 Sep 2026 09:38:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"밖에서 먹으면 몇만원 깨져요\"…명절에도 '집밥' 택했다 [벼랑 끝 사장님]",
+      "link": "https://www.hankyung.com/article/202609233190H",
+      "pubDate": "Sun, 27 Sep 2026 09:37:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "경남도, 내달 서울서 투자유치 설명회…기업인 300여명 초청",
+      "link": "https://www.yna.co.kr/view/AKR20260927015500052",
+      "pubDate": "Sun, 27 Sep 2026 09:37:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "안산시, ASV 내 첨단로봇 400억원대 대규모 투자 유치",
+      "link": "https://www.yna.co.kr/view/AKR20260923130800061",
+      "pubDate": "Sun, 27 Sep 2026 09:09:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "광주 반도체 산단 수백억 용역 발주…지역업체는 그림의 떡",
+      "link": "https://www.yna.co.kr/view/AKR20260921056700054",
+      "pubDate": "Sun, 27 Sep 2026 09:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "영진전문대, 일본 AI·IT기업 공략 통했다…14명 취업 내정",
+      "link": "https://www.yna.co.kr/view/AKR20260922163700053",
+      "pubDate": "Sun, 27 Sep 2026 09:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "LH \"서리풀 1지구 내년 3월 지구계획 승인 즉시 보상 착수\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923156600003",
+      "pubDate": "Sun, 27 Sep 2026 09:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "갤럭시 폴드8, 유럽 5개국 소비자 평가서 1위",
+      "link": "https://www.yna.co.kr/view/AKR20260927011600017",
+      "pubDate": "Sun, 27 Sep 2026 08:55:48 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"K푸드 수출 늘었다는데\"…180억 지원해도 뒷걸음",
+      "link": "https://www.hankyung.com/article/2026092770617",
+      "pubDate": "Sun, 27 Sep 2026 08:38:52 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "소비자 분쟁조정 3년 새 3.3배 증가…조정 성립률은 10%P 하락",
+      "link": "https://www.yna.co.kr/view/AKR20260923188000030",
+      "pubDate": "Sun, 27 Sep 2026 08:13:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"엔비디아 너무 비싸\"…1200조 시장 노리는 K반도체",
+      "link": "https://www.hankyung.com/article/2026092769927",
+      "pubDate": "Sun, 27 Sep 2026 07:56:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "1만원 목욕탕 놔두고 9만원 낸다…'예약 전쟁' 벌어진 이곳 [박수림의 요즘 여기]",
+      "link": "https://www.hankyung.com/article/202609220866g",
+      "pubDate": "Sun, 27 Sep 2026 07:45:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"대기업 퇴사 3일 만에 1억 벌었어요\"…요즘 뜨는 직업 정체",
+      "link": "https://www.hankyung.com/article/2026092769727",
+      "pubDate": "Sun, 27 Sep 2026 07:39:58 +0900",
+      "source": "한국경제"
     },
     {
       "title": "\"AI 전기 너무 먹네\" 골치였는데…삼성도 꽂힌 신기술 나왔다",
@@ -139,96 +229,6 @@
       "title": "스테이블코인도 '은행업'처럼…Fed, 2영업일 환매·100% 준비금 추진 [김주완의 글로벌머니 X파일]",
       "link": "https://www.hankyung.com/article/202609266710i",
       "pubDate": "Sun, 27 Sep 2026 07:00:14 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"농기계 회사가 자율주행 한다고?\"…75년 기업의 '대변신'",
-      "link": "https://www.hankyung.com/article/202609229954i",
-      "pubDate": "Sun, 27 Sep 2026 07:00:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "입법조사처 \"가축전염병 느는데…수의직 공무원 결원율 34%\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923179400030",
-      "pubDate": "Sun, 27 Sep 2026 07:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"35년 삼성맨인데 인턴입니다\"…62세에 다시 출근한 이유 [장서우의 하입:hype]",
-      "link": "https://www.hankyung.com/article/202609234199i",
-      "pubDate": "Sun, 27 Sep 2026 07:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[마켓인사이트] 추석 연휴서 돌아온 韓증시, 상승흐름 이어갈까",
-      "link": "https://www.yna.co.kr/view/AKR20260926021000008",
-      "pubDate": "Sun, 27 Sep 2026 07:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"직원은 수억원 주면서 우리는?\"…반도체 성과급 잔치의 그늘 [강진구의 회사법 뜨락]",
-      "link": "https://www.hankyung.com/article/202609234174i",
-      "pubDate": "Sun, 27 Sep 2026 07:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[반려동물] \"펫로스는 노령기부터 지원 필요…동물병원비 부담은 낮춰야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260923177200030",
-      "pubDate": "Sun, 27 Sep 2026 06:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "작년 360억원 쏟은 K푸드 수출 지원…지원 기업 53% 수출액 감소",
-      "link": "https://www.yna.co.kr/view/AKR20260926039900030",
-      "pubDate": "Sun, 27 Sep 2026 06:01:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"8월 오디세이·스파이더맨에 4명 중 1명 2회 이상 영화관람\"",
-      "link": "https://www.yna.co.kr/view/AKR20260926043700002",
-      "pubDate": "Sun, 27 Sep 2026 06:01:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "최수진 \"한중 FTA 10년…경제적 효과는 정부예상치 4 분의 1\"",
-      "link": "https://www.yna.co.kr/view/AKR20260922148900001",
-      "pubDate": "Sun, 27 Sep 2026 06:00:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"조달청, 외부선임 소송 패소율 41%…직접 수행 두배\"",
-      "link": "https://www.yna.co.kr/view/AKR20260926036400002",
-      "pubDate": "Sun, 27 Sep 2026 05:59:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"이러다 中에 빼앗긴다\"…삼전닉스 동시에 달려간 '이 나라'",
-      "link": "https://www.hankyung.com/article/202609217576i",
-      "pubDate": "Sat, 26 Sep 2026 22:30:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"수익률 1위 덜컥 샀다간…\" 노후자금 굴리다 멘붕 온 개미들 [김연지의 연금빌드업]",
-      "link": "https://www.hankyung.com/article/2026092336196",
-      "pubDate": "Sat, 26 Sep 2026 19:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"돈잔치 할 때 아냐\"…삼전닉스 호황에 소환된 '이건희 승부수' [분석+]",
-      "link": "https://www.hankyung.com/article/2026092180476",
-      "pubDate": "Sat, 26 Sep 2026 17:29:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"SUV가 왜 이렇게 조용해?\"…16년차 연구원도 놀란 '역발상'",
-      "link": "https://www.hankyung.com/article/202609182599g",
-      "pubDate": "Sat, 26 Sep 2026 16:18:12 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI 시대 보험사 경쟁력, 특허에 달렸다",
-      "link": "https://www.hankyung.com/article/202609221940i",
-      "pubDate": "Sat, 26 Sep 2026 15:00:07 +0900",
       "source": "한국경제"
     }
   ]
