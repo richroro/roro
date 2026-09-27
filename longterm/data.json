@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-27T09:40:00.467785+09:00",
+ "updatedAt": "2026-09-28T00:11:38.213293+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2388,7 +2388,7 @@
    },
    "valuation": {
     "per": 17.27,
-    "forwardPer": 23.08,
+    "forwardPer": 22.77,
     "pbr": 6.76,
     "psr": 9.43,
     "peg": 1.23,
@@ -2512,7 +2512,7 @@
    },
    "valuation": {
     "per": 20.09,
-    "forwardPer": 24.02,
+    "forwardPer": 23.83,
     "pbr": 4.88,
     "psr": 3.47,
     "peg": 1.48,
@@ -3040,11 +3040,11 @@
     "per": 22.09,
     "forwardPer": 19.76,
     "pbr": 6.37,
-    "psr": 3.9,
+    "psr": 3.91,
     "peg": 3.74,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 339644383232,
+    "marketCap": 339901841408,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -3343,7 +3343,7 @@
     "5y": -3.08,
     "10y": 1.84
    },
-   "mdd10y": -32.87,
+   "mdd10y": -32.62,
    "fromHigh": -32.62,
    "week52": {
     "high": 171.48,
@@ -3821,7 +3821,7 @@
    },
    "valuation": {
     "per": 14.7,
-    "forwardPer": 13.7,
+    "forwardPer": 13.73,
     "pbr": 2.58,
     "psr": 4.89,
     "peg": 1.59,
@@ -6255,6 +6255,78 @@
  ],
  "news": [
   {
+   "title": "이형일, 첫 경제현안간담회…전기차 정책·퇴직연금 개선 논의",
+   "link": "https://www.yna.co.kr/view/AKR20260927051000002",
+   "pubDate": "Sun, 27 Sep 2026 20:04:30 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "수출株 날고…내수株 꺾였다 3분기도 'K자형' 실적 양극화",
+   "link": "https://www.mk.co.kr/news/stock/12162116",
+   "pubDate": "Sun, 27 Sep 2026 19:07:03 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "금리 민감도 약해진 반도체株…외국인 수급·3분기 실적 관건",
+   "link": "https://www.mk.co.kr/news/stock/12162046",
+   "pubDate": "Sun, 27 Sep 2026 16:59:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "올해 수익률 1위는 코스피",
+   "link": "https://www.mk.co.kr/news/stock/12161989",
+   "pubDate": "Sun, 27 Sep 2026 16:46:15 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "유가·환율에 엇갈린 3분기 실적 … 정유·항공 ↑ 석화·전기 ↓",
+   "link": "https://www.mk.co.kr/news/stock/12161962",
+   "pubDate": "Sun, 27 Sep 2026 16:39:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "'돈의 속성' 김승호, 서울머니쇼 특별세미나 … 투자비법 깜짝 공개",
+   "link": "https://www.mk.co.kr/news/stock/12161941",
+   "pubDate": "Sun, 27 Sep 2026 16:12:27 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "늦어지는 대미투자 발표…산업부 \"미국 내부 절차 남아\"",
+   "link": "https://www.yna.co.kr/view/AKR20260927024600003",
+   "pubDate": "Sun, 27 Sep 2026 11:49:28 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "중장년 사회공헌활동 일자리 소개…서울시 '가치동행한마당'",
+   "link": "https://www.yna.co.kr/view/AKR20260924024100004",
+   "pubDate": "Sun, 27 Sep 2026 11:15:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "해수부, '연안 선박 현대화 펀드' 지원 대상 공모",
+   "link": "https://www.yna.co.kr/view/AKR20260923138900051",
+   "pubDate": "Sun, 27 Sep 2026 11:00:04 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "이형일 부총리, 첫 현안간담회… 전기차·퇴직연금 논의",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/27/ZIC7HKXOMFDYLLY25OZUFYQF5Y/",
+   "pubDate": "Sun, 27 Sep 2026 10:53:23 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "주가상승 13%에 배당 10%…파이어족 갈아타는 ‘혜자 GPIQ’ 뭐길래[이번주 찜할 ETF]",
+   "link": "https://www.mk.co.kr/news/stock/12161809",
+   "pubDate": "Sun, 27 Sep 2026 10:49:26 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "경남도, 내달 서울서 투자유치 설명회…기업인 300여명 초청",
+   "link": "https://www.yna.co.kr/view/AKR20260927015500052",
+   "pubDate": "Sun, 27 Sep 2026 09:37:05 +0900",
+   "source": "연합뉴스"
+  },
+  {
    "title": "안산시, ASV 내 첨단로봇 400억원대 대규모 투자 유치",
    "link": "https://www.yna.co.kr/view/AKR20260923130800061",
    "pubDate": "Sun, 27 Sep 2026 09:09:00 +0900",
@@ -6265,6 +6337,12 @@
    "link": "https://www.yna.co.kr/view/AKR20260923161100008",
    "pubDate": "Sun, 27 Sep 2026 07:15:02 +0900",
    "source": "연합뉴스"
+  },
+  {
+   "title": "‘삼전닉스’ 레버리지 ETF 규제에…거래대금 92% 급감",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/09/27/G43GGMDBGEYDCNRXGAYTEOLCME/",
+   "pubDate": "Sun, 27 Sep 2026 07:06:52 +0000",
+   "source": "조선일보"
   },
   {
    "title": "[마켓인사이트] 추석 연휴서 돌아온 韓증시, 상승흐름 이어갈까",
@@ -6285,15 +6363,21 @@
    "source": "연합뉴스"
   },
   {
-   "title": "상장사 3분기 실적 전망치 변화 살펴보니…삼전닉스는 석 달 전보다 상향",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/27/MUZDAYRVGAZWEOLEGU4GMMBZG4/",
-   "pubDate": "Sun, 27 Sep 2026 00:30:43 +0000",
+   "title": "2026 서울투자서밋, 10월 개최…글로벌 투자자 서울 집결",
+   "link": "https://www.chosun.com/economy/smb-venture/2026/09/27/GEYDAOJZGY3DIYTDGNSDEMBVMM/",
+   "pubDate": "Sun, 27 Sep 2026 04:59:05 +0000",
    "source": "조선일보"
   },
   {
-   "title": "삼전닉스 레버리지 ETF·대출 규제… 금융위 국감 난타전 예고",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/27/G43WCZTDGUYTIOJYGU3DMZRZG4/",
-   "pubDate": "Sat, 26 Sep 2026 22:00:00 +0000",
+   "title": "예상보다 지연되는 대미투자 발표… 산업부 “美 내부 절차에 시간 소요”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/27/MMZGKZTFHEZDGOLGHA3WGNBRGA/",
+   "pubDate": "Sun, 27 Sep 2026 04:44:32 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "美 국채 금리 5% 시대... 개미들, 미 장기채 ETF 9000억원 팔아치워",
+   "link": "https://www.chosun.com/economy/economy_general/2026/09/27/B7P4VFWRRZH3ZECVP5VYERKQ34/",
+   "pubDate": "Sun, 27 Sep 2026 03:44:55 +0000",
    "source": "조선일보"
   },
   {
@@ -6301,18 +6385,6 @@
    "link": "https://www.mk.co.kr/news/stock/12161712",
    "pubDate": "Sat, 26 Sep 2026 21:27:35 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "[주간증시전망] 美 물가·마이크론 실적 발표에 쏠린 눈",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/27/GM2DANLGMVTDIODBMFSTINBUGU/",
-   "pubDate": "Sat, 26 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "추석 용돈, 예·적금에 넣어볼까… 특판 금리 최고 연 12%",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/09/27/GMYDKZRXGMYDGNBYMQ3DSNBQGI/",
-   "pubDate": "Sat, 26 Sep 2026 21:00:00 +0000",
-   "source": "조선일보"
   },
   {
    "title": "“시골 부모님이 지금 삼전 들어가신답니다”…명절 후 주가 실제 향방보니",
@@ -6324,78 +6396,6 @@
    "title": "“증시 방향 잡히면 바로 빼서 들어가요”…일주일 새 1.8조 몰린 ‘대기실 ETF’",
    "link": "https://www.mk.co.kr/news/stock/12161603",
    "pubDate": "Sat, 26 Sep 2026 13:15:59 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[다음주 경제] 반도체 생산 얼마나 늘었나…물가·금리 지표도 발표",
-   "link": "https://www.yna.co.kr/view/AKR20260926014400002",
-   "pubDate": "Sat, 26 Sep 2026 08:23:49 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "\"주식 투자법 알려주겠다\" 신현송 한은 총재 사칭 SNS 주의보",
-   "link": "https://www.yna.co.kr/view/AKR20260924040800002",
-   "pubDate": "Sat, 26 Sep 2026 08:01:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "'역대급 실적' 증권가, 하반기 채용 활기…대형사도 가세",
-   "link": "https://www.yna.co.kr/view/AKR20260923105900008",
-   "pubDate": "Sat, 26 Sep 2026 08:00:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "김재섭 “누가 레버리지 ETF 제안·결정했는지 밝혀야”",
-   "link": "https://www.chosun.com/economy/economy_general/2026/09/26/GY3GMMTEMM2DQMJWMU3DKZRSMM/",
-   "pubDate": "Sat, 26 Sep 2026 02:27:11 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "“하이닉스 손자회사 美상장 추진” 보도.. ‘4중’ 중복 상장 논란이란?",
-   "link": "https://www.chosun.com/economy/industry-company/2026/09/26/CEIMPV2HGNDHHATBXBEEYHTDC4/",
-   "pubDate": "Sat, 26 Sep 2026 01:12:40 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "“삼전으로 번 1천만원은 0원, 엔비디아는 165만원”…추석에 정리하는 투자세금",
-   "link": "https://www.mk.co.kr/news/stock/12161462",
-   "pubDate": "Fri, 25 Sep 2026 20:54:20 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "평범한 70대 국민연금 얼마나 받을까, 73세 은퇴자 통장 열어 보니",
-   "link": "https://www.chosun.com/economy/startup_story/2026/09/26/YDDNMTNAKZF5VDVKWNO5SHWZCY/",
-   "pubDate": "Fri, 25 Sep 2026 20:30:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "코스닥 8개사·코스피 1개사 퇴출…‘시총미달·동전주’ 관리종목 대폭 증가",
-   "link": "https://www.mk.co.kr/news/stock/12161302",
-   "pubDate": "Fri, 25 Sep 2026 11:27:08 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "주가상승 13%에 배당 10% … 파이어족 갈아타는 ‘혜자 GPIQ’ 뭐길래",
-   "link": "https://www.mk.co.kr/news/economy/12159601",
-   "pubDate": "Fri, 25 Sep 2026 04:30:00 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "막 오른 미중정상회담... 국채금리 발작 잠재울까",
-   "link": "https://www.mk.co.kr/news/stock/12160835",
-   "pubDate": "Thu, 24 Sep 2026 10:19:19 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“추석때 주식 얘기 꺼내도 되겠죠?”…일단 7000은 지킨 코스피",
-   "link": "https://www.mk.co.kr/news/stock/12160772",
-   "pubDate": "Thu, 24 Sep 2026 06:22:46 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "유가↑·금리↑ 3대지수 하락···하워드막스 “미국주식 팔지마라”[월가월부]",
-   "link": "https://www.mk.co.kr/news/stock/12160770",
-   "pubDate": "Thu, 24 Sep 2026 06:13:15 +09:00",
    "source": "매일경제 증권"
   }
  ]
