@@ -2,6 +2,8 @@
 
 ▶ 완성본: [`dist/billie-eilish-career-720p.mp4`](dist/billie-eilish-career-720p.mp4) (2:52, 720p)
 
+배경음악 없는 버전: [`dist/billie-eilish-career-720p-no-music.mp4`](dist/billie-eilish-career-720p-no-music.mp4) (영상은 같고 소리만 뺐다)
+
 침실에서 시작한 노래가 세상에 닿기까지. 춤을 사랑하던 소녀가 부상으로 춤을 잃고, 남은 노래로 세상에
 나가고, 우울증과 투렛 증후군을 숨기지 않고 이야기하고, 정상에서 "침실에서 음악을 만드는 모든 아이들"에게
 건넨 말(피니어스, 2020 그래미)을 지나, 지금 어느 작은 방에서 첫 노래를 만드는 누군가에게로 끝나는 짧은 영화.
