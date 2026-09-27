@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>작은 방에서 · 쇼츠</title>
+<style>
+  @font-face { font-family: "Black Han Sans"; src: url("../assets/fonts/BlackHanSans.ttf"); }
+  @font-face { font-family: "Jua"; src: url("../assets/fonts/Jua.ttf"); }
+  html, body { margin: 0; background: #1b1530; color: #fff; font-family: "Jua", sans-serif; }
+  body.render { background: #000; }
+  #stage { display: block; height: calc(100vh - 70px); margin: 0 auto; aspect-ratio: 9 / 16; }
+  body.render #stage { width: auto; max-width: none; }
+  #bar { display: flex; gap: 12px; align-items: center; padding: 10px 16px; max-width: 1100px; margin: 0 auto; }
+  #bar button { font: inherit; font-size: 18px; padding: 6px 18px; border-radius: 999px; border: 0; background: #ffd45c; color: #2a2438; cursor: pointer; }
+  #bar input { flex: 1; }
+  #bar span { min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
+  body.render #bar { display: none; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1080" height="1920"></canvas>
+<div id="bar">
+  <button id="play">▶ 재생</button>
+  <input id="seek" type="range" min="0" max="172" step="0.01" value="0">
+  <span id="clock">0:00</span>
+</div>
+<audio id="song" src="assets/song.m4a" preload="auto"></audio>
+
+<!-- the shared kit, then this video's captions and chapters -->
+<script>window.FRAME = { w: 1080, h: 1920 };   // a vertical Short</script>
+<script src="src/song.js"></script>
+<script src="../src/core.js"></script>
+<script src="../src/timeline.js"></script>
+<script src="src/anime.js"></script>
+<script src="src/ch/s1_lost.js"></script>
+<script src="src/ch/s2_rise.js"></script>
+<script src="src/ch/s3_top.js"></script>
+<script src="src/ch/s4_you.js"></script>
+<script>
+  // ?render      : the renderer drives the page through window.renderAt / window.sheet
+  // ?t=42.5      : show one frame
+  // (nothing)    : a player: the picture follows the audio
+  const params = new URLSearchParams(location.search);
+  const canvas = document.getElementById('stage');
+  const width = Number(params.get('w') || 1080);
+  canvas.width = width; canvas.height = Math.round(width * FRAME.h / FRAME.w);
+  setupCanvas(canvas);
+
+  window.ready = Promise.all([
+    document.fonts.load('80px "Black Han Sans"', '열세살춤을잃었다다음은너야'),
+    document.fonts.load('80px "Jua"', '빌리아일리시오빠피니어스'),
+  ]).then(() => document.fonts.ready);
+
+  window.renderAt = t => { renderFrame(t); };
+  window.frameJpeg = (t, q = 0.92) => { renderFrame(t); return canvas.toDataURL('image/jpeg', q); };
+
+  // A contact sheet: several times on one image, labelled, with how long each frame took.
+  window.sheet = (times, cols, cellW) => {
+    const cellH = Math.round(cellW * canvas.height / canvas.width), rows = Math.ceil(times.length / cols);
+    const out = document.createElement('canvas');
+    out.width = cols * cellW; out.height = rows * (cellH + 30);
+    const g = out.getContext('2d');
+    g.fillStyle = '#111'; g.fillRect(0, 0, out.width, out.height);
+    const ms = [];
+    times.forEach((t, i) => {
+      const t0 = performance.now(); renderFrame(t); ms.push(performance.now() - t0);
+      const x = (i % cols) * cellW, y = Math.floor(i / cols) * (cellH + 30);
+      g.drawImage(canvas, x, y + 30, cellW, cellH);
+      g.fillStyle = '#fff'; g.font = '20px sans-serif';
+      const s = shotAt(t);
+      g.fillText(`${t.toFixed(2)}s  ${s ? s.chapter : '-'}`, x + 8, y + 22);
+    });
+    return { url: out.toDataURL('image/jpeg', 0.85), ms };
+  };
+
+  if (params.has('render')) {
+    document.body.classList.add('render');
+  } else {
+    const audio = document.getElementById('song'), seek = document.getElementById('seek');
+    const clock = document.getElementById('clock'), play = document.getElementById('play');
+    seek.max = SONG.length.toFixed(2);
+    let t = Number(params.get('t') || 0);
+    const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    play.onclick = () => { if (audio.paused) { audio.currentTime = t; audio.play(); } else audio.pause(); };
+    audio.onplay = () => { play.textContent = '❚❚ 멈춤'; };
+    audio.onpause = () => { play.textContent = '▶ 재생'; };
+    seek.oninput = () => { t = Number(seek.value); audio.currentTime = t; };
+    window.ready.then(() => {
+      const loop = () => {
+        if (!audio.paused) t = audio.currentTime;
+        renderFrame(t);
+        seek.value = t; clock.textContent = fmt(t);
+        requestAnimationFrame(loop);
+      };
+      loop();
+    });
+  }
+</script>
+</body>
+</html>

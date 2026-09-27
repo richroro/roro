@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>누가 진짜 나쁜 녀석? · bad guy 팬 뮤비</title>
+<style>
+  @font-face { font-family: "Black Han Sans"; src: url("../assets/fonts/BlackHanSans.ttf"); }
+  @font-face { font-family: "Jua"; src: url("../assets/fonts/Jua.ttf"); }
+  html, body { margin: 0; background: #1b1530; color: #fff; font-family: "Jua", sans-serif; }
+  body.render { background: #000; }
+  #stage { display: block; width: 100vw; max-width: calc(100vh * 16 / 9 - 60px * 16 / 9); margin: 0 auto; aspect-ratio: 16 / 9; }
+  body.render #stage { width: auto; max-width: none; }
+  #bar { display: flex; gap: 12px; align-items: center; padding: 10px 16px; max-width: 1100px; margin: 0 auto; }
+  #bar button { font: inherit; font-size: 18px; padding: 6px 18px; border-radius: 999px; border: 0; background: #ffd45c; color: #2a2438; cursor: pointer; }
+  #bar input { flex: 1; }
+  #bar span { min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
+  #pick { cursor: pointer; font-size: 15px; padding: 6px 12px; border-radius: 999px; background: #2a2438; }
+  body.render #bar { display: none; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1920" height="1080"></canvas>
+<div id="bar">
+  <button id="play">▶ 재생</button>
+  <input id="seek" type="range" min="0" max="194" step="0.01" value="0">
+  <span id="clock">0:00</span>
+  <label id="pick">🎵 내 음원 불러오기<input id="file" type="file" accept="audio/*" hidden></label>
+</div>
+<audio id="song" preload="auto"></audio>
+
+<!-- the shared kit, the family cast from the second video, then this video's chapters -->
+<script src="src/song.js"></script>
+<script src="../src/core.js"></script>
+<script src="../src/cast.js"></script>
+<script src="../src/props.js"></script>
+<script src="../src/timeline.js"></script>
+<script src="../gajang/src/family.js"></script>
+<script src="src/beat.js"></script>
+<script src="src/ch/b1_tough.js"></script>
+<script src="src/ch/b2_drop.js"></script>
+<script src="src/ch/b3_mischief.js"></script>
+<script src="src/ch/b4_chase.js"></script>
+<script src="src/ch/b5_break.js"></script>
+<script src="src/ch/b6_slow.js"></script>
+<script>
+  // ?render      : the renderer drives the page through window.renderAt / window.sheet
+  // ?t=42.5      : show one frame
+  // (nothing)    : a player: the picture follows the audio
+  const params = new URLSearchParams(location.search);
+  const canvas = document.getElementById('stage');
+  const width = Number(params.get('w') || 1920);
+  canvas.width = width; canvas.height = Math.round(width * 9 / 16);
+  setupCanvas(canvas);
+
+  window.ready = Promise.all([
+    document.fonts.load('80px "Black Han Sans"', '누가진짜나쁜녀석'),
+    document.fonts.load('80px "Jua"', '누가진짜나쁜녀석'),
+  ]).then(() => document.fonts.ready);
+
+  window.renderAt = t => { renderFrame(t); };
+  window.frameJpeg = (t, q = 0.92) => { renderFrame(t); return canvas.toDataURL('image/jpeg', q); };
+
+  // A contact sheet: several times on one image, labelled, with how long each frame took.
+  window.sheet = (times, cols, cellW) => {
+    const cellH = Math.round(cellW * 9 / 16), rows = Math.ceil(times.length / cols);
+    const out = document.createElement('canvas');
+    out.width = cols * cellW; out.height = rows * (cellH + 30);
+    const g = out.getContext('2d');
+    g.fillStyle = '#111'; g.fillRect(0, 0, out.width, out.height);
+    const ms = [];
+    times.forEach((t, i) => {
+      const t0 = performance.now(); renderFrame(t); ms.push(performance.now() - t0);
+      const x = (i % cols) * cellW, y = Math.floor(i / cols) * (cellH + 30);
+      g.drawImage(canvas, x, y + 30, cellW, cellH);
+      g.fillStyle = '#fff'; g.font = '20px sans-serif';
+      const s = shotAt(t);
+      g.fillText(`${t.toFixed(2)}s  ${s ? s.chapter : '-'}`, x + 8, y + 22);
+    });
+    return { url: out.toDataURL('image/jpeg', 0.85), ms };
+  };
+
+  if (params.has('render')) {
+    document.body.classList.add('render');
+  } else {
+    // There is no music bundled: the picture runs on a clock, or follows a track you load.
+    const audio = document.getElementById('song'), seek = document.getElementById('seek');
+    const clock = document.getElementById('clock'), play = document.getElementById('play');
+    seek.max = SONG.length.toFixed(2);
+    let t = Number(params.get('t') || 0), hasTrack = false, running = false, t0 = 0, wall = 0;
+    const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    const setLabel = () => { play.textContent = running ? '❚❚ 멈춤' : '▶ 재생'; };
+    document.getElementById('file').onchange = e => {
+      const f = e.target.files[0];
+      if (f) { audio.src = URL.createObjectURL(f); hasTrack = true; }
+    };
+    play.onclick = () => {
+      running = !running;
+      if (hasTrack) { if (running) { audio.currentTime = t; audio.play(); } else audio.pause(); }
+      t0 = t; wall = performance.now(); setLabel();
+    };
+    seek.oninput = () => { t = Number(seek.value); t0 = t; wall = performance.now(); if (hasTrack) audio.currentTime = t; };
+    window.ready.then(() => {
+      const loop = () => {
+        if (running) t = hasTrack ? audio.currentTime : t0 + (performance.now() - wall) / 1000;
+        renderFrame(t);
+        seek.value = t; clock.textContent = fmt(t);
+        requestAnimationFrame(loop);
+      };
+      loop();
+    });
+  }
+</script>
+</body>
+</html>

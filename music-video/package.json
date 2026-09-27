@@ -1,0 +1,14 @@
+{
+  "name": "goding-life-mv",
+  "private": true,
+  "type": "module",
+  "description": "고딩 라이프 — a music video painted in Canvas 2D, with a song synthesised from scratch",
+  "scripts": {
+    "song": "node song/synth.mjs",
+    "frames": "node render.mjs --frames",
+    "encode": "node render.mjs --encode"
+  },
+  "devDependencies": {
+    "playwright-core": "1.56.1"
+  }
+}
