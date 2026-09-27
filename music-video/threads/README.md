@@ -3,6 +3,9 @@
 ▶ 완성본: [`dist/threads-quiz-short-1080x1920.mp4`](dist/threads-quiz-short-1080x1920.mp4) (1:00, 세로 1080×1920) ·
 가벼운 버전 [`dist/threads-quiz-short-720p.mp4`](dist/threads-quiz-short-720p.mp4)
 
+배경음악 없는 버전: [`dist/threads-quiz-short-1080x1920-no-music.mp4`](dist/threads-quiz-short-1080x1920-no-music.mp4) ·
+[`dist/threads-quiz-short-720p-no-music.mp4`](dist/threads-quiz-short-720p-no-music.mp4) (영상은 같고 소리만 뺐다)
+
 한국 스레드의 문화를 퀴즈쇼로 푼다. 첫날 "안녕하십니까"로 들어온 뻣뻣한 털실이 스친, 스하리, 스린이, 쓰하를 배우고,
 보너스 문제 "왜 반말?"에서 넥타이와 안경을 벗는다. 마지막엔 숫자(국내 월간 이용자 665만 명 등)와 함께 모두가
 털실로 이어진다.
@@ -21,4 +24,5 @@
 node song/darkpop.mjs threads/song/score.mjs && node rescene/song/cut.mjs threads/song/score.mjs
 node render.mjs --project=threads --frames --w=1080
 node render.mjs --project=threads --encode                  # threads/out/mv.mp4
+node render.mjs --project=threads --encode --audio=none     # 배경음악 없이 (없는 파일을 주면 무음)
 ```
