@@ -69,7 +69,7 @@
     // bowed: we see the top of the head, the face goes under the hair
     ctx.fillStyle = o.hair || '#2A1B2E';
     ctx.globalAlpha *= clamp(bowK * 1.6);
-    ctx.fillRect(x - 5 * s, y - 17 * s, 10 * s, 4 * s);
+    ctx.fillRect(x - 5 * s, y - 18.5 * s, 10 * s, 6.5 * s);
     ctx.restore();
   }
 
@@ -272,8 +272,10 @@
     const H0 = rows + 4;
     for (let k = 0; k < 3; k++) {
       const pw = Math.pow(10, 2 - k), xv = v / pw;
-      const d = Math.floor(xv + 1e-6) % 10, f = xv - Math.floor(xv + 1e-6);
-      const roll = k === 2 ? f : f > 0.8 ? (f - 0.8) / 0.2 : 0;   // the tens/hundreds click over at the end
+      const d = Math.floor(xv + 1e-6) % 10;
+      // a wheel only turns while every wheel to its right is passing 9 -> 0
+      const lower = v - Math.floor(v / pw + 1e-9) * pw;
+      const roll = k === 2 ? v - Math.floor(v + 1e-9) : clamp(lower - (pw - 1));
       const off = Math.round(ease(clamp(roll)) * H0);
       const shown = k < 2 && v < pw - 1e-6 && off === 0;           // leading zeros stay dark
       const cx0 = k * dw;
