@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T00:17:00.362323+09:00",
+  "updatedAt": "2026-09-29T06:48:50.430635+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51455.54,
-      "change": -373.08,
-      "changePercent": -0.72,
+      "price": 51481.51,
+      "change": -347.11,
+      "changePercent": -0.67,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26797.4,
-      "change": -271.32,
-      "changePercent": -1.0,
+      "price": 26820.38,
+      "change": -248.34,
+      "changePercent": -0.92,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1361.78,
-      "change": 6.5,
-      "changePercent": 0.48,
+      "price": 1359.8,
+      "change": 4.52,
+      "changePercent": 0.33,
       "currency": "KRW"
     }
   ],
@@ -88,34 +88,94 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 340.69,
-      "change": -0.38,
-      "changePercent": -0.11,
+      "price": 338.4,
+      "change": -2.67,
+      "changePercent": -0.78,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 360.37,
-      "change": -11.74,
-      "changePercent": -3.15,
+      "price": 357.45,
+      "change": -14.66,
+      "changePercent": -3.94,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.35,
-      "change": 5.28,
-      "changePercent": 2.35,
+      "price": 228.86,
+      "change": 3.79,
+      "changePercent": 1.68,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "[재산공개] 조상호 세종시장 3억9천만원…배우자, 미국에 연립주택",
-      "link": "https://www.yna.co.kr/view/AKR20260928083000063",
-      "pubDate": "Tue, 29 Sep 2026 00:00:01 +0900",
+      "title": "실업급여 3차례 이상 반복수급 11.3만명…지급액 연 6천억원",
+      "link": "https://www.yna.co.kr/view/AKR20260928134800530",
+      "pubDate": "Tue, 29 Sep 2026 06:07:01 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "터널도 인생도 \"뚫어!\"…건설인 홍보영상 유튜브서 인기몰이",
+      "link": "https://www.yna.co.kr/view/AKR20260928118400003",
+      "pubDate": "Tue, 29 Sep 2026 06:05:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"품질도 중요\" 청년 공공임대, 입주 늘어나니 시설보수도 급증",
+      "link": "https://www.yna.co.kr/view/AKR20260928157300003",
+      "pubDate": "Tue, 29 Sep 2026 06:05:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "하반기 신규 채용 장 선다…대기업 51% \"대졸 뽑는다\"",
+      "link": "https://www.yna.co.kr/view/AKR20260928114200003",
+      "pubDate": "Tue, 29 Sep 2026 06:00:13 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "공공건축 설계공모 다양화…민간 전문가 역할 넓힌다",
+      "link": "https://www.yna.co.kr/view/AKR20260928098900003",
+      "pubDate": "Tue, 29 Sep 2026 06:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "명절·날씨 덕에 비제조업 체감경기 3년 만에 최고",
+      "link": "https://www.yna.co.kr/view/AKR20260928136500002",
+      "pubDate": "Tue, 29 Sep 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "코트라·세계한인총연합회, 중소기업 해외진출 지원 협력",
+      "link": "https://www.yna.co.kr/view/AKR20260928145200003",
+      "pubDate": "Tue, 29 Sep 2026 06:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상반기 '불장'·스페이스X 사태에…금융투자 민원 86% 급증",
+      "link": "https://www.yna.co.kr/view/AKR20260928142900002",
+      "pubDate": "Tue, 29 Sep 2026 06:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"산업은행, 화석연료 여신 9.5조 달하는데…탄소배출 미산출\"",
+      "link": "https://www.yna.co.kr/view/AKR20260928150000002",
+      "pubDate": "Tue, 29 Sep 2026 05:53:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "연 소득 규제에 막힌 IBK 포용대출…\"예외 적용 검토해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260928153300002",
+      "pubDate": "Tue, 29 Sep 2026 05:51:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "유가와 국채수익률 상승에 눌린 美증시…나스닥 1.2%↓",
+      "link": "https://www.hankyung.com/article/202609280546i",
+      "pubDate": "Mon, 28 Sep 2026 23:55:58 +0900",
+      "source": "한국경제"
     },
     {
       "title": "스페이스X 스타십,사상 첫 궤도진입…V3위성 26개 궤도 배치",
@@ -142,12 +202,6 @@
       "source": "한국경제"
     },
     {
-      "title": "은행장 16명과 머리 맞댄 한은 총재 \"현장 얘기 많이 들어\"",
-      "link": "https://www.yna.co.kr/view/AKR20260928161100002",
-      "pubDate": "Mon, 28 Sep 2026 20:50:38 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "中,엔비디아 RTX프로5500구매 풀면…삼전·닉스 DDR7 '수혜'주목",
       "link": "https://www.hankyung.com/article/202609280407i",
       "pubDate": "Mon, 28 Sep 2026 20:15:12 +0900",
@@ -158,18 +212,6 @@
       "link": "https://www.hankyung.com/article/202609289061g",
       "pubDate": "Mon, 28 Sep 2026 20:00:03 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "성남시, 내년 분당재건축 2만5천호 선정…'예비구역' 첫 도입",
-      "link": "https://www.yna.co.kr/view/AKR20260928159900061",
-      "pubDate": "Mon, 28 Sep 2026 19:58:31 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[동포의 창] \"동포사회 리더 한자리에\"…세계한인대회 개막",
-      "link": "https://www.yna.co.kr/view/AKR20260928159100371",
-      "pubDate": "Mon, 28 Sep 2026 19:52:38 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "중동 원유 수출 하루 1280만배럴…이란전쟁 후 최대",
@@ -188,48 +230,6 @@
       "link": "https://www.hankyung.com/article/202609289515H",
       "pubDate": "Mon, 28 Sep 2026 19:35:01 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "솔리스·럭스코·셀트릭스, 코스닥 상장예심 통과",
-      "link": "https://www.yna.co.kr/view/AKR20260928156200008",
-      "pubDate": "Mon, 28 Sep 2026 19:24:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "엔비디아,AI에이전트 해킹막는 보안시스템 공개…\"밀리초만에 격리\"",
-      "link": "https://www.hankyung.com/article/202609280328i",
-      "pubDate": "Mon, 28 Sep 2026 19:15:32 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "은행 점포 30분 늦게 연다…\"디지털 금융 확산 등 반영\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260928149551002",
-      "pubDate": "Mon, 28 Sep 2026 19:14:28 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인사] 농림축산식품부",
-      "link": "https://www.yna.co.kr/view/AKR20260928152400030",
-      "pubDate": "Mon, 28 Sep 2026 18:19:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융위 \"변동성 키우는 고빈도매매, 적절 규율방안 검토 중\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260928104151002",
-      "pubDate": "Mon, 28 Sep 2026 18:16:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "항재밍 솔루션기업 덕산넵코어스, 30일 코스닥 신규 상장",
-      "link": "https://www.yna.co.kr/view/AKR20260928150600008",
-      "pubDate": "Mon, 28 Sep 2026 18:15:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "효성, 경력보유여성 취업활성화 프로그램 지원",
-      "link": "https://www.yna.co.kr/view/AKR20260928150900003",
-      "pubDate": "Mon, 28 Sep 2026 18:08:56 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
