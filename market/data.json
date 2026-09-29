@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T00:39:11.095568+09:00",
+  "updatedAt": "2026-09-30T05:39:21.583199+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51237.72,
-      "change": -243.79,
-      "changePercent": -0.47,
+      "price": 51349.92,
+      "change": -131.59,
+      "changePercent": -0.26,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26817.34,
-      "change": -3.04,
-      "changePercent": -0.01,
+      "price": 26797.54,
+      "change": -22.84,
+      "changePercent": -0.09,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1355.77,
-      "change": -2.95,
-      "changePercent": -0.22,
+      "price": 1352.84,
+      "change": -5.88,
+      "changePercent": -0.43,
       "currency": "KRW"
     }
   ],
@@ -88,33 +88,51 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 332.55,
-      "change": -5.85,
-      "changePercent": -1.73,
+      "price": 329.4,
+      "change": -9.0,
+      "changePercent": -2.66,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 354.38,
-      "change": -3.07,
-      "changePercent": -0.86,
+      "price": 352.84,
+      "change": -4.61,
+      "changePercent": -1.29,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.72,
-      "change": 1.86,
-      "changePercent": 0.81,
+      "price": 227.21,
+      "change": -1.65,
+      "changePercent": -0.72,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "8개월 만에 3300억어치 긁었다…2030 중국인들 몰려간 곳",
-      "link": "https://www.hankyung.com/article/2026092926881",
-      "pubDate": "Wed, 30 Sep 2026 00:09:40 +0900",
+      "title": "사우디 홍해 원유 수출 재개에 WTI 3.5%↓…8월 31일 이후 최저",
+      "link": "https://www.yna.co.kr/view/AKR20260930005900072",
+      "pubDate": "Wed, 30 Sep 2026 05:12:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美 30년물국채 수익률 5.609%…2002년 이후 최고치",
+      "link": "https://www.hankyung.com/article/202609303116i",
+      "pubDate": "Wed, 30 Sep 2026 01:05:38 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "마이크론 순익 940% 폭증 예상…메모리 '정점론'잠재울까",
+      "link": "https://www.hankyung.com/article/202609293017i",
+      "pubDate": "Wed, 30 Sep 2026 00:41:19 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 9월 소비자신뢰도 12년만에 최저…유가급등에 생활비 위기 확대",
+      "link": "https://www.hankyung.com/article/202609303107i",
+      "pubDate": "Wed, 30 Sep 2026 00:29:03 +0900",
       "source": "한국경제"
     },
     {
@@ -178,18 +196,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "\"내가 月 200만원 벌기도 힘들 줄은\"…60대 퇴직자 '눈물'",
-      "link": "https://www.hankyung.com/article/2026092927211",
-      "pubDate": "Tue, 29 Sep 2026 19:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이재용·최태원·젠슨 황, 맨해튼서 'AI동맹' 과시",
-      "link": "https://www.hankyung.com/article/2026092928231",
-      "pubDate": "Tue, 29 Sep 2026 18:37:58 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "미국 의약품 관세 발효…한국산 ADC·유전자치료제는 0%",
       "link": "https://www.yna.co.kr/view/AKR20260929168800017",
       "pubDate": "Tue, 29 Sep 2026 18:24:23 +0900",
@@ -223,12 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
       "link": "https://www.yna.co.kr/view/AKR20260929159100011",
       "pubDate": "Tue, 29 Sep 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "5년간 1.5조 지원 무색…한계기업 10곳 중 9곳은 '경영난 여전'",
-      "link": "https://www.yna.co.kr/view/AKR20260929161000003",
-      "pubDate": "Tue, 29 Sep 2026 17:38:14 +0900",
       "source": "연합뉴스"
     }
   ]
