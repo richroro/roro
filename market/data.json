@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T17:18:47.202723+09:00",
+  "updatedAt": "2026-09-30T00:39:11.095568+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51481.51,
-      "change": -347.09,
-      "changePercent": -0.67,
+      "price": 51237.72,
+      "change": -243.79,
+      "changePercent": -0.47,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26820.38,
-      "change": -248.34,
-      "changePercent": -0.92,
+      "price": 26817.34,
+      "change": -3.04,
+      "changePercent": -0.01,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1357.98,
-      "change": -0.74,
-      "changePercent": -0.05,
+      "price": 1355.77,
+      "change": -2.95,
+      "changePercent": -0.22,
       "currency": "KRW"
     }
   ],
@@ -88,148 +88,148 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 338.4,
-      "change": -2.67,
-      "changePercent": -0.78,
+      "price": 332.55,
+      "change": -5.85,
+      "changePercent": -1.73,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 357.45,
-      "change": -14.66,
-      "changePercent": -3.94,
+      "price": 354.38,
+      "change": -3.07,
+      "changePercent": -0.86,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 228.86,
-      "change": 3.79,
-      "changePercent": 1.68,
+      "price": 230.72,
+      "change": 1.86,
+      "changePercent": 0.81,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "한국가스공사 \"코가스 캐나다 에너지 주식 7천670억원에 취득\"",
-      "link": "https://www.yna.co.kr/view/AKR20260929155800008",
-      "pubDate": "Tue, 29 Sep 2026 17:01:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "송미령 농식품장관 \"청년농 지원 체계 개편 최종안 연내 발표\"",
-      "link": "https://www.yna.co.kr/view/AKR20260929087100030",
-      "pubDate": "Tue, 29 Sep 2026 17:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리 일제히 하락…전일 급등에 일부 되돌림(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260929150851008",
-      "pubDate": "Tue, 29 Sep 2026 16:48:28 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "전주시, 반려동물 산업 지원…기업 판로개척·전문인력 양성",
-      "link": "https://www.yna.co.kr/view/AKR20260929151100055",
-      "pubDate": "Tue, 29 Sep 2026 16:46:42 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[특징주] 한미반도체, 반도체 장비 수주 소식에 7%대 상승 마감(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260929055751008",
-      "pubDate": "Tue, 29 Sep 2026 16:45:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "MSDI, 20억원 유상증자…케이연투자조합에 제3자배정",
-      "link": "https://www.yna.co.kr/view/AKR20260929151300008",
-      "pubDate": "Tue, 29 Sep 2026 16:45:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리 일제히 하락…3년물 연 4.076%",
-      "link": "https://www.yna.co.kr/view/AKR20260929150800008",
-      "pubDate": "Tue, 29 Sep 2026 16:41:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 연말까지 GS샵서 '농산업 우수 혁신품 모음전'",
-      "link": "https://www.yna.co.kr/view/AKR20260929142700030",
-      "pubDate": "Tue, 29 Sep 2026 16:39:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "JW중외제약 \"계열사 솔리더스인베스트먼트 주식 307억원에 취득\"",
-      "link": "https://www.yna.co.kr/view/AKR20260929149400008",
-      "pubDate": "Tue, 29 Sep 2026 16:38:43 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "SK, 회사채 수요예측에 7천200억 몰려…고금리에도 모집액 5배",
-      "link": "https://www.yna.co.kr/view/AKR20260929147900008",
-      "pubDate": "Tue, 29 Sep 2026 16:38:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "뉴앤뉴, 미세전류 화장품 독자 개발…美·中·日 노린다",
-      "link": "https://www.hankyung.com/article/2026092911771",
-      "pubDate": "Tue, 29 Sep 2026 16:20:58 +0900",
+      "title": "8개월 만에 3300억어치 긁었다…2030 중국인들 몰려간 곳",
+      "link": "https://www.hankyung.com/article/2026092926881",
+      "pubDate": "Wed, 30 Sep 2026 00:09:40 +0900",
       "source": "한국경제"
     },
     {
-      "title": "삼영기계, 3D 프린터로 엔진 부품 생산…제조 DX 속도",
-      "link": "https://www.hankyung.com/article/2026092911731",
-      "pubDate": "Tue, 29 Sep 2026 16:19:50 +0900",
+      "title": "AI '안전'과 '확장' 사이…앤트로픽과 메타의 다른 승부수 [박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202609293089i",
+      "pubDate": "Tue, 29 Sep 2026 23:50:51 +0900",
       "source": "한국경제"
     },
     {
-      "title": "서북, 최애 아티스트와 '찰칵'…국경 넘는 셀프 사진",
-      "link": "https://www.hankyung.com/article/2026092911721",
-      "pubDate": "Tue, 29 Sep 2026 16:18:45 +0900",
+      "title": "美 8월 구인공고 710만건…예상치 밑돌아",
+      "link": "https://www.hankyung.com/article/202609293097i",
+      "pubDate": "Tue, 29 Sep 2026 23:34:46 +0900",
       "source": "한국경제"
     },
     {
-      "title": "아라, 20년 치 제조 데이터, 조리·서빙로봇에 심는다",
-      "link": "https://www.hankyung.com/article/2026092911711",
-      "pubDate": "Tue, 29 Sep 2026 16:17:30 +0900",
+      "title": "中 AI도 '거짓말·위조'드러나…알리바바·딥시크 에이전트 기만행동",
+      "link": "https://www.hankyung.com/article/202609293066i",
+      "pubDate": "Tue, 29 Sep 2026 22:47:19 +0900",
       "source": "한국경제"
     },
     {
-      "title": "영광와이케이엠씨, 반도체 부품 일괄 생산…매출 절반이 해외서",
-      "link": "https://www.hankyung.com/article/2026092911571",
-      "pubDate": "Tue, 29 Sep 2026 16:15:53 +0900",
+      "title": "서초구 건설 현장서 천장 무너져 30대 외국인 숨져…당국 조사",
+      "link": "https://www.yna.co.kr/view/AKR20260929185700004",
+      "pubDate": "Tue, 29 Sep 2026 22:08:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"떡볶이 하나로 매출 2700억\"…루저 김대리의 '인생 역전' [씬메이커]",
+      "link": "https://www.hankyung.com/article/202609292186g",
+      "pubDate": "Tue, 29 Sep 2026 22:00:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "영신식품, 바비큐·치폴레 조미김 개발…17개국 뚫었다",
-      "link": "https://www.hankyung.com/article/2026092911581",
-      "pubDate": "Tue, 29 Sep 2026 16:14:36 +0900",
+      "title": "\"HBM 판매가 내년 121% 오른다\"…삼전·닉스 메모리 호황 2027년에도",
+      "link": "https://www.hankyung.com/article/202609293035i",
+      "pubDate": "Tue, 29 Sep 2026 21:51:21 +0900",
       "source": "한국경제"
     },
     {
-      "title": "지덕산업, 구글·스페이스X 데이터센터에 캐스터 공급",
-      "link": "https://www.hankyung.com/article/2026092911561",
-      "pubDate": "Tue, 29 Sep 2026 16:13:37 +0900",
+      "title": "\"가수는 절대 안 돼\" 정유경 회장, 딸 애니 뮤비 '여기' 띄웠다",
+      "link": "https://www.hankyung.com/article/202609292491g",
+      "pubDate": "Tue, 29 Sep 2026 20:00:54 +0900",
       "source": "한국경제"
     },
     {
-      "title": "짧아진 연휴에 백화점 웃었다…명품·키즈 매출 '쑥'",
-      "link": "https://www.hankyung.com/article/2026092922907",
-      "pubDate": "Tue, 29 Sep 2026 16:12:56 +0900",
+      "title": "앤스로픽 투자설명서,\"AI,시스템종료에 저항,정보은폐,협박\"경고",
+      "link": "https://www.hankyung.com/article/202609292966i",
+      "pubDate": "Tue, 29 Sep 2026 19:50:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "케이티이, 미국도 반한 비닐타일, 이젠 유럽 문 두드린다",
-      "link": "https://www.hankyung.com/article/2026092911551",
-      "pubDate": "Tue, 29 Sep 2026 16:12:14 +0900",
+      "title": "[동정] 이억원, 美나스닥·DTCC·홍콩거래소 고위급 면담",
+      "link": "https://www.yna.co.kr/view/AKR20260929180200002",
+      "pubDate": "Tue, 29 Sep 2026 19:49:50 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한국-리비아 경제협력포럼…기업 중동 진출·건설수주 지원",
+      "link": "https://www.yna.co.kr/view/AKR20260929177100504",
+      "pubDate": "Tue, 29 Sep 2026 19:30:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"내가 月 200만원 벌기도 힘들 줄은\"…60대 퇴직자 '눈물'",
+      "link": "https://www.hankyung.com/article/2026092927211",
+      "pubDate": "Tue, 29 Sep 2026 19:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "기아 대형 전기 PBV 'PV7' 공개…유럽 밴시장 질주한다",
-      "link": "https://www.hankyung.com/article/2026092912091",
-      "pubDate": "Tue, 29 Sep 2026 16:06:58 +0900",
+      "title": "이재용·최태원·젠슨 황, 맨해튼서 'AI동맹' 과시",
+      "link": "https://www.hankyung.com/article/2026092928231",
+      "pubDate": "Tue, 29 Sep 2026 18:37:58 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "미국 의약품 관세 발효…한국산 ADC·유전자치료제는 0%",
+      "link": "https://www.yna.co.kr/view/AKR20260929168800017",
+      "pubDate": "Tue, 29 Sep 2026 18:24:23 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "쟁글, 아부다비 법인 '오리엔트' 설립…내년 서비스 출시 목표",
+      "link": "https://www.yna.co.kr/view/AKR20260929171700002",
+      "pubDate": "Tue, 29 Sep 2026 18:18:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "농산물 수급조절위, 법정 심의 기구로 격상",
+      "link": "https://www.yna.co.kr/view/AKR20260929166700030",
+      "pubDate": "Tue, 29 Sep 2026 18:12:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[동포의 창] 전 세계 10개 권역별로 세계한상대회 열린다",
+      "link": "https://www.yna.co.kr/view/AKR20260929163500371",
+      "pubDate": "Tue, 29 Sep 2026 18:04:24 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "전남광주 옛 전방·일신방직 개발사, 공공기여금 154억 첫 납부",
+      "link": "https://www.yna.co.kr/view/AKR20260929165900054",
+      "pubDate": "Tue, 29 Sep 2026 18:03:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20260929159100011",
+      "pubDate": "Tue, 29 Sep 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "5년간 1.5조 지원 무색…한계기업 10곳 중 9곳은 '경영난 여전'",
+      "link": "https://www.yna.co.kr/view/AKR20260929161000003",
+      "pubDate": "Tue, 29 Sep 2026 17:38:14 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
