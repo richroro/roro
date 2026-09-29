@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-09-29T10:45:15.167856+09:00",
+  "updatedAt": "2026-09-29T17:18:47.202723+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6853.16,
-      "change": -36.58,
-      "changePercent": -0.53,
+      "price": 6870.81,
+      "change": -18.93,
+      "changePercent": -0.27,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 839.16,
-      "change": -7.42,
-      "changePercent": -0.88,
+      "price": 849.8,
+      "change": 5.32,
+      "changePercent": 0.63,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51481.51,
-      "change": -347.11,
+      "change": -347.09,
       "changePercent": -0.67,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1360.18,
-      "change": 1.46,
-      "changePercent": 0.11,
+      "price": 1357.98,
+      "change": -0.74,
+      "changePercent": -0.05,
       "currency": "KRW"
     }
   ],
@@ -56,33 +56,33 @@
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1767000.0,
-      "change": -1000.0,
-      "changePercent": -0.06,
+      "price": 1765000.0,
+      "change": -3000.0,
+      "changePercent": -0.17,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 194700.0,
-      "change": -3000.0,
-      "changePercent": -1.52,
+      "price": 194800.0,
+      "change": -2900.0,
+      "changePercent": -1.47,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 33750.0,
-      "change": -400.0,
-      "changePercent": -1.17,
+      "price": 33700.0,
+      "change": -450.0,
+      "changePercent": -1.32,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 351000.0,
-      "change": -13000.0,
-      "changePercent": -3.57,
+      "price": 352500.0,
+      "change": -11500.0,
+      "changePercent": -3.16,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "OCI, 전북 반도체 소재 특화단지 앵커기업 참여",
-      "link": "https://www.yna.co.kr/view/AKR20260929055600003",
-      "pubDate": "Tue, 29 Sep 2026 10:37:23 +0900",
+      "title": "한국가스공사 \"코가스 캐나다 에너지 주식 7천670억원에 취득\"",
+      "link": "https://www.yna.co.kr/view/AKR20260929155800008",
+      "pubDate": "Tue, 29 Sep 2026 17:01:29 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "가온전선, 미국 송전망 시장 진출…가공선 현지 생산 추진",
-      "link": "https://www.yna.co.kr/view/AKR20260929063700003",
-      "pubDate": "Tue, 29 Sep 2026 10:36:19 +0900",
+      "title": "송미령 농식품장관 \"청년농 지원 체계 개편 최종안 연내 발표\"",
+      "link": "https://www.yna.co.kr/view/AKR20260929087100030",
+      "pubDate": "Tue, 29 Sep 2026 17:00:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "HD현대중·노동부·안전공단, '안전한 일터 조성' 캠페인",
-      "link": "https://www.yna.co.kr/view/AKR20260929067400057",
-      "pubDate": "Tue, 29 Sep 2026 10:36:10 +0900",
+      "title": "국고채 금리 일제히 하락…전일 급등에 일부 되돌림(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260929150851008",
+      "pubDate": "Tue, 29 Sep 2026 16:48:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "LS전선, 데이터센터 전시회서 서버랙용 신제품 공개",
-      "link": "https://www.yna.co.kr/view/AKR20260929061000003",
-      "pubDate": "Tue, 29 Sep 2026 10:33:19 +0900",
+      "title": "전주시, 반려동물 산업 지원…기업 판로개척·전문인력 양성",
+      "link": "https://www.yna.co.kr/view/AKR20260929151100055",
+      "pubDate": "Tue, 29 Sep 2026 16:46:42 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "방송 이용자 피해, 분쟁조정으로 더 폭넓게 구제하나",
-      "link": "https://www.yna.co.kr/view/AKR20260929061700017",
-      "pubDate": "Tue, 29 Sep 2026 10:33:18 +0900",
+      "title": "[특징주] 한미반도체, 반도체 장비 수주 소식에 7%대 상승 마감(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260929055751008",
+      "pubDate": "Tue, 29 Sep 2026 16:45:57 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한국-OECD 공동 국제재정 포럼…'미래를 준비하는 재정' 논의",
-      "link": "https://www.yna.co.kr/view/AKR20260929048500002",
-      "pubDate": "Tue, 29 Sep 2026 10:30:01 +0900",
+      "title": "MSDI, 20억원 유상증자…케이연투자조합에 제3자배정",
+      "link": "https://www.yna.co.kr/view/AKR20260929151300008",
+      "pubDate": "Tue, 29 Sep 2026 16:45:29 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20260929060100011",
-      "pubDate": "Tue, 29 Sep 2026 10:30:00 +0900",
+      "title": "국고채 금리 일제히 하락…3년물 연 4.076%",
+      "link": "https://www.yna.co.kr/view/AKR20260929150800008",
+      "pubDate": "Tue, 29 Sep 2026 16:41:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "카카오, '매일 쓰는' 원화 스테이블코인 추진",
-      "link": "https://www.yna.co.kr/view/AKR20260929060600017",
-      "pubDate": "Tue, 29 Sep 2026 10:29:01 +0900",
+      "title": "[게시판] 연말까지 GS샵서 '농산업 우수 혁신품 모음전'",
+      "link": "https://www.yna.co.kr/view/AKR20260929142700030",
+      "pubDate": "Tue, 29 Sep 2026 16:39:33 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "경기 양주·화성, 생활여건 개조사업 선정…국비 42억 투입",
-      "link": "https://www.yna.co.kr/view/AKR20260929064700061",
-      "pubDate": "Tue, 29 Sep 2026 10:27:04 +0900",
+      "title": "JW중외제약 \"계열사 솔리더스인베스트먼트 주식 307억원에 취득\"",
+      "link": "https://www.yna.co.kr/view/AKR20260929149400008",
+      "pubDate": "Tue, 29 Sep 2026 16:38:43 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "LF 헤지스, 바스통과 협업해 가을·겨울 외투 제품군 선봬",
-      "link": "https://www.yna.co.kr/view/AKR20260929058400030",
-      "pubDate": "Tue, 29 Sep 2026 10:26:49 +0900",
+      "title": "SK, 회사채 수요예측에 7천200억 몰려…고금리에도 모집액 5배",
+      "link": "https://www.yna.co.kr/view/AKR20260929147900008",
+      "pubDate": "Tue, 29 Sep 2026 16:38:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "삼성, 뉴욕 한복판에 젠슨 황 띄웠다…밴 플리트상 수상 축하",
-      "link": "https://www.hankyung.com/article/202609291266i",
-      "pubDate": "Tue, 29 Sep 2026 10:10:51 +0900",
+      "title": "뉴앤뉴, 미세전류 화장품 독자 개발…美·中·日 노린다",
+      "link": "https://www.hankyung.com/article/2026092911771",
+      "pubDate": "Tue, 29 Sep 2026 16:20:58 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] SC제일은행, 내달 1일부터 주담대 MCI 전면 재개",
-      "link": "https://www.hankyung.com/article/202609290593i",
-      "pubDate": "Tue, 29 Sep 2026 10:08:41 +0900",
+      "title": "삼영기계, 3D 프린터로 엔진 부품 생산…제조 DX 속도",
+      "link": "https://www.hankyung.com/article/2026092911731",
+      "pubDate": "Tue, 29 Sep 2026 16:19:50 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'빈손 회담'에 中이 환호하는 이유는 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202609291294i",
-      "pubDate": "Tue, 29 Sep 2026 10:04:01 +0900",
+      "title": "서북, 최애 아티스트와 '찰칵'…국경 넘는 셀프 사진",
+      "link": "https://www.hankyung.com/article/2026092911721",
+      "pubDate": "Tue, 29 Sep 2026 16:18:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "“47년째 조연은 그만”…롯데리아 간판 노리는 '떼리앙'",
-      "link": "https://www.hankyung.com/article/202609290880i",
-      "pubDate": "Tue, 29 Sep 2026 10:00:05 +0900",
+      "title": "아라, 20년 치 제조 데이터, 조리·서빙로봇에 심는다",
+      "link": "https://www.hankyung.com/article/2026092911711",
+      "pubDate": "Tue, 29 Sep 2026 16:17:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "SK하이닉스, TSMC 행사서 '차세대 메모리' 솔루션 공개",
-      "link": "https://www.hankyung.com/article/202609289704i",
-      "pubDate": "Tue, 29 Sep 2026 09:53:30 +0900",
+      "title": "영광와이케이엠씨, 반도체 부품 일괄 생산…매출 절반이 해외서",
+      "link": "https://www.hankyung.com/article/2026092911571",
+      "pubDate": "Tue, 29 Sep 2026 16:15:53 +0900",
       "source": "한국경제"
     },
     {
-      "title": "반도체서 데이터센터로…삼성 6개사, 美 AI 인프라 헬릭스에 10억달러 투자",
-      "link": "https://www.hankyung.com/article/202609291068i",
-      "pubDate": "Tue, 29 Sep 2026 09:52:02 +0900",
+      "title": "영신식품, 바비큐·치폴레 조미김 개발…17개국 뚫었다",
+      "link": "https://www.hankyung.com/article/2026092911581",
+      "pubDate": "Tue, 29 Sep 2026 16:14:36 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"쿠팡 조사로 무너진 정의 바로 세울 것\"…공정위, 현장조사 재개 시사",
-      "link": "https://www.hankyung.com/article/202609291234g",
-      "pubDate": "Tue, 29 Sep 2026 09:49:53 +0900",
+      "title": "지덕산업, 구글·스페이스X 데이터센터에 캐스터 공급",
+      "link": "https://www.hankyung.com/article/2026092911561",
+      "pubDate": "Tue, 29 Sep 2026 16:13:37 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 현대카드 정태영, 中 알리바바·유니트리 찾았다",
-      "link": "https://www.hankyung.com/article/2026092909816",
-      "pubDate": "Tue, 29 Sep 2026 09:49:05 +0900",
+      "title": "짧아진 연휴에 백화점 웃었다…명품·키즈 매출 '쑥'",
+      "link": "https://www.hankyung.com/article/2026092922907",
+      "pubDate": "Tue, 29 Sep 2026 16:12:56 +0900",
       "source": "한국경제"
     },
     {
-      "title": "롯데백화점, 새 얼굴에 '제니' 낙점…글로벌 영토 확장 드라이브",
-      "link": "https://www.hankyung.com/article/2026092912397",
-      "pubDate": "Tue, 29 Sep 2026 09:44:44 +0900",
+      "title": "케이티이, 미국도 반한 비닐타일, 이젠 유럽 문 두드린다",
+      "link": "https://www.hankyung.com/article/2026092911551",
+      "pubDate": "Tue, 29 Sep 2026 16:12:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "20년 전 이건희 받은 상, 젠슨 황도 받자…삼성 '특급 이벤트' [영상]",
-      "link": "https://www.hankyung.com/article/202609290738g",
-      "pubDate": "Tue, 29 Sep 2026 09:40:05 +0900",
+      "title": "기아 대형 전기 PBV 'PV7' 공개…유럽 밴시장 질주한다",
+      "link": "https://www.hankyung.com/article/2026092912091",
+      "pubDate": "Tue, 29 Sep 2026 16:06:58 +0900",
       "source": "한국경제"
     }
   ]
