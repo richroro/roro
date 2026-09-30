@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T22:34:16.241081+09:00",
+  "updatedAt": "2026-10-01T04:04:44.271747+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51401.93,
-      "change": 52.01,
-      "changePercent": 0.1,
+      "price": 51125.81,
+      "change": -224.11,
+      "changePercent": -0.44,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26933.99,
-      "change": 136.45,
-      "changePercent": 0.51,
+      "price": 27037.85,
+      "change": 240.31,
+      "changePercent": 0.9,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1352.02,
-      "change": -0.34,
-      "changePercent": -0.03,
+      "price": 1355.18,
+      "change": 2.82,
+      "changePercent": 0.21,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,65 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 332.52,
-      "change": 3.12,
-      "changePercent": 0.95,
+      "price": 336.53,
+      "change": 7.13,
+      "changePercent": 2.16,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 346.8,
-      "change": -6.04,
-      "changePercent": -1.71,
+      "price": 352.8,
+      "change": -0.04,
+      "changePercent": -0.01,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.7,
-      "change": 3.49,
-      "changePercent": 1.53,
+      "price": 230.66,
+      "change": 3.45,
+      "changePercent": 1.52,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "美 8월 PCE 물가 예상치 밑돌아",
+      "link": "https://www.hankyung.com/article/2026093059721",
+      "pubDate": "Thu, 01 Oct 2026 01:50:28 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "트럼프 60개국에 대한 '강제노동' 관세도 법정행",
+      "link": "https://www.hankyung.com/article/202609305998i",
+      "pubDate": "Thu, 01 Oct 2026 00:14:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "독일 9월 소비자물가 3.3％↑…ECB 금리인상 압박",
+      "link": "https://www.yna.co.kr/view/AKR20260930196400082",
+      "pubDate": "Wed, 30 Sep 2026 22:43:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美 8월 PCE 예상보다 완화…연준 추가금리인상 부담 덜었다",
+      "link": "https://www.hankyung.com/article/202609305956i",
+      "pubDate": "Wed, 30 Sep 2026 22:37:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"아이폰, 멋대로 꺼지더니 또\"…이번엔 '스피커' 오류 주장",
+      "link": "https://www.hankyung.com/article/2026093059577",
+      "pubDate": "Wed, 30 Sep 2026 22:27:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 2분기 성장률 2.2% 확정…잠정치보다 0.7%P↑",
+      "link": "https://www.hankyung.com/article/202609305959i",
+      "pubDate": "Wed, 30 Sep 2026 22:19:01 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "美 8월 PCE 물가 3.4% 상승…예상치 밑돌았다",
       "link": "https://www.hankyung.com/article/202609305951i",
@@ -172,40 +208,10 @@
       "source": "연합뉴스"
     },
     {
-      "title": "한국인들 美쳤다…지구 반대편서 '10조' 놓고 벌어진 일",
-      "link": "https://www.hankyung.com/article/2026093055041",
-      "pubDate": "Wed, 30 Sep 2026 19:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "[청주소식] 차기 시 금고에 농협·신한은행 선정",
       "link": "https://www.yna.co.kr/view/AKR20260930182700064",
       "pubDate": "Wed, 30 Sep 2026 18:53:45 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "'은둔의 경영자' 최평규 \"인재 양성, 기업인 책무\"",
-      "link": "https://www.hankyung.com/article/2026093056481",
-      "pubDate": "Wed, 30 Sep 2026 18:38:16 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "신한銀, 법률구조공단에 17.5억 기부",
-      "link": "https://www.hankyung.com/article/2026093056461",
-      "pubDate": "Wed, 30 Sep 2026 18:34:23 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "세븐일레븐, 육군 2작사에 위문 물품",
-      "link": "https://www.hankyung.com/article/2026093056451",
-      "pubDate": "Wed, 30 Sep 2026 18:33:39 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "하나금융, 소진공과 청년 소상공인 지원",
-      "link": "https://www.hankyung.com/article/2026093056421",
-      "pubDate": "Wed, 30 Sep 2026 18:32:36 +0900",
-      "source": "한국경제"
     },
     {
       "title": "한화생명, 애큐온캐피탈·저축은행 품는다…\"종합금융그룹 구축\"(종합)",
@@ -223,12 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
       "link": "https://www.yna.co.kr/view/AKR20260930165500011",
       "pubDate": "Wed, 30 Sep 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[동포의 창] 세계한상대회 폐막…3억달러 상담·940만달러 현장 계약 성과",
-      "link": "https://www.yna.co.kr/view/AKR20260930173300371",
-      "pubDate": "Wed, 30 Sep 2026 17:56:57 +0900",
       "source": "연합뉴스"
     }
   ]
