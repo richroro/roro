@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T04:04:44.271747+09:00",
+  "updatedAt": "2026-10-01T07:58:22.390083+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51125.81,
-      "change": -224.11,
-      "changePercent": -0.44,
+      "price": 50906.05,
+      "change": -443.87,
+      "changePercent": -0.86,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27037.85,
-      "change": 240.31,
-      "changePercent": 0.9,
+      "price": 26861.06,
+      "change": 63.52,
+      "changePercent": 0.24,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1355.18,
-      "change": 2.82,
-      "changePercent": 0.21,
+      "price": 1356.26,
+      "change": 3.9,
+      "changePercent": 0.29,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,65 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 336.53,
-      "change": 7.13,
-      "changePercent": 2.16,
+      "price": 333.02,
+      "change": 3.62,
+      "changePercent": 1.1,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 352.8,
-      "change": -0.04,
-      "changePercent": -0.01,
+      "price": 354.81,
+      "change": 1.97,
+      "changePercent": 0.56,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.66,
-      "change": 3.45,
-      "changePercent": 1.52,
+      "price": 228.38,
+      "change": 1.17,
+      "changePercent": 0.51,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"등록금도 아닌데 빚 냈어요\"…대학생 45만명 대출받은 이유",
+      "link": "https://www.hankyung.com/article/2026100161857",
+      "pubDate": "Thu, 01 Oct 2026 07:11:33 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"신차 귀하다더니 반갑네\"…현대차 '이 차'로 美공략 나선다",
+      "link": "https://www.hankyung.com/article/202609305329g",
+      "pubDate": "Thu, 01 Oct 2026 07:01:58 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "데이터센터 사고 발전사도 산다…블랙록, AI 투자 확장에 전기료 논란 [김주완의 글로벌머니 X파일]",
+      "link": "https://www.hankyung.com/article/202609305889i",
+      "pubDate": "Thu, 01 Oct 2026 07:00:12 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "삼전닉스 호남 주거비까지 혈세로?…'2000억 지원' 논란",
+      "link": "https://www.hankyung.com/article/202610016129g",
+      "pubDate": "Thu, 01 Oct 2026 06:36:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "3분기 거래대금 무너지며 코스피 6800선 마감…4분기는? [분석+]",
+      "link": "https://www.hankyung.com/article/2026093053446",
+      "pubDate": "Thu, 01 Oct 2026 06:30:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"5만원만 내면 집안 가전 34종 수리\"…'파격 서비스' 등장",
+      "link": "https://www.hankyung.com/article/202609305279g",
+      "pubDate": "Thu, 01 Oct 2026 06:00:12 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "美 8월 PCE 물가 예상치 밑돌아",
       "link": "https://www.hankyung.com/article/2026093059721",
@@ -122,12 +158,6 @@
       "link": "https://www.hankyung.com/article/202609305998i",
       "pubDate": "Thu, 01 Oct 2026 00:14:40 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "독일 9월 소비자물가 3.3％↑…ECB 금리인상 압박",
-      "link": "https://www.yna.co.kr/view/AKR20260930196400082",
-      "pubDate": "Wed, 30 Sep 2026 22:43:10 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "美 8월 PCE 예상보다 완화…연준 추가금리인상 부담 덜었다",
@@ -142,93 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "美 2분기 성장률 2.2% 확정…잠정치보다 0.7%P↑",
-      "link": "https://www.hankyung.com/article/202609305959i",
-      "pubDate": "Wed, 30 Sep 2026 22:19:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美 8월 PCE 물가 3.4% 상승…예상치 밑돌았다",
-      "link": "https://www.hankyung.com/article/202609305951i",
-      "pubDate": "Wed, 30 Sep 2026 22:12:30 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "7주만에 최저 금값…\"그럼에도 실물수요 등 보유할 이유 많아\"",
-      "link": "https://www.hankyung.com/article/202609305927i",
-      "pubDate": "Wed, 30 Sep 2026 21:25:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "증선위, 대표 시세조종행위 등 불공정거래 3건 檢 고발·통보",
-      "link": "https://www.yna.co.kr/view/AKR20260930190900002",
-      "pubDate": "Wed, 30 Sep 2026 21:18:00 +0900",
+      "title": "알래스카 '추가검토' 분류한 한국에 500억불 투자 못박은 미국",
+      "link": "https://www.yna.co.kr/view/AKR20261001016400003",
+      "pubDate": "Thu, 1 Oct 2026 07:46:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "韓총리 \"주택공급 예측가능성 높이는 게 중요…신뢰 회복해야\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260930167051001",
-      "pubDate": "Wed, 30 Sep 2026 20:29:47 +0900",
+      "title": "한국 통신비 세계 최고가?…기준 바꾸니 순위 뒤집혔다",
+      "link": "https://www.yna.co.kr/view/AKR20260930152000017",
+      "pubDate": "Thu, 1 Oct 2026 07:45:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "2차 국민참여성장펀드 첫날 2천억원 판매…일부 온라인한도 소진",
-      "link": "https://www.yna.co.kr/view/AKR20260930189800002",
-      "pubDate": "Wed, 30 Sep 2026 20:27:54 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20261001015200011",
+      "pubDate": "Thu, 1 Oct 2026 07:30:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "74조원 알래스카 LNG, 선뜻 참여하기 어려운 이유는?",
-      "link": "https://www.hankyung.com/article/202609305877i",
-      "pubDate": "Wed, 30 Sep 2026 20:25:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼립 \"2030년 영업익 1천700억·해외 매출 5천억 달성 목표\"",
-      "link": "https://www.yna.co.kr/view/AKR20260930189700030",
-      "pubDate": "Wed, 30 Sep 2026 20:19:58 +0900",
+      "title": "나체사진을 담보로…여성 노린 '성착취' 불법사금융 기승",
+      "link": "https://www.yna.co.kr/view/AKR20260930116200065",
+      "pubDate": "Thu, 1 Oct 2026 07:17:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[르포] 계열사 10개 청라로 집결하는 하나금융, 본사 건물부터 '시너지' 강조",
-      "link": "https://www.hankyung.com/article/202609304779i",
-      "pubDate": "Wed, 30 Sep 2026 20:03:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "KB·하나·우리, 자회사 CEO 선임 착수",
-      "link": "https://www.hankyung.com/article/2026093058431",
-      "pubDate": "Wed, 30 Sep 2026 19:49:15 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "9월 D램·낸드 가격 또 역대 최고…상승폭은 둔화",
-      "link": "https://www.yna.co.kr/view/AKR20260930184700003",
-      "pubDate": "Wed, 30 Sep 2026 19:37:07 +0900",
+      "title": "\"주유소 휘발유 가격, SK에너지가 가장 비싸고 EX알뜰이 가장 저렴\"",
+      "link": "https://www.yna.co.kr/view/AKR20260930149700001",
+      "pubDate": "Thu, 1 Oct 2026 07:10:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[청주소식] 차기 시 금고에 농협·신한은행 선정",
-      "link": "https://www.yna.co.kr/view/AKR20260930182700064",
-      "pubDate": "Wed, 30 Sep 2026 18:53:45 +0900",
+      "title": "[우분투칼럼] 아프리카와 개발협력(17): 보릿고개를 이겨낸 말라위 창고 사업",
+      "link": "https://www.yna.co.kr/view/AKR20260922029800898",
+      "pubDate": "Thu, 1 Oct 2026 07:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한화생명, 애큐온캐피탈·저축은행 품는다…\"종합금융그룹 구축\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260930160351008",
-      "pubDate": "Wed, 30 Sep 2026 18:25:21 +0900",
+      "title": "\"'영세 납세자 보루' 국선대리인 지원 2년새 18%↓\"",
+      "link": "https://www.yna.co.kr/view/AKR20260930161100002",
+      "pubDate": "Thu, 1 Oct 2026 06:57:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "엑스플러스, 30억원 제3자배정 유상증자",
-      "link": "https://www.yna.co.kr/view/AKR20260930174700008",
-      "pubDate": "Wed, 30 Sep 2026 18:06:13 +0900",
+      "title": "[팩트체크] 보조배터리 부풀어 오르면 소금물에 넣어라?…화재 대응법은",
+      "link": "https://www.yna.co.kr/view/AKR20260930110000518",
+      "pubDate": "Thu, 1 Oct 2026 06:30:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20260930165500011",
-      "pubDate": "Wed, 30 Sep 2026 18:00:00 +0900",
+      "title": "산업장관 \"대미투자, 관세 압박 관리 차원…15% 상한선 재확인\"",
+      "link": "https://www.yna.co.kr/view/AKR20260923159400003",
+      "pubDate": "Thu, 1 Oct 2026 06:09:34 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "가스발전·원전·알래스카…대미투자 어떤 내용 담겼나",
+      "link": "https://www.yna.co.kr/view/AKR20260922195200003",
+      "pubDate": "Thu, 1 Oct 2026 06:07:03 +0900",
       "source": "연합뉴스"
     }
   ]
