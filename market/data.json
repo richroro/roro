@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T17:43:07.934421+09:00",
+  "updatedAt": "2026-10-02T01:17:19.650993+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 50906.05,
-      "change": -443.85,
-      "changePercent": -0.86,
+      "price": 50766.85,
+      "change": -139.2,
+      "changePercent": -0.27,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26861.06,
-      "change": 63.52,
-      "changePercent": 0.24,
+      "price": 26802.36,
+      "change": -58.7,
+      "changePercent": -0.22,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1361.32,
-      "change": 4.78,
-      "changePercent": 0.35,
+      "price": 1363.24,
+      "change": 6.7,
+      "changePercent": 0.49,
       "currency": "KRW"
     }
   ],
@@ -88,88 +88,136 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 333.02,
-      "change": 3.62,
-      "changePercent": 1.1,
+      "price": 328.08,
+      "change": -4.94,
+      "changePercent": -1.48,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 354.81,
-      "change": 1.97,
-      "changePercent": 0.56,
+      "price": 356.13,
+      "change": 1.32,
+      "changePercent": 0.37,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 228.38,
-      "change": 1.17,
-      "changePercent": 0.51,
+      "price": 230.05,
+      "change": 1.67,
+      "changePercent": 0.73,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "GM 한국사업장, 9월 4만1101대…전년 대비 73.3% 증가",
-      "link": "https://www.hankyung.com/article/202610018345g",
-      "pubDate": "Thu, 01 Oct 2026 16:49:35 +0900",
+      "title": "美소비자 \"기름값 무서워 하이브리드로\"…현대차 3분기 포드제쳐",
+      "link": "https://www.hankyung.com/article/202610028887i",
+      "pubDate": "Fri, 02 Oct 2026 00:40:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "KG모빌리티, 9월 8863대 판매…전년 대비 16.7% 감소",
-      "link": "https://www.hankyung.com/article/202610018338g",
-      "pubDate": "Thu, 01 Oct 2026 16:45:43 +0900",
+      "title": "美 9월 제조업지수 54.5 확장 지속…비용 상승에 속도는 둔화",
+      "link": "https://www.hankyung.com/article/202610018877i",
+      "pubDate": "Thu, 01 Oct 2026 23:27:11 +0900",
       "source": "한국경제"
     },
     {
-      "title": "기아, 3분기 84만대 넘게 팔았다…창사 이래 역대 최다",
-      "link": "https://www.hankyung.com/article/202610018298g",
-      "pubDate": "Thu, 01 Oct 2026 16:42:51 +0900",
+      "title": "구글 AI칩 TPU, 스페이스X 로켓타고 우주로…우주데이터센터 첫걸음",
+      "link": "https://www.hankyung.com/article/202610018869i",
+      "pubDate": "Thu, 01 Oct 2026 23:00:54 +0900",
       "source": "한국경제"
     },
     {
-      "title": "김정관 \"알래스카 투자 확정 아냐…러트닉에 강하게 이의 제기\"",
-      "link": "https://www.hankyung.com/article/2026100181927",
-      "pubDate": "Thu, 01 Oct 2026 16:32:50 +0900",
+      "title": "밀·옥수수·대두가격 3분기에 13%↑…4분기 식탁물가 비상",
+      "link": "https://www.hankyung.com/article/202610018832i",
+      "pubDate": "Thu, 01 Oct 2026 22:00:17 +0900",
       "source": "한국경제"
     },
     {
-      "title": "현대차, 9월 내수 4만9022대 판매…전년 대비 25.7% 감소",
-      "link": "https://www.hankyung.com/article/202610018275g",
-      "pubDate": "Thu, 01 Oct 2026 16:30:16 +0900",
+      "title": "오픈AI \"中문샷이 추론정보 추출시도\"…美·中 AI \"탈취 VS 수성 전쟁\"",
+      "link": "https://www.hankyung.com/article/202610018799i",
+      "pubDate": "Thu, 01 Oct 2026 20:57:16 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"국민연금 미적립부채 1450조…개혁 미루면 미래세대 부담\"",
-      "link": "https://www.hankyung.com/article/202610018162i",
-      "pubDate": "Thu, 01 Oct 2026 16:27:26 +0900",
+      "title": "\"새로 나온 것도 아닌데 왜 이래\"…스마트폰 바꾸려다 '당황'",
+      "link": "https://www.hankyung.com/article/2026100187447",
+      "pubDate": "Thu, 01 Oct 2026 19:57:23 +0900",
       "source": "한국경제"
     },
     {
-      "title": "제주 드림타워 9월 매출 434억원…\"중국 국경절 연휴 기대\"",
-      "link": "https://www.hankyung.com/article/202610018208g",
-      "pubDate": "Thu, 01 Oct 2026 16:24:55 +0900",
+      "title": "美 10년물 국채금리 5.34% \"24년만에 최고\"…전세계 채권 수익률 일제 급등 왜?",
+      "link": "https://www.hankyung.com/article/202610018739i",
+      "pubDate": "Thu, 01 Oct 2026 19:33:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "국세청장, 배달라이더 등 만나 \"세금 처음부터 적정하게 떼야\"",
-      "link": "https://www.hankyung.com/article/202610018242i",
-      "pubDate": "Thu, 01 Oct 2026 16:17:34 +0900",
+      "title": "에쓰오일, '올해의 시민영웅' 시상식",
+      "link": "https://www.hankyung.com/article/2026100186031",
+      "pubDate": "Thu, 01 Oct 2026 19:03:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"7년·14만㎞ 신차 보증 효과\"…르노코리아, 9월 내수 반등",
-      "link": "https://www.hankyung.com/article/202610018128g",
-      "pubDate": "Thu, 01 Oct 2026 16:15:29 +0900",
+      "title": "英상륙 '이건희 컬렉션'…JY \"韓문화 이해하는 계기 되길\"",
+      "link": "https://www.hankyung.com/article/2026100186081",
+      "pubDate": "Thu, 01 Oct 2026 19:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"추석엔 집밥\" 옛말…명절에 가족 손님 몰리자 매출 뛴 식당",
-      "link": "https://www.hankyung.com/article/202610018211i",
-      "pubDate": "Thu, 01 Oct 2026 16:09:36 +0900",
+      "title": "[단독] 미소금융 연체채권 새도약기금에 넘긴다",
+      "link": "https://www.hankyung.com/article/2026100185041",
+      "pubDate": "Thu, 01 Oct 2026 18:38:58 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "'AI 에이전트'에 당했다…신한은행 보안 허점 노출(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261001145452002",
+      "pubDate": "Thu, 1 Oct 2026 20:00:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "울산 동구 환경미화원 노사, 구청 중재로 대화 물꼬",
+      "link": "https://www.yna.co.kr/view/AKR20261001190700057",
+      "pubDate": "Thu, 1 Oct 2026 19:52:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "제주 5성급 호텔서 59명 염소가스 흡입…조선호텔 \"깊이 사과\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261001114152030",
+      "pubDate": "Thu, 1 Oct 2026 19:19:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"'영세 납세자 보루' 국선대리인 지원 2년새 18%↓\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260930161151002",
+      "pubDate": "Thu, 1 Oct 2026 18:24:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261001173100011",
+      "pubDate": "Thu, 1 Oct 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[인사] 한화저축은행",
+      "link": "https://www.yna.co.kr/view/AKR20261001180500002",
+      "pubDate": "Thu, 1 Oct 2026 17:53:12 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "대출모집인 전용 서비스 뚫렸다…신한은행 보안 허점 노출(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261001145451002",
+      "pubDate": "Thu, 1 Oct 2026 17:53:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "외교부, 대미투자 공식발표에 \"안보협의 등 현안 진전 기대\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261001147451504",
+      "pubDate": "Thu, 1 Oct 2026 17:52:58 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "10월 국채 총발행 계획대비 5조원 축소…\"필요시 더 줄여\"",
@@ -181,54 +229,6 @@
       "title": "\"증시 경보, 단계수 줄이고 불건전거래 감시에 집중해야\"",
       "link": "https://www.yna.co.kr/view/AKR20261001175400008",
       "pubDate": "Thu, 1 Oct 2026 17:32:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "신용정보법 경미한 위반 과징금 낮춘다…부과기준율 50→1∼30%",
-      "link": "https://www.yna.co.kr/view/AKR20261001172200002",
-      "pubDate": "Thu, 1 Oct 2026 17:29:36 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채, 주요국 금리상승에 장기물 중심 약세(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261001164851008",
-      "pubDate": "Thu, 1 Oct 2026 17:29:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "프락시스 CEO \"서울 모처에 디지털국가 대사관 짓겠다\"",
-      "link": "https://www.yna.co.kr/view/AKR20261001176500002",
-      "pubDate": "Thu, 1 Oct 2026 17:27:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인사] 한화투자증권",
-      "link": "https://www.yna.co.kr/view/AKR20261001159900008",
-      "pubDate": "Thu, 1 Oct 2026 17:11:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"10주만 사줘\"…다올증권, AI-증권계좌 연결 서비스 출시",
-      "link": "https://www.yna.co.kr/view/AKR20261001170100008",
-      "pubDate": "Thu, 1 Oct 2026 17:06:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 농식품부, 여성 농업인 정책 권역별 간담회 개최",
-      "link": "https://www.yna.co.kr/view/AKR20261001080300030",
-      "pubDate": "Thu, 1 Oct 2026 17:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일, 첫 유관기관 간담회…\"모든 판단 출발점, 국민과 현장\"",
-      "link": "https://www.yna.co.kr/view/AKR20261001159200002",
-      "pubDate": "Thu, 1 Oct 2026 17:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "VIP운용·TS인베, '아늑 호텔' 운영사 더휴식에 650억원 투자",
-      "link": "https://www.yna.co.kr/view/AKR20261001168000008",
-      "pubDate": "Thu, 1 Oct 2026 16:56:01 +0900",
       "source": "연합뉴스"
     }
   ]
