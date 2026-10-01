@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T01:17:19.650993+09:00",
+  "updatedAt": "2026-10-02T06:44:54.692661+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 50766.85,
-      "change": -139.2,
-      "changePercent": -0.27,
+      "price": 50926.56,
+      "change": 20.51,
+      "changePercent": 0.04,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26802.36,
-      "change": -58.7,
-      "changePercent": -0.22,
+      "price": 26871.6,
+      "change": 10.53,
+      "changePercent": 0.04,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1363.24,
-      "change": 6.7,
-      "changePercent": 0.49,
+      "price": 1359.87,
+      "change": 3.33,
+      "changePercent": 0.25,
       "currency": "KRW"
     }
   ],
@@ -88,25 +88,25 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 328.08,
-      "change": -4.94,
-      "changePercent": -1.48,
+      "price": 330.32,
+      "change": -2.7,
+      "changePercent": -0.81,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 356.13,
-      "change": 1.32,
-      "changePercent": 0.37,
+      "price": 354.11,
+      "change": -0.7,
+      "changePercent": -0.2,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.05,
-      "change": 1.67,
-      "changePercent": 0.73,
+      "price": 230.86,
+      "change": 2.48,
+      "changePercent": 1.09,
       "currency": "USD"
     }
   ],
@@ -160,16 +160,64 @@
       "source": "한국경제"
     },
     {
-      "title": "英상륙 '이건희 컬렉션'…JY \"韓문화 이해하는 계기 되길\"",
+      "title": "英 상륙 '이건희 컬렉션'…JY \"韓문화 이해하는 계기 되길\"",
       "link": "https://www.hankyung.com/article/2026100186081",
       "pubDate": "Thu, 01 Oct 2026 19:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 미소금융 연체채권 새도약기금에 넘긴다",
+      "title": "[단독] 미소금융 연체채권, 새도약기금에 넘긴다",
       "link": "https://www.hankyung.com/article/2026100185041",
       "pubDate": "Thu, 01 Oct 2026 18:38:58 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "낙상 미리 감지하는 AI기술…서울시 외국인창업경진대회 대상",
+      "link": "https://www.yna.co.kr/view/AKR20261001159700004",
+      "pubDate": "Fri, 2 Oct 2026 06:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[인사] 예금보험공사",
+      "link": "https://www.yna.co.kr/view/AKR20261001164400002",
+      "pubDate": "Fri, 2 Oct 2026 06:00:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중기부·지식재산처, K-브랜드 '위조·상표 선점' 공동 대응",
+      "link": "https://www.yna.co.kr/view/AKR20261001164500030",
+      "pubDate": "Fri, 2 Oct 2026 06:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금감원·금융권 \"노인의 날 맞아 고령층 집중 금융교육 제공\"",
+      "link": "https://www.yna.co.kr/view/AKR20261001184500002",
+      "pubDate": "Fri, 2 Oct 2026 06:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국내증시 호황에 ELS 상환…상반기 파생결합증권 잔액 소폭 감소",
+      "link": "https://www.yna.co.kr/view/AKR20261001193100002",
+      "pubDate": "Fri, 2 Oct 2026 06:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울신보, 지방공공기관 혁신 우수기관 선정…행안부장관상",
+      "link": "https://www.yna.co.kr/view/AKR20261001193500004",
+      "pubDate": "Fri, 2 Oct 2026 06:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "뉴딜펀드 만기청산 절반이 마이너스…재정 손실부담 139억",
+      "link": "https://www.yna.co.kr/view/AKR20261001179600002",
+      "pubDate": "Fri, 2 Oct 2026 05:51:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "中 석유제품 수출 중단에 美 추가파병까지…브렌트유 4%대 급등",
+      "link": "https://www.yna.co.kr/view/AKR20261002006600072",
+      "pubDate": "Fri, 2 Oct 2026 05:22:03 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "'AI 에이전트'에 당했다…신한은행 보안 허점 노출(종합2보)",
@@ -181,54 +229,6 @@
       "title": "울산 동구 환경미화원 노사, 구청 중재로 대화 물꼬",
       "link": "https://www.yna.co.kr/view/AKR20261001190700057",
       "pubDate": "Thu, 1 Oct 2026 19:52:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "제주 5성급 호텔서 59명 염소가스 흡입…조선호텔 \"깊이 사과\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261001114152030",
-      "pubDate": "Thu, 1 Oct 2026 19:19:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"'영세 납세자 보루' 국선대리인 지원 2년새 18%↓\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260930161151002",
-      "pubDate": "Thu, 1 Oct 2026 18:24:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261001173100011",
-      "pubDate": "Thu, 1 Oct 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인사] 한화저축은행",
-      "link": "https://www.yna.co.kr/view/AKR20261001180500002",
-      "pubDate": "Thu, 1 Oct 2026 17:53:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대출모집인 전용 서비스 뚫렸다…신한은행 보안 허점 노출(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261001145451002",
-      "pubDate": "Thu, 1 Oct 2026 17:53:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "외교부, 대미투자 공식발표에 \"안보협의 등 현안 진전 기대\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261001147451504",
-      "pubDate": "Thu, 1 Oct 2026 17:52:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "10월 국채 총발행 계획대비 5조원 축소…\"필요시 더 줄여\"",
-      "link": "https://www.yna.co.kr/view/AKR20261001176300002",
-      "pubDate": "Thu, 1 Oct 2026 17:35:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"증시 경보, 단계수 줄이고 불건전거래 감시에 집중해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261001175400008",
-      "pubDate": "Thu, 1 Oct 2026 17:32:04 +0900",
       "source": "연합뉴스"
     }
   ]
