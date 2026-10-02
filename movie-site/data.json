@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-29",
-  "updated": "2026-10-01T05:57:15+00:00",
+  "date": "2026-10-01",
+  "updated": "2026-10-02T05:39:45+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "암살자(들)",
       "open": "2026-09-23",
-      "share": 27.7,
-      "audience": 61404,
-      "total": 1695004,
-      "screens": 1314
+      "share": 21.8,
+      "audience": 55015,
+      "total": 1821960,
+      "screens": 1007
     },
     {
       "rank": 2,
       "title": "타짜: 벨제붑의 노래",
       "open": "2026-09-23",
-      "share": 26.8,
-      "audience": 56135,
-      "total": 958052,
-      "screens": 996
+      "share": 20.8,
+      "audience": 49832,
+      "total": 1065735,
+      "screens": 1037
     },
     {
       "rank": 3,
-      "title": "오디세이",
-      "open": "2026-08-05",
-      "share": 14.9,
-      "audience": 22705,
-      "total": 11837326,
-      "screens": 645
+      "title": "극장판 치이카와: 인어 섬의 비밀",
+      "open": "2026-09-30",
+      "share": 20.4,
+      "audience": 45770,
+      "total": 198786,
+      "screens": 932
     },
     {
       "rank": 4,
-      "title": "가능한 사랑",
-      "open": "2026-09-23",
-      "share": 7.0,
-      "audience": 14177,
-      "total": 144530,
-      "screens": 182
+      "title": "부활남: 더 레드",
+      "open": "2026-09-30",
+      "share": 9.2,
+      "audience": 22233,
+      "total": 73908,
+      "screens": 828
     },
     {
       "rank": 5,
-      "title": "인턴",
-      "open": "2026-09-16",
-      "share": 6.2,
-      "audience": 14020,
-      "total": 782609,
-      "screens": 645
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 10.8,
+      "audience": 18010,
+      "total": 11875153,
+      "screens": 542
     },
     {
       "rank": 6,
-      "title": "옵세션",
-      "open": "2026-09-02",
-      "share": 4.9,
-      "audience": 9301,
-      "total": 868480,
-      "screens": 419
+      "title": "가능한 사랑",
+      "open": "2026-09-23",
+      "share": 5.2,
+      "audience": 11745,
+      "total": 169949,
+      "screens": 195
     },
     {
       "rank": 7,
-      "title": "어벤져스: 엔드게임 앙코르",
-      "open": "2026-09-23",
-      "share": 3.3,
-      "audience": 5680,
-      "total": 119886,
-      "screens": 163
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 2.8,
+      "audience": 6888,
+      "total": 801375,
+      "screens": 465
     },
     {
       "rank": 8,
-      "title": "레지던트 이블: 0번째 밤",
-      "open": "2026-09-17",
-      "share": 2.1,
-      "audience": 4054,
-      "total": 195638,
-      "screens": 365
+      "title": "옵세션",
+      "open": "2026-09-02",
+      "share": 3.2,
+      "audience": 6763,
+      "total": 882854,
+      "screens": 302
     },
     {
       "rank": 9,
-      "title": "스파이더맨: 브랜드 뉴 데이",
-      "open": "2026-07-29",
+      "title": "레지던트 이블: 0번째 밤",
+      "open": "2026-09-17",
       "share": 1.0,
-      "audience": 2362,
-      "total": 9036856,
-      "screens": 167
+      "audience": 2126,
+      "total": 200466,
+      "screens": 162
     },
     {
       "rank": 10,
-      "title": "아버지의 집밥",
-      "open": "2026-09-09",
-      "share": 0.4,
-      "audience": 991,
-      "total": 14255,
-      "screens": 10
+      "title": "어벤져스: 엔드게임 앙코르",
+      "open": "2026-09-23",
+      "share": 0.8,
+      "audience": 1477,
+      "total": 122968,
+      "screens": 47
     }
   ]
 }
