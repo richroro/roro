@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T00:41:50.514538+09:00",
+  "updatedAt": "2026-10-03T05:37:45.802291+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51092.02,
-      "change": 165.46,
-      "changePercent": 0.32,
+      "price": 51176.96,
+      "change": 250.4,
+      "changePercent": 0.49,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27175.29,
-      "change": 303.69,
-      "changePercent": 1.13,
+      "price": 27190.86,
+      "change": 319.27,
+      "changePercent": 1.19,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1345.98,
-      "change": -13.86,
-      "changePercent": -1.02,
+      "price": 1343.43,
+      "change": -16.41,
+      "changePercent": -1.21,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 331.98,
-      "change": 1.66,
-      "changePercent": 0.5,
+      "price": 333.69,
+      "change": 3.37,
+      "changePercent": 1.02,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 373.14,
-      "change": 19.03,
-      "changePercent": 5.37,
+      "price": 370.59,
+      "change": 16.48,
+      "changePercent": 4.65,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 235.06,
-      "change": 4.2,
-      "changePercent": 1.82,
+      "price": 233.95,
+      "change": 3.09,
+      "changePercent": 1.34,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "최악 9월 끝 10월부터 랠리?…AI에이전트 시대 투자 방향은?[월가 백브리핑]",
+      "link": "https://www.hankyung.com/article/202610031364i",
+      "pubDate": "Sat, 03 Oct 2026 02:12:41 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "엔비디아와 월가, GPU 담보가치에 기싸움[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202610031370i",
+      "pubDate": "Sat, 03 Oct 2026 01:44:24 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "美 9월 '비농업 고용 쇼크'…추가 금리인상 제동 걸리나",
       "link": "https://www.hankyung.com/article/2026100213271",
@@ -157,18 +169,6 @@
       "title": "기업 지배구조의 신규 리스크…오너의 이혼 [화우의 가사분쟁 솔루션]",
       "link": "https://www.hankyung.com/article/202610029426i",
       "pubDate": "Fri, 02 Oct 2026 20:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'AI 해킹'에 줄줄이 뚫렸다…신한·국민·하나銀 개인정보 유출",
-      "link": "https://www.hankyung.com/article/2026100212011",
-      "pubDate": "Fri, 02 Oct 2026 19:39:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"미국인들이 이렇게 좋아할 줄이야\"…15조 잭팟 터진 K뷰티",
-      "link": "https://www.hankyung.com/article/2026100211377",
-      "pubDate": "Fri, 02 Oct 2026 19:19:09 +0900",
       "source": "한국경제"
     },
     {
