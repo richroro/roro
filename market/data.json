@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T15:20:44.820162+09:00",
+  "updatedAt": "2026-10-03T21:25:39.896589+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,42 @@
   ],
   "news": [
     {
+      "title": "요즘 사람들이 제일 많이 찾는 카드 따로 있었다…1위 봤더니",
+      "link": "https://www.hankyung.com/article/2026100319487",
+      "pubDate": "Sat, 03 Oct 2026 21:12:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "은행·저축은행·캐피탈까지 뚫리자…금융당국, CEO 긴급 소집",
+      "link": "https://www.hankyung.com/article/2026100319347",
+      "pubDate": "Sat, 03 Oct 2026 20:17:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"560만원 준다고요?\"…결혼 앞둔 예비부부 몰려든 곳이 [류은혁의 유통기한]",
+      "link": "https://www.hankyung.com/article/202610021279i",
+      "pubDate": "Sat, 03 Oct 2026 20:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "금융권 해킹 '도미노'…예가람저축은행도 고객정보 4만명 유출",
+      "link": "https://www.hankyung.com/article/2026100319047",
+      "pubDate": "Sat, 03 Oct 2026 19:35:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "모기 물릴 걱정 없겠네…133만원 퇴치기 등장에 '난리'",
+      "link": "https://www.hankyung.com/article/2026100318187",
+      "pubDate": "Sat, 03 Oct 2026 16:59:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'암살자(들)' 300억대 투자에 외부개입?…산은·기업은행 입 열었다",
+      "link": "https://www.hankyung.com/article/2026100317647",
+      "pubDate": "Sat, 03 Oct 2026 15:32:09 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "100세 시대, 은퇴설계의 질문이 달라져야 한다",
       "link": "https://www.hankyung.com/article/202609280082i",
       "pubDate": "Sat, 03 Oct 2026 14:00:05 +0900",
@@ -136,40 +172,34 @@
       "source": "한국경제"
     },
     {
-      "title": "돼지는 적자 닭은 방어…원스식품 실적 바닥 통과하나",
-      "link": "https://www.hankyung.com/article/202609120339i",
-      "pubDate": "Sat, 03 Oct 2026 09:00:06 +0900",
-      "source": "한국경제"
+      "title": "'해킹피해' 2금융권 확산…금융당국 투톱, 내일 全업권 긴급소집(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261003047151002",
+      "pubDate": "Sat, 3 Oct 2026 20:40:26 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"20주째 내렸다는데 고작 0.4원\"…서울 휘발유 여전히 1900원",
-      "link": "https://www.hankyung.com/article/2026100314707",
-      "pubDate": "Sat, 03 Oct 2026 07:33:20 +0900",
-      "source": "한국경제"
+      "title": "당국, '해킹피해' 2금융권 확산에 내일 全업권 긴급소집",
+      "link": "https://www.yna.co.kr/view/AKR20261003047100002",
+      "pubDate": "Sat, 3 Oct 2026 20:07:06 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"계좌 안 보여요\"…대형 증권사 전산사고에 피해자만 2만명",
-      "link": "https://www.hankyung.com/article/2026100314527",
-      "pubDate": "Sat, 03 Oct 2026 07:10:37 +0900",
-      "source": "한국경제"
+      "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261003038151002",
+      "pubDate": "Sat, 3 Oct 2026 17:19:32 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"나흘간 2900명\"…뉴욕 뒤흔든 'K뷰티 자판기' 정체 [장서우의 하입:hype]",
-      "link": "https://www.hankyung.com/article/202610021316i",
-      "pubDate": "Sat, 03 Oct 2026 07:00:07 +0900",
-      "source": "한국경제"
+      "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261003035051002",
+      "pubDate": "Sat, 3 Oct 2026 16:36:35 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "돈 빌려주고 월급에서 까달라던 직원…퇴직 날 '뒤통수' [사장님 고충백서]",
-      "link": "https://www.hankyung.com/article/202610021347i",
-      "pubDate": "Sat, 03 Oct 2026 07:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "日총리도 감탄…명동 빌딩 팔고 한옥 지은 60대의 15년 '땀방울' [권용훈의 직업불만족(族)]",
-      "link": "https://www.hankyung.com/article/202610029307i",
-      "pubDate": "Sat, 03 Oct 2026 06:00:10 +0900",
-      "source": "한국경제"
+      "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출",
+      "link": "https://www.yna.co.kr/view/AKR20261003038100002",
+      "pubDate": "Sat, 3 Oct 2026 16:27:10 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정",
@@ -199,36 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
       "link": "https://www.yna.co.kr/view/AKR20261003022900011",
       "pubDate": "Sat, 3 Oct 2026 10:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"기업 유치, 보조금 지원 벗어나 산업생태계 형성 지원해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261003023400063",
-      "pubDate": "Sat, 3 Oct 2026 10:27:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[다음주 경제] 경제부처 국정감사 개막…은행권 해킹·세제 개편 등 쟁점",
-      "link": "https://www.yna.co.kr/view/AKR20261003015700002",
-      "pubDate": "Sat, 3 Oct 2026 09:20:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "전남광주, 투자·펀드 기능 한데 묶는다…투자 기관 설립 추진",
-      "link": "https://www.yna.co.kr/view/AKR20261002064300054",
-      "pubDate": "Sat, 3 Oct 2026 09:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[머니플로우] 금리 고공행진에 CD·채권 관련 ETF 인기 '쑥'",
-      "link": "https://www.yna.co.kr/view/AKR20261002136000008",
-      "pubDate": "Sat, 3 Oct 2026 08:00:06 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국내 기름값 20주째 하락…휘발유·경유 1천800원대 유지",
-      "link": "https://www.yna.co.kr/view/AKR20261002168300003",
-      "pubDate": "Sat, 3 Oct 2026 07:01:01 +0900",
       "source": "연합뉴스"
     }
   ]
