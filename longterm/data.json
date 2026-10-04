@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-03T23:45:58.856803+09:00",
+ "updatedAt": "2026-10-04T09:41:24.220565+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2078,7 +2078,7 @@
     "forwardPer": 34.82,
     "pbr": 45.34,
     "psr": 10.43,
-    "peg": 2.64,
+    "peg": 2.67,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 4869931925504,
@@ -2231,11 +2231,11 @@
     "position": 82.3
    },
    "valuation": {
-    "per": 28.58,
+    "per": 28.82,
     "forwardPer": 21.89,
     "pbr": 8.69,
     "psr": 11.58,
-    "peg": 1.67,
+    "peg": 1.68,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3842942959616,
@@ -2392,7 +2392,7 @@
     "forwardPer": 22.79,
     "pbr": 6.75,
     "psr": 9.42,
-    "peg": 1.21,
+    "peg": 1.23,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4200982642688,
@@ -2512,11 +2512,11 @@
     "position": 60.9
    },
    "valuation": {
-    "per": 19.96,
+    "per": 20.23,
     "forwardPer": 24.01,
     "pbr": 4.92,
     "psr": 3.5,
-    "peg": 1.47,
+    "peg": 1.49,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2712973606912,
@@ -2622,7 +2622,7 @@
     "forwardPer": 14.91,
     "pbr": 24.67,
     "psr": 18.65,
-    "peg": 0.28,
+    "peg": 0.29,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 5649190617088,
@@ -2885,7 +2885,7 @@
     "forwardPer": 21.09,
     "pbr": 7.26,
     "psr": 6.3,
-    "peg": 2.71,
+    "peg": 2.68,
     "roe": 25.74,
     "margin": 21.48,
     "marketCap": 617006301184,
@@ -3042,10 +3042,10 @@
     "forwardPer": 19.58,
     "pbr": 6.31,
     "psr": 3.87,
-    "peg": 3.68,
+    "peg": 3.71,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 336833609728,
+    "marketCap": 336578478080,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.51
@@ -3195,11 +3195,11 @@
     "position": 74.3
    },
    "valuation": {
-    "per": 25.88,
+    "per": 25.72,
     "forwardPer": 24.29,
     "pbr": 10.2,
     "psr": 7.35,
-    "peg": 3.91,
+    "peg": 3.89,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 368513318912,
@@ -3664,7 +3664,7 @@
     "position": 72.8
    },
    "valuation": {
-    "per": 30.64,
+    "per": 30.67,
     "forwardPer": 24.04,
     "pbr": 19.11,
     "psr": 15.22,
@@ -3822,10 +3822,10 @@
    },
    "valuation": {
     "per": 14.25,
-    "forwardPer": 13.3,
+    "forwardPer": 13.29,
     "pbr": 2.5,
     "psr": 4.74,
-    "peg": 1.55,
+    "peg": 1.54,
     "roe": 17.79,
     "margin": 34.92,
     "marketCap": 883527974912,
@@ -3982,7 +3982,7 @@
     "forwardPer": 14.51,
     "pbr": 2.6,
     "psr": 1.87,
-    "peg": 1.44,
+    "peg": 1.45,
     "roe": 12.58,
     "margin": 9.07,
     "marketCap": 674394669056,
@@ -6256,6 +6256,30 @@
  ],
  "news": [
   {
+   "title": "외국인, 한달 사이 코스피 20조 ‘팔자’… 삼성전자·SK하이닉스 순매도 1위",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MVRGKNJRGI4GEZLCMM3DKMZRGM/",
+   "pubDate": "Sat, 03 Oct 2026 23:52:45 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "3분기 ETF 수익률 1~3위는 ‘美 달러 곱버스’",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MIZDMNBTMFQTCOBYMIZWMNZXHA/",
+   "pubDate": "Sat, 03 Oct 2026 22:06:17 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "달라진 서학개미 장바구니… 美 초단기채·배당 ETF에 뭉칫돈",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/GBRDCYZVME4DKMDFGMZWIMJVGQ/",
+   "pubDate": "Sat, 03 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "‘상폐 위기’ 케이이엠텍, 기댈 건 대주주 수혈 뿐인데… 그 대주주는 배터리 기술 유출 혐의",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MVSTQZTFG5QWEYRSGYZTGNZTMQ/",
+   "pubDate": "Sat, 03 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“평생 월급 500만원, 꿈이 아닙니다”…연금박사가 공개한 노후 설계법",
    "link": "https://www.mk.co.kr/news/stock/12167807",
    "pubDate": "Sat, 03 Oct 2026 17:14:47 +09:00",
@@ -6373,30 +6397,6 @@
    "title": "“삼성전자 현저한 저평가 상태…목표주가 46만원 유지” 증권사 전망",
    "link": "https://www.mk.co.kr/news/stock/12166783",
    "pubDate": "Fri, 02 Oct 2026 09:00:14 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "고금리에도 미국 경제가 버티는 충격적인 이유",
-   "link": "https://www.mk.co.kr/news/economy/12166743",
-   "pubDate": "Fri, 02 Oct 2026 08:17:46 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“NAVER, 우려는 이미 주가에 반영됐다…지금이 매수 타이밍?”",
-   "link": "https://www.mk.co.kr/news/stock/12166742",
-   "pubDate": "Fri, 02 Oct 2026 08:15:36 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“이재용·최태원이 개미 살리러 온다”…300조 실적으로 박스권 뚫나",
-   "link": "https://www.mk.co.kr/news/stock/12166681",
-   "pubDate": "Fri, 02 Oct 2026 05:51:23 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“긴축의 시대 투자로 정면돌파” … 서울머니쇼+에 초대합니다",
-   "link": "https://www.mk.co.kr/news/economy/12166434",
-   "pubDate": "Fri, 02 Oct 2026 05:00:00 +09:00",
    "source": "매일경제 증권"
   }
  ]
