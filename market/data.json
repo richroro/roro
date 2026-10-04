@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T22:07:42.825834+09:00",
+  "updatedAt": "2026-10-05T03:04:44.249900+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51176.96,
-      "change": 250.4,
+      "change": 250.36,
       "changePercent": 0.49,
       "currency": "USD"
     },
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 27190.86,
-      "change": 319.27,
+      "change": 319.26,
       "changePercent": 1.19,
       "currency": "USD"
     }
@@ -148,7 +148,7 @@
       "source": "한국경제"
     },
     {
-      "title": "16년 만에 '최악 부진' 현대차…7천만원대 GV80 꺼낸다",
+      "title": "16년 만에 '최악 부진' 현대차…7천만원대 GV80 내놓는다",
       "link": "https://www.hankyung.com/article/2026100426291",
       "pubDate": "Sun, 04 Oct 2026 18:16:07 +0900",
       "source": "한국경제"
@@ -170,6 +170,12 @@
       "link": "https://www.hankyung.com/article/2026100426411",
       "pubDate": "Sun, 04 Oct 2026 18:02:50 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "시총 기준 상폐요건 강화에 법원 제동…\"비례 원칙에 어긋나\"",
+      "link": "https://www.yna.co.kr/view/AKR20261004043100008",
+      "pubDate": "Sun, 4 Oct 2026 22:31:22 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "\"차명계좌 적발 NH농협·국민·농축협·신한銀 순으로 많아\"(종합)",
@@ -223,12 +229,6 @@
       "title": "이억원 \"AI활용 해킹 가능성…금융권 최고수준 경각심 가져야\"(종합)",
       "link": "https://www.yna.co.kr/view/AKR20261004024951002",
       "pubDate": "Sun, 4 Oct 2026 15:00:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261004023900011",
-      "pubDate": "Sun, 4 Oct 2026 15:00:00 +0900",
       "source": "연합뉴스"
     }
   ]
