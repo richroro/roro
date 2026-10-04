@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T06:05:52.153150+09:00",
+  "updatedAt": "2026-10-04T09:28:37.927031+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,48 @@
   ],
   "news": [
     {
+      "title": "[단독] 美 AI 인프라 투자 올라탄 TMC…광·전력케이블로 매출 5000억 겨냥",
+      "link": "https://www.hankyung.com/article/202610042164i",
+      "pubDate": "Sun, 04 Oct 2026 09:00:13 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한국인 넘치더니 \"이젠 안 가요\"…사이판에 무슨 일이",
+      "link": "https://www.hankyung.com/article/202610031986H",
+      "pubDate": "Sun, 04 Oct 2026 09:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"반도체만 믿다간 큰일\" 직장인들 돌변하더니…'대이동' [김연지의 연금빌드업]",
+      "link": "https://www.hankyung.com/article/2026100204986",
+      "pubDate": "Sun, 04 Oct 2026 09:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'컵밥'으로 한 끼 때웠는데…\"사 먹기 무섭네\" 화들짝",
+      "link": "https://www.hankyung.com/article/2026100421717",
+      "pubDate": "Sun, 04 Oct 2026 08:35:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"화장품 90% 싸게 팝니다\"…올리브영 위협하는 '이곳' [장서우의 하입:hype]",
+      "link": "https://www.hankyung.com/article/202610031362i",
+      "pubDate": "Sun, 04 Oct 2026 08:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'사과빵'으로 대박 나더니…3040에 인기 폭발한 빵집 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610020192i",
+      "pubDate": "Sun, 04 Oct 2026 06:00:12 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"한국 안 가도 되겠네\"…中 청년들 '우르르' 몰려든 동네 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610031968i",
+      "pubDate": "Sun, 04 Oct 2026 05:57:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "요즘 사람들이 제일 많이 찾는 카드 따로 있었다…1위 봤더니",
       "link": "https://www.hankyung.com/article/2026100319487",
       "pubDate": "Sat, 03 Oct 2026 21:12:46 +0900",
@@ -130,105 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "금융권 해킹 '도미노'…예가람저축은행도 고객정보 4만명 유출",
-      "link": "https://www.hankyung.com/article/2026100319047",
-      "pubDate": "Sat, 03 Oct 2026 19:35:46 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "모기 물릴 걱정 없겠네…133만원 퇴치기 등장에 '난리'",
-      "link": "https://www.hankyung.com/article/2026100318187",
-      "pubDate": "Sat, 03 Oct 2026 16:59:21 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'암살자(들)' 300억대 투자에 외부개입?…산은·기업은행 입 열었다",
-      "link": "https://www.hankyung.com/article/2026100317647",
-      "pubDate": "Sat, 03 Oct 2026 15:32:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "100세 시대, 은퇴설계의 질문이 달라져야 한다",
-      "link": "https://www.hankyung.com/article/202609280082i",
-      "pubDate": "Sat, 03 Oct 2026 14:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"우리 또 만났네요\" 2500만 터졌다…고윤정·허남준에 난리 [김소연의 얼굴전략]",
-      "link": "https://www.hankyung.com/article/202610020253g",
-      "pubDate": "Sat, 03 Oct 2026 13:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"화장품·양주 다 제쳤다\"…외국인들 공항서 싹쓸이한 '이것'",
-      "link": "https://www.hankyung.com/article/2026100315947",
-      "pubDate": "Sat, 03 Oct 2026 12:07:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI 붐과 한국경제, 이번에는 다를까?",
-      "link": "https://www.hankyung.com/article/202609220337i",
-      "pubDate": "Sat, 03 Oct 2026 12:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[마켓인사이트] 삼전 실적발표 앞둔 韓증시…'7천피' 지켜낼까",
-      "link": "https://www.yna.co.kr/view/AKR20261003023000008",
-      "pubDate": "Sun, 4 Oct 2026 06:00:05 +0900",
+      "title": "시흥에 투자하는 기업에 최대 6억원 보조금…공격적 투자유치",
+      "link": "https://www.yna.co.kr/view/AKR20261002138600061",
+      "pubDate": "Sun, 4 Oct 2026 09:09:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "횡령·부당대출 등…NH농협은행 5년여간 426명 징계",
-      "link": "https://www.yna.co.kr/view/AKR20261002180700002",
-      "pubDate": "Sun, 4 Oct 2026 05:59:01 +0900",
+      "title": "적자회사 주식으로 상속세 84억 납부?…\"당국 불허 적법\"",
+      "link": "https://www.yna.co.kr/view/AKR20261003027400004",
+      "pubDate": "Sun, 4 Oct 2026 09:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"가상자산거래소 대주주 의결권 제한도 위헌 소지\"",
-      "link": "https://www.yna.co.kr/view/AKR20261003040700002",
-      "pubDate": "Sun, 4 Oct 2026 05:57:00 +0900",
+      "title": "신한은행 \"기계·부품·소재 기업 금융지원 확대\"",
+      "link": "https://www.yna.co.kr/view/AKR20261003016300002",
+      "pubDate": "Sun, 4 Oct 2026 09:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"차명계좌 적발 NH농협·국민·농축협·신한銀 순으로 많아\"",
-      "link": "https://www.yna.co.kr/view/AKR20261003049200002",
-      "pubDate": "Sun, 4 Oct 2026 05:55:12 +0900",
+      "title": "\"국내 펫푸드 시장 2.5조 규모…수입산 점유율 통계는 '없음'\"",
+      "link": "https://www.yna.co.kr/view/AKR20261004008400030",
+      "pubDate": "Sun, 4 Oct 2026 08:32:40 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "트럼프 압박까지…대미투자, 알래스카 LNG 암초에 산 넘어 산",
-      "link": "https://www.yna.co.kr/view/AKR20260923183200003",
-      "pubDate": "Sun, 4 Oct 2026 05:55:01 +0900",
+      "title": "5년간 국내 어선 사고 사망·실종자 478명…지난해만 110명",
+      "link": "https://www.yna.co.kr/view/AKR20261002068500051",
+      "pubDate": "Sun, 4 Oct 2026 08:01:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "4대금융 3분기도 최대실적 전망…차기 은행장 선임 영향은",
-      "link": "https://www.yna.co.kr/view/AKR20261003032300002",
-      "pubDate": "Sun, 4 Oct 2026 05:53:00 +0900",
+      "title": "싱크홀 예방 지반탐사 지원, 전국 수요 절반도 못 채워",
+      "link": "https://www.yna.co.kr/view/AKR20261002157900003",
+      "pubDate": "Sun, 4 Oct 2026 07:11:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "iM뱅크·바로저축銀 올해 악성코드 감염…고객정보는 유출 안돼",
-      "link": "https://www.yna.co.kr/view/AKR20261003043300002",
-      "pubDate": "Sun, 4 Oct 2026 05:51:00 +0900",
+      "title": "가공식품 26개 중 24개 1년 새 가격 상승…국·탕·컵밥 올라",
+      "link": "https://www.yna.co.kr/view/AKR20261002175300030",
+      "pubDate": "Sun, 4 Oct 2026 07:10:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "합병요건 상습 위반…아시아나·대한항공, 공정위 과태료 톱3",
-      "link": "https://www.yna.co.kr/view/AKR20261002184100002",
-      "pubDate": "Sun, 4 Oct 2026 05:49:01 +0900",
+      "title": "민간아파트 부정청약 적발 5년간 1천699건…83%가 위장전입",
+      "link": "https://www.yna.co.kr/view/AKR20261004004000003",
+      "pubDate": "Sun, 4 Oct 2026 07:03:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "9월 全금융권 가계대출 올해 첫 감소…은행 대출여력 확대되나",
-      "link": "https://www.yna.co.kr/view/AKR20261003050300002",
-      "pubDate": "Sun, 4 Oct 2026 05:47:00 +0900",
+      "title": "'세계경주포럼' 8∼9일 개최…경주를 '문화의 다보스'로 키운다",
+      "link": "https://www.yna.co.kr/view/AKR20261001144900053",
+      "pubDate": "Sun, 4 Oct 2026 07:02:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "법에 없는 'NEXT원칙'…재경위 \"미래기금 선정 기준 보완해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261003047300002",
-      "pubDate": "Sun, 4 Oct 2026 05:45:04 +0900",
+      "title": "GV80 하이브리드, 7천만원대 중후반에 나온다…흥행에 방점",
+      "link": "https://www.yna.co.kr/view/AKR20261002150200003",
+      "pubDate": "Sun, 4 Oct 2026 07:01:00 +0900",
       "source": "연합뉴스"
     }
   ]
