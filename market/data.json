@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T15:50:29.029489+09:00",
+  "updatedAt": "2026-10-06T00:51:36.341661+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51176.96,
-      "change": 250.36,
-      "changePercent": 0.49,
+      "price": 51165.8,
+      "change": -11.16,
+      "changePercent": -0.02,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27190.86,
-      "change": 319.26,
-      "changePercent": 1.19,
+      "price": 27399.1,
+      "change": 208.23,
+      "changePercent": 0.77,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1344.66,
-      "change": 2.15,
-      "changePercent": 0.16,
+      "price": 1341.72,
+      "change": -0.79,
+      "changePercent": -0.06,
       "currency": "KRW"
     }
   ],
@@ -88,88 +88,136 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 333.69,
-      "change": 3.37,
-      "changePercent": 1.02,
+      "price": 333.63,
+      "change": -0.06,
+      "changePercent": -0.02,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 370.59,
-      "change": 16.48,
-      "changePercent": 4.65,
+      "price": 377.42,
+      "change": 6.83,
+      "changePercent": 1.84,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 233.95,
-      "change": 3.09,
-      "changePercent": 1.34,
+      "price": 236.81,
+      "change": 2.86,
+      "changePercent": 1.22,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"닭값 폭락에도 치킨값 그대로\"…李대통령 한마디에 업계 '술렁'",
-      "link": "https://www.hankyung.com/article/2026100534527",
-      "pubDate": "Mon, 05 Oct 2026 14:46:45 +0900",
+      "title": "머스크 '테라팹'에 TSMC도 참여?…인텔주가 하락",
+      "link": "https://www.hankyung.com/article/202610053989i",
+      "pubDate": "Tue, 06 Oct 2026 00:27:44 +0900",
       "source": "한국경제"
     },
     {
-      "title": "추석 지나면 싸진다더니…이 버섯 1㎏에 171만원",
-      "link": "https://www.hankyung.com/article/2026100534377",
-      "pubDate": "Mon, 05 Oct 2026 14:13:02 +0900",
+      "title": "美 서비스 물가 4년 만에 최고치…고용도 다시 확장세",
+      "link": "https://www.hankyung.com/article/202610053994i",
+      "pubDate": "Mon, 05 Oct 2026 23:40:10 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"5살도 안 됐는데 억대 자산가?\"…미성년 통장에 쌓인 10조",
-      "link": "https://www.hankyung.com/article/202610053420i",
-      "pubDate": "Mon, 05 Oct 2026 13:30:32 +0900",
+      "title": "\"AI반도체주 아직도 싸다?\"…그래도 불안하면 이 종목[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202610053986i",
+      "pubDate": "Mon, 05 Oct 2026 23:27:59 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"곧 합의 안 하면 두 배\"…트럼프 압박에 한국 '15% 관세' 비상",
-      "link": "https://www.hankyung.com/article/202610053408i",
-      "pubDate": "Mon, 05 Oct 2026 13:09:24 +0900",
+      "title": "중동 원유수출 전쟁전수준 회복에도 유가 안떨어지는 이유는?",
+      "link": "https://www.hankyung.com/article/202610053981i",
+      "pubDate": "Mon, 05 Oct 2026 23:09:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"한국이 훨씬 싸잖아요\" 예약 폭증…외국인들 '풀코스' 즐긴다 [박수림의 요즘 여기]",
-      "link": "https://www.hankyung.com/article/202610020277g",
-      "pubDate": "Mon, 05 Oct 2026 13:00:07 +0900",
+      "title": "LG전자 '美 AI센터 냉각설비' 5조 계약 따냈다",
+      "link": "https://www.hankyung.com/article/2026100539141",
+      "pubDate": "Mon, 05 Oct 2026 22:13:15 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"메가·컴포즈 점주들 돈 많이 벌었겠네\"…실상은 달랐다",
-      "link": "https://www.hankyung.com/article/202609305185g",
-      "pubDate": "Mon, 05 Oct 2026 12:37:49 +0900",
+      "title": "美, 데이터센터 반대여론에도 건설 계속…2027년 90GW 전망",
+      "link": "https://www.hankyung.com/article/202610053953i",
+      "pubDate": "Mon, 05 Oct 2026 22:05:32 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"부르는 게 값\"…반년 새 235% 폭등한 '이 기름' 알고 보니",
-      "link": "https://www.hankyung.com/article/202610042527i",
-      "pubDate": "Mon, 05 Oct 2026 12:00:01 +0900",
+      "title": "폭스콘, AI수요 힙입어 3분기 매출 47% 급증",
+      "link": "https://www.hankyung.com/article/202610053926i",
+      "pubDate": "Mon, 05 Oct 2026 20:29:08 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"마세라티가 中 기술 쓴다고?\"…판매 70% 급감에 꺼낸 카드 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610042516i",
-      "pubDate": "Mon, 05 Oct 2026 10:42:01 +0900",
+      "title": "'추울 땐 역시 롱패딩'이라더니…\"이젠 안 입을래요\" 돌변 [박수림의 트렌딧(Trend:it)]",
+      "link": "https://www.hankyung.com/article/202610029783g",
+      "pubDate": "Mon, 05 Oct 2026 19:57:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"아직 미성년자인데 통장에 10억?\"…52명이나 있었다",
-      "link": "https://www.hankyung.com/article/2026100529637",
-      "pubDate": "Mon, 05 Oct 2026 07:14:14 +0900",
+      "title": "프랑스 채무에 유로화 17개월만에 최저치 급락…살까 말까",
+      "link": "https://www.hankyung.com/article/202610053873i",
+      "pubDate": "Mon, 05 Oct 2026 19:19:46 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 세계 1위 보일러 설계사 품은 미코…다음 승부처는 美 AI 전력시장",
-      "link": "https://www.hankyung.com/article/202610020790i",
-      "pubDate": "Mon, 05 Oct 2026 07:00:07 +0900",
+      "title": "佛 재정 불안, 유럽 전역 번지나…유로화 17개월來 최저",
+      "link": "https://www.hankyung.com/article/2026100537641",
+      "pubDate": "Mon, 05 Oct 2026 18:30:19 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "이형일, 하준경 등과 현안간담회…사회정책·초과세수 활용 논의",
+      "link": "https://www.yna.co.kr/view/AKR20261005057300002",
+      "pubDate": "Mon, 5 Oct 2026 20:14:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"농식품부 고위공직자 모친 소유 농지 3필지 휴경\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261005050051030",
+      "pubDate": "Mon, 5 Oct 2026 19:27:26 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "개인정보 유출 공포 전방위로…금융 이어 한전·대학도 비상",
+      "link": "https://www.yna.co.kr/view/AKR20261005052800017",
+      "pubDate": "Mon, 5 Oct 2026 19:23:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"농식품부 고위공직자 모친 소유 농지 3필지 미경작 적발\"",
+      "link": "https://www.yna.co.kr/view/AKR20261005050000030",
+      "pubDate": "Mon, 5 Oct 2026 18:27:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "온투업까지 손 뻗은 해킹…'보안 기본기'가 피해 여부 갈랐다(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261004042751002",
+      "pubDate": "Mon, 5 Oct 2026 18:16:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "리사 수 AMD 회장 7개월 만에 방한…'AI 동맹' 넓히나(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261005043951017",
+      "pubDate": "Mon, 5 Oct 2026 17:20:46 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "유로화, 17개월 만에 최저…프랑스 등 재정 불안에 채권시장 흔들",
+      "link": "https://www.yna.co.kr/view/AKR20261005046100085",
+      "pubDate": "Mon, 5 Oct 2026 17:11:43 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "리사 수 AMD 회장 7개월 만에 방한…7일 용산서 '게이머데이'",
+      "link": "https://www.yna.co.kr/view/AKR20261005043900017",
+      "pubDate": "Mon, 5 Oct 2026 16:20:23 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "[동포의 창] 홍콩 '중추절 K-페스티벌 주간'에 100만 명 몰려",
@@ -181,54 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
       "link": "https://www.yna.co.kr/view/AKR20261005036900011",
       "pubDate": "Mon, 5 Oct 2026 15:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융권 잇단 해킹사태에 증권업계도 '긴장'…\"휴일도 비상근무\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261005029251008",
-      "pubDate": "Mon, 5 Oct 2026 14:36:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "문체부·행안부, 지역관광 경진대회에 61억원 재정 인센티브",
-      "link": "https://www.yna.co.kr/view/AKR20261005032200030",
-      "pubDate": "Mon, 5 Oct 2026 12:41:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융권 잇단 해킹사태에 증권업계도 '긴장'…\"휴일도 지속 점검\"",
-      "link": "https://www.yna.co.kr/view/AKR20261005029200008",
-      "pubDate": "Mon, 5 Oct 2026 12:11:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[부고] 김영수(YTN 시사제작팀장)씨 장인상",
-      "link": "https://www.yna.co.kr/view/AKR20261005030500008",
-      "pubDate": "Mon, 5 Oct 2026 12:10:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "라이다센서 등 메가프로젝트 관련 신규상품 명칭 72개 공개",
-      "link": "https://www.yna.co.kr/view/AKR20261002137800063",
-      "pubDate": "Mon, 5 Oct 2026 12:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[가보니] DMZ 식물 10년간 모았다…'생태 보고'로 자란 자생식물원",
-      "link": "https://www.yna.co.kr/view/AKR20261004023400017",
-      "pubDate": "Mon, 5 Oct 2026 12:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'무사곤데 건강보험 할인되나요'…유리한 조건 회사가 알려준다",
-      "link": "https://www.yna.co.kr/view/AKR20261004020600002",
-      "pubDate": "Mon, 5 Oct 2026 12:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "3분기 부가세 26일까지 신고·납부…호우·홈플 피해사업자 연장",
-      "link": "https://www.yna.co.kr/view/AKR20261004043700002",
-      "pubDate": "Mon, 5 Oct 2026 12:00:01 +0900",
       "source": "연합뉴스"
     }
   ]
