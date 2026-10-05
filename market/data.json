@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T00:51:36.341661+09:00",
+  "updatedAt": "2026-10-06T07:31:03.716288+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51165.8,
-      "change": -11.16,
-      "changePercent": -0.02,
+      "price": 51267.9,
+      "change": 90.94,
+      "changePercent": 0.18,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27399.1,
-      "change": 208.23,
-      "changePercent": 0.77,
+      "price": 27477.31,
+      "change": 286.45,
+      "changePercent": 1.05,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1341.72,
-      "change": -0.79,
-      "changePercent": -0.06,
+      "price": 1342.64,
+      "change": 0.13,
+      "changePercent": 0.01,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,53 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 333.63,
-      "change": -0.06,
-      "changePercent": -0.02,
+      "price": 332.89,
+      "change": -0.8,
+      "changePercent": -0.24,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 377.42,
-      "change": 6.83,
-      "changePercent": 1.84,
+      "price": 378.73,
+      "change": 8.14,
+      "changePercent": 2.2,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 236.81,
-      "change": 2.86,
-      "changePercent": 1.22,
+      "price": 238.9,
+      "change": 4.95,
+      "changePercent": 2.12,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"금융권 슈퍼앱 경쟁 끝난다…슈퍼 에이전트가 대세\"",
+      "link": "https://www.hankyung.com/article/202610020746i",
+      "pubDate": "Tue, 06 Oct 2026 07:01:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"월급 모아 집부터 사야지\" 했는데…전문가가 말린 이유 [인터뷰+]",
+      "link": "https://www.hankyung.com/article/2026100298566",
+      "pubDate": "Tue, 06 Oct 2026 06:30:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"김치 한 통이 3만원?\" 잘 팔린다더니…'김치 전쟁' 불붙었다 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610053920i",
+      "pubDate": "Tue, 06 Oct 2026 06:00:06 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 증시,국채금리 올라도 나스닥 사상 최고…엔비디아도 최고치 돌파",
+      "link": "https://www.hankyung.com/article/202610064008i",
+      "pubDate": "Tue, 06 Oct 2026 00:55:37 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "머스크 '테라팹'에 TSMC도 참여?…인텔주가 하락",
       "link": "https://www.hankyung.com/article/202610053989i",
@@ -148,87 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "폭스콘, AI수요 힙입어 3분기 매출 47% 급증",
-      "link": "https://www.hankyung.com/article/202610053926i",
-      "pubDate": "Mon, 05 Oct 2026 20:29:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'추울 땐 역시 롱패딩'이라더니…\"이젠 안 입을래요\" 돌변 [박수림의 트렌딧(Trend:it)]",
-      "link": "https://www.hankyung.com/article/202610029783g",
-      "pubDate": "Mon, 05 Oct 2026 19:57:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "프랑스 채무에 유로화 17개월만에 최저치 급락…살까 말까",
-      "link": "https://www.hankyung.com/article/202610053873i",
-      "pubDate": "Mon, 05 Oct 2026 19:19:46 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "佛 재정 불안, 유럽 전역 번지나…유로화 17개월來 최저",
-      "link": "https://www.hankyung.com/article/2026100537641",
-      "pubDate": "Mon, 05 Oct 2026 18:30:19 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이형일, 하준경 등과 현안간담회…사회정책·초과세수 활용 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261005057300002",
-      "pubDate": "Mon, 5 Oct 2026 20:14:08 +0900",
+      "title": "[우분투칼럼] '아프리카 속 유럽'…이중적 맥락과 비즈니스 통찰",
+      "link": "https://www.yna.co.kr/view/AKR20260908033900898",
+      "pubDate": "Tue, 6 Oct 2026 07:00:07 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"농식품부 고위공직자 모친 소유 농지 3필지 휴경\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261005050051030",
-      "pubDate": "Mon, 5 Oct 2026 19:27:26 +0900",
+      "title": "LH 공공임대 '1년 이상 빈집' 임대료 손실 5년간 1천670억원",
+      "link": "https://www.yna.co.kr/view/AKR20261005057600003",
+      "pubDate": "Tue, 6 Oct 2026 06:03:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "개인정보 유출 공포 전방위로…금융 이어 한전·대학도 비상",
-      "link": "https://www.yna.co.kr/view/AKR20261005052800017",
-      "pubDate": "Mon, 5 Oct 2026 19:23:42 +0900",
+      "title": "수도권은 집 부족…지방은 수요 부족해 공공주택 착공 연기",
+      "link": "https://www.yna.co.kr/view/AKR20261005048400003",
+      "pubDate": "Tue, 6 Oct 2026 06:01:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"농식품부 고위공직자 모친 소유 농지 3필지 미경작 적발\"",
-      "link": "https://www.yna.co.kr/view/AKR20261005050000030",
-      "pubDate": "Mon, 5 Oct 2026 18:27:40 +0900",
+      "title": "9월 외환보유액 4천405억6천만달러…넉 달 만에 감소",
+      "link": "https://www.yna.co.kr/view/AKR20261003017600002",
+      "pubDate": "Tue, 6 Oct 2026 06:00:10 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "온투업까지 손 뻗은 해킹…'보안 기본기'가 피해 여부 갈랐다(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261004042751002",
-      "pubDate": "Mon, 5 Oct 2026 18:16:37 +0900",
+      "title": "[게시판] 금감원, 취준생 대상 '청년금융특강' 제공",
+      "link": "https://www.yna.co.kr/view/AKR20261004042500002",
+      "pubDate": "Tue, 6 Oct 2026 06:00:09 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "리사 수 AMD 회장 7개월 만에 방한…'AI 동맹' 넓히나(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261005043951017",
-      "pubDate": "Mon, 5 Oct 2026 17:20:46 +0900",
+      "title": "한-사우디, 전기차·AI·방산 등 첨단산업 협력 강화",
+      "link": "https://www.yna.co.kr/view/AKR20261005039600003",
+      "pubDate": "Tue, 6 Oct 2026 06:00:08 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "유로화, 17개월 만에 최저…프랑스 등 재정 불안에 채권시장 흔들",
-      "link": "https://www.yna.co.kr/view/AKR20261005046100085",
-      "pubDate": "Mon, 5 Oct 2026 17:11:43 +0900",
+      "title": "롯데마트, 고물가 겨냥 언더웨어 7종 균일가 판매",
+      "link": "https://www.yna.co.kr/view/AKR20261005044500030",
+      "pubDate": "Tue, 6 Oct 2026 06:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "리사 수 AMD 회장 7개월 만에 방한…7일 용산서 '게이머데이'",
-      "link": "https://www.yna.co.kr/view/AKR20261005043900017",
-      "pubDate": "Mon, 5 Oct 2026 16:20:23 +0900",
+      "title": "롯데百 주류 바이어, 프랑스 생떼밀리옹 와인 기사 작위 수훈",
+      "link": "https://www.yna.co.kr/view/AKR20261005046400030",
+      "pubDate": "Tue, 6 Oct 2026 06:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[동포의 창] 홍콩 '중추절 K-페스티벌 주간'에 100만 명 몰려",
-      "link": "https://www.yna.co.kr/view/AKR20261005040000371",
-      "pubDate": "Mon, 5 Oct 2026 15:21:54 +0900",
+      "title": "유록스 프로모션서 4천만원 트럭 구매 지원금 당첨자 나와",
+      "link": "https://www.yna.co.kr/view/AKR20261005047800030",
+      "pubDate": "Tue, 6 Oct 2026 06:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261005036900011",
-      "pubDate": "Mon, 5 Oct 2026 15:00:00 +0900",
+      "title": "가상자산 거래소 장애인고용 '미달'…5년여간 부담금 13억",
+      "link": "https://www.yna.co.kr/view/AKR20261002184600002",
+      "pubDate": "Tue, 6 Oct 2026 05:59:01 +0900",
       "source": "연합뉴스"
     }
   ]
