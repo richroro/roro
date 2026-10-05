@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-05T00:25:10.452603+09:00",
+ "updatedAt": "2026-10-05T09:59:16.574551+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -405,8 +405,8 @@
    "fromHigh": -25.11,
    "week52": {
     "high": 1229.42,
-    "low": 630.99,
-    "position": 43.8
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": null,
@@ -482,26 +482,26 @@
    "group": "index",
    "tag": "일본",
    "currency": "JPY",
-   "price": 68309.46,
-   "change": -647.26,
-   "changePercent": -0.94,
+   "price": 69819.63,
+   "change": 1510.17,
+   "changePercent": 2.21,
    "returns": {
-    "1y": 30.33,
-    "3y": 121.36,
-    "5y": 136.42,
-    "10y": 273.1
+    "1y": 33.21,
+    "3y": 126.25,
+    "5y": 141.65,
+    "10y": 281.35
    },
    "cagr": {
-    "3y": 30.33,
-    "5y": 18.78,
-    "10y": 14.07
+    "3y": 31.28,
+    "5y": 19.3,
+    "10y": 14.32
    },
    "mdd10y": -21.57,
-   "fromHigh": -2.5,
+   "fromHigh": -0.35,
    "week52": {
     "high": 72831.73,
     "low": 46544.05,
-    "position": 82.8
+    "position": 88.5
    },
    "valuation": {},
    "dividendYield": null,
@@ -567,7 +567,7 @@
     66329.5,
     64362.0195,
     66753.7188,
-    68309.4609
+    69819.6328
    ],
    "months": 121
   },
@@ -2074,7 +2074,7 @@
     "position": 88.6
    },
    "valuation": {
-    "per": 38.31,
+    "per": 38.27,
     "forwardPer": 34.82,
     "pbr": 45.34,
     "psr": 10.43,
@@ -2084,7 +2084,7 @@
     "marketCap": 4869931925504,
     "beta": 1.08,
     "payout": 12.04,
-    "avgYield5y": 0.5
+    "avgYield5y": 0.47
    },
    "dividendYield": 0.32,
    "dividend": {
@@ -2231,7 +2231,7 @@
     "position": 82.3
    },
    "valuation": {
-    "per": 28.82,
+    "per": 28.83,
     "forwardPer": 21.89,
     "pbr": 8.69,
     "psr": 11.58,
@@ -2241,7 +2241,7 @@
     "marketCap": 3842942959616,
     "beta": 1.11,
     "payout": 19.83,
-    "avgYield5y": 0.79
+    "avgYield5y": 0.78
    },
    "dividendYield": 0.76,
    "dividend": {
@@ -2628,7 +2628,7 @@
     "marketCap": 5649190617088,
     "beta": 2.22,
     "payout": 3.54,
-    "avgYield5y": 0.05
+    "avgYield5y": 0.03
    },
    "dividendYield": 0.43,
    "dividend": {
@@ -2775,7 +2775,7 @@
     "position": 52.4
    },
    "valuation": {
-    "per": 12.64,
+    "per": 12.59,
     "forwardPer": 23.22,
     "pbr": 0.0,
     "psr": 2.8,
@@ -2890,8 +2890,8 @@
     "margin": 21.48,
     "marketCap": 617006301184,
     "beta": 0.23,
-    "payout": 60.79,
-    "avgYield5y": 2.74
+    "payout": 60.72,
+    "avgYield5y": 2.68
    },
    "dividendYield": 2.09,
    "dividend": {
@@ -3048,7 +3048,7 @@
     "marketCap": 336578478080,
     "beta": 0.38,
     "payout": 64.33,
-    "avgYield5y": 2.51
+    "avgYield5y": 2.49
    },
    "dividendYield": 3.0,
    "dividend": {
@@ -3205,7 +3205,7 @@
     "marketCap": 368513318912,
     "beta": 0.34,
     "payout": 62.46,
-    "avgYield5y": 2.85
+    "avgYield5y": 2.84
    },
    "dividendYield": 2.48,
    "dividend": {
@@ -3362,7 +3362,7 @@
     "marketCap": 171965743104,
     "beta": 0.36,
     "payout": 75.33,
-    "avgYield5y": 3.14
+    "avgYield5y": 3.02
    },
    "dividendYield": 4.7,
    "dividend": {
@@ -3517,7 +3517,7 @@
     "marketCap": 164095000576,
     "beta": 0.41,
     "payout": 59.71,
-    "avgYield5y": 2.26
+    "avgYield5y": 2.24
    },
    "dividendYield": 3.33,
    "dividend": {
@@ -3664,7 +3664,7 @@
     "position": 72.8
    },
    "valuation": {
-    "per": 30.67,
+    "per": 30.69,
     "forwardPer": 24.04,
     "pbr": 19.11,
     "psr": 15.22,
@@ -3821,7 +3821,7 @@
     "position": 61.0
    },
    "valuation": {
-    "per": 14.25,
+    "per": 14.24,
     "forwardPer": 13.29,
     "pbr": 2.5,
     "psr": 4.74,
@@ -3831,7 +3831,7 @@
     "marketCap": 883527974912,
     "beta": 0.97,
     "payout": 25.71,
-    "avgYield5y": 2.39
+    "avgYield5y": 2.25
    },
    "dividendYield": 1.99,
    "dividend": {
@@ -3988,7 +3988,7 @@
     "marketCap": 674394669056,
     "beta": 0.17,
     "payout": 52.51,
-    "avgYield5y": 3.7
+    "avgYield5y": 3.4
    },
    "dividendYield": 2.51,
    "dividend": {
@@ -4143,7 +4143,7 @@
     "marketCap": 1812371509084160,
     "beta": 1.54,
     "payout": 7.49,
-    "avgYield5y": 2.02
+    "avgYield5y": 1.66
    },
    "dividendYield": 0.54,
    "dividend": {
@@ -4291,14 +4291,14 @@
    },
    "valuation": {
     "forwardPer": 3.91,
-    "psr": 6.91,
+    "psr": 6.92,
     "peg": 0.2,
     "roe": 92.68,
     "margin": 85.62,
-    "marketCap": 1306842852491264,
+    "marketCap": 1309090059911168,
     "beta": 2.39,
     "payout": 1.32,
-    "avgYield5y": 1.02
+    "avgYield5y": 0.59
    },
    "dividendYield": 0.08,
    "dividend": {
@@ -4453,7 +4453,7 @@
     "marketCap": 90725505040384,
     "beta": 1.73,
     "payout": 32.25,
-    "avgYield5y": 4.05
+    "avgYield5y": 3.27
    },
    "dividendYield": 2.89,
    "dividend": {
@@ -4608,7 +4608,7 @@
     "marketCap": 43879264944128,
     "beta": 1.01,
     "payout": 37.36,
-    "avgYield5y": 3.0
+    "avgYield5y": 4.07
    },
    "dividendYield": 6.02,
    "dividend": {
@@ -4759,7 +4759,7 @@
     "marketCap": 33926544359424,
     "beta": 1.35,
     "payout": 15.93,
-    "avgYield5y": 1.82
+    "avgYield5y": 1.67
    },
    "dividendYield": 1.69,
    "dividend": {
@@ -4914,7 +4914,7 @@
     "marketCap": 28792393302016,
     "beta": 1.2,
     "payout": 19.64,
-    "avgYield5y": 0.56
+    "avgYield5y": 0.35
    },
    "dividendYield": 1.37,
    "dividend": {
@@ -5064,8 +5064,8 @@
     "margin": -3.16,
     "marketCap": 20547215818752,
     "beta": 1.47,
-    "payout": 0.0,
-    "avgYield5y": 1.29
+    "payout": 291.18,
+    "avgYield5y": 0.79
    },
    "dividendYield": 0.76,
    "dividend": {
@@ -5216,7 +5216,7 @@
     "marketCap": 23518062313472,
     "beta": 1.66,
     "payout": 52.04,
-    "avgYield5y": 3.74
+    "avgYield5y": 3.15
    },
    "dividendYield": 2.57,
    "dividend": {
@@ -5371,7 +5371,7 @@
     "marketCap": 58775163633664,
     "beta": 0.63,
     "payout": 27.21,
-    "avgYield5y": 4.66
+    "avgYield5y": 4.17
    },
    "dividendYield": 2.76,
    "dividend": {
@@ -5526,7 +5526,7 @@
     "marketCap": 49346582151168,
     "beta": 0.65,
     "payout": 25.3,
-    "avgYield5y": 4.81
+    "avgYield5y": 4.31
    },
    "dividendYield": 2.82,
    "dividend": {
@@ -5680,8 +5680,8 @@
     "margin": 29.29,
     "marketCap": 24389196185600,
     "beta": 0.52,
-    "payout": 33.26,
-    "avgYield5y": 6.82
+    "payout": 33.21,
+    "avgYield5y": 5.97
    },
    "dividendYield": 4.18,
    "dividend": {
@@ -5824,7 +5824,7 @@
     "marketCap": 18364070100992,
     "beta": 0.2,
     "payout": 43.88,
-    "avgYield5y": 5.23
+    "avgYield5y": 4.82
    },
    "dividendYield": 3.73,
    "dividend": {
@@ -5979,7 +5979,7 @@
     "marketCap": 18834413060096,
     "beta": 0.71,
     "payout": 48.61,
-    "avgYield5y": 6.16
+    "avgYield5y": 5.29
    },
    "dividendYield": 3.76,
    "dividend": {
@@ -6131,10 +6131,10 @@
     "peg": 4.32,
     "roe": 7.15,
     "margin": 4.72,
-    "marketCap": 12359041024000,
+    "marketCap": 12286062231552,
     "beta": 0.09,
-    "payout": 44.9,
-    "avgYield5y": 5.38
+    "payout": 44.98,
+    "avgYield5y": 5.08
    },
    "dividendYield": 4.62,
    "dividend": {
@@ -6262,10 +6262,52 @@
    "source": "매일경제 증권"
   },
   {
+   "title": "‘아이온2’ 5일 글로벌 출시 … 엔씨 주가 힘받나",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/05/ZKW7MB4K2BC7DNXMUMRFQJD7GU/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:01 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "칩 리스·자산담보 대출...AI 투자 폭주에 ‘빅테크 금융공학’ 총동원",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/05/7PQP3B4PRZF5FO3PEI35ZF4YDQ/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:01 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[르포] “월급 가치를 지켜라”…달러·금 찾는 튀르키예 청년들",
+   "link": "https://www.chosun.com/economy/smb-venture/2026/10/05/HBRDKYLBMI3GIZJSGJSDSZDGMU/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:01 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[주간증시전망] 美 국채 금리에 눌린 증시… 삼성전자 3분기 실적에 쏠린 눈",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/05/GQZTKZRYMJQWKNZZMNQTQYLDMY/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "韓 거래소 부실 코인도 ‘깜깜이 상장’… “스스로 신뢰 해쳐”",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/05/MFRTQYZSGY4GKMBUGMZDENRQGE/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "로또 청약 대신 '은마 리츠'로…무주택자에게 투자 기회를",
+   "link": "https://www.chosun.com/economy/realty/2026/10/05/MM4WCOBUGA3DMNZRHA2GIYRVGQ/",
+   "pubDate": "Sun, 04 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“요즘 K 붙으면 영 불안한데”…주가 조정받은 뷰티·푸드 대표주들",
    "link": "https://www.mk.co.kr/news/stock/12168202",
    "pubDate": "Sun, 04 Oct 2026 19:14:18 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "이자·배당 비과세에 건보료 부담까지 줄인다… 은퇴자 새 절세 통장",
+   "link": "https://www.chosun.com/economy/economy_general/2026/10/05/JAK6XUTNMRC65MUN6ATHZHVXPM/",
+   "pubDate": "Sun, 04 Oct 2026 18:00:00 +0000",
+   "source": "조선일보"
   },
   {
    "title": "부실기업 증시퇴출, 작년보다 두배 급증",
@@ -6280,33 +6322,9 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "빚내서 사면 돈 벌던 시대 끝났다…월가 사모펀드 ‘황금시대’ 흔들",
-   "link": "https://www.chosun.com/economy/money/2026/10/04/SIVJJ733LFEN7FBIQIJPF5WBPE/",
-   "pubDate": "Sun, 04 Oct 2026 01:40:57 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "외국인, 한달 사이 코스피 20조 ‘팔자’… 삼성전자·SK하이닉스 순매도 1위",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MVRGKNJRGI4GEZLCMM3DKMZRGM/",
-   "pubDate": "Sat, 03 Oct 2026 23:52:45 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "3분기 ETF 수익률 1~3위는 ‘美 달러 곱버스’",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MIZDMNBTMFQTCOBYMIZWMNZXHA/",
-   "pubDate": "Sat, 03 Oct 2026 22:06:17 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "‘상폐 위기’ 케이이엠텍, 기댈 건 대주주 수혈 뿐인데… 그 대주주는 배터리 기술 유출 혐의",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/MVSTQZTFG5QWEYRSGYZTGNZTMQ/",
-   "pubDate": "Sat, 03 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "달라진 서학개미 장바구니… 美 초단기채·배당 ETF에 뭉칫돈",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/04/GBRDCYZVME4DKMDFGMZWIMJVGQ/",
-   "pubDate": "Sat, 03 Oct 2026 21:00:00 +0000",
+   "title": "“AI 전력 확보”… 美 빅테크, 원전 장기고객·투자자로 나서",
+   "link": "https://www.chosun.com/economy/industry-company/2026/10/05/G6VEQJW5ZNH4VMDVZSDZB3MNMA/",
+   "pubDate": "Sun, 04 Oct 2026 15:42:00 +0000",
    "source": "조선일보"
   },
   {
@@ -6379,24 +6397,6 @@
    "title": "다시 도는 코넥스 상장 시계…모비콘텐츠테크, 예심 청구",
    "link": "https://www.mk.co.kr/news/stock/12167067",
    "pubDate": "Fri, 02 Oct 2026 13:58:26 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“뉴딜펀드, 혈세낭비펀드 전락”…자펀드 절반 마이너스, 재정 139억 투입",
-   "link": "https://www.mk.co.kr/news/stock/12166979",
-   "pubDate": "Fri, 02 Oct 2026 10:52:15 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "앤트로픽, 11월 중순 증시 입성하나…“기업가치 최대 2717조원”",
-   "link": "https://www.mk.co.kr/news/stock/12166913",
-   "pubDate": "Fri, 02 Oct 2026 10:17:33 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[MK시그널] 이엔에프테크놀로지, 신제품 성과 가시화로 이익 구조 개선 기대감에 주가 상승세... MK시그널 추천 후 상승률 24.19% 기록",
-   "link": "https://www.mk.co.kr/news/stock/12166874",
-   "pubDate": "Fri, 02 Oct 2026 09:39:04 +09:00",
    "source": "매일경제 증권"
   }
  ]
