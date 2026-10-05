@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T09:43:22.874280+09:00",
+  "updatedAt": "2026-10-05T15:50:29.029489+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1344.55,
-      "change": 2.04,
-      "changePercent": 0.15,
+      "price": 1344.66,
+      "change": 2.15,
+      "changePercent": 0.16,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,54 @@
   ],
   "news": [
     {
+      "title": "\"닭값 폭락에도 치킨값 그대로\"…李대통령 한마디에 업계 '술렁'",
+      "link": "https://www.hankyung.com/article/2026100534527",
+      "pubDate": "Mon, 05 Oct 2026 14:46:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "추석 지나면 싸진다더니…이 버섯 1㎏에 171만원",
+      "link": "https://www.hankyung.com/article/2026100534377",
+      "pubDate": "Mon, 05 Oct 2026 14:13:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"5살도 안 됐는데 억대 자산가?\"…미성년 통장에 쌓인 10조",
+      "link": "https://www.hankyung.com/article/202610053420i",
+      "pubDate": "Mon, 05 Oct 2026 13:30:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"곧 합의 안 하면 두 배\"…트럼프 압박에 한국 '15% 관세' 비상",
+      "link": "https://www.hankyung.com/article/202610053408i",
+      "pubDate": "Mon, 05 Oct 2026 13:09:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"한국이 훨씬 싸잖아요\" 예약 폭증…외국인들 '풀코스' 즐긴다 [박수림의 요즘 여기]",
+      "link": "https://www.hankyung.com/article/202610020277g",
+      "pubDate": "Mon, 05 Oct 2026 13:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"메가·컴포즈 점주들 돈 많이 벌었겠네\"…실상은 달랐다",
+      "link": "https://www.hankyung.com/article/202609305185g",
+      "pubDate": "Mon, 05 Oct 2026 12:37:49 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"부르는 게 값\"…반년 새 235% 폭등한 '이 기름' 알고 보니",
+      "link": "https://www.hankyung.com/article/202610042527i",
+      "pubDate": "Mon, 05 Oct 2026 12:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"마세라티가 中 기술 쓴다고?\"…판매 70% 급감에 꺼낸 카드 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610042516i",
+      "pubDate": "Mon, 05 Oct 2026 10:42:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "\"아직 미성년자인데 통장에 10억?\"…52명이나 있었다",
       "link": "https://www.hankyung.com/article/2026100529637",
       "pubDate": "Mon, 05 Oct 2026 07:14:14 +0900",
@@ -124,111 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "'왕조현이 20년 만에 돌아왔다'…드라마 43만편 쏟아진 中 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610042500i",
-      "pubDate": "Mon, 05 Oct 2026 06:18:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'암살자(들)' 보지 말라더니 더 몰렸다…11일 만에 200만 돌파 [어떻게 생각하십니까]",
-      "link": "https://www.hankyung.com/article/202610042817i",
-      "pubDate": "Mon, 05 Oct 2026 06:00:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"혹시 '그 빵' 들어왔어요?\"…3040男 편의점에 몰린 까닭",
-      "link": "https://www.hankyung.com/article/2026100427607",
-      "pubDate": "Sun, 04 Oct 2026 19:41:30 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "5대 은행, 보안에 순익의 1%만 투자",
-      "link": "https://www.hankyung.com/article/2026100427041",
-      "pubDate": "Sun, 04 Oct 2026 18:18:13 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"세수 들쭉날쭉한데 지출은 안 줄어…200조 미래기금 지속가능성 우려\"",
-      "link": "https://www.hankyung.com/article/2026100426371",
-      "pubDate": "Sun, 04 Oct 2026 18:17:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "연구실 단계부터 투자…美도 '기술 구루' 우대",
-      "link": "https://www.hankyung.com/article/2026100426711",
-      "pubDate": "Sun, 04 Oct 2026 18:17:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'K기판 르네상스'…역대 최대 수출액 노린다",
-      "link": "https://www.hankyung.com/article/2026100426341",
-      "pubDate": "Sun, 04 Oct 2026 18:16:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "휘발유·경유 수출 제한속…정유업계 '효자'된 항공유",
-      "link": "https://www.hankyung.com/article/2026100426331",
-      "pubDate": "Sun, 04 Oct 2026 18:16:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "대우건설 이강석 대표 취임…도약 위한 '3대 경영방향' 제시",
-      "link": "https://www.yna.co.kr/view/AKR20261005017000003",
-      "pubDate": "Mon, 5 Oct 2026 09:24:44 +0900",
+      "title": "[동포의 창] 홍콩 '중추절 K-페스티벌 주간'에 100만 명 몰려",
+      "link": "https://www.yna.co.kr/view/AKR20261005040000371",
+      "pubDate": "Mon, 5 Oct 2026 15:21:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "경북도, 미국 유타주·유타대와 AI·반도체 등 첨단산업 협력",
-      "link": "https://www.yna.co.kr/view/AKR20261005015400053",
-      "pubDate": "Mon, 5 Oct 2026 09:17:14 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
+      "link": "https://www.yna.co.kr/view/AKR20261005036900011",
+      "pubDate": "Mon, 5 Oct 2026 15:00:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "CJ제일제당 '자리', 뉴욕 이어 LA 진출…K-증류주 시장 공략",
-      "link": "https://www.yna.co.kr/view/AKR20261005015800030",
-      "pubDate": "Mon, 5 Oct 2026 09:15:13 +0900",
+      "title": "금융권 잇단 해킹사태에 증권업계도 '긴장'…\"휴일도 비상근무\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261005029251008",
+      "pubDate": "Mon, 5 Oct 2026 14:36:29 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "체납 징수에 복지 발굴까지…울산시 체납관리단 성과",
-      "link": "https://www.yna.co.kr/view/AKR20261002131100057",
-      "pubDate": "Mon, 5 Oct 2026 09:00:08 +0900",
+      "title": "문체부·행안부, 지역관광 경진대회에 61억원 재정 인센티브",
+      "link": "https://www.yna.co.kr/view/AKR20261005032200030",
+      "pubDate": "Mon, 5 Oct 2026 12:41:22 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "우리은행, '우다페' 연계 '다함께 적금'…최고 연 9.0% 금리",
-      "link": "https://www.yna.co.kr/view/AKR20261004020300002",
-      "pubDate": "Mon, 5 Oct 2026 09:00:03 +0900",
+      "title": "금융권 잇단 해킹사태에 증권업계도 '긴장'…\"휴일도 지속 점검\"",
+      "link": "https://www.yna.co.kr/view/AKR20261005029200008",
+      "pubDate": "Mon, 5 Oct 2026 12:11:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "해수부 장관, 제주 어선 전복사고에 \"인명구조에 최선\" 지시",
-      "link": "https://www.yna.co.kr/view/AKR20261005013500030",
-      "pubDate": "Mon, 5 Oct 2026 08:56:17 +0900",
+      "title": "[부고] 김영수(YTN 시사제작팀장)씨 장인상",
+      "link": "https://www.yna.co.kr/view/AKR20261005030500008",
+      "pubDate": "Mon, 5 Oct 2026 12:10:45 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "세제개편안 후 서울 아파트 15억원 이하 거래 비중 80% 육박",
-      "link": "https://www.yna.co.kr/view/AKR20261005011500003",
-      "pubDate": "Mon, 5 Oct 2026 08:48:29 +0900",
+      "title": "라이다센서 등 메가프로젝트 관련 신규상품 명칭 72개 공개",
+      "link": "https://www.yna.co.kr/view/AKR20261002137800063",
+      "pubDate": "Mon, 5 Oct 2026 12:00:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[AI픽] '예·아니오'만 답하는 AI가 뜬다…0.1초 판단 '제브'",
-      "link": "https://www.yna.co.kr/view/AKR20261003039700017",
-      "pubDate": "Mon, 5 Oct 2026 08:45:01 +0900",
+      "title": "[가보니] DMZ 식물 10년간 모았다…'생태 보고'로 자란 자생식물원",
+      "link": "https://www.yna.co.kr/view/AKR20261004023400017",
+      "pubDate": "Mon, 5 Oct 2026 12:00:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "GS25, '한정선 피스타치오 찹쌀떡' 출시…2만개 사전 예약",
-      "link": "https://www.yna.co.kr/view/AKR20261005012900030",
-      "pubDate": "Mon, 5 Oct 2026 08:44:57 +0900",
+      "title": "'무사곤데 건강보험 할인되나요'…유리한 조건 회사가 알려준다",
+      "link": "https://www.yna.co.kr/view/AKR20261004020600002",
+      "pubDate": "Mon, 5 Oct 2026 12:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "'리츠 활성화 대책' 2년'…\"제도개선, 기대보다 속도 느려\"",
-      "link": "https://www.yna.co.kr/view/AKR20261005003900003",
-      "pubDate": "Mon, 5 Oct 2026 08:36:07 +0900",
+      "title": "3분기 부가세 26일까지 신고·납부…호우·홈플 피해사업자 연장",
+      "link": "https://www.yna.co.kr/view/AKR20261004043700002",
+      "pubDate": "Mon, 5 Oct 2026 12:00:01 +0900",
       "source": "연합뉴스"
     }
   ]
