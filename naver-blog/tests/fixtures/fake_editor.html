@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>가짜 스마트에디터 (테스트용)</title>
+<style>
+  body { font-family: sans-serif; margin: 20px; }
+  .se-text-paragraph { min-height: 24px; border: 1px solid #ccc; padding: 6px; }
+  .se-section-text .se-text-paragraph { min-height: 200px; }
+  .se-popup-dim { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; }
+  .layer_publish__x1 { display: none; border: 2px solid #333; padding: 12px; margin-top: 12px; }
+  .layer_publish__x1.open { display: block; }
+</style>
+</head>
+<body>
+  <!-- 임시저장 글 불러오기 팝업 (취소를 눌러야 사라진다) -->
+  <div class="se-popup-dim" id="draft-popup">
+    <div class="se-popup">
+      <p>작성 중인 글이 있습니다. 불러올까요?</p>
+      <button class="se-popup-button-cancel" onclick="document.getElementById('draft-popup').remove()">취소</button>
+      <button class="se-popup-button-confirm">확인</button>
+    </div>
+  </div>
+
+  <header>
+    <button class="publish_btn__m9KHH" onclick="document.getElementById('layer').classList.add('open')">발행</button>
+  </header>
+
+  <div class="se-main-container">
+    <div class="se-section se-section-documentTitle">
+      <div class="se-text-paragraph" id="title" contenteditable="true"></div>
+    </div>
+    <div class="se-component se-text se-section-text">
+      <div class="se-text-paragraph" id="body" contenteditable="true"></div>
+    </div>
+  </div>
+
+  <div class="layer_publish__x1" id="layer">
+    <label for="open_public"><input type="radio" name="open" id="open_public" checked> 전체공개</label>
+    <label for="open_private"><input type="radio" name="open" id="open_private"> 비공개</label>
+    <div>
+      <input id="tag-input" class="tag_input__rvUB5" placeholder="#태그 입력 (최대 30개)">
+      <ul id="tags"></ul>
+    </div>
+    <button class="confirm_btn__WEaBq" id="confirm">발행</button>
+  </div>
+
+<script>
+  window.__tags = [];
+  document.getElementById('tag-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && this.value.trim()) {
+      window.__tags.push(this.value.trim());
+      var li = document.createElement('li'); li.textContent = this.value.trim();
+      document.getElementById('tags').appendChild(li);
+      this.value = '';
+      e.preventDefault();
+    }
+  });
+  document.getElementById('confirm').addEventListener('click', function () {
+    window.__published = {
+      title: document.getElementById('title').innerText,
+      body: document.getElementById('body').innerText,
+      html: document.getElementById('body').innerHTML,
+      isPrivate: document.getElementById('open_private').checked,
+      tags: window.__tags.slice()
+    };
+    window.name = JSON.stringify(window.__published); // 페이지 이동 후에도 테스트가 읽을 수 있게
+    // 실제 네이버는 글 주소(logNo)로 이동한다
+    setTimeout(function () { location.href = location.pathname + '?logNo=223456789012'; }, 200);
+  });
+</script>
+</body>
+</html>
