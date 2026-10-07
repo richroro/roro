@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T01:19:09.173087+09:00",
+  "updatedAt": "2026-10-08T06:55:11.331370+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51156.92,
-      "change": -364.36,
-      "changePercent": -0.71,
+      "price": 51179.87,
+      "change": -341.41,
+      "changePercent": -0.66,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27471.81,
-      "change": -128.08,
-      "changePercent": -0.46,
+      "price": 27538.69,
+      "change": -61.2,
+      "changePercent": -0.22,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1338.86,
-      "change": 1.97,
-      "changePercent": 0.15,
+      "price": 1339.36,
+      "change": 2.47,
+      "changePercent": 0.18,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,47 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 334.93,
-      "change": 1.3,
-      "changePercent": 0.39,
+      "price": 336.67,
+      "change": 3.04,
+      "changePercent": 0.91,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 375.46,
-      "change": -5.22,
-      "changePercent": -1.37,
+      "price": 377.81,
+      "change": -2.87,
+      "changePercent": -0.75,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 236.99,
-      "change": -2.25,
-      "changePercent": -0.94,
+      "price": 237.47,
+      "change": -1.77,
+      "changePercent": -0.74,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"13억 가죽재킷 벗고 정장 입었다\"…젠슨 황이 달라진 이유",
+      "link": "https://www.hankyung.com/article/2026100790331",
+      "pubDate": "Thu, 08 Oct 2026 06:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"5000만원짜리 여행, 누가 가겠어\" 했는데…내놓자마자 완판 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610017178i",
+      "pubDate": "Thu, 08 Oct 2026 06:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'아아'만 찾던 직장인 달라졌다…불티나게 팔린 '이 음료' [박수림의 요즘 여기]",
+      "link": "https://www.hankyung.com/article/202610017700g",
+      "pubDate": "Thu, 08 Oct 2026 06:00:01 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "\"폭락 예측말고 대비하라\"…'블랙스완'탈레브 美증시 경고",
       "link": "https://www.hankyung.com/article/202610089559i",
@@ -154,81 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "EU, 중국산 하이브리드차 수입 급증에 '세이프가드' 검토",
-      "link": "https://www.hankyung.com/article/202610079369i",
-      "pubDate": "Wed, 07 Oct 2026 19:36:09 +0900",
-      "source": "한국경제"
+      "title": "트럼프, 美주담대 급등에 \"연준, 나라 잘 안풀리길 바라는듯\"",
+      "link": "https://www.yna.co.kr/view/AKR20261008009400071",
+      "pubDate": "Thu, 8 Oct 2026 06:41:20 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"짜장 본연의 맛, 분말로는 안 나와\"…짜파게티에 도전장 내민 이 라면",
-      "link": "https://www.hankyung.com/article/202610078887i",
-      "pubDate": "Wed, 07 Oct 2026 19:00:01 +0900",
-      "source": "한국경제"
+      "title": "\"증권사, 레버리지ETF 판매前 '고객에 권유 불가' 등 자체 조치\"",
+      "link": "https://www.yna.co.kr/view/AKR20261007194200001",
+      "pubDate": "Thu, 8 Oct 2026 06:10:00 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "[단독] 현대차그룹, 이달 남양서 '미래차 10년' 비전 발표",
-      "link": "https://www.hankyung.com/article/2026100792121",
-      "pubDate": "Wed, 07 Oct 2026 18:43:34 +0900",
-      "source": "한국경제"
+      "title": "수조원대 다단계 사기 혐의 '콕 코인'…법적 판단 '감감'",
+      "link": "https://www.yna.co.kr/view/AKR20261006187900002",
+      "pubDate": "Thu, 8 Oct 2026 06:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국립종자원, 우수품종 경진대회 대통령상에 배추 '청명가을'",
+      "link": "https://www.yna.co.kr/view/AKR20261007128900030",
+      "pubDate": "Thu, 8 Oct 2026 06:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금융지주 순이익 또 '역대 최대'…올해 상반기 17.6조원",
+      "link": "https://www.yna.co.kr/view/AKR20261007183100002",
+      "pubDate": "Thu, 8 Oct 2026 06:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "시중은행 동산담보대출 연체율 9%대도…일반대출의 최고 11배",
+      "link": "https://www.yna.co.kr/view/AKR20261007171300002",
+      "pubDate": "Thu, 8 Oct 2026 05:57:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "지방재정 버팀목 3년새 반토막…\"미래기금보다 자체 여력 보강\"",
+      "link": "https://www.yna.co.kr/view/AKR20261007166300002",
+      "pubDate": "Thu, 8 Oct 2026 05:55:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "피해기업 구제 늦어질라…기술 탈취 공정위 제재까지 703일 걸려",
+      "link": "https://www.yna.co.kr/view/AKR20261007156500002",
+      "pubDate": "Thu, 8 Oct 2026 05:53:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "또 당한 기업은행…사고기업 사장 세운 회사서 94억 금융사고",
+      "link": "https://www.yna.co.kr/view/AKR20261007195700002",
+      "pubDate": "Thu, 8 Oct 2026 05:51:00 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "美국채 매도세 재개…장중 10년물 금리 2002년 4월 이후 최고",
       "link": "https://www.yna.co.kr/view/AKR20261007207300072",
       "pubDate": "Wed, 7 Oct 2026 23:05:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "인도중앙은행, 3년8개월만 첫 기준금리 인상…\"인플레 대응\"",
-      "link": "https://www.yna.co.kr/view/AKR20261007203000084",
-      "pubDate": "Wed, 7 Oct 2026 21:51:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "NH농협생명, 올해 신계약 CSM 1조 추진",
-      "link": "https://www.yna.co.kr/view/AKR20261007198600002",
-      "pubDate": "Wed, 7 Oct 2026 21:47:23 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국민참여성장펀드 닷새간 3천300억원 팔려…목표액 55% 달성",
-      "link": "https://www.yna.co.kr/view/AKR20261007198200002",
-      "pubDate": "Wed, 7 Oct 2026 21:46:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "생물 '거울형 이성질체' 난제 푼 과학자들에 노벨화학상",
-      "link": "https://www.yna.co.kr/view/AKR20261007201500017",
-      "pubDate": "Wed, 7 Oct 2026 21:27:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "올해 수은 해킹 시도 283건, 작년의 8배…지난달 한은 공격도(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261007044852002",
-      "pubDate": "Wed, 7 Oct 2026 20:11:38 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"미래기금으로 한전·관사·공연관람·농어촌 기본소득 지원\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261007188851001",
-      "pubDate": "Wed, 7 Oct 2026 20:10:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이소영 \"모두의창업 업체 재지정해 새 플랫폼 구축…보안 조치\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261007180951030",
-      "pubDate": "Wed, 7 Oct 2026 20:05:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "올해 수은 해킹 시도 283건, 작년의 8배…지난달 한은 공격도(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261007044851002",
-      "pubDate": "Wed, 7 Oct 2026 19:33:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "현대건설 \"삼성역 안전진단 필요한 사항 적극 지원·협조\"",
-      "link": "https://www.yna.co.kr/view/AKR20261007187400003",
-      "pubDate": "Wed, 7 Oct 2026 19:12:16 +0900",
       "source": "연합뉴스"
     }
   ]
