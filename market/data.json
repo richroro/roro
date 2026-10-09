@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-09T17:51:09.914072+09:00",
+  "updatedAt": "2026-10-10T01:04:55.551535+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51231.64,
-      "change": 51.74,
-      "changePercent": 0.1,
+      "price": 51544.47,
+      "change": 312.83,
+      "changePercent": 0.61,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27193.34,
-      "change": -345.35,
-      "changePercent": -1.25,
+      "price": 27332.47,
+      "change": 139.13,
+      "changePercent": 0.51,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1339.4,
-      "change": -3.16,
-      "changePercent": -0.24,
+      "price": 1342.03,
+      "change": -0.53,
+      "changePercent": -0.04,
       "currency": "KRW"
     }
   ],
@@ -88,88 +88,94 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 340.42,
-      "change": 3.75,
-      "changePercent": 1.11,
+      "price": 334.19,
+      "change": -6.24,
+      "changePercent": -1.83,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 375.0,
-      "change": -2.81,
-      "changePercent": -0.74,
+      "price": 383.79,
+      "change": 8.79,
+      "changePercent": 2.34,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 230.48,
-      "change": -6.99,
-      "changePercent": -2.94,
+      "price": 229.51,
+      "change": -0.97,
+      "changePercent": -0.42,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "[단독] 로봇 세계 1위 '유비테크' 가보니…\"배터리 스스로 교체\"",
-      "link": "https://www.hankyung.com/article/202610092805i",
-      "pubDate": "Fri, 09 Oct 2026 17:03:13 +0900",
+      "title": "\"한국 여행 필수코스\" 외국인 몰리더니…'매출 폭등' 대반전 [현장+]",
+      "link": "https://www.hankyung.com/article/202610081720g",
+      "pubDate": "Fri, 09 Oct 2026 20:30:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"물량 더 달라\"…'형님차' 넘보는 신형 투싼의 반란 [신차털기]",
-      "link": "https://www.hankyung.com/article/202610082004g",
-      "pubDate": "Fri, 09 Oct 2026 16:00:05 +0900",
+      "title": "비상장주식의 상속, 온전한 기업승계를 위하여 [세종의 가사분쟁 솔루션]",
+      "link": "https://www.hankyung.com/article/202610081327i",
+      "pubDate": "Fri, 09 Oct 2026 20:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "무료 AI는 디지털 격차를 없앨까",
-      "link": "https://www.hankyung.com/article/202610080379i",
-      "pubDate": "Fri, 09 Oct 2026 16:00:02 +0900",
+      "title": "\"우리만 팝니다\"…면세점 '독점' 경쟁, 이유 있었네",
+      "link": "https://www.hankyung.com/article/202610080071g",
+      "pubDate": "Fri, 09 Oct 2026 19:26:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "㎏당 171만원 몸값 신기록 경신…양양서 벌어진 일",
-      "link": "https://www.hankyung.com/article/2026100927197",
-      "pubDate": "Fri, 09 Oct 2026 15:50:30 +0900",
+      "title": "떡볶이부터 붕어빵까지…노재헌의 'K푸드 외교' [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610092990i",
+      "pubDate": "Fri, 09 Oct 2026 19:03:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 삼성전자 내년 공급물량 80%가 장기계약",
-      "link": "https://www.hankyung.com/article/202610092740i",
-      "pubDate": "Fri, 09 Oct 2026 15:49:06 +0900",
+      "title": "제7대 경제단체 될까…박종범 \"제도 기반 마련에 교감”",
+      "link": "https://www.hankyung.com/article/202610092969i",
+      "pubDate": "Fri, 09 Oct 2026 18:23:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "일·중 홀린 프리미엄 군산 김…1억달러 수출 계약 성사",
-      "link": "https://www.hankyung.com/article/202610092706i",
-      "pubDate": "Fri, 09 Oct 2026 15:10:49 +0900",
+      "title": "'부잣집 딸'처럼 입는다더니…2030 女 난리 난 패션",
+      "link": "https://www.hankyung.com/article/2026100928931",
+      "pubDate": "Fri, 09 Oct 2026 18:08:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "최태원 \"전력·용수 늦어지면 먼저 착공…건설비 안 아낀다\"",
-      "link": "https://www.hankyung.com/article/2026100926837",
-      "pubDate": "Fri, 09 Oct 2026 14:55:50 +0900",
+      "title": "탈탄소 전환 급한데…값싼 전기 공급엔 소극적인 정부",
+      "link": "https://www.hankyung.com/article/2026100928441",
+      "pubDate": "Fri, 09 Oct 2026 18:07:06 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[속보] 최태원 \"호남 반도체 인프라 늦어지면 팹 먼저…비용 안 아낀다\"",
-      "link": "https://www.hankyung.com/article/2026100926857",
-      "pubDate": "Fri, 09 Oct 2026 14:55:30 +0900",
+      "title": "사망자에 연금 퍼주기…복지부 3년 넘게 몰랐다",
+      "link": "https://www.hankyung.com/article/2026100928471",
+      "pubDate": "Fri, 09 Oct 2026 18:06:36 +0900",
       "source": "한국경제"
     },
     {
-      "title": "한국서 '1000억 잭팟'…길거리서 줄 세우던 브랜드, 결국 일냈다 [박수림의 요즘 여기]",
-      "link": "https://www.hankyung.com/article/202610080165g",
-      "pubDate": "Fri, 09 Oct 2026 13:00:02 +0900",
+      "title": "주민 반발·자원 부족…인도 'AI 데이터센터' 확충 제동 걸리나",
+      "link": "https://www.hankyung.com/article/2026100929071",
+      "pubDate": "Fri, 09 Oct 2026 18:02:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "백화점까지 진출한 '페이스페이'…신촌 현대百에 토스 입성",
-      "link": "https://www.hankyung.com/article/202610092505i",
-      "pubDate": "Fri, 09 Oct 2026 11:00:05 +0900",
+      "title": "주파수 탐내는 머스크…美 이동통신 3사 '긴장'",
+      "link": "https://www.hankyung.com/article/2026100929081",
+      "pubDate": "Fri, 09 Oct 2026 18:02:15 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "박정현 \"전국 243개 지자체 부채 58조원…미래 세대에 부담\"",
+      "link": "https://www.yna.co.kr/view/AKR20261009052500063",
+      "pubDate": "Fri, 9 Oct 2026 18:20:24 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "슈퍼마켓연합회·택배노조, 쿠팡 장애에 대책 마련·보상 촉구",
@@ -223,12 +229,6 @@
       "title": "정부, '러트닉, 김정관에 국정원 불신 전달' 보도에 \"사실 아냐\"",
       "link": "https://www.yna.co.kr/view/AKR20261009025900504",
       "pubDate": "Fri, 9 Oct 2026 10:38:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20261009024900011",
-      "pubDate": "Fri, 9 Oct 2026 10:30:00 +0900",
       "source": "연합뉴스"
     }
   ]
