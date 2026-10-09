@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T01:04:55.551535+09:00",
+  "updatedAt": "2026-10-10T05:49:19.712399+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51544.47,
-      "change": 312.83,
-      "changePercent": 0.61,
+      "price": 51654.95,
+      "change": 423.31,
+      "changePercent": 0.83,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27332.47,
-      "change": 139.13,
-      "changePercent": 0.51,
+      "price": 27366.17,
+      "change": 172.83,
+      "changePercent": 0.64,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.03,
-      "change": -0.53,
-      "changePercent": -0.04,
+      "price": 1339.89,
+      "change": -2.67,
+      "changePercent": -0.2,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 334.19,
-      "change": -6.24,
-      "changePercent": -1.83,
+      "price": 336.64,
+      "change": -3.78,
+      "changePercent": -1.11,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 383.79,
-      "change": 8.79,
-      "changePercent": 2.34,
+      "price": 382.7,
+      "change": 7.7,
+      "changePercent": 2.05,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 229.51,
-      "change": -0.97,
-      "changePercent": -0.42,
+      "price": 229.28,
+      "change": -1.2,
+      "changePercent": -0.52,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "푸틴에 손벌린 트럼프 \"러 경유 공급 합의\"…대러 제재 완화(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261010004551071",
+      "pubDate": "Sat, 10 Oct 2026 05:10:13 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "오픈AI發 버블 논쟁…다가오는 실적 시즌[월가 백브리핑]",
+      "link": "https://www.hankyung.com/article/202610103126i",
+      "pubDate": "Sat, 10 Oct 2026 02:17:12 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "\"한국 여행 필수코스\" 외국인 몰리더니…'매출 폭등' 대반전 [현장+]",
       "link": "https://www.hankyung.com/article/202610081720g",
@@ -160,15 +172,9 @@
       "source": "한국경제"
     },
     {
-      "title": "주민 반발·자원 부족…인도 'AI 데이터센터' 확충 제동 걸리나",
+      "title": "주민 반발에…印 '데이터센터' 확충 제동",
       "link": "https://www.hankyung.com/article/2026100929071",
       "pubDate": "Fri, 09 Oct 2026 18:02:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "주파수 탐내는 머스크…美 이동통신 3사 '긴장'",
-      "link": "https://www.hankyung.com/article/2026100929081",
-      "pubDate": "Fri, 09 Oct 2026 18:02:15 +0900",
       "source": "한국경제"
     },
     {
@@ -223,12 +229,6 @@
       "title": "IPARK현대산업개발, '5천500억원' 숙대입구역세권 재개발 공략",
       "link": "https://www.yna.co.kr/view/AKR20261009028100003",
       "pubDate": "Fri, 9 Oct 2026 11:10:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정부, '러트닉, 김정관에 국정원 불신 전달' 보도에 \"사실 아냐\"",
-      "link": "https://www.yna.co.kr/view/AKR20261009025900504",
-      "pubDate": "Fri, 9 Oct 2026 10:38:12 +0900",
       "source": "연합뉴스"
     }
   ]
