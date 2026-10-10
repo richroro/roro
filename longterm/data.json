@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-10T10:46:33.358380+09:00",
+ "updatedAt": "2026-10-11T00:54:21.556445+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2067,7 +2067,7 @@
     "10y": 28.4
    },
    "mdd10y": -30.7,
-   "fromHigh": -1.11,
+   "fromHigh": 0.0,
    "week52": {
     "high": 345.34,
     "low": 243.42,
@@ -2512,7 +2512,7 @@
     "position": 72.8
    },
    "valuation": {
-    "per": 21.11,
+    "per": 20.44,
     "forwardPer": 25.07,
     "pbr": 5.13,
     "psr": 3.65,
@@ -2611,7 +2611,7 @@
     "10y": 58.41
    },
    "mdd10y": -62.85,
-   "fromHigh": -0.52,
+   "fromHigh": 0.0,
    "week52": {
     "high": 243.37,
     "low": 164.27,
@@ -2775,7 +2775,7 @@
     "position": 70.0
    },
    "valuation": {
-    "per": 12.86,
+    "per": 12.97,
     "forwardPer": 23.8,
     "pbr": 0.0,
     "psr": 2.87,
@@ -2881,7 +2881,7 @@
     "position": 79.6
    },
    "valuation": {
-    "per": 29.71,
+    "per": 30.29,
     "forwardPer": 21.54,
     "pbr": 7.41,
     "psr": 6.43,
@@ -3038,7 +3038,7 @@
     "position": 45.9
    },
    "valuation": {
-    "per": 22.74,
+    "per": 22.84,
     "forwardPer": 20.45,
     "pbr": 6.59,
     "psr": 4.04,
@@ -3352,8 +3352,8 @@
     "position": 5.2
    },
    "valuation": {
-    "per": 16.51,
-    "forwardPer": 14.49,
+    "per": 15.85,
+    "forwardPer": 14.5,
     "pbr": 7.79,
     "psr": 1.77,
     "peg": 1.27,
@@ -3509,7 +3509,7 @@
     "position": 5.4
    },
    "valuation": {
-    "per": 19.25,
+    "per": 19.11,
     "forwardPer": 17.09,
     "psr": 6.01,
     "peg": 2.45,
@@ -3664,7 +3664,7 @@
     "position": 98.5
    },
    "valuation": {
-    "per": 32.8,
+    "per": 31.93,
     "forwardPer": 25.69,
     "pbr": 20.43,
     "psr": 16.27,
@@ -3821,7 +3821,7 @@
     "position": 61.7
    },
    "valuation": {
-    "per": 14.2,
+    "per": 14.27,
     "forwardPer": 13.25,
     "pbr": 2.5,
     "psr": 4.75,
@@ -3974,8 +3974,8 @@
     "position": 88.7
    },
    "valuation": {
-    "per": 21.69,
-    "forwardPer": 14.83,
+    "per": 21.74,
+    "forwardPer": 14.74,
     "pbr": 2.68,
     "psr": 1.92,
     "peg": 1.45,
@@ -5200,8 +5200,8 @@
    "fromHigh": -52.26,
    "week52": {
     "high": 542000.0,
-    "low": 258500.0,
-    "position": 16.9
+    "low": 259500.0,
+    "position": 16.6
    },
    "valuation": {
     "forwardPer": 10.27,
@@ -6348,18 +6348,6 @@
    "source": "조선일보"
   },
   {
-   "title": "뉴욕증시, 오픈AI 매출 우려에 기술주 약세…나스닥 1.25% 하락",
-   "link": "https://www.chosun.com/economy/int_economy/2026/10/09/VSVMUC7KJFDMVNHKNO7OCAZOOI/",
-   "pubDate": "Thu, 08 Oct 2026 21:20:18 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "AI 칩 사려고 수백억달러씩 빚…월가로 번진 AI 투자 경쟁",
-   "link": "https://www.chosun.com/economy/int_economy/2026/10/09/PG2ULUU3FBCBPCIC5JTJUD4GTM/",
-   "pubDate": "Thu, 08 Oct 2026 20:33:14 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "100조 실적 잔칫날인데 삼전 주가는 왜…“극단적 저평가”라는데",
    "link": "https://www.mk.co.kr/news/stock/12171940",
    "pubDate": "Thu, 08 Oct 2026 19:48:52 +09:00",
@@ -6393,6 +6381,18 @@
    "title": "“투자자만 울컥하겠네”…역대 최다 기록한 ETF 괴리율, 무슨 일",
    "link": "https://www.mk.co.kr/news/economy/12171138",
    "pubDate": "Thu, 08 Oct 2026 09:19:57 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "LG전자 주가 급락에 하나증권 “단기 실적보다 AI 냉각사업 주목”",
+   "link": "https://www.mk.co.kr/news/stock/12171108",
+   "pubDate": "Thu, 08 Oct 2026 08:52:04 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "삼전닉스 3년뒤 주가 하느님도 몰라…유행 따라갔다 원금 녹는다는 ELS [이슈플러스]",
+   "link": "https://www.mk.co.kr/news/stock/12171049",
+   "pubDate": "Thu, 08 Oct 2026 06:11:01 +09:00",
    "source": "매일경제 증권"
   }
  ]
