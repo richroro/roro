@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T09:41:12.031370+09:00",
+  "updatedAt": "2026-10-10T15:55:40.681860+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51654.95,
-      "change": 423.31,
+      "change": 423.35,
       "changePercent": 0.83,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1340.02,
-      "change": -2.54,
-      "changePercent": -0.19,
+      "price": 1340.9,
+      "change": -1.66,
+      "changePercent": -0.12,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,84 @@
   ],
   "news": [
     {
+      "title": "부천 발전소 공사장서 크레인 무게추 사고…1명 사망·1명 부상",
+      "link": "https://www.yna.co.kr/view/AKR20261010032200530",
+      "pubDate": "Sat, 10 Oct 2026 15:19:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "소송 끝난 뒤 '세금 폭탄' 터진다…개정 유류분법에 복잡해진 셈법",
+      "link": "https://www.hankyung.com/article/202610077375i",
+      "pubDate": "Sat, 10 Oct 2026 14:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "32년된 건물 마감재 무너졌는데…정기 안전점검 의무대상 아니었다",
+      "link": "https://www.yna.co.kr/view/AKR20261010028000053",
+      "pubDate": "Sat, 10 Oct 2026 13:59:50 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"효도하고 받은 집, 유류분 방어하려면\"…증여 재산 지키는 법",
+      "link": "https://www.hankyung.com/article/202610020211i",
+      "pubDate": "Sat, 10 Oct 2026 13:42:51 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[테크톡노트] 중국어로 지시했는데 한국 금융권 공격…어떻게 가능했나",
+      "link": "https://www.yna.co.kr/view/AKR20261009030600017",
+      "pubDate": "Sat, 10 Oct 2026 13:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "똑같은 금메달인데…'100억' 안세영 웃고 나이키는 '낭패' [김소연의 얼굴전략]",
+      "link": "https://www.hankyung.com/article/202610080917g",
+      "pubDate": "Sat, 10 Oct 2026 13:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'양배추가 양상추보다 비싸졌다'…뒤집힌 채소값  [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610103315i",
+      "pubDate": "Sat, 10 Oct 2026 13:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한·중 청년기업가 200명 선전에 모여…“글로벌 협력 확대”",
+      "link": "https://www.hankyung.com/article/202610103408i",
+      "pubDate": "Sat, 10 Oct 2026 12:26:31 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"국세청 세법 개정 건의에 재경부 80% 퇴짜…재탕 174건\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261009048851002",
+      "pubDate": "Sat, 10 Oct 2026 11:28:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한국 금융권 해킹에 등장한 '아르텍스' 결국 공개 중단",
+      "link": "https://www.yna.co.kr/view/AKR20261010022500017",
+      "pubDate": "Sat, 10 Oct 2026 10:59:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20261010021400011",
+      "pubDate": "Sat, 10 Oct 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"아이 키우려면 돈 벌어야 하는데\"…26세 싱글맘의 눈물 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610079376i",
+      "pubDate": "Sat, 10 Oct 2026 09:49:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "치폴레, 이번엔 백화점으로…내달 신세계 강남에 2호점 연다",
+      "link": "https://www.hankyung.com/article/202610103307i",
+      "pubDate": "Sat, 10 Oct 2026 09:36:12 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "[다음주 경제] 취업자 얼마나 늘었나…IMF, 韓성장률 전망 수정치 발표",
       "link": "https://www.yna.co.kr/view/AKR20261010018000002",
       "pubDate": "Sat, 10 Oct 2026 09:03:29 +0900",
@@ -151,84 +229,6 @@
       "title": "\"뭐가 진짜 불닭면이지?\"…짝퉁 한 방에 가르는 기막힌 기술",
       "link": "https://www.hankyung.com/article/2026101032617",
       "pubDate": "Sat, 10 Oct 2026 08:32:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[아프리카인물열전](41) '유리천장 깬 개혁가' WTO 첫 여성 수장 오콘조이웨알라",
-      "link": "https://www.yna.co.kr/view/AKR20260921172200079",
-      "pubDate": "Sat, 10 Oct 2026 08:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정부 '원양어선 안전펀드' 지원받은 11척 중 2척 중국서 건조",
-      "link": "https://www.yna.co.kr/view/AKR20261008084400051",
-      "pubDate": "Sat, 10 Oct 2026 07:01:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[신상잇슈] 롯데칠성 '순하리 청레몬진'·연세유업 '공주의밤 생크림빵'",
-      "link": "https://www.yna.co.kr/view/AKR20261008168100030",
-      "pubDate": "Sat, 10 Oct 2026 07:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[금주핫템] LG생건 '시크릿 에센스'·미즈노 '멀티 패딩 라이트'",
-      "link": "https://www.yna.co.kr/view/AKR20261008155300030",
-      "pubDate": "Sat, 10 Oct 2026 07:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[AI돋보기] AI가 물건 고르고 결제까지…내 카드 맡겨도 될까",
-      "link": "https://www.yna.co.kr/view/AKR20261002022300017",
-      "pubDate": "Sat, 10 Oct 2026 06:33:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "검사 지휘 폐지됐는데…산안감독관 절반은 수사경력 '1년 미만'",
-      "link": "https://www.yna.co.kr/view/AKR20261009051000530",
-      "pubDate": "Sat, 10 Oct 2026 06:05:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"저 친구 퇴사할거 같은데요\"…AI가 먼저 알려준다 [임다연의 요즘 CEO 경영법]",
-      "link": "https://www.hankyung.com/article/202610081389i",
-      "pubDate": "Sat, 10 Oct 2026 06:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "오픈AI發 버블 논쟁…다가오는 실적 시즌[월가 백브리핑]",
-      "link": "https://www.hankyung.com/article/202610103126i",
-      "pubDate": "Sat, 10 Oct 2026 02:17:12 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"한국 여행 필수코스\" 외국인 몰리더니…'매출 폭등' 대반전 [현장+]",
-      "link": "https://www.hankyung.com/article/202610081720g",
-      "pubDate": "Fri, 09 Oct 2026 20:30:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "비상장주식의 상속, 온전한 기업승계를 위하여 [세종의 가사분쟁 솔루션]",
-      "link": "https://www.hankyung.com/article/202610081327i",
-      "pubDate": "Fri, 09 Oct 2026 20:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"우리만 팝니다\"…면세점 '독점' 경쟁, 이유 있었네",
-      "link": "https://www.hankyung.com/article/202610080071g",
-      "pubDate": "Fri, 09 Oct 2026 19:26:57 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "떡볶이부터 붕어빵까지…노재헌의 'K푸드 외교' [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610092990i",
-      "pubDate": "Fri, 09 Oct 2026 19:03:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "제7대 경제단체 될까…박종범 \"제도 기반 마련에 교감”",
-      "link": "https://www.hankyung.com/article/202610092969i",
-      "pubDate": "Fri, 09 Oct 2026 18:23:28 +0900",
       "source": "한국경제"
     }
   ]
