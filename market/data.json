@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T05:49:19.712399+09:00",
+  "updatedAt": "2026-10-10T09:41:12.031370+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1339.89,
-      "change": -2.67,
-      "changePercent": -0.2,
+      "price": 1340.02,
+      "change": -2.54,
+      "changePercent": -0.19,
       "currency": "KRW"
     }
   ],
@@ -112,10 +112,88 @@
   ],
   "news": [
     {
-      "title": "푸틴에 손벌린 트럼프 \"러 경유 공급 합의\"…대러 제재 완화(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261010004551071",
-      "pubDate": "Sat, 10 Oct 2026 05:10:13 +0900",
+      "title": "[다음주 경제] 취업자 얼마나 늘었나…IMF, 韓성장률 전망 수정치 발표",
+      "link": "https://www.yna.co.kr/view/AKR20261010018000002",
+      "pubDate": "Sat, 10 Oct 2026 09:03:29 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "검색 제국 흔들리는 바이두…AI 클라우드·로보택시서 돌파구",
+      "link": "https://www.hankyung.com/article/202609144116i",
+      "pubDate": "Sat, 10 Oct 2026 09:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[로펌을만나다] 이준기 태평양 대표 \"기업엔 수사 장기화 자체가 처벌\"",
+      "link": "https://www.yna.co.kr/view/AKR20261008175900004",
+      "pubDate": "Sat, 10 Oct 2026 09:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[IPO챗] 이번주 수요예측 10곳…진코스텍 등 2개사 상장",
+      "link": "https://www.yna.co.kr/view/AKR20261008073000008",
+      "pubDate": "Sat, 10 Oct 2026 09:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"국내은행, 외형 성장 한계…'위험 대비 수익성'으로 전환해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20261009050300002",
+      "pubDate": "Sat, 10 Oct 2026 09:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"김장을 왜 해요?\"…1kg '3만원' 김치 불티나는 이유 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610078534i",
+      "pubDate": "Sat, 10 Oct 2026 09:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"뭐가 진짜 불닭면이지?\"…짝퉁 한 방에 가르는 기막힌 기술",
+      "link": "https://www.hankyung.com/article/2026101032617",
+      "pubDate": "Sat, 10 Oct 2026 08:32:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[아프리카인물열전](41) '유리천장 깬 개혁가' WTO 첫 여성 수장 오콘조이웨알라",
+      "link": "https://www.yna.co.kr/view/AKR20260921172200079",
+      "pubDate": "Sat, 10 Oct 2026 08:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "정부 '원양어선 안전펀드' 지원받은 11척 중 2척 중국서 건조",
+      "link": "https://www.yna.co.kr/view/AKR20261008084400051",
+      "pubDate": "Sat, 10 Oct 2026 07:01:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[신상잇슈] 롯데칠성 '순하리 청레몬진'·연세유업 '공주의밤 생크림빵'",
+      "link": "https://www.yna.co.kr/view/AKR20261008168100030",
+      "pubDate": "Sat, 10 Oct 2026 07:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[금주핫템] LG생건 '시크릿 에센스'·미즈노 '멀티 패딩 라이트'",
+      "link": "https://www.yna.co.kr/view/AKR20261008155300030",
+      "pubDate": "Sat, 10 Oct 2026 07:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[AI돋보기] AI가 물건 고르고 결제까지…내 카드 맡겨도 될까",
+      "link": "https://www.yna.co.kr/view/AKR20261002022300017",
+      "pubDate": "Sat, 10 Oct 2026 06:33:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "검사 지휘 폐지됐는데…산안감독관 절반은 수사경력 '1년 미만'",
+      "link": "https://www.yna.co.kr/view/AKR20261009051000530",
+      "pubDate": "Sat, 10 Oct 2026 06:05:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"저 친구 퇴사할거 같은데요\"…AI가 먼저 알려준다 [임다연의 요즘 CEO 경영법]",
+      "link": "https://www.hankyung.com/article/202610081389i",
+      "pubDate": "Sat, 10 Oct 2026 06:00:01 +0900",
+      "source": "한국경제"
     },
     {
       "title": "오픈AI發 버블 논쟁…다가오는 실적 시즌[월가 백브리핑]",
@@ -152,84 +230,6 @@
       "link": "https://www.hankyung.com/article/202610092969i",
       "pubDate": "Fri, 09 Oct 2026 18:23:28 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "'부잣집 딸'처럼 입는다더니…2030 女 난리 난 패션",
-      "link": "https://www.hankyung.com/article/2026100928931",
-      "pubDate": "Fri, 09 Oct 2026 18:08:45 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "탈탄소 전환 급한데…값싼 전기 공급엔 소극적인 정부",
-      "link": "https://www.hankyung.com/article/2026100928441",
-      "pubDate": "Fri, 09 Oct 2026 18:07:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "사망자에 연금 퍼주기…복지부 3년 넘게 몰랐다",
-      "link": "https://www.hankyung.com/article/2026100928471",
-      "pubDate": "Fri, 09 Oct 2026 18:06:36 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "주민 반발에…印 '데이터센터' 확충 제동",
-      "link": "https://www.hankyung.com/article/2026100929071",
-      "pubDate": "Fri, 09 Oct 2026 18:02:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "박정현 \"전국 243개 지자체 부채 58조원…미래 세대에 부담\"",
-      "link": "https://www.yna.co.kr/view/AKR20261009052500063",
-      "pubDate": "Fri, 9 Oct 2026 18:20:24 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "슈퍼마켓연합회·택배노조, 쿠팡 장애에 대책 마련·보상 촉구",
-      "link": "https://www.yna.co.kr/view/AKR20261009050900030",
-      "pubDate": "Fri, 9 Oct 2026 17:41:24 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "광주 군공항 찾은 최태원, 반도체 투자 우려 '한방에' 불식",
-      "link": "https://www.yna.co.kr/view/AKR20261009046800054",
-      "pubDate": "Fri, 9 Oct 2026 16:52:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "충북도·충주시, 중국 닝보 롱바이와 4천300억원 투자협약",
-      "link": "https://www.yna.co.kr/view/AKR20261009045600064",
-      "pubDate": "Fri, 9 Oct 2026 16:18:28 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[외환] 원/달러 환율 4.3원 오른 1,342.8원(15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20261009043000002",
-      "pubDate": "Fri, 9 Oct 2026 15:33:31 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261009039200011",
-      "pubDate": "Fri, 9 Oct 2026 15:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "김승수 \"한국어교원 10명 중 7명은 활동 안해…고용·처우 열악\"",
-      "link": "https://www.yna.co.kr/view/AKR20261009038600001",
-      "pubDate": "Fri, 9 Oct 2026 14:53:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인사] 농림축산식품부",
-      "link": "https://www.yna.co.kr/view/AKR20261009029500030",
-      "pubDate": "Fri, 9 Oct 2026 12:01:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "IPARK현대산업개발, '5천500억원' 숙대입구역세권 재개발 공략",
-      "link": "https://www.yna.co.kr/view/AKR20261009028100003",
-      "pubDate": "Fri, 9 Oct 2026 11:10:05 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
