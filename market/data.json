@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T15:55:40.681860+09:00",
+  "updatedAt": "2026-10-10T22:31:29.509582+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,24 @@
   ],
   "news": [
     {
+      "title": "\"금값 내렸다면서요?\"…귀금속상가서 돌반지 사려다 '화들짝' [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610103321i",
+      "pubDate": "Sat, 10 Oct 2026 20:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"여기 편의점 맞나요?\"…러닝족·외국인 몰리자 '파격 변신' [류은혁의 유통기한]",
+      "link": "https://www.hankyung.com/article/202610081249i",
+      "pubDate": "Sat, 10 Oct 2026 20:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"립스틱 색깔마다 인증 받아야\"…코트라가 본 중국 수출 '복병'은",
+      "link": "https://www.hankyung.com/article/202610103537i",
+      "pubDate": "Sat, 10 Oct 2026 18:01:28 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "부천 발전소 공사장서 크레인 무게추 사고…1명 사망·1명 부상",
       "link": "https://www.yna.co.kr/view/AKR20261010032200530",
       "pubDate": "Sat, 10 Oct 2026 15:19:45 +0900",
@@ -148,7 +166,7 @@
       "source": "한국경제"
     },
     {
-      "title": "'양배추가 양상추보다 비싸졌다'…뒤집힌 채소값  [프라이스&]",
+      "title": "'양배추가 양상추보다 비싸졌다'…뒤집힌 채소값 [프라이스&]",
       "link": "https://www.hankyung.com/article/202610103315i",
       "pubDate": "Sat, 10 Oct 2026 13:00:01 +0900",
       "source": "한국경제"
@@ -196,12 +214,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "검색 제국 흔들리는 바이두…AI 클라우드·로보택시서 돌파구",
-      "link": "https://www.hankyung.com/article/202609144116i",
-      "pubDate": "Sat, 10 Oct 2026 09:00:07 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "[로펌을만나다] 이준기 태평양 대표 \"기업엔 수사 장기화 자체가 처벌\"",
       "link": "https://www.yna.co.kr/view/AKR20261008175900004",
       "pubDate": "Sat, 10 Oct 2026 09:00:05 +0900",
@@ -218,18 +230,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261009050300002",
       "pubDate": "Sat, 10 Oct 2026 09:00:02 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "\"김장을 왜 해요?\"…1kg '3만원' 김치 불티나는 이유 [프라이스&]",
-      "link": "https://www.hankyung.com/article/202610078534i",
-      "pubDate": "Sat, 10 Oct 2026 09:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"뭐가 진짜 불닭면이지?\"…짝퉁 한 방에 가르는 기막힌 기술",
-      "link": "https://www.hankyung.com/article/2026101032617",
-      "pubDate": "Sat, 10 Oct 2026 08:32:11 +0900",
-      "source": "한국경제"
     }
   ]
 }
