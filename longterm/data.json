@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-11T10:02:04.933491+09:00",
+ "updatedAt": "2026-10-12T01:21:10.845268+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2389,7 +2389,7 @@
    },
    "valuation": {
     "per": 17.64,
-    "forwardPer": 23.33,
+    "forwardPer": 23.12,
     "pbr": 6.91,
     "psr": 9.65,
     "peg": 1.23,
@@ -4902,7 +4902,7 @@
     "position": 2.2
    },
    "valuation": {
-    "forwardPer": 12.72,
+    "forwardPer": 12.7,
     "psr": 2.12,
     "peg": 25.82,
     "roe": 6.42,
@@ -6252,10 +6252,70 @@
  ],
  "news": [
   {
+   "title": "“역시 주주환원은 뒷전입니까”…코스피 자사주 매입, 삼전닉스 뺐더니 줄었다",
+   "link": "https://www.mk.co.kr/news/stock/12173202",
+   "pubDate": "Sun, 11 Oct 2026 20:51:10 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "총 1억3500만 원 납입한 일반 계좌 vs IRP 계좌…15년 후 자산 차이는? [금융 리터러시2.0]",
+   "link": "https://www.mk.co.kr/news/economy/12173180",
+   "pubDate": "Sun, 11 Oct 2026 18:51:53 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "'삼전닉스 2배' ETF 개인비중 9%로 뚝",
+   "link": "https://www.mk.co.kr/news/stock/12173060",
+   "pubDate": "Sun, 11 Oct 2026 17:08:33 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "반도체팹 투자 붐에 달라진 건설 수혜株",
+   "link": "https://www.mk.co.kr/news/stock/12173040",
+   "pubDate": "Sun, 11 Oct 2026 16:52:23 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "자사주매입 5배 늘었지만 삼닉 빼면 13%↓",
+   "link": "https://www.mk.co.kr/news/stock/12173038",
+   "pubDate": "Sun, 11 Oct 2026 16:52:22 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "\"고금리에도 돈 벌 기회 있다\"…세상의 모든 재테크 한자리에",
+   "link": "https://www.mk.co.kr/news/stock/12172980",
+   "pubDate": "Sun, 11 Oct 2026 16:12:08 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI 투자 확대 바람… ‘소부장’ 주가 승승장구",
+   "link": "https://www.chosun.com/economy/money/2026/10/12/O4VVMGGPXJFI7LNVCEKTQYER3M/",
+   "pubDate": "Sun, 11 Oct 2026 15:32:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "게걸음 증시에 지친 개미들, 3분기 美 주식 10조원 넘게 샀다",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/12/M5J55ZPLJVGYTDS6S4VLA3CT3I/",
+   "pubDate": "Sun, 11 Oct 2026 15:31:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[AI픽] 포스코DX, 인핸스에 20억원 투자…에이전틱 AI 고도화",
+   "link": "https://www.yna.co.kr/view/AKR20261008194900017",
+   "pubDate": "Sun, 11 Oct 2026 12:00:06 +0900",
+   "source": "연합뉴스"
+  },
+  {
    "title": "“60% 폭등하더니 18% 급락”…롤러코스터 코스피, 4분기에는?",
    "link": "https://www.mk.co.kr/news/stock/12172844",
    "pubDate": "Sun, 11 Oct 2026 08:59:48 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "팀 쿡 애플 의장, CEO 퇴임 후 첫 중국 방문…청정에너지 투자도 확대",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/11/MI2DSMRYMIYWEYZUGU4TMZDEMY/",
+   "pubDate": "Sun, 11 Oct 2026 08:57:56 +0000",
+   "source": "조선일보"
   },
   {
    "title": "답답한 증시 대신 발행어음?…증권사, 4∼5% 상품 잇달아 출시",
@@ -6282,39 +6342,15 @@
    "source": "연합뉴스"
   },
   {
-   "title": "증권사, 중소·벤처 투자 70%가 수도권…'생산적 금융'에도 쏠림",
-   "link": "https://www.yna.co.kr/view/AKR20261009051600002",
-   "pubDate": "Sun, 11 Oct 2026 05:59:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "모태 자펀드 수도권 집중…2020년 이후 신규투자 4분의 3 쏠려",
-   "link": "https://www.yna.co.kr/view/AKR20261009049200002",
-   "pubDate": "Sun, 11 Oct 2026 05:56:05 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "은행 가계대출 57.3%가 변동금리…1년 새 4.3%p 확대",
-   "link": "https://www.yna.co.kr/view/AKR20261010042400002",
-   "pubDate": "Sun, 11 Oct 2026 05:52:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "은행권 'AI 방어' 투자 확대…KB 내년 보안 예산 1천억원대로",
-   "link": "https://www.yna.co.kr/view/AKR20261010034100002",
-   "pubDate": "Sun, 11 Oct 2026 05:45:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "은행 가계대출 변동금리 비중 57.3%… 1년 새 4.3%p 상승",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/11/GRSWMZTBHA2GKYJSMY4WIMDEG4/",
-   "pubDate": "Sun, 11 Oct 2026 00:31:02 +0000",
+   "title": "엔비디아, AI 스타트업 리플렉션 추가 투자·인수 검토…핵심 인력 확보도 논의",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/11/GJRTSMRXGIZGIMJRGEZDOYTBMM/",
+   "pubDate": "Sun, 11 Oct 2026 05:52:35 +0000",
    "source": "조선일보"
   },
   {
-   "title": "실거래보다 1억 낮은 진주시 아파트…소액 투자자 추천 경매 5선",
-   "link": "https://www.chosun.com/economy/realty/investment_trends/2026/10/11/GQ2DEMLGGA3TCOJXME3DAN3DGM/",
-   "pubDate": "Sat, 10 Oct 2026 21:00:00 +0000",
+   "title": "금리 오르는데…은행 가계대출 57.3%가 변동금리, 1년 새 4.3%포인트 늘어",
+   "link": "https://www.chosun.com/economy/economy_general/2026/10/11/WLYIUSMUVJHUBOEEK6XUIRGVXA/",
+   "pubDate": "Sun, 11 Oct 2026 02:13:11 +0000",
    "source": "조선일보"
   },
   {
@@ -6322,24 +6358,6 @@
    "link": "https://www.mk.co.kr/news/stock/12172657",
    "pubDate": "Sat, 10 Oct 2026 09:05:32 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "[로펌을만나다] 이준기 태평양 대표 \"기업엔 수사 장기화 자체가 처벌\"",
-   "link": "https://www.yna.co.kr/view/AKR20261008175900004",
-   "pubDate": "Sat, 10 Oct 2026 09:00:05 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "[IPO챗] 이번주 수요예측 10곳…진코스텍 등 2개사 상장",
-   "link": "https://www.yna.co.kr/view/AKR20261008073000008",
-   "pubDate": "Sat, 10 Oct 2026 09:00:05 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "정부 '원양어선 안전펀드' 지원받은 11척 중 2척 중국서 건조",
-   "link": "https://www.yna.co.kr/view/AKR20261008084400051",
-   "pubDate": "Sat, 10 Oct 2026 07:01:02 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "‘고금리’를 극복하는 이익의 힘 … 현재가 90년대 버블과 다른 이유",
@@ -6360,18 +6378,6 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "美, 2연속 금리 인상? 연준 인사들은 신중론",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/10/RH35CC4OYVCYZBGM764SLJCBFM/",
-   "pubDate": "Fri, 09 Oct 2026 15:34:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "日, 이달 또 금리 올리나",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/10/N4BDZHJEVVAGJCL4ACIKCK3ZNE/",
-   "pubDate": "Fri, 09 Oct 2026 15:34:00 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "주성엔지니어링 ‘텐배거’에 웃은 오스템 최규옥 ... 회장님들 투자 비법",
    "link": "https://www.mk.co.kr/news/stock/12172298",
    "pubDate": "Fri, 09 Oct 2026 15:16:34 +09:00",
@@ -6387,12 +6393,6 @@
    "title": "브라질증시 폭등 예상한 전설의 ‘투자 기계’…함께 매수한 종목은?",
    "link": "https://www.mk.co.kr/news/stock/12172188",
    "pubDate": "Fri, 09 Oct 2026 09:05:51 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "세달만에 90만원 뚝, 33% 급락한 SK하닉…코스피 톱 10곳 중 8곳도 떨어졌다",
-   "link": "https://www.mk.co.kr/news/stock/12172148",
-   "pubDate": "Fri, 09 Oct 2026 07:07:33 +09:00",
    "source": "매일경제 증권"
   }
  ]
