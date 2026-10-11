@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T00:33:01.960394+09:00",
+  "updatedAt": "2026-10-12T05:09:22.917714+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51654.95,
-      "change": 423.31,
+      "change": 423.35,
       "changePercent": 0.83,
       "currency": "USD"
     },
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 27366.17,
-      "change": 172.83,
+      "change": 172.87,
       "changePercent": 0.64,
       "currency": "USD"
     }
@@ -112,6 +112,18 @@
   ],
   "news": [
     {
+      "title": "마감재 붙인 철골 천장틀 통째로 붕괴…경찰, 수사 속도",
+      "link": "https://www.yna.co.kr/view/AKR20261011043200053",
+      "pubDate": "Mon, 12 Oct 2026 04:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이의순 세방그룹 창업주 별세…향년 103세",
+      "link": "https://www.hankyung.com/article/2026101147011",
+      "pubDate": "Mon, 12 Oct 2026 00:33:59 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "\"룸서비스 되나요?\" 말 걸었더니…호텔 직원의 '반전 정체'",
       "link": "https://www.hankyung.com/article/202610081420g",
       "pubDate": "Sun, 11 Oct 2026 21:37:46 +0900",
@@ -160,7 +172,7 @@
       "source": "한국경제"
     },
     {
-      "title": "北 경제 정량데이터 구축…이념서 과학의 영역으로 연구 정립",
+      "title": "\"北경제 연구, 정량데이터 구축해 이념 아닌 과학의 영역으로\"",
       "link": "https://www.hankyung.com/article/2026101144441",
       "pubDate": "Sun, 11 Oct 2026 18:11:57 +0900",
       "source": "한국경제"
@@ -169,12 +181,6 @@
       "title": "\"北경제 이해 필독서 저술…통일·외교현안 해결 공헌\"",
       "link": "https://www.hankyung.com/article/2026101144461",
       "pubDate": "Sun, 11 Oct 2026 18:11:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "세제·부동산 가격이 가계 부채·소비에 미치는 영향 분석",
-      "link": "https://www.hankyung.com/article/2026101144451",
-      "pubDate": "Sun, 11 Oct 2026 18:10:34 +0900",
       "source": "한국경제"
     },
     {
@@ -223,12 +229,6 @@
       "title": "李대통령 \"2022년 대선 이후 차질 빚은 주택공급 조만간 정상화\"",
       "link": "https://www.yna.co.kr/view/AKR20261011026100001",
       "pubDate": "Sun, 11 Oct 2026 13:57:43 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "온라인 위조상품 유통, 연말까지 민·관 합동 모니터링",
-      "link": "https://www.yna.co.kr/view/AKR20261011024200063",
-      "pubDate": "Sun, 11 Oct 2026 13:08:29 +0900",
       "source": "연합뉴스"
     }
   ]
