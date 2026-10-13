@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T00:51:15.272767+09:00",
+  "updatedAt": "2026-10-14T06:09:24.679343+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51691.3,
-      "change": -159.25,
-      "changePercent": -0.31,
+      "price": 51670.1,
+      "change": -180.45,
+      "changePercent": -0.35,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27156.1,
-      "change": -89.8,
-      "changePercent": -0.33,
+      "price": 27204.38,
+      "change": -41.52,
+      "changePercent": -0.15,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1341.31,
-      "change": 7.15,
-      "changePercent": 0.54,
+      "price": 1340.13,
+      "change": 5.97,
+      "changePercent": 0.45,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,77 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 345.22,
-      "change": 4.25,
-      "changePercent": 1.25,
+      "price": 341.27,
+      "change": 0.3,
+      "changePercent": 0.09,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 376.44,
-      "change": -1.59,
-      "changePercent": -0.42,
+      "price": 375.23,
+      "change": -2.8,
+      "changePercent": -0.74,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 225.35,
-      "change": -0.97,
-      "changePercent": -0.43,
+      "price": 228.52,
+      "change": 2.2,
+      "changePercent": 0.97,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "LH 전세임대 소년소녀 가구 46% 장기 체납…독촉 내몰려",
+      "link": "https://www.yna.co.kr/view/AKR20261013173800003",
+      "pubDate": "Wed, 14 Oct 2026 06:01:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"농어촌공사, 동일직종 뽑는데도 본부 심사기준 제각각\"",
+      "link": "https://www.yna.co.kr/view/AKR20261013027300001",
+      "pubDate": "Wed, 14 Oct 2026 06:00:13 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"아일릿이 뉴진스 표절\" 민희진, 명예훼손·업무방해 혐의로 송치",
+      "link": "https://www.yna.co.kr/view/AKR20261013180200004",
+      "pubDate": "Wed, 14 Oct 2026 05:55:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "은행 밖 그림자금융 6천213조원…4년새 1천277조원 늘어",
+      "link": "https://www.yna.co.kr/view/AKR20261013178000002",
+      "pubDate": "Wed, 14 Oct 2026 05:55:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "공정위 과징금 4천531억원 징수유예…2년 8개월새 15배로 불어",
+      "link": "https://www.yna.co.kr/view/AKR20261013154200002",
+      "pubDate": "Wed, 14 Oct 2026 05:54:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "KDI \"52시간제, 제조업·중소 사업체 성과에 부정적 영향\"",
+      "link": "https://www.yna.co.kr/view/AKR20261013149400002",
+      "pubDate": "Wed, 14 Oct 2026 05:53:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금융위, 오늘 해킹사고 점검회의…새마을금고 추가 유출도 주시",
+      "link": "https://www.yna.co.kr/view/AKR20261013187300002",
+      "pubDate": "Wed, 14 Oct 2026 05:51:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"끝난줄 알았더니 대반전\"…마이크로소프트,사상최고가 눈앞",
+      "link": "https://www.hankyung.com/article/202610149923i",
+      "pubDate": "Wed, 14 Oct 2026 00:44:53 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "\"주식 팔고 국채산다\"…블랙록 6년만의 투자 전망 변경",
       "link": "https://www.hankyung.com/article/202610139894i",
@@ -182,54 +230,6 @@
       "link": "https://www.hankyung.com/article/2026101394311",
       "pubDate": "Tue, 13 Oct 2026 20:00:03 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "새마을금고 400명대 고객정보 유출…\"피해발생시 전액보상\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261013155952002",
-      "pubDate": "Tue, 13 Oct 2026 19:50:37 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "삼성월렛에 위챗페이 탑재…中 결제시장 공략",
-      "link": "https://www.hankyung.com/article/2026101397811",
-      "pubDate": "Tue, 13 Oct 2026 19:38:52 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "농업인단체 \"농림축수산업 희생 전제한 통상정책 벗어나야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261013181500030",
-      "pubDate": "Tue, 13 Oct 2026 18:40:32 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "노동장관 \"포스코 교섭 적극 지도…신안산선 사고 엄중 조치\"",
-      "link": "https://www.yna.co.kr/view/AKR20261013178800530",
-      "pubDate": "Tue, 13 Oct 2026 18:19:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "농식품부 \"브라질산 계란 수입, 전체의 0.8%…시범적 조치\"",
-      "link": "https://www.yna.co.kr/view/AKR20261013178600030",
-      "pubDate": "Tue, 13 Oct 2026 18:19:20 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "진코스텍·멜콘, 코스닥 신규상장…오는 15일 거래 개시",
-      "link": "https://www.yna.co.kr/view/AKR20261013178400008",
-      "pubDate": "Tue, 13 Oct 2026 18:15:43 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261013166300011",
-      "pubDate": "Tue, 13 Oct 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "춘천미래동행재단, 24일 미래동행 DAY·미래를 잇다' 개최",
-      "link": "https://www.yna.co.kr/view/AKR20261013167800062",
-      "pubDate": "Tue, 13 Oct 2026 18:00:00 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
