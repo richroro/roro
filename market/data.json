@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-14T15:04:40.782717+09:00",
+  "updatedAt": "2026-10-14T20:43:27.886709+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 6040.24,
-      "change": 4.89,
-      "changePercent": 0.08,
+      "price": 6008.81,
+      "change": -26.54,
+      "changePercent": -0.44,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 826.24,
-      "change": -22.95,
-      "changePercent": -2.7,
+      "price": 823.88,
+      "change": -25.31,
+      "changePercent": -2.98,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1338.48,
-      "change": -1.65,
-      "changePercent": -0.12,
+      "price": 1336.26,
+      "change": -3.87,
+      "changePercent": -0.29,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 233750.0,
-      "change": 1750.0,
-      "changePercent": 0.75,
+      "price": 232000.0,
+      "change": 0.0,
+      "changePercent": 0.0,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1429000.0,
-      "change": -14000.0,
-      "changePercent": -0.97,
+      "price": 1419000.0,
+      "change": -24000.0,
+      "changePercent": -1.66,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 180800.0,
-      "change": 2800.0,
-      "changePercent": 1.57,
+      "price": 179400.0,
+      "change": 1400.0,
+      "changePercent": 0.79,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 31950.0,
-      "change": 650.0,
-      "changePercent": 2.08,
+      "price": 31700.0,
+      "change": 400.0,
+      "changePercent": 1.28,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 425500.0,
-      "change": 15500.0,
-      "changePercent": 3.78,
+      "price": 422000.0,
+      "change": 12000.0,
+      "changePercent": 2.93,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "[게시판] iM뱅크, '독도의 날' 기념 굿즈 증정 이벤트",
-      "link": "https://www.yna.co.kr/view/AKR20261014124200053",
-      "pubDate": "Wed, 14 Oct 2026 14:56:29 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "송미령 \"농지 임대차 적법화 특례…농지은행 매입 확대 검토\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261014072651030",
-      "pubDate": "Wed, 14 Oct 2026 14:55:52 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] 코스피, 하락전환해 장중 6,000선 아래로…5,999",
-      "link": "https://www.yna.co.kr/view/AKR20261014126500008",
-      "pubDate": "Wed, 14 Oct 2026 14:55:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "동작구, 16일 취업박람회…구인기업 20곳 참여",
-      "link": "https://www.yna.co.kr/view/AKR20261014125700004",
-      "pubDate": "Wed, 14 Oct 2026 14:55:11 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'경관 보존'vs'지역 개발'…울산바위 인근 공동주택 사업 미래는",
-      "link": "https://www.yna.co.kr/view/AKR20261014124100062",
-      "pubDate": "Wed, 14 Oct 2026 14:53:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "울산시, 장종근 감사관·김진석 노동특보 임용",
-      "link": "https://www.yna.co.kr/view/AKR20261014122300057",
-      "pubDate": "Wed, 14 Oct 2026 14:40:11 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인사] 국세청",
-      "link": "https://www.yna.co.kr/view/AKR20261014121900002",
-      "pubDate": "Wed, 14 Oct 2026 14:37:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "변재영 울산항만공사 사장, 해수부에 사의 표명",
-      "link": "https://www.yna.co.kr/view/AKR20261014120900051",
-      "pubDate": "Wed, 14 Oct 2026 14:35:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
-      "link": "https://www.yna.co.kr/view/AKR20261014115400011",
-      "pubDate": "Wed, 14 Oct 2026 14:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국민숙의단 95% \"AI 대응 미래기금 필요\"…의료·주거 보장해야",
-      "link": "https://www.yna.co.kr/view/AKR20261014070900530",
-      "pubDate": "Wed, 14 Oct 2026 14:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "서울 강남 재건축 단지에 들어간 고급 변기…프리미엄에 승부수",
-      "link": "https://www.hankyung.com/article/202610140615i",
-      "pubDate": "Wed, 14 Oct 2026 14:14:13 +0900",
+      "title": "오픈런은커녕 찬밥 신세…'국민성장펀드'에 무슨 일이",
+      "link": "https://www.hankyung.com/article/2026101421721",
+      "pubDate": "Wed, 14 Oct 2026 20:09:37 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] \"비싸게 만들고 가격은 뚝\"…전력시장 '이상한 계산법'",
-      "link": "https://www.hankyung.com/article/202610141387i",
-      "pubDate": "Wed, 14 Oct 2026 14:11:02 +0900",
+      "title": "\"메모리 공급부족 곧 끝나?\"…JP모건,\"2028년까지도 부족\"",
+      "link": "https://www.hankyung.com/article/202610142408i",
+      "pubDate": "Wed, 14 Oct 2026 20:09:08 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美 규제 덫 걸린 엔비디아…中 AI칩 점유율 34%로 급락",
-      "link": "https://www.hankyung.com/article/202610141469i",
-      "pubDate": "Wed, 14 Oct 2026 14:10:19 +0900",
+      "title": "신발·화장품도 속속 입점…왜 배달앱으로 몰리나 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610141869i",
+      "pubDate": "Wed, 14 Oct 2026 20:00:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"책 사러 왔다가 화들짝\"…여의도 3040 직장인 홀린 '이곳'",
-      "link": "https://www.hankyung.com/article/202610141089g",
-      "pubDate": "Wed, 14 Oct 2026 14:08:06 +0900",
+      "title": "신현송 한은 총재, 중·일 중앙은행 총재와 경제동향 논의",
+      "link": "https://www.yna.co.kr/view/AKR20261014176200002",
+      "pubDate": "Wed, 14 Oct 2026 20:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "취임 6주년에 인도 찾은 정의선 \"상당히 중요한 이정표\"",
+      "link": "https://www.yna.co.kr/view/AKR20261014179600003",
+      "pubDate": "Wed, 14 Oct 2026 19:45:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "ASML \"30% 증산해도 부족\"…2030년까지 AI칩 장비 주문",
+      "link": "https://www.hankyung.com/article/202610141990i",
+      "pubDate": "Wed, 14 Oct 2026 19:29:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"피지컬AI 시대 이미 열려…AI반도체 확보가 최대 과제\"",
-      "link": "https://www.hankyung.com/article/202610141063i",
-      "pubDate": "Wed, 14 Oct 2026 14:00:02 +0900",
+      "title": "\"밤새워야 겨우 들어간다\"…품절 대란에 중고거래 10배 폭등 [덕질경제학]",
+      "link": "https://www.hankyung.com/article/202610141284H",
+      "pubDate": "Wed, 14 Oct 2026 19:29:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "美, '탠덤 태양광'으로 中 추격…발전효율 25% 향상 기대",
-      "link": "https://www.hankyung.com/article/202610140497i",
-      "pubDate": "Wed, 14 Oct 2026 13:49:07 +0900",
+      "title": "당국 \"금융사 침해사고 발생 총 16곳…약 10만건 유출\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261014134852002",
+      "pubDate": "Wed, 14 Oct 2026 19:23:59 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "인도서 '제2의 도약' 나선 현대차, 연 150만대 생산한다(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261014005751003",
+      "pubDate": "Wed, 14 Oct 2026 19:13:40 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "에스원, 자사주 4500억 매입·소각…기존 자사주도 없앤다",
+      "link": "https://www.hankyung.com/article/202610142354i",
+      "pubDate": "Wed, 14 Oct 2026 19:00:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"눈치만 보다 다 뺏겼다\"…잘 나가던 한국車마저 '초토화'",
-      "link": "https://www.hankyung.com/article/202610141107i",
-      "pubDate": "Wed, 14 Oct 2026 13:46:08 +0900",
+      "title": "정부, 서비스산업발전기본법 재추진…보건·의료 제외 전망(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261014029051002",
+      "pubDate": "Wed, 14 Oct 2026 18:55:25 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "최장 16년 '초장기기술투자펀드' 운용사 7곳 선정…연말가동",
+      "link": "https://www.yna.co.kr/view/AKR20261014172900002",
+      "pubDate": "Wed, 14 Oct 2026 18:49:39 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "증선위 '매출 등 258억원 과대계상' 한주에이알티에 감사인지정",
+      "link": "https://www.yna.co.kr/view/AKR20261014169000002",
+      "pubDate": "Wed, 14 Oct 2026 18:36:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "에스원 자사주 4500억 공개매수…주주 달래기 나선다",
+      "link": "https://www.hankyung.com/article/202610142342i",
+      "pubDate": "Wed, 14 Oct 2026 18:30:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "5개월 새 거래액 2조원 늘었다…스위치원, 누적 8조원 돌파",
-      "link": "https://www.hankyung.com/article/2026101413246",
-      "pubDate": "Wed, 14 Oct 2026 13:29:18 +0900",
+      "title": "모디 만난 정의선 \"인도산 차량의 30% 해외 수출\"",
+      "link": "https://www.hankyung.com/article/2026101422701",
+      "pubDate": "Wed, 14 Oct 2026 18:28:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "위챗 문 열리자 화웨이·샤오미·오포 '우르르'…中 AI폰 전쟁 새 국면",
-      "link": "https://www.hankyung.com/article/202609156466i",
-      "pubDate": "Wed, 14 Oct 2026 13:00:05 +0900",
+      "title": "이재용 日 체류 중 삼성 경영진 총출동…\"매우 이례적\" 술렁",
+      "link": "https://www.hankyung.com/article/2026101422711",
+      "pubDate": "Wed, 14 Oct 2026 18:27:47 +0900",
       "source": "한국경제"
     },
     {
-      "title": "미닉스 음처기와 얼마나 닮았길래…쿠쿠, 디자인 소송서 최종 패소",
-      "link": "https://www.hankyung.com/article/202610141201i",
-      "pubDate": "Wed, 14 Oct 2026 12:11:49 +0900",
+      "title": "한화, 계열사 이사회 의장 '독립이사'에 맡긴다",
+      "link": "https://www.hankyung.com/article/2026101422751",
+      "pubDate": "Wed, 14 Oct 2026 18:27:07 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "다자외교 데뷔하는 이형일, G20 재무장관회의 참석차 방콕행",
+      "link": "https://www.yna.co.kr/view/AKR20261014151300002",
+      "pubDate": "Wed, 14 Oct 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261014162300011",
+      "pubDate": "Wed, 14 Oct 2026 18:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "청주 '신분평 에피트 더웨이시티' 3.3㎡당 1천489만원",
+      "link": "https://www.yna.co.kr/view/AKR20261014165300064",
+      "pubDate": "Wed, 14 Oct 2026 17:38:43 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
