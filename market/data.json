@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T20:43:27.886709+09:00",
+  "updatedAt": "2026-10-15T02:01:27.330009+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51670.1,
-      "change": -180.5,
-      "changePercent": -0.35,
+      "price": 51534.63,
+      "change": -135.47,
+      "changePercent": -0.26,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 27204.38,
-      "change": -41.52,
-      "changePercent": -0.15,
+      "price": 26807.09,
+      "change": -397.29,
+      "changePercent": -1.46,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1336.26,
-      "change": -3.87,
-      "changePercent": -0.29,
+      "price": 1343.5,
+      "change": 3.37,
+      "changePercent": 0.25,
       "currency": "KRW"
     }
   ],
@@ -88,37 +88,79 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 341.27,
-      "change": 0.3,
-      "changePercent": 0.09,
+      "price": 344.13,
+      "change": 2.86,
+      "changePercent": 0.84,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 375.23,
-      "change": -2.8,
-      "changePercent": -0.74,
+      "price": 367.46,
+      "change": -7.77,
+      "changePercent": -2.07,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 228.52,
-      "change": 2.2,
-      "changePercent": 0.97,
+      "price": 222.76,
+      "change": -5.76,
+      "changePercent": -2.52,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "오픈런은커녕 찬밥 신세…'국민성장펀드'에 무슨 일이",
+      "title": "예상 웃돈 CPI 여파에 美국채 투매…주가 하락·달러 연중최고",
+      "link": "https://www.hankyung.com/article/202610142609i",
+      "pubDate": "Wed, 14 Oct 2026 23:45:56 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 9월 소비자 물가 3.7% 상승…고유가에 인플레이션 압력",
+      "link": "https://www.hankyung.com/article/202610142600i",
+      "pubDate": "Wed, 14 Oct 2026 23:03:55 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 9월 소비자물가 3.7% 상승 예상치 상회…\"금리인상 압력\"",
+      "link": "https://www.hankyung.com/article/2026101425871",
+      "pubDate": "Wed, 14 Oct 2026 22:36:36 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"금리 동결 믿었는데\"…9월 물가 충격에 연준 셈법 복잡해져",
+      "link": "https://www.hankyung.com/article/202610142568i",
+      "pubDate": "Wed, 14 Oct 2026 22:26:48 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "취임 6주년 정의선 \"인도서 자동차 넘어 인프라·에너지 투자\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261014179651003",
+      "pubDate": "Wed, 14 Oct 2026 22:14:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 美 9월 소비자물가, 전년대비 3.7% 상승",
+      "link": "https://www.hankyung.com/article/202610142545i",
+      "pubDate": "Wed, 14 Oct 2026 21:33:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"3만9000원? 여기선 2000원\"…다이소 또 '난리' 뭐길래",
+      "link": "https://www.hankyung.com/article/2026101424707",
+      "pubDate": "Wed, 14 Oct 2026 20:35:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "없어서 못팔던 국민성장펀드, 넉 달 만에 증권사에 '밀어내기'",
       "link": "https://www.hankyung.com/article/2026101421721",
       "pubDate": "Wed, 14 Oct 2026 20:09:37 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"메모리 공급부족 곧 끝나?\"…JP모건,\"2028년까지도 부족\"",
+      "title": "\"메모리 공급부족 곧 끝나?\"…JP모건 \"2028년까지도 부족\"",
       "link": "https://www.hankyung.com/article/202610142408i",
       "pubDate": "Wed, 14 Oct 2026 20:09:08 +0900",
       "source": "한국경제"
@@ -148,12 +190,6 @@
       "source": "한국경제"
     },
     {
-      "title": "\"밤새워야 겨우 들어간다\"…품절 대란에 중고거래 10배 폭등 [덕질경제학]",
-      "link": "https://www.hankyung.com/article/202610141284H",
-      "pubDate": "Wed, 14 Oct 2026 19:29:01 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "당국 \"금융사 침해사고 발생 총 16곳…약 10만건 유출\"(종합2보)",
       "link": "https://www.yna.co.kr/view/AKR20261014134852002",
       "pubDate": "Wed, 14 Oct 2026 19:23:59 +0900",
@@ -164,12 +200,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261014005751003",
       "pubDate": "Wed, 14 Oct 2026 19:13:40 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "에스원, 자사주 4500억 매입·소각…기존 자사주도 없앤다",
-      "link": "https://www.hankyung.com/article/202610142354i",
-      "pubDate": "Wed, 14 Oct 2026 19:00:04 +0900",
-      "source": "한국경제"
     },
     {
       "title": "정부, 서비스산업발전기본법 재추진…보건·의료 제외 전망(종합)",
@@ -190,30 +220,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "에스원 자사주 4500억 공개매수…주주 달래기 나선다",
-      "link": "https://www.hankyung.com/article/202610142342i",
-      "pubDate": "Wed, 14 Oct 2026 18:30:29 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "모디 만난 정의선 \"인도산 차량의 30% 해외 수출\"",
-      "link": "https://www.hankyung.com/article/2026101422701",
-      "pubDate": "Wed, 14 Oct 2026 18:28:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이재용 日 체류 중 삼성 경영진 총출동…\"매우 이례적\" 술렁",
-      "link": "https://www.hankyung.com/article/2026101422711",
-      "pubDate": "Wed, 14 Oct 2026 18:27:47 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한화, 계열사 이사회 의장 '독립이사'에 맡긴다",
-      "link": "https://www.hankyung.com/article/2026101422751",
-      "pubDate": "Wed, 14 Oct 2026 18:27:07 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "다자외교 데뷔하는 이형일, G20 재무장관회의 참석차 방콕행",
       "link": "https://www.yna.co.kr/view/AKR20261014151300002",
       "pubDate": "Wed, 14 Oct 2026 18:00:01 +0900",
@@ -223,12 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
       "link": "https://www.yna.co.kr/view/AKR20261014162300011",
       "pubDate": "Wed, 14 Oct 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "청주 '신분평 에피트 더웨이시티' 3.3㎡당 1천489만원",
-      "link": "https://www.yna.co.kr/view/AKR20261014165300064",
-      "pubDate": "Wed, 14 Oct 2026 17:38:43 +0900",
       "source": "연합뉴스"
     }
   ]
