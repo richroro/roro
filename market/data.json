@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T02:01:27.330009+09:00",
+  "updatedAt": "2026-10-15T05:34:45.262570+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51534.63,
-      "change": -135.47,
-      "changePercent": -0.26,
+      "price": 51621.48,
+      "change": -48.62,
+      "changePercent": -0.09,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26807.09,
-      "change": -397.29,
-      "changePercent": -1.46,
+      "price": 26692.87,
+      "change": -511.51,
+      "changePercent": -1.88,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.5,
-      "change": 3.37,
-      "changePercent": 0.25,
+      "price": 1340.75,
+      "change": 0.62,
+      "changePercent": 0.05,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 344.13,
-      "change": 2.86,
-      "changePercent": 0.84,
+      "price": 342.96,
+      "change": 1.69,
+      "changePercent": 0.5,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 367.46,
-      "change": -7.77,
-      "changePercent": -2.07,
+      "price": 367.16,
+      "change": -8.07,
+      "changePercent": -2.15,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 222.76,
-      "change": -5.76,
-      "changePercent": -2.52,
+      "price": 221.3,
+      "change": -7.22,
+      "changePercent": -3.16,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "국제유가, 사우디 아람코 피격·IEA 공급 경고에 상승",
+      "link": "https://www.yna.co.kr/view/AKR20261015005800072",
+      "pubDate": "Thu, 15 Oct 2026 05:25:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美가 때릴수록 더 잘나가네…中 반도체 수출 136% 폭증 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610142548i",
+      "pubDate": "Thu, 15 Oct 2026 04:33:01 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "예상 웃돈 CPI 여파에 美국채 투매…주가 하락·달러 연중최고",
       "link": "https://www.hankyung.com/article/202610142609i",
@@ -154,7 +166,7 @@
       "source": "한국경제"
     },
     {
-      "title": "없어서 못팔던 국민성장펀드, 넉 달 만에 증권사에 '밀어내기'",
+      "title": "오픈런은커녕 찬밥 신세…'국민성장펀드'에 무슨 일이",
       "link": "https://www.hankyung.com/article/2026101421721",
       "pubDate": "Wed, 14 Oct 2026 20:09:37 +0900",
       "source": "한국경제"
@@ -182,12 +194,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261014179600003",
       "pubDate": "Wed, 14 Oct 2026 19:45:40 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "ASML \"30% 증산해도 부족\"…2030년까지 AI칩 장비 주문",
-      "link": "https://www.hankyung.com/article/202610141990i",
-      "pubDate": "Wed, 14 Oct 2026 19:29:30 +0900",
-      "source": "한국경제"
     },
     {
       "title": "당국 \"금융사 침해사고 발생 총 16곳…약 10만건 유출\"(종합2보)",
@@ -223,12 +229,6 @@
       "title": "다자외교 데뷔하는 이형일, G20 재무장관회의 참석차 방콕행",
       "link": "https://www.yna.co.kr/view/AKR20261014151300002",
       "pubDate": "Wed, 14 Oct 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261014162300011",
-      "pubDate": "Wed, 14 Oct 2026 18:00:00 +0900",
       "source": "연합뉴스"
     }
   ]
