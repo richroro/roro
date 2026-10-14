@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-12",
-  "updated": "2026-10-13T06:48:24+00:00",
+  "date": "2026-10-13",
+  "updated": "2026-10-14T04:55:41+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "암살자(들)",
       "open": "2026-09-23",
-      "share": 23.9,
-      "audience": 30673,
-      "total": 3023216,
-      "screens": 1017
+      "share": 25.0,
+      "audience": 32851,
+      "total": 3057414,
+      "screens": 1044
     },
     {
       "rank": 2,
       "title": "극장판 치이카와: 인어 섬의 비밀",
       "open": "2026-09-30",
-      "share": 25.1,
-      "audience": 30094,
-      "total": 1311577,
-      "screens": 779
+      "share": 23.3,
+      "audience": 28245,
+      "total": 1339815,
+      "screens": 811
     },
     {
       "rank": 3,
       "title": "타짜: 벨제붑의 노래",
       "open": "2026-09-23",
-      "share": 15.3,
-      "audience": 18997,
-      "total": 1763157,
-      "screens": 782
+      "share": 15.5,
+      "audience": 19572,
+      "total": 1783337,
+      "screens": 772
     },
     {
       "rank": 4,
       "title": "오디세이",
       "open": "2026-08-05",
-      "share": 11.3,
-      "audience": 9475,
-      "total": 12188629,
-      "screens": 486
+      "share": 10.8,
+      "audience": 9175,
+      "total": 12197802,
+      "screens": 487
     },
     {
       "rank": 5,
-      "title": "룩백",
-      "open": "2026-10-08",
-      "share": 3.9,
-      "audience": 4611,
-      "total": 66994,
-      "screens": 274
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 3.0,
+      "audience": 4330,
+      "total": 878478,
+      "screens": 258
     },
     {
       "rank": 6,
-      "title": "부활남: 더 레드",
-      "open": "2026-09-30",
-      "share": 3.6,
-      "audience": 4425,
-      "total": 306774,
-      "screens": 517
+      "title": "룩백",
+      "open": "2026-10-08",
+      "share": 3.5,
+      "audience": 4228,
+      "total": 71222,
+      "screens": 273
     },
     {
       "rank": 7,
-      "title": "입에 대한 앙케트",
-      "open": "2026-10-07",
-      "share": 2.6,
-      "audience": 3168,
-      "total": 53641,
-      "screens": 421
+      "title": "부활남: 더 레드",
+      "open": "2026-09-30",
+      "share": 3.3,
+      "audience": 4107,
+      "total": 311086,
+      "screens": 507
     },
     {
       "rank": 8,
-      "title": "인턴",
-      "open": "2026-09-16",
-      "share": 2.2,
-      "audience": 2920,
-      "total": 874223,
-      "screens": 235
+      "title": "입에 대한 앙케트",
+      "open": "2026-10-07",
+      "share": 2.8,
+      "audience": 3648,
+      "total": 57287,
+      "screens": 413
     },
     {
       "rank": 9,
       "title": "디거",
       "open": "2026-10-03",
-      "share": 2.0,
-      "audience": 2422,
-      "total": 72919,
-      "screens": 271
+      "share": 2.5,
+      "audience": 2956,
+      "total": 75920,
+      "screens": 287
     },
     {
       "rank": 10,
       "title": "옵세션",
       "open": "2026-09-02",
       "share": 1.8,
-      "audience": 2031,
-      "total": 957167,
-      "screens": 170
+      "audience": 1990,
+      "total": 959153,
+      "screens": 166
     }
   ]
 }
