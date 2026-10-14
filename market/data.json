@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T05:34:45.262570+09:00",
+  "updatedAt": "2026-10-15T08:50:55.154897+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1340.75,
-      "change": 0.62,
-      "changePercent": 0.05,
+      "price": 1339.99,
+      "change": -0.87,
+      "changePercent": -0.06,
       "currency": "KRW"
     }
   ],
@@ -112,15 +112,117 @@
   ],
   "news": [
     {
-      "title": "국제유가, 사우디 아람코 피격·IEA 공급 경고에 상승",
-      "link": "https://www.yna.co.kr/view/AKR20261015005800072",
-      "pubDate": "Thu, 15 Oct 2026 05:25:03 +0900",
+      "title": "삼성웰스토리, 경북 중소기업 상품 활용 급식 메뉴 선봬",
+      "link": "https://www.yna.co.kr/view/AKR20261015027200030",
+      "pubDate": "Thu, 15 Oct 2026 08:40:45 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "美가 때릴수록 더 잘나가네…中 반도체 수출 136% 폭증 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610142548i",
-      "pubDate": "Thu, 15 Oct 2026 04:33:01 +0900",
+      "title": "무보·BNK경남은행, 동남권 수출기업에 78억원 우대금융 지원",
+      "link": "https://www.yna.co.kr/view/AKR20261015024600003",
+      "pubDate": "Thu, 15 Oct 2026 08:39:57 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "DS증권, CJ프레시웨이 목표가↓…\"3분기 실적 기대치 하회전망\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015025800008",
+      "pubDate": "Thu, 15 Oct 2026 08:34:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신한증권 \"현대건설, 원전 수주 불확실성\"…목표주가 하향",
+      "link": "https://www.yna.co.kr/view/AKR20261015025400008",
+      "pubDate": "Thu, 15 Oct 2026 08:32:38 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "SK증권 \"KT, 4분기 실적 반등 가능성…지금이 매수 적기\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015025300008",
+      "pubDate": "Thu, 15 Oct 2026 08:31:34 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "경제인협회 류진 \"한미 전략투자 실행 단계…이제 기업의 시간\"",
+      "link": "https://www.yna.co.kr/view/AKR20261014188100003",
+      "pubDate": "Thu, 15 Oct 2026 08:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[부산소식] 부산터널 19∼29일 심야 교통통제…제연설비 설치",
+      "link": "https://www.yna.co.kr/view/AKR20261015024700051",
+      "pubDate": "Thu, 15 Oct 2026 08:28:46 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "공연으로 즐기는 한국 여행…관광공사, '코리아 인 모션' 캠페인 전개",
+      "link": "https://www.hankyung.com/article/202610152903g",
+      "pubDate": "Thu, 15 Oct 2026 08:27:37 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"끼니만 때우던 편의점은 옛말\"…이마트24의 새로운 실험",
+      "link": "https://www.hankyung.com/article/202610152834g",
+      "pubDate": "Thu, 15 Oct 2026 08:27:18 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한투증권 \"KT&G, 증시 불확실성 높을 때 편안한 방어주\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015024200008",
+      "pubDate": "Thu, 15 Oct 2026 08:26:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[밤 사이 해외뉴스 영상] \"금리 7.4% 충격\" 매물 쌓이는데 거래 빙하기…미국 집값 터지나",
+      "link": "https://www.hankyung.com/article/202610152900i",
+      "pubDate": "Thu, 15 Oct 2026 08:23:50 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "DB증권, 한화솔루션 목표가 하향·투자의견은 상향…\"낙폭 과대\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015021800008",
+      "pubDate": "Thu, 15 Oct 2026 08:23:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[밤 사이 해외뉴스] \"순익 14% 뛰었는데 주가는 왜 폭락?\" 월가가 떨고 있는 이유",
+      "link": "https://www.hankyung.com/article/202610152859i",
+      "pubDate": "Thu, 15 Oct 2026 08:12:57 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"요즘 애들도 이걸 입는다고?\"…1020 꽂히더니 매출 '대반전'",
+      "link": "https://www.hankyung.com/article/2026101420961",
+      "pubDate": "Thu, 15 Oct 2026 08:00:14 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "지그재그, 16일부터 성수동서 팝업스토어…쇼핑몰 50곳 참여",
+      "link": "https://www.yna.co.kr/view/AKR20261014142400030",
+      "pubDate": "Thu, 15 Oct 2026 08:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "화웨이의 반도체 굴기…'로직폴딩'으로 EUV 벽 넘는다",
+      "link": "https://www.hankyung.com/article/202610141879i",
+      "pubDate": "Thu, 15 Oct 2026 08:00:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 물가 충격에 금값 1.8% 급락…Fed 금리 인상론 확산",
+      "link": "https://www.hankyung.com/article/202610152810i",
+      "pubDate": "Thu, 15 Oct 2026 07:48:13 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"AI로 돈 쓸어 담는다더니\"…IMF가 경고한 이유 [분석+]",
+      "link": "https://www.hankyung.com/article/202610140981g",
+      "pubDate": "Thu, 15 Oct 2026 07:00:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"비싼 돈 주고 포르쉐 샀는데\"…5년 만에 벌어진 일 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610142514i",
+      "pubDate": "Thu, 15 Oct 2026 06:00:01 +0900",
       "source": "한국경제"
     },
     {
@@ -128,108 +230,6 @@
       "link": "https://www.hankyung.com/article/202610142609i",
       "pubDate": "Wed, 14 Oct 2026 23:45:56 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "美 9월 소비자 물가 3.7% 상승…고유가에 인플레이션 압력",
-      "link": "https://www.hankyung.com/article/202610142600i",
-      "pubDate": "Wed, 14 Oct 2026 23:03:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美 9월 소비자물가 3.7% 상승 예상치 상회…\"금리인상 압력\"",
-      "link": "https://www.hankyung.com/article/2026101425871",
-      "pubDate": "Wed, 14 Oct 2026 22:36:36 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"금리 동결 믿었는데\"…9월 물가 충격에 연준 셈법 복잡해져",
-      "link": "https://www.hankyung.com/article/202610142568i",
-      "pubDate": "Wed, 14 Oct 2026 22:26:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "취임 6주년 정의선 \"인도서 자동차 넘어 인프라·에너지 투자\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261014179651003",
-      "pubDate": "Wed, 14 Oct 2026 22:14:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] 美 9월 소비자물가, 전년대비 3.7% 상승",
-      "link": "https://www.hankyung.com/article/202610142545i",
-      "pubDate": "Wed, 14 Oct 2026 21:33:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"3만9000원? 여기선 2000원\"…다이소 또 '난리' 뭐길래",
-      "link": "https://www.hankyung.com/article/2026101424707",
-      "pubDate": "Wed, 14 Oct 2026 20:35:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "오픈런은커녕 찬밥 신세…'국민성장펀드'에 무슨 일이",
-      "link": "https://www.hankyung.com/article/2026101421721",
-      "pubDate": "Wed, 14 Oct 2026 20:09:37 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"메모리 공급부족 곧 끝나?\"…JP모건 \"2028년까지도 부족\"",
-      "link": "https://www.hankyung.com/article/202610142408i",
-      "pubDate": "Wed, 14 Oct 2026 20:09:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "신발·화장품도 속속 입점…왜 배달앱으로 몰리나 [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202610141869i",
-      "pubDate": "Wed, 14 Oct 2026 20:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "신현송 한은 총재, 중·일 중앙은행 총재와 경제동향 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261014176200002",
-      "pubDate": "Wed, 14 Oct 2026 20:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "취임 6주년에 인도 찾은 정의선 \"상당히 중요한 이정표\"",
-      "link": "https://www.yna.co.kr/view/AKR20261014179600003",
-      "pubDate": "Wed, 14 Oct 2026 19:45:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "당국 \"금융사 침해사고 발생 총 16곳…약 10만건 유출\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261014134852002",
-      "pubDate": "Wed, 14 Oct 2026 19:23:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "인도서 '제2의 도약' 나선 현대차, 연 150만대 생산한다(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261014005751003",
-      "pubDate": "Wed, 14 Oct 2026 19:13:40 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정부, 서비스산업발전기본법 재추진…보건·의료 제외 전망(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261014029051002",
-      "pubDate": "Wed, 14 Oct 2026 18:55:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "최장 16년 '초장기기술투자펀드' 운용사 7곳 선정…연말가동",
-      "link": "https://www.yna.co.kr/view/AKR20261014172900002",
-      "pubDate": "Wed, 14 Oct 2026 18:49:39 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "증선위 '매출 등 258억원 과대계상' 한주에이알티에 감사인지정",
-      "link": "https://www.yna.co.kr/view/AKR20261014169000002",
-      "pubDate": "Wed, 14 Oct 2026 18:36:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "다자외교 데뷔하는 이형일, G20 재무장관회의 참석차 방콕행",
-      "link": "https://www.yna.co.kr/view/AKR20261014151300002",
-      "pubDate": "Wed, 14 Oct 2026 18:00:01 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
