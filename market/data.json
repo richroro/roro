@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T18:45:24.624607+09:00",
+  "updatedAt": "2026-10-15T23:50:45.965603+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51621.48,
-      "change": -48.62,
-      "changePercent": -0.09,
+      "price": 51996.88,
+      "change": 375.4,
+      "changePercent": 0.73,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26692.87,
-      "change": -511.51,
-      "changePercent": -1.88,
+      "price": 26531.05,
+      "change": -161.82,
+      "changePercent": -0.61,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.72,
-      "change": 2.86,
-      "changePercent": 0.21,
+      "price": 1344.08,
+      "change": 3.22,
+      "changePercent": 0.24,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,131 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.96,
-      "change": 1.69,
-      "changePercent": 0.5,
+      "price": 344.52,
+      "change": 1.56,
+      "changePercent": 0.45,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 367.16,
-      "change": -8.07,
-      "changePercent": -2.15,
+      "price": 360.74,
+      "change": -6.43,
+      "changePercent": -1.75,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 221.3,
-      "change": -7.22,
-      "changePercent": -3.16,
+      "price": 216.55,
+      "change": -4.75,
+      "changePercent": -2.15,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "뉴욕시 감사관,\"안전 우려 해소될때까지 앤트로픽 IPO연기\"촉구",
+      "link": "https://www.hankyung.com/article/202610155093i",
+      "pubDate": "Thu, 15 Oct 2026 23:03:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美 9월 소매 판매 0.8% 증가…차·휘발유 제외시 0.2% 증가 그쳐",
+      "link": "https://www.hankyung.com/article/202610155088i",
+      "pubDate": "Thu, 15 Oct 2026 22:34:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"10만원까지 가라\"…주가 폭락에 웃는 삼성전자 직원들, 왜?",
+      "link": "https://www.hankyung.com/article/2026101550767",
+      "pubDate": "Thu, 15 Oct 2026 22:32:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"기름값 때문에\"…9월 CPI이어 PPI도 급등 쇼크",
+      "link": "https://www.hankyung.com/article/202610155072i",
+      "pubDate": "Thu, 15 Oct 2026 22:18:22 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"삼전닉스 턱밑까지 추격\" 초긴장…몸집 불리는 中 기업 정체",
+      "link": "https://www.hankyung.com/article/202610155055g",
+      "pubDate": "Thu, 15 Oct 2026 21:43:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[속보] 美 9월 PPI 1.3% 올라 연 6.3%↑…4년여 만에 최고",
+      "link": "https://www.hankyung.com/article/202610155029i",
+      "pubDate": "Thu, 15 Oct 2026 21:37:22 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이소영 장관 \"대전은 가장 앞서나가는 창업도시 성공사례 될 것\"",
+      "link": "https://www.hankyung.com/article/202610154878i",
+      "pubDate": "Thu, 15 Oct 2026 21:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "40년 바다 지킨 포항 해녀, FAO 여성 인재 100인에 선정",
+      "link": "https://www.yna.co.kr/view/AKR20261015057000051",
+      "pubDate": "Thu, 15 Oct 2026 21:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이소영 장관 \"창업도시, 지정 넘어 실질적 창업거점 돼야\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015171000030",
+      "pubDate": "Thu, 15 Oct 2026 21:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "2차 국민성장펀드 목표액 못 채웠다…전체 86.6% 판매",
+      "link": "https://www.yna.co.kr/view/AKR20261015174800002",
+      "pubDate": "Thu, 15 Oct 2026 20:15:54 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "앤스로픽 3분기 매출 45%성장에 첫 흑자…월가는 시큰둥",
+      "link": "https://www.hankyung.com/article/202610154978i",
+      "pubDate": "Thu, 15 Oct 2026 20:10:36 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"없어서 못 팔았는데…\" 가을만 되면 불티나는 음료 뭐길래 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202610154559g",
+      "pubDate": "Thu, 15 Oct 2026 20:02:28 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"5년 전 주담대 받았는데…\" 직격탄 맞은 영끌족 '어쩌나'",
+      "link": "https://www.hankyung.com/article/2026101547071",
+      "pubDate": "Thu, 15 Oct 2026 20:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "박진선 샘표 대표, '우리맛문화재단' 설립…한식 세계화 지원",
+      "link": "https://www.yna.co.kr/view/AKR20261015174200030",
+      "pubDate": "Thu, 15 Oct 2026 19:43:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이소영 장관 \"딥테크에 장기 인내자본 필요…부처 간 검토\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015173600030",
+      "pubDate": "Thu, 15 Oct 2026 19:38:25 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이나인페이·이노보테라퓨틱스 등 4개사, 코스닥 상장예심 통과",
+      "link": "https://www.yna.co.kr/view/AKR20261015172200008",
+      "pubDate": "Thu, 15 Oct 2026 19:16:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "식약처, '특발성 폐섬유증 치료' 희귀의약품 허가",
+      "link": "https://www.yna.co.kr/view/AKR20261015170800017",
+      "pubDate": "Thu, 15 Oct 2026 19:02:18 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "'OLED 소재업체' 에스에프씨, 코스피 신규상장 예비심사 통과",
       "link": "https://www.yna.co.kr/view/AKR20261015168700008",
@@ -128,108 +230,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261015115451001",
       "pubDate": "Thu, 15 Oct 2026 18:32:13 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "신보 \"재도전·재창업 관련 연대보증 폐지 적극 검토\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015165200002",
-      "pubDate": "Thu, 15 Oct 2026 18:14:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[단독] 보금자리론 채무조정 올들어 1.4만건…5년 새 4배 이상 급증",
-      "link": "https://www.hankyung.com/article/2026101547051",
-      "pubDate": "Thu, 15 Oct 2026 18:12:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "하나금융, 인천서 중장년 취업지원 행사",
-      "link": "https://www.hankyung.com/article/2026101548401",
-      "pubDate": "Thu, 15 Oct 2026 18:09:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'수의계약·가격비교 면제'…조달청 '우수제품'이 뭐길래",
-      "link": "https://www.yna.co.kr/view/AKR20261015164600063",
-      "pubDate": "Thu, 15 Oct 2026 18:06:24 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "새마을금고, 아동복지시설에 농산물 전달",
-      "link": "https://www.hankyung.com/article/2026101548371",
-      "pubDate": "Thu, 15 Oct 2026 18:06:19 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "9월 기준 서울 민간아파트 분양가 전월과 동일",
-      "link": "https://www.yna.co.kr/view/AKR20261015165400003",
-      "pubDate": "Thu, 15 Oct 2026 18:05:22 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국민 25% '노인·장애인'인데…준비 안된 한국사회",
-      "link": "https://www.hankyung.com/article/2026101548281",
-      "pubDate": "Thu, 15 Oct 2026 18:03:14 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"처음 보는 난민과 삽니다\"…이방인을 집으로 들인 '이 나라'",
-      "link": "https://www.hankyung.com/article/2026101548251",
-      "pubDate": "Thu, 15 Oct 2026 18:02:37 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "부산 이전 금융기관, 부산은행 예치 14.9%…지역인재 채용 미달",
-      "link": "https://www.yna.co.kr/view/AKR20261015161600051",
-      "pubDate": "Thu, 15 Oct 2026 18:00:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"관세청이 송치한 1천582건 처리는?\"…공소청 \"순차 처리\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261014168151002",
-      "pubDate": "Thu, 15 Oct 2026 18:00:36 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261015157700011",
-      "pubDate": "Thu, 15 Oct 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한·일 100억달러 규모…통화스와프 3년 연장",
-      "link": "https://www.hankyung.com/article/2026101547901",
-      "pubDate": "Thu, 15 Oct 2026 17:59:35 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "상반기 37개 사업장 중대재해 처벌",
-      "link": "https://www.hankyung.com/article/2026101547841",
-      "pubDate": "Thu, 15 Oct 2026 17:56:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'다름'이 '틀림'이 된 韓…끌어안는 연습을 하자",
-      "link": "https://www.hankyung.com/article/2026101548631",
-      "pubDate": "Thu, 15 Oct 2026 17:56:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HMM, 컨테이너선 12척에 2조2천억원 투자…\"선대 경쟁력 강화\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015164200003",
-      "pubDate": "Thu, 15 Oct 2026 17:53:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[단독] 金 3700만원어치 카드 긁더니…\"안 갚을래요\" 황당",
-      "link": "https://www.hankyung.com/article/2026101547061",
-      "pubDate": "Thu, 15 Oct 2026 17:52:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] 서민 주택대출 연체 4배 넘게 늘었다",
-      "link": "https://www.hankyung.com/article/2026101548641",
-      "pubDate": "Thu, 15 Oct 2026 17:49:32 +0900",
-      "source": "한국경제"
     }
   ]
 }
