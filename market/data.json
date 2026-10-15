@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T04:01:39.487438+09:00",
+  "updatedAt": "2026-10-16T07:08:17.987424+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52143.5,
-      "change": 522.02,
-      "changePercent": 1.01,
+      "price": 52177.69,
+      "change": 556.21,
+      "changePercent": 1.08,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26659.02,
-      "change": -33.85,
-      "changePercent": -0.13,
+      "price": 26713.03,
+      "change": 20.16,
+      "changePercent": 0.08,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1342.01,
-      "change": 1.15,
-      "changePercent": 0.09,
+      "price": 1341.22,
+      "change": 0.36,
+      "changePercent": 0.03,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,101 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.43,
-      "change": -0.53,
-      "changePercent": -0.16,
+      "price": 342.0,
+      "change": -0.96,
+      "changePercent": -0.28,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 361.58,
-      "change": -5.58,
-      "changePercent": -1.52,
+      "price": 362.44,
+      "change": -4.72,
+      "changePercent": -1.29,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.73,
-      "change": -3.57,
-      "changePercent": -1.61,
+      "price": 217.23,
+      "change": -4.07,
+      "changePercent": -1.84,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "무료체험 뒤 자동결제에 해지도 어려워…다크패턴 상담 잇따라",
+      "link": "https://www.yna.co.kr/view/AKR20261015108700017",
+      "pubDate": "Fri, 16 Oct 2026 06:45:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신한은행, 보안예산은 5대 은행 최저",
+      "link": "https://www.hankyung.com/article/2026101651787",
+      "pubDate": "Fri, 16 Oct 2026 06:13:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "5인미만사업장 노동법위반 신고 20만건 육박…83%가 금품 미지급",
+      "link": "https://www.yna.co.kr/view/AKR20261015160000530",
+      "pubDate": "Fri, 16 Oct 2026 06:07:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "건설현장 전자카드 발급률 90%인데 사용률은 75% 머물러",
+      "link": "https://www.yna.co.kr/view/AKR20261015148200530",
+      "pubDate": "Fri, 16 Oct 2026 06:05:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "해수부, 제주∼추자∼완도 항로 운항결손금 지원",
+      "link": "https://www.yna.co.kr/view/AKR20261015113800051",
+      "pubDate": "Fri, 16 Oct 2026 06:00:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성전기 8조 투자 이어 SK 반도체 소재기업 세종공장 확장 추진",
+      "link": "https://www.yna.co.kr/view/AKR20261015156600063",
+      "pubDate": "Fri, 16 Oct 2026 06:00:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "경제인협회, 미국 싱크탱크와 한국 성장전략 모색…이창용 대담",
+      "link": "https://www.yna.co.kr/view/AKR20261015167000003",
+      "pubDate": "Fri, 16 Oct 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"돈 쏟아부었는데 어쩌나\"…4700조 AI 투자에 섬뜩한 '경고' [분석+]",
+      "link": "https://www.hankyung.com/article/202610154868g",
+      "pubDate": "Fri, 16 Oct 2026 06:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "환율 내렸지만 유가 올라서…9월 수입물가 넉 달만에 상승",
+      "link": "https://www.yna.co.kr/view/AKR20261015160300002",
+      "pubDate": "Fri, 16 Oct 2026 06:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"눈만 깜빡이면 결제\"…알리바바 가세에 불붙은 AI 안경 전쟁 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610155121i",
+      "pubDate": "Fri, 16 Oct 2026 05:53:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "올해 은행 정보보호예산 KB가 최다…신한·우리는 10% 이상 감소",
+      "link": "https://www.yna.co.kr/view/AKR20261014175600002",
+      "pubDate": "Fri, 16 Oct 2026 05:51:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美, '이슬람 십일조' 포함 對이란 종교기부금 송금 옥죄기",
+      "link": "https://www.yna.co.kr/view/AKR20261016005000071",
+      "pubDate": "Fri, 16 Oct 2026 05:26:19 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "하늘 나는 테슬라 로드스터…스페이스X의 테슬라 인수 큰그림?",
       "link": "https://www.hankyung.com/article/202610165127i",
@@ -154,81 +226,9 @@
       "source": "한국경제"
     },
     {
-      "title": "이소영 장관 \"대전은 가장 앞서나가는 창업도시 성공사례 될 것\"",
-      "link": "https://www.hankyung.com/article/202610154878i",
-      "pubDate": "Thu, 15 Oct 2026 21:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "40년 바다 지킨 포항 해녀, FAO 여성 인재 100인에 선정",
       "link": "https://www.yna.co.kr/view/AKR20261015057000051",
       "pubDate": "Thu, 15 Oct 2026 21:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이소영 장관 \"창업도시, 지정 넘어 실질적 창업거점 돼야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015171000030",
-      "pubDate": "Thu, 15 Oct 2026 21:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "2차 국민성장펀드 목표액 못 채웠다…전체 86.6% 판매",
-      "link": "https://www.yna.co.kr/view/AKR20261015174800002",
-      "pubDate": "Thu, 15 Oct 2026 20:15:54 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "앤스로픽 3분기 매출 45%성장에 첫 흑자…월가는 시큰둥",
-      "link": "https://www.hankyung.com/article/202610154978i",
-      "pubDate": "Thu, 15 Oct 2026 20:10:36 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"없어서 못 팔았는데…\" 가을만 되면 불티나는 음료 뭐길래 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202610154559g",
-      "pubDate": "Thu, 15 Oct 2026 20:02:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "박진선 샘표 대표, '우리맛문화재단' 설립…한식 세계화 지원",
-      "link": "https://www.yna.co.kr/view/AKR20261015174200030",
-      "pubDate": "Thu, 15 Oct 2026 19:43:20 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이소영 장관 \"딥테크에 장기 인내자본 필요…부처 간 검토\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015173600030",
-      "pubDate": "Thu, 15 Oct 2026 19:38:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이나인페이·이노보테라퓨틱스 등 4개사, 코스닥 상장예심 통과",
-      "link": "https://www.yna.co.kr/view/AKR20261015172200008",
-      "pubDate": "Thu, 15 Oct 2026 19:16:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "식약처, '특발성 폐섬유증 치료' 희귀의약품 허가",
-      "link": "https://www.yna.co.kr/view/AKR20261015170800017",
-      "pubDate": "Thu, 15 Oct 2026 19:02:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'OLED 소재업체' 에스에프씨, 코스피 신규상장 예비심사 통과",
-      "link": "https://www.yna.co.kr/view/AKR20261015168700008",
-      "pubDate": "Thu, 15 Oct 2026 18:34:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "올해 상반기 대형GA 수입보험료 10조원 넘어…작년 比 16.4%↑",
-      "link": "https://www.yna.co.kr/view/AKR20261015168300002",
-      "pubDate": "Thu, 15 Oct 2026 18:33:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "李대통령 \"출범 500일…주요 지표 우수에도 민생회복 속도 더뎌\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261015115451001",
-      "pubDate": "Thu, 15 Oct 2026 18:32:13 +0900",
       "source": "연합뉴스"
     }
   ]
