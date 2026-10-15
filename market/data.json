@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-15T13:23:05.207180+09:00",
+  "updatedAt": "2026-10-15T18:45:24.624607+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 5527.12,
-      "change": -481.69,
-      "changePercent": -8.02,
+      "price": 5554.22,
+      "change": -454.59,
+      "changePercent": -7.57,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 756.29,
-      "change": -67.59,
-      "changePercent": -8.2,
+      "price": 760.82,
+      "change": -76.21,
+      "changePercent": -9.1,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1349.18,
-      "change": 8.32,
-      "changePercent": 0.62,
+      "price": 1343.72,
+      "change": 2.86,
+      "changePercent": 0.21,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 209500.0,
-      "change": -22500.0,
-      "changePercent": -9.7,
+      "price": 210000.0,
+      "change": -22000.0,
+      "changePercent": -9.48,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1258000.0,
-      "change": -161000.0,
-      "changePercent": -11.35,
+      "price": 1262000.0,
+      "change": -157000.0,
+      "changePercent": -11.06,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 172100.0,
-      "change": -7300.0,
-      "changePercent": -4.07,
+      "price": 173600.0,
+      "change": -5800.0,
+      "changePercent": -3.23,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 30500.0,
-      "change": -1200.0,
-      "changePercent": -3.79,
+      "price": 31000.0,
+      "change": -700.0,
+      "changePercent": -2.21,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 399000.0,
-      "change": -23000.0,
-      "changePercent": -5.45,
+      "price": 402500.0,
+      "change": -19500.0,
+      "changePercent": -4.62,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "현대차그룹 장재훈 \"AI·스타트업 등 인도 신사업에 4조 투자\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015003200003",
-      "pubDate": "Thu, 15 Oct 2026 13:00:02 +0900",
+      "title": "'OLED 소재업체' 에스에프씨, 코스피 신규상장 예비심사 통과",
+      "link": "https://www.yna.co.kr/view/AKR20261015168700008",
+      "pubDate": "Thu, 15 Oct 2026 18:34:50 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "중소기업 청년 \"임금격차 줄이는 것 넘어 청약·주거지원 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015086100530",
-      "pubDate": "Thu, 15 Oct 2026 13:00:01 +0900",
+      "title": "올해 상반기 대형GA 수입보험료 10조원 넘어…작년 比 16.4%↑",
+      "link": "https://www.yna.co.kr/view/AKR20261015168300002",
+      "pubDate": "Thu, 15 Oct 2026 18:33:46 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "코트라 \"대일본 수출 2030년까지 350억달러로 확대\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015087900003",
-      "pubDate": "Thu, 15 Oct 2026 13:00:01 +0900",
+      "title": "李대통령 \"출범 500일…주요 지표 우수에도 민생회복 속도 더뎌\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261015115451001",
+      "pubDate": "Thu, 15 Oct 2026 18:32:13 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[속보] 코스닥 이어 코스피도 거래재개…서킷브레이커 해제",
-      "link": "https://www.yna.co.kr/view/AKR20261015095300008",
-      "pubDate": "Thu, 15 Oct 2026 12:59:04 +0900",
+      "title": "신보 \"재도전·재창업 관련 연대보증 폐지 적극 검토\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015165200002",
+      "pubDate": "Thu, 15 Oct 2026 18:14:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "소진공 \"홈플러스 입점업체 긴급자금 금리 인하 적극 협의\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015094500030",
-      "pubDate": "Thu, 15 Oct 2026 12:56:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "코스피·코스닥 1단계 서킷브레이커 발동…8% 넘게 폭락(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261015093551008",
-      "pubDate": "Thu, 15 Oct 2026 12:45:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] 코스닥, 거래재개…20분간 매매중단 후 서킷브레이커 해제",
-      "link": "https://www.yna.co.kr/view/AKR20261015094300008",
-      "pubDate": "Thu, 15 Oct 2026 12:44:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국토부 \"주간 아파트값 통계, 전문가는 조정·국민은 공표 원해\"",
-      "link": "https://www.yna.co.kr/view/AKR20261015091600003",
-      "pubDate": "Thu, 15 Oct 2026 12:42:41 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[속보] 코스닥 이어 코스피도 1단계 서킷브레이커 발동",
-      "link": "https://www.yna.co.kr/view/AKR20261015093900008",
-      "pubDate": "Thu, 15 Oct 2026 12:39:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "코스닥 8%대 폭락에 서킷브레이커 발동…20분간 거래 중단",
-      "link": "https://www.yna.co.kr/view/AKR20261015093500008",
-      "pubDate": "Thu, 15 Oct 2026 12:32:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "美 물가 4% 찍나…커지는 美 최종금리 상향 공포 [심성미의 중앙은행 워치]",
-      "link": "https://www.hankyung.com/article/202610153743i",
-      "pubDate": "Thu, 15 Oct 2026 12:10:57 +0900",
+      "title": "[단독] 보금자리론 채무조정 올들어 1.4만건…5년 새 4배 이상 급증",
+      "link": "https://www.hankyung.com/article/2026101547051",
+      "pubDate": "Thu, 15 Oct 2026 18:12:10 +0900",
       "source": "한국경제"
     },
     {
-      "title": "8000만원 인허가 비용 최저 200만원으로 '뚝'…사업자 부담 확 줄인다",
-      "link": "https://www.hankyung.com/article/202610153753i",
-      "pubDate": "Thu, 15 Oct 2026 12:00:12 +0900",
+      "title": "하나금융, 인천서 중장년 취업지원 행사",
+      "link": "https://www.hankyung.com/article/2026101548401",
+      "pubDate": "Thu, 15 Oct 2026 18:09:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "2차 '모두의 창업' 1만명 선발…40%가 '재수생'",
-      "link": "https://www.hankyung.com/article/202610153213i",
-      "pubDate": "Thu, 15 Oct 2026 12:00:04 +0900",
+      "title": "'수의계약·가격비교 면제'…조달청 '우수제품'이 뭐길래",
+      "link": "https://www.yna.co.kr/view/AKR20261015164600063",
+      "pubDate": "Thu, 15 Oct 2026 18:06:24 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "새마을금고, 아동복지시설에 농산물 전달",
+      "link": "https://www.hankyung.com/article/2026101548371",
+      "pubDate": "Thu, 15 Oct 2026 18:06:19 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"물먹는 하마 잡는다\"…수도요금 줄일 '이곳' 기술",
-      "link": "https://www.hankyung.com/article/202610153745i",
-      "pubDate": "Thu, 15 Oct 2026 12:00:02 +0900",
+      "title": "9월 기준 서울 민간아파트 분양가 전월과 동일",
+      "link": "https://www.yna.co.kr/view/AKR20261015165400003",
+      "pubDate": "Thu, 15 Oct 2026 18:05:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국민 25% '노인·장애인'인데…준비 안된 한국사회",
+      "link": "https://www.hankyung.com/article/2026101548281",
+      "pubDate": "Thu, 15 Oct 2026 18:03:14 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"잠옷에 20만원 썼어요\"…외국인들도 지갑 연 '이곳' [박수림의 요즘 여기]",
-      "link": "https://www.hankyung.com/article/202610153085g",
-      "pubDate": "Thu, 15 Oct 2026 11:22:44 +0900",
+      "title": "\"처음 보는 난민과 삽니다\"…이방인을 집으로 들인 '이 나라'",
+      "link": "https://www.hankyung.com/article/2026101548251",
+      "pubDate": "Thu, 15 Oct 2026 18:02:37 +0900",
       "source": "한국경제"
     },
     {
-      "title": "유럽 37개 은행 뭉쳐…'유로코인' 발행 시동 걸렸다",
-      "link": "https://www.hankyung.com/article/202610153613i",
-      "pubDate": "Thu, 15 Oct 2026 11:15:32 +0900",
+      "title": "부산 이전 금융기관, 부산은행 예치 14.9%…지역인재 채용 미달",
+      "link": "https://www.yna.co.kr/view/AKR20261015161600051",
+      "pubDate": "Thu, 15 Oct 2026 18:00:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"관세청이 송치한 1천582건 처리는?\"…공소청 \"순차 처리\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261014168151002",
+      "pubDate": "Thu, 15 Oct 2026 18:00:36 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261015157700011",
+      "pubDate": "Thu, 15 Oct 2026 18:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한·일 100억달러 규모…통화스와프 3년 연장",
+      "link": "https://www.hankyung.com/article/2026101547901",
+      "pubDate": "Thu, 15 Oct 2026 17:59:35 +0900",
       "source": "한국경제"
     },
     {
-      "title": "현대모비스, 美 이어 中서 로보틱스 혁신 파트너 발굴 나선다",
-      "link": "https://www.hankyung.com/article/202610153238g",
-      "pubDate": "Thu, 15 Oct 2026 11:01:01 +0900",
+      "title": "상반기 37개 사업장 중대재해 처벌",
+      "link": "https://www.hankyung.com/article/2026101547841",
+      "pubDate": "Thu, 15 Oct 2026 17:56:43 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"인허가 지연에 전력 난제까지\"… 韓반도체, 美 진출 '가시밭길'",
-      "link": "https://www.hankyung.com/article/202610141794i",
-      "pubDate": "Thu, 15 Oct 2026 11:00:06 +0900",
+      "title": "'다름'이 '틀림'이 된 韓…끌어안는 연습을 하자",
+      "link": "https://www.hankyung.com/article/2026101548631",
+      "pubDate": "Thu, 15 Oct 2026 17:56:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "박진선 샘표 대표, '우리맛문화재단' 설립…한식 세계화 나선다",
-      "link": "https://www.hankyung.com/article/202610153550i",
-      "pubDate": "Thu, 15 Oct 2026 10:48:11 +0900",
+      "title": "HMM, 컨테이너선 12척에 2조2천억원 투자…\"선대 경쟁력 강화\"",
+      "link": "https://www.yna.co.kr/view/AKR20261015164200003",
+      "pubDate": "Thu, 15 Oct 2026 17:53:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] 金 3700만원어치 카드 긁더니…\"안 갚을래요\" 황당",
+      "link": "https://www.hankyung.com/article/2026101547061",
+      "pubDate": "Thu, 15 Oct 2026 17:52:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "굽네, 연세대 의대에 1억원 기부…의료 인재 양성 지원",
-      "link": "https://www.hankyung.com/article/202610153538i",
-      "pubDate": "Thu, 15 Oct 2026 10:46:24 +0900",
+      "title": "[단독] 서민 주택대출 연체 4배 넘게 늘었다",
+      "link": "https://www.hankyung.com/article/2026101548641",
+      "pubDate": "Thu, 15 Oct 2026 17:49:32 +0900",
       "source": "한국경제"
     }
   ]
