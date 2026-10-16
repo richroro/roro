@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T16:01:08.360100+09:00",
+  "updatedAt": "2026-10-16T21:16:11.152355+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1332.08,
-      "change": -9.11,
-      "changePercent": -0.68,
+      "price": 1331.6,
+      "change": -9.59,
+      "changePercent": -0.72,
       "currency": "KRW"
     }
   ],
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "충청권 4개 시도 손잡은 '내일이음 취업박람회' 성료",
-      "link": "https://www.yna.co.kr/view/AKR20261016125400064",
-      "pubDate": "Fri, 16 Oct 2026 15:52:30 +0900",
+      "title": "삼성바이오 2차 파업 미뤄지나…노조, 법원 제동에 재검토",
+      "link": "https://www.yna.co.kr/view/AKR20261016171400017",
+      "pubDate": "Fri, 16 Oct 2026 20:45:55 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[특징주] 화장품주, 반발매수세에 강세…달바글로벌 8%대 상승(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261016041051008",
-      "pubDate": "Fri, 16 Oct 2026 15:39:52 +0900",
+      "title": "CJ그룹, 다우키움그룹과 중앙일보 인수전 참여 가능성",
+      "link": "https://www.yna.co.kr/view/AKR20261016170000030",
+      "pubDate": "Fri, 16 Oct 2026 20:03:31 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "외국환시세(10월16일·15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20261016121600002",
-      "pubDate": "Fri, 16 Oct 2026 15:39:47 +0900",
+      "title": "'이거 하려고 한국 왔어요'…문 열자마자 중국인 몰려들더니",
+      "link": "https://www.hankyung.com/article/2026101670691",
+      "pubDate": "Fri, 16 Oct 2026 20:00:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "김홍국 하림그룹 회장 \"홈플러스 익스프레스 매장 늘릴 것\"",
+      "link": "https://www.hankyung.com/article/202610167221i",
+      "pubDate": "Fri, 16 Oct 2026 20:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "바니 프랭크: '워크(Woke)'를 탄핵하라  [이번주 WSJ]",
+      "link": "https://www.hankyung.com/article/202610167287i",
+      "pubDate": "Fri, 16 Oct 2026 19:47:44 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "AI 붐은 어떻게 끝나는가 [이번주 WSJ]",
+      "link": "https://www.hankyung.com/article/202610167284i",
+      "pubDate": "Fri, 16 Oct 2026 19:43:20 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "HL로보틱스, 세계 최초 실외 자율주행 주차로봇 선보여",
+      "link": "https://www.hankyung.com/article/202610167277i",
+      "pubDate": "Fri, 16 Oct 2026 19:40:43 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "마코 루비오의 아테네 연설에 드러난 이교적 민족주의  [이번주 WSJ]",
+      "link": "https://www.hankyung.com/article/202610167276i",
+      "pubDate": "Fri, 16 Oct 2026 19:34:50 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "김대자, 제13대 산단공 이사장 취임",
+      "link": "https://www.hankyung.com/article/2026101672611",
+      "pubDate": "Fri, 16 Oct 2026 19:26:17 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한화시스템, 오션 지분 1.4조에 전량 유동화",
+      "link": "https://www.hankyung.com/article/2026101672691",
+      "pubDate": "Fri, 16 Oct 2026 19:25:18 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "여수신 비대면 창구 잇달아 뚫린 OK저축銀…고객 518명 정보 유출",
+      "link": "https://www.hankyung.com/article/202610167171i",
+      "pubDate": "Fri, 16 Oct 2026 19:20:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한미 재무·통화당국 첫 '2+2' 회동…\"금융충격 땐 신속 공조\"",
+      "link": "https://www.hankyung.com/article/2026101672657",
+      "pubDate": "Fri, 16 Oct 2026 19:18:09 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "국토차관 \"강남3구 최근 안정화 흐름…매수심리 다소 진정\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016162200003",
+      "pubDate": "Fri, 16 Oct 2026 18:20:27 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "기획처 \"IMF 올해 韓정부부채 전망 46.1%→47.3%로 변경\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016121300002",
-      "pubDate": "Fri, 16 Oct 2026 15:39:40 +0900",
+      "title": "석유 최고가격 다시 동결…100달러대 고유가에도 물가 고려",
+      "link": "https://www.yna.co.kr/view/AKR20261016147400003",
+      "pubDate": "Fri, 16 Oct 2026 18:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "코스피 2.1%↑, 8거래일만 반등…코스닥 4.5%↑",
-      "link": "https://www.yna.co.kr/view/AKR20261016121900008",
-      "pubDate": "Fri, 16 Oct 2026 15:36:50 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261016150600011",
+      "pubDate": "Fri, 16 Oct 2026 18:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[속보] 코스피 2.1%↑, 8거래일만 반등…코스닥 4.5%↑",
-      "link": "https://www.yna.co.kr/view/AKR20261016121200008",
-      "pubDate": "Fri, 16 Oct 2026 15:34:08 +0900",
+      "title": "키움증권 \"한화오션 주식 5천92억원어치 추가취득…지분율 2.7%\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016157600008",
+      "pubDate": "Fri, 16 Oct 2026 17:50:52 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[외환] 원/달러 환율 13.2원 내린 1,331.4원(15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20261016120200002",
-      "pubDate": "Fri, 16 Oct 2026 15:30:52 +0900",
+      "title": "바이오포트 \"패밀리팜 주식 21억원어치 취득…지분율 44.5%\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016155300008",
+      "pubDate": "Fri, 16 Oct 2026 17:35:51 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "정해용 대구경북경제자유구역청장 \"지역 성장동력 거점 육성\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016118100053",
-      "pubDate": "Fri, 16 Oct 2026 15:30:18 +0900",
+      "title": "OK저축은행서 '또 해킹' 고객 268명 정보 추가 유출",
+      "link": "https://www.yna.co.kr/view/AKR20261016153800002",
+      "pubDate": "Fri, 16 Oct 2026 17:31:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "IEA \"회원국, 경유 2천만배럴 조속히 방출 합의\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016118500009",
-      "pubDate": "Fri, 16 Oct 2026 15:26:23 +0900",
+      "title": "\"대전노동청, 태안화력 1호기 폐쇄 후 고용 영향성 파악 부족\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016150300063",
+      "pubDate": "Fri, 16 Oct 2026 17:17:12 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"에이전트AI 시대, 메모리 효율 높일 핵심은 CXL과 SOM\"",
-      "link": "https://www.hankyung.com/article/202610141988i",
-      "pubDate": "Fri, 16 Oct 2026 15:10:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성바이오 노조 2차 파업 앞두고 21일 단체행동",
-      "link": "https://www.yna.co.kr/view/AKR20261016114400017",
-      "pubDate": "Fri, 16 Oct 2026 15:04:36 +0900",
+      "title": "임금님표이천쌀, 올해 수출 100t 육박…역대 최대 실적",
+      "link": "https://www.yna.co.kr/view/AKR20261016146800061",
+      "pubDate": "Fri, 16 Oct 2026 17:04:06 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "금융위원회 부위원장에 신진창 현 금융위 사무처장",
-      "link": "https://www.hankyung.com/article/2026101665366",
-      "pubDate": "Fri, 16 Oct 2026 14:41:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "네이버페이, 제주도·제주은행과 손잡고 지역 소상공인에 75억 신용보증",
-      "link": "https://www.hankyung.com/article/202610166464i",
-      "pubDate": "Fri, 16 Oct 2026 14:28:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "김대자 산단공 이사장 취임…\"산업단지 대전환으로 지방 성장 이끌 것\"",
-      "link": "https://www.hankyung.com/article/202610166424i",
-      "pubDate": "Fri, 16 Oct 2026 14:14:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이제 도쿄 안 가도 살 수 있다\"…한국 상륙 소식에 '들썩' [현장+]",
-      "link": "https://www.hankyung.com/article/202610165820g",
-      "pubDate": "Fri, 16 Oct 2026 14:08:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "다이소인 줄 알았는데…1000원대 비타민 파는 '이곳' 정체 [현장+]",
-      "link": "https://www.hankyung.com/article/202610165805g",
-      "pubDate": "Fri, 16 Oct 2026 14:06:17 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"공중제비까지\"…테슬라 '하늘 나는 車' 9년 만에 공개 [영상+]",
-      "link": "https://www.hankyung.com/article/2026101663587",
-      "pubDate": "Fri, 16 Oct 2026 13:50:58 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'삼성 밑으로 집합'…애플·나이키·도요타·소니 모조리 눌렀다",
-      "link": "https://www.hankyung.com/article/2026101662857",
-      "pubDate": "Fri, 16 Oct 2026 13:09:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "국산 비만약 얼마길래…'이젠 日 안 가도 되겠다' 환호 [프라이스&]",
-      "link": "https://www.hankyung.com/article/202610165794i",
-      "pubDate": "Fri, 16 Oct 2026 13:00:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이소영 장관 \"기업성장 가로막는 규제 걷어내는 게 가장 좋은 정책\"",
-      "link": "https://www.hankyung.com/article/202610165885i",
-      "pubDate": "Fri, 16 Oct 2026 13:00:03 +0900",
-      "source": "한국경제"
     }
   ]
 }
