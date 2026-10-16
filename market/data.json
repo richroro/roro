@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T05:54:43.701067+09:00",
+  "updatedAt": "2026-10-17T08:26:34.704051+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1334.71,
-      "change": -6.48,
-      "changePercent": -0.48,
+      "price": 1334.2,
+      "change": -6.99,
+      "changePercent": -0.52,
       "currency": "KRW"
     }
   ],
@@ -112,9 +112,75 @@
   ],
   "news": [
     {
-      "title": "중동도 우크라도 불안…브렌트유 109달러대, 5개월만에 최고",
-      "link": "https://www.yna.co.kr/view/AKR20261017004900072",
-      "pubDate": "Sat, 17 Oct 2026 05:04:06 +0900",
+      "title": "'속도전' 멈춘 CPTPP…'수출영토'·'식량안보'에 타협점 찾을까",
+      "link": "https://www.yna.co.kr/view/AKR20261016022300030",
+      "pubDate": "Sat, 17 Oct 2026 08:00:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "전세계 GDP 14% 묶은 거대블록 CPTPP…트럼프 시대 뜨거운 감자",
+      "link": "https://www.yna.co.kr/view/AKR20261016069000003",
+      "pubDate": "Sat, 17 Oct 2026 08:00:15 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "전기차 수요 급증…부산시 보조금 추가신청 10분 만에 마감",
+      "link": "https://www.yna.co.kr/view/AKR20261016115500051",
+      "pubDate": "Sat, 17 Oct 2026 07:50:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "부평 산곡역자이힐스테이트&하늘채 등 6천734가구 내주 분양",
+      "link": "https://www.yna.co.kr/view/AKR20261016152400003",
+      "pubDate": "Sat, 17 Oct 2026 07:05:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"부모님이 신혼집에 5억 보태준다는데\"…직장인 '골머리' [고정삼의 절세GPT]",
+      "link": "https://www.hankyung.com/article/2026101666376",
+      "pubDate": "Sat, 17 Oct 2026 07:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[신상잇슈] 해태제과 '만루홈런볼'·풀무원 '특등급 국산콩 두유 서리태'",
+      "link": "https://www.yna.co.kr/view/AKR20261016064800030",
+      "pubDate": "Sat, 17 Oct 2026 07:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"무서워서 안 간다\"…흉기난동 사건에 얼어붙는 지역 상권",
+      "link": "https://www.yna.co.kr/view/AKR20261016169300004",
+      "pubDate": "Sat, 17 Oct 2026 07:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "불황 장기화에 빚 감당 못하는 기업…법인파산 4년새 2.4배로",
+      "link": "https://www.yna.co.kr/view/AKR20261016169600004",
+      "pubDate": "Sat, 17 Oct 2026 07:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국내 기름값 22주 연속 하락…휘발유·경유 1천800원대 지속",
+      "link": "https://www.yna.co.kr/view/AKR20261016155700003",
+      "pubDate": "Sat, 17 Oct 2026 06:05:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "클릭해 예약한 컬러렌즈…안전과 편의 사이 멈춰 선 혁신",
+      "link": "https://www.yna.co.kr/view/AKR20261016090400530",
+      "pubDate": "Sat, 17 Oct 2026 06:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"옷만 봐도 딱 알겠네\"…요즘 SNS서 난리난 '부잣집 스타일'",
+      "link": "https://www.hankyung.com/article/2026101671141",
+      "pubDate": "Sat, 17 Oct 2026 06:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "코스피 꺾이자…해외 코인거래소 '큰손' 90% 이상 반등 베팅",
+      "link": "https://www.yna.co.kr/view/AKR20261016169500002",
+      "pubDate": "Sat, 17 Oct 2026 05:55:01 +0900",
       "source": "연합뉴스"
     },
     {
@@ -128,18 +194,6 @@
       "link": "https://www.hankyung.com/article/2026101671461",
       "pubDate": "Fri, 16 Oct 2026 21:00:02 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "삼성바이오 2차 파업 미뤄지나…노조, 법원 제동에 재검토",
-      "link": "https://www.yna.co.kr/view/AKR20261016171400017",
-      "pubDate": "Fri, 16 Oct 2026 20:45:55 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "CJ그룹, 다우키움그룹과 중앙일보 인수전 참여 가능성",
-      "link": "https://www.yna.co.kr/view/AKR20261016170000030",
-      "pubDate": "Fri, 16 Oct 2026 20:03:31 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "\"한국 가면 꼭 사라\" 입소문 퍼지더니…'110%' 대박 터졌다",
@@ -176,60 +230,6 @@
       "link": "https://www.hankyung.com/article/202610167276i",
       "pubDate": "Fri, 16 Oct 2026 19:34:50 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "김대자, 제13대 산단공 이사장 취임",
-      "link": "https://www.hankyung.com/article/2026101672611",
-      "pubDate": "Fri, 16 Oct 2026 19:26:17 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한화시스템, 오션 지분 1.4조에 전량 유동화",
-      "link": "https://www.hankyung.com/article/2026101672691",
-      "pubDate": "Fri, 16 Oct 2026 19:25:18 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "국토차관 \"강남3구 최근 안정화 흐름…매수심리 다소 진정\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016162200003",
-      "pubDate": "Fri, 16 Oct 2026 18:20:27 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "석유 최고가격 다시 동결…100달러대 고유가에도 물가 고려",
-      "link": "https://www.yna.co.kr/view/AKR20261016147400003",
-      "pubDate": "Fri, 16 Oct 2026 18:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261016150600011",
-      "pubDate": "Fri, 16 Oct 2026 18:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "키움증권 \"한화오션 주식 5천92억원어치 추가취득…지분율 2.7%\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016157600008",
-      "pubDate": "Fri, 16 Oct 2026 17:50:52 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "바이오포트 \"패밀리팜 주식 21억원어치 취득…지분율 44.5%\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016155300008",
-      "pubDate": "Fri, 16 Oct 2026 17:35:51 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "OK저축은행서 '또 해킹' 고객 268명 정보 추가 유출",
-      "link": "https://www.yna.co.kr/view/AKR20261016153800002",
-      "pubDate": "Fri, 16 Oct 2026 17:31:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"대전노동청, 태안화력 1호기 폐쇄 후 고용 영향성 파악 부족\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016150300063",
-      "pubDate": "Fri, 16 Oct 2026 17:17:12 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
