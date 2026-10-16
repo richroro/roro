@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T21:16:11.152355+09:00",
+  "updatedAt": "2026-10-17T02:18:44.539473+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52177.69,
-      "change": 556.19,
-      "changePercent": 1.08,
+      "price": 51888.82,
+      "change": -288.87,
+      "changePercent": -0.55,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26713.03,
-      "change": 20.16,
-      "changePercent": 0.08,
+      "price": 26171.27,
+      "change": -541.76,
+      "changePercent": -2.03,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1331.6,
-      "change": -9.59,
-      "changePercent": -0.72,
+      "price": 1334.85,
+      "change": -6.34,
+      "changePercent": -0.47,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.0,
-      "change": -0.96,
-      "changePercent": -0.28,
+      "price": 342.78,
+      "change": 0.78,
+      "changePercent": 0.23,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 362.44,
-      "change": -4.72,
-      "changePercent": -1.29,
+      "price": 351.35,
+      "change": -11.09,
+      "changePercent": -3.06,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.23,
-      "change": -4.07,
-      "changePercent": -1.84,
+      "price": 215.34,
+      "change": -1.88,
+      "changePercent": -0.87,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "엔비디아, AI PC 'RTX 스파크' 국내 출시…\"에이전트 AI 시대 가속화\"",
+      "link": "https://www.hankyung.com/article/202610166871i",
+      "pubDate": "Fri, 16 Oct 2026 21:08:38 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[단독] \"돈 넣어둔 사람 많은데\"…'368곳' 경고등 켜졌다",
+      "link": "https://www.hankyung.com/article/2026101671461",
+      "pubDate": "Fri, 16 Oct 2026 21:00:02 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "삼성바이오 2차 파업 미뤄지나…노조, 법원 제동에 재검토",
       "link": "https://www.yna.co.kr/view/AKR20261016171400017",
@@ -124,7 +136,7 @@
       "source": "연합뉴스"
     },
     {
-      "title": "'이거 하려고 한국 왔어요'…문 열자마자 중국인 몰려들더니",
+      "title": "\"한국 가면 꼭 사라\" 입소문 퍼지더니…'110%' 대박 터졌다",
       "link": "https://www.hankyung.com/article/2026101670691",
       "pubDate": "Fri, 16 Oct 2026 20:00:09 +0900",
       "source": "한국경제"
@@ -169,18 +181,6 @@
       "title": "한화시스템, 오션 지분 1.4조에 전량 유동화",
       "link": "https://www.hankyung.com/article/2026101672691",
       "pubDate": "Fri, 16 Oct 2026 19:25:18 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "여수신 비대면 창구 잇달아 뚫린 OK저축銀…고객 518명 정보 유출",
-      "link": "https://www.hankyung.com/article/202610167171i",
-      "pubDate": "Fri, 16 Oct 2026 19:20:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "한미 재무·통화당국 첫 '2+2' 회동…\"금융충격 땐 신속 공조\"",
-      "link": "https://www.hankyung.com/article/2026101672657",
-      "pubDate": "Fri, 16 Oct 2026 19:18:09 +0900",
       "source": "한국경제"
     },
     {
