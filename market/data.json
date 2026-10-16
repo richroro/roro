@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T02:18:44.539473+09:00",
+  "updatedAt": "2026-10-17T05:54:43.701067+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51888.82,
-      "change": -288.87,
-      "changePercent": -0.55,
+      "price": 52002.41,
+      "change": -175.28,
+      "changePercent": -0.34,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26171.27,
-      "change": -541.76,
-      "changePercent": -2.03,
+      "price": 26140.03,
+      "change": -572.99,
+      "changePercent": -2.14,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1334.85,
-      "change": -6.34,
-      "changePercent": -0.47,
+      "price": 1334.71,
+      "change": -6.48,
+      "changePercent": -0.48,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.78,
-      "change": 0.78,
-      "changePercent": 0.23,
+      "price": 343.46,
+      "change": 1.46,
+      "changePercent": 0.43,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 351.35,
-      "change": -11.09,
-      "changePercent": -3.06,
+      "price": 354.72,
+      "change": -7.72,
+      "changePercent": -2.13,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 215.34,
-      "change": -1.88,
-      "changePercent": -0.87,
+      "price": 214.13,
+      "change": -3.1,
+      "changePercent": -1.43,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "중동도 우크라도 불안…브렌트유 109달러대, 5개월만에 최고",
+      "link": "https://www.yna.co.kr/view/AKR20261017004900072",
+      "pubDate": "Sat, 17 Oct 2026 05:04:06 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "엔비디아, AI PC 'RTX 스파크' 국내 출시…\"에이전트 AI 시대 가속화\"",
       "link": "https://www.hankyung.com/article/202610166871i",
@@ -223,12 +229,6 @@
       "title": "\"대전노동청, 태안화력 1호기 폐쇄 후 고용 영향성 파악 부족\"",
       "link": "https://www.yna.co.kr/view/AKR20261016150300063",
       "pubDate": "Fri, 16 Oct 2026 17:17:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "임금님표이천쌀, 올해 수출 100t 육박…역대 최대 실적",
-      "link": "https://www.yna.co.kr/view/AKR20261016146800061",
-      "pubDate": "Fri, 16 Oct 2026 17:04:06 +0900",
       "source": "연합뉴스"
     }
   ]
