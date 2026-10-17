@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T18:10:18.432169+09:00",
+  "updatedAt": "2026-10-17T22:36:08.900478+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,42 @@
   ],
   "news": [
     {
+      "title": "\"빈 방을 여행자와 삶 나누는 공간으로\"…두 '해녀'의 도전",
+      "link": "https://www.hankyung.com/article/202610166604g",
+      "pubDate": "Sat, 17 Oct 2026 21:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'한국에 쇼핑하러 오길 잘했네'…외국인 관광객들 '감탄' [류은혁의 유통기한]",
+      "link": "https://www.hankyung.com/article/202610167273i",
+      "pubDate": "Sat, 17 Oct 2026 20:00:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한은 총재 \"화폐의 단일성 중요…한은금융망 국제화 추진\"",
+      "link": "https://www.yna.co.kr/view/AKR20261017043100002",
+      "pubDate": "Sat, 17 Oct 2026 19:32:30 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[부고] 양재진(IBK투자증권 강남센터 부장)씨 빙모상",
+      "link": "https://www.yna.co.kr/view/AKR20261017044000008",
+      "pubDate": "Sat, 17 Oct 2026 18:40:51 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[동포의 창] 美 유타서 한인상의 공동 주최 비즈니스 엑스포 성황",
+      "link": "https://www.yna.co.kr/view/AKR20261017042600371",
+      "pubDate": "Sat, 17 Oct 2026 18:40:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "中 반도체 이 정도였나…'없어서 못 판다' 삼전닉스 맹추격",
+      "link": "https://www.hankyung.com/article/2026101779027",
+      "pubDate": "Sat, 17 Oct 2026 18:06:38 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "\"아내 생일 깜빡했네\"…1억뷰 터지자마자  벌어진 일 [권용훈의 트렌드워치]",
       "link": "https://www.hankyung.com/article/202610177754i",
       "pubDate": "Sat, 17 Oct 2026 16:00:01 +0900",
@@ -194,42 +230,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261017011700002",
       "pubDate": "Sat, 17 Oct 2026 09:07:32 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "충주 바이오헬스 국가산단 토지거래계약 허가구역 재지정",
-      "link": "https://www.yna.co.kr/view/AKR20261016147500064",
-      "pubDate": "Sat, 17 Oct 2026 09:01:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "장인화 동반성장위원장 \"대기업·중소기업 상생 모델 만들 것\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016022800051",
-      "pubDate": "Sat, 17 Oct 2026 09:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"비싸도 좋으니 물량만 달라\"…거품 경고에도 삼전닉스 '반전' [홍민성의 테토남]",
-      "link": "https://www.hankyung.com/article/202610166229g",
-      "pubDate": "Sat, 17 Oct 2026 09:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[민선9기 서울] 김경대 용산구청장 \"공간디자인 통해 매력도시로\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016104600004",
-      "pubDate": "Sat, 17 Oct 2026 09:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중소기업의 눈물…불황에 빚 감당 못한 법인파산 4년새 2.4배",
-      "link": "https://www.hankyung.com/article/2026101775467",
-      "pubDate": "Sat, 17 Oct 2026 08:30:35 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "中 CXMT 차세대 D램 공포인가 위협인가 [한경 반도체포커스]",
-      "link": "https://www.hankyung.com/article/202610166994i",
-      "pubDate": "Sat, 17 Oct 2026 08:00:07 +0900",
-      "source": "한국경제"
     }
   ]
 }
