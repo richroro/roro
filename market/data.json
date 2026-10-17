@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T22:36:08.900478+09:00",
+  "updatedAt": "2026-10-18T01:58:41.347432+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52002.41,
-      "change": -175.29,
+      "change": -175.28,
       "changePercent": -0.34,
       "currency": "USD"
     },
