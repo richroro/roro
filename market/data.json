@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T08:26:34.704051+09:00",
+  "updatedAt": "2026-10-17T13:09:27.466647+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -13,15 +13,15 @@
       "symbol": "^KQ11",
       "name": "KOSDAQ",
       "price": 794.78,
-      "change": -29.1,
-      "changePercent": -3.53,
+      "change": 33.96,
+      "changePercent": 4.46,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52002.41,
-      "change": -175.28,
+      "change": -175.29,
       "changePercent": -0.34,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1334.2,
-      "change": -6.99,
-      "changePercent": -0.52,
+      "price": 1329.6,
+      "change": -11.59,
+      "changePercent": -0.86,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,72 @@
   ],
   "news": [
     {
+      "title": "\"이란, 후티에 사우디 어디 어떻게 때릴지 가르쳐줬다\"",
+      "link": "https://www.yna.co.kr/view/AKR20261017026500009",
+      "pubDate": "Sat, 17 Oct 2026 12:54:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "총 든 로봇개·대테러 휴머노이드까지…中 대테러 작전도 AI가 맡는다 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610165935i",
+      "pubDate": "Sat, 17 Oct 2026 11:23:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20261017021100011",
+      "pubDate": "Sat, 17 Oct 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"반도체는 워싱턴서 결정\"…SK가 HBM 만큼 공들이는 것 [강경주의 테크X]",
+      "link": "https://www.hankyung.com/article/2026101667266",
+      "pubDate": "Sat, 17 Oct 2026 09:30:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[테크톡노트] 스마트폰 한 대 300만원…삼성·애플은 왜 고급화할까",
+      "link": "https://www.yna.co.kr/view/AKR20261016134700017",
+      "pubDate": "Sat, 17 Oct 2026 09:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[다음주 경제] 기준금리 3연속 인상할까…생산자 물가도 발표",
+      "link": "https://www.yna.co.kr/view/AKR20261017011700002",
+      "pubDate": "Sat, 17 Oct 2026 09:07:32 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "충주 바이오헬스 국가산단 토지거래계약 허가구역 재지정",
+      "link": "https://www.yna.co.kr/view/AKR20261016147500064",
+      "pubDate": "Sat, 17 Oct 2026 09:01:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "장인화 동반성장위원장 \"대기업·중소기업 상생 모델 만들 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016022800051",
+      "pubDate": "Sat, 17 Oct 2026 09:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"비싸도 좋으니 물량만 달라\"…거품 경고에도 삼전닉스 '반전' [홍민성의 테토남]",
+      "link": "https://www.hankyung.com/article/202610166229g",
+      "pubDate": "Sat, 17 Oct 2026 09:00:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[민선9기 서울] 김경대 용산구청장 \"공간디자인 통해 매력도시로\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016104600004",
+      "pubDate": "Sat, 17 Oct 2026 09:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중소기업의 눈물…불황에 빚 감당 못한 법인파산 4년새 2.4배",
+      "link": "https://www.hankyung.com/article/2026101775467",
+      "pubDate": "Sat, 17 Oct 2026 08:30:35 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "'속도전' 멈춘 CPTPP…'수출영토'·'식량안보'에 타협점 찾을까",
       "link": "https://www.yna.co.kr/view/AKR20261016022300030",
       "pubDate": "Sat, 17 Oct 2026 08:00:20 +0900",
@@ -124,15 +190,21 @@
       "source": "연합뉴스"
     },
     {
+      "title": "中 CXMT 차세대 D램 공포인가 위협인가 [한경 반도체포커스]",
+      "link": "https://www.hankyung.com/article/202610166994i",
+      "pubDate": "Sat, 17 Oct 2026 08:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"2만9000원 팝콘통까지 품절\"…2030 푹 빠지더니 '대박' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610141176i",
+      "pubDate": "Sat, 17 Oct 2026 08:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "전기차 수요 급증…부산시 보조금 추가신청 10분 만에 마감",
       "link": "https://www.yna.co.kr/view/AKR20261016115500051",
       "pubDate": "Sat, 17 Oct 2026 07:50:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "부평 산곡역자이힐스테이트&하늘채 등 6천734가구 내주 분양",
-      "link": "https://www.yna.co.kr/view/AKR20261016152400003",
-      "pubDate": "Sat, 17 Oct 2026 07:05:00 +0900",
       "source": "연합뉴스"
     },
     {
@@ -142,46 +214,10 @@
       "source": "한국경제"
     },
     {
-      "title": "[신상잇슈] 해태제과 '만루홈런볼'·풀무원 '특등급 국산콩 두유 서리태'",
-      "link": "https://www.yna.co.kr/view/AKR20261016064800030",
-      "pubDate": "Sat, 17 Oct 2026 07:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"무서워서 안 간다\"…흉기난동 사건에 얼어붙는 지역 상권",
-      "link": "https://www.yna.co.kr/view/AKR20261016169300004",
-      "pubDate": "Sat, 17 Oct 2026 07:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "불황 장기화에 빚 감당 못하는 기업…법인파산 4년새 2.4배로",
-      "link": "https://www.yna.co.kr/view/AKR20261016169600004",
-      "pubDate": "Sat, 17 Oct 2026 07:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국내 기름값 22주 연속 하락…휘발유·경유 1천800원대 지속",
-      "link": "https://www.yna.co.kr/view/AKR20261016155700003",
-      "pubDate": "Sat, 17 Oct 2026 06:05:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "클릭해 예약한 컬러렌즈…안전과 편의 사이 멈춰 선 혁신",
-      "link": "https://www.yna.co.kr/view/AKR20261016090400530",
-      "pubDate": "Sat, 17 Oct 2026 06:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"옷만 봐도 딱 알겠네\"…요즘 SNS서 난리난 '부잣집 스타일'",
+      "title": "\"옷만 봐도 딱 알겠네\"…요즘 SNS서 난리난 '부잣집 패션'",
       "link": "https://www.hankyung.com/article/2026101671141",
       "pubDate": "Sat, 17 Oct 2026 06:00:01 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "코스피 꺾이자…해외 코인거래소 '큰손' 90% 이상 반등 베팅",
-      "link": "https://www.yna.co.kr/view/AKR20261016169500002",
-      "pubDate": "Sat, 17 Oct 2026 05:55:01 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "엔비디아, AI PC 'RTX 스파크' 국내 출시…\"에이전트 AI 시대 가속화\"",
@@ -193,42 +229,6 @@
       "title": "[단독] \"돈 넣어둔 사람 많은데\"…'368곳' 경고등 켜졌다",
       "link": "https://www.hankyung.com/article/2026101671461",
       "pubDate": "Fri, 16 Oct 2026 21:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"한국 가면 꼭 사라\" 입소문 퍼지더니…'110%' 대박 터졌다",
-      "link": "https://www.hankyung.com/article/2026101670691",
-      "pubDate": "Fri, 16 Oct 2026 20:00:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "김홍국 하림그룹 회장 \"홈플러스 익스프레스 매장 늘릴 것\"",
-      "link": "https://www.hankyung.com/article/202610167221i",
-      "pubDate": "Fri, 16 Oct 2026 20:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "바니 프랭크: '워크(Woke)'를 탄핵하라  [이번주 WSJ]",
-      "link": "https://www.hankyung.com/article/202610167287i",
-      "pubDate": "Fri, 16 Oct 2026 19:47:44 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI 붐은 어떻게 끝나는가 [이번주 WSJ]",
-      "link": "https://www.hankyung.com/article/202610167284i",
-      "pubDate": "Fri, 16 Oct 2026 19:43:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HL로보틱스, 세계 최초 실외 자율주행 주차로봇 선보여",
-      "link": "https://www.hankyung.com/article/202610167277i",
-      "pubDate": "Fri, 16 Oct 2026 19:40:43 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "마코 루비오의 아테네 연설에 드러난 이교적 민족주의  [이번주 WSJ]",
-      "link": "https://www.hankyung.com/article/202610167276i",
-      "pubDate": "Fri, 16 Oct 2026 19:34:50 +0900",
       "source": "한국경제"
     }
   ]
