@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-17T22:47:46.905896+09:00",
+ "updatedAt": "2026-10-18T09:04:50.246523+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2078,7 +2078,7 @@
     "forwardPer": 35.86,
     "pbr": 46.67,
     "psr": 10.74,
-    "peg": 2.74,
+    "peg": 2.75,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 5012516765696,
@@ -2231,11 +2231,11 @@
     "position": 87.9
    },
    "valuation": {
-    "per": 29.81,
-    "forwardPer": 22.35,
+    "per": 29.47,
+    "forwardPer": 22.3,
     "pbr": 8.88,
     "psr": 11.84,
-    "peg": 1.75,
+    "peg": 1.72,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3928485003264,
@@ -2392,7 +2392,7 @@
     "forwardPer": 22.28,
     "pbr": 6.69,
     "psr": 9.34,
-    "peg": 1.23,
+    "peg": 1.2,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 4165393448960,
@@ -2516,7 +2516,7 @@
     "forwardPer": 23.94,
     "pbr": 4.89,
     "psr": 3.48,
-    "peg": 1.48,
+    "peg": 1.45,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2696578334720,
@@ -2622,7 +2622,7 @@
     "forwardPer": 13.45,
     "pbr": 22.58,
     "psr": 17.07,
-    "peg": 0.27,
+    "peg": 0.26,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 5170596937728,
@@ -2885,7 +2885,7 @@
     "forwardPer": 21.83,
     "pbr": 7.24,
     "psr": 6.2,
-    "peg": 2.77,
+    "peg": 2.8,
     "margin": 16.2,
     "marketCap": 615873642496,
     "beta": 0.21,
@@ -3040,11 +3040,11 @@
     "per": 24.07,
     "forwardPer": 21.56,
     "pbr": 6.94,
-    "psr": 4.26,
-    "peg": 4.02,
+    "psr": 4.25,
+    "peg": 4.08,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 370398429184,
+    "marketCap": 370117869568,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -3195,10 +3195,10 @@
    },
    "valuation": {
     "per": 28.2,
-    "forwardPer": 26.63,
+    "forwardPer": 26.65,
     "pbr": 11.18,
     "psr": 8.06,
-    "peg": 4.18,
+    "peg": 4.27,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 404009353216,
@@ -3355,7 +3355,7 @@
     "forwardPer": 15.22,
     "pbr": 8.05,
     "psr": 1.82,
-    "peg": 1.34,
+    "peg": 1.37,
     "roe": 52.19,
     "margin": 11.09,
     "marketCap": 179186843648,
@@ -3824,7 +3824,7 @@
     "forwardPer": 13.32,
     "pbr": 2.57,
     "psr": 4.73,
-    "peg": 1.43,
+    "peg": 1.45,
     "roe": 18.01,
     "margin": 34.59,
     "marketCap": 902160449536,
@@ -3977,7 +3977,7 @@
     "forwardPer": 15.09,
     "pbr": 2.84,
     "psr": 2.04,
-    "peg": 1.51,
+    "peg": 1.55,
     "roe": 12.58,
     "margin": 9.07,
     "marketCap": 735950012416,
@@ -6251,6 +6251,48 @@
  ],
  "news": [
   {
+   "title": "'지난주 14.5% 폭락' 코스피, 회복까지 얼마나…과거 사례는",
+   "link": "https://www.yna.co.kr/view/AKR20261016179500008",
+   "pubDate": "Sun, 18 Oct 2026 06:30:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "솔리다임 미국 상장 준비 속도…주관사 선정 이어 대관 강화",
+   "link": "https://www.yna.co.kr/view/AKR20261017046600003",
+   "pubDate": "Sun, 18 Oct 2026 06:19:50 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "대미 무역흑자 1천억불 눈앞…트럼프 투자 압박에 난감한 정부",
+   "link": "https://www.yna.co.kr/view/AKR20261017041500003",
+   "pubDate": "Sun, 18 Oct 2026 06:17:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "정부, 연내 동일가치노동 동일임금 로드맵 낸다…임금개편 핵심",
+   "link": "https://www.yna.co.kr/view/AKR20261016118800530",
+   "pubDate": "Sun, 18 Oct 2026 06:01:02 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "폭락장세 뒤 반등했지만 악재는 여전…이번주 코스피 향배는",
+   "link": "https://www.yna.co.kr/view/AKR20261016179400008",
+   "pubDate": "Sun, 18 Oct 2026 06:00:08 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "\"10월 넘기고 11월에\"…전문가들, 금리 인상 '숨고르기' 전망",
+   "link": "https://www.yna.co.kr/view/AKR20261017017500002",
+   "pubDate": "Sun, 18 Oct 2026 05:45:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "SK하이닉스, 美 솔리다임 상장 추진에 ‘중복상장’ 논란",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/VFB2R5M7MND7FG4IFM75JXRLTE/",
+   "pubDate": "Sat, 17 Oct 2026 23:50:31 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "[부고] 양재진(IBK투자증권 강남센터 부장)씨 빙모상",
    "link": "https://www.yna.co.kr/view/AKR20261017044000008",
    "pubDate": "Sat, 17 Oct 2026 18:40:51 +0900",
@@ -6261,6 +6303,12 @@
    "link": "https://www.mk.co.kr/news/stock/12178557",
    "pubDate": "Sat, 17 Oct 2026 18:25:43 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "美 ‘중간 선거’로 증시 강세 유력… 한국도 흐름 탈 가능성",
+   "link": "https://www.chosun.com/economy/weeklybiz/2026/10/18/OFYFRE6MN5CWVEISJYUQELR3KE/",
+   "pubDate": "Sat, 17 Oct 2026 18:00:00 +0000",
+   "source": "조선일보"
   },
   {
    "title": "[다음주 경제] 기준금리 3연속 인상할까…생산자 물가도 발표",
@@ -6311,64 +6359,16 @@
    "source": "조선일보"
   },
   {
-   "title": "Al 데이터센터 전력 확보 비상에… 핵융합, 실험실 나와 투자 자산 됐다",
-   "link": "https://www.chosun.com/economy/weeklybiz/2026/10/17/5ZONVZG5O5EOXO3GNWTHUNJT4E/",
-   "pubDate": "Fri, 16 Oct 2026 18:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "美 국채금리 하락에 … 모처럼 웃은 韓 바이오株",
-   "link": "https://www.mk.co.kr/news/stock/12178088",
-   "pubDate": "Fri, 16 Oct 2026 17:41:56 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
    "title": "하락 일단 멈췄지만 … 코스피 빚투는 부담",
    "link": "https://www.mk.co.kr/news/stock/12178089",
    "pubDate": "Fri, 16 Oct 2026 17:41:56 +09:00",
    "source": "매일경제 증권"
   },
   {
-   "title": "임금님표이천쌀, 올해 수출 100t 육박…역대 최대 실적",
-   "link": "https://www.yna.co.kr/view/AKR20261016146800061",
-   "pubDate": "Fri, 16 Oct 2026 17:04:06 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…코스피 반등에도 외인 매수 영향(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261016141851008",
-   "pubDate": "Fri, 16 Oct 2026 17:00:18 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…3년물 연 3.854%",
-   "link": "https://www.yna.co.kr/view/AKR20261016141800008",
-   "pubDate": "Fri, 16 Oct 2026 16:40:48 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "엘리스그룹 코스닥 신규 상장…20일 거래 개시",
-   "link": "https://www.yna.co.kr/view/AKR20261016137900008",
-   "pubDate": "Fri, 16 Oct 2026 16:33:13 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피 7% 급락한 '검은 목요일'에 800억원대 또 강제청산",
-   "link": "https://www.yna.co.kr/view/AKR20261016128500008",
-   "pubDate": "Fri, 16 Oct 2026 16:28:30 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "반도체 소부장·금융채 투자 등 ETF 7종 20일 신규 상장",
-   "link": "https://www.yna.co.kr/view/AKR20261016134900008",
-   "pubDate": "Fri, 16 Oct 2026 16:27:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피, 급락후 반발매수에 2.1%↑…8거래일만에 반등(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261016121951008",
-   "pubDate": "Fri, 16 Oct 2026 16:06:43 +0900",
-   "source": "연합뉴스"
+   "title": "美 국채금리 하락에 … 모처럼 웃은 韓 바이오株",
+   "link": "https://www.mk.co.kr/news/stock/12178088",
+   "pubDate": "Fri, 16 Oct 2026 17:41:56 +09:00",
+   "source": "매일경제 증권"
   },
   {
    "title": "“지금 팔아? 좀 더 버텨?”…급락 뒤 반등한 코스피, 전문가 의견 보니",
