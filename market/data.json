@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T19:52:13.742298+09:00",
+  "updatedAt": "2026-10-18T23:28:16.676739+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1329.6,
-      "change": -11.59,
-      "changePercent": -0.86,
+      "price": 1334.2,
+      "change": -6.99,
+      "changePercent": -0.52,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,18 @@
   ],
   "news": [
     {
+      "title": "민주당 경기도당 긴급회의, 추미애 '재정 빨대' 논란 대응 논의",
+      "link": "https://www.yna.co.kr/view/AKR20261018060400061",
+      "pubDate": "Sun, 18 Oct 2026 21:53:29 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"인생 달겠다\" 이미주도 감탄…'억대 성과급' 직원 속내는 달랐다",
+      "link": "https://www.hankyung.com/article/2026101889487",
+      "pubDate": "Sun, 18 Oct 2026 19:22:58 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "토스증권, 윤리·준법경영 선포식…김규빈 대표가 TF장",
       "link": "https://www.yna.co.kr/view/AKR20261018052200008",
       "pubDate": "Sun, 18 Oct 2026 19:20:58 +0900",
@@ -124,7 +136,7 @@
       "source": "한국경제"
     },
     {
-      "title": "일상 파고드는 스테이블코인…日편의점·스위스 공항서도 결제",
+      "title": "\"현금도 카드도 아닙니다\"…편의점까지 파고든 '결제 실험'",
       "link": "https://www.hankyung.com/article/2026101889081",
       "pubDate": "Sun, 18 Oct 2026 17:58:58 +0900",
       "source": "한국경제"
@@ -169,12 +181,6 @@
       "title": "김구 얼굴 넣으려다 무산된 10만원 발행",
       "link": "https://www.hankyung.com/article/2026101889391",
       "pubDate": "Sun, 18 Oct 2026 17:50:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "러 에너지·中 시장·美 안보…다 잃은 유럽, 성장엔진 꺼졌다",
-      "link": "https://www.hankyung.com/article/2026101889051",
-      "pubDate": "Sun, 18 Oct 2026 17:40:31 +0900",
       "source": "한국경제"
     },
     {
@@ -223,12 +229,6 @@
       "title": "금감원·민간합동팀, IOSCO '투자자보호 AI 개발 대회' 입상",
       "link": "https://www.yna.co.kr/view/AKR20261017026400002",
       "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중기부, 수·위탁기업 불공정거래 점검…조사 기간 1년으로 확대",
-      "link": "https://www.yna.co.kr/view/AKR20261017027000030",
-      "pubDate": "Sun, 18 Oct 2026 12:00:07 +0900",
       "source": "연합뉴스"
     }
   ]
