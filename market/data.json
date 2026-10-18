@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T05:28:51.942279+09:00",
+  "updatedAt": "2026-10-19T07:58:28.403902+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1334.2,
-      "change": -6.99,
-      "changePercent": -0.52,
+      "price": 1334.34,
+      "change": -6.85,
+      "changePercent": -0.51,
       "currency": "KRW"
     }
   ],
@@ -112,22 +112,88 @@
   ],
   "news": [
     {
-      "title": "민주당 경기도당 긴급회의, 추미애 '재정 빨대' 논란 대응 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261018060400061",
-      "pubDate": "Sun, 18 Oct 2026 21:53:29 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20261019009700011",
+      "pubDate": "Mon, 19 Oct 2026 07:30:00 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "[글로컬] '성장률 반등' 한국 경제, 대만 닮아간다는데",
+      "link": "https://www.yna.co.kr/view/AKR20261018059000546",
+      "pubDate": "Mon, 19 Oct 2026 07:07:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"아빠 육아휴직은 1년만 근속 인정\"…법 개정 외면한 과기출연연",
+      "link": "https://www.yna.co.kr/view/AKR20261018023500017",
+      "pubDate": "Mon, 19 Oct 2026 07:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "아이폰 넘어 맥북까지 OLED…삼성D·LGD, '애플효과' 기대",
+      "link": "https://www.yna.co.kr/view/AKR20261016109700003",
+      "pubDate": "Mon, 19 Oct 2026 06:45:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "투자자 울린 '논란의 코인'…고팍스는 제때 팔아 억대 이익",
+      "link": "https://www.yna.co.kr/view/AKR20261016178600002",
+      "pubDate": "Mon, 19 Oct 2026 06:01:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"3억5000만원 냈는데 차값은 따로?\"…테슬라 신차 뭐길래 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610188323i",
+      "pubDate": "Mon, 19 Oct 2026 06:00:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "소규모 건설현장 휴게시설 개선 지원…1곳당 최대 500만원",
+      "link": "https://www.yna.co.kr/view/AKR20261016142600530",
+      "pubDate": "Mon, 19 Oct 2026 06:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중장년 '새 출발' 경험 찾는다…서울시50플러스재단 수기 공모",
+      "link": "https://www.yna.co.kr/view/AKR20261018033100004",
+      "pubDate": "Mon, 19 Oct 2026 06:00:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"아내와 손목에 끈 묶고 달렸다\"…부부가 러닝에 진심인 이유 [현장+]",
+      "link": "https://www.hankyung.com/article/202610154062g",
+      "pubDate": "Mon, 19 Oct 2026 06:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "금융감독원, 1천193개사 감사인 지정 사전통지…내달 본통지",
+      "link": "https://www.yna.co.kr/view/AKR20261018029000002",
+      "pubDate": "Mon, 19 Oct 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "롯데멤버스 \"10명 중 3명 제로 식품 구매…2030이 시장 주도\"",
+      "link": "https://www.yna.co.kr/view/AKR20261018048200030",
+      "pubDate": "Mon, 19 Oct 2026 06:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "구직 청년 10명 중 7명 \"취업 준비 비용 부담\"…월평균 58만원",
+      "link": "https://www.yna.co.kr/view/AKR20261018026700003",
+      "pubDate": "Mon, 19 Oct 2026 06:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"5만원 회원권이 1만원대?\"…창고형 마트 '암시장' 생겼다 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610177858i",
+      "pubDate": "Mon, 19 Oct 2026 05:19:01 +0900",
+      "source": "한국경제"
     },
     {
       "title": "\"인생 달겠다\" 이미주도 감탄…'억대 성과급' 직원 속내는 달랐다",
       "link": "https://www.hankyung.com/article/2026101889487",
       "pubDate": "Sun, 18 Oct 2026 19:22:58 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "토스증권, 윤리·준법경영 선포식…김규빈 대표가 TF장",
-      "link": "https://www.yna.co.kr/view/AKR20261018052200008",
-      "pubDate": "Sun, 18 Oct 2026 19:20:58 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "골드만삭스 M&A자문…3분기 수익 '사상 최대'",
@@ -164,72 +230,6 @@
       "link": "https://www.hankyung.com/article/2026101889271",
       "pubDate": "Sun, 18 Oct 2026 17:56:41 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "美 백악관 대변인, 임명 나흘 만에 경질",
-      "link": "https://www.hankyung.com/article/2026101888741",
-      "pubDate": "Sun, 18 Oct 2026 17:53:12 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'조선 李씨' 위인뿐인 화폐 속 얼굴…50년 넘게 그대로",
-      "link": "https://www.hankyung.com/article/2026101889401",
-      "pubDate": "Sun, 18 Oct 2026 17:52:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "김구 얼굴 넣으려다 무산된 10만원 발행",
-      "link": "https://www.hankyung.com/article/2026101889391",
-      "pubDate": "Sun, 18 Oct 2026 17:50:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "정부 \"주택 공급·시장동향 지표 개선…중장기 안정화 전망\"",
-      "link": "https://www.yna.co.kr/view/AKR20261018042600003",
-      "pubDate": "Sun, 18 Oct 2026 17:05:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"수협서 금융사고 잇따라…사고 규모 갈수록 대형화\"",
-      "link": "https://www.yna.co.kr/view/AKR20261018037800030",
-      "pubDate": "Sun, 18 Oct 2026 16:13:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261018030800011",
-      "pubDate": "Sun, 18 Oct 2026 15:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[동포의 창] \"재외동포 청년, 제주서 배우고 취업까지\"",
-      "link": "https://www.yna.co.kr/view/AKR20261018023600371",
-      "pubDate": "Sun, 18 Oct 2026 12:18:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "서울투자진흥재단, 프랑스 AI·딥테크 기업 서울 유치 나서",
-      "link": "https://www.yna.co.kr/view/AKR20261018024400004",
-      "pubDate": "Sun, 18 Oct 2026 12:11:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "화재·폭발 산재사망, 작년 2배로↑…노동부, 안전조치 집중점검",
-      "link": "https://www.yna.co.kr/view/AKR20261016136900530",
-      "pubDate": "Sun, 18 Oct 2026 12:00:27 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "최지영 IMF 이사 \"한국만 재정 여력 늘어나…AI붐 당장 안 꺾여\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016170600002",
-      "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금감원·민간합동팀, IOSCO '투자자보호 AI 개발 대회' 입상",
-      "link": "https://www.yna.co.kr/view/AKR20261017026400002",
-      "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
