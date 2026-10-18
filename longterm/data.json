@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-18T09:04:50.246523+09:00",
+ "updatedAt": "2026-10-18T23:03:27.909017+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -3040,11 +3040,11 @@
     "per": 24.07,
     "forwardPer": 21.56,
     "pbr": 6.94,
-    "psr": 4.25,
+    "psr": 4.26,
     "peg": 4.08,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 370117869568,
+    "marketCap": 370398429184,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -6251,6 +6251,96 @@
  ],
  "news": [
   {
+   "title": "밸류업 공시 제각각 … \"핵심지표 표준화해야\"",
+   "link": "https://www.mk.co.kr/news/stock/12178991",
+   "pubDate": "Sun, 18 Oct 2026 17:19:43 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "美증시로 피난간 개미 '울상'",
+   "link": "https://www.mk.co.kr/news/stock/12178989",
+   "pubDate": "Sun, 18 Oct 2026 17:19:42 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "코스피 급락에 '강제 청산' 경고등",
+   "link": "https://www.mk.co.kr/news/stock/12178990",
+   "pubDate": "Sun, 18 Oct 2026 17:19:42 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "기업이익 못따라가는 코스피… '닷컴버블' 판박이",
+   "link": "https://www.mk.co.kr/news/stock/12178982",
+   "pubDate": "Sun, 18 Oct 2026 17:16:20 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "정부 \"주택 공급·시장동향 지표 개선…중장기 안정화 전망\"",
+   "link": "https://www.yna.co.kr/view/AKR20261018042600003",
+   "pubDate": "Sun, 18 Oct 2026 17:05:49 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "불확실성 시대 당신의 투자 전략은 [김승호의 투자전망] 1부",
+   "link": "https://www.mk.co.kr/news/stock/12178844",
+   "pubDate": "Sun, 18 Oct 2026 17:00:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "삼전닉스 월요일에 주가 어떡해요?…‘中딥시크 쇼크’ 또 온다는데",
+   "link": "https://www.mk.co.kr/news/business/12178901",
+   "pubDate": "Sun, 18 Oct 2026 16:17:54 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "'돈의 속성' 김승호 투자특강 … 매플 가입하면 볼수 있어요",
+   "link": "https://www.mk.co.kr/news/stock/12178877",
+   "pubDate": "Sun, 18 Oct 2026 16:11:46 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "코스피 20% 빠져도 “韓 기초체력 반등” 이유 보니 [매플 위켄드]",
+   "link": "https://www.mk.co.kr/news/economy/12178869",
+   "pubDate": "Sun, 18 Oct 2026 16:06:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "코스피 급락에 미장으로…순매수 1위 반도체 3배 ETF는 40% 급락",
+   "link": "https://www.mk.co.kr/news/stock/12178768",
+   "pubDate": "Sun, 18 Oct 2026 14:11:38 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“내 계좌 다 녹았어요”…지난주 14.5% 폭락 코스피, 언제나 회복?",
+   "link": "https://www.mk.co.kr/news/stock/12178764",
+   "pubDate": "Sun, 18 Oct 2026 14:00:07 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "서울투자진흥재단, 프랑스 AI·딥테크 기업 서울 유치 나서",
+   "link": "https://www.yna.co.kr/view/AKR20261018024400004",
+   "pubDate": "Sun, 18 Oct 2026 12:11:53 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "금감원·민간합동팀, IOSCO '투자자보호 AI 개발 대회' 입상",
+   "link": "https://www.yna.co.kr/view/AKR20261017026400002",
+   "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "신한은행, 중저신용자 민간 중금리대출 금리 0.3%p 추가 인하",
+   "link": "https://www.yna.co.kr/view/AKR20261016159400002",
+   "pubDate": "Sun, 18 Oct 2026 09:00:03 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "국힘 “국민연금 손실 눈덩이인데… 與, 조희대 탄핵 ‘물타기’”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/10/18/MY3WGZLEGQZDIMLBHE3TMMZRMU/",
+   "pubDate": "Sun, 18 Oct 2026 07:24:01 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "'지난주 14.5% 폭락' 코스피, 회복까지 얼마나…과거 사례는",
    "link": "https://www.yna.co.kr/view/AKR20261016179500008",
    "pubDate": "Sun, 18 Oct 2026 06:30:01 +0900",
@@ -6281,118 +6371,28 @@
    "source": "연합뉴스"
   },
   {
-   "title": "\"10월 넘기고 11월에\"…전문가들, 금리 인상 '숨고르기' 전망",
-   "link": "https://www.yna.co.kr/view/AKR20261017017500002",
-   "pubDate": "Sun, 18 Oct 2026 05:45:00 +0900",
-   "source": "연합뉴스"
+   "title": "혁신금융위도 패싱... 금융위의 이상한 조각투자 사업자 예비인가",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/18/WBILTO6ZL5HABEYA5XADFC4TGA/",
+   "pubDate": "Sun, 18 Oct 2026 05:14:24 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "금감원·민간합동팀, ‘투자자 보호 AI 프로그램 개발’ 대회 입상",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/MVRTINBTGA3WIZLFHE2DEMLFGE/",
+   "pubDate": "Sun, 18 Oct 2026 04:26:41 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "국민연금, 3분기 182조원 손실... 7분기 만에 ‘마이너스’",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/VVCPGCSICRDKTC4PNOEWEA5JAM/",
+   "pubDate": "Sun, 18 Oct 2026 00:31:30 +0000",
+   "source": "조선일보"
   },
   {
    "title": "SK하이닉스, 美 솔리다임 상장 추진에 ‘중복상장’ 논란",
    "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/VFB2R5M7MND7FG4IFM75JXRLTE/",
    "pubDate": "Sat, 17 Oct 2026 23:50:31 +0000",
    "source": "조선일보"
-  },
-  {
-   "title": "[부고] 양재진(IBK투자증권 강남센터 부장)씨 빙모상",
-   "link": "https://www.yna.co.kr/view/AKR20261017044000008",
-   "pubDate": "Sat, 17 Oct 2026 18:40:51 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "트럼프에 뺨 맞은 하버드…‘여기’ 투자 성공해 자산 90조원 돌파",
-   "link": "https://www.mk.co.kr/news/stock/12178557",
-   "pubDate": "Sat, 17 Oct 2026 18:25:43 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "美 ‘중간 선거’로 증시 강세 유력… 한국도 흐름 탈 가능성",
-   "link": "https://www.chosun.com/economy/weeklybiz/2026/10/18/OFYFRE6MN5CWVEISJYUQELR3KE/",
-   "pubDate": "Sat, 17 Oct 2026 18:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[다음주 경제] 기준금리 3연속 인상할까…생산자 물가도 발표",
-   "link": "https://www.yna.co.kr/view/AKR20261017011700002",
-   "pubDate": "Sat, 17 Oct 2026 09:07:32 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "불황 장기화에 빚 감당 못하는 기업…법인파산 4년새 2.4배로",
-   "link": "https://www.yna.co.kr/view/AKR20261016169600004",
-   "pubDate": "Sat, 17 Oct 2026 07:00:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피 꺾이자…해외 코인거래소 '큰손' 90% 이상 반등 베팅",
-   "link": "https://www.yna.co.kr/view/AKR20261016169500002",
-   "pubDate": "Sat, 17 Oct 2026 05:55:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피 7거래일 연속 하락에 반대매매 3000억원 육박",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/17/GVRWIZRUMM2TMOBYMVRTEYTCME/",
-   "pubDate": "Sat, 17 Oct 2026 00:43:12 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "코스피 7거래일 하락에 ‘빚투’ 직격탄…반대매매 3000억 육박",
-   "link": "https://www.chosun.com/economy/economy_general/2026/10/17/6YENIOK6NZHZLP67JHRONBDIQY/",
-   "pubDate": "Sat, 17 Oct 2026 00:30:51 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "“증시 폭등 없었으면 폭락도 없었다”…국민연금 국조 꺼내든 국힘",
-   "link": "https://www.mk.co.kr/news/politics/12178257",
-   "pubDate": "Fri, 16 Oct 2026 22:01:18 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[산업X파일] 통풍 애주가도 ‘캬~’... 맥주 마실 날 오나요",
-   "link": "https://www.chosun.com/economy/industry-company/2026/10/17/CCEIKCY2Y5DMZBITNTWFU3SFQM/",
-   "pubDate": "Fri, 16 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "\"재건축, 서울보다 분당이 유리\"..분담금 10억시대 유망 투자처는?",
-   "link": "https://www.chosun.com/economy/realty/redevelop/2026/10/17/HA2WKOBYGU3GGNLDGE3TEZRRGI/",
-   "pubDate": "Fri, 16 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "하락 일단 멈췄지만 … 코스피 빚투는 부담",
-   "link": "https://www.mk.co.kr/news/stock/12178089",
-   "pubDate": "Fri, 16 Oct 2026 17:41:56 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "美 국채금리 하락에 … 모처럼 웃은 韓 바이오株",
-   "link": "https://www.mk.co.kr/news/stock/12178088",
-   "pubDate": "Fri, 16 Oct 2026 17:41:56 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“지금 팔아? 좀 더 버텨?”…급락 뒤 반등한 코스피, 전문가 의견 보니",
-   "link": "https://www.mk.co.kr/news/stock/12177886",
-   "pubDate": "Fri, 16 Oct 2026 15:48:54 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[단독] KRX “중복상장규제 자금조달과정 적용은 무리”",
-   "link": "https://www.mk.co.kr/news/stock/12177861",
-   "pubDate": "Fri, 16 Oct 2026 15:26:27 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“코스피 0.66% 빠졌는데 전액손실”…200배 레버리지 등장했다는데",
-   "link": "https://www.mk.co.kr/news/stock/12177832",
-   "pubDate": "Fri, 16 Oct 2026 14:56:15 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[MK시그널] 뉴파워프라즈마, 반도체 플라즈마 부품 수요 확대 등에 주가 상승세... MK시그널 추천 후 상승률 22.01% 기록",
-   "link": "https://www.mk.co.kr/news/stock/12177522",
-   "pubDate": "Fri, 16 Oct 2026 09:52:12 +09:00",
-   "source": "매일경제 증권"
   }
  ]
 }
