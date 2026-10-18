@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T09:50:21.145719+09:00",
+  "updatedAt": "2026-10-18T14:42:28.352593+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,22 +112,94 @@
   ],
   "news": [
     {
-      "title": "오세훈 \"정부 여당, 부동산정책 실패 인정하고 방향 바로잡아야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261018013900004",
-      "pubDate": "Sun, 18 Oct 2026 09:46:09 +0900",
+      "title": "[동포의 창] \"재외동포 청년, 제주서 배우고 취업까지\"",
+      "link": "https://www.yna.co.kr/view/AKR20261018023600371",
+      "pubDate": "Sun, 18 Oct 2026 12:18:57 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[AI위클리] 'AI 해킹' 우려가 현실로…정부·기업은 방어책 고심",
-      "link": "https://www.yna.co.kr/view/AKR20261017026800017",
-      "pubDate": "Sun, 18 Oct 2026 09:30:00 +0900",
+      "title": "서울투자진흥재단, 프랑스 AI·딥테크 기업 서울 유치 나서",
+      "link": "https://www.yna.co.kr/view/AKR20261018024400004",
+      "pubDate": "Sun, 18 Oct 2026 12:11:53 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "수은 행장, 국제금융공사 총재와 글로벌 공급망 협력 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261018012100002",
-      "pubDate": "Sun, 18 Oct 2026 09:18:39 +0900",
+      "title": "화재·폭발 산재사망, 작년 2배로↑…노동부, 안전조치 집중점검",
+      "link": "https://www.yna.co.kr/view/AKR20261016136900530",
+      "pubDate": "Sun, 18 Oct 2026 12:00:27 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "최지영 IMF 이사 \"한국만 재정 여력 늘어나…AI붐 당장 안 꺾여\"",
+      "link": "https://www.yna.co.kr/view/AKR20261016170600002",
+      "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금감원·민간합동팀, IOSCO '투자자보호 AI 개발 대회' 입상",
+      "link": "https://www.yna.co.kr/view/AKR20261017026400002",
+      "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중기부, 수·위탁기업 불공정거래 점검…조사 기간 1년으로 확대",
+      "link": "https://www.yna.co.kr/view/AKR20261017027000030",
+      "pubDate": "Sun, 18 Oct 2026 12:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "IMF 총재 \"미래대응기금 등 韓재정·통화 정책조합 접근법 적절\"",
+      "link": "https://www.yna.co.kr/view/AKR20261018011600002",
+      "pubDate": "Sun, 18 Oct 2026 12:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'신세계 3세' 애니도 이렇게 쓴다…요즘 뜨는 향수 사용법",
+      "link": "https://www.hankyung.com/article/2026101884397",
+      "pubDate": "Sun, 18 Oct 2026 11:28:28 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "CU \"'트러플하몽스틱', 10월 스낵 매출 1위\"",
+      "link": "https://www.yna.co.kr/view/AKR20261018021900030",
+      "pubDate": "Sun, 18 Oct 2026 11:17:24 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "동네 중소형 마트 5천곳, 배민 통해 즉시 배송 가능해진다",
+      "link": "https://www.yna.co.kr/view/AKR20261018019800030",
+      "pubDate": "Sun, 18 Oct 2026 11:02:25 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "여객선 좌초사고 해역에 11ｍ 높이 정식 등대 설치",
+      "link": "https://www.yna.co.kr/view/AKR20261016133700051",
+      "pubDate": "Sun, 18 Oct 2026 11:00:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'509만원 아이폰' 사전예약 열리자마자…'반전' [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610188349i",
+      "pubDate": "Sun, 18 Oct 2026 11:00:06 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"제철 굴 실컷 먹으려 했는데\"…마트 갔다가 '한숨' [박상경의 영수증 리뷰]",
+      "link": "https://www.hankyung.com/article/202610166081g",
+      "pubDate": "Sun, 18 Oct 2026 11:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"돈 아껴드리겠습니다\"…슈퍼카 CEO가 날린 '일침' [최수진의 모빌리티톡]",
+      "link": "https://www.hankyung.com/article/202610166362g",
+      "pubDate": "Sun, 18 Oct 2026 10:30:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'중국서 돈 벌던 시절 끝났나'…한국 은행들 줄줄이 '비상' [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610177694i",
+      "pubDate": "Sun, 18 Oct 2026 09:29:03 +0900",
+      "source": "한국경제"
     },
     {
       "title": "현대차·기아, 제조 AI 내재화 속도…로봇부터 공장 운영까지 혁신",
@@ -148,87 +220,15 @@
       "source": "한국경제"
     },
     {
-      "title": "신한은행, 중저신용자 민간 중금리대출 금리 0.3%p 추가 인하",
-      "link": "https://www.yna.co.kr/view/AKR20261016159400002",
-      "pubDate": "Sun, 18 Oct 2026 09:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "코인으로 1000만원 벌면…세금은 165만원 낸다",
       "link": "https://www.hankyung.com/article/202610166514i",
       "pubDate": "Sun, 18 Oct 2026 09:00:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "김영권, 외국납부세액공제 다툰 8억원대 소득세 소송 최종 패소",
-      "link": "https://www.yna.co.kr/view/AKR20261017031000004",
-      "pubDate": "Sun, 18 Oct 2026 09:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'채용비위 의혹' 조선대 무용과 교수 무죄…법원 \"증거 부족\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016099300054",
-      "pubDate": "Sun, 18 Oct 2026 08:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "50억짜리 건물 판 70대 자산가…매월 820만원 꽂힌다",
       "link": "https://www.hankyung.com/article/202610166341i",
       "pubDate": "Sun, 18 Oct 2026 08:00:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "LG전자, 미국 최대 소비자매체 프리미엄 주방가전 신뢰도 1위",
-      "link": "https://www.yna.co.kr/view/AKR20261016150400003",
-      "pubDate": "Sun, 18 Oct 2026 08:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"점박이물범 살립시다\" 자라는 왜 갯벌 보호에 앞장설까 [장서우의 하입:hype]",
-      "link": "https://www.hankyung.com/article/202610178012i",
-      "pubDate": "Sun, 18 Oct 2026 08:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이것까지 5000원이라고?\"…다이소 파격 행보에 '깜짝'  [박수림의 요즘 여기]",
-      "link": "https://www.hankyung.com/article/202610166696g",
-      "pubDate": "Sun, 18 Oct 2026 07:30:02 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"마시면 이틀 뒤에 깬다\"…11년 만에 돌아온 '전설의 술'",
-      "link": "https://www.hankyung.com/article/2026101881707",
-      "pubDate": "Sun, 18 Oct 2026 07:26:34 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이건희 삼성 선대회장 6주기…삼성가 '조용한 추모'",
-      "link": "https://www.hankyung.com/article/2026101881377",
-      "pubDate": "Sun, 18 Oct 2026 07:10:54 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[만나보니] 딥엑스 김녹원 \"인텔과 기술협력 본격화…AMD와도 논의\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016157300017",
-      "pubDate": "Sun, 18 Oct 2026 07:00:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[인터뷰] 최진영 미래운용 본부장 \"우량채로 이자수익 확보할 때\"",
-      "link": "https://www.yna.co.kr/view/AKR20261016112700008",
-      "pubDate": "Sun, 18 Oct 2026 07:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "백화점 3분기 성장 둔화 전망…대형마트는 '홈플러스 반사이익'",
-      "link": "https://www.yna.co.kr/view/AKR20261016176200030",
-      "pubDate": "Sun, 18 Oct 2026 07:00:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "러시아서 더 잘 팔린다…80억개 대박 난 '이 라면' [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202610167152i",
-      "pubDate": "Sun, 18 Oct 2026 06:00:01 +0900",
       "source": "한국경제"
     }
   ]
