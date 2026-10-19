@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T04:13:23.619522+09:00",
+  "updatedAt": "2026-10-20T08:31:19.284935+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52049.1,
-      "change": 46.69,
-      "changePercent": 0.09,
+      "price": 51966.03,
+      "change": -36.38,
+      "changePercent": -0.07,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26468.61,
-      "change": 328.57,
-      "changePercent": 1.26,
+      "price": 26430.89,
+      "change": 290.85,
+      "changePercent": 1.11,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1331.86,
-      "change": -2.34,
-      "changePercent": -0.18,
+      "price": 1330.8,
+      "change": -2.05,
+      "changePercent": -0.15,
       "currency": "KRW"
     }
   ],
@@ -88,148 +88,148 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 343.12,
-      "change": -0.34,
-      "changePercent": -0.1,
+      "price": 342.94,
+      "change": -0.52,
+      "changePercent": -0.15,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 368.94,
-      "change": 14.21,
-      "changePercent": 4.01,
+      "price": 368.06,
+      "change": 13.34,
+      "changePercent": 3.76,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.34,
-      "change": 3.21,
-      "changePercent": 1.5,
+      "price": 217.09,
+      "change": 2.96,
+      "changePercent": 1.38,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"엔비디아의 진짜 해자 CUDA에 도전\"…아마존,AI칩 소프트웨어 공개",
-      "link": "https://www.hankyung.com/article/202610191823i",
-      "pubDate": "Tue, 20 Oct 2026 00:11:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "이찬진 \"의무복무 병사 대부업체 대출 금지 검토\"(종합3보)",
-      "link": "https://www.yna.co.kr/view/AKR20261019071353002",
-      "pubDate": "Mon, 19 Oct 2026 23:43:18 +0900",
+      "title": "대신증권 \"LG CNS, 3분기 실적 예상치 5% 상회 전망\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020025300008",
+      "pubDate": "Tue, 20 Oct 2026 08:25:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "美 증시, AI 관련 주식 저가 매수에 나스닥 반등",
-      "link": "https://www.hankyung.com/article/202610191800i",
-      "pubDate": "Mon, 19 Oct 2026 23:13:03 +0900",
+      "title": "파르나스호텔, 인스케이프 양양 초대 총지배인에 김호경 선임",
+      "link": "https://www.hankyung.com/article/202610202104g",
+      "pubDate": "Tue, 20 Oct 2026 08:12:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "이찬진 \"금감원 현장에 있어야…지방이전 정책적 고려 기다려\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019179600002",
-      "pubDate": "Mon, 19 Oct 2026 22:51:13 +0900",
+      "title": "하나증권, 대한통운 목표가↓…\"3분기 실적, 24% 감소 전망\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020022800008",
+      "pubDate": "Tue, 20 Oct 2026 08:11:31 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "중앙일보 인수 우협에 다우키움·CJ 컨소시엄 선정(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261019144551008",
-      "pubDate": "Mon, 19 Oct 2026 22:46:53 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"월급 빼고 다 오르는데\"…폭스바겐 2030년까지 임금 동결 추진",
-      "link": "https://www.hankyung.com/article/2026101917897",
-      "pubDate": "Mon, 19 Oct 2026 22:36:52 +0900",
+      "title": "[밤 사이 해외 뉴스 영상] 상점 3000곳 약탈당했다…프랑스 대규모 폭동에 국채 폭락",
+      "link": "https://www.hankyung.com/article/202610202122i",
+      "pubDate": "Tue, 20 Oct 2026 08:11:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"돈 풀면 국가부도, 돈 줄이면 폭동\"…진퇴양난 프랑스 국가부채",
-      "link": "https://www.hankyung.com/article/202610191780i",
-      "pubDate": "Mon, 19 Oct 2026 22:15:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"갈취 수준\" 삼전닉스 겨냥한 머스크…전문가는 정면반박",
-      "link": "https://www.hankyung.com/article/2026101917517",
-      "pubDate": "Mon, 19 Oct 2026 21:04:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "야근 중에도 '홀짝홀짝'…MZ들 지갑 여는 '와인' 정체 [현장+]",
-      "link": "https://www.hankyung.com/article/202610199278g",
-      "pubDate": "Mon, 19 Oct 2026 21:00:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[게시판] DB저축銀, 파킹통장 한도 1억원으로 확대…금리 3.3%",
-      "link": "https://www.yna.co.kr/view/AKR20261019175000002",
-      "pubDate": "Mon, 19 Oct 2026 20:39:56 +0900",
+      "title": "식약처, '신생아·암환자 치료' 국가필수의약품 8종 신규 지정",
+      "link": "https://www.yna.co.kr/view/AKR20261020022600017",
+      "pubDate": "Tue, 20 Oct 2026 08:10:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "머스크 \"美 어린이에 스페이스X 1주씩\"…파격 선언한 이유",
-      "link": "https://www.hankyung.com/article/202610191742i",
-      "pubDate": "Mon, 19 Oct 2026 20:34:32 +0900",
+      "title": "[마켓뷰] AI 투자 의견 분분…코스피 반등 지속성 시험대",
+      "link": "https://www.yna.co.kr/view/AKR20261020021900008",
+      "pubDate": "Tue, 20 Oct 2026 08:03:58 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[밤 사이 해외뉴스] 사우디 '사막의 다보스' 결국 연기… 후티 공항 습격에 중동 정세 격랑",
+      "link": "https://www.hankyung.com/article/202610202056i",
+      "pubDate": "Tue, 20 Oct 2026 08:03:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"저걸 혼자 어떻게 다 먹나\"…요즘 잘 팔리는 먹거리의 비밀 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202610190150g",
-      "pubDate": "Mon, 19 Oct 2026 20:04:37 +0900",
+      "title": "\"다이소에 옷 사러 간다더니\"…'5000원 니트' 등장에 깜짝 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610202061i",
+      "pubDate": "Tue, 20 Oct 2026 08:00:09 +0900",
       "source": "한국경제"
     },
     {
-      "title": "빅테크에 반도체 기판…삼성전기 3600억 수주",
-      "link": "https://www.hankyung.com/article/2026101916931",
-      "pubDate": "Mon, 19 Oct 2026 19:26:21 +0900",
+      "title": "TSMC \"3나노 공장 또 짓는다\"…삼성, 'GAA 2나노' 승부수로 맞불",
+      "link": "https://www.hankyung.com/article/202610191471i",
+      "pubDate": "Tue, 20 Oct 2026 08:00:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "18년 끌어온 대전역세권 개발 무산되나…한화 결국 포기",
-      "link": "https://www.yna.co.kr/view/AKR20261019170400063",
-      "pubDate": "Mon, 19 Oct 2026 19:24:11 +0900",
+      "title": "GS글로벌, 탄소배출권 전문기업과 맞손…탄소자산 사업 본격화",
+      "link": "https://www.yna.co.kr/view/AKR20261019155800003",
+      "pubDate": "Tue, 20 Oct 2026 08:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"연임 자격 있나\" 국회 질타에 고개 숙인 은행장들(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261019140652002",
-      "pubDate": "Mon, 19 Oct 2026 19:23:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이찬진 \"해킹때 CEO 책임 강화...망분리규제 완화는 단계적으로\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261019146751002",
-      "pubDate": "Mon, 19 Oct 2026 19:21:55 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"스페이스X 주식 1주씩 선물\"…머스크 통 큰 기부 선언",
-      "link": "https://www.hankyung.com/article/2026101916707",
-      "pubDate": "Mon, 19 Oct 2026 19:15:27 +0900",
+      "title": "\"계란값 왜이리 비싸나\" 했는데 어느새 '뚝'…10개 2000원 밑으로 [박상경의 영수증 리뷰]",
+      "link": "https://www.hankyung.com/article/202610190612g",
+      "pubDate": "Tue, 20 Oct 2026 08:00:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "與 민병덕, 금감원에 \"'콕 코인 관계자 취업' 비토즈 점검해야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019167500002",
-      "pubDate": "Mon, 19 Oct 2026 18:51:18 +0900",
+      "title": "SNT모티브 \"스맥 주식 248억원어치 추가취득…지분율 29.2%\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020019300008",
+      "pubDate": "Tue, 20 Oct 2026 07:53:36 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261019152900011",
-      "pubDate": "Mon, 19 Oct 2026 18:00:02 +0900",
+      "title": "BNK부산은행, 지역축제 후원금 2억원 쾌척…20년간 60억 후원",
+      "link": "https://www.yna.co.kr/view/AKR20261020018300051",
+      "pubDate": "Tue, 20 Oct 2026 07:51:26 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "추미애 \"토지거래허가구역, 효과 따라 빠른 해제 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019160900061",
-      "pubDate": "Mon, 19 Oct 2026 17:59:10 +0900",
+      "title": "송파구, '매매 vs 상속·증여' 절세 전략 설명회",
+      "link": "https://www.yna.co.kr/view/AKR20261020017900004",
+      "pubDate": "Tue, 20 Oct 2026 07:47:41 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "아시아 정제마진 82% 삼킨 운임…중동 산유국도 타격",
+      "link": "https://www.hankyung.com/article/202610202033i",
+      "pubDate": "Tue, 20 Oct 2026 07:44:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "새 폰으로 바꾸려다가 '멈칫'…13년 만에 '최악의 상황' [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610188979i",
+      "pubDate": "Tue, 20 Oct 2026 07:30:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20261020012700011",
+      "pubDate": "Tue, 20 Oct 2026 07:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[우분투칼럼] 아프리카 알고보면(20) 기념품이 된 짐바브웨 화폐",
+      "link": "https://www.yna.co.kr/view/AKR20261001038900898",
+      "pubDate": "Tue, 20 Oct 2026 07:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"잘나가면 1년에 10억도 우습다\"…유튜버 수입 뜯어봤더니",
+      "link": "https://www.hankyung.com/article/2026102019227",
+      "pubDate": "Tue, 20 Oct 2026 06:22:39 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"이수만은 언제 감 잃나\"…3년 만에 돌아온 74세 노장의 반격",
+      "link": "https://www.hankyung.com/article/2026101915661",
+      "pubDate": "Tue, 20 Oct 2026 06:00:12 +0900",
+      "source": "한국경제"
     }
   ]
 }
