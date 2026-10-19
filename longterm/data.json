@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-18T23:03:27.909017+09:00",
+ "updatedAt": "2026-10-19T09:13:43.654590+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -310,8 +310,8 @@
    "fromHigh": -33.13,
    "week52": {
     "high": 9385.59,
-    "low": 3728.38,
-    "position": 34.3
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": null,
@@ -405,8 +405,8 @@
    "fromHigh": -33.37,
    "week52": {
     "high": 1229.42,
-    "low": 630.99,
-    "position": 27.4
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": null,
@@ -1586,8 +1586,8 @@
    "fromHigh": -35.96,
    "week52": {
     "high": 152455.0,
-    "low": 52365.0,
-    "position": 36.4
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 0.96,
@@ -1727,8 +1727,8 @@
    "fromHigh": -10.7,
    "week52": {
     "high": 26440.0,
-    "low": 21615.0,
-    "position": 35.3
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 2.05,
@@ -1836,8 +1836,8 @@
    "fromHigh": -13.79,
    "week52": {
     "high": 208900.0,
-    "low": 153650.0,
-    "position": 41.9
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 0.53,
@@ -1973,8 +1973,8 @@
    "fromHigh": -8.42,
    "week52": {
     "high": 15975.0,
-    "low": 12025.0,
-    "position": 60.4
+    "low": 0.0,
+    "position": null
    },
    "valuation": {},
    "dividendYield": 3.01,
@@ -3040,11 +3040,11 @@
     "per": 24.07,
     "forwardPer": 21.56,
     "pbr": 6.94,
-    "psr": 4.26,
+    "psr": 4.25,
     "peg": 4.08,
     "roe": 30.29,
     "margin": 18.44,
-    "marketCap": 370398429184,
+    "marketCap": 370117869568,
     "beta": 0.38,
     "payout": 64.33,
     "avgYield5y": 2.5
@@ -4126,8 +4126,8 @@
    "fromHigh": -35.48,
    "week52": {
     "high": 374500.0,
-    "low": 94500.0,
-    "position": 43.2
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 2.99,
@@ -4281,8 +4281,8 @@
    "fromHigh": -52.0,
    "week52": {
     "high": 2987000.0,
-    "low": 465500.0,
-    "position": 32.0
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 2.73,
@@ -4436,8 +4436,8 @@
    "fromHigh": -56.85,
    "week52": {
     "high": 783000.0,
-    "low": 241500.0,
-    "position": 13.0
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 6.81,
@@ -4591,8 +4591,8 @@
    "fromHigh": -46.37,
    "week52": {
     "high": 212500.0,
-    "low": 102600.0,
-    "position": 6.9
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 4.95,
@@ -4742,8 +4742,8 @@
    "fromHigh": -54.1,
    "week52": {
     "high": 822000.0,
-    "low": 283000.0,
-    "position": 12.9
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 6.89,
@@ -4897,8 +4897,8 @@
    "fromHigh": -59.0,
    "week52": {
     "high": 304000.0,
-    "low": 171100.0,
-    "position": 6.7
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 12.63,
@@ -5048,8 +5048,8 @@
    "fromHigh": -72.75,
    "week52": {
     "high": 437500.0,
-    "low": 224000.0,
-    "position": 14.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 12.58,
@@ -5199,8 +5199,8 @@
    "fromHigh": -53.82,
    "week52": {
     "high": 542000.0,
-    "low": 275000.0,
-    "position": 8.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 9.93,
@@ -5354,8 +5354,8 @@
    "fromHigh": -7.67,
    "week52": {
     "high": 194500.0,
-    "low": 113000.0,
-    "position": 57.7
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 7.94,
@@ -5509,8 +5509,8 @@
    "fromHigh": -14.23,
    "week52": {
     "high": 116500.0,
-    "low": 72100.0,
-    "position": 48.0
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 6.84,
@@ -5664,8 +5664,8 @@
    "fromHigh": -12.92,
    "week52": {
     "high": 41500.0,
-    "low": 25100.0,
-    "position": 38.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 6.43,
@@ -5807,8 +5807,8 @@
    "fromHigh": 0.0,
    "week52": {
     "high": 195500.0,
-    "low": 132100.0,
-    "position": 92.1
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 13.67,
@@ -5962,8 +5962,8 @@
    "fromHigh": -22.07,
    "week52": {
     "high": 139500.0,
-    "low": 51400.0,
-    "position": 30.6
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 12.22,
@@ -6117,8 +6117,8 @@
    "fromHigh": -21.0,
    "week52": {
     "high": 69400.0,
-    "low": 48100.0,
-    "position": 10.8
+    "low": 0.0,
+    "position": null
    },
    "valuation": {
     "forwardPer": 7.93,
@@ -6251,6 +6251,138 @@
  ],
  "news": [
   {
+   "title": "코스피, 3.2% 급락한 5,488 개장…코스닥도 2.7%↓",
+   "link": "https://www.yna.co.kr/view/AKR20261019033200008",
+   "pubDate": "Mon, 19 Oct 2026 09:07:06 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "[속보] 코스피, 3.2% 급락한 5,488 개장…코스닥도 2.7%↓",
+   "link": "https://www.yna.co.kr/view/AKR20261019030400008",
+   "pubDate": "Mon, 19 Oct 2026 09:02:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "삼성운용, 'KODEX 미국 배당다우존스액티브' 20일 상장",
+   "link": "https://www.yna.co.kr/view/AKR20261019027500008",
+   "pubDate": "Mon, 19 Oct 2026 08:57:14 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "“HD현대중공업, 단기 부진에도 중장기 성장 동력은 여전”…목표가↓",
+   "link": "https://www.mk.co.kr/news/stock/12179204",
+   "pubDate": "Mon, 19 Oct 2026 08:56:17 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "교보증권, 넷마블 목표주가 16%↓…\"신작 성과 확인 필요\"",
+   "link": "https://www.yna.co.kr/view/AKR20261019023900008",
+   "pubDate": "Mon, 19 Oct 2026 08:40:29 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "하나증권, 금호타이어 목표가↓…\"환율·관세 영향에 실적부진\"",
+   "link": "https://www.yna.co.kr/view/AKR20261019020400008",
+   "pubDate": "Mon, 19 Oct 2026 08:32:56 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "[마켓뷰] 코스피, 반등했지만 다시 시험대로…美 증시 동반 하락",
+   "link": "https://www.yna.co.kr/view/AKR20261019014000008",
+   "pubDate": "Mon, 19 Oct 2026 07:57:46 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "거래소 대주주 지분 규제, 기업들 구조 재편 불가피한가[엠블록레터]",
+   "link": "https://www.mk.co.kr/news/stock/12179141",
+   "pubDate": "Mon, 19 Oct 2026 06:34:30 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "투자자 울린 '논란의 코인'…고팍스는 제때 팔아 억대 이익",
+   "link": "https://www.yna.co.kr/view/AKR20261016178600002",
+   "pubDate": "Mon, 19 Oct 2026 06:01:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "요즘 증시, 닷컴버블 급락장과 꼭 닮았다…“긴 겨울 대비” 분석도",
+   "link": "https://www.mk.co.kr/news/stock/12179137",
+   "pubDate": "Mon, 19 Oct 2026 05:55:28 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "339조 굴리는 국부펀드, 사내AI 핵심은 중국산…\"보안의식 허술\"",
+   "link": "https://www.yna.co.kr/view/AKR20261018027100002",
+   "pubDate": "Mon, 19 Oct 2026 05:51:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "실적 발표에는 널뛰는 주식 … 기준금리 변화 영향은 미미 한 까닭",
+   "link": "https://www.mk.co.kr/news/economy/12178906",
+   "pubDate": "Mon, 19 Oct 2026 05:20:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "10월들어 20%빠진 코스피 ... 1년후 주가 전망은?",
+   "link": "https://www.mk.co.kr/news/stock/12178942",
+   "pubDate": "Mon, 19 Oct 2026 05:00:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "[속보] 증시 급락 출발… 美 반도체 지수, 금융위기 후 최장 하락",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/GUZGEMRQMJTGMMJQGE3GIMBSMM/",
+   "pubDate": "Mon, 19 Oct 2026 00:01:40 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "iM證 “코스피 바닥 5100~5340…투매 땐 4800선까지 열려”",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/G5SWMMTEGJSTIMLEMNTDAOBSGA/",
+   "pubDate": "Sun, 18 Oct 2026 23:50:34 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "대우건설 ‘스튜디오 푸르지오’ 첫 투자 작품 ‘여전히 찬란하게’ 21일 개봉",
+   "link": "https://www.chosun.com/economy/real_estate/2026/10/19/MQ4GEYRTMEYWKZJXGQ3TKNRTGQ/",
+   "pubDate": "Sun, 18 Oct 2026 23:50:14 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "안철수 “솔리다임 상장일은 국장 둠스데이…李대통령 침묵 말아야”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/10/19/GJRWGMBQGY2GGNTCMQ4TSN3FHE/",
+   "pubDate": "Sun, 18 Oct 2026 23:47:32 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "“美 신용위험 직격탄 맞은 코스피…반도체 쏠림이 급락 원인\"",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/MYZDMZLBMVSTGZRWGE4DGMJVMI/",
+   "pubDate": "Sun, 18 Oct 2026 23:46:23 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "“코스피 5150까지 열어둬야…과매도지만 바닥 아니다”",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/GZQWKMDGGQ4TINBVGM4TCMDEHE/",
+   "pubDate": "Sun, 18 Oct 2026 23:26:13 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "‘7월의 악몽’ 재점화…헤지펀드 발 빼자 外人 26조 ‘셀 코리아’",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/WFJBVYVW5VGPTMPO7LLDUK4P2U/",
+   "pubDate": "Sun, 18 Oct 2026 23:25:59 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "해외 부동산펀드 수익률 수년째 부진…지난해 말에도 0.2% 그쳐",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/19/OXIFSLHEGZD4RBAXW3CTQENS7M/",
+   "pubDate": "Sun, 18 Oct 2026 23:24:58 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "12월부터 23시간 열리는 미국 증시… 낮과 밤 전략 달라야",
+   "link": "https://www.chosun.com/economy/economy_general/2026/10/19/YFBBNTO3QVGBROCH7HE23RD3VU/",
+   "pubDate": "Sun, 18 Oct 2026 18:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "밸류업 공시 제각각 … \"핵심지표 표준화해야\"",
    "link": "https://www.mk.co.kr/news/stock/12178991",
    "pubDate": "Sun, 18 Oct 2026 17:19:43 +09:00",
@@ -6261,138 +6393,6 @@
    "link": "https://www.mk.co.kr/news/stock/12178989",
    "pubDate": "Sun, 18 Oct 2026 17:19:42 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 급락에 '강제 청산' 경고등",
-   "link": "https://www.mk.co.kr/news/stock/12178990",
-   "pubDate": "Sun, 18 Oct 2026 17:19:42 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "기업이익 못따라가는 코스피… '닷컴버블' 판박이",
-   "link": "https://www.mk.co.kr/news/stock/12178982",
-   "pubDate": "Sun, 18 Oct 2026 17:16:20 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "정부 \"주택 공급·시장동향 지표 개선…중장기 안정화 전망\"",
-   "link": "https://www.yna.co.kr/view/AKR20261018042600003",
-   "pubDate": "Sun, 18 Oct 2026 17:05:49 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "불확실성 시대 당신의 투자 전략은 [김승호의 투자전망] 1부",
-   "link": "https://www.mk.co.kr/news/stock/12178844",
-   "pubDate": "Sun, 18 Oct 2026 17:00:00 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "삼전닉스 월요일에 주가 어떡해요?…‘中딥시크 쇼크’ 또 온다는데",
-   "link": "https://www.mk.co.kr/news/business/12178901",
-   "pubDate": "Sun, 18 Oct 2026 16:17:54 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "'돈의 속성' 김승호 투자특강 … 매플 가입하면 볼수 있어요",
-   "link": "https://www.mk.co.kr/news/stock/12178877",
-   "pubDate": "Sun, 18 Oct 2026 16:11:46 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 20% 빠져도 “韓 기초체력 반등” 이유 보니 [매플 위켄드]",
-   "link": "https://www.mk.co.kr/news/economy/12178869",
-   "pubDate": "Sun, 18 Oct 2026 16:06:09 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 급락에 미장으로…순매수 1위 반도체 3배 ETF는 40% 급락",
-   "link": "https://www.mk.co.kr/news/stock/12178768",
-   "pubDate": "Sun, 18 Oct 2026 14:11:38 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“내 계좌 다 녹았어요”…지난주 14.5% 폭락 코스피, 언제나 회복?",
-   "link": "https://www.mk.co.kr/news/stock/12178764",
-   "pubDate": "Sun, 18 Oct 2026 14:00:07 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "서울투자진흥재단, 프랑스 AI·딥테크 기업 서울 유치 나서",
-   "link": "https://www.yna.co.kr/view/AKR20261018024400004",
-   "pubDate": "Sun, 18 Oct 2026 12:11:53 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "금감원·민간합동팀, IOSCO '투자자보호 AI 개발 대회' 입상",
-   "link": "https://www.yna.co.kr/view/AKR20261017026400002",
-   "pubDate": "Sun, 18 Oct 2026 12:00:17 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "신한은행, 중저신용자 민간 중금리대출 금리 0.3%p 추가 인하",
-   "link": "https://www.yna.co.kr/view/AKR20261016159400002",
-   "pubDate": "Sun, 18 Oct 2026 09:00:03 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국힘 “국민연금 손실 눈덩이인데… 與, 조희대 탄핵 ‘물타기’”",
-   "link": "https://www.chosun.com/economy/economy_general/2026/10/18/MY3WGZLEGQZDIMLBHE3TMMZRMU/",
-   "pubDate": "Sun, 18 Oct 2026 07:24:01 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "'지난주 14.5% 폭락' 코스피, 회복까지 얼마나…과거 사례는",
-   "link": "https://www.yna.co.kr/view/AKR20261016179500008",
-   "pubDate": "Sun, 18 Oct 2026 06:30:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "솔리다임 미국 상장 준비 속도…주관사 선정 이어 대관 강화",
-   "link": "https://www.yna.co.kr/view/AKR20261017046600003",
-   "pubDate": "Sun, 18 Oct 2026 06:19:50 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "대미 무역흑자 1천억불 눈앞…트럼프 투자 압박에 난감한 정부",
-   "link": "https://www.yna.co.kr/view/AKR20261017041500003",
-   "pubDate": "Sun, 18 Oct 2026 06:17:00 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "정부, 연내 동일가치노동 동일임금 로드맵 낸다…임금개편 핵심",
-   "link": "https://www.yna.co.kr/view/AKR20261016118800530",
-   "pubDate": "Sun, 18 Oct 2026 06:01:02 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "폭락장세 뒤 반등했지만 악재는 여전…이번주 코스피 향배는",
-   "link": "https://www.yna.co.kr/view/AKR20261016179400008",
-   "pubDate": "Sun, 18 Oct 2026 06:00:08 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "혁신금융위도 패싱... 금융위의 이상한 조각투자 사업자 예비인가",
-   "link": "https://www.chosun.com/economy/tech_it/2026/10/18/WBILTO6ZL5HABEYA5XADFC4TGA/",
-   "pubDate": "Sun, 18 Oct 2026 05:14:24 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "금감원·민간합동팀, ‘투자자 보호 AI 프로그램 개발’ 대회 입상",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/MVRTINBTGA3WIZLFHE2DEMLFGE/",
-   "pubDate": "Sun, 18 Oct 2026 04:26:41 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "국민연금, 3분기 182조원 손실... 7분기 만에 ‘마이너스’",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/VVCPGCSICRDKTC4PNOEWEA5JAM/",
-   "pubDate": "Sun, 18 Oct 2026 00:31:30 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "SK하이닉스, 美 솔리다임 상장 추진에 ‘중복상장’ 논란",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/18/VFB2R5M7MND7FG4IFM75JXRLTE/",
-   "pubDate": "Sat, 17 Oct 2026 23:50:31 +0000",
-   "source": "조선일보"
   }
  ]
 }
