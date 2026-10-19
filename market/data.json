@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T21:57:01.932396+09:00",
+  "updatedAt": "2026-10-20T04:13:23.619522+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52002.41,
-      "change": -175.29,
-      "changePercent": -0.34,
+      "price": 52049.1,
+      "change": 46.69,
+      "changePercent": 0.09,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26140.03,
-      "change": -572.97,
-      "changePercent": -2.14,
+      "price": 26468.61,
+      "change": 328.57,
+      "changePercent": 1.26,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1329.89,
-      "change": -4.31,
-      "changePercent": -0.32,
+      "price": 1331.86,
+      "change": -2.34,
+      "changePercent": -0.18,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,73 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 343.46,
-      "change": 1.46,
-      "changePercent": 0.43,
+      "price": 343.12,
+      "change": -0.34,
+      "changePercent": -0.1,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 354.72,
-      "change": -7.72,
-      "changePercent": -2.13,
+      "price": 368.94,
+      "change": 14.21,
+      "changePercent": 4.01,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 214.13,
-      "change": -3.1,
-      "changePercent": -1.43,
+      "price": 217.34,
+      "change": 3.21,
+      "changePercent": 1.5,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"갈취 수준\" 머스크 분노에…반도체 전문가 정면반박",
+      "title": "\"엔비디아의 진짜 해자 CUDA에 도전\"…아마존,AI칩 소프트웨어 공개",
+      "link": "https://www.hankyung.com/article/202610191823i",
+      "pubDate": "Tue, 20 Oct 2026 00:11:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이찬진 \"의무복무 병사 대부업체 대출 금지 검토\"(종합3보)",
+      "link": "https://www.yna.co.kr/view/AKR20261019071353002",
+      "pubDate": "Mon, 19 Oct 2026 23:43:18 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美 증시, AI 관련 주식 저가 매수에 나스닥 반등",
+      "link": "https://www.hankyung.com/article/202610191800i",
+      "pubDate": "Mon, 19 Oct 2026 23:13:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이찬진 \"금감원 현장에 있어야…지방이전 정책적 고려 기다려\"",
+      "link": "https://www.yna.co.kr/view/AKR20261019179600002",
+      "pubDate": "Mon, 19 Oct 2026 22:51:13 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중앙일보 인수 우협에 다우키움·CJ 컨소시엄 선정(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261019144551008",
+      "pubDate": "Mon, 19 Oct 2026 22:46:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"월급 빼고 다 오르는데\"…폭스바겐 2030년까지 임금 동결 추진",
+      "link": "https://www.hankyung.com/article/2026101917897",
+      "pubDate": "Mon, 19 Oct 2026 22:36:52 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"돈 풀면 국가부도, 돈 줄이면 폭동\"…진퇴양난 프랑스 국가부채",
+      "link": "https://www.hankyung.com/article/202610191780i",
+      "pubDate": "Mon, 19 Oct 2026 22:15:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"갈취 수준\" 삼전닉스 겨냥한 머스크…전문가는 정면반박",
       "link": "https://www.hankyung.com/article/2026101917517",
       "pubDate": "Mon, 19 Oct 2026 21:04:55 +0900",
       "source": "한국경제"
@@ -172,34 +214,10 @@
       "source": "한국경제"
     },
     {
-      "title": "\"지금도 비싼데 더 오른다\"…전세계 식량값 2027년까지 고공행진",
-      "link": "https://www.hankyung.com/article/202610191660i",
-      "pubDate": "Mon, 19 Oct 2026 19:07:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "中, 대출금리 결정체계 대수술…기업이 기준금리 직접 고른다 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610191663i",
-      "pubDate": "Mon, 19 Oct 2026 19:02:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "CJ도 신세계도 '새 먹거리' 꽂혔다…미디어로 눈 돌리는 이유 [분석+]",
-      "link": "https://www.hankyung.com/article/202610199476g",
-      "pubDate": "Mon, 19 Oct 2026 19:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "與 민병덕, 금감원에 \"'콕 코인 관계자 취업' 비토즈 점검해야\"",
       "link": "https://www.yna.co.kr/view/AKR20261019167500002",
       "pubDate": "Mon, 19 Oct 2026 18:51:18 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "이경수 회장 \"초격차 기술력·인디 다양성이 K뷰티의 힘\"",
-      "link": "https://www.hankyung.com/article/2026101915401",
-      "pubDate": "Mon, 19 Oct 2026 18:34:59 +0900",
-      "source": "한국경제"
     },
     {
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
@@ -211,24 +229,6 @@
       "title": "추미애 \"토지거래허가구역, 효과 따라 빠른 해제 필요\"",
       "link": "https://www.yna.co.kr/view/AKR20261019160900061",
       "pubDate": "Mon, 19 Oct 2026 17:59:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "농식품부 \"김장철 배추·무 공급 안정…마늘·양파가격 높을 듯\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019161500030",
-      "pubDate": "Mon, 19 Oct 2026 17:58:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이찬진 \"단일종목 ETF, 상장일정 맞추기 위해 심사 빨리 진행\"(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20261019071352002",
-      "pubDate": "Mon, 19 Oct 2026 17:52:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정부 \"베트남 진출기업 부가세 환급지연 풀려…과거거래도 소급\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019159100002",
-      "pubDate": "Mon, 19 Oct 2026 17:49:52 +0900",
       "source": "연합뉴스"
     }
   ]
