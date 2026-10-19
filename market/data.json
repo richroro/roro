@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-19T15:02:36.091962+09:00",
+  "updatedAt": "2026-10-19T21:57:01.932396+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 5700.95,
-      "change": 32.9,
-      "changePercent": 0.58,
+      "price": 5768.01,
+      "change": 99.96,
+      "changePercent": 1.76,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 799.38,
-      "change": 4.6,
-      "changePercent": 0.58,
+      "price": 808.89,
+      "change": 14.11,
+      "changePercent": 1.78,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1329.58,
-      "change": -4.62,
-      "changePercent": -0.35,
+      "price": 1329.89,
+      "change": -4.31,
+      "changePercent": -0.32,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 215500.0,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 218000.0,
+      "change": 2500.0,
+      "changePercent": 1.16,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1248000.0,
-      "change": -24000.0,
-      "changePercent": -1.89,
+      "price": 1277000.0,
+      "change": 5000.0,
+      "changePercent": 0.39,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 181700.0,
-      "change": 1700.0,
-      "changePercent": 0.94,
+      "price": 182900.0,
+      "change": 2900.0,
+      "changePercent": 1.61,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 31950.0,
-      "change": 100.0,
-      "changePercent": 0.31,
+      "price": 32100.0,
+      "change": 250.0,
+      "changePercent": 0.78,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 430500.0,
-      "change": 27500.0,
-      "changePercent": 6.82,
+      "price": 432000.0,
+      "change": 29000.0,
+      "changePercent": 7.2,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "소비자원, 지역 문화행사 '가을밤의 아트 살롱' 개최",
-      "link": "https://www.yna.co.kr/view/AKR20261019109400030",
-      "pubDate": "Mon, 19 Oct 2026 14:44:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이찬진 \"해외서 '결제주기 단축' 우려 많아…일부 공감해\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019116200002",
-      "pubDate": "Mon, 19 Oct 2026 14:41:38 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"매출 네 배 이상 뛰었다\"…파두, 분기 실적 '또 최대'",
-      "link": "https://www.hankyung.com/article/202610190796i",
-      "pubDate": "Mon, 19 Oct 2026 14:36:08 +0900",
+      "title": "\"갈취 수준\" 머스크 분노에…반도체 전문가 정면반박",
+      "link": "https://www.hankyung.com/article/2026101917517",
+      "pubDate": "Mon, 19 Oct 2026 21:04:55 +0900",
       "source": "한국경제"
     },
     {
-      "title": "BNK경남은행, 업무 전반에 AI 활용 늘린다…AI 크루 60명 선발",
-      "link": "https://www.yna.co.kr/view/AKR20261019112600052",
-      "pubDate": "Mon, 19 Oct 2026 14:34:10 +0900",
+      "title": "야근 중에도 '홀짝홀짝'…MZ들 지갑 여는 '와인' 정체 [현장+]",
+      "link": "https://www.hankyung.com/article/202610199278g",
+      "pubDate": "Mon, 19 Oct 2026 21:00:28 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[게시판] DB저축銀, 파킹통장 한도 1억원으로 확대…금리 3.3%",
+      "link": "https://www.yna.co.kr/view/AKR20261019175000002",
+      "pubDate": "Mon, 19 Oct 2026 20:39:56 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "송옥주 \"141개 산림조합의 90%는 적자…수익성·건전성 최악\"",
-      "link": "https://www.yna.co.kr/view/AKR20261019107500063",
-      "pubDate": "Mon, 19 Oct 2026 14:31:44 +0900",
+      "title": "머스크 \"美 어린이에 스페이스X 1주씩\"…파격 선언한 이유",
+      "link": "https://www.hankyung.com/article/202610191742i",
+      "pubDate": "Mon, 19 Oct 2026 20:34:32 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"저걸 혼자 어떻게 다 먹나\"…요즘 잘 팔리는 먹거리의 비밀 [트렌드+]",
+      "link": "https://www.hankyung.com/article/202610190150g",
+      "pubDate": "Mon, 19 Oct 2026 20:04:37 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "빅테크에 반도체 기판…삼성전기 3600억 수주",
+      "link": "https://www.hankyung.com/article/2026101916931",
+      "pubDate": "Mon, 19 Oct 2026 19:26:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "18년 끌어온 대전역세권 개발 무산되나…한화 결국 포기",
+      "link": "https://www.yna.co.kr/view/AKR20261019170400063",
+      "pubDate": "Mon, 19 Oct 2026 19:24:11 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"간판이 싹 바뀌었네\"…코카콜라 입고 확 달라진 해방촌",
-      "link": "https://www.hankyung.com/article/202610190767g",
-      "pubDate": "Mon, 19 Oct 2026 14:30:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
-      "link": "https://www.yna.co.kr/view/AKR20261019109000011",
-      "pubDate": "Mon, 19 Oct 2026 14:30:00 +0900",
+      "title": "\"연임 자격 있나\" 국회 질타에 고개 숙인 은행장들(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261019140652002",
+      "pubDate": "Mon, 19 Oct 2026 19:23:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "'시유지 무단점유' 아파트 변상금 부과한 울산 남구, 2심서 패소",
-      "link": "https://www.yna.co.kr/view/AKR20261019109300057",
-      "pubDate": "Mon, 19 Oct 2026 14:29:24 +0900",
+      "title": "이찬진 \"해킹때 CEO 책임 강화...망분리규제 완화는 단계적으로\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261019146751002",
+      "pubDate": "Mon, 19 Oct 2026 19:21:55 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "청년미래적금 2차 가입 신청자 68만8천명…20대 후반이 34%",
-      "link": "https://www.yna.co.kr/view/AKR20261019110500002",
-      "pubDate": "Mon, 19 Oct 2026 14:24:25 +0900",
+      "title": "\"스페이스X 주식 1주씩 선물\"…머스크 통 큰 기부 선언",
+      "link": "https://www.hankyung.com/article/2026101916707",
+      "pubDate": "Mon, 19 Oct 2026 19:15:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"지금도 비싼데 더 오른다\"…전세계 식량값 2027년까지 고공행진",
+      "link": "https://www.hankyung.com/article/202610191660i",
+      "pubDate": "Mon, 19 Oct 2026 19:07:20 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "中, 대출금리 결정체계 대수술…기업이 기준금리 직접 고른다 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610191663i",
+      "pubDate": "Mon, 19 Oct 2026 19:02:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "CJ도 신세계도 '새 먹거리' 꽂혔다…미디어로 눈 돌리는 이유 [분석+]",
+      "link": "https://www.hankyung.com/article/202610199476g",
+      "pubDate": "Mon, 19 Oct 2026 19:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "與 민병덕, 금감원에 \"'콕 코인 관계자 취업' 비토즈 점검해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20261019167500002",
+      "pubDate": "Mon, 19 Oct 2026 18:51:18 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 한국부동산원, 공공 건축물 그린리모델링 지원신청 접수",
-      "link": "https://www.yna.co.kr/view/AKR20261019110300003",
-      "pubDate": "Mon, 19 Oct 2026 14:18:55 +0900",
+      "title": "이경수 회장 \"초격차 기술력·인디 다양성이 K뷰티의 힘\"",
+      "link": "https://www.hankyung.com/article/2026101915401",
+      "pubDate": "Mon, 19 Oct 2026 18:34:59 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261019152900011",
+      "pubDate": "Mon, 19 Oct 2026 18:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "현대건설, 2조6천억 규모 목동10단지 재건축 시공사 선정",
-      "link": "https://www.yna.co.kr/view/AKR20261019098000003",
-      "pubDate": "Mon, 19 Oct 2026 14:18:00 +0900",
+      "title": "추미애 \"토지거래허가구역, 효과 따라 빠른 해제 필요\"",
+      "link": "https://www.yna.co.kr/view/AKR20261019160900061",
+      "pubDate": "Mon, 19 Oct 2026 17:59:10 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "도로공사 강원본부, 지역 건설업계와 소통·협력 확대",
-      "link": "https://www.yna.co.kr/view/AKR20261019107200062",
-      "pubDate": "Mon, 19 Oct 2026 14:07:00 +0900",
+      "title": "농식품부 \"김장철 배추·무 공급 안정…마늘·양파가격 높을 듯\"",
+      "link": "https://www.yna.co.kr/view/AKR20261019161500030",
+      "pubDate": "Mon, 19 Oct 2026 17:58:49 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"중국인들 300만명 몰렸다\"…역대급 품귀현상 빚은 '아이폰 대란'",
-      "link": "https://www.hankyung.com/article/202610190662g",
-      "pubDate": "Mon, 19 Oct 2026 14:01:05 +0900",
-      "source": "한국경제"
+      "title": "이찬진 \"단일종목 ETF, 상장일정 맞추기 위해 심사 빨리 진행\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261019071352002",
+      "pubDate": "Mon, 19 Oct 2026 17:52:18 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "[포토] 2026 강릉 ITS 세계총회 개회식",
-      "link": "https://www.hankyung.com/article/202610190646i",
-      "pubDate": "Mon, 19 Oct 2026 13:54:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"스마트밴드 2000개 주세요\"…中 박람회 휩쓴 '큰손' 정체 [차이나 워치]",
-      "link": "https://www.hankyung.com/article/202610190517i",
-      "pubDate": "Mon, 19 Oct 2026 12:47:29 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "HBM 장비 최강자 한미반도체, 美 심장부에 전진기지 세웠다",
-      "link": "https://www.hankyung.com/article/2026101904947",
-      "pubDate": "Mon, 19 Oct 2026 12:13:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] 멀쩡한 여수엑스포장 14년 방치하더니…수백억 줄줄 샜다",
-      "link": "https://www.hankyung.com/article/202610190030H",
-      "pubDate": "Mon, 19 Oct 2026 12:07:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"오픈 전부터 줄 섰다\"…美서 난리난 '한국 케이크' 뭐길래",
-      "link": "https://www.hankyung.com/article/202610199950i",
-      "pubDate": "Mon, 19 Oct 2026 11:27:23 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"삼성 따라올 틈 안 준다\"…TSMC 3나노 공장 추가 건설",
-      "link": "https://www.hankyung.com/article/2026101903257",
-      "pubDate": "Mon, 19 Oct 2026 11:25:40 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'배라' 1986년 1호점 그 메뉴 돌아왔다…재출시 요구 폭주",
-      "link": "https://www.hankyung.com/article/202610190366g",
-      "pubDate": "Mon, 19 Oct 2026 11:24:06 +0900",
-      "source": "한국경제"
+      "title": "정부 \"베트남 진출기업 부가세 환급지연 풀려…과거거래도 소급\"",
+      "link": "https://www.yna.co.kr/view/AKR20261019159100002",
+      "pubDate": "Mon, 19 Oct 2026 17:49:52 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
