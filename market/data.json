@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T18:56:11.113956+09:00",
+  "updatedAt": "2026-10-20T23:55:03.331107+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51966.03,
-      "change": -36.37,
-      "changePercent": -0.07,
+      "price": 52684.12,
+      "change": 718.09,
+      "changePercent": 1.38,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26430.89,
-      "change": 290.85,
-      "changePercent": 1.11,
+      "price": 26573.39,
+      "change": 142.5,
+      "changePercent": 0.54,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1327.68,
-      "change": -5.17,
-      "changePercent": -0.39,
+      "price": 1326.44,
+      "change": -6.41,
+      "changePercent": -0.48,
       "currency": "KRW"
     }
   ],
@@ -88,34 +88,124 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.94,
-      "change": -0.52,
-      "changePercent": -0.15,
+      "price": 340.94,
+      "change": -2.0,
+      "changePercent": -0.58,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 368.06,
-      "change": 13.34,
-      "changePercent": 3.76,
+      "price": 376.42,
+      "change": 8.36,
+      "changePercent": 2.27,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.09,
-      "change": 2.96,
-      "changePercent": 1.38,
+      "price": 218.21,
+      "change": 1.12,
+      "changePercent": 0.52,
       "currency": "USD"
     }
   ],
   "news": [
     {
+      "title": "LIG D&A 2년간 방산 입찰 금지",
+      "link": "https://www.hankyung.com/article/2026102044251",
+      "pubDate": "Tue, 20 Oct 2026 22:34:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'케데헌'이후 대박이 없다…넷플릭스 감원 등 '초비상'",
+      "link": "https://www.hankyung.com/article/202610204415i",
+      "pubDate": "Tue, 20 Oct 2026 22:31:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"47조원어치 칩 달라\"…中빅테크들 주문에 엔비디아도 '난감'",
+      "link": "https://www.hankyung.com/article/202610204388i",
+      "pubDate": "Tue, 20 Oct 2026 21:36:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'역삼 방화 70대' 4년전에도 특허법인 2곳에 휘발유 2L 뿌려 위협",
+      "link": "https://www.yna.co.kr/view/AKR20261020173700004",
+      "pubDate": "Tue, 20 Oct 2026 21:36:18 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "브렌트유 111달러까지 치솟아…사우디 석유시설 공격에 초긴장",
+      "link": "https://www.hankyung.com/article/202610204308i",
+      "pubDate": "Tue, 20 Oct 2026 20:49:36 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "NXT \"프리마켓 시가 단일가매매 내년 1월 18일 도입\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020172700008",
+      "pubDate": "Tue, 20 Oct 2026 20:30:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020172600002",
+      "pubDate": "Tue, 20 Oct 2026 20:28:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "삼성증권 \"모니모서 신규 계좌 개설시 코스피200 주식 증정\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020171900008",
+      "pubDate": "Tue, 20 Oct 2026 20:09:32 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "트럼프 지지율 사상최저 \"31%\"…중간선거 민주 양원 통제가능성↑",
+      "link": "https://www.hankyung.com/article/202610204280i",
+      "pubDate": "Tue, 20 Oct 2026 19:37:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이소영 장관 \"국가 성장 프로젝트에 中企 참여 기회 확대\"",
+      "link": "https://www.yna.co.kr/view/AKR20261020166900030",
+      "pubDate": "Tue, 20 Oct 2026 19:33:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "록밴드 MCR, 18년 만에 한국 온다…파라다이스시티서 2만명 규모 공연",
+      "link": "https://www.hankyung.com/article/202610204287g",
+      "pubDate": "Tue, 20 Oct 2026 19:26:54 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "야놀자, 'ITB 아시아 2026' 참가…APAC 시장 공략 속도",
+      "link": "https://www.hankyung.com/article/202610204283g",
+      "pubDate": "Tue, 20 Oct 2026 19:18:54 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "머스크가 쏘아올린 \"주식 1주 기부\"…이젠 버핏에게 \"주식 풀어라\"",
+      "link": "https://www.hankyung.com/article/202610204270i",
+      "pubDate": "Tue, 20 Oct 2026 19:08:23 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "'실버 오크' 와인 최고매출책임자 \"한국은 아시아 최대 시장\"",
       "link": "https://www.yna.co.kr/view/AKR20261020163000030",
       "pubDate": "Tue, 20 Oct 2026 18:51:51 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "뜨거운 티슈시장…문구·유아업체도 도전장",
+      "link": "https://www.hankyung.com/article/2026102040701",
+      "pubDate": "Tue, 20 Oct 2026 18:37:13 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "세라젬 창업주 이환성 회장, 직원 출신 CEO에 경영권 승계",
+      "link": "https://www.hankyung.com/article/2026102040661",
+      "pubDate": "Tue, 20 Oct 2026 18:35:57 +0900",
+      "source": "한국경제"
     },
     {
       "title": "수은 행장 \"KAI 지분 매각 계획 없어\"…KAI 대표 \"독과점 문제\"(종합2보)",
@@ -130,12 +220,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "건보 재정악화에 덜 낸 보험료 찾아낸다…지역가입자 설득이 관건",
-      "link": "https://www.hankyung.com/article/2026102041391",
-      "pubDate": "Tue, 20 Oct 2026 18:02:02 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "충북 수출 3분기 124억달러…분기 최대 실적 또 경신",
       "link": "https://www.yna.co.kr/view/AKR20261020159800064",
       "pubDate": "Tue, 20 Oct 2026 18:01:44 +0900",
@@ -145,90 +229,6 @@
       "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
       "link": "https://www.yna.co.kr/view/AKR20261020149000011",
       "pubDate": "Tue, 20 Oct 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "뒤바뀐 해킹판…은행 대신 2금융권 집중포화",
-      "link": "https://www.hankyung.com/article/2026102039931",
-      "pubDate": "Tue, 20 Oct 2026 17:52:16 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"AI 때문에 일자리 사라지면…\" 한국 덮친 '섬뜩한 진단'",
-      "link": "https://www.hankyung.com/article/2026102040291",
-      "pubDate": "Tue, 20 Oct 2026 17:51:38 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "다크웹 유출된 국내 카드정보 8만건",
-      "link": "https://www.hankyung.com/article/2026102039951",
-      "pubDate": "Tue, 20 Oct 2026 17:51:14 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "내주 글로벌 투자 컨퍼런스…BDA, 국내외 PE 100곳 초청",
-      "link": "https://www.hankyung.com/article/2026102039971",
-      "pubDate": "Tue, 20 Oct 2026 17:50:54 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"채권 금리 올리지마\" 재경부, 은행채 발행 자제령",
-      "link": "https://www.hankyung.com/article/2026102039961",
-      "pubDate": "Tue, 20 Oct 2026 17:50:36 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "신한카드, 업계 최초 중금리 대출",
-      "link": "https://www.hankyung.com/article/2026102039941",
-      "pubDate": "Tue, 20 Oct 2026 17:49:38 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "농협, 전세대출 AI 에이전트 개발",
-      "link": "https://www.hankyung.com/article/2026102039991",
-      "pubDate": "Tue, 20 Oct 2026 17:49:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "중앙일보 인수에 신세계도 합류…이병철 손주들 뭉쳤다",
-      "link": "https://www.hankyung.com/article/2026102041311",
-      "pubDate": "Tue, 20 Oct 2026 17:48:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "고액 건보료 체납 땐 외국인 출국금지한다",
-      "link": "https://www.hankyung.com/article/2026102041361",
-      "pubDate": "Tue, 20 Oct 2026 17:45:55 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[포항소식] 폐기물처리시설 전략환경영향평가 초안 공개",
-      "link": "https://www.yna.co.kr/view/AKR20261020155700053",
-      "pubDate": "Tue, 20 Oct 2026 17:41:52 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "李대통령 \"3기 신도시 공급에 부동산 성패…속도 무엇보다 중요\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261020149251001",
-      "pubDate": "Tue, 20 Oct 2026 17:40:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융당국 \"솔리다임 중복상장\" 경고…국내 주식시장 영향은?",
-      "link": "https://www.yna.co.kr/view/AKR20261020129000008",
-      "pubDate": "Tue, 20 Oct 2026 17:37:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정부, 주택공급 '속도전' 의지 재확인…\"구체적 성과 만들어야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261020153700003",
-      "pubDate": "Tue, 20 Oct 2026 17:36:28 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "4분기 공적채권 59조원 발행…국고채 추가 축소 검토",
-      "link": "https://www.yna.co.kr/view/AKR20261020153900002",
-      "pubDate": "Tue, 20 Oct 2026 17:31:12 +0900",
       "source": "연합뉴스"
     }
   ]
