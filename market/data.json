@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T23:55:03.331107+09:00",
+  "updatedAt": "2026-10-21T04:07:48.444959+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52684.12,
-      "change": 718.09,
-      "changePercent": 1.38,
+      "price": 52458.52,
+      "change": 492.49,
+      "changePercent": 0.95,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26573.39,
-      "change": 142.5,
-      "changePercent": 0.54,
+      "price": 26450.78,
+      "change": 19.89,
+      "changePercent": 0.08,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1326.44,
-      "change": -6.41,
-      "changePercent": -0.48,
+      "price": 1325.68,
+      "change": -7.17,
+      "changePercent": -0.54,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 340.94,
-      "change": -2.0,
-      "changePercent": -0.58,
+      "price": 339.49,
+      "change": -3.45,
+      "changePercent": -1.01,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 376.42,
-      "change": 8.36,
-      "changePercent": 2.27,
+      "price": 375.69,
+      "change": 7.63,
+      "changePercent": 2.07,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 218.21,
-      "change": 1.12,
-      "changePercent": 0.52,
+      "price": 216.85,
+      "change": -0.24,
+      "changePercent": -0.11,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "제주 리더스포럼 개막 \"중소기업, AI로 무장해야\"",
+      "link": "https://www.hankyung.com/article/2026102044261",
+      "pubDate": "Wed, 21 Oct 2026 02:36:51 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"테슬라·스페이스X합병발표?\"…스페이스X 실적발표에 쏠린 눈",
+      "link": "https://www.hankyung.com/article/202610204456i",
+      "pubDate": "Wed, 21 Oct 2026 00:01:18 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "LIG D&A 2년간 방산 입찰 금지",
       "link": "https://www.hankyung.com/article/2026102044251",
@@ -194,18 +206,6 @@
       "link": "https://www.yna.co.kr/view/AKR20261020163000030",
       "pubDate": "Tue, 20 Oct 2026 18:51:51 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "뜨거운 티슈시장…문구·유아업체도 도전장",
-      "link": "https://www.hankyung.com/article/2026102040701",
-      "pubDate": "Tue, 20 Oct 2026 18:37:13 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "세라젬 창업주 이환성 회장, 직원 출신 CEO에 경영권 승계",
-      "link": "https://www.hankyung.com/article/2026102040661",
-      "pubDate": "Tue, 20 Oct 2026 18:35:57 +0900",
-      "source": "한국경제"
     },
     {
       "title": "수은 행장 \"KAI 지분 매각 계획 없어\"…KAI 대표 \"독과점 문제\"(종합2보)",
