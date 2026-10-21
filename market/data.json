@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T00:02:00.425042+09:00",
+  "updatedAt": "2026-10-22T04:14:23.022639+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,16 +20,16 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52500.09,
-      "change": 4.21,
-      "changePercent": 0.01,
+      "price": 52644.61,
+      "change": 148.73,
+      "changePercent": 0.28,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26645.42,
-      "change": 220.61,
+      "price": 26643.87,
+      "change": 219.06,
       "changePercent": 0.83,
       "currency": "USD"
     }
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1327.67,
-      "change": 0.84,
-      "changePercent": 0.06,
+      "price": 1327.17,
+      "change": 0.34,
+      "changePercent": 0.03,
       "currency": "KRW"
     }
   ],
@@ -88,43 +88,49 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 343.59,
-      "change": 4.09,
-      "changePercent": 1.2,
+      "price": 343.85,
+      "change": 4.35,
+      "changePercent": 1.28,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 385.86,
-      "change": 12.15,
-      "changePercent": 3.25,
+      "price": 385.51,
+      "change": 11.8,
+      "changePercent": 3.16,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 220.17,
-      "change": 3.7,
-      "changePercent": 1.71,
+      "price": 220.87,
+      "change": 4.4,
+      "changePercent": 2.03,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "'뮤즈'대박에도 돈이 말라간다…메타 실적에 월가 긴장하는 이유",
+      "title": "佛 국채 10년물 금리 年5% 돌파…2002년 이후 처음",
+      "link": "https://www.hankyung.com/article/2026102171271",
+      "pubDate": "Wed, 21 Oct 2026 23:56:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'뮤즈' 대박에도 돈이 말라간다…메타 실적에 월가 긴장하는 이유",
       "link": "https://www.hankyung.com/article/202610217168i",
       "pubDate": "Wed, 21 Oct 2026 23:14:28 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'회장님이 왜 여기서 나와?'…최태원, '힙지로'에 떴다",
+      "title": "'회장님이 왜 여기서 나와?'…최태원, '힙지로'서 포착된 모습",
       "link": "https://www.hankyung.com/article/202610217132i",
       "pubDate": "Wed, 21 Oct 2026 23:12:00 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"비싸도 없어서 못 샀는데\"…'반값 위스키' 등장하자 '술렁' [프라이스&]",
+      "title": "\"없어서 못 샀는데 이젠 남아돈다\"…'귀하신 몸'의 굴욕 [프라이스&]",
       "link": "https://www.hankyung.com/article/202610215249i",
       "pubDate": "Wed, 21 Oct 2026 22:25:18 +0900",
       "source": "한국경제"
@@ -163,12 +169,6 @@
       "title": "中서 건너왔지만 \"한국이 유일\"…'커피 공화국' 뒤흔든 음료 [씬메이커]",
       "link": "https://www.hankyung.com/article/202610203710g",
       "pubDate": "Wed, 21 Oct 2026 21:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성전기, 엔비디아에 AI 반도체 기판 공급…역대 최대 규모",
-      "link": "https://www.hankyung.com/article/202610216563i",
-      "pubDate": "Wed, 21 Oct 2026 20:48:02 +0900",
       "source": "한국경제"
     },
     {
