@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-21T13:28:41.027665+09:00",
+  "updatedAt": "2026-10-21T18:59:56.261069+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 5679.91,
-      "change": 127.17,
-      "changePercent": 2.29,
+      "price": 5735.66,
+      "change": 182.92,
+      "changePercent": 3.29,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 791.27,
-      "change": -17.62,
-      "changePercent": -2.18,
+      "price": 792.76,
+      "change": -16.13,
+      "changePercent": -1.99,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1324.58,
-      "change": -2.25,
-      "changePercent": -0.17,
+      "price": 1323.41,
+      "change": -3.42,
+      "changePercent": -0.26,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 220000.0,
-      "change": 8500.0,
-      "changePercent": 4.02,
+      "price": 223500.0,
+      "change": 12000.0,
+      "changePercent": 5.67,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1266000.0,
-      "change": 43000.0,
-      "changePercent": 3.52,
+      "price": 1294000.0,
+      "change": 71000.0,
+      "changePercent": 5.81,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 179400.0,
-      "change": 1400.0,
-      "changePercent": 0.79,
+      "price": 179500.0,
+      "change": 1500.0,
+      "changePercent": 0.84,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 31100.0,
-      "change": -450.0,
-      "changePercent": -1.43,
+      "price": 30950.0,
+      "change": -600.0,
+      "changePercent": -1.9,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 413000.0,
-      "change": -1000.0,
-      "changePercent": -0.24,
+      "price": 411500.0,
+      "change": -2500.0,
+      "changePercent": -0.6,
       "currency": "KRW"
     },
     {
@@ -112,124 +112,124 @@
   ],
   "news": [
     {
-      "title": "폴리텍대, 벤처창업아이템 경진대회…AI·바이오 창업기술 경쟁",
-      "link": "https://www.yna.co.kr/view/AKR20261021067400530",
-      "pubDate": "Wed, 21 Oct 2026 13:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[단독]그린하버, '랭킹닭컴' 푸드나무 품는다…355억에 경영권 인수",
-      "link": "https://www.hankyung.com/article/202610215767i",
-      "pubDate": "Wed, 21 Oct 2026 12:20:20 +0900",
+      "title": "32년 산업안전 외길…\"中企 안전, CEO가 직접 챙겨야\"",
+      "link": "https://www.hankyung.com/article/2026102168191",
+      "pubDate": "Wed, 21 Oct 2026 18:38:47 +0900",
       "source": "한국경제"
     },
     {
-      "title": "코스피 일단 반등했지만…'폭락→급등' 널뛰기에 '불안' 지속",
-      "link": "https://www.yna.co.kr/view/AKR20261021084300008",
-      "pubDate": "Wed, 21 Oct 2026 12:06:51 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "항공사 소비자 피해 증가…\"일부 외항사, 오버부킹 배상 미비\"",
-      "link": "https://www.yna.co.kr/view/AKR20261020119400030",
-      "pubDate": "Wed, 21 Oct 2026 12:00:36 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "인니 발리에 '한국 전기버스+충전기'…친환경 대중교통 구축",
-      "link": "https://www.yna.co.kr/view/AKR20261021035500530",
-      "pubDate": "Wed, 21 Oct 2026 12:00:35 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 근로·자녀장려금 이야기 60초 영상 안에…국세청 숏폼 공모전",
-      "link": "https://www.yna.co.kr/view/AKR20261021030700002",
-      "pubDate": "Wed, 21 Oct 2026 12:00:34 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"꼭 필요한 것만\"…신중해진 소비에 4분기 유통 체감경기 주춤",
-      "link": "https://www.yna.co.kr/view/AKR20261021041600003",
-      "pubDate": "Wed, 21 Oct 2026 12:00:34 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 22일 국회서 '석탄 발전 폐지 대응 노동정책' 토론회",
-      "link": "https://www.yna.co.kr/view/AKR20261021052500530",
-      "pubDate": "Wed, 21 Oct 2026 12:00:32 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "노인친화기업 고용실적에서 등기임원·고소득자 제외한다",
-      "link": "https://www.yna.co.kr/view/AKR20261021070600530",
-      "pubDate": "Wed, 21 Oct 2026 12:00:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "정규직 405만원·비정규직 211만원…또 벌어진 월급 격차",
-      "link": "https://www.yna.co.kr/view/AKR20261021075500002",
-      "pubDate": "Wed, 21 Oct 2026 12:00:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"연금저축보험 상품 가입시 안내받은 연금, 수령액은 다를수도\"",
-      "link": "https://www.yna.co.kr/view/AKR20261021079500002",
-      "pubDate": "Wed, 21 Oct 2026 12:00:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"다이소보다 싸다\"…외국인까지 몰리는 약국 정체 [현장+]",
-      "link": "https://www.hankyung.com/article/202610214628g",
-      "pubDate": "Wed, 21 Oct 2026 11:49:23 +0900",
+      "title": "이준혁 동진쎄미켐 회장 금탑산업훈장",
+      "link": "https://www.hankyung.com/article/2026102168291",
+      "pubDate": "Wed, 21 Oct 2026 18:36:33 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] 항의 메일 후 中서 블로그 378번 방문…섬뜩한 기록 [K갈라파고스: 규제의 세계]",
-      "link": "https://www.hankyung.com/article/202610203137H",
-      "pubDate": "Wed, 21 Oct 2026 11:22:07 +0900",
+      "title": "\"KRX 넘어서면 안 돼\"…NXT 거래활발 종목들, 잇단 매매중단",
+      "link": "https://www.yna.co.kr/view/AKR20261021120500008",
+      "pubDate": "Wed, 21 Oct 2026 18:36:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'2026 삼성행복대상'에 행복심리학자 등 8명",
+      "link": "https://www.hankyung.com/article/2026102168201",
+      "pubDate": "Wed, 21 Oct 2026 18:35:44 +0900",
       "source": "한국경제"
     },
     {
-      "title": "다시 떠오르는 닷컴 버블 악몽[박신영의 월가 아나토미]",
-      "link": "https://www.hankyung.com/article/202610215482i",
-      "pubDate": "Wed, 21 Oct 2026 11:08:58 +0900",
+      "title": "TKG휴켐스 \"티케이지엠켐 주식 467억원에 추가취득\"",
+      "link": "https://www.yna.co.kr/view/AKR20261021154200008",
+      "pubDate": "Wed, 21 Oct 2026 18:22:22 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "루멘스바이오스 \"폴라리스우노 주식 138억원에 취득\"",
+      "link": "https://www.yna.co.kr/view/AKR20261021158700008",
+      "pubDate": "Wed, 21 Oct 2026 18:22:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "핀다, 대원저축은행 품고 여수신 기능 탑재…금융위 최종 승인",
+      "link": "https://www.yna.co.kr/view/AKR20261021158900002",
+      "pubDate": "Wed, 21 Oct 2026 18:20:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "모비콘텐츠테크, 코넥스 신규 상장…오는 23일 거래 개시",
+      "link": "https://www.yna.co.kr/view/AKR20261021161400008",
+      "pubDate": "Wed, 21 Oct 2026 18:19:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "女 절반 “삶에서 가장 중요한 건 재무”…만족도는 최하위",
+      "link": "https://www.hankyung.com/article/202610216681i",
+      "pubDate": "Wed, 21 Oct 2026 18:16:17 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"1년치 수입 쏟아부었다\"…배우 정보석이 2년 반 매달린 사업 [본캐부캐]",
-      "link": "https://www.hankyung.com/article/202610203754g",
-      "pubDate": "Wed, 21 Oct 2026 11:01:51 +0900",
+      "title": "매출 2000억 찍고 쫓겨날 판…코스닥 덮친 '상장폐지 공포'",
+      "link": "https://www.hankyung.com/article/2026102167611",
+      "pubDate": "Wed, 21 Oct 2026 18:11:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "대한항공, 인천 도서지역서 국내 첫 지자체 연계 UAM 실증 성공",
-      "link": "https://www.hankyung.com/article/202610215469g",
-      "pubDate": "Wed, 21 Oct 2026 10:45:24 +0900",
+      "title": "정부·현대차그룹 손잡고 '車반도체 국산화' 추진",
+      "link": "https://www.hankyung.com/article/2026102167601",
+      "pubDate": "Wed, 21 Oct 2026 18:09:38 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"이사일 맞춰 목돈 굴릴까\"…예금 만기일 내 맘대로 정한다",
-      "link": "https://www.hankyung.com/article/202610215271i",
-      "pubDate": "Wed, 21 Oct 2026 10:13:13 +0900",
+      "title": "현대차, 신형 투싼 출시…3140만원부터",
+      "link": "https://www.hankyung.com/article/2026102167651",
+      "pubDate": "Wed, 21 Oct 2026 18:09:00 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"카스랑 먹으니 딱이네\"…삼겹살집부터 파고든 '찰랑 소주' [권 기자의 내돈내산]",
-      "link": "https://www.hankyung.com/article/202610204376i",
-      "pubDate": "Wed, 21 Oct 2026 10:00:06 +0900",
+      "title": "대한전선 신임 대표 김준석 \"美·유럽 사업기반 확대 주력\"",
+      "link": "https://www.hankyung.com/article/2026102167641",
+      "pubDate": "Wed, 21 Oct 2026 18:08:26 +0900",
       "source": "한국경제"
     },
     {
-      "title": "2시간 만에 완판된 섬에어 로컬여행…이번엔 하동·남해로",
-      "link": "https://www.hankyung.com/article/202610215013g",
-      "pubDate": "Wed, 21 Oct 2026 09:29:48 +0900",
+      "title": "LS일렉트릭, 100분기 연속 흑자 기록",
+      "link": "https://www.hankyung.com/article/2026102167661",
+      "pubDate": "Wed, 21 Oct 2026 18:07:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"상품 60%가 2000원 이하\"…이마트, 다이소 대항마 키운다",
-      "link": "https://www.hankyung.com/article/202610215051g",
-      "pubDate": "Wed, 21 Oct 2026 09:28:02 +0900",
+      "title": "[포토] 삼성 하만 'JBL 80주년' 전시",
+      "link": "https://www.hankyung.com/article/2026102167631",
+      "pubDate": "Wed, 21 Oct 2026 18:07:39 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261021151400011",
+      "pubDate": "Wed, 21 Oct 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "주병기 \"숙박업 표준약관 제정 필요성 검토…실태조사 곧 완료\"",
+      "link": "https://www.yna.co.kr/view/AKR20261021156100002",
+      "pubDate": "Wed, 21 Oct 2026 17:51:24 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "디티에스, 코스닥 신규 상장…오는 23일 거래 개시",
+      "link": "https://www.yna.co.kr/view/AKR20261021157500008",
+      "pubDate": "Wed, 21 Oct 2026 17:49:51 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "울산 중구 일자리박람회…29개 기업서 138명 뽑는다",
+      "link": "https://www.yna.co.kr/view/AKR20261021157300057",
+      "pubDate": "Wed, 21 Oct 2026 17:49:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] IBK저축 부사장에 김학필 전 IBK기업은행 부행장",
+      "link": "https://www.yna.co.kr/view/AKR20261021151800002",
+      "pubDate": "Wed, 21 Oct 2026 17:33:43 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
