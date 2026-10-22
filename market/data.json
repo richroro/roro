@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-10-22T08:10:17.298597+09:00",
+  "updatedAt": "2026-10-22T13:26:58.833958+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 5735.66,
-      "change": 182.92,
-      "changePercent": 3.29,
+      "price": 5554.18,
+      "change": -181.48,
+      "changePercent": -3.16,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 792.76,
-      "change": -16.13,
-      "changePercent": -1.99,
+      "price": 772.34,
+      "change": -9.63,
+      "changePercent": -1.23,
       "currency": "KRW"
     },
     {
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52856.09,
-      "change": 360.21,
+      "change": 360.19,
       "changePercent": 0.69,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1326.04,
-      "change": -0.79,
-      "changePercent": -0.06,
+      "price": 1323.06,
+      "change": -3.56,
+      "changePercent": -0.27,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 223500.0,
-      "change": 12000.0,
-      "changePercent": 5.67,
+      "price": 213750.0,
+      "change": -9750.0,
+      "changePercent": -4.36,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1294000.0,
-      "change": 71000.0,
-      "changePercent": 5.81,
+      "price": 1231000.0,
+      "change": -63000.0,
+      "changePercent": -4.87,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 179500.0,
-      "change": 1500.0,
-      "changePercent": 0.84,
+      "price": 176600.0,
+      "change": -2900.0,
+      "changePercent": -1.62,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 30950.0,
-      "change": -600.0,
-      "changePercent": -1.9,
+      "price": 30500.0,
+      "change": -450.0,
+      "changePercent": -1.45,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 411500.0,
-      "change": -2500.0,
-      "changePercent": -0.6,
+      "price": 397500.0,
+      "change": -14000.0,
+      "changePercent": -3.4,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "부산 벡스코서 26일 청년부터 시니어까지 참여 일자리 박람회",
-      "link": "https://www.yna.co.kr/view/AKR20261022021100051",
-      "pubDate": "Thu, 22 Oct 2026 08:04:07 +0900",
+      "title": "한은 총재 \"금리 동결은 '호미질'의 결실…긴축기조 이어간다\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261022107000002",
+      "pubDate": "Thu, 22 Oct 2026 13:20:53 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[마켓뷰] AI 투심 개선 vs 차익 실현…코스피 향방은",
-      "link": "https://www.yna.co.kr/view/AKR20261022022400008",
-      "pubDate": "Thu, 22 Oct 2026 08:02:40 +0900",
+      "title": "재정·통화 '엇박자' 논란에 신현송 \"재정 지속가능성 생각해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022106800002",
+      "pubDate": "Thu, 22 Oct 2026 13:18:20 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "부산불꽃축제 앞두고 숙박시설 공정가격 유도 캠페인",
-      "link": "https://www.yna.co.kr/view/AKR20261022020900051",
-      "pubDate": "Thu, 22 Oct 2026 07:57:57 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
-      "link": "https://www.yna.co.kr/view/AKR20261022015800011",
-      "pubDate": "Thu, 22 Oct 2026 07:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"돈 불리는 재미 쏠쏠했는데\"…뒤늦게 갈아탄 직장인 '눈물'",
-      "link": "https://www.hankyung.com/article/2026102167161",
-      "pubDate": "Thu, 22 Oct 2026 07:00:13 +0900",
+      "title": "김기문 중기중앙회장 \"차기 회장, 일 잘하고 화합하는 리더십 갖춰야\"",
+      "link": "https://www.hankyung.com/article/202610228499i",
+      "pubDate": "Thu, 22 Oct 2026 12:46:47 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"가격 올려도 자신있다\"…6년 만에 2040 잡으러 나온 車",
-      "link": "https://www.hankyung.com/article/202610215768g",
-      "pubDate": "Thu, 22 Oct 2026 07:00:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[우분투칼럼] 아프리카 증시가 울리는 자립의 종소리",
-      "link": "https://www.yna.co.kr/view/AKR20261006025000898",
-      "pubDate": "Thu, 22 Oct 2026 07:00:04 +0900",
+      "title": "원/달러 환율, '매파적 동결' 금통위 소화하며 하락세",
+      "link": "https://www.yna.co.kr/view/AKR20261022102800002",
+      "pubDate": "Thu, 22 Oct 2026 12:32:56 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "대학생 10명 중 1명꼴 졸업 유예…76%가 고용 불안정성 때문",
-      "link": "https://www.yna.co.kr/view/AKR20261021137200530",
-      "pubDate": "Thu, 22 Oct 2026 07:00:03 +0900",
+      "title": "한은 총재 \"물가 상승률 2% 목표, 내후년께 가까이 갈 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022103300002",
+      "pubDate": "Thu, 22 Oct 2026 12:30:51 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "연합뉴스 미래경제포럼에 日매체 큰 관심…NHK·아사히 등 신청",
-      "link": "https://www.yna.co.kr/view/AKR20261021105600898",
-      "pubDate": "Thu, 22 Oct 2026 07:00:02 +0900",
+      "title": "강남구, 서울시와 수서지구 4개 단지 신통기획 현장 자문",
+      "link": "https://www.yna.co.kr/view/AKR20261022103600004",
+      "pubDate": "Thu, 22 Oct 2026 12:23:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한은, 기준금리 동결 유력 전망…11월 추가 인상 가능성 주목",
-      "link": "https://www.hankyung.com/article/2026102273417",
-      "pubDate": "Thu, 22 Oct 2026 06:59:09 +0900",
+      "title": "JB금융, 키르기스스탄 금융사 인수…중앙아시아 첫 진출",
+      "link": "https://www.hankyung.com/article/202610228113i",
+      "pubDate": "Thu, 22 Oct 2026 12:11:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "AI 간판 달면 R&D 예산 받나…정부 분류에 AI도 이견",
-      "link": "https://www.yna.co.kr/view/AKR20261021155000017",
-      "pubDate": "Thu, 22 Oct 2026 06:33:00 +0900",
+      "title": "한은 총재 \"석유최고가격제, 장기적으로 재정에 문제\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022101500002",
+      "pubDate": "Thu, 22 Oct 2026 12:09:41 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"할당관세 1천586억원 감면했지만…가격 인하효과 제한적\"",
-      "link": "https://www.yna.co.kr/view/AKR20261021131700030",
-      "pubDate": "Thu, 22 Oct 2026 06:03:02 +0900",
+      "title": "[속보] 한은 총재 \"내후년 정도면 물가 목표수준 가까이 갈 것\"",
+      "link": "https://www.hankyung.com/article/2026102284667",
+      "pubDate": "Thu, 22 Oct 2026 12:08:30 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[속보] 한은 총재 \"내후년 정도면 물가 목표수준 가까이 갈 것\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022101400002",
+      "pubDate": "Thu, 22 Oct 2026 12:06:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한국산에 푹 빠진 '이 나라'…갤럭시도 초코파이도 '국민템' [권용훈의 트렌드워치]",
-      "link": "https://www.hankyung.com/article/202610217155i",
-      "pubDate": "Thu, 22 Oct 2026 06:00:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"복덩이가 따로 없네\"…커피 1잔 받는데 40분, 평일도 '난리'",
-      "link": "https://www.hankyung.com/article/2026102166361",
-      "pubDate": "Thu, 22 Oct 2026 06:00:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "서울 아파트 실거래가 1년 새 15.5%↑…2021년 이후 최대 상승",
-      "link": "https://www.yna.co.kr/view/AKR20261021153100004",
-      "pubDate": "Thu, 22 Oct 2026 06:00:04 +0900",
+      "title": "한은 총재 \"주가 하락, 실물경제에 영향…소비 일시적 줄어\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022100900002",
+      "pubDate": "Thu, 22 Oct 2026 12:03:31 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"화장실 잘 가려고 먹었는데\"…몸 곳곳에 나타난 '뜻밖의 효과' [현장+]",
-      "link": "https://www.hankyung.com/article/202610216151g",
-      "pubDate": "Thu, 22 Oct 2026 06:00:01 +0900",
+      "title": "이형일, 가상자산 과세에 \"여러 의견…최대한 숙고해서 판단\"",
+      "link": "https://www.yna.co.kr/view/AKR20261022098600001",
+      "pubDate": "Thu, 22 Oct 2026 12:01:19 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 한은 총재 \"주가 조정에 일시적으로 소비 줄어\"",
+      "link": "https://www.hankyung.com/article/2026102284467",
+      "pubDate": "Thu, 22 Oct 2026 12:00:55 +0900",
       "source": "한국경제"
     },
     {
-      "title": "佛 국채 10년물 금리 年5% 돌파…2002년 이후 처음",
-      "link": "https://www.hankyung.com/article/2026102171271",
-      "pubDate": "Wed, 21 Oct 2026 23:56:46 +0900",
+      "title": "[속보] 한은 총재 \"석유최고가격제, 장기적으로 재정에 문제\"",
+      "link": "https://www.hankyung.com/article/2026102284297",
+      "pubDate": "Thu, 22 Oct 2026 12:00:16 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'뮤즈' 대박에도 돈이 말라간다…메타 실적에 월가 긴장하는 이유",
-      "link": "https://www.hankyung.com/article/202610217168i",
-      "pubDate": "Wed, 21 Oct 2026 23:14:28 +0900",
+      "title": "\"주류라벨 규정 6개월마다 변경\"…상의, 규제개선과제 건의",
+      "link": "https://www.yna.co.kr/view/AKR20261022031500003",
+      "pubDate": "Thu, 22 Oct 2026 12:00:07 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[속보] 한은 총재 \"투자 위한 재정은 통화 긴축과 엇박자 아냐\"",
+      "link": "https://www.hankyung.com/article/2026102284257",
+      "pubDate": "Thu, 22 Oct 2026 11:57:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "'회장님이 왜 여기서 나와?'…최태원, '힙지로'서 포착된 모습",
-      "link": "https://www.hankyung.com/article/202610217132i",
-      "pubDate": "Wed, 21 Oct 2026 23:12:00 +0900",
+      "title": "신현송 한은 총재 \"원화 아직 약세…최근 환율 하락은 정상화 과정\"",
+      "link": "https://www.hankyung.com/article/2026102284177",
+      "pubDate": "Thu, 22 Oct 2026 11:55:55 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"없어서 못 샀는데 이젠 남아돈다\"…'귀하신 몸'의 굴욕 [프라이스&]",
-      "link": "https://www.hankyung.com/article/202610215249i",
-      "pubDate": "Wed, 21 Oct 2026 22:25:18 +0900",
+      "title": "[속보] 한은 총재 \"재정 지속가능성 생각해야…국회 심사 엄격히\"",
+      "link": "https://www.hankyung.com/article/2026102284057",
+      "pubDate": "Thu, 22 Oct 2026 11:52:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[속보] 한은 총재 \"투자 위한 재정은 통화 긴축과 엇박자 아냐\"",
+      "link": "https://www.hankyung.com/article/2026102283887",
+      "pubDate": "Thu, 22 Oct 2026 11:48:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[속보] 한은 총재 \"환율 10% 내리면 1분위 가계 구매력 0.4% 이상↑\"",
+      "link": "https://www.hankyung.com/article/2026102283627",
+      "pubDate": "Thu, 22 Oct 2026 11:39:24 +0900",
       "source": "한국경제"
     }
   ]
