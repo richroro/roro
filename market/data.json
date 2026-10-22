@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T00:02:18.213633+09:00",
+  "updatedAt": "2026-10-23T04:09:53.031018+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52641.8,
-      "change": -214.29,
-      "changePercent": -0.41,
+      "price": 52779.6,
+      "change": -76.49,
+      "changePercent": -0.14,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26112.1,
-      "change": -590.76,
-      "changePercent": -2.21,
+      "price": 25942.69,
+      "change": -760.17,
+      "changePercent": -2.85,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1325.68,
-      "change": -0.94,
-      "changePercent": -0.07,
+      "price": 1326.16,
+      "change": -0.46,
+      "changePercent": -0.03,
       "currency": "KRW"
     }
   ],
@@ -88,34 +88,64 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 344.61,
-      "change": 0.62,
-      "changePercent": 0.18,
+      "price": 346.85,
+      "change": 2.86,
+      "changePercent": 0.83,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 386.52,
-      "change": 0.05,
-      "changePercent": 0.01,
+      "price": 376.37,
+      "change": -10.1,
+      "changePercent": -2.61,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 213.44,
-      "change": -8.53,
-      "changePercent": -3.84,
+      "price": 211.87,
+      "change": -10.1,
+      "changePercent": -4.55,
       "currency": "USD"
     }
   ],
   "news": [
     {
+      "title": "트럼프 \"이란, 중간선거 앞 유가 올리려 모든 것 꾸며내\"",
+      "link": "https://www.yna.co.kr/view/AKR20261023005000071",
+      "pubDate": "Fri, 23 Oct 2026 03:34:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] SK하이닉스, 솔리다임 美 상장 전격 철회",
+      "link": "https://www.hankyung.com/article/202610229798i",
+      "pubDate": "Fri, 23 Oct 2026 03:00:02 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"AI 거품이라고? 천만에\"…구글 전CEO와 월가 거물들 반박",
+      "link": "https://www.hankyung.com/article/202610239834i",
+      "pubDate": "Fri, 23 Oct 2026 00:58:50 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[재산공개] 심욱기 대전지방국세청장 57억원 신고",
+      "link": "https://www.yna.co.kr/view/AKR20261022169800063",
+      "pubDate": "Fri, 23 Oct 2026 00:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "재경위 '가상자산 과세' 시각차…與 의견분분, 野 \"인프라 미비\"(종합2보)",
       "link": "https://www.yna.co.kr/view/AKR20261022098652001",
       "pubDate": "Thu, 22 Oct 2026 23:30:29 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "중국발 메모리공포에 젠슨황 한마디…\"2029년까지 공급과잉 없다\"",
+      "link": "https://www.hankyung.com/article/202610229805i",
+      "pubDate": "Thu, 22 Oct 2026 22:59:35 +0900",
+      "source": "한국경제"
     },
     {
       "title": "술 안 마신다더니…'이건 못 참지' 1000억 잭팟 터진 日 맥주 [트렌드+]",
@@ -190,24 +220,6 @@
       "source": "연합뉴스"
     },
     {
-      "title": "한옥호텔 짓는데만 15년…\"기와 한장 허투루 얹지 않았다\"",
-      "link": "https://www.hankyung.com/article/2026102293361",
-      "pubDate": "Thu, 22 Oct 2026 19:12:23 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"360만원 아이폰 455만원에 팝니다\"…'초유의 사태' [이슈+]",
-      "link": "https://www.hankyung.com/article/202610229428g",
-      "pubDate": "Thu, 22 Oct 2026 19:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "2030 반하겠네…'아재옷'인줄 알았던 이 브랜드 '대변신' [장서우의 하입:hype]",
-      "link": "https://www.hankyung.com/article/202610229230i",
-      "pubDate": "Thu, 22 Oct 2026 19:00:01 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "연일 출렁이는데…한화증권 \"내년 코스피 최대 9,300\" 전망",
       "link": "https://www.yna.co.kr/view/AKR20261022183400008",
       "pubDate": "Thu, 22 Oct 2026 18:54:41 +0900",
@@ -217,18 +229,6 @@
       "title": "李대통령, 노인 일자리사업 발굴 주문…공공영역 적정임금 독려",
       "link": "https://www.yna.co.kr/view/AKR20261022184400001",
       "pubDate": "Thu, 22 Oct 2026 18:39:46 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "교보증권, 상환전환우선주 발행으로 3천억원 자본 확충(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261022178051008",
-      "pubDate": "Thu, 22 Oct 2026 18:37:42 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "韓총리 \"도심 주택공급 활용부지 적극 발굴…사업 속도내야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261022181400001",
-      "pubDate": "Thu, 22 Oct 2026 18:32:37 +0900",
       "source": "연합뉴스"
     }
   ]
