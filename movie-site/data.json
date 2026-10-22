@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-20",
-  "updated": "2026-10-21T04:50:44+00:00",
+  "date": "2026-10-21",
+  "updated": "2026-10-22T04:49:44+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "극장판 치이카와: 인어 섬의 비밀",
       "open": "2026-09-30",
-      "share": 24.1,
-      "audience": 22474,
-      "total": 1875607,
-      "screens": 879
+      "share": 23.9,
+      "audience": 28985,
+      "total": 1904592,
+      "screens": 798
     },
     {
       "rank": 2,
-      "title": "암살자(들)",
-      "open": "2026-09-23",
-      "share": 16.4,
-      "audience": 16150,
-      "total": 3281596,
-      "screens": 919
+      "title": "실낙원",
+      "open": "2026-10-21",
+      "share": 15.8,
+      "audience": 20627,
+      "total": 23989,
+      "screens": 808
     },
     {
       "rank": 3,
-      "title": "타짜: 벨제붑의 노래",
-      "open": "2026-09-23",
-      "share": 12.7,
-      "audience": 11818,
-      "total": 1936723,
-      "screens": 691
+      "title": "클레이페이스",
+      "open": "2026-10-21",
+      "share": 11.4,
+      "audience": 14664,
+      "total": 18839,
+      "screens": 556
     },
     {
       "rank": 4,
-      "title": "오디세이",
-      "open": "2026-08-05",
-      "share": 15.4,
-      "audience": 9152,
-      "total": 12284704,
-      "screens": 408
+      "title": "암살자(들)",
+      "open": "2026-09-23",
+      "share": 10.5,
+      "audience": 13538,
+      "total": 3295132,
+      "screens": 679
     },
     {
       "rank": 5,
-      "title": "웨일폴: 고래에 먹힌 남자",
-      "open": "2026-10-14",
-      "share": 4.7,
-      "audience": 4472,
-      "total": 64804,
-      "screens": 523
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 6.9,
+      "audience": 8253,
+      "total": 1944974,
+      "screens": 550
     },
     {
       "rank": 6,
-      "title": "인턴",
-      "open": "2026-09-16",
-      "share": 3.4,
-      "audience": 4047,
-      "total": 897813,
-      "screens": 127
+      "title": "여전히 찬란하게",
+      "open": "2026-10-21",
+      "share": 5.5,
+      "audience": 7666,
+      "total": 12964,
+      "screens": 587
     },
     {
       "rank": 7,
-      "title": "룩백",
-      "open": "2026-10-08",
-      "share": 3.0,
-      "audience": 2849,
-      "total": 110773,
-      "screens": 225
+      "title": "킬링타임",
+      "open": "2026-10-21",
+      "share": 2.8,
+      "audience": 3858,
+      "total": 5421,
+      "screens": 278
     },
     {
       "rank": 8,
-      "title": "전자오락수호대",
-      "open": "2026-10-14",
-      "share": 2.4,
-      "audience": 2271,
-      "total": 46882,
-      "screens": 444
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 2.9,
+      "audience": 3639,
+      "total": 12288343,
+      "screens": 274
     },
     {
       "rank": 9,
-      "title": "스트리트 파이터",
-      "open": "2026-10-14",
-      "share": 2.0,
-      "audience": 2174,
-      "total": 38616,
-      "screens": 414
+      "title": "레위기",
+      "open": "2026-10-21",
+      "share": 1.9,
+      "audience": 2502,
+      "total": 3487,
+      "screens": 169
     },
     {
       "rank": 10,
-      "title": "디거",
-      "open": "2026-10-03",
-      "share": 2.1,
-      "audience": 1978,
-      "total": 91786,
-      "screens": 86
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 1.6,
+      "audience": 2491,
+      "total": 900304,
+      "screens": 44
     }
   ]
 }
