@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T23:53:38.877790+09:00",
+  "updatedAt": "2026-10-24T04:03:51.766192+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52292.42,
-      "change": -575.56,
-      "changePercent": -1.09,
+      "price": 52285.21,
+      "change": -582.77,
+      "changePercent": -1.1,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26102.36,
-      "change": 93.5,
-      "changePercent": 0.36,
+      "price": 25983.98,
+      "change": -24.88,
+      "changePercent": -0.1,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1325.5,
-      "change": 0.1,
-      "changePercent": 0.01,
+      "price": 1324.77,
+      "change": -0.63,
+      "changePercent": -0.05,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,41 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 347.82,
-      "change": -0.4,
-      "changePercent": -0.11,
+      "price": 347.01,
+      "change": -1.21,
+      "changePercent": -0.35,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 373.86,
-      "change": -0.72,
-      "changePercent": -0.19,
+      "price": 371.61,
+      "change": -2.97,
+      "changePercent": -0.79,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 213.63,
-      "change": 1.42,
-      "changePercent": 0.67,
+      "price": 211.68,
+      "change": -0.53,
+      "changePercent": -0.25,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "대한항공서 예약번호 등 개인정보 유출",
+      "link": "https://www.hankyung.com/article/2026102320511",
+      "pubDate": "Sat, 24 Oct 2026 00:36:00 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "AI 투자 불안에 국채 급등…메타 증자·스페이스X 통신 진출 주목[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202610242083i",
+      "pubDate": "Sat, 24 Oct 2026 00:21:09 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "[반론보도]「가덕도 신공항, 안전 우려에도 졸속 통과」 등 관련",
       "link": "https://www.hankyung.com/article/202610232040i",
@@ -181,18 +193,6 @@
       "title": "허태수 \"일하는 방식 원점부터 혁신\"",
       "link": "https://www.hankyung.com/article/2026102318231",
       "pubDate": "Fri, 23 Oct 2026 18:09:59 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "UAE서 귀국 직후 父 선영으로 달려간 이재용 회장",
-      "link": "https://www.hankyung.com/article/2026102317441",
-      "pubDate": "Fri, 23 Oct 2026 18:06:37 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[단독] 저커버그·빈 살만도 다녀갔다…VIP 홀린 '비밀 공간'",
-      "link": "https://www.hankyung.com/article/2026102318371",
-      "pubDate": "Fri, 23 Oct 2026 18:06:00 +0900",
       "source": "한국경제"
     },
     {
