@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T18:55:09.209920+09:00",
+  "updatedAt": "2026-10-23T23:53:38.877790+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52867.98,
-      "change": 11.89,
-      "changePercent": 0.02,
+      "price": 52292.42,
+      "change": -575.56,
+      "changePercent": -1.09,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26008.86,
-      "change": -694.0,
-      "changePercent": -2.6,
+      "price": 26102.36,
+      "change": 93.5,
+      "changePercent": 0.36,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1325.03,
-      "change": -0.37,
-      "changePercent": -0.03,
+      "price": 1325.5,
+      "change": 0.1,
+      "changePercent": 0.01,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,73 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 348.22,
-      "change": 4.23,
-      "changePercent": 1.23,
+      "price": 347.82,
+      "change": -0.4,
+      "changePercent": -0.11,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 374.58,
-      "change": -11.89,
-      "changePercent": -3.08,
+      "price": 373.86,
+      "change": -0.72,
+      "changePercent": -0.19,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 212.21,
-      "change": -9.76,
-      "changePercent": -4.4,
+      "price": 213.63,
+      "change": 1.42,
+      "changePercent": 0.67,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "경영 전면 나선 정용진, AI 전환기 혁신 이끈다",
+      "title": "[반론보도]「가덕도 신공항, 안전 우려에도 졸속 통과」 등 관련",
+      "link": "https://www.hankyung.com/article/202610232040i",
+      "pubDate": "Fri, 23 Oct 2026 22:17:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"2000원짜리 커피가 왜 이래?\"…어쩐지 맛 다르더니 '화들짝'",
+      "link": "https://www.hankyung.com/article/202610231141g",
+      "pubDate": "Fri, 23 Oct 2026 21:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "LH 사장 \"집값 상승은 공급부족 탓…前정부 폭등 시한폭탄 설치\"",
+      "link": "https://www.yna.co.kr/view/AKR20261023181200003",
+      "pubDate": "Fri, 23 Oct 2026 20:39:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "JP모건, 국내 소부장 기업 4곳 지분 5% 이상 보유",
+      "link": "https://www.yna.co.kr/view/AKR20261023179900008",
+      "pubDate": "Fri, 23 Oct 2026 20:21:46 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] \"돈 줘도 안 돌아가요\"…역대급 '탈한국' 무슨 일이 [K갈라파고스: 족쇄의 세계]",
+      "link": "https://www.hankyung.com/article/202610204124H",
+      "pubDate": "Fri, 23 Oct 2026 19:32:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "“1%만 알던 에이전시, 이제는 대중이 느끼는 콘텐츠 인큐베이터로”",
+      "link": "https://www.hankyung.com/article/202610231424i",
+      "pubDate": "Fri, 23 Oct 2026 18:23:11 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "알티캐스트 \"알티모빌리티 주식 65억원에 추가취득\"",
+      "link": "https://www.yna.co.kr/view/AKR20261023169600008",
+      "pubDate": "Fri, 23 Oct 2026 18:20:37 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "경영 전면 나선 정용진, 핵심 사업 직접 챙긴다",
       "link": "https://www.hankyung.com/article/2026102318211",
       "pubDate": "Fri, 23 Oct 2026 18:13:15 +0900",
       "source": "한국경제"
@@ -124,13 +166,19 @@
       "source": "한국경제"
     },
     {
+      "title": "경제계 \"초광역특구 추진 환영\"…신속한 입법 요구",
+      "link": "https://www.yna.co.kr/view/AKR20261023167000003",
+      "pubDate": "Fri, 23 Oct 2026 18:11:14 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "하나·우리금융, 3분기 순이익 1조 돌파",
       "link": "https://www.hankyung.com/article/2026102318241",
       "pubDate": "Fri, 23 Oct 2026 18:11:03 +0900",
       "source": "한국경제"
     },
     {
-      "title": "허태수 \"업무설계, 처음부터 디지털로 해야\"",
+      "title": "허태수 \"일하는 방식 원점부터 혁신\"",
       "link": "https://www.hankyung.com/article/2026102318231",
       "pubDate": "Fri, 23 Oct 2026 18:09:59 +0900",
       "source": "한국경제"
@@ -142,34 +190,46 @@
       "source": "한국경제"
     },
     {
-      "title": "[단독] 저커버그·빈 살만·앤 공주…VIP 사로잡은 기업 '영빈관'",
+      "title": "[단독] 저커버그·빈 살만도 다녀갔다…VIP 홀린 '비밀 공간'",
       "link": "https://www.hankyung.com/article/2026102318371",
       "pubDate": "Fri, 23 Oct 2026 18:06:00 +0900",
       "source": "한국경제"
     },
     {
-      "title": "투자 유치? 증자?…하이닉스, 美 낸드공장 자금줄 새로 찾는다",
-      "link": "https://www.hankyung.com/article/2026102318411",
-      "pubDate": "Fri, 23 Oct 2026 18:02:44 +0900",
-      "source": "한국경제"
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261023154600011",
+      "pubDate": "Fri, 23 Oct 2026 18:00:00 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "고물가에 뜬 트레이더스, 9월 카드 결제액 사상 최대",
-      "link": "https://www.hankyung.com/article/2026102317771",
-      "pubDate": "Fri, 23 Oct 2026 17:59:13 +0900",
-      "source": "한국경제"
+      "title": "\"서울, 정비사업으로 2∼3년 내 약 5만 가구 이주·멸실\"",
+      "link": "https://www.yna.co.kr/view/AKR20261023162800003",
+      "pubDate": "Fri, 23 Oct 2026 17:41:37 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "[포토] 현대그린푸드 '힙스토어 팝업'",
-      "link": "https://www.hankyung.com/article/2026102317801",
-      "pubDate": "Fri, 23 Oct 2026 17:58:05 +0900",
-      "source": "한국경제"
+      "title": "무역위원회, 중국산 아연도금냉연에 최대 33.67％ 덤핑방지관세",
+      "link": "https://www.yna.co.kr/view/AKR20261023157600003",
+      "pubDate": "Fri, 23 Oct 2026 17:40:24 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "정용진, 13년 만에 이마트 대표 복귀",
-      "link": "https://www.hankyung.com/article/2026102318281",
-      "pubDate": "Fri, 23 Oct 2026 17:54:13 +0900",
-      "source": "한국경제"
+      "title": "국토장관 \"집값 상승폭 둔화…연말 금리 상향 시 시장 안정화\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261023088651003",
+      "pubDate": "Fri, 23 Oct 2026 17:39:23 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한미약품, 차세대 비만치료제 명칭 '잔트루타이드'로 확정",
+      "link": "https://www.yna.co.kr/view/AKR20261023161300017",
+      "pubDate": "Fri, 23 Oct 2026 17:39:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "당진시민 내년 설 전 30만원씩 받는다…조례안 시의회 통과",
+      "link": "https://www.yna.co.kr/view/AKR20261023160900063",
+      "pubDate": "Fri, 23 Oct 2026 17:36:55 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
