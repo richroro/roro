@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T04:03:51.766192+09:00",
+  "updatedAt": "2026-10-24T07:02:36.734347+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52285.21,
-      "change": -582.77,
-      "changePercent": -1.1,
+      "price": 52215.16,
+      "change": -652.82,
+      "changePercent": -1.23,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25983.98,
-      "change": -24.88,
-      "changePercent": -0.1,
+      "price": 25955.34,
+      "change": -53.52,
+      "changePercent": -0.21,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1324.77,
-      "change": -0.63,
-      "changePercent": -0.05,
+      "price": 1323.66,
+      "change": -1.74,
+      "changePercent": -0.13,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 347.01,
-      "change": -1.21,
-      "changePercent": -0.35,
+      "price": 347.73,
+      "change": -0.5,
+      "changePercent": -0.14,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 371.61,
-      "change": -2.97,
-      "changePercent": -0.79,
+      "price": 372.22,
+      "change": -2.36,
+      "changePercent": -0.63,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 211.68,
-      "change": -0.53,
-      "changePercent": -0.25,
+      "price": 210.96,
+      "change": -1.25,
+      "changePercent": -0.59,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "[부동산캘린더] 내주 전국 5천555가구 분양…수도권·부산 중심",
+      "link": "https://www.yna.co.kr/view/AKR20261023165700003",
+      "pubDate": "Sat, 24 Oct 2026 06:05:00 +0900",
+      "source": "연합뉴스"
+    },
     {
       "title": "대한항공서 예약번호 등 개인정보 유출",
       "link": "https://www.hankyung.com/article/2026102320511",
@@ -223,12 +229,6 @@
       "title": "한미약품, 차세대 비만치료제 명칭 '잔트루타이드'로 확정",
       "link": "https://www.yna.co.kr/view/AKR20261023161300017",
       "pubDate": "Fri, 23 Oct 2026 17:39:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "당진시민 내년 설 전 30만원씩 받는다…조례안 시의회 통과",
-      "link": "https://www.yna.co.kr/view/AKR20261023160900063",
-      "pubDate": "Fri, 23 Oct 2026 17:36:55 +0900",
       "source": "연합뉴스"
     }
   ]
