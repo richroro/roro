@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T05:38:37.008929+09:00",
+  "updatedAt": "2026-10-25T08:04:42.811581+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 25955.34,
-      "change": -53.52,
+      "change": -53.56,
       "changePercent": -0.21,
       "currency": "USD"
     }
@@ -112,9 +112,69 @@
   ],
   "news": [
     {
-      "title": "[2027 산업] 내년 사업계획 시동…AI '성과내기'·중국과는 생존경쟁",
-      "link": "https://www.yna.co.kr/view/AKR20261024035400003",
-      "pubDate": "Sun, 25 Oct 2026 05:31:10 +0900",
+      "title": "민간 우주로켓 보험금 첫 고시 추진…한빛-나노 최대 238억원",
+      "link": "https://www.yna.co.kr/view/AKR20261023153000017",
+      "pubDate": "Sun, 25 Oct 2026 07:33:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "석유·가스 상시 수급불안…\"저비용 넘어 공급 회복력 확보해야\"",
+      "link": "https://www.yna.co.kr/view/AKR20261023120200003",
+      "pubDate": "Sun, 25 Oct 2026 07:21:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[머니톡스] '호미질'의 미학…파국을 막는 정공법",
+      "link": "https://www.yna.co.kr/view/AKR20261023093000546",
+      "pubDate": "Sun, 25 Oct 2026 07:07:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"올해 크리스마스는 10월부터\"…매장마다 트리 켜진 사연 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610217144i",
+      "pubDate": "Sun, 25 Oct 2026 07:00:07 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"닫힌 지갑 열어라\"…유통가, AI·이색 상품으로 연말 승부수",
+      "link": "https://www.yna.co.kr/view/AKR20261024004400030",
+      "pubDate": "Sun, 25 Oct 2026 07:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "석유 최고가격제 장기화 딜레마…재정부담에 출구전략 고민",
+      "link": "https://www.yna.co.kr/view/AKR20261023186900003",
+      "pubDate": "Sun, 25 Oct 2026 06:45:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "대형 건설사들, 중대재해 영업정지에 '취소소송' 후 계속 수주",
+      "link": "https://www.yna.co.kr/view/AKR20261024044100003",
+      "pubDate": "Sun, 25 Oct 2026 06:41:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[반려동물] '깐깐해진 집사'에 반려묘 간식·영양제 시장 성장세",
+      "link": "https://www.yna.co.kr/view/AKR20261024027000030",
+      "pubDate": "Sun, 25 Oct 2026 06:35:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "내 주식 주문 어디로 갔나 봤더니…60%는 넥스트레이드로",
+      "link": "https://www.yna.co.kr/view/AKR20261024022500008",
+      "pubDate": "Sun, 25 Oct 2026 06:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "올해 아파트 관리비 '비리 경보' 7천851곳…처분 결과는 '모름'",
+      "link": "https://www.yna.co.kr/view/AKR20261024041400003",
+      "pubDate": "Sun, 25 Oct 2026 06:27:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "상장사 62곳 PBR 개선안 제출 완료…주요 상장사 계획 보니",
+      "link": "https://www.yna.co.kr/view/AKR20261024023600008",
+      "pubDate": "Sun, 25 Oct 2026 06:20:01 +0900",
       "source": "연합뉴스"
     },
     {
@@ -142,12 +202,6 @@
       "source": "한국경제"
     },
     {
-      "title": "삼성물산, 반포푸르지오 리모델링 수주…1천250억원 규모(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261024031251003",
-      "pubDate": "Sat, 24 Oct 2026 17:20:43 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "'사망설' 김정은, 전격 방중…APEC 앞두고 북·중 밀착 과시 [차이나 워치]",
       "link": "https://www.hankyung.com/article/202610242504i",
       "pubDate": "Sat, 24 Oct 2026 16:22:58 +0900",
@@ -166,12 +220,6 @@
       "source": "한국경제"
     },
     {
-      "title": "포스코이앤씨, 5천264억원 규모 이수신동아4단지 리모델링 수주",
-      "link": "https://www.yna.co.kr/view/AKR20261024031200003",
-      "pubDate": "Sat, 24 Oct 2026 13:53:21 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "日 '치이카와' 200만 관객 돌파…극장·유통가 휩쓴 '먼작귀'",
       "link": "https://www.hankyung.com/article/2026102423937",
       "pubDate": "Sat, 24 Oct 2026 13:28:46 +0900",
@@ -182,54 +230,6 @@
       "link": "https://www.hankyung.com/article/202610231282g",
       "pubDate": "Sat, 24 Oct 2026 13:00:04 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "한전, 사채 한도 19조 초과 위기…전기요금 인상 압박 커진다",
-      "link": "https://www.hankyung.com/article/2026102423667",
-      "pubDate": "Sat, 24 Oct 2026 12:09:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "춘천시, 중소기업 직장인 점심값 20％ 지원…300명으로 확대",
-      "link": "https://www.yna.co.kr/view/AKR20261023146400062",
-      "pubDate": "Sat, 24 Oct 2026 11:10:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20261024020700011",
-      "pubDate": "Sat, 24 Oct 2026 10:30:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[바이오사이언스] 월 1회 주사에 먹는 약까지…진화하는 K비만치료제",
-      "link": "https://www.yna.co.kr/view/AKR20261023139600017",
-      "pubDate": "Sat, 24 Oct 2026 10:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[다음주 경제] 3분기 성장률은…9월 산업동향도 주목",
-      "link": "https://www.yna.co.kr/view/AKR20261023183500002",
-      "pubDate": "Sat, 24 Oct 2026 09:21:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"수출호황·확장재정에 수요측 물가압력↑…긴축 장기화 가능성\"",
-      "link": "https://www.yna.co.kr/view/AKR20261023177600002",
-      "pubDate": "Sat, 24 Oct 2026 09:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[르포] 화약 냄새에 푸른 광맥 '반짝'…32년 만에 깬 영월 상동광산",
-      "link": "https://www.yna.co.kr/view/AKR20261023161100062",
-      "pubDate": "Sat, 24 Oct 2026 08:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "'K푸드 열풍 덕'…떡볶이 등 대구지역 식료품 수출 급증",
-      "link": "https://www.yna.co.kr/view/AKR20261023120500053",
-      "pubDate": "Sat, 24 Oct 2026 07:11:12 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
