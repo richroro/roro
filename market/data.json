@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T09:31:08.668030+09:00",
+  "updatedAt": "2026-10-24T14:39:13.431174+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52215.16,
-      "change": -652.82,
+      "change": -652.84,
       "changePercent": -1.23,
       "currency": "USD"
     },
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1323.66,
-      "change": -1.74,
-      "changePercent": -0.13,
+      "price": 1325.4,
+      "change": 0.0,
+      "changePercent": 0.0,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,54 @@
   ],
   "news": [
     {
+      "title": "포스코이앤씨, 5천264억원 규모 이수신동아4단지 리모델링 수주",
+      "link": "https://www.yna.co.kr/view/AKR20261024031200003",
+      "pubDate": "Sat, 24 Oct 2026 13:53:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "日 '치이카와' 200만 관객 돌파…극장·유통가 휩쓴 '먼작귀'",
+      "link": "https://www.hankyung.com/article/2026102423937",
+      "pubDate": "Sat, 24 Oct 2026 13:28:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'사진 3장에 157억 터졌다'…디올이 지수 모셔가는 이유 [김소연의 얼굴전략]",
+      "link": "https://www.hankyung.com/article/202610231282g",
+      "pubDate": "Sat, 24 Oct 2026 13:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "한전, 사채 한도 19조 초과 위기…전기요금 인상 압박 커진다",
+      "link": "https://www.hankyung.com/article/2026102423667",
+      "pubDate": "Sat, 24 Oct 2026 12:09:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "붕어빵 사장님 '광명 차은우'…\"연예인 안 해\" 단호박 행보",
+      "link": "https://www.hankyung.com/article/2026102423707",
+      "pubDate": "Sat, 24 Oct 2026 11:40:38 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "춘천시, 중소기업 직장인 점심값 20％ 지원…300명으로 확대",
+      "link": "https://www.yna.co.kr/view/AKR20261023146400062",
+      "pubDate": "Sat, 24 Oct 2026 11:10:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "link": "https://www.yna.co.kr/view/AKR20261024020700011",
+      "pubDate": "Sat, 24 Oct 2026 10:30:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[바이오사이언스] 월 1회 주사에 먹는 약까지…진화하는 K비만치료제",
+      "link": "https://www.yna.co.kr/view/AKR20261023139600017",
+      "pubDate": "Sat, 24 Oct 2026 10:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "[다음주 경제] 3분기 성장률은…9월 산업동향도 주목",
       "link": "https://www.yna.co.kr/view/AKR20261023183500002",
       "pubDate": "Sat, 24 Oct 2026 09:21:26 +0900",
@@ -172,63 +220,15 @@
       "source": "연합뉴스"
     },
     {
-      "title": "[위클리 건강] '0칼로리' 믿고 마셨는데…당뇨병부터 뇌 건강까지 '경고등'",
-      "link": "https://www.yna.co.kr/view/AKR20261023083600530",
-      "pubDate": "Sat, 24 Oct 2026 07:00:07 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[신상잇슈] 삼립-제스티살룬 협업 버거·웅진-메가박스 '아침햇살' 신메뉴",
-      "link": "https://www.yna.co.kr/view/AKR20261023160000030",
-      "pubDate": "Sat, 24 Oct 2026 07:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "\"태국서만 月 1억씩 번다\"…전세계서 난리 난 한국 식당 [권용훈의 트렌드워치]",
       "link": "https://www.hankyung.com/article/202610217150i",
       "pubDate": "Sat, 24 Oct 2026 07:00:02 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[부동산캘린더] 내주 전국 5천555가구 분양…수도권·부산 중심",
-      "link": "https://www.yna.co.kr/view/AKR20261023165700003",
-      "pubDate": "Sat, 24 Oct 2026 06:05:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "대한항공서 예약번호 등 개인정보 유출",
+      "title": "대한항공·아시아나 협력사서 고객 개인정보 유출…\"피해 규모 확인 중\"",
       "link": "https://www.hankyung.com/article/2026102320511",
       "pubDate": "Sat, 24 Oct 2026 00:36:00 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI 투자 불안에 국채 급등…메타 증자·스페이스X 통신 진출 주목[박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202610242083i",
-      "pubDate": "Sat, 24 Oct 2026 00:21:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[반론보도] '가덕도 신공항, 안전 우려에도 졸속 통과' 등 관련",
-      "link": "https://www.hankyung.com/article/202610232040i",
-      "pubDate": "Fri, 23 Oct 2026 22:17:24 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"2000원짜리 커피가 왜 이래?\"…어쩐지 맛 다르더니 '화들짝'",
-      "link": "https://www.hankyung.com/article/202610231141g",
-      "pubDate": "Fri, 23 Oct 2026 21:00:03 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "LH 사장 \"집값 상승은 공급부족 탓…前정부 폭등 시한폭탄 설치\"",
-      "link": "https://www.yna.co.kr/view/AKR20261023181200003",
-      "pubDate": "Fri, 23 Oct 2026 20:39:20 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[단독] \"돈 줘도 안 돌아가요\"…역대급 '탈한국' 무슨 일이 [K갈라파고스: 족쇄의 세계]",
-      "link": "https://www.hankyung.com/article/202610204124H",
-      "pubDate": "Fri, 23 Oct 2026 19:32:01 +0900",
       "source": "한국경제"
     }
   ]
