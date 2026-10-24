@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-24T09:45:47.156602+09:00",
+ "updatedAt": "2026-10-24T23:02:42.789915+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -293,8 +293,8 @@
    "tag": "한국",
    "currency": "KRW",
    "price": 5550.3,
-   "change": -185.36,
-   "changePercent": -3.23,
+   "change": 16.53,
+   "changePercent": 0.3,
    "returns": {
     "1y": 35.13,
     "3y": 143.65,
@@ -306,7 +306,7 @@
     "5y": 13.32,
     "10y": 10.84
    },
-   "mdd10y": -34.72,
+   "mdd10y": -34.62,
    "fromHigh": -34.52,
    "week52": {
     "high": 9385.59,
@@ -388,8 +388,8 @@
    "tag": "한국 성장",
    "currency": "KRW",
    "price": 751.69,
-   "change": -41.07,
-   "changePercent": -5.18,
+   "change": -12.41,
+   "changePercent": -1.62,
    "returns": {
     "1y": -16.52,
     "3y": 2.12,
@@ -483,8 +483,8 @@
    "tag": "일본",
    "currency": "JPY",
    "price": 62693.16,
-   "change": -1928.08,
-   "changePercent": -2.98,
+   "change": -214.68,
+   "changePercent": -0.34,
    "returns": {
     "1y": 19.62,
     "3y": 103.16,
@@ -578,8 +578,8 @@
    "tag": "미국 지수",
    "currency": "USD",
    "price": 698.58,
-   "change": -12.14,
-   "changePercent": -1.71,
+   "change": -3.72,
+   "changePercent": -0.53,
    "returns": {
     "1y": 11.41,
     "3y": 81.84,
@@ -727,8 +727,8 @@
    "tag": "미국 기술",
    "currency": "USD",
    "price": 704.4,
-   "change": -20.8,
-   "changePercent": -2.87,
+   "change": -0.07,
+   "changePercent": -0.01,
    "returns": {
     "1y": 11.97,
     "3y": 100.76,
@@ -876,8 +876,8 @@
    "tag": "미국 전체",
    "currency": "USD",
    "price": 373.01,
-   "change": -6.14,
-   "changePercent": -1.62,
+   "change": -1.89,
+   "changePercent": -0.5,
    "returns": {
     "1y": 11.21,
     "3y": 80.38,
@@ -1025,8 +1025,8 @@
    "tag": "글로벌",
    "currency": "USD",
    "price": 155.9,
-   "change": -2.69,
-   "changePercent": -1.7,
+   "change": -0.62,
+   "changePercent": -0.4,
    "returns": {
     "1y": 10.89,
     "3y": 72.34,
@@ -1174,8 +1174,8 @@
    "tag": "배당성장",
    "currency": "USD",
    "price": 35.27,
-   "change": 0.61,
-   "changePercent": 1.76,
+   "change": -0.13,
+   "changePercent": -0.37,
    "returns": {
     "1y": 31.85,
     "3y": 55.47,
@@ -1188,7 +1188,7 @@
     "10y": 9.42
    },
    "mdd10y": -22.34,
-   "fromHigh": -0.37,
+   "fromHigh": 0.0,
    "week52": {
     "high": 35.45,
     "low": 26.32,
@@ -1323,8 +1323,8 @@
    "tag": "채권",
    "currency": "USD",
    "price": 71.2,
-   "change": 0.45,
-   "changePercent": 0.64,
+   "change": -0.16,
+   "changePercent": -0.22,
    "returns": {
     "1y": -4.53,
     "3y": 3.9,
@@ -1471,8 +1471,8 @@
    "tag": "원자재",
    "currency": "USD",
    "price": 366.61,
-   "change": -12.34,
-   "changePercent": -3.26,
+   "change": -2.39,
+   "changePercent": -0.65,
    "returns": {
     "1y": -0.41,
     "3y": 99.15,
@@ -1582,7 +1582,7 @@
     "5y": 17.53,
     "10y": 13.11
    },
-   "mdd10y": -37.56,
+   "mdd10y": -37.17,
    "fromHigh": -37.17,
    "week52": {
     "high": 152455.0,
@@ -1807,7 +1807,7 @@
     24030.0,
     23755.0,
     23470.0,
-    22985.0,
+    22915.0,
     22915.0
    ],
    "months": 67
@@ -2041,7 +2041,7 @@
     15165.0,
     15095.0,
     14155.0,
-    14570.0,
+    14810.0,
     14810.0
    ],
    "months": 41
@@ -2053,8 +2053,8 @@
    "tag": "기술",
    "currency": "USD",
    "price": 347.73,
-   "change": 3.74,
-   "changePercent": 1.09,
+   "change": -0.5,
+   "changePercent": -0.14,
    "returns": {
     "1y": 28.61,
     "3y": 103.62,
@@ -2067,7 +2067,7 @@
     "10y": 28.82
    },
    "mdd10y": -30.7,
-   "fromHigh": -0.14,
+   "fromHigh": 0.0,
    "week52": {
     "high": 351.73,
     "low": 243.42,
@@ -2210,8 +2210,8 @@
    "tag": "기술",
    "currency": "USD",
    "price": 524.51,
-   "change": -8.44,
-   "changePercent": -1.58,
+   "change": 3.43,
+   "changePercent": 0.66,
    "returns": {
     "1y": 1.29,
     "3y": 55.13,
@@ -2367,8 +2367,8 @@
    "tag": "기술",
    "currency": "USD",
    "price": 320.21,
-   "change": -14.55,
-   "changePercent": -4.35,
+   "change": -4.01,
+   "changePercent": -1.24,
    "returns": {
     "1y": 13.88,
     "3y": 158.07,
@@ -2384,8 +2384,8 @@
    "fromHigh": -16.79,
    "week52": {
     "high": 408.61,
-    "low": 255.32,
-    "position": 42.3
+    "low": 264.28,
+    "position": 38.8
    },
    "valuation": {
     "per": 16.07,
@@ -2491,8 +2491,8 @@
    "tag": "소비/클라우드",
    "currency": "USD",
    "price": 248.0,
-   "change": -14.37,
-   "changePercent": -5.48,
+   "change": -2.38,
+   "changePercent": -0.95,
    "returns": {
     "1y": 1.55,
     "3y": 86.34,
@@ -2597,8 +2597,8 @@
    "tag": "반도체",
    "currency": "USD",
    "price": 210.96,
-   "change": -11.01,
-   "changePercent": -4.96,
+   "change": -1.25,
+   "changePercent": -0.59,
    "returns": {
     "1y": 4.18,
     "3y": 417.31,
@@ -2754,8 +2754,8 @@
    "tag": "지주",
    "currency": "USD",
    "price": 542.19,
-   "change": 3.2,
-   "changePercent": 0.59,
+   "change": -4.78,
+   "changePercent": -0.87,
    "returns": {
     "1y": 13.54,
     "3y": 58.85,
@@ -2768,7 +2768,7 @@
     "10y": 13.16
    },
    "mdd10y": -24.34,
-   "fromHigh": -0.87,
+   "fromHigh": 0.0,
    "week52": {
     "high": 549.96,
     "low": 464.01,
@@ -2860,8 +2860,8 @@
    "tag": "헬스케어",
    "currency": "USD",
    "price": 263.81,
-   "change": 6.03,
-   "changePercent": 2.34,
+   "change": -3.8,
+   "changePercent": -1.42,
    "returns": {
     "1y": 39.68,
     "3y": 77.84,
@@ -2874,7 +2874,7 @@
     "10y": 9.01
    },
    "mdd10y": -19.88,
-   "fromHigh": -1.42,
+   "fromHigh": -0.77,
    "week52": {
     "high": 281.07,
     "low": 184.66,
@@ -2883,16 +2883,17 @@
    "valuation": {
     "per": 40.03,
     "forwardPer": 22.71,
-    "pbr": 7.48,
+    "pbr": 7.79,
     "psr": 6.39,
     "peg": 2.96,
+    "roe": 20.02,
     "margin": 16.2,
     "marketCap": 635072544768,
     "beta": 0.21,
     "payout": 80.12,
     "avgYield5y": 2.68
    },
-   "dividendYield": 2.0,
+   "dividendYield": 2.03,
    "dividend": {
     "ttm": 5.28,
     "yieldTtm": 2.0,
@@ -3016,8 +3017,8 @@
    "tag": "생활필수",
    "currency": "USD",
    "price": 161.02,
-   "change": 4.18,
-   "changePercent": 2.67,
+   "change": -4.57,
+   "changePercent": -2.76,
    "returns": {
     "1y": 7.08,
     "3y": 7.33,
@@ -3039,19 +3040,20 @@
    "valuation": {
     "per": 24.25,
     "forwardPer": 21.73,
-    "pbr": 6.88,
+    "pbr": 6.87,
     "psr": 4.24,
     "peg": 4.25,
     "roe": 29.61,
     "margin": 18.23,
     "marketCap": 373209432064,
+    "beta": 0.38,
     "payout": 64.62,
     "avgYield5y": 2.5
    },
-   "dividendYield": 2.63,
+   "dividendYield": 2.7,
    "dividend": {
-    "ttm": 4.292,
-    "yieldTtm": 2.67,
+    "ttm": 5.381,
+    "yieldTtm": 3.34,
     "growth5y": 6.02,
     "history": [
      {
@@ -3092,7 +3094,7 @@
      },
      {
       "year": 2026,
-      "amount": 3.235
+      "amount": 4.324
      }
     ]
    },
@@ -3168,8 +3170,8 @@
    "tag": "배당왕",
    "currency": "USD",
    "price": 92.71,
-   "change": 0.03,
-   "changePercent": 0.03,
+   "change": -2.63,
+   "changePercent": -2.76,
    "returns": {
     "1y": 34.56,
     "3y": 64.12,
@@ -3182,7 +3184,7 @@
     "10y": 8.67
    },
    "mdd10y": -24.23,
-   "fromHigh": -2.76,
+   "fromHigh": 0.0,
    "week52": {
     "high": 95.37,
     "low": 67.27,
@@ -3201,7 +3203,7 @@
     "payout": 62.46,
     "avgYield5y": 2.83
    },
-   "dividendYield": 2.22,
+   "dividendYield": 2.29,
    "dividend": {
     "ttm": 2.1,
     "yieldTtm": 2.27,
@@ -3325,8 +3327,8 @@
    "tag": "배당왕",
    "currency": "USD",
    "price": 135.77,
-   "change": 1.07,
-   "changePercent": 0.79,
+   "change": -3.06,
+   "changePercent": -2.2,
    "returns": {
     "1y": -7.06,
     "3y": -16.85,
@@ -3358,7 +3360,7 @@
     "payout": 73.02,
     "avgYield5y": 3.04
    },
-   "dividendYield": 4.26,
+   "dividendYield": 4.36,
    "dividend": {
     "ttm": 5.806,
     "yieldTtm": 4.28,
@@ -3482,8 +3484,8 @@
    "tag": "소비",
    "currency": "USD",
    "price": 248.46,
-   "change": 2.21,
-   "changePercent": 0.9,
+   "change": -4.17,
+   "changePercent": -1.65,
    "returns": {
     "1y": -16.74,
     "3y": -5.23,
@@ -3513,7 +3515,7 @@
     "payout": 59.71,
     "avgYield5y": 2.25
    },
-   "dividendYield": 3.06,
+   "dividendYield": 3.11,
    "dividend": {
     "ttm": 7.44,
     "yieldTtm": 2.99,
@@ -3637,8 +3639,8 @@
    "tag": "결제",
    "currency": "USD",
    "price": 407.92,
-   "change": 0.07,
-   "changePercent": 0.02,
+   "change": -6.42,
+   "changePercent": -1.55,
    "returns": {
     "1y": 19.72,
     "3y": 73.51,
@@ -3651,7 +3653,7 @@
     "10y": 18.09
    },
    "mdd10y": -27.9,
-   "fromHigh": -1.55,
+   "fromHigh": 0.0,
    "week52": {
     "high": 414.6,
     "low": 293.89,
@@ -3670,7 +3672,7 @@
     "payout": 22.13,
     "avgYield5y": 0.71
    },
-   "dividendYield": 0.65,
+   "dividendYield": 0.66,
    "dividend": {
     "ttm": 2.68,
     "yieldTtm": 0.66,
@@ -3794,8 +3796,8 @@
    "tag": "금융",
    "currency": "USD",
    "price": 331.58,
-   "change": -3.61,
-   "changePercent": -1.08,
+   "change": -4.96,
+   "changePercent": -1.47,
    "returns": {
     "1y": 6.58,
     "3y": 138.44,
@@ -3827,7 +3829,7 @@
     "payout": 25.71,
     "avgYield5y": 2.25
    },
-   "dividendYield": 1.96,
+   "dividendYield": 1.99,
    "dividend": {
     "ttm": 6.15,
     "yieldTtm": 1.85,
@@ -3947,8 +3949,8 @@
    "tag": "에너지",
    "currency": "USD",
    "price": 183.21,
-   "change": 5.12,
-   "changePercent": 2.87,
+   "change": 4.98,
+   "changePercent": 2.79,
    "returns": {
     "1y": 60.2,
     "3y": 73.08,
@@ -3980,7 +3982,7 @@
     "payout": 52.51,
     "avgYield5y": 3.37
    },
-   "dividendYield": 2.31,
+   "dividendYield": 2.25,
    "dividend": {
     "ttm": 4.12,
     "yieldTtm": 2.25,
@@ -4133,9 +4135,9 @@
     "marketCap": 1403319360684032,
     "beta": 1.54,
     "payout": 7.49,
-    "avgYield5y": 1.63
+    "avgYield5y": 1.62
    },
-   "dividendYield": 0.7,
+   "dividendYield": 0.69,
    "dividend": {
     "ttm": 1312.0,
     "yieldTtm": 0.61,
@@ -4272,12 +4274,12 @@
     "5y": 65.45,
     "10y": 40.4
    },
-   "mdd10y": -53.85,
+   "mdd10y": -51.81,
    "fromHigh": -51.81,
    "week52": {
     "high": 2987000.0,
-    "low": 491500.0,
-    "position": 31.5
+    "low": 501000.0,
+    "position": 31.2
    },
    "valuation": {
     "forwardPer": 2.73,
@@ -4431,8 +4433,8 @@
    "fromHigh": -59.13,
    "week52": {
     "high": 783000.0,
-    "low": 248000.0,
-    "position": 8.9
+    "low": 249000.0,
+    "position": 8.7
    },
    "valuation": {
     "forwardPer": 6.5,
@@ -4445,7 +4447,7 @@
     "payout": 32.25,
     "avgYield5y": 3.29
    },
-   "dividendYield": 3.32,
+   "dividendYield": 3.38,
    "dividend": {
     "ttm": 10000.0,
     "yieldTtm": 3.38,
@@ -4600,7 +4602,7 @@
     "payout": 37.36,
     "avgYield5y": 4.19
    },
-   "dividendYield": 6.25,
+   "dividendYield": 6.36,
    "dividend": {
     "ttm": 6800.0,
     "yieldTtm": 6.36,
@@ -4751,7 +4753,7 @@
     "payout": 15.93,
     "avgYield5y": 1.67
    },
-   "dividendYield": 1.93,
+   "dividendYield": 1.98,
    "dividend": {
     "ttm": 6500.0,
     "yieldTtm": 1.98,
@@ -4906,7 +4908,7 @@
     "payout": 19.64,
     "avgYield5y": 0.36
    },
-   "dividendYield": 1.49,
+   "dividendYield": 1.52,
    "dividend": {
     "ttm": 2630.0,
     "yieldTtm": 1.51,
@@ -5057,7 +5059,7 @@
     "payout": 291.18,
     "avgYield5y": 0.79
    },
-   "dividendYield": 0.84,
+   "dividendYield": 0.87,
    "dividend": {
     "ttm": 2000.0,
     "yieldTtm": 0.87,
@@ -5208,7 +5210,7 @@
     "payout": 52.04,
     "avgYield5y": 3.13
    },
-   "dividendYield": 2.8,
+   "dividendYield": 2.9,
    "dividend": {
     "ttm": 9000.0,
     "yieldTtm": 3.27,
@@ -5349,8 +5351,8 @@
    "fromHigh": -11.71,
    "week52": {
     "high": 194500.0,
-    "low": 113800.0,
-    "position": 48.6
+    "low": 114000.0,
+    "position": 48.4
    },
    "valuation": {
     "forwardPer": 7.6,
@@ -5363,7 +5365,7 @@
     "payout": 27.21,
     "avgYield5y": 4.15
    },
-   "dividendYield": 2.92,
+   "dividendYield": 3.02,
    "dividend": {
     "ttm": 4833.0,
     "yieldTtm": 3.16,
@@ -5518,7 +5520,7 @@
     "payout": 25.3,
     "avgYield5y": 4.29
    },
-   "dividendYield": 3.28,
+   "dividendYield": 3.36,
    "dividend": {
     "ttm": 2930.0,
     "yieldTtm": 3.33,
@@ -5664,16 +5666,16 @@
    },
    "valuation": {
     "forwardPer": 6.2,
-    "psr": 2.02,
+    "psr": 2.03,
     "peg": 2.56,
     "roe": 8.61,
     "margin": 29.29,
-    "marketCap": 21913875251200,
+    "marketCap": 22064169746432,
     "beta": 0.53,
     "payout": 33.21,
     "avgYield5y": 5.98
    },
-   "dividendYield": 4.48,
+   "dividendYield": 4.65,
    "dividend": {
     "ttm": 1400.0,
     "yieldTtm": 4.65,
@@ -5773,7 +5775,7 @@
     29700.0,
     33600.0,
     33800.0,
-    31250.0,
+    30100.0,
     30100.0
    ],
    "months": 93
@@ -5799,7 +5801,7 @@
     "10y": 6.08
    },
    "mdd10y": -38.77,
-   "fromHigh": -2.27,
+   "fromHigh": 0.0,
    "week52": {
     "high": 196400.0,
     "low": 132100.0,
@@ -5816,7 +5818,7 @@
     "payout": 43.88,
     "avgYield5y": 4.79
    },
-   "dividendYield": 3.41,
+   "dividendYield": 3.48,
    "dividend": {
     "ttm": 6600.0,
     "yieldTtm": 3.48,
@@ -5971,7 +5973,7 @@
     "payout": 48.61,
     "avgYield5y": 5.23
    },
-   "dividendYield": 4.36,
+   "dividendYield": 4.46,
    "dividend": {
     "ttm": 1660.0,
     "yieldTtm": 2.23,
@@ -6126,7 +6128,7 @@
     "payout": 44.98,
     "avgYield5y": 5.09
    },
-   "dividendYield": 5.05,
+   "dividendYield": 5.13,
    "dividend": {
     "ttm": 2400.0,
     "yieldTtm": 5.13,
@@ -6245,6 +6247,18 @@
   }
  ],
  "news": [
+  {
+   "title": "“SK하닉 고점서 절반넘게 날아갔는데 중복상장?”…분노 잇따르자 철회",
+   "link": "https://www.mk.co.kr/news/stock/12184884",
+   "pubDate": "Sat, 24 Oct 2026 21:40:50 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "9100→5500까지 하락한 코스피…“11월은 W자 반등에 주목”",
+   "link": "https://www.mk.co.kr/news/stock/12184843",
+   "pubDate": "Sat, 24 Oct 2026 17:06:17 +09:00",
+   "source": "매일경제 증권"
+  },
   {
    "title": "\"수출호황·확장재정에 수요측 물가압력↑…긴축 장기화 가능성\"",
    "link": "https://www.yna.co.kr/view/AKR20261023177600002",
@@ -6376,18 +6390,6 @@
    "link": "https://www.chosun.com/economy/stock-finance/2026/10/24/IWDPUSVYGVFA7OIAIPZUM55R6E/",
    "pubDate": "Fri, 23 Oct 2026 15:34:00 +0000",
    "source": "조선일보"
-  },
-  {
-   "title": "주가 부진·중복상장 부담… 솔리다임 ‘美상장 절차’ 중단",
-   "link": "https://www.chosun.com/economy/tech_it/2026/10/24/AWPC4BIBS5CBNG4W24VRK2BYDE/",
-   "pubDate": "Fri, 23 Oct 2026 15:34:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "충북도·청주시, 한솔아이원스와 1천560억원 규모 투자협약",
-   "link": "https://www.yna.co.kr/view/AKR20261023124000064",
-   "pubDate": "Fri, 23 Oct 2026 15:14:19 +0900",
-   "source": "연합뉴스"
   }
  ]
 }
