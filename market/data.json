@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T19:46:16.593142+09:00",
+  "updatedAt": "2026-10-24T23:24:50.641380+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 52215.16,
-      "change": -652.84,
+      "change": -652.82,
       "changePercent": -1.23,
       "currency": "USD"
     },
@@ -112,7 +112,25 @@
   ],
   "news": [
     {
-      "title": "'쫄깃·탱탱' 회, 불티나게 팔렸다…25년 횟집에 무슨 일이",
+      "title": "김정은 '당일치기 방중' 끝났다…'中 서열 4위' 왕후닝과 회담",
+      "link": "https://www.hankyung.com/article/202610242653i",
+      "pubDate": "Sat, 24 Oct 2026 20:24:58 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"이건 꼭 봐야 해\" 엄마 아빠도 줄 섰다…핫플 된 의외의 동네 [류은혁의 유통기한]",
+      "link": "https://www.hankyung.com/article/202610231399i",
+      "pubDate": "Sat, 24 Oct 2026 20:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"일본도 중국도 건너뛰었다\"…한국인 입맛 잡으러 온 외식 공룡 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610204406i",
+      "pubDate": "Sat, 24 Oct 2026 20:00:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'쫄깃·탱탱' 회가 뭐길래 '불티'…25년 횟집 사장님도 놀랐다",
       "link": "https://www.hankyung.com/article/202610229019g",
       "pubDate": "Sat, 24 Oct 2026 19:34:20 +0900",
       "source": "한국경제"
@@ -166,12 +184,6 @@
       "source": "한국경제"
     },
     {
-      "title": "붕어빵 사장님 '광명 차은우'…\"연예인 안 해\" 단호박 행보",
-      "link": "https://www.hankyung.com/article/2026102423707",
-      "pubDate": "Sat, 24 Oct 2026 11:40:38 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "춘천시, 중소기업 직장인 점심값 20％ 지원…300명으로 확대",
       "link": "https://www.yna.co.kr/view/AKR20261023146400062",
       "pubDate": "Sat, 24 Oct 2026 11:10:00 +0900",
@@ -196,22 +208,10 @@
       "source": "연합뉴스"
     },
     {
-      "title": "가성비 전기차의 반란…후발주자 리프모터의 역습",
-      "link": "https://www.hankyung.com/article/202609206193i",
-      "pubDate": "Sat, 24 Oct 2026 09:00:02 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "\"수출호황·확장재정에 수요측 물가압력↑…긴축 장기화 가능성\"",
       "link": "https://www.yna.co.kr/view/AKR20261023177600002",
       "pubDate": "Sat, 24 Oct 2026 09:00:01 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "채권의 귀환…월가 기관들의 투자 전략은 [박신영의 월가 아나토미]",
-      "link": "https://www.hankyung.com/article/202610242220i",
-      "pubDate": "Sat, 24 Oct 2026 08:07:55 +0900",
-      "source": "한국경제"
     },
     {
       "title": "[르포] 화약 냄새에 푸른 광맥 '반짝'…32년 만에 깬 영월 상동광산",
