@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T03:01:35.567686+09:00",
+  "updatedAt": "2026-10-25T05:38:37.008929+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,6 +112,12 @@
   ],
   "news": [
     {
+      "title": "[2027 산업] 내년 사업계획 시동…AI '성과내기'·중국과는 생존경쟁",
+      "link": "https://www.yna.co.kr/view/AKR20261024035400003",
+      "pubDate": "Sun, 25 Oct 2026 05:31:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "김정은 '당일치기 방중' 끝났다…'中 서열 4위' 왕후닝과 회담",
       "link": "https://www.hankyung.com/article/202610242653i",
       "pubDate": "Sat, 24 Oct 2026 20:24:58 +0900",
@@ -223,12 +229,6 @@
       "title": "'K푸드 열풍 덕'…떡볶이 등 대구지역 식료품 수출 급증",
       "link": "https://www.yna.co.kr/view/AKR20261023120500053",
       "pubDate": "Sat, 24 Oct 2026 07:11:12 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "주유소 기름값 23주 연속 하락…휘발유·경유 1천800원대",
-      "link": "https://www.yna.co.kr/view/AKR20261023102900003",
-      "pubDate": "Sat, 24 Oct 2026 07:01:01 +0900",
       "source": "연합뉴스"
     }
   ]
