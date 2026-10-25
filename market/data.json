@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T03:53:16.555403+09:00",
+  "updatedAt": "2026-10-26T06:38:32.154098+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1323.66,
-      "change": -1.74,
-      "changePercent": -0.13,
+      "price": 1323.61,
+      "change": -1.79,
+      "changePercent": -0.14,
       "currency": "KRW"
     }
   ],
@@ -112,9 +112,63 @@
   ],
   "news": [
     {
-      "title": "코카콜라, 신흥시장 상인 이어 해방촌 협업…골목상권 활성화",
-      "link": "https://www.yna.co.kr/view/AKR20261025025400030",
-      "pubDate": "Mon, 26 Oct 2026 00:00:01 +0900",
+      "title": "위험기계 불합격에도 사용중지 늑장 명령…노동청, 102건 지연",
+      "link": "https://www.yna.co.kr/view/AKR20261023145600530",
+      "pubDate": "Mon, 26 Oct 2026 06:01:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "롯데마트·슈퍼, 오뚜기와 '굴미역국라면' 단독 출시",
+      "link": "https://www.yna.co.kr/view/AKR20261025036100030",
+      "pubDate": "Mon, 26 Oct 2026 06:00:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "롯데온, 28일까지 월말 할인전…생필품·식품 최대 50% 할인",
+      "link": "https://www.yna.co.kr/view/AKR20261025038100030",
+      "pubDate": "Mon, 26 Oct 2026 06:00:10 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "롯데百, 잠실점 3천400평 식품관 10년 만에 전면 개편",
+      "link": "https://www.yna.co.kr/view/AKR20261025038900030",
+      "pubDate": "Mon, 26 Oct 2026 06:00:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "신세계百 강남점, 내달 3일까지 캐릭터 팝업…굿즈 950종 선보여",
+      "link": "https://www.yna.co.kr/view/AKR20261025040200030",
+      "pubDate": "Mon, 26 Oct 2026 06:00:05 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[게시판] 롯데멤버스, '금연 마라톤 챌린지' 진행",
+      "link": "https://www.yna.co.kr/view/AKR20261025040900030",
+      "pubDate": "Mon, 26 Oct 2026 06:00:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "어느새 금융범죄자로…알바 가장한 자금수거책·통장양도 주의",
+      "link": "https://www.yna.co.kr/view/AKR20261025030200002",
+      "pubDate": "Mon, 26 Oct 2026 06:00:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "중금리대출 확대에…카드론 금리 석달 만에 13%대로 하락",
+      "link": "https://www.yna.co.kr/view/AKR20261025029100002",
+      "pubDate": "Mon, 26 Oct 2026 05:57:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "원/달러 환율 1,310원대 근접…명목실효환율 2년만에 최고",
+      "link": "https://www.yna.co.kr/view/AKR20261025043600002",
+      "pubDate": "Mon, 26 Oct 2026 05:55:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "코인 과세 유예 기류에 업계 '반색'…자금 이탈 감소 기대",
+      "link": "https://www.yna.co.kr/view/AKR20261025041000002",
+      "pubDate": "Mon, 26 Oct 2026 05:53:00 +0900",
       "source": "연합뉴스"
     },
     {
@@ -122,12 +176,6 @@
       "link": "https://www.hankyung.com/article/202610253289H",
       "pubDate": "Sun, 25 Oct 2026 20:07:49 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "이형일, 경제현안간담회서 국내생산세액공제 보완방안 등 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261025047700002",
-      "pubDate": "Sun, 25 Oct 2026 19:52:38 +0900",
-      "source": "연합뉴스"
     },
     {
       "title": "[단독] 전력 부족한데…열병합발전, 낙찰 받고도 2년째 착공 못해",
@@ -182,54 +230,6 @@
       "link": "https://www.hankyung.com/article/2026102535701",
       "pubDate": "Sun, 25 Oct 2026 18:34:01 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "李대통령, 대규모 경상수지 흑자에 \"韓 이제 세계경제 선도국가\"",
-      "link": "https://www.yna.co.kr/view/AKR20261025040300001",
-      "pubDate": "Sun, 25 Oct 2026 18:14:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "李대통령, 내일 '농어민과 대화'…농지조사·CPTPP 등 의견수렴",
-      "link": "https://www.yna.co.kr/view/AKR20261025039100001",
-      "pubDate": "Sun, 25 Oct 2026 18:08:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "롯데 계열 '기프티엘', 해킹으로 고객 개인정보 유출",
-      "link": "https://www.yna.co.kr/view/AKR20261025039500030",
-      "pubDate": "Sun, 25 Oct 2026 17:25:15 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "여성경제인협회 \"출산·육아 고려한 창업지원 기준 개선 환영\"",
-      "link": "https://www.yna.co.kr/view/AKR20261025033600030",
-      "pubDate": "Sun, 25 Oct 2026 16:03:32 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261025028700011",
-      "pubDate": "Sun, 25 Oct 2026 15:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"K-뷰티 도약의 장으로\"…2026 오송화장품뷰티엑스포 성료",
-      "link": "https://www.yna.co.kr/view/AKR20261025029700064",
-      "pubDate": "Sun, 25 Oct 2026 14:40:35 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "박수현 충남지사, 미국서 투자협약·AI 협력망 구축 추진",
-      "link": "https://www.yna.co.kr/view/AKR20261025027600063",
-      "pubDate": "Sun, 25 Oct 2026 13:54:31 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "KB \"10월 서울 아파트값 0.61% 올라…상승률 연내 최저\"",
-      "link": "https://www.yna.co.kr/view/AKR20261025026700003",
-      "pubDate": "Sun, 25 Oct 2026 13:16:02 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
