@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-25T09:21:40.094268+09:00",
+ "updatedAt": "2026-10-25T23:26:37.010452+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2075,7 +2075,7 @@
    },
    "valuation": {
     "per": 39.88,
-    "forwardPer": 36.33,
+    "forwardPer": 36.37,
     "pbr": 47.25,
     "psr": 10.87,
     "peg": 2.79,
@@ -6248,39 +6248,75 @@
  ],
  "news": [
   {
-   "title": "석유 최고가격제 장기화 딜레마…재정부담에 출구전략 고민",
-   "link": "https://www.yna.co.kr/view/AKR20261023186900003",
-   "pubDate": "Sun, 25 Oct 2026 06:45:00 +0900",
+   "title": "“코스피 목표 25% 낮췄는데 상승 여력 60%?”…골드만삭스의 반전 전망",
+   "link": "https://www.mk.co.kr/news/stock/12185306",
+   "pubDate": "Sun, 25 Oct 2026 21:09:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "低PBR 낙인 찍힐라 … 62개사 개선계획 공시",
+   "link": "https://www.mk.co.kr/news/stock/12185150",
+   "pubDate": "Sun, 25 Oct 2026 17:05:17 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "\"대체거래소 활성화하려면 … ETF·ETN 거래 허용 검토를\"",
+   "link": "https://www.mk.co.kr/news/stock/12185144",
+   "pubDate": "Sun, 25 Oct 2026 17:05:04 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "TSMC 실적 숫자만 보면 놓친다ㅣ월가는 이렇게 읽는다(1화) [매플 위켄드]",
+   "link": "https://www.mk.co.kr/news/stock/12185064",
+   "pubDate": "Sun, 25 Oct 2026 15:07:59 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "低PBR 기업 압박 본격화…“구조적 이유” 하소연",
+   "link": "https://www.mk.co.kr/news/stock/12185040",
+   "pubDate": "Sun, 25 Oct 2026 14:24:02 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "박수현 충남지사, 미국서 투자협약·AI 협력망 구축 추진",
+   "link": "https://www.yna.co.kr/view/AKR20261025027600063",
+   "pubDate": "Sun, 25 Oct 2026 13:54:31 +0900",
    "source": "연합뉴스"
   },
   {
-   "title": "상장사 62곳 PBR 개선안 제출 완료…주요 상장사 계획 보니",
-   "link": "https://www.yna.co.kr/view/AKR20261024023600008",
-   "pubDate": "Sun, 25 Oct 2026 06:20:01 +0900",
+   "title": "호실적에 자사주매입까지 쐈더니…코스피 급락장 이겨낸 삼성E&A [이주의 Bull기둥]",
+   "link": "https://www.mk.co.kr/news/stock/12184992",
+   "pubDate": "Sun, 25 Oct 2026 12:47:13 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "금융미래 조망·스타트업 투자유치…26∼28일 '서울핀테크위크'",
+   "link": "https://www.yna.co.kr/view/AKR20261024023400004",
+   "pubDate": "Sun, 25 Oct 2026 11:15:04 +0900",
    "source": "연합뉴스"
   },
   {
-   "title": "코스피 급락에…10대그룹 시총, 한달새 1천100조원 증발",
-   "link": "https://www.yna.co.kr/view/AKR20261024028000008",
-   "pubDate": "Sun, 25 Oct 2026 06:15:00 +0900",
-   "source": "연합뉴스"
+   "title": "180조도 ‘예고된 호실적’... 삼전닉스 가이던스, 감동 줄까",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/25/2UHGWQHXAFADJADFNNWMTZHZKA/",
+   "pubDate": "Sun, 25 Oct 2026 08:00:00 +0000",
+   "source": "조선일보"
   },
   {
-   "title": "[마켓인사이트] 솔리다임 상장중단에 반전한 코스피…금주 향방은",
-   "link": "https://www.yna.co.kr/view/AKR20261024024500008",
-   "pubDate": "Sun, 25 Oct 2026 06:00:07 +0900",
-   "source": "연합뉴스"
+   "title": "월가 ‘AI 과잉투자’ 우려에도… 아마존 “2028년 물량까지 매진”",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/25/4WAYQ6KLOZBTNB7VREYIFEGJYE/",
+   "pubDate": "Sun, 25 Oct 2026 04:27:23 +0000",
+   "source": "조선일보"
   },
   {
-   "title": "'너도나도 1천억' 은행 보안투자 경쟁…PHP 대응도 비상",
-   "link": "https://www.yna.co.kr/view/AKR20261024041000002",
-   "pubDate": "Sun, 25 Oct 2026 05:55:00 +0900",
-   "source": "연합뉴스"
+   "title": "‘저PBR 기업’ 공개 앞두고 62곳 개선안…평균 PBR 0.3배",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/GNRGGOJTHBTDCNBYHBSDQZBRGM/",
+   "pubDate": "Sun, 25 Oct 2026 02:18:24 +0000",
+   "source": "조선일보"
   },
   {
-   "title": "증시 대기자금 넉 달 새 51조원 감소…개인 ‘실탄’ 빠르게 줄었다",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/KYFFD5CPNNCNBNQA5YLSQG5Z7Y/",
-   "pubDate": "Sun, 25 Oct 2026 00:14:11 +0000",
+   "title": "[주간증시전망] ‘역대급 실적’ 기대에도 못 웃는 증시…AI 불신에 수급 공백까지 막막",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/GU4TANBUMNRDEYRXGAZDCZLBGU/",
+   "pubDate": "Sun, 25 Oct 2026 01:35:35 +0000",
    "source": "조선일보"
   },
   {
@@ -6290,34 +6326,16 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "이름만 남은 ‘서민금융 우수 대부’… 은행 외면에 연 금리 20%",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/GU2DAMTCMMYTQYZQGBQTSNBTGM/",
-   "pubDate": "Sat, 24 Oct 2026 22:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "“SK하닉 고점서 절반넘게 날아갔는데 중복상장?”…분노 잇따르자 철회",
    "link": "https://www.mk.co.kr/news/stock/12184884",
    "pubDate": "Sat, 24 Oct 2026 21:40:50 +09:00",
    "source": "매일경제 증권"
   },
   {
-   "title": "\"목에 칼 들어와도 안 사\" 다주택자 개그맨…3개월 뒤 코스피에 무슨 일이",
-   "link": "https://www.chosun.com/economy/realty/realestate_news/2026/10/25/HEZGMNZWGU4TEOJWGAYDGMRWGM/",
-   "pubDate": "Sat, 24 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "9100→5500까지 하락한 코스피…“11월은 W자 반등에 주목”",
    "link": "https://www.mk.co.kr/news/stock/12184843",
    "pubDate": "Sat, 24 Oct 2026 17:06:17 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "\"수출호황·확장재정에 수요측 물가압력↑…긴축 장기화 가능성\"",
-   "link": "https://www.yna.co.kr/view/AKR20261023177600002",
-   "pubDate": "Sat, 24 Oct 2026 09:00:01 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "‘채시라 남편’ 김태욱 회사에 日마루베니 공개매수…주가 상한가 직행",
@@ -6332,28 +6350,10 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "중동 확전 우려에 유가 6개월 만에 최고치...뉴욕 증시, 일제히 하락",
-   "link": "https://www.chosun.com/economy/2026/10/24/ODT2TDXNYNGDDNEO2AYIIZYSEU/",
-   "pubDate": "Sat, 24 Oct 2026 00:35:56 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "\"목에 칼 들어와도 안 사\" 다주택자 개그맨, 3개월 뒤 '코스피' 보니",
-   "link": "https://www.chosun.com/economy/realty/investment_trends/2026/10/24/G4YTQMZSMVSTONTGMZQTKMLFGE/",
-   "pubDate": "Fri, 23 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "美 금리 고공행진에 … 맥 못추는 金",
    "link": "https://www.mk.co.kr/news/stock/12184419",
    "pubDate": "Fri, 23 Oct 2026 17:39:43 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "국토장관 \"집값 상승폭 둔화…연말 금리 상향 시 시장 안정화\"(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023088651003",
-   "pubDate": "Fri, 23 Oct 2026 17:39:23 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "노르웨이 국부펀드도 마이너스 수익률…기금규모 95조 줄어 3125조",
