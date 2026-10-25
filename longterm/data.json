@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-24T23:02:42.789915+09:00",
+ "updatedAt": "2026-10-25T09:21:40.094268+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2235,7 +2235,7 @@
     "forwardPer": 22.13,
     "pbr": 8.81,
     "psr": 11.74,
-    "peg": 1.69,
+    "peg": 1.7,
     "roe": 34.04,
     "margin": 40.3,
     "marketCap": 3894773022720,
@@ -2392,7 +2392,7 @@
     "forwardPer": 20.85,
     "pbr": 6.29,
     "psr": 8.78,
-    "peg": 1.14,
+    "peg": 1.12,
     "roe": 48.68,
     "margin": 54.77,
     "marketCap": 3916147458048,
@@ -2516,7 +2516,7 @@
     "forwardPer": 23.78,
     "pbr": 4.85,
     "psr": 3.45,
-    "peg": 1.45,
+    "peg": 1.44,
     "roe": 30.56,
     "margin": 17.44,
     "marketCap": 2675005718528,
@@ -2885,7 +2885,7 @@
     "forwardPer": 22.71,
     "pbr": 7.79,
     "psr": 6.39,
-    "peg": 2.96,
+    "peg": 2.94,
     "roe": 20.02,
     "margin": 16.2,
     "marketCap": 635072544768,
@@ -3042,7 +3042,7 @@
     "forwardPer": 21.73,
     "pbr": 6.87,
     "psr": 4.24,
-    "peg": 4.25,
+    "peg": 4.14,
     "roe": 29.61,
     "margin": 18.23,
     "marketCap": 373209432064,
@@ -3195,7 +3195,7 @@
     "forwardPer": 26.31,
     "pbr": 11.04,
     "psr": 7.96,
-    "peg": 4.33,
+    "peg": 4.21,
     "roe": 42.05,
     "margin": 28.56,
     "marketCap": 398889320448,
@@ -3352,7 +3352,7 @@
     "forwardPer": 15.72,
     "pbr": 8.31,
     "psr": 1.88,
-    "peg": 1.44,
+    "peg": 1.41,
     "roe": 52.19,
     "margin": 11.09,
     "marketCap": 185019367424,
@@ -3508,7 +3508,7 @@
     "per": 20.18,
     "forwardPer": 18.08,
     "psr": 6.35,
-    "peg": 2.67,
+    "peg": 2.63,
     "margin": 31.72,
     "marketCap": 175820619776,
     "beta": 0.45,
@@ -3664,7 +3664,7 @@
     "forwardPer": 27.15,
     "pbr": 21.62,
     "psr": 17.21,
-    "peg": 1.88,
+    "peg": 1.85,
     "roe": 61.19,
     "margin": 50.78,
     "marketCap": 765810769920,
@@ -3821,7 +3821,7 @@
     "forwardPer": 12.99,
     "pbr": 2.51,
     "psr": 4.62,
-    "peg": 1.43,
+    "peg": 1.41,
     "roe": 18.01,
     "margin": 34.59,
     "marketCap": 880543858688,
@@ -3974,7 +3974,7 @@
     "forwardPer": 14.92,
     "pbr": 2.9,
     "psr": 2.09,
-    "peg": 1.54,
+    "peg": 1.58,
     "roe": 12.58,
     "margin": 9.07,
     "marketCap": 753343397888,
@@ -5510,7 +5510,7 @@
     "position": 35.5
    },
    "valuation": {
-    "forwardPer": 6.49,
+    "forwardPer": 6.47,
     "psr": 2.02,
     "peg": 5.14,
     "roe": 8.94,
@@ -5665,7 +5665,7 @@
     "position": 30.1
    },
    "valuation": {
-    "forwardPer": 6.2,
+    "forwardPer": 6.18,
     "psr": 2.03,
     "peg": 2.56,
     "roe": 8.61,
@@ -6248,10 +6248,64 @@
  ],
  "news": [
   {
+   "title": "석유 최고가격제 장기화 딜레마…재정부담에 출구전략 고민",
+   "link": "https://www.yna.co.kr/view/AKR20261023186900003",
+   "pubDate": "Sun, 25 Oct 2026 06:45:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "상장사 62곳 PBR 개선안 제출 완료…주요 상장사 계획 보니",
+   "link": "https://www.yna.co.kr/view/AKR20261024023600008",
+   "pubDate": "Sun, 25 Oct 2026 06:20:01 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "코스피 급락에…10대그룹 시총, 한달새 1천100조원 증발",
+   "link": "https://www.yna.co.kr/view/AKR20261024028000008",
+   "pubDate": "Sun, 25 Oct 2026 06:15:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "[마켓인사이트] 솔리다임 상장중단에 반전한 코스피…금주 향방은",
+   "link": "https://www.yna.co.kr/view/AKR20261024024500008",
+   "pubDate": "Sun, 25 Oct 2026 06:00:07 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "'너도나도 1천억' 은행 보안투자 경쟁…PHP 대응도 비상",
+   "link": "https://www.yna.co.kr/view/AKR20261024041000002",
+   "pubDate": "Sun, 25 Oct 2026 05:55:00 +0900",
+   "source": "연합뉴스"
+  },
+  {
+   "title": "증시 대기자금 넉 달 새 51조원 감소…개인 ‘실탄’ 빠르게 줄었다",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/KYFFD5CPNNCNBNQA5YLSQG5Z7Y/",
+   "pubDate": "Sun, 25 Oct 2026 00:14:11 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "증시 큰 변동성에도 버티는 보험주…배당·방어주로 부각된다는데",
+   "link": "https://www.mk.co.kr/news/stock/12184896",
+   "pubDate": "Sat, 24 Oct 2026 23:11:45 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "이름만 남은 ‘서민금융 우수 대부’… 은행 외면에 연 금리 20%",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/10/25/GU2DAMTCMMYTQYZQGBQTSNBTGM/",
+   "pubDate": "Sat, 24 Oct 2026 22:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“SK하닉 고점서 절반넘게 날아갔는데 중복상장?”…분노 잇따르자 철회",
    "link": "https://www.mk.co.kr/news/stock/12184884",
    "pubDate": "Sat, 24 Oct 2026 21:40:50 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "\"목에 칼 들어와도 안 사\" 다주택자 개그맨…3개월 뒤 코스피에 무슨 일이",
+   "link": "https://www.chosun.com/economy/realty/realestate_news/2026/10/25/HEZGMNZWGU4TEOJWGAYDGMRWGM/",
+   "pubDate": "Sat, 24 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
   },
   {
    "title": "9100→5500까지 하락한 코스피…“11월은 W자 반등에 주목”",
@@ -6302,40 +6356,10 @@
    "source": "연합뉴스"
   },
   {
-   "title": "박홍근 \"미래대응기금, 적립 계속되는 구조…정권과 무관\"",
-   "link": "https://www.yna.co.kr/view/AKR20261023158100002",
-   "pubDate": "Fri, 23 Oct 2026 17:34:48 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…美 국채 강세 영향(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023146851008",
-   "pubDate": "Fri, 23 Oct 2026 16:50:10 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…3년물 연 3.803%",
-   "link": "https://www.yna.co.kr/view/AKR20261023146800008",
-   "pubDate": "Fri, 23 Oct 2026 16:41:30 +0900",
-   "source": "연합뉴스"
-  },
-  {
    "title": "노르웨이 국부펀드도 마이너스 수익률…기금규모 95조 줄어 3125조",
    "link": "https://www.mk.co.kr/news/stock/12184290",
    "pubDate": "Fri, 23 Oct 2026 16:36:11 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "솔리다임 IPO 중단 덕분?…코스피, 낙폭 좁혀 5,500선 회복 마감(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023137600008",
-   "pubDate": "Fri, 23 Oct 2026 16:29:52 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "AI 신용우려에 코스피 '출렁'…하이닉스 호재에 한숨 돌려(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023079351008",
-   "pubDate": "Fri, 23 Oct 2026 16:21:58 +0900",
-   "source": "연합뉴스"
   },
   {
    "title": "“노후자금 불리고 세금 줄이고”…퇴직연금 담당자 100여 명 모인 이유",
@@ -6350,46 +6374,22 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "네오클라우드서 빅테크로 옮겨붙은 AI 신용위험…코스피 '흔들'(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023083151008",
-   "pubDate": "Fri, 23 Oct 2026 15:55:01 +0900",
-   "source": "연합뉴스"
+   "title": "“이제 삼전닉스 들어가도 되나요”…솔리다임 상장 중단, 반도체주 반등 신호탄?",
+   "link": "https://www.mk.co.kr/news/stock/12183984",
+   "pubDate": "Fri, 23 Oct 2026 11:37:24 +09:00",
+   "source": "매일경제 증권"
   },
   {
-   "title": "증권가 \"솔리다임 상장검토 중단, 반도체 투심 회복 기여할 듯\"(종합2보)",
-   "link": "https://www.yna.co.kr/view/AKR20261023030452008",
-   "pubDate": "Fri, 23 Oct 2026 15:44:02 +0900",
-   "source": "연합뉴스"
+   "title": "반도체주, AI 수익성 우려에 급락…SK하닉, 솔리다임 상장 중단에도 약세",
+   "link": "https://www.mk.co.kr/news/stock/12183843",
+   "pubDate": "Fri, 23 Oct 2026 09:49:18 +09:00",
+   "source": "매일경제 증권"
   },
   {
-   "title": "[특징주] 삼성E&A, 증권가 목표주가 줄상향 속 8% 강세(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023044651008",
-   "pubDate": "Fri, 23 Oct 2026 15:39:17 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "솔리다임 IPO 철회 덕분?…코스피, 낙폭 좁혀 5,500선 회복 마감",
-   "link": "https://www.yna.co.kr/view/AKR20261023130000008",
-   "pubDate": "Fri, 23 Oct 2026 15:38:39 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "[특징주] 디티에스, 코스닥 상장 첫날 35% 강세 마감…상승폭은 줄어(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261023040151008",
-   "pubDate": "Fri, 23 Oct 2026 15:38:29 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "[속보] 코스피, 0.3% 반등 5,550 마감…SK하이닉스 4.4%↑",
-   "link": "https://www.yna.co.kr/view/AKR20261023130600008",
-   "pubDate": "Fri, 23 Oct 2026 15:36:55 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "주가 1000원 못 넘겨 ‘동전주 첫 상폐’ 수순",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/24/IWDPUSVYGVFA7OIAIPZUM55R6E/",
-   "pubDate": "Fri, 23 Oct 2026 15:34:00 +0000",
-   "source": "조선일보"
+   "title": "[MK시그널] 펩트론, 스마트데포 기술력 글로벌 기대감에 주가 상승세... MK시그널 추천 후 상승률 11.26% 기록",
+   "link": "https://www.mk.co.kr/news/stock/12183827",
+   "pubDate": "Fri, 23 Oct 2026 09:41:27 +09:00",
+   "source": "매일경제 증권"
   }
  ]
 }
