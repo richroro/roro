@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T20:12:12.771549+09:00",
+  "updatedAt": "2026-10-26T00:59:01.697299+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1325.4,
-      "change": 0.0,
-      "changePercent": 0.0,
+      "price": 1323.66,
+      "change": -1.74,
+      "changePercent": -0.13,
       "currency": "KRW"
     }
   ],
@@ -112,6 +112,18 @@
   ],
   "news": [
     {
+      "title": "코카콜라, 신흥시장 상인 이어 해방촌 협업…골목상권 활성화",
+      "link": "https://www.yna.co.kr/view/AKR20261025025400030",
+      "pubDate": "Mon, 26 Oct 2026 00:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] \"여기 털리면 큰일인데\"…7840만건 뚫렸다 '초비상'",
+      "link": "https://www.hankyung.com/article/202610253289H",
+      "pubDate": "Sun, 25 Oct 2026 20:07:49 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "이형일, 경제현안간담회서 국내생산세액공제 보완방안 등 논의",
       "link": "https://www.yna.co.kr/view/AKR20261025047700002",
       "pubDate": "Sun, 25 Oct 2026 19:52:38 +0900",
@@ -172,12 +184,6 @@
       "source": "한국경제"
     },
     {
-      "title": "LG 세탁기, 유럽 B2B 시장 공략 강화",
-      "link": "https://www.hankyung.com/article/2026102535681",
-      "pubDate": "Sun, 25 Oct 2026 18:33:47 +0900",
-      "source": "한국경제"
-    },
-    {
       "title": "李대통령, 대규모 경상수지 흑자에 \"韓 이제 세계경제 선도국가\"",
       "link": "https://www.yna.co.kr/view/AKR20261025040300001",
       "pubDate": "Sun, 25 Oct 2026 18:14:33 +0900",
@@ -223,12 +229,6 @@
       "title": "KB \"10월 서울 아파트값 0.61% 올라…상승률 연내 최저\"",
       "link": "https://www.yna.co.kr/view/AKR20261025026700003",
       "pubDate": "Sun, 25 Oct 2026 13:16:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "4대그룹 유일 공채 삼성, 하반기 GSAT 실시…그룹 19개사 참여",
-      "link": "https://www.yna.co.kr/view/AKR20261025013100003",
-      "pubDate": "Sun, 25 Oct 2026 13:00:02 +0900",
       "source": "연합뉴스"
     }
   ]
