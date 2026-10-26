@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T06:38:32.154098+09:00",
+  "updatedAt": "2026-10-26T09:05:12.851008+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1323.61,
-      "change": -1.79,
-      "changePercent": -0.14,
+      "price": 1323.02,
+      "change": -0.64,
+      "changePercent": -0.05,
       "currency": "KRW"
     }
   ],
@@ -112,64 +112,112 @@
   ],
   "news": [
     {
-      "title": "위험기계 불합격에도 사용중지 늑장 명령…노동청, 102건 지연",
-      "link": "https://www.yna.co.kr/view/AKR20261023145600530",
-      "pubDate": "Mon, 26 Oct 2026 06:01:03 +0900",
+      "title": "[부산포용금융] 캠코, 유휴시설 활용 일자리 창출·안전망 구축",
+      "link": "https://www.yna.co.kr/view/AKR20261013160500051",
+      "pubDate": "Mon, 26 Oct 2026 09:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "롯데마트·슈퍼, 오뚜기와 '굴미역국라면' 단독 출시",
-      "link": "https://www.yna.co.kr/view/AKR20261025036100030",
-      "pubDate": "Mon, 26 Oct 2026 06:00:11 +0900",
+      "title": "신한운용, 국제기업지배구조네트워크 가입…\"국내 운용사 처음\"",
+      "link": "https://www.yna.co.kr/view/AKR20261026029500008",
+      "pubDate": "Mon, 26 Oct 2026 08:58:56 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "롯데온, 28일까지 월말 할인전…생필품·식품 최대 50% 할인",
-      "link": "https://www.yna.co.kr/view/AKR20261025038100030",
-      "pubDate": "Mon, 26 Oct 2026 06:00:10 +0900",
+      "title": "천안시, '배달의민족' 손잡고 농특산물 온라인 판로 확대",
+      "link": "https://www.yna.co.kr/view/AKR20261026028000063",
+      "pubDate": "Mon, 26 Oct 2026 08:53:16 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "롯데百, 잠실점 3천400평 식품관 10년 만에 전면 개편",
-      "link": "https://www.yna.co.kr/view/AKR20261025038900030",
-      "pubDate": "Mon, 26 Oct 2026 06:00:09 +0900",
+      "title": "헤지스, 다운웨어 '록키마운틴 페더베드'와 협업 제품 출시",
+      "link": "https://www.yna.co.kr/view/AKR20261026020700030",
+      "pubDate": "Mon, 26 Oct 2026 08:53:08 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "신세계百 강남점, 내달 3일까지 캐릭터 팝업…굿즈 950종 선보여",
-      "link": "https://www.yna.co.kr/view/AKR20261025040200030",
-      "pubDate": "Mon, 26 Oct 2026 06:00:05 +0900",
+      "title": "대신증권 \"美중간선거, 방향 전환보다 국내사이클 증폭 역할\"",
+      "link": "https://www.yna.co.kr/view/AKR20261026023400008",
+      "pubDate": "Mon, 26 Oct 2026 08:52:30 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 롯데멤버스, '금연 마라톤 챌린지' 진행",
-      "link": "https://www.yna.co.kr/view/AKR20261025040900030",
-      "pubDate": "Mon, 26 Oct 2026 06:00:04 +0900",
+      "title": "삼성물산, 7천381억원 규모 창원 용호1구역 재건축 수주",
+      "link": "https://www.yna.co.kr/view/AKR20261026027600003",
+      "pubDate": "Mon, 26 Oct 2026 08:51:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "어느새 금융범죄자로…알바 가장한 자금수거책·통장양도 주의",
-      "link": "https://www.yna.co.kr/view/AKR20261025030200002",
-      "pubDate": "Mon, 26 Oct 2026 06:00:02 +0900",
+      "title": "태광산업·대한화섬, 친환경 섬유사업 확대…바이오 소재도 개발",
+      "link": "https://www.yna.co.kr/view/AKR20261026025000003",
+      "pubDate": "Mon, 26 Oct 2026 08:43:42 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "중금리대출 확대에…카드론 금리 석달 만에 13%대로 하락",
-      "link": "https://www.yna.co.kr/view/AKR20261025029100002",
-      "pubDate": "Mon, 26 Oct 2026 05:57:06 +0900",
+      "title": "식품기업 3분기 실적 전망 희비 교차…해외 성장이 성패 갈라",
+      "link": "https://www.yna.co.kr/view/AKR20261025050100030",
+      "pubDate": "Mon, 26 Oct 2026 08:43:22 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "원/달러 환율 1,310원대 근접…명목실효환율 2년만에 최고",
-      "link": "https://www.yna.co.kr/view/AKR20261025043600002",
-      "pubDate": "Mon, 26 Oct 2026 05:55:00 +0900",
+      "title": "iM증권 \"기가비스, 수주잔고 계속 급증 전망…목표가↑\"",
+      "link": "https://www.yna.co.kr/view/AKR20261026021200008",
+      "pubDate": "Mon, 26 Oct 2026 08:36:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "코인 과세 유예 기류에 업계 '반색'…자금 이탈 감소 기대",
-      "link": "https://www.yna.co.kr/view/AKR20261025041000002",
-      "pubDate": "Mon, 26 Oct 2026 05:53:00 +0900",
+      "title": "한미글로벌·터너앤타운젠드코리아 하반기 신입사원 채용",
+      "link": "https://www.yna.co.kr/view/AKR20261026021400003",
+      "pubDate": "Mon, 26 Oct 2026 08:26:44 +0900",
       "source": "연합뉴스"
+    },
+    {
+      "title": "프랑스 국채금리 5% 돌파…우량 회사채보다 높아졌다",
+      "link": "https://www.hankyung.com/article/202610264055i",
+      "pubDate": "Mon, 26 Oct 2026 08:11:00 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"아기 울음소리 늘었다\"…저출생에 울던 분유업계 '반전' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610253447i",
+      "pubDate": "Mon, 26 Oct 2026 08:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "中 소비 침체에 명품업계 직격탄…시총 420조원 증발",
+      "link": "https://www.hankyung.com/article/202610264007i",
+      "pubDate": "Mon, 26 Oct 2026 07:57:51 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "이란전쟁이 드러낸 美 에너지 패권의 한계…중간선거 부담",
+      "link": "https://www.hankyung.com/article/202610263990i",
+      "pubDate": "Mon, 26 Oct 2026 07:49:17 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"18만원에 팝니다\"…추억의 '캪틴큐' 재테크족 몰려든 이유 [프라이스&]",
+      "link": "https://www.hankyung.com/article/202610230640i",
+      "pubDate": "Mon, 26 Oct 2026 07:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "국제유가 117달러 돌파…에너지값 급등에 연말 물가 '빨간불'",
+      "link": "https://www.hankyung.com/article/2026102638807",
+      "pubDate": "Mon, 26 Oct 2026 06:45:56 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "라이브방송으로 '18억 돈방석' 앉더니…유명 인플루언서의 최후 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610242427i",
+      "pubDate": "Mon, 26 Oct 2026 06:04:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"우리도 해주세요\"…해방촌 사장님들 코카콜라 반긴 이유 [현장+]",
+      "link": "https://www.hankyung.com/article/202610231279g",
+      "pubDate": "Mon, 26 Oct 2026 06:00:03 +0900",
+      "source": "한국경제"
     },
     {
       "title": "[단독] \"여기 털리면 큰일인데\"…7840만건 뚫렸다 '초비상'",
@@ -181,54 +229,6 @@
       "title": "[단독] 전력 부족한데…열병합발전, 낙찰 받고도 2년째 착공 못해",
       "link": "https://www.hankyung.com/article/2026102535691",
       "pubDate": "Sun, 25 Oct 2026 18:45:37 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"일본·독일도 한국 밑\"…반도체 호황에 경상수지 '세계 2위'",
-      "link": "https://www.hankyung.com/article/202610253648i",
-      "pubDate": "Sun, 25 Oct 2026 18:43:53 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "가상자산 거래대금, 반년 새 44% 뚝",
-      "link": "https://www.hankyung.com/article/2026102535481",
-      "pubDate": "Sun, 25 Oct 2026 18:42:48 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"집 소유는 주거 불안정 헤징 수단…주식으로 대체할 수 없어\"",
-      "link": "https://www.hankyung.com/article/2026102535531",
-      "pubDate": "Sun, 25 Oct 2026 18:42:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "中, 부동산 자금으로 증시 띄웠지만…집값만 올랐다",
-      "link": "https://www.hankyung.com/article/2026102535511",
-      "pubDate": "Sun, 25 Oct 2026 18:40:22 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'주식에서 예·적금으로' 이달에만 39조 급증",
-      "link": "https://www.hankyung.com/article/2026102535521",
-      "pubDate": "Sun, 25 Oct 2026 18:40:15 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "트럼프發 중동전쟁 재점화 우려에…유가 117달러 돌파",
-      "link": "https://www.hankyung.com/article/2026102535241",
-      "pubDate": "Sun, 25 Oct 2026 18:35:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'근원 경쟁력' 회복한 삼성…AI 전환·미래 투자 속도전",
-      "link": "https://www.hankyung.com/article/2026102535721",
-      "pubDate": "Sun, 25 Oct 2026 18:34:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성 GSAT 실시…\"반도체·AI·바이오 인재 채용 확대\"",
-      "link": "https://www.hankyung.com/article/2026102535701",
-      "pubDate": "Sun, 25 Oct 2026 18:34:01 +0900",
       "source": "한국경제"
     }
   ]
