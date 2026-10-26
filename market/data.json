@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T04:08:48.730899+09:00",
+  "updatedAt": "2026-10-27T08:44:26.635026+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52302.9,
-      "change": 87.74,
-      "changePercent": 0.17,
+      "price": 52361.58,
+      "change": 146.42,
+      "changePercent": 0.28,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26174.73,
-      "change": 219.39,
-      "changePercent": 0.85,
+      "price": 26169.38,
+      "change": 214.04,
+      "changePercent": 0.82,
       "currency": "USD"
     }
   ],
@@ -88,147 +88,147 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 342.91,
-      "change": -4.81,
-      "changePercent": -1.38,
+      "price": 343.91,
+      "change": -3.81,
+      "changePercent": -1.1,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 394.55,
-      "change": 22.33,
-      "changePercent": 6.0,
+      "price": 391.62,
+      "change": 19.4,
+      "changePercent": 5.21,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 216.13,
-      "change": 5.17,
-      "changePercent": 2.45,
+      "price": 216.0,
+      "change": 5.04,
+      "changePercent": 2.39,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"AI 낙오주가 피난처로\"…애플, 나스닥100과 거꾸로 가는 '안티 AI주' 됐다",
-      "link": "https://www.hankyung.com/article/202610266364i",
-      "pubDate": "Tue, 27 Oct 2026 00:05:35 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "20년 전 기준에 머문 근로감독관 교육자료…\"대법판례 역행\"",
-      "link": "https://www.yna.co.kr/view/AKR20261026156700530",
-      "pubDate": "Tue, 27 Oct 2026 00:00:02 +0900",
+      "title": "유안타증권 \"기업은행, 3분기 환율 하락 수혜\"",
+      "link": "https://www.yna.co.kr/view/AKR20261027027500008",
+      "pubDate": "Tue, 27 Oct 2026 08:37:17 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "머스크의 네오클라우드 죽이기?…\"기업AI 최종 승자는 MS\" [박신영의 개장전 요것만]",
-      "link": "https://www.hankyung.com/article/202610266357i",
-      "pubDate": "Mon, 26 Oct 2026 23:36:52 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'AI 최대어' 앤스로픽, 나스닥 상장 위한 IPO 신청",
-      "link": "https://www.hankyung.com/article/202610266351i",
-      "pubDate": "Mon, 26 Oct 2026 23:17:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"현금만 500조원\"…사상최고가 버크셔, 다음 투자처는 메타?",
-      "link": "https://www.hankyung.com/article/202610266323i",
-      "pubDate": "Mon, 26 Oct 2026 22:54:50 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"JYP 절반 사겠다\" 日투자사 깜짝 발표…주가 14% 뛰었다",
-      "link": "https://www.hankyung.com/article/2026102663267",
-      "pubDate": "Mon, 26 Oct 2026 22:30:42 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "JYP, 때아닌 인수설…\"제안받은 적 없다\" 일축",
-      "link": "https://www.hankyung.com/article/202610266306H",
-      "pubDate": "Mon, 26 Oct 2026 22:27:10 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"자식 줄 돈? 내가 다 쓰고 갈래요\"…은퇴세대 확 바뀌었다",
-      "link": "https://www.hankyung.com/article/2026102663197",
-      "pubDate": "Mon, 26 Oct 2026 22:23:40 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "AI주도권 잡는데 126조원 조달 베팅…메타 저커버그 승부수 던졌다",
-      "link": "https://www.hankyung.com/article/202610266268i",
-      "pubDate": "Mon, 26 Oct 2026 21:23:20 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "비트코인 8만달러 붕괴…AI 불안·연준·美 중간선거 3중고",
-      "link": "https://www.hankyung.com/article/202610266262i",
-      "pubDate": "Mon, 26 Oct 2026 20:50:05 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"쥬얼리 끝나니 백수\"…이력서 수백장 넣고 직장인 된 하주연",
-      "link": "https://www.hankyung.com/article/2026102662647",
-      "pubDate": "Mon, 26 Oct 2026 20:45:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "그린플러스, 100억유증…아리바이오홀딩스 등에 3자 배정",
-      "link": "https://www.yna.co.kr/view/AKR20261026166500008",
-      "pubDate": "Mon, 26 Oct 2026 19:35:57 +0900",
+      "title": "중진공, 칠레와 中企 해외진출 지원 협약…인력 교류·정보 제공",
+      "link": "https://www.yna.co.kr/view/AKR20261027024100030",
+      "pubDate": "Tue, 27 Oct 2026 08:36:41 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "우상호 \"AI 데이터센터 유치 고발전 유감…투자 환경 악화 우려\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261026150851062",
-      "pubDate": "Mon, 26 Oct 2026 18:57:56 +0900",
+      "title": "키움증권 \"증권주 주가, 거래대금과 함께 바닥권 근접\"",
+      "link": "https://www.yna.co.kr/view/AKR20261027027000008",
+      "pubDate": "Tue, 27 Oct 2026 08:32:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "해킹 발표 24일 만에…KB국민은행 정보유출 119→2천210명(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261026157951002",
-      "pubDate": "Mon, 26 Oct 2026 18:38:26 +0900",
+      "title": "지드래곤부터 BTS까지…준지, K팝 스타 48인 전시서 의상 협업",
+      "link": "https://www.hankyung.com/article/202610276590g",
+      "pubDate": "Tue, 27 Oct 2026 08:29:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"국내서 딱 두 곳뿐\"…글로벌 호텔상 휩쓴 '이곳'",
+      "link": "https://www.hankyung.com/article/202610276663g",
+      "pubDate": "Tue, 27 Oct 2026 08:28:42 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "비날리아, 이탈리아산 '프로세코' 와인 선보여",
+      "link": "https://www.hankyung.com/article/202610276695i",
+      "pubDate": "Tue, 27 Oct 2026 08:24:54 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "KB증권 \"'삼전닉스', 총 120조 추가 주주환원 기대…저평가 해소 계기\"",
+      "link": "https://www.yna.co.kr/view/AKR20261027024600008",
+      "pubDate": "Tue, 27 Oct 2026 08:24:26 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "하림산업, 부동산개발·식품사업 분할…하림식품 신설",
-      "link": "https://www.yna.co.kr/view/AKR20261026160700030",
-      "pubDate": "Mon, 26 Oct 2026 18:38:12 +0900",
+      "title": "앤트로픽 IPO 시동…8000억달러 지출 약정 공개",
+      "link": "https://www.hankyung.com/article/202610276665i",
+      "pubDate": "Tue, 27 Oct 2026 08:23:14 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "하나증권 \"HD현대마린솔루션, 환율 하락에 실적 부진\"…목표가↓",
+      "link": "https://www.yna.co.kr/view/AKR20261027024400008",
+      "pubDate": "Tue, 27 Oct 2026 08:16:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "금감원 불법대부계약 무효확인서, 피해자 무죄판결 첫 활용",
-      "link": "https://www.yna.co.kr/view/AKR20261026157200002",
-      "pubDate": "Mon, 26 Oct 2026 18:20:11 +0900",
+      "title": "\"편의점서 강아지 간식 산다\"…CU 펫 특화매장 10곳",
+      "link": "https://www.hankyung.com/article/202610276560g",
+      "pubDate": "Tue, 27 Oct 2026 08:16:33 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[마켓뷰] 코스피, '앤트로픽발 훈풍'에 반등 시도하나",
+      "link": "https://www.yna.co.kr/view/AKR20261027023000008",
+      "pubDate": "Tue, 27 Oct 2026 08:09:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "에이전트AI, 70억원 제3자배정 유상증자",
-      "link": "https://www.yna.co.kr/view/AKR20261026158600008",
-      "pubDate": "Mon, 26 Oct 2026 18:08:19 +0900",
+      "title": "[밤 사이 해외 뉴스] 트럼프 관세 폭탄에 결국 백기…6조원 들여 미국 공장 짓는 독일 아우디",
+      "link": "https://www.hankyung.com/article/202610276615i",
+      "pubDate": "Tue, 27 Oct 2026 08:08:42 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"반도체가 다 먹여살리네\"…후진국도 아닌데 '두자릿수 경제성장'",
+      "link": "https://www.hankyung.com/article/202610276371g",
+      "pubDate": "Tue, 27 Oct 2026 08:02:50 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[밤 사이 해외뉴스] 엔비디아·마이크론이 다 먹었다? 미 증시 폭등 뒤에 숨겨진 AI 거품 경고",
+      "link": "https://www.hankyung.com/article/202610276589i",
+      "pubDate": "Tue, 27 Oct 2026 08:01:53 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "반도체 수출 호조에 3분기 한국 경제 1.0% '깜짝 성장'",
+      "link": "https://www.yna.co.kr/view/AKR20261027018100002",
+      "pubDate": "Tue, 27 Oct 2026 08:00:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "KB국민은행 \"해킹 정보유출 2천91명 추가 확인…고객에 송구\"",
-      "link": "https://www.yna.co.kr/view/AKR20261026157900002",
-      "pubDate": "Mon, 26 Oct 2026 18:05:59 +0900",
+      "title": "유가 하락에 금값 4000달러 회복…Fed 금리 결정 주목",
+      "link": "https://www.hankyung.com/article/202610276551i",
+      "pubDate": "Tue, 27 Oct 2026 07:53:55 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20261027014700011",
+      "pubDate": "Tue, 27 Oct 2026 07:30:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "국도화학 \"계열사 국도인터내셔널에 500억원 출자\"",
-      "link": "https://www.yna.co.kr/view/AKR20261026155300008",
-      "pubDate": "Mon, 26 Oct 2026 18:03:13 +0900",
+      "title": "\"제철이라 싸질 줄 알았는데\"…가격 두 배 뛴 '가을 별미'",
+      "link": "https://www.hankyung.com/article/2026102765327",
+      "pubDate": "Tue, 27 Oct 2026 07:26:05 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[우분투칼럼] 브릭스 품은 아프리카",
+      "link": "https://www.yna.co.kr/view/AKR20261006114100898",
+      "pubDate": "Tue, 27 Oct 2026 07:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261026149600011",
-      "pubDate": "Mon, 26 Oct 2026 18:00:01 +0900",
+      "title": "어획량 감소에 수꽃게 시세 2배로…고등어는 어획 늘어 하락",
+      "link": "https://www.yna.co.kr/view/AKR20261026139200030",
+      "pubDate": "Tue, 27 Oct 2026 07:00:02 +0900",
       "source": "연합뉴스"
     }
   ]
