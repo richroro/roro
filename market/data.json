@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T17:16:27.653405+09:00",
+  "updatedAt": "2026-10-29T00:54:03.369511+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52377.57,
-      "change": 15.97,
-      "changePercent": 0.03,
+      "price": 52522.02,
+      "change": 144.45,
+      "changePercent": 0.28,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26477.81,
-      "change": 308.43,
-      "changePercent": 1.18,
+      "price": 26455.75,
+      "change": -22.06,
+      "changePercent": -0.08,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1337.78,
-      "change": 10.95,
-      "changePercent": 0.83,
+      "price": 1343.19,
+      "change": 16.36,
+      "changePercent": 1.23,
       "currency": "KRW"
     }
   ],
@@ -88,148 +88,148 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 347.1,
-      "change": 3.19,
-      "changePercent": 0.93,
+      "price": 344.95,
+      "change": -2.15,
+      "changePercent": -0.62,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 407.46,
-      "change": 15.84,
-      "changePercent": 4.04,
+      "price": 401.85,
+      "change": -5.61,
+      "changePercent": -1.38,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.94,
-      "change": 1.94,
-      "changePercent": 0.9,
+      "price": 217.02,
+      "change": -0.92,
+      "changePercent": -0.42,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "국도 5호선 춘천∼화천 2.82㎞ 구간 연내 조기 개통 추진",
-      "link": "https://www.yna.co.kr/view/AKR20261028165500062",
-      "pubDate": "Wed, 28 Oct 2026 17:08:08 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "SK렌터카, 수요예측에 자금 4.2배 몰려…만기별 투자심리 차이",
-      "link": "https://www.yna.co.kr/view/AKR20261028167100008",
-      "pubDate": "Wed, 28 Oct 2026 17:06:39 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "이형일, 블룸버그 아태대표 만나 선진국 채권지수 격상 요청",
-      "link": "https://www.yna.co.kr/view/AKR20261028129200002",
-      "pubDate": "Wed, 28 Oct 2026 17:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "전북 찾은 박홍근 \"피지컬AI·새만금 개발 적극 지원\"",
-      "link": "https://www.yna.co.kr/view/AKR20261028147900002",
-      "pubDate": "Wed, 28 Oct 2026 17:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "미 FOMC 앞두고 국고채 금리 일제히 상승…3년물 연 3.799%(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261028160651008",
-      "pubDate": "Wed, 28 Oct 2026 16:57:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "구글, 429억 과징금에 유감…개발자 지원 기여 미반영 지적",
-      "link": "https://www.yna.co.kr/view/AKR20261028163200017",
-      "pubDate": "Wed, 28 Oct 2026 16:56:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "산청군, 카이랩스와 70억 규모 투자협약…매촌산단 공장 증설",
-      "link": "https://www.yna.co.kr/view/AKR20261028163000052",
-      "pubDate": "Wed, 28 Oct 2026 16:53:55 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국고채 금리 일제히 상승…3년물 연 3.799%",
-      "link": "https://www.yna.co.kr/view/AKR20261028160600008",
-      "pubDate": "Wed, 28 Oct 2026 16:40:49 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "노동부 AI '다우리 GPT', 인사혁신 경진대회서 '대상' 수상",
-      "link": "https://www.yna.co.kr/view/AKR20261028159900530",
-      "pubDate": "Wed, 28 Oct 2026 16:40:34 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "해양진흥공사 '컨테이너 손상 AI 탐지 기술' 부총리상",
-      "link": "https://www.yna.co.kr/view/AKR20261028158900051",
-      "pubDate": "Wed, 28 Oct 2026 16:38:10 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "\"비오는 날 배달 늦다고요?\"…시간 확 줄인 배민의 비결은 [현장+]",
-      "link": "https://www.hankyung.com/article/202610280698g",
-      "pubDate": "Wed, 28 Oct 2026 16:26:58 +0900",
+      "title": "엔비디아·애플보다 현금많은 6년차기업…앤스로픽 176조원에 시장\"깜짝\"",
+      "link": "https://www.hankyung.com/article/202610281854i",
+      "pubDate": "Wed, 28 Oct 2026 23:59:57 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"집도 주식도 안 된다\"…中 개미들 '뭉칫돈' 들고 몰려간 곳",
-      "link": "https://www.hankyung.com/article/2026102811097",
-      "pubDate": "Wed, 28 Oct 2026 16:18:17 +0900",
+      "title": "웬디스,1.9조달러에 팔리나?…펠츠의 트라이언 펀드 인수제안",
+      "link": "https://www.hankyung.com/article/202610281810i",
+      "pubDate": "Wed, 28 Oct 2026 23:17:33 +0900",
       "source": "한국경제"
     },
     {
-      "title": "구태의연 찹쌀떡·엿 대신 수험생 '취향저격'…확 달라진 수능 선물 [트렌드+]",
-      "link": "https://www.hankyung.com/article/202610289379g",
-      "pubDate": "Wed, 28 Oct 2026 16:11:36 +0900",
+      "title": "韓총리 \"새만금, 임기내 최대한 진척…향후 10년이 미래 좌우\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261028197100001",
+      "pubDate": "Wed, 28 Oct 2026 23:08:08 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "서울시, 구룡마을 화재 이재민에 공공임대 96호 긴급 지원",
+      "link": "https://www.yna.co.kr/view/AKR20261028193900004",
+      "pubDate": "Wed, 28 Oct 2026 22:00:20 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "앤스로픽공모주 '그림의 떡'아시아투자자…블룸버그가 주목한 주식은?",
+      "link": "https://www.hankyung.com/article/202610281738i",
+      "pubDate": "Wed, 28 Oct 2026 21:29:27 +0900",
       "source": "한국경제"
     },
     {
-      "title": "연말 대목 막 올랐다…유통가, 할인 또 할인",
-      "link": "https://www.hankyung.com/article/2026102898171",
-      "pubDate": "Wed, 28 Oct 2026 16:03:27 +0900",
+      "title": "이재용, 故이건희 6주기 추모음악회 참석…삼성家·경영진 한자리에",
+      "link": "https://www.hankyung.com/article/2026102817097",
+      "pubDate": "Wed, 28 Oct 2026 20:48:23 +0900",
       "source": "한국경제"
     },
     {
-      "title": "파리바게뜨, 건강 인증 '파란라벨' 붙은 메밀·쌀·호밀빵…당 줄이고 식이섬유 늘렸다",
-      "link": "https://www.hankyung.com/article/2026102898301",
-      "pubDate": "Wed, 28 Oct 2026 16:00:45 +0900",
+      "title": "'마트에서 안 사요'…4050 다이소에서 반찬까지 담는 이유가 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202610281686i",
+      "pubDate": "Wed, 28 Oct 2026 20:17:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "신안보 기업 538곳 첫 선정…AI 145곳·우주항공 115곳",
-      "link": "https://www.hankyung.com/article/202610289752i",
-      "pubDate": "Wed, 28 Oct 2026 16:00:03 +0900",
+      "title": "초광역특구법 갈등 속 사회적 대화…집중 논의 과제 공유",
+      "link": "https://www.yna.co.kr/view/AKR20261028189100530",
+      "pubDate": "Wed, 28 Oct 2026 20:05:38 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "희토류 필요없는 LED…서울반도체, 세계 첫 개발",
+      "link": "https://www.hankyung.com/article/2026102816531",
+      "pubDate": "Wed, 28 Oct 2026 20:00:10 +0900",
       "source": "한국경제"
     },
     {
-      "title": "익숙한 버거에 재미를 더하다…파인다이닝처럼 먹고, 패티·소스도 새롭게",
-      "link": "https://www.hankyung.com/article/2026102898281",
-      "pubDate": "Wed, 28 Oct 2026 15:59:34 +0900",
+      "title": "中CXMT, HBM3E 생산 강행…수율 25%,양산 빠르면 2028년?",
+      "link": "https://www.hankyung.com/article/202610281647i",
+      "pubDate": "Wed, 28 Oct 2026 19:34:46 +0900",
       "source": "한국경제"
     },
     {
-      "title": "에이피알, 화장품 넘어 피부과용 의료기기 만든다…종합 스킨케어 기업으로",
-      "link": "https://www.hankyung.com/article/2026102898291",
-      "pubDate": "Wed, 28 Oct 2026 15:57:51 +0900",
+      "title": "인텔리빅스·크리에이츠 등 코스닥 신규상장…30일 거래 개시",
+      "link": "https://www.yna.co.kr/view/AKR20261028182600008",
+      "pubDate": "Wed, 28 Oct 2026 18:48:16 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "증선위, 실적 부풀린 피델릭스에 감사인지정 3년 등 조치",
+      "link": "https://www.yna.co.kr/view/AKR20261028180900002",
+      "pubDate": "Wed, 28 Oct 2026 18:44:11 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "미국육류수출협회 창립 50주년 기념 '2026 USMEF 파트너스 데이' 개최",
+      "link": "https://www.hankyung.com/article/202610281615i",
+      "pubDate": "Wed, 28 Oct 2026 18:27:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "BAT로스만스, \"청소하기 쉬운 궐련형 전자담배\"…'글로 하이퍼 프로 플러스' 사용 경험 입소문",
-      "link": "https://www.hankyung.com/article/2026102898351",
-      "pubDate": "Wed, 28 Oct 2026 15:56:47 +0900",
+      "title": "故이건희 회장 6주기 추모 음악회",
+      "link": "https://www.hankyung.com/article/2026102815201",
+      "pubDate": "Wed, 28 Oct 2026 18:25:45 +0900",
       "source": "한국경제"
     },
     {
-      "title": "롯데홈쇼핑, AI가 방송 하이라이트 장면 뽑아 숏폼 제작…홈피 배너 문구·이미지도 만들어",
-      "link": "https://www.hankyung.com/article/2026102898341",
-      "pubDate": "Wed, 28 Oct 2026 15:55:46 +0900",
+      "title": "농협銀, NH미소금융에 1000억 출연",
+      "link": "https://www.hankyung.com/article/2026102815311",
+      "pubDate": "Wed, 28 Oct 2026 18:24:28 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "비나텍 \"베트남 종속회사에 397억원 출자\"",
+      "link": "https://www.yna.co.kr/view/AKR20261028178400008",
+      "pubDate": "Wed, 28 Oct 2026 18:06:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "증선위, 미공개정보로 부당이득 취한 내부자 중수청 고발",
+      "link": "https://www.yna.co.kr/view/AKR20261028176900002",
+      "pubDate": "Wed, 28 Oct 2026 18:03:45 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "국가공무원 7급 2차시험 820명 합격…평균연령 28.7세",
+      "link": "https://www.yna.co.kr/view/AKR20261028033500001",
+      "pubDate": "Wed, 28 Oct 2026 18:00:01 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261028172100011",
+      "pubDate": "Wed, 28 Oct 2026 18:00:00 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한신평, SK하이닉스·SK스퀘어 신용등급 전망 '긍정적' 상향",
+      "link": "https://www.yna.co.kr/view/AKR20261028175700008",
+      "pubDate": "Wed, 28 Oct 2026 17:52:56 +0900",
+      "source": "연합뉴스"
     }
   ]
 }
