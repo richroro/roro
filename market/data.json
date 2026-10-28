@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T00:54:03.369511+09:00",
+  "updatedAt": "2026-10-29T05:56:25.099722+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52522.02,
-      "change": 144.45,
-      "changePercent": 0.28,
+      "price": 52475.1,
+      "change": 97.53,
+      "changePercent": 0.19,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26455.75,
-      "change": -22.06,
-      "changePercent": -0.08,
+      "price": 26549.85,
+      "change": 72.04,
+      "changePercent": 0.27,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.19,
-      "change": 16.36,
-      "changePercent": 1.23,
+      "price": 1342.57,
+      "change": 15.74,
+      "changePercent": 1.19,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,77 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 344.95,
-      "change": -2.15,
-      "changePercent": -0.62,
+      "price": 343.83,
+      "change": -3.27,
+      "changePercent": -0.94,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 401.85,
-      "change": -5.61,
-      "changePercent": -1.38,
+      "price": 404.22,
+      "change": -3.24,
+      "changePercent": -0.8,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 217.02,
-      "change": -0.92,
-      "changePercent": -0.42,
+      "price": 215.38,
+      "change": -2.56,
+      "changePercent": -1.17,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "기관별로 쪼개진 과태료 등 세외수입…\"징수부터 통합 필요\"",
+      "link": "https://www.yna.co.kr/view/AKR20261028176400002",
+      "pubDate": "Thu, 29 Oct 2026 05:53:06 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"공공금고 70% 점유한 농협銀…협력사업비 비중은 20% 남짓\"",
+      "link": "https://www.yna.co.kr/view/AKR20261028172200002",
+      "pubDate": "Thu, 29 Oct 2026 05:51:02 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美기준금리 3.75∼4.00% 동결…지난달 인상 뒤 숨고르기(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261029002952071",
+      "pubDate": "Thu, 29 Oct 2026 05:28:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "이스라엘 총선·美 이란 공격 가능성 주시…국제유가 상승",
+      "link": "https://www.yna.co.kr/view/AKR20261029009000072",
+      "pubDate": "Thu, 29 Oct 2026 04:52:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "美기준금리 3.75∼4.00% 동결…지난달 인상 뒤 숨고르기(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261029002951071",
+      "pubDate": "Thu, 29 Oct 2026 03:32:54 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[2보] 美기준금리 3.75∼4.00% 동결…9월 인상 뒤 속도조절",
+      "link": "https://www.yna.co.kr/view/AKR20261029002900071",
+      "pubDate": "Thu, 29 Oct 2026 03:03:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[1보] 美연준, 기준금리 동결…3.75∼4.00% 유지",
+      "link": "https://www.yna.co.kr/view/AKR20261029002800071",
+      "pubDate": "Thu, 29 Oct 2026 03:02:30 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "금값 바닥 멀었다?…JP모건,\"내년초까지 추가 하락위험\"",
+      "link": "https://www.hankyung.com/article/202610291867i",
+      "pubDate": "Thu, 29 Oct 2026 00:34:42 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "엔비디아·애플보다 현금많은 6년차기업…앤스로픽 176조원에 시장\"깜짝\"",
       "link": "https://www.hankyung.com/article/202610281854i",
@@ -172,18 +220,6 @@
       "source": "한국경제"
     },
     {
-      "title": "인텔리빅스·크리에이츠 등 코스닥 신규상장…30일 거래 개시",
-      "link": "https://www.yna.co.kr/view/AKR20261028182600008",
-      "pubDate": "Wed, 28 Oct 2026 18:48:16 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "증선위, 실적 부풀린 피델릭스에 감사인지정 3년 등 조치",
-      "link": "https://www.yna.co.kr/view/AKR20261028180900002",
-      "pubDate": "Wed, 28 Oct 2026 18:44:11 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "미국육류수출협회 창립 50주년 기념 '2026 USMEF 파트너스 데이' 개최",
       "link": "https://www.hankyung.com/article/202610281615i",
       "pubDate": "Wed, 28 Oct 2026 18:27:30 +0900",
@@ -194,42 +230,6 @@
       "link": "https://www.hankyung.com/article/2026102815201",
       "pubDate": "Wed, 28 Oct 2026 18:25:45 +0900",
       "source": "한국경제"
-    },
-    {
-      "title": "농협銀, NH미소금융에 1000억 출연",
-      "link": "https://www.hankyung.com/article/2026102815311",
-      "pubDate": "Wed, 28 Oct 2026 18:24:28 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "비나텍 \"베트남 종속회사에 397억원 출자\"",
-      "link": "https://www.yna.co.kr/view/AKR20261028178400008",
-      "pubDate": "Wed, 28 Oct 2026 18:06:06 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "증선위, 미공개정보로 부당이득 취한 내부자 중수청 고발",
-      "link": "https://www.yna.co.kr/view/AKR20261028176900002",
-      "pubDate": "Wed, 28 Oct 2026 18:03:45 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국가공무원 7급 2차시험 820명 합격…평균연령 28.7세",
-      "link": "https://www.yna.co.kr/view/AKR20261028033500001",
-      "pubDate": "Wed, 28 Oct 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261028172100011",
-      "pubDate": "Wed, 28 Oct 2026 18:00:00 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "한신평, SK하이닉스·SK스퀘어 신용등급 전망 '긍정적' 상향",
-      "link": "https://www.yna.co.kr/view/AKR20261028175700008",
-      "pubDate": "Wed, 28 Oct 2026 17:52:56 +0900",
-      "source": "연합뉴스"
     }
   ]
 }
