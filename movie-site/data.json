@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-26",
-  "updated": "2026-10-27T05:07:48+00:00",
+  "date": "2026-10-27",
+  "updated": "2026-10-28T05:44:24+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
@@ -8,91 +8,91 @@
       "rank": 1,
       "title": "극장판 치이카와: 인어 섬의 비밀",
       "open": "2026-09-30",
-      "share": 28.2,
-      "audience": 20151,
-      "total": 2268277,
-      "screens": 767
+      "share": 23.8,
+      "audience": 18328,
+      "total": 2286522,
+      "screens": 792
     },
     {
       "rank": 2,
-      "title": "암살자(들)",
-      "open": "2026-09-23",
-      "share": 10.0,
-      "audience": 7622,
-      "total": 3382064,
-      "screens": 592
+      "title": "실낙원",
+      "open": "2026-10-21",
+      "share": 10.9,
+      "audience": 9419,
+      "total": 121610,
+      "screens": 682
     },
     {
       "rank": 3,
-      "title": "실낙원",
-      "open": "2026-10-21",
-      "share": 9.4,
-      "audience": 7319,
-      "total": 112193,
-      "screens": 632
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 11.2,
+      "audience": 9281,
+      "total": 2015758,
+      "screens": 543
     },
     {
       "rank": 4,
-      "title": "타짜: 벨제붑의 노래",
+      "title": "암살자(들)",
       "open": "2026-09-23",
-      "share": 9.5,
-      "audience": 7011,
-      "total": 2006487,
-      "screens": 531
+      "share": 9.0,
+      "audience": 7416,
+      "total": 3389456,
+      "screens": 611
     },
     {
       "rank": 5,
       "title": "클레이페이스",
       "open": "2026-10-21",
-      "share": 9.5,
-      "audience": 6898,
-      "total": 84051,
-      "screens": 542
+      "share": 8.0,
+      "audience": 6274,
+      "total": 90470,
+      "screens": 535
     },
     {
       "rank": 6,
-      "title": "오디세이",
-      "open": "2026-08-05",
+      "title": "여전히 찬란하게",
+      "open": "2026-10-21",
       "share": 4.6,
-      "audience": 3399,
-      "total": 12314610,
-      "screens": 305
+      "audience": 4244,
+      "total": 48448,
+      "screens": 492
     },
     {
       "rank": 7,
-      "title": "여전히 찬란하게",
-      "open": "2026-10-21",
-      "share": 3.7,
-      "audience": 3167,
-      "total": 44204,
-      "screens": 449
+      "title": "오디세이",
+      "open": "2026-08-05",
+      "share": 3.6,
+      "audience": 2752,
+      "total": 12317358,
+      "screens": 296
     },
     {
       "rank": 8,
       "title": "룩백",
       "open": "2026-10-08",
-      "share": 3.2,
-      "audience": 2249,
-      "total": 133300,
-      "screens": 144
+      "share": 3.0,
+      "audience": 2302,
+      "total": 135602,
+      "screens": 152
     },
     {
       "rank": 9,
       "title": "베러티",
       "open": "2026-10-22",
-      "share": 2.9,
-      "audience": 2243,
-      "total": 27433,
-      "screens": 381
+      "share": 2.7,
+      "audience": 2274,
+      "total": 29707,
+      "screens": 388
     },
     {
       "rank": 10,
-      "title": "킬링타임",
-      "open": "2026-10-21",
-      "share": 1.6,
-      "audience": 1305,
-      "total": 20426,
-      "screens": 211
+      "title": "인턴",
+      "open": "2026-09-16",
+      "share": 2.3,
+      "audience": 1754,
+      "total": 908419,
+      "screens": 28
     }
   ]
 }
