@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T15:58:33.901697+09:00",
+  "updatedAt": "2026-10-30T22:58:07.913547+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52342.56,
-      "change": -132.54,
-      "changePercent": -0.25,
+      "price": 52171.76,
+      "change": -170.8,
+      "changePercent": -0.33,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 26184.72,
-      "change": -365.13,
-      "changePercent": -1.38,
+      "price": 25602.12,
+      "change": -582.61,
+      "changePercent": -2.22,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1334.2,
-      "change": -4.79,
-      "changePercent": -0.36,
+      "price": 1332.29,
+      "change": -6.7,
+      "changePercent": -0.5,
       "currency": "KRW"
     }
   ],
@@ -88,148 +88,148 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 348.91,
-      "change": 5.08,
-      "changePercent": 1.48,
+      "price": 344.92,
+      "change": -3.99,
+      "changePercent": -1.14,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 403.3,
-      "change": -0.92,
-      "changePercent": -0.23,
+      "price": 394.81,
+      "change": -8.5,
+      "changePercent": -2.11,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 213.66,
-      "change": -1.72,
-      "changePercent": -0.8,
+      "price": 207.19,
+      "change": -6.47,
+      "changePercent": -3.03,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "[특징주] 상장 첫날 인텔리빅스 3.5배 상승 마감…크리에이츠 37%↓(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261030049551008",
-      "pubDate": "Fri, 30 Oct 2026 15:44:01 +0900",
+      "title": "강남 은마 795㎡ 소유권 정태수 상속인에…\"재건축엔 지장 없어\"",
+      "link": "https://www.yna.co.kr/view/AKR20261030179300004",
+      "pubDate": "Fri, 30 Oct 2026 20:22:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"요즘 시리얼 안 먹는다고요?\"…깐깐한 韓소비자 입맛 맞추자 해외서도 통했다 [씬메이커]",
-      "link": "https://www.hankyung.com/article/202610305267g",
-      "pubDate": "Fri, 30 Oct 2026 15:41:39 +0900",
+      "title": "경상북도, 포항·구미에 6500억 규모 '희토류 영구자석' 생산기반 구축",
+      "link": "https://www.hankyung.com/article/202610306516i",
+      "pubDate": "Fri, 30 Oct 2026 20:07:06 +0900",
       "source": "한국경제"
     },
     {
-      "title": "목포서 '전남광주 여성 일자리 박람회' 개최",
-      "link": "https://www.yna.co.kr/view/AKR20261030133000054",
-      "pubDate": "Fri, 30 Oct 2026 15:41:09 +0900",
+      "title": "케이뱅크, 3분기 순익 421억…개인사업자 대출로 두 배 이상 늘어",
+      "link": "https://www.hankyung.com/article/202610306981i",
+      "pubDate": "Fri, 30 Oct 2026 19:09:28 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "국토장관 \"연내 서울민간정비 3.1만호 착공…용적률 1.2배 협의\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261030091152003",
+      "pubDate": "Fri, 30 Oct 2026 18:56:32 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "하나은행, 비대면 주담대 신규 취급 재개…\"실수요자 지원\"",
-      "link": "https://www.yna.co.kr/view/AKR20261030133200002",
-      "pubDate": "Fri, 30 Oct 2026 15:39:13 +0900",
+      "title": "소프트웨어 개발 기업 래블업, 내달 3일 코스닥 신규 상장",
+      "link": "https://www.yna.co.kr/view/AKR20261030172900008",
+      "pubDate": "Fri, 30 Oct 2026 18:54:28 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"명동이 동화 속 세상으로\"…롯데百의 크리스마스 변신",
-      "link": "https://www.hankyung.com/article/202610306415i",
-      "pubDate": "Fri, 30 Oct 2026 15:39:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[특징주] 대원제약, '위식도역류질환 신약 임상 3상 성공'에 13%↑(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261030040751008",
-      "pubDate": "Fri, 30 Oct 2026 15:37:35 +0900",
+      "title": "EU, 하이브리드차 세이프가드 조사 개시…정부 \"국내 영향 점검\"",
+      "link": "https://www.yna.co.kr/view/AKR20261030171700003",
+      "pubDate": "Fri, 30 Oct 2026 18:42:27 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "코스피·코스닥, 美 기술주 삭풍에 3%대 급락 마감",
-      "link": "https://www.yna.co.kr/view/AKR20261030131500008",
-      "pubDate": "Fri, 30 Oct 2026 15:35:56 +0900",
+      "title": "반도체가 떠받친 경기…양극화는 더 짙어졌다",
+      "link": "https://www.hankyung.com/article/2026103069201",
+      "pubDate": "Fri, 30 Oct 2026 18:02:18 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261030156400011",
+      "pubDate": "Fri, 30 Oct 2026 18:00:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "외국환시세(10월30일·15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20261030131700002",
-      "pubDate": "Fri, 30 Oct 2026 15:35:42 +0900",
+      "title": "단 20분 만에 9조원 털렸다…세계 최대 코인거래소 '발칵'",
+      "link": "https://www.hankyung.com/article/2026103068991",
+      "pubDate": "Fri, 30 Oct 2026 17:54:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "NH미소금융재단 출범…1000억 출연",
+      "link": "https://www.hankyung.com/article/2026103068401",
+      "pubDate": "Fri, 30 Oct 2026 17:53:16 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "[단독] 정부, 알래스카 사업성 검증 서두른다",
+      "link": "https://www.hankyung.com/article/2026103069241",
+      "pubDate": "Fri, 30 Oct 2026 17:47:27 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "효성 3분기 영업익 49% 증가…중공업 수주잔고 19조 역대 최고(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261030151100003",
+      "pubDate": "Fri, 30 Oct 2026 17:46:43 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한일 관세당국, 위조상품 단속·마약 밀수 대응 등 협력 강화",
-      "link": "https://www.yna.co.kr/view/AKR20261030129000002",
-      "pubDate": "Fri, 30 Oct 2026 15:33:48 +0900",
+      "title": "9월까지 국세 385兆…반도체 덕에 95兆 더 걷혀",
+      "link": "https://www.hankyung.com/article/2026103069211",
+      "pubDate": "Fri, 30 Oct 2026 17:46:23 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "SK '실무형 리더' 전진배치…반도체 안정, 에너지는 쇄신",
+      "link": "https://www.hankyung.com/article/2026103068871",
+      "pubDate": "Fri, 30 Oct 2026 17:40:26 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "포스코퓨처엠, LG엔솔에 양·음극재 수조원대 공급",
+      "link": "https://www.hankyung.com/article/2026103068841",
+      "pubDate": "Fri, 30 Oct 2026 17:39:15 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "삼성전자 '이익 107조' 자축 경계…\"오늘 호황이 내일의 경쟁력 아냐\"",
+      "link": "https://www.hankyung.com/article/2026103068861",
+      "pubDate": "Fri, 30 Oct 2026 17:38:49 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "성남시 역 신설 타당성…'판교동역' 통과·'도촌야탑역' 무산",
+      "link": "https://www.yna.co.kr/view/AKR20261030162600061",
+      "pubDate": "Fri, 30 Oct 2026 17:34:18 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "기아 \"4분기 수익성 반등 쉽지 않아…EV, 2∼3년내 수익성 낼것\"",
-      "link": "https://www.yna.co.kr/view/AKR20261030129700003",
-      "pubDate": "Fri, 30 Oct 2026 15:32:31 +0900",
+      "title": "목포에 국가 1호 수산식품 수출단지 준공",
+      "link": "https://www.yna.co.kr/view/AKR20261030160000054",
+      "pubDate": "Fri, 30 Oct 2026 17:30:15 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[외환] 원/달러 환율 2.5원 내린 1,334.3원(15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20261030130000002",
-      "pubDate": "Fri, 30 Oct 2026 15:30:41 +0900",
+      "title": "토스, 일본 치어증권 인수 추진…\"일본 젊은층 공략\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261030090751009",
+      "pubDate": "Fri, 30 Oct 2026 17:19:50 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[단독] 정부, 알래스카 LNG 프로젝트 상업적 합리성 검토 착수",
-      "link": "https://www.hankyung.com/article/202610293562i",
-      "pubDate": "Fri, 30 Oct 2026 15:28:30 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "울산시, 감사청렴위·노동정책위 재추진…조직개편안 입법예고",
-      "link": "https://www.yna.co.kr/view/AKR20261030126100057",
-      "pubDate": "Fri, 30 Oct 2026 15:27:57 +0900",
+      "title": "강원도립대, 7∼8일 서울서 '강원 창업 팝업 콘서트'",
+      "link": "https://www.yna.co.kr/view/AKR20261030157200062",
+      "pubDate": "Fri, 30 Oct 2026 17:12:23 +0900",
       "source": "연합뉴스"
-    },
-    {
-      "title": "'HEV 판매 호조' 기아, 영업익 24% 증가…美관세 인하 효과도 [종합]",
-      "link": "https://www.hankyung.com/article/202610306140g",
-      "pubDate": "Fri, 30 Oct 2026 14:52:26 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "중앙일보 이어 물류도…CJ·신세계 '범삼성가' 다시 손잡았다",
-      "link": "https://www.hankyung.com/article/202610306134g",
-      "pubDate": "Fri, 30 Oct 2026 14:38:41 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"없어서 못 먹었는데\"…불티났던 인기 디저트 '판매 중단'",
-      "link": "https://www.hankyung.com/article/202610306074g",
-      "pubDate": "Fri, 30 Oct 2026 14:29:29 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "'출연료 0원' 쇼호스트, 500억어치 팔았다…\"안 쓸 이유가 없네\" [트렌드+]",
-      "link": "https://www.hankyung.com/article/202610305225g",
-      "pubDate": "Fri, 30 Oct 2026 14:17:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "세계은행 사무총장 “부채 관리 핵심은 성장…AI·전력 인프라 함께 키워야”",
-      "link": "https://www.hankyung.com/article/202610306133i",
-      "pubDate": "Fri, 30 Oct 2026 14:14:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"피부과학, 돈 되네\"…에스트라 키운 아모레, 영업익 25% 증가 [분석+]",
-      "link": "https://www.hankyung.com/article/202610304944g",
-      "pubDate": "Fri, 30 Oct 2026 14:08:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "[속보] 기아 3분기 영업익 1조8183억원…전년비 24%↑",
-      "link": "https://www.hankyung.com/article/202610305985g",
-      "pubDate": "Fri, 30 Oct 2026 14:06:33 +0900",
-      "source": "한국경제"
     }
   ]
 }
