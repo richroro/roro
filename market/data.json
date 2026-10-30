@@ -1,20 +1,20 @@
 {
-  "updatedAt": "2026-10-30T09:46:40.234308+09:00",
+  "updatedAt": "2026-10-30T15:58:33.901697+09:00",
   "indices": [
     {
       "symbol": "^KS11",
       "name": "KOSPI",
-      "price": 5717.75,
-      "change": -219.91,
-      "changePercent": -3.7,
+      "price": 5730.74,
+      "change": -206.92,
+      "changePercent": -3.48,
       "currency": "KRW"
     },
     {
       "symbol": "^KQ11",
       "name": "KOSDAQ",
-      "price": 736.41,
-      "change": -16.82,
-      "changePercent": -2.23,
+      "price": 724.38,
+      "change": -46.9,
+      "changePercent": -6.08,
       "currency": "KRW"
     },
     {
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1338.58,
-      "change": -0.41,
-      "changePercent": -0.03,
+      "price": 1334.2,
+      "change": -4.79,
+      "changePercent": -0.36,
       "currency": "KRW"
     }
   ],
@@ -48,41 +48,41 @@
     {
       "symbol": "005930.KS",
       "name": "삼성전자",
-      "price": 222250.0,
-      "change": -9750.0,
-      "changePercent": -4.2,
+      "price": 225000.0,
+      "change": -7000.0,
+      "changePercent": -3.02,
       "currency": "KRW"
     },
     {
       "symbol": "000660.KS",
       "name": "SK하이닉스",
-      "price": 1421000.0,
-      "change": -105000.0,
-      "changePercent": -6.88,
+      "price": 1418000.0,
+      "change": -108000.0,
+      "changePercent": -7.08,
       "currency": "KRW"
     },
     {
       "symbol": "035420.KS",
       "name": "NAVER",
-      "price": 173700.0,
-      "change": -1200.0,
-      "changePercent": -0.69,
+      "price": 172300.0,
+      "change": -2600.0,
+      "changePercent": -1.49,
       "currency": "KRW"
     },
     {
       "symbol": "035720.KS",
       "name": "카카오",
-      "price": 29500.0,
-      "change": 200.0,
-      "changePercent": 0.68,
+      "price": 29450.0,
+      "change": 150.0,
+      "changePercent": 0.51,
       "currency": "KRW"
     },
     {
       "symbol": "373220.KS",
       "name": "LG에너지솔루션",
-      "price": 361500.0,
-      "change": 5500.0,
-      "changePercent": 1.54,
+      "price": 359500.0,
+      "change": 3500.0,
+      "changePercent": 0.98,
       "currency": "KRW"
     },
     {
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "[특징주] '6년만의 분기매출 감소' 현대차, 장초반 약세",
-      "link": "https://www.yna.co.kr/view/AKR20261030046400008",
-      "pubDate": "Fri, 30 Oct 2026 09:37:40 +0900",
+      "title": "[특징주] 상장 첫날 인텔리빅스 3.5배 상승 마감…크리에이츠 37%↓(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261030049551008",
+      "pubDate": "Fri, 30 Oct 2026 15:44:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"전방 흰색 건물 앞에서 우회전\"…티맵·LG전자, AI 길안내 개발",
-      "link": "https://www.yna.co.kr/view/AKR20261030039700017",
-      "pubDate": "Fri, 30 Oct 2026 09:37:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중기중앙회, '2027 노란우산 홍보모델' 20명 최종 선발",
-      "link": "https://www.yna.co.kr/view/AKR20261030040200030",
-      "pubDate": "Fri, 30 Oct 2026 09:36:06 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "9월 전남광주 생산·투자 증가…소비 감소",
-      "link": "https://www.yna.co.kr/view/AKR20261030046500054",
-      "pubDate": "Fri, 30 Oct 2026 09:35:35 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "중진공, 지역특화 청년창업기업 11개사 투자유치 지원",
-      "link": "https://www.yna.co.kr/view/AKR20261030037700030",
-      "pubDate": "Fri, 30 Oct 2026 09:35:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "넥써쓰, 두바이 정부와 게임산업 협력…원스토어 주축",
-      "link": "https://www.yna.co.kr/view/AKR20261030039200017",
-      "pubDate": "Fri, 30 Oct 2026 09:34:44 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "코스피, 美기술주 삭풍에 3%대 급락…삼전닉스 3~6%↓(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261030037351008",
-      "pubDate": "Fri, 30 Oct 2026 09:34:15 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 기획처, 대국민 재정교육 아이디어 공모전 개최",
-      "link": "https://www.yna.co.kr/view/AKR20261030042400002",
-      "pubDate": "Fri, 30 Oct 2026 09:32:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[바이오스냅] 식약안전평가원, 의료기기 사이버보안 심사지침 개정",
-      "link": "https://www.yna.co.kr/view/AKR20261030037600017",
-      "pubDate": "Fri, 30 Oct 2026 09:29:58 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "하나은행, '태권브이' 50주년 기념 적금 출시…최고 연 5%",
-      "link": "https://www.yna.co.kr/view/AKR20261030039300002",
-      "pubDate": "Fri, 30 Oct 2026 09:23:59 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "집까지 팔고 크루즈 탔는데…캄보디아서 갑자기 \"내려라\"",
-      "link": "https://www.hankyung.com/article/202610305252i",
-      "pubDate": "Fri, 30 Oct 2026 09:14:27 +0900",
+      "title": "\"요즘 시리얼 안 먹는다고요?\"…깐깐한 韓소비자 입맛 맞추자 해외서도 통했다 [씬메이커]",
+      "link": "https://www.hankyung.com/article/202610305267g",
+      "pubDate": "Fri, 30 Oct 2026 15:41:39 +0900",
       "source": "한국경제"
     },
     {
-      "title": "영어캠프부터 가족 휴양까지…PIC 사이판, 겨울방학 스쿨링 프로모션",
-      "link": "https://www.hankyung.com/article/202610305140g",
-      "pubDate": "Fri, 30 Oct 2026 09:02:11 +0900",
+      "title": "목포서 '전남광주 여성 일자리 박람회' 개최",
+      "link": "https://www.yna.co.kr/view/AKR20261030133000054",
+      "pubDate": "Fri, 30 Oct 2026 15:41:09 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "하나은행, 비대면 주담대 신규 취급 재개…\"실수요자 지원\"",
+      "link": "https://www.yna.co.kr/view/AKR20261030133200002",
+      "pubDate": "Fri, 30 Oct 2026 15:39:13 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "\"명동이 동화 속 세상으로\"…롯데百의 크리스마스 변신",
+      "link": "https://www.hankyung.com/article/202610306415i",
+      "pubDate": "Fri, 30 Oct 2026 15:39:11 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"반도체 뺨치는 수출 효자\"…외국인 푹 빠진 '국민 반찬'",
-      "link": "https://www.hankyung.com/article/202610305058g",
-      "pubDate": "Fri, 30 Oct 2026 08:57:30 +0900",
+      "title": "[특징주] 대원제약, '위식도역류질환 신약 임상 3상 성공'에 13%↑(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261030040751008",
+      "pubDate": "Fri, 30 Oct 2026 15:37:35 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "코스피·코스닥, 美 기술주 삭풍에 3%대 급락 마감",
+      "link": "https://www.yna.co.kr/view/AKR20261030131500008",
+      "pubDate": "Fri, 30 Oct 2026 15:35:56 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "외국환시세(10월30일·15:30 기준가)",
+      "link": "https://www.yna.co.kr/view/AKR20261030131700002",
+      "pubDate": "Fri, 30 Oct 2026 15:35:42 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한일 관세당국, 위조상품 단속·마약 밀수 대응 등 협력 강화",
+      "link": "https://www.yna.co.kr/view/AKR20261030129000002",
+      "pubDate": "Fri, 30 Oct 2026 15:33:48 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "기아 \"4분기 수익성 반등 쉽지 않아…EV, 2∼3년내 수익성 낼것\"",
+      "link": "https://www.yna.co.kr/view/AKR20261030129700003",
+      "pubDate": "Fri, 30 Oct 2026 15:32:31 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[외환] 원/달러 환율 2.5원 내린 1,334.3원(15:30 기준가)",
+      "link": "https://www.yna.co.kr/view/AKR20261030130000002",
+      "pubDate": "Fri, 30 Oct 2026 15:30:41 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[단독] 정부, 알래스카 LNG 프로젝트 상업적 합리성 검토 착수",
+      "link": "https://www.hankyung.com/article/202610293562i",
+      "pubDate": "Fri, 30 Oct 2026 15:28:30 +0900",
       "source": "한국경제"
     },
     {
-      "title": "신형 아반떼 나오자…중고차 값 떨어지는데 나홀로 오른 車",
-      "link": "https://www.hankyung.com/article/202610304903g",
-      "pubDate": "Fri, 30 Oct 2026 08:50:08 +0900",
+      "title": "울산시, 감사청렴위·노동정책위 재추진…조직개편안 입법예고",
+      "link": "https://www.yna.co.kr/view/AKR20261030126100057",
+      "pubDate": "Fri, 30 Oct 2026 15:27:57 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'HEV 판매 호조' 기아, 영업익 24% 증가…美관세 인하 효과도 [종합]",
+      "link": "https://www.hankyung.com/article/202610306140g",
+      "pubDate": "Fri, 30 Oct 2026 14:52:26 +0900",
       "source": "한국경제"
     },
     {
-      "title": "오라클, AI 데이터센터에 700억달러…주가 12% 급락",
-      "link": "https://www.hankyung.com/article/202610305084i",
-      "pubDate": "Fri, 30 Oct 2026 08:40:19 +0900",
+      "title": "중앙일보 이어 물류도…CJ·신세계 '범삼성가' 다시 손잡았다",
+      "link": "https://www.hankyung.com/article/202610306134g",
+      "pubDate": "Fri, 30 Oct 2026 14:38:41 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"공장 취업 쉬워졌다더니\"…막상 뽑는 사람은 따로 있었다",
-      "link": "https://www.hankyung.com/article/202610305049i",
-      "pubDate": "Fri, 30 Oct 2026 08:38:57 +0900",
+      "title": "\"없어서 못 먹었는데\"…불티났던 인기 디저트 '판매 중단'",
+      "link": "https://www.hankyung.com/article/202610306074g",
+      "pubDate": "Fri, 30 Oct 2026 14:29:29 +0900",
       "source": "한국경제"
     },
     {
-      "title": "드러켄밀러, 월가 고위험 파생상품 도입에 투자",
-      "link": "https://www.hankyung.com/article/202610305056i",
-      "pubDate": "Fri, 30 Oct 2026 08:32:37 +0900",
+      "title": "'출연료 0원' 쇼호스트, 500억어치 팔았다…\"안 쓸 이유가 없네\" [트렌드+]",
+      "link": "https://www.hankyung.com/article/202610305225g",
+      "pubDate": "Fri, 30 Oct 2026 14:17:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"한 봉지에 6900원\"…작년보다 뚝 떨어진 사과 가격",
-      "link": "https://www.hankyung.com/article/202610304975g",
-      "pubDate": "Fri, 30 Oct 2026 08:26:06 +0900",
+      "title": "세계은행 사무총장 “부채 관리 핵심은 성장…AI·전력 인프라 함께 키워야”",
+      "link": "https://www.hankyung.com/article/202610306133i",
+      "pubDate": "Fri, 30 Oct 2026 14:14:04 +0900",
       "source": "한국경제"
     },
     {
-      "title": "면세점·약국에 들어선 K-굿즈…관광공사, 관광기념품 판로 확대",
-      "link": "https://www.hankyung.com/article/202610305014g",
-      "pubDate": "Fri, 30 Oct 2026 08:25:49 +0900",
+      "title": "\"피부과학, 돈 되네\"…에스트라 키운 아모레, 영업익 25% 증가 [분석+]",
+      "link": "https://www.hankyung.com/article/202610304944g",
+      "pubDate": "Fri, 30 Oct 2026 14:08:08 +0900",
       "source": "한국경제"
     },
     {
-      "title": "비만치료제 호황에 릴리 순익 16% 급증…주가 최고치",
-      "link": "https://www.hankyung.com/article/202610305040i",
-      "pubDate": "Fri, 30 Oct 2026 08:24:22 +0900",
+      "title": "[속보] 기아 3분기 영업익 1조8183억원…전년비 24%↑",
+      "link": "https://www.hankyung.com/article/202610305985g",
+      "pubDate": "Fri, 30 Oct 2026 14:06:33 +0900",
       "source": "한국경제"
     }
   ]
