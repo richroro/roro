@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T22:58:07.913547+09:00",
+  "updatedAt": "2026-10-31T04:08:07.524906+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52171.76,
-      "change": -170.8,
-      "changePercent": -0.33,
+      "price": 51655.81,
+      "change": -686.75,
+      "changePercent": -1.31,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25602.12,
-      "change": -582.61,
-      "changePercent": -2.22,
+      "price": 25288.34,
+      "change": -896.38,
+      "changePercent": -3.42,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1332.29,
-      "change": -6.7,
-      "changePercent": -0.5,
+      "price": 1333.71,
+      "change": -5.28,
+      "changePercent": -0.39,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 344.92,
-      "change": -3.99,
-      "changePercent": -1.14,
+      "price": 342.86,
+      "change": -6.05,
+      "changePercent": -1.73,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 394.81,
-      "change": -8.5,
-      "changePercent": -2.11,
+      "price": 397.17,
+      "change": -6.13,
+      "changePercent": -1.52,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 207.19,
-      "change": -6.47,
-      "changePercent": -3.03,
+      "price": 201.03,
+      "change": -12.62,
+      "changePercent": -5.91,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "\"문화가 곧 비즈니스 경쟁력\"…베이징 한복판에 韓 라이프스타일 심은 한국문화원 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202610307105i",
+      "pubDate": "Fri, 30 Oct 2026 23:15:17 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "강남 은마 795㎡ 소유권 정태수 상속인에…\"재건축엔 지장 없어\"",
       "link": "https://www.yna.co.kr/view/AKR20261030179300004",
@@ -184,7 +190,7 @@
       "source": "연합뉴스"
     },
     {
-      "title": "9월까지 국세 385兆…반도체 덕에 95兆 더 걷혀",
+      "title": "9월까지 국세 385조원…반도체 덕에 96조원 더 걷혀",
       "link": "https://www.hankyung.com/article/2026103069211",
       "pubDate": "Fri, 30 Oct 2026 17:46:23 +0900",
       "source": "한국경제"
@@ -199,12 +205,6 @@
       "title": "포스코퓨처엠, LG엔솔에 양·음극재 수조원대 공급",
       "link": "https://www.hankyung.com/article/2026103068841",
       "pubDate": "Fri, 30 Oct 2026 17:39:15 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성전자 '이익 107조' 자축 경계…\"오늘 호황이 내일의 경쟁력 아냐\"",
-      "link": "https://www.hankyung.com/article/2026103068861",
-      "pubDate": "Fri, 30 Oct 2026 17:38:49 +0900",
       "source": "한국경제"
     },
     {
