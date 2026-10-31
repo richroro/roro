@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-31T10:37:34.101951+09:00",
+ "updatedAt": "2026-11-01T00:47:16.836007+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -22,7 +22,7 @@
     "10y": 13.17
    },
    "mdd10y": -24.77,
-   "fromHigh": -1.82,
+   "fromHigh": -1.38,
    "week52": {
     "high": 7844.52,
     "low": 6316.91,
@@ -592,7 +592,7 @@
     "10y": 13.13
    },
    "mdd10y": -24.8,
-   "fromHigh": -1.77,
+   "fromHigh": -1.43,
    "week52": {
     "high": 718.47,
     "low": 578.46,
@@ -890,7 +890,7 @@
     "10y": 12.56
    },
    "mdd10y": -25.67,
-   "fromHigh": -1.76,
+   "fromHigh": -1.74,
    "week52": {
     "high": 385.12,
     "low": 310.4,
@@ -1807,7 +1807,7 @@
     24030.0,
     23755.0,
     23470.0,
-    23185.0,
+    22945.0,
     22945.0
    ],
    "months": 67
@@ -2041,7 +2041,7 @@
     15165.0,
     15095.0,
     14155.0,
-    14955.0,
+    15175.0,
     15175.0
    ],
    "months": 41
@@ -2067,7 +2067,7 @@
     "10y": 28.71
    },
    "mdd10y": -30.7,
-   "fromHigh": -1.23,
+   "fromHigh": 0.0,
    "week52": {
     "high": 351.73,
     "low": 243.42,
@@ -2239,10 +2239,11 @@
     "roe": 34.22,
     "margin": 41.17,
     "marketCap": 3875804807168,
+    "beta": 1.1,
     "payout": 19.0,
     "avgYield5y": 0.78
    },
-   "dividendYield": 0.74,
+   "dividendYield": 0.75,
    "dividend": {
     "ttm": 3.64,
     "yieldTtm": 0.7,
@@ -2391,12 +2392,12 @@
     "forwardPer": 18.49,
     "pbr": 5.22,
     "psr": 7.3,
-    "peg": 1.0,
+    "peg": 0.98,
     "roe": 44.29,
     "margin": 50.03,
     "marketCap": 3440352690176,
     "beta": 1.21,
-    "payout": 4.26
+    "payout": 4.49
    },
    "dividendYield": 0.31,
    "dividend": {
@@ -2511,15 +2512,14 @@
     "position": 48.6
    },
    "valuation": {
-    "per": 19.34,
-    "forwardPer": 22.77,
-    "pbr": 6.27,
-    "psr": 3.35,
-    "peg": 1.41,
-    "roe": 30.56,
-    "margin": 17.44,
-    "marketCap": 2598423756800,
-    "beta": 1.46,
+    "per": 19.43,
+    "forwardPer": 22.8,
+    "pbr": 4.23,
+    "psr": 3.26,
+    "peg": 1.39,
+    "roe": 27.42,
+    "margin": 16.9,
+    "marketCap": 2598937821184,
     "payout": 0.0
    },
    "dividendYield": null,
@@ -2629,7 +2629,7 @@
     "payout": 3.54,
     "avgYield5y": 0.03
    },
-   "dividendYield": 0.47,
+   "dividendYield": 0.49,
    "dividend": {
     "ttm": 0.52,
     "yieldTtm": 0.25,
@@ -2873,9 +2873,9 @@
     "10y": 9.4
    },
    "mdd10y": -19.88,
-   "fromHigh": -0.73,
+   "fromHigh": 0.0,
    "week52": {
-    "high": 282.0,
+    "high": 282.02,
     "low": 185.12,
     "position": 90.9
    },
@@ -2884,7 +2884,7 @@
     "forwardPer": 23.52,
     "pbr": 8.07,
     "psr": 6.62,
-    "peg": 3.1,
+    "peg": 3.07,
     "roe": 20.02,
     "margin": 16.2,
     "marketCap": 657677221888,
@@ -2892,7 +2892,7 @@
     "payout": 80.12,
     "avgYield5y": 2.67
    },
-   "dividendYield": 1.95,
+   "dividendYield": 1.96,
    "dividend": {
     "ttm": 5.28,
     "yieldTtm": 1.93,
@@ -3049,7 +3049,7 @@
     "payout": 64.62,
     "avgYield5y": 2.5
    },
-   "dividendYield": 2.71,
+   "dividendYield": 2.69,
    "dividend": {
     "ttm": 4.324,
     "yieldTtm": 2.68,
@@ -3191,7 +3191,7 @@
    },
    "valuation": {
     "per": 27.75,
-    "forwardPer": 26.7,
+    "forwardPer": 26.67,
     "pbr": 10.83,
     "psr": 7.93,
     "peg": 3.9,
@@ -3202,7 +3202,7 @@
     "payout": 61.95,
     "avgYield5y": 2.83
    },
-   "dividendYield": 2.28,
+   "dividendYield": 2.25,
    "dividend": {
     "ttm": 2.1,
     "yieldTtm": 2.23,
@@ -3359,7 +3359,7 @@
     "payout": 73.02,
     "avgYield5y": 3.05
    },
-   "dividendYield": 4.42,
+   "dividendYield": 4.31,
    "dividend": {
     "ttm": 5.806,
     "yieldTtm": 4.23,
@@ -3514,7 +3514,7 @@
     "payout": 59.71,
     "avgYield5y": 2.25
    },
-   "dividendYield": 3.0,
+   "dividendYield": 2.99,
    "dividend": {
     "ttm": 7.44,
     "yieldTtm": 2.88,
@@ -3828,7 +3828,7 @@
     "payout": 25.71,
     "avgYield5y": 2.24
    },
-   "dividendYield": 1.92,
+   "dividendYield": 1.96,
    "dividend": {
     "ttm": 6.15,
     "yieldTtm": 1.82,
@@ -3969,19 +3969,18 @@
     "position": 98.4
    },
    "valuation": {
-    "per": 24.1,
+    "per": 19.26,
     "forwardPer": 15.59,
-    "pbr": 2.97,
-    "psr": 2.13,
-    "peg": 1.49,
-    "roe": 12.58,
-    "margin": 9.07,
-    "marketCap": 769955528704,
-    "beta": 0.21,
+    "pbr": 2.9,
+    "psr": 1.97,
+    "peg": 1.52,
+    "roe": 15.53,
+    "margin": 10.46,
+    "marketCap": 763792785408,
     "payout": 52.51,
     "avgYield5y": 3.36
    },
-   "dividendYield": 2.25,
+   "dividendYield": 2.2,
    "dividend": {
     "ttm": 4.12,
     "yieldTtm": 2.2,
@@ -4126,17 +4125,17 @@
     "position": 46.6
    },
    "valuation": {
-    "forwardPer": 3.04,
-    "psr": 3.02,
-    "peg": 0.11,
-    "roe": 30.79,
-    "margin": 30.84,
+    "forwardPer": 3.02,
+    "psr": 2.46,
+    "peg": 0.1,
+    "roe": 41.58,
+    "margin": 35.82,
     "marketCap": 1465182593220608,
     "beta": 1.54,
     "payout": 7.49,
     "avgYield5y": 1.61
    },
-   "dividendYield": 0.64,
+   "dividendYield": 0.66,
    "dividend": {
     "ttm": 1312.0,
     "yieldTtm": 0.58,
@@ -4282,16 +4281,16 @@
    },
    "valuation": {
     "forwardPer": 2.69,
-    "psr": 5.29,
-    "peg": 0.16,
-    "roe": 92.68,
-    "margin": 85.62,
+    "psr": 3.71,
+    "peg": 0.14,
+    "roe": 92.54,
+    "margin": 70.27,
     "marketCap": 999935763808256,
     "beta": 2.39,
     "payout": 1.32,
     "avgYield5y": 0.57
    },
-   "dividendYield": 0.2,
+   "dividendYield": 0.21,
    "dividend": {
     "ttm": 3000.0,
     "yieldTtm": 0.21,
@@ -4436,17 +4435,16 @@
     "position": 5.4
    },
    "valuation": {
-    "forwardPer": 6.37,
-    "psr": 0.39,
+    "forwardPer": 6.35,
+    "psr": 0.4,
     "peg": 4.13,
-    "roe": 7.17,
-    "margin": 4.32,
+    "margin": 4.06,
     "marketCap": 74202161872896,
     "beta": 1.74,
     "payout": 32.25,
     "avgYield5y": 3.3
    },
-   "dividendYield": 3.42,
+   "dividendYield": 3.55,
    "dividend": {
     "ttm": 10000.0,
     "yieldTtm": 3.55,
@@ -4601,7 +4599,7 @@
     "payout": 37.36,
     "avgYield5y": 4.25
    },
-   "dividendYield": 6.28,
+   "dividendYield": 7.11,
    "dividend": {
     "ttm": 6800.0,
     "yieldTtm": 7.11,
@@ -4743,16 +4741,16 @@
    },
    "valuation": {
     "forwardPer": 6.55,
-    "psr": 0.47,
+    "psr": 0.48,
     "peg": 0.09,
     "roe": 7.4,
     "margin": 5.83,
-    "marketCap": 29547500142592,
+    "marketCap": 29786315423744,
     "beta": 1.36,
     "payout": 15.93,
     "avgYield5y": 1.67
    },
-   "dividendYield": 1.84,
+   "dividendYield": 1.95,
    "dividend": {
     "ttm": 6500.0,
     "yieldTtm": 1.95,
@@ -4898,16 +4896,16 @@
    },
    "valuation": {
     "forwardPer": 12.25,
-    "psr": 1.99,
+    "psr": 1.9,
     "peg": 25.82,
     "roe": 6.42,
     "margin": 15.61,
-    "marketCap": 25811287539712,
+    "marketCap": 24636840476672,
     "beta": 1.19,
     "payout": 19.64,
     "avgYield5y": 0.37
    },
-   "dividendYield": 1.5,
+   "dividendYield": 1.53,
    "dividend": {
     "ttm": 2630.0,
     "yieldTtm": 1.53,
@@ -5209,7 +5207,7 @@
     "payout": 52.04,
     "avgYield5y": 3.13
    },
-   "dividendYield": 2.9,
+   "dividendYield": 2.93,
    "dividend": {
     "ttm": 9000.0,
     "yieldTtm": 3.29,
@@ -5350,11 +5348,11 @@
    "fromHigh": -10.27,
    "week52": {
     "high": 194500.0,
-    "low": 114800.0,
-    "position": 51.1
+    "low": 115600.0,
+    "position": 50.6
    },
    "valuation": {
-    "forwardPer": 7.76,
+    "forwardPer": 7.77,
     "psr": 3.14,
     "peg": 0.74,
     "roe": 10.22,
@@ -5362,9 +5360,9 @@
     "marketCap": 53981220962304,
     "beta": 0.65,
     "payout": 27.21,
-    "avgYield5y": 4.13
+    "avgYield5y": 4.14
    },
-   "dividendYield": 2.95,
+   "dividendYield": 3.11,
    "dividend": {
     "ttm": 4833.0,
     "yieldTtm": 3.11,
@@ -5519,7 +5517,7 @@
     "payout": 25.21,
     "avgYield5y": 4.27
    },
-   "dividendYield": 3.31,
+   "dividendYield": 3.27,
    "dividend": {
     "ttm": 2930.0,
     "yieldTtm": 3.27,
@@ -5817,7 +5815,7 @@
     "payout": 43.88,
     "avgYield5y": 4.78
    },
-   "dividendYield": 3.42,
+   "dividendYield": 3.36,
    "dividend": {
     "ttm": 6600.0,
     "yieldTtm": 3.36,
@@ -5958,21 +5956,21 @@
    "fromHigh": -25.05,
    "week52": {
     "high": 139500.0,
-    "low": 51400.0,
-    "position": 27.2
+    "low": 51800.0,
+    "position": 26.9
    },
    "valuation": {
     "forwardPer": 11.69,
     "psr": 0.94,
-    "peg": 0.39,
+    "peg": 0.38,
     "roe": 5.19,
     "margin": 4.38,
     "marketCap": 16064646742016,
     "beta": 0.75,
     "payout": 48.61,
-    "avgYield5y": 5.21
+    "avgYield5y": 5.2
    },
-   "dividendYield": 4.33,
+   "dividendYield": 4.4,
    "dividend": {
     "ttm": 1660.0,
     "yieldTtm": 2.2,
@@ -6127,7 +6125,7 @@
     "payout": 44.98,
     "avgYield5y": 5.09
    },
-   "dividendYield": 5.25,
+   "dividendYield": 5.18,
    "dividend": {
     "ttm": 3000.0,
     "yieldTtm": 6.48,
@@ -6247,16 +6245,46 @@
  ],
  "news": [
   {
+   "title": "“월요일 개장이 두렵습니다”…나스닥100 한달 새 2700조 증발",
+   "link": "https://www.mk.co.kr/news/stock/12192467",
+   "pubDate": "Sat, 31 Oct 2026 18:13:26 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“‘10배 불려준다’ 말에 투자한 1.3억 몽땅 날려”…홍준표, 26년 전 흑역사 회상",
+   "link": "https://www.mk.co.kr/news/stock/12192438",
+   "pubDate": "Sat, 31 Oct 2026 15:47:01 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“52년 만에 최악의 하루”…주가 29% 폭락 인텔, 시총 183조원 증발",
+   "link": "https://www.mk.co.kr/news/stock/12192398",
+   "pubDate": "Sat, 31 Oct 2026 10:44:36 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
    "title": "“상장 첫날 던지라는 말이 맞나요”…한국증시 암울하게 하는 새내기주",
    "link": "https://www.mk.co.kr/news/stock/12192354",
    "pubDate": "Sat, 31 Oct 2026 08:24:45 +09:00",
    "source": "매일경제 증권"
   },
   {
+   "title": "블랙스톤 “앤트로픽, 상장 이후에도 정크등급” 전망… ‘투자적격’ 기대 후퇴",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/31/GAYDGYLCME4WGZTDHFSDMYJTGE/",
+   "pubDate": "Sat, 31 Oct 2026 08:14:57 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "전쟁 길어질수록 하나만 오른다…리스크 대비할 수 있는 최적의 ETF는",
    "link": "https://www.mk.co.kr/news/stock/12192321",
    "pubDate": "Sat, 31 Oct 2026 06:07:22 +09:00",
    "source": "매일경제 증권"
+  },
+  {
+   "title": "AI 투자 불안에 오픈AI, 자금 조달 목표 100억달러 축소",
+   "link": "https://www.chosun.com/economy/tech_it/2026/10/31/G5QTSZLCG43TSNZUMFRDAOLCMI/",
+   "pubDate": "Sat, 31 Oct 2026 05:13:42 +0000",
+   "source": "조선일보"
   },
   {
    "title": "\"카카오가 美상장 막아\"… 美사모펀드 소송 예고",
@@ -6358,36 +6386,6 @@
    "title": "메모리반도체 투자 등 ETF 2종, 내달 3일 신규 상장",
    "link": "https://www.yna.co.kr/view/AKR20261030137800008",
    "pubDate": "Fri, 30 Oct 2026 15:59:44 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "미국발 악재·외국인 매도에 코스피 3.48%↓…SK하이닉스 6% 이상 급락",
-   "link": "https://www.mk.co.kr/news/stock/12191598",
-   "pubDate": "Fri, 30 Oct 2026 15:56:41 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[특징주] 상장 첫날 인텔리빅스 3.5배 상승 마감…크리에이츠 37%↓(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261030049551008",
-   "pubDate": "Fri, 30 Oct 2026 15:44:01 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "‘美 빅테크 쇼크’에 코스피 출렁… 삼전닉스도 힘 못써",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/10/31/M3H6MHBGGFGCTBAZZSJDHI36LU/",
-   "pubDate": "Fri, 30 Oct 2026 15:44:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "코스피·코스닥, 美 기술주 삭풍에 3%대 급락 마감",
-   "link": "https://www.yna.co.kr/view/AKR20261030131500008",
-   "pubDate": "Fri, 30 Oct 2026 15:35:56 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "삼성 공장 인허가 10개월→3개월…충남도 투자 지원 '속도'",
-   "link": "https://www.yna.co.kr/view/AKR20261030125300063",
-   "pubDate": "Fri, 30 Oct 2026 15:26:04 +0900",
    "source": "연합뉴스"
   }
  ]
