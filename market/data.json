@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T21:09:45.991321+09:00",
+  "updatedAt": "2026-11-01T02:37:22.882246+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51770.31,
-      "change": -572.29,
+      "change": -572.25,
       "changePercent": -1.09,
       "currency": "USD"
     },
@@ -124,7 +124,7 @@
       "source": "한국경제"
     },
     {
-      "title": "트리 하나 보러 150만명 몰렸다…올해 '크리스마스 명소'는? [트렌드+]",
+      "title": "'이것' 하나 보러 150만명 몰렸다…연말마다 난리 나는 이유 [트렌드+]",
       "link": "https://www.hankyung.com/article/202610305641g",
       "pubDate": "Sat, 31 Oct 2026 18:00:04 +0900",
       "source": "한국경제"
