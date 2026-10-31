@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T02:37:22.882246+09:00",
+  "updatedAt": "2026-11-01T06:23:05.161152+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -112,12 +112,6 @@
   ],
   "news": [
     {
-      "title": "李대통령, 野 '순방' 비판에 \"링거 맞고 코피…그결과 성과차이\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261031028951001",
-      "pubDate": "Sat, 31 Oct 2026 20:07:50 +0900",
-      "source": "연합뉴스"
-    },
-    {
       "title": "\"이게 무슨 조합?\"…케데헌·오겜·흑백요리사 한데 모인 이유 [류은혁의 유통기한]",
       "link": "https://www.hankyung.com/article/202610306404i",
       "pubDate": "Sat, 31 Oct 2026 20:00:02 +0900",
@@ -178,57 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "\"세무대행 수수료 불만에 소비자상담 급증…전년 대비 7배\"",
-      "link": "https://www.yna.co.kr/view/AKR20261029151800030",
-      "pubDate": "Sat, 31 Oct 2026 12:00:00 +0900",
+      "title": "10일중 8일 주가 같은 방향 삼전닉스…3분기 실적 땐 엇갈려",
+      "link": "https://www.yna.co.kr/view/AKR20261031000200008",
+      "pubDate": "Sun, 1 Nov 2026 06:15:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[마이더스] 결산 한 달 전, 가지급금 해소의 골든타임",
-      "link": "https://www.yna.co.kr/view/AKR20261030045900980",
-      "pubDate": "Sat, 31 Oct 2026 10:30:02 +0900",
+      "title": "국산 하이브리드차 EU 수출 연 10만대…수입제한 움직임 촉각",
+      "link": "https://www.yna.co.kr/view/AKR20261031047500003",
+      "pubDate": "Sun, 1 Nov 2026 06:15:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
-      "link": "https://www.yna.co.kr/view/AKR20261031023400011",
-      "pubDate": "Sat, 31 Oct 2026 10:30:00 +0900",
+      "title": "코로나 같은 전국 고용위기, 5개 지표로 감지해 신속 대응",
+      "link": "https://www.yna.co.kr/view/AKR20261030139400530",
+      "pubDate": "Sun, 1 Nov 2026 06:06:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[고양소식] 퓨리오사AI·엑스페릭스와 AI선도 도시 MOU",
-      "link": "https://www.yna.co.kr/view/AKR20261031021700060",
-      "pubDate": "Sat, 31 Oct 2026 09:46:21 +0900",
+      "title": "[해킹 도미노] ② 10월 해킹 대란이 남긴 질문…왜 잇따라 뚫렸나",
+      "link": "https://www.yna.co.kr/view/AKR20261031035200017",
+      "pubDate": "Sun, 1 Nov 2026 06:05:15 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[IPO챗] 내주 영광·래블업·이에스티 등 3개사 코스닥 입성",
-      "link": "https://www.yna.co.kr/view/AKR20261030067200008",
-      "pubDate": "Sat, 31 Oct 2026 09:00:38 +0900",
+      "title": "제조업 외국인근로자 1천명 늘면 인력부족 934명 줄어",
+      "link": "https://www.yna.co.kr/view/AKR20261031028500530",
+      "pubDate": "Sun, 1 Nov 2026 06:05:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[다음주 경제] 소비자물가 얼마나 올랐을까…9월 국제수지도 발표",
-      "link": "https://www.yna.co.kr/view/AKR20261031012200002",
-      "pubDate": "Sat, 31 Oct 2026 08:35:38 +0900",
+      "title": "건설사 해킹에 부각된 입주민 정보보안…아파트 첨단화의 그늘",
+      "link": "https://www.yna.co.kr/view/AKR20261031047400003",
+      "pubDate": "Sun, 1 Nov 2026 06:03:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "대EU 철강 수출, 감소폭 줄었지만…잇단 규제에 업계 긴장",
-      "link": "https://www.yna.co.kr/view/AKR20261030178500003",
-      "pubDate": "Sat, 31 Oct 2026 08:15:00 +0900",
+      "title": "SK·한화·HD현대, 핀셋 쇄신…삼성·LG도 안정에 무게 전망",
+      "link": "https://www.yna.co.kr/view/AKR20261031045800003",
+      "pubDate": "Sun, 1 Nov 2026 06:01:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[해수분해] 항구만으론 부족하다…금융·관광까지 품는 남부 해양수도권",
-      "link": "https://www.yna.co.kr/view/AKR20261028129700051",
-      "pubDate": "Sat, 31 Oct 2026 08:00:03 +0900",
+      "title": "'AI 수익성 회의론', 증시 계속 짓누르나…美중간선거에 촉각",
+      "link": "https://www.yna.co.kr/view/AKR20261031026300008",
+      "pubDate": "Sun, 1 Nov 2026 06:00:08 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[시승기] 정숙함과 연비를 더했다…제네시스 GV80 하이브리드",
-      "link": "https://www.yna.co.kr/view/AKR20261030163600003",
-      "pubDate": "Sat, 31 Oct 2026 07:31:01 +0900",
+      "title": "롯데마트 토이저러스, 태권브이 50주년 기념 팝업 잇달아 운영",
+      "link": "https://www.yna.co.kr/view/AKR20261030152800030",
+      "pubDate": "Sun, 1 Nov 2026 06:00:03 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "'위험한 철거' 더는 안된다…서울시 해체공사 경력업체에 맡긴다",
+      "link": "https://www.yna.co.kr/view/AKR20261031042100004",
+      "pubDate": "Sun, 1 Nov 2026 06:00:01 +0900",
       "source": "연합뉴스"
     }
   ]
