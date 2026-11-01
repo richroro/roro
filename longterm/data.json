@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-01T10:14:32.834540+09:00",
+ "updatedAt": "2026-11-02T01:50:57.641725+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2232,7 +2232,7 @@
    },
    "valuation": {
     "per": 27.24,
-    "forwardPer": 21.63,
+    "forwardPer": 21.62,
     "pbr": 8.24,
     "psr": 11.19,
     "peg": 1.69,
@@ -2513,13 +2513,14 @@
    },
    "valuation": {
     "per": 19.43,
-    "forwardPer": 22.57,
+    "forwardPer": 22.39,
     "pbr": 4.23,
     "psr": 3.26,
     "peg": 1.39,
     "roe": 27.42,
     "margin": 16.9,
     "marketCap": 2598937821184,
+    "beta": 1.46,
     "payout": 0.0
    },
    "dividendYield": null,
@@ -3505,7 +3506,7 @@
    },
    "valuation": {
     "per": 20.97,
-    "forwardPer": 18.78,
+    "forwardPer": 18.8,
     "psr": 6.59,
     "peg": 2.73,
     "margin": 31.72,
@@ -3971,12 +3972,13 @@
    "valuation": {
     "per": 19.26,
     "forwardPer": 15.59,
-    "pbr": 2.9,
+    "pbr": 2.87,
     "psr": 1.97,
     "peg": 1.52,
     "roe": 15.53,
     "margin": 10.46,
     "marketCap": 763792785408,
+    "beta": 0.21,
     "payout": 52.51,
     "avgYield5y": 3.36
    },
@@ -4125,7 +4127,7 @@
     "position": 46.6
    },
    "valuation": {
-    "forwardPer": 3.0,
+    "forwardPer": 2.98,
     "psr": 2.46,
     "peg": 0.1,
     "roe": 41.58,
@@ -4740,7 +4742,7 @@
     "position": 9.5
    },
    "valuation": {
-    "forwardPer": 6.7,
+    "forwardPer": 6.72,
     "psr": 0.48,
     "peg": 0.09,
     "roe": 7.4,
@@ -5353,10 +5355,9 @@
    },
    "valuation": {
     "forwardPer": 7.76,
-    "psr": 3.14,
+    "psr": 1.43,
     "peg": 0.74,
-    "roe": 10.22,
-    "margin": 36.53,
+    "margin": 17.25,
     "marketCap": 53981220962304,
     "beta": 0.65,
     "payout": 27.21,
@@ -6245,52 +6246,124 @@
  ],
  "news": [
   {
+   "title": "“운동화 선택지 많지만 이건 유일”…주가 76% 폭등한 ‘구멍숭숭’ 못난이 신발",
+   "link": "https://www.mk.co.kr/news/stock/12193024",
+   "pubDate": "Sun, 01 Nov 2026 21:12:44 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "이젠 6000선조차 버겁네…지난달에만 16% 급락한 코스피, 이번주 향방은",
+   "link": "https://www.mk.co.kr/news/stock/12192995",
+   "pubDate": "Sun, 01 Nov 2026 20:09:48 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "한투·日 SBI, 1조엔 AI인프라 펀드 추진",
+   "link": "https://www.mk.co.kr/news/stock/12192990",
+   "pubDate": "Sun, 01 Nov 2026 19:50:59 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "“국민연금, 삼전닉스서만 131조 잃어…회의록 제출 왜 미루나” 당정에 물은 안철수",
+   "link": "https://www.mk.co.kr/news/stock/12192989",
+   "pubDate": "Sun, 01 Nov 2026 19:50:30 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "151개 기업에 ‘저PBR’ 꼬리표 붙는다 … 이마트·현대제철 등 시총 1조 넘는 5곳 포함",
+   "link": "https://www.mk.co.kr/news/stock/12192947",
+   "pubDate": "Sun, 01 Nov 2026 17:38:05 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "시총 1조클럽도 못 피했다 … 151개사에 저PBR '꼬리표'",
+   "link": "https://www.mk.co.kr/news/stock/12192944",
+   "pubDate": "Sun, 01 Nov 2026 17:37:09 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "노후 생활비 목표 먼저 세우고 3층 연금 넘어 주택연금도 활용",
+   "link": "https://www.mk.co.kr/news/stock/12192925",
+   "pubDate": "Sun, 01 Nov 2026 17:34:50 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI 회의론 확산에 … 국내외 증시 '좌불안석'",
+   "link": "https://www.mk.co.kr/news/stock/12192898",
+   "pubDate": "Sun, 01 Nov 2026 17:29:15 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "[미국 주식 돋보기] 크록스 주가의 대반전",
+   "link": "https://www.mk.co.kr/news/stock/12192899",
+   "pubDate": "Sun, 01 Nov 2026 17:29:15 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "'저평가 낙인' 통할까…기업들 자사주 소각하고 구조재편 잰걸음",
+   "link": "https://www.mk.co.kr/news/stock/12192888",
+   "pubDate": "Sun, 01 Nov 2026 17:27:55 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "아이가 목표 이루면 돈 주는 신탁… 자녀 펀드·청약도 손쉽게",
+   "link": "https://www.chosun.com/economy/economy_general/2026/11/02/FT6734VF65GIDJGPLDFN3TBFCU/",
+   "pubDate": "Sun, 01 Nov 2026 15:36:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "“AI 투자 끝났다고?… 내년 증시 승자는 AI 잘 쓰는 기업”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/11/02/UOXFMDVR3VB47PZKWTXNCTCE34/",
+   "pubDate": "Sun, 01 Nov 2026 15:36:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "건설사 3분기 실적 희비… 삼성·현대·대우 웃고 GS·DL 울고",
+   "link": "https://www.chosun.com/economy/real_estate/2026/11/02/TD6Z5SSOTFCMZDHHWJYHQM4224/",
+   "pubDate": "Sun, 01 Nov 2026 15:35:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "앤스로픽 상장 임박… 증시에 약 될까 독 될까",
+   "link": "https://www.chosun.com/economy/economy_general/2026/11/02/ZV6WEVCKIFCLPIGLZQ74L4F2FI/",
+   "pubDate": "Sun, 01 Nov 2026 15:34:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "S&P, 메타 신용 등급 전망 ‘부정적’으로 하향",
+   "link": "https://www.chosun.com/economy/tech_it/2026/11/02/MKJJDR4SJJDJJM6F7RDHQMP2OU/",
+   "pubDate": "Sun, 01 Nov 2026 15:34:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "브랜드 가치 폭락… 체면 구긴 글로벌 車 명가",
+   "link": "https://www.chosun.com/economy/industry-company/2026/11/02/W6KJO7J3XZDLJM23QE22OXDNCE/",
+   "pubDate": "Sun, 01 Nov 2026 15:33:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "저PBR社 151곳 첫 공개… 증권사 앱엔 꼬리표",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/02/32F7D2XRHNCVRJ6RHUNJWPRLAU/",
+   "pubDate": "Sun, 01 Nov 2026 15:32:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "AI 투자에 현금 마른 빅테크… 美 반도체주 ‘추락’",
+   "link": "https://www.chosun.com/economy/tech_it/2026/11/02/DQOIVLXGHFGOZGFQIY3SQ3CQJU/",
+   "pubDate": "Sun, 01 Nov 2026 15:31:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "한화생명·현대제철·롯데케미칼·롯데쇼핑·이마트…‘저PBR 기업’ 꼬리표 붙는다",
+   "link": "https://www.mk.co.kr/news/stock/12192603",
+   "pubDate": "Sun, 01 Nov 2026 12:00:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
    "title": "‘몸값 2700조’ 앤트로픽 상장에 기대감 높은데…국내서 투자되나 보니",
    "link": "https://www.mk.co.kr/news/stock/12192529",
    "pubDate": "Sun, 01 Nov 2026 07:37:14 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "증시 변동성 확대에 불법 공매도 주의보… 금감원, 긴급 점검 나선다",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GQ3DINBYHE3WGZRQGI4WCMBSG4/",
-   "pubDate": "Sun, 01 Nov 2026 00:47:31 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "“보우소나루가 이긴다” 몰빵한 브라질 펀드들…룰라 승리에 하루 32% 손실",
-   "link": "https://www.chosun.com/economy/int_economy/2026/11/01/DVZU7ZUARRELJLYIBSMEODOLNA/",
-   "pubDate": "Sun, 01 Nov 2026 00:41:29 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "올해 자사주 취득·처분 5배 이상 늘어… 삼전·닉스가 80% 차지",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GIZWKNDGGJTDOY3CHFRDANBUGQ/",
-   "pubDate": "Sun, 01 Nov 2026 00:23:50 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "코스피 절반 넘는 AI 공룡 앤스로픽 상장… 내 주식 괜찮을까",
-   "link": "https://www.chosun.com/economy/economy_general/2026/11/01/K7RFOECSUNGXVDGJ4VLAANXIGI/",
-   "pubDate": "Sat, 31 Oct 2026 23:37:39 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "SK, 아끼던 티맵마저 내놨다… 중복상장 규제에 IPO 대신 M&A",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/MRTGKZBRG5RTIYRSGVSTGNRRGI/",
-   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "50만원 쓰고 13만원 할인·적립… ‘중복 할인’ 디지털온누리 활용법",
-   "link": "https://www.chosun.com/economy/money/2026/11/01/GVRDENBXHFQTQZJRMY4GMZJVMU/",
-   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[주간증시전망] 美 중간선거·주요 경제지표 발표 대기",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GA4WIZBRGE4DMNZUMY2GMYJXGQ/",
-   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
   },
   {
    "title": "“월요일 개장이 두렵습니다”…나스닥100 한달 새 2700조 증발",
@@ -6314,78 +6387,6 @@
    "title": "“상장 첫날 던지라는 말이 맞나요”…한국증시 암울하게 하는 새내기주",
    "link": "https://www.mk.co.kr/news/stock/12192354",
    "pubDate": "Sat, 31 Oct 2026 08:24:45 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "블랙스톤 “앤트로픽, 상장 이후에도 정크등급” 전망… ‘투자적격’ 기대 후퇴",
-   "link": "https://www.chosun.com/economy/tech_it/2026/10/31/GAYDGYLCME4WGZTDHFSDMYJTGE/",
-   "pubDate": "Sat, 31 Oct 2026 08:14:57 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "전쟁 길어질수록 하나만 오른다…리스크 대비할 수 있는 최적의 ETF는",
-   "link": "https://www.mk.co.kr/news/stock/12192321",
-   "pubDate": "Sat, 31 Oct 2026 06:07:22 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "AI 투자 불안에 오픈AI, 자금 조달 목표 100억달러 축소",
-   "link": "https://www.chosun.com/economy/tech_it/2026/10/31/G5QTSZLCG43TSNZUMFRDAOLCMI/",
-   "pubDate": "Sat, 31 Oct 2026 05:13:42 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "\"카카오가 美상장 막아\"… 美사모펀드 소송 예고",
-   "link": "https://www.mk.co.kr/news/stock/12192159",
-   "pubDate": "Fri, 30 Oct 2026 23:00:03 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“30% 예상했는데 50%나 깎인다고?”…국민연금 신청자의 ‘착각’ [배짱 편한 은퇴]",
-   "link": "https://www.mk.co.kr/news/economy/12191833",
-   "pubDate": "Fri, 30 Oct 2026 17:59:27 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "엔터株 투자하지 말라고?…‘임장’ 뛰어보면 돈이 보입니다 [김유신의 딥 머니 토크]",
-   "link": "https://www.mk.co.kr/news/stock/12191832",
-   "pubDate": "Fri, 30 Oct 2026 17:59:04 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 긴 호흡으로 볼때 … 반도체 소부장·증권주 주목",
-   "link": "https://www.mk.co.kr/news/stock/12191785",
-   "pubDate": "Fri, 30 Oct 2026 17:42:49 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "AI투자에 현금 마른다 … 빅테크 줄줄이 '추풍낙엽'",
-   "link": "https://www.mk.co.kr/news/stock/12191760",
-   "pubDate": "Fri, 30 Oct 2026 17:36:09 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 3%·닛케이 2% 뚝 … 亞증시 '휘청'",
-   "link": "https://www.mk.co.kr/news/stock/12191759",
-   "pubDate": "Fri, 30 Oct 2026 17:36:08 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "신한투자증권, 공모주 플랫폼 일육공과 제휴…예수금 50만원까지 연 7.45% 금리",
-   "link": "https://www.mk.co.kr/news/stock/12191708",
-   "pubDate": "Fri, 30 Oct 2026 17:04:32 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "국민연금 올해 8월 기준 수익률 15%…국내주식에서만 66% 기록",
-   "link": "https://www.mk.co.kr/news/stock/12191701",
-   "pubDate": "Fri, 30 Oct 2026 17:02:16 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "하락장에도 끄떡없다…KT&G, 코스피 급락에도 신고가 갈아치워",
-   "link": "https://www.mk.co.kr/news/stock/12191693",
-   "pubDate": "Fri, 30 Oct 2026 16:58:53 +09:00",
    "source": "매일경제 증권"
   }
  ]
