@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T23:56:44.437535+09:00",
+  "updatedAt": "2026-11-02T04:29:38.301680+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51770.31,
-      "change": -572.25,
+      "change": -572.29,
       "changePercent": -1.09,
       "currency": "USD"
     },
@@ -29,7 +29,7 @@
       "symbol": "^IXIC",
       "name": "나스닥",
       "price": 25437.0,
-      "change": -747.73,
+      "change": -747.7,
       "changePercent": -2.86,
       "currency": "USD"
     }
