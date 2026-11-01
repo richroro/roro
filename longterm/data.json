@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-01T00:47:16.836007+09:00",
+ "updatedAt": "2026-11-01T10:14:32.834540+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -2078,7 +2078,7 @@
     "forwardPer": 36.07,
     "pbr": 46.82,
     "psr": 10.77,
-    "peg": 2.8,
+    "peg": 2.76,
     "roe": 148.75,
     "margin": 27.62,
     "marketCap": 5029592301568,
@@ -2232,10 +2232,10 @@
    },
    "valuation": {
     "per": 27.24,
-    "forwardPer": 21.62,
+    "forwardPer": 21.63,
     "pbr": 8.24,
     "psr": 11.19,
-    "peg": 1.72,
+    "peg": 1.69,
     "roe": 34.22,
     "margin": 41.17,
     "marketCap": 3875804807168,
@@ -2513,7 +2513,7 @@
    },
    "valuation": {
     "per": 19.43,
-    "forwardPer": 22.8,
+    "forwardPer": 22.57,
     "pbr": 4.23,
     "psr": 3.26,
     "peg": 1.39,
@@ -2621,7 +2621,7 @@
     "forwardPer": 12.86,
     "pbr": 21.58,
     "psr": 16.31,
-    "peg": 0.26,
+    "peg": 0.25,
     "roe": 117.21,
     "margin": 63.66,
     "marketCap": 4941441662976,
@@ -3041,7 +3041,7 @@
     "forwardPer": 21.85,
     "pbr": 6.89,
     "psr": 4.26,
-    "peg": 4.13,
+    "peg": 4.15,
     "roe": 29.61,
     "margin": 18.23,
     "marketCap": 374484238336,
@@ -3194,7 +3194,7 @@
     "forwardPer": 26.67,
     "pbr": 10.83,
     "psr": 7.93,
-    "peg": 3.9,
+    "peg": 3.96,
     "roe": 40.59,
     "margin": 28.65,
     "marketCap": 404722974720,
@@ -3351,7 +3351,7 @@
     "forwardPer": 15.9,
     "pbr": 8.4,
     "psr": 1.91,
-    "peg": 1.44,
+    "peg": 1.47,
     "roe": 52.19,
     "margin": 11.09,
     "marketCap": 187158855680,
@@ -3507,7 +3507,7 @@
     "per": 20.97,
     "forwardPer": 18.78,
     "psr": 6.59,
-    "peg": 2.72,
+    "peg": 2.73,
     "margin": 31.72,
     "marketCap": 182656434176,
     "beta": 0.45,
@@ -3663,7 +3663,7 @@
     "forwardPer": 24.14,
     "pbr": 21.23,
     "psr": 16.84,
-    "peg": 1.86,
+    "peg": 1.87,
     "roe": 63.51,
     "margin": 51.2,
     "marketCap": 773002166272,
@@ -3820,7 +3820,7 @@
     "forwardPer": 13.2,
     "pbr": 2.55,
     "psr": 4.69,
-    "peg": 1.46,
+    "peg": 1.43,
     "roe": 18.01,
     "margin": 34.59,
     "marketCap": 895043502080,
@@ -4125,7 +4125,7 @@
     "position": 46.6
    },
    "valuation": {
-    "forwardPer": 3.02,
+    "forwardPer": 3.0,
     "psr": 2.46,
     "peg": 0.1,
     "roe": 41.58,
@@ -4435,7 +4435,7 @@
     "position": 5.4
    },
    "valuation": {
-    "forwardPer": 6.35,
+    "forwardPer": 6.67,
     "psr": 0.4,
     "peg": 4.13,
     "margin": 4.06,
@@ -4589,7 +4589,7 @@
     "position": 1.8
    },
    "valuation": {
-    "forwardPer": 4.29,
+    "forwardPer": 4.48,
     "psr": 0.31,
     "peg": 0.42,
     "roe": 11.6,
@@ -4740,7 +4740,7 @@
     "position": 9.5
    },
    "valuation": {
-    "forwardPer": 6.55,
+    "forwardPer": 6.7,
     "psr": 0.48,
     "peg": 0.09,
     "roe": 7.4,
@@ -5352,7 +5352,7 @@
     "position": 50.6
    },
    "valuation": {
-    "forwardPer": 7.77,
+    "forwardPer": 7.76,
     "psr": 3.14,
     "peg": 0.74,
     "roe": 10.22,
@@ -6245,6 +6245,54 @@
  ],
  "news": [
   {
+   "title": "‘몸값 2700조’ 앤트로픽 상장에 기대감 높은데…국내서 투자되나 보니",
+   "link": "https://www.mk.co.kr/news/stock/12192529",
+   "pubDate": "Sun, 01 Nov 2026 07:37:14 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "증시 변동성 확대에 불법 공매도 주의보… 금감원, 긴급 점검 나선다",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GQ3DINBYHE3WGZRQGI4WCMBSG4/",
+   "pubDate": "Sun, 01 Nov 2026 00:47:31 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "“보우소나루가 이긴다” 몰빵한 브라질 펀드들…룰라 승리에 하루 32% 손실",
+   "link": "https://www.chosun.com/economy/int_economy/2026/11/01/DVZU7ZUARRELJLYIBSMEODOLNA/",
+   "pubDate": "Sun, 01 Nov 2026 00:41:29 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "올해 자사주 취득·처분 5배 이상 늘어… 삼전·닉스가 80% 차지",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GIZWKNDGGJTDOY3CHFRDANBUGQ/",
+   "pubDate": "Sun, 01 Nov 2026 00:23:50 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "코스피 절반 넘는 AI 공룡 앤스로픽 상장… 내 주식 괜찮을까",
+   "link": "https://www.chosun.com/economy/economy_general/2026/11/01/K7RFOECSUNGXVDGJ4VLAANXIGI/",
+   "pubDate": "Sat, 31 Oct 2026 23:37:39 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "SK, 아끼던 티맵마저 내놨다… 중복상장 규제에 IPO 대신 M&A",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/MRTGKZBRG5RTIYRSGVSTGNRRGI/",
+   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "50만원 쓰고 13만원 할인·적립… ‘중복 할인’ 디지털온누리 활용법",
+   "link": "https://www.chosun.com/economy/money/2026/11/01/GVRDENBXHFQTQZJRMY4GMZJVMU/",
+   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[주간증시전망] 美 중간선거·주요 경제지표 발표 대기",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/01/GA4WIZBRGE4DMNZUMY2GMYJXGQ/",
+   "pubDate": "Sat, 31 Oct 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“월요일 개장이 두렵습니다”…나스닥100 한달 새 2700조 증발",
    "link": "https://www.mk.co.kr/news/stock/12192467",
    "pubDate": "Sat, 31 Oct 2026 18:13:26 +09:00",
@@ -6293,24 +6341,6 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "[데스크 칼럼] 중복상장 막기만 하면, 우리 자본시장은 나아지나",
-   "link": "https://www.chosun.com/economy/economy_general/2026/10/31/MUZTSYLCMQZTGN3CGVTDIMRXGU/",
-   "pubDate": "Fri, 30 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "정유 덕에 역대 최대 이익 났지만 배터리는 적자… SK이노, 실적 지속 관건은 중동전쟁",
-   "link": "https://www.chosun.com/economy/industry-company/2026/10/31/G42DIZRYG5TGKOBSMM3TKNRRMU/",
-   "pubDate": "Fri, 30 Oct 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "소프트웨어 개발 기업 래블업, 내달 3일 코스닥 신규 상장",
-   "link": "https://www.yna.co.kr/view/AKR20261030172900008",
-   "pubDate": "Fri, 30 Oct 2026 18:54:28 +0900",
-   "source": "연합뉴스"
-  },
-  {
    "title": "“30% 예상했는데 50%나 깎인다고?”…국민연금 신청자의 ‘착각’ [배짱 편한 은퇴]",
    "link": "https://www.mk.co.kr/news/economy/12191833",
    "pubDate": "Fri, 30 Oct 2026 17:59:27 +09:00",
@@ -6357,36 +6387,6 @@
    "link": "https://www.mk.co.kr/news/stock/12191693",
    "pubDate": "Fri, 30 Oct 2026 16:58:53 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…위험회피 속 주요국 채권 강세(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261030149151008",
-   "pubDate": "Fri, 30 Oct 2026 16:56:34 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "국고채 금리 일제히 하락…3년물 연 3.715%",
-   "link": "https://www.yna.co.kr/view/AKR20261030149100008",
-   "pubDate": "Fri, 30 Oct 2026 16:40:44 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피·코스닥, 美 빅테크 실적 부진에 3%대 급락 마감(종합)",
-   "link": "https://www.yna.co.kr/view/AKR20261030131551008",
-   "pubDate": "Fri, 30 Oct 2026 16:06:05 +0900",
-   "source": "연합뉴스"
-  },
-  {
-   "title": "코스피, 외국인 매도 공세에 3% 급락 마감…5700선 후퇴",
-   "link": "https://www.mk.co.kr/news/stock/12191609",
-   "pubDate": "Fri, 30 Oct 2026 16:02:41 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "메모리반도체 투자 등 ETF 2종, 내달 3일 신규 상장",
-   "link": "https://www.yna.co.kr/view/AKR20261030137800008",
-   "pubDate": "Fri, 30 Oct 2026 15:59:44 +0900",
-   "source": "연합뉴스"
   }
  ]
 }
