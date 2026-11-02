@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T00:33:14.446739+09:00",
+  "updatedAt": "2026-11-03T08:24:38.807067+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 52368.57,
-      "change": 598.26,
-      "changePercent": 1.16,
+      "price": 51983.98,
+      "change": 213.67,
+      "changePercent": 0.41,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25756.93,
-      "change": 319.93,
-      "changePercent": 1.26,
+      "price": 25164.36,
+      "change": -272.63,
+      "changePercent": -1.07,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.98,
-      "change": 10.54,
-      "changePercent": 0.79,
+      "price": 1344.8,
+      "change": 11.36,
+      "changePercent": 0.85,
       "currency": "KRW"
     }
   ],
@@ -88,37 +88,79 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 340.35,
-      "change": -4.28,
-      "changePercent": -1.24,
+      "price": 338.32,
+      "change": -6.31,
+      "changePercent": -1.83,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 409.92,
-      "change": 10.11,
-      "changePercent": 2.53,
+      "price": 403.82,
+      "change": 4.01,
+      "changePercent": 1.0,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 209.07,
-      "change": 4.43,
-      "changePercent": 2.16,
+      "price": 202.06,
+      "change": -2.58,
+      "changePercent": -1.26,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"인텔, 저가 매수 신중\"…팔란티어, 월가 '긍정' vs 개인 '약세'[박신영의 개장전 요것만]",
+      "title": "[속보] 10월 소비자물가 2.8% 상승…가공식품·석유류 오름세",
+      "link": "https://www.hankyung.com/article/2026110316487",
+      "pubDate": "Tue, 03 Nov 2026 08:01:16 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"알록달록 예쁜데 트웰브 1/4값\" '스무디 대전' 뛰어든 올리브영 [장서우의 하입:hype]",
+      "link": "https://www.hankyung.com/article/202611021401i",
+      "pubDate": "Tue, 03 Nov 2026 08:00:08 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "원유 반입 늘어난 아시아…경유값은 여전히 84% 높아",
+      "link": "https://www.hankyung.com/article/202611031615i",
+      "pubDate": "Tue, 03 Nov 2026 07:55:43 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "국민연금 10년 부어도 34만원…기초연금보다 적었다",
+      "link": "https://www.hankyung.com/article/202611031592H",
+      "pubDate": "Tue, 03 Nov 2026 07:42:53 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "철거할 꽃밭에 8억?…세금 낭비 논란에 송도 주민들 '부글'",
+      "link": "https://www.hankyung.com/article/202611031578H",
+      "pubDate": "Tue, 03 Nov 2026 07:36:55 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'이럴 거면 그냥 국산차 탈걸'…BYD 차주들 비명 터졌다",
+      "link": "https://www.hankyung.com/article/2026110210431",
+      "pubDate": "Tue, 03 Nov 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "'광명 차은우' 뜨자 전국이 들썩…대기업까지 뛰어들었다  [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202611020623i",
+      "pubDate": "Tue, 03 Nov 2026 06:00:10 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"인텔, 저가 매수 신중\"…팔란티어, 월가 '긍정' vs 개인 '약세' [박신영의 개장전 요것만]",
       "link": "https://www.hankyung.com/article/202611031416i",
       "pubDate": "Tue, 03 Nov 2026 00:23:10 +0900",
       "source": "한국경제"
     },
     {
-      "title": "매출 12배 폭증에 순손실 140조원…앤스로픽 1.7조달러 가치 가능할까?",
+      "title": "매출 12배 폭증에 순손실 140조원…앤스로픽 1.7조달러 가치 가능할까",
       "link": "https://www.hankyung.com/article/202611021411i",
       "pubDate": "Tue, 03 Nov 2026 00:19:46 +0900",
       "source": "한국경제"
@@ -130,105 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "48년 물 안 마시고 콜라만 마신 버핏…30년 들고 있는 '이 주식'",
-      "link": "https://www.hankyung.com/article/2026110213457",
-      "pubDate": "Mon, 02 Nov 2026 21:58:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "엔비디아가 찜한 마벨, 루멘텀 합병…154조원 AI반도체 빅딜",
-      "link": "https://www.hankyung.com/article/202611021336i",
-      "pubDate": "Mon, 02 Nov 2026 21:55:27 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "엔비디아 시총 제친 애플…월가는 \"주가 고평가\" 경고",
-      "link": "https://www.hankyung.com/article/202611021310i",
-      "pubDate": "Mon, 02 Nov 2026 21:11:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "보금자리론 10년 만기 금리 연 5%대 돌파",
-      "link": "https://www.hankyung.com/article/2026110212651",
-      "pubDate": "Mon, 02 Nov 2026 19:36:12 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "美 민주, 중간선거 후 트럼프 관세 폐지 추진…한·일 대미투자금도 조사",
-      "link": "https://www.hankyung.com/article/202611021256i",
-      "pubDate": "Mon, 02 Nov 2026 19:28:51 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "해외서 원화계좌 열고 국내 투자…우리은행 “역외 원화거래 첫 사례”",
-      "link": "https://www.hankyung.com/article/202611021249i",
-      "pubDate": "Mon, 02 Nov 2026 19:21:37 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "호반에 반격나선 조원태 \"한진칼 주식 더 살 것\"",
-      "link": "https://www.hankyung.com/article/202611021227i",
-      "pubDate": "Mon, 02 Nov 2026 18:53:53 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "금융지주 회장 연임 시 주총 의결요건 강화…3연임 땐 75% 찬성",
-      "link": "https://www.yna.co.kr/view/AKR20261102172400002",
-      "pubDate": "Mon, 2 Nov 2026 21:21:47 +0900",
+      "title": "부산 10월 소비자물가 2.8% 상승…기름값↑·신선식품↓",
+      "link": "https://www.yna.co.kr/view/AKR20261103025700051",
+      "pubDate": "Tue, 3 Nov 2026 08:11:54 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "호반, 한진칼 최대주주 가능성에…조원태, 주식 추가 매입키로(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261102091751003",
-      "pubDate": "Mon, 2 Nov 2026 18:56:04 +0900",
+      "title": "[마켓뷰] 전날은 선방했지만…AI 수익성 우려 지속, 코스피 향방은",
+      "link": "https://www.yna.co.kr/view/AKR20261103023500008",
+      "pubDate": "Tue, 3 Nov 2026 08:06:22 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "與 민병덕 \"가상자산, 기본법도 없는데 과세할 수 없어\"",
-      "link": "https://www.yna.co.kr/view/AKR20261102162000002",
-      "pubDate": "Mon, 2 Nov 2026 18:51:22 +0900",
+      "title": "부산시, AI 창업 경진대회…위성영상 분석서비스 대상 선정",
+      "link": "https://www.yna.co.kr/view/AKR20261103022000051",
+      "pubDate": "Tue, 3 Nov 2026 08:03:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "바이낸스 해킹에…금융위,  가상자산거래소 신속 출금제한 방안 검토(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261102134651002",
-      "pubDate": "Mon, 2 Nov 2026 18:51:09 +0900",
+      "title": "정부 \"체감 물가 여전히 높아…역대 최대 규모 김장 대책\"",
+      "link": "https://www.yna.co.kr/view/AKR20261103024500002",
+      "pubDate": "Tue, 3 Nov 2026 08:02:59 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "정의선 만난 이형일…생산세액공제 등 전기차 경쟁력 강화 논의(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261102126151002",
-      "pubDate": "Mon, 2 Nov 2026 18:37:43 +0900",
+      "title": "[2보] 10월 소비자물가 2.8% 상승…가공식품·석유류 오름세",
+      "link": "https://www.yna.co.kr/view/AKR20261103019351002",
+      "pubDate": "Tue, 3 Nov 2026 08:00:05 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261102156900011",
-      "pubDate": "Mon, 2 Nov 2026 18:00:00 +0900",
+      "title": "정부, 김장철 농수산물 640억원 할인 지원…최대 50% 할인",
+      "link": "https://www.yna.co.kr/view/AKR20261102131700030",
+      "pubDate": "Tue, 3 Nov 2026 08:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "강원 겨울관광 알리고 소비 늘리고…도·기업은행 맞손",
-      "link": "https://www.yna.co.kr/view/AKR20261102159200062",
-      "pubDate": "Mon, 2 Nov 2026 17:36:09 +0900",
+      "title": "[1보] 10월 소비자물가 2.8% 상승…두 달 연속 2%대 후반",
+      "link": "https://www.yna.co.kr/view/AKR20261103019300002",
+      "pubDate": "Tue, 3 Nov 2026 08:00:02 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "\"대부업법 개편해야…불법사금융과 독립된 '대부금융업법' 필요\"",
-      "link": "https://www.yna.co.kr/view/AKR20261102141700002",
-      "pubDate": "Mon, 2 Nov 2026 17:32:22 +0900",
+      "title": "한양증권에서도 해킹…고객정보 등 일부 정보 유출",
+      "link": "https://www.yna.co.kr/view/AKR20261103022900008",
+      "pubDate": "Tue, 3 Nov 2026 07:57:10 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "송미령 농식품 장관, 서산 벼 수확 현장 점검…\"쌀값 안정 총력\"",
-      "link": "https://www.yna.co.kr/view/AKR20261102140200030",
-      "pubDate": "Mon, 2 Nov 2026 17:30:00 +0900",
+      "title": "부산여성일자리포럼, 해양산업 여성 고용 확대 논의",
+      "link": "https://www.yna.co.kr/view/AKR20261103021800051",
+      "pubDate": "Tue, 3 Nov 2026 07:56:37 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "서울중수청, '3억원대 하도급 대금 미지급' 법인·계열사 송치",
-      "link": "https://www.yna.co.kr/view/AKR20261102158300004",
-      "pubDate": "Mon, 2 Nov 2026 17:28:59 +0900",
+      "title": "[속보] 한양증권에서도 해킹…고객정보 등 일부 정보 유출",
+      "link": "https://www.yna.co.kr/view/AKR20261103021200008",
+      "pubDate": "Tue, 3 Nov 2026 07:46:26 +0900",
       "source": "연합뉴스"
     }
   ]
