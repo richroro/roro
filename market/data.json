@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T23:58:27.508977+09:00",
+  "updatedAt": "2026-11-04T05:52:05.171135+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51718.58,
-      "change": -265.4,
-      "changePercent": -0.51,
+      "price": 51691.28,
+      "change": -292.7,
+      "changePercent": -0.56,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25311.77,
-      "change": 147.4,
-      "changePercent": 0.59,
+      "price": 25354.28,
+      "change": 189.92,
+      "changePercent": 0.75,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.28,
-      "change": -2.14,
-      "changePercent": -0.16,
+      "price": 1344.06,
+      "change": -1.36,
+      "changePercent": -0.1,
       "currency": "KRW"
     }
   ],
@@ -88,31 +88,43 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 331.33,
-      "change": -6.99,
-      "changePercent": -2.07,
+      "price": 330.57,
+      "change": -7.75,
+      "changePercent": -2.29,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 401.99,
-      "change": -1.83,
-      "changePercent": -0.45,
+      "price": 397.85,
+      "change": -5.97,
+      "changePercent": -1.48,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 207.74,
-      "change": 5.68,
-      "changePercent": 2.81,
+      "price": 206.67,
+      "change": 4.61,
+      "changePercent": 2.28,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "AI 관련 투자자들,美중간선거 텍사스주결과 주목해야하는 이유",
+      "title": "\"이런 메모리값 처음\"…애플 새CEO \"내년에도 메모리 구매비 오를 것\"",
+      "link": "https://www.hankyung.com/article/202611044103i",
+      "pubDate": "Wed, 04 Nov 2026 01:02:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"달러 떨어진다더니 왜 오르나\"…외환전략가들도 \"강세위험 커\"",
+      "link": "https://www.hankyung.com/article/202611034089i",
+      "pubDate": "Wed, 04 Nov 2026 00:01:45 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "AI 관련 투자자들, 美 중간선거 텍사스주 결과에 주목하는 이유",
       "link": "https://www.hankyung.com/article/202611033976i",
       "pubDate": "Tue, 03 Nov 2026 22:09:27 +0900",
       "source": "한국경제"
@@ -130,7 +142,7 @@
       "source": "한국경제"
     },
     {
-      "title": "325만명 몰리더니 200억 벌었다…요즘 핫한 '분홍곰' 정체 [트렌드+]",
+      "title": "'분홍곰' 하나로 200억 벌었다…남녀노소 몰리더니 '잭팟' [트렌드+]",
       "link": "https://www.hankyung.com/article/202611031993g",
       "pubDate": "Tue, 03 Nov 2026 20:28:48 +0900",
       "source": "한국경제"
@@ -157,18 +169,6 @@
       "title": "\"착한 사업도 수익 내야\"…장애인 일자리 키운 힘",
       "link": "https://www.hankyung.com/article/2026110337571",
       "pubDate": "Tue, 03 Nov 2026 18:27:07 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "은행연합회, 취약계층에 백미 기부",
-      "link": "https://www.hankyung.com/article/2026110337511",
-      "pubDate": "Tue, 03 Nov 2026 18:25:36 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "삼성, 어린이집·유치원 원장 문화체험 행사 연다",
-      "link": "https://www.hankyung.com/article/2026110337481",
-      "pubDate": "Tue, 03 Nov 2026 18:19:10 +0900",
       "source": "한국경제"
     },
     {
