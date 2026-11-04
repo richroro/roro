@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T17:57:04.345292+09:00",
+  "updatedAt": "2026-11-05T02:02:29.664303+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 51786.7,
-      "change": -197.3,
-      "changePercent": -0.38,
+      "price": 53265.93,
+      "change": 1479.21,
+      "changePercent": 2.86,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25372.01,
-      "change": 207.65,
-      "changePercent": 0.83,
+      "price": 25872.23,
+      "change": 500.22,
+      "changePercent": 1.97,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1339.79,
-      "change": -3.03,
-      "changePercent": -0.23,
+      "price": 1341.49,
+      "change": -1.33,
+      "changePercent": -0.1,
       "currency": "KRW"
     }
   ],
@@ -88,88 +88,136 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 331.9,
-      "change": -6.42,
-      "changePercent": -1.9,
+      "price": 353.82,
+      "change": 21.92,
+      "changePercent": 6.6,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 398.5,
-      "change": -5.32,
-      "changePercent": -1.32,
+      "price": 384.79,
+      "change": -13.71,
+      "changePercent": -3.44,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 206.69,
-      "change": 4.63,
-      "changePercent": 2.29,
+      "price": 203.66,
+      "change": -3.03,
+      "changePercent": -1.47,
       "currency": "USD"
     }
   ],
   "news": [
     {
-      "title": "\"배터리 제조사 속인 벤츠, 인당 400만원 배상해야\"",
-      "link": "https://www.hankyung.com/article/2026110464111",
-      "pubDate": "Wed, 04 Nov 2026 17:44:20 +0900",
+      "title": "\"레임덕이 화난 오리 된다\"…트럼프 참패에도 대미투자 셈법 복잡",
+      "link": "https://www.hankyung.com/article/202611056810i",
+      "pubDate": "Thu, 05 Nov 2026 01:07:32 +0900",
       "source": "한국경제"
     },
     {
-      "title": "中, 10년來 증시 최악 급락에…IPO·대주주 매각까지 막는다",
-      "link": "https://www.hankyung.com/article/2026110463641",
-      "pubDate": "Wed, 04 Nov 2026 17:42:21 +0900",
+      "title": "선거 리스크 제거에 매수 기회?…\"테슬라·스페이스X 는 위험\" [박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202611056800i",
+      "pubDate": "Thu, 05 Nov 2026 00:19:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"메모리 단기 사이클 위험 여전\"",
-      "link": "https://www.hankyung.com/article/2026110463591",
-      "pubDate": "Wed, 04 Nov 2026 17:41:04 +0900",
+      "title": "美 민주당 압승에 월가 축포?…다우·나스닥 2% 넘게 급등",
+      "link": "https://www.hankyung.com/article/202611046798i",
+      "pubDate": "Thu, 05 Nov 2026 00:10:06 +0900",
       "source": "한국경제"
     },
     {
-      "title": "홍콩ELS 과징금 3700억…은행 \"소송 검토\"",
-      "link": "https://www.hankyung.com/article/2026110463391",
-      "pubDate": "Wed, 04 Nov 2026 17:37:26 +0900",
+      "title": "美10월 민간고용 8만6000개 증가…대기업 해고증가에도 예상밖 증가",
+      "link": "https://www.hankyung.com/article/202611046771i",
+      "pubDate": "Wed, 04 Nov 2026 22:59:07 +0900",
       "source": "한국경제"
     },
     {
-      "title": "금융권, 줄줄이 영구채 발행…하나·JB 이어 KB금융 추진",
-      "link": "https://www.hankyung.com/article/2026110463321",
-      "pubDate": "Wed, 04 Nov 2026 17:36:29 +0900",
+      "title": "\"중고백 3900만원에 팔았어요\"…MZ 열광한 '이곳' 정체",
+      "link": "https://www.hankyung.com/article/202611044235g",
+      "pubDate": "Wed, 04 Nov 2026 22:12:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "AI 사용량으로 직원 줄 세운다…코인원의 실험",
-      "link": "https://www.hankyung.com/article/2026110463311",
-      "pubDate": "Wed, 04 Nov 2026 17:35:54 +0900",
+      "title": "\"6000억 걸었는데 이럴 수가\"…머스크에 닥친 '날벼락'",
+      "link": "https://www.hankyung.com/article/202611046678i",
+      "pubDate": "Wed, 04 Nov 2026 21:49:47 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[포토] 주금공 '사람 살리는 금융' 캠페인 동참",
-      "link": "https://www.hankyung.com/article/2026110463371",
-      "pubDate": "Wed, 04 Nov 2026 17:35:01 +0900",
+      "title": "150억에 회사 넘긴 노현정 남편…장례식장 647곳 손잡은 이유",
+      "link": "https://www.hankyung.com/article/2026110466527",
+      "pubDate": "Wed, 04 Nov 2026 21:07:34 +0900",
       "source": "한국경제"
     },
     {
-      "title": "카뱅, 年 순이익 첫 5000억원 눈앞",
-      "link": "https://www.hankyung.com/article/2026110463401",
-      "pubDate": "Wed, 04 Nov 2026 17:34:09 +0900",
+      "title": "\"1000원 내면 3개 줬었는데\"…붕어빵 사먹으려다 '깜짝'",
+      "link": "https://www.hankyung.com/article/202611046089g",
+      "pubDate": "Wed, 04 Nov 2026 21:06:53 +0900",
       "source": "한국경제"
     },
     {
-      "title": "비씨카드, 전 직원에 AI 비서…카드 검수 4시간 → 5분 단축",
-      "link": "https://www.hankyung.com/article/2026110463381",
-      "pubDate": "Wed, 04 Nov 2026 17:33:58 +0900",
+      "title": "\"데이터센터붐 중단되나\"…블루쓰나미속 반도체주 급락피한 이유는?",
+      "link": "https://www.hankyung.com/article/202611046616i",
+      "pubDate": "Wed, 04 Nov 2026 20:36:05 +0900",
       "source": "한국경제"
     },
     {
-      "title": "[단독] \"날씨처럼 화재예보 보는 시대 올 것\"",
-      "link": "https://www.hankyung.com/article/2026110462731",
-      "pubDate": "Wed, 04 Nov 2026 17:26:35 +0900",
+      "title": "10만원 내고 '조물조물'…요즘 외국인들 푹 빠졌다는데 [현장+]",
+      "link": "https://www.hankyung.com/article/202611045374g",
+      "pubDate": "Wed, 04 Nov 2026 20:22:09 +0900",
       "source": "한국경제"
+    },
+    {
+      "title": "코트라 \"미국 관세정책 유지 전망…쟁점법안 거부권 가능성\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104185300003",
+      "pubDate": "Wed, 4 Nov 2026 23:48:59 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "李대통령, '대통령 집값 발언 강남만 맞았다' 보도에 \"가짜뉴스\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261104050951001",
+      "pubDate": "Wed, 4 Nov 2026 22:28:23 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "대통령이 힘 실은 공공재개발…\"인센티브로 사업성·속도 제고\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104176100003",
+      "pubDate": "Wed, 4 Nov 2026 19:44:39 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "오세훈 \"李, 공공개발 만능론 버려야…서울주택공급 90%가 민간\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104174200004",
+      "pubDate": "Wed, 4 Nov 2026 19:24:53 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "한국, 아시아지배구조협회 기업지배구조 순위 5위…3단계 올라",
+      "link": "https://www.yna.co.kr/view/AKR20261104168200002",
+      "pubDate": "Wed, 4 Nov 2026 18:50:49 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "정책금융기관 글로벌 스케일업 협력펀드 위탁운용사 3곳 선정",
+      "link": "https://www.yna.co.kr/view/AKR20261104167500002",
+      "pubDate": "Wed, 4 Nov 2026 18:21:04 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "위성락, 방글라 총리 특사 접견…경제·방산협력 강화방안 논의",
+      "link": "https://www.yna.co.kr/view/AKR20261104165300001",
+      "pubDate": "Wed, 4 Nov 2026 18:20:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
+      "link": "https://www.yna.co.kr/view/AKR20261104154100011",
+      "pubDate": "Wed, 4 Nov 2026 18:00:00 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "다우기술 \"중앙일보 주식 1천900억원어치 취득…지분율 34.4%\"",
@@ -181,54 +229,6 @@
       "title": "사람인 \"중앙일보 주식 714억원어치 취득…지분율 12.9%\"",
       "link": "https://www.yna.co.kr/view/AKR20261104161600008",
       "pubDate": "Wed, 4 Nov 2026 17:42:33 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "공공재개발 현장찾은 李대통령 \"조기진행엔 용적률 등 인센티브\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104150400001",
-      "pubDate": "Wed, 4 Nov 2026 17:28:19 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 우리은행, 국민연금공단과 해외봉사단 발대식",
-      "link": "https://www.yna.co.kr/view/AKR20261104159400002",
-      "pubDate": "Wed, 4 Nov 2026 17:28:03 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "고양 K-컬처밸리 공사중단 아레나 구조물 안전진단 '양호'",
-      "link": "https://www.yna.co.kr/view/AKR20261104158000061",
-      "pubDate": "Wed, 4 Nov 2026 17:26:54 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[게시판] 산업부, 대학생 통상정책 토론대회…한양대 통상이몽팀 우승",
-      "link": "https://www.yna.co.kr/view/AKR20261104157900003",
-      "pubDate": "Wed, 4 Nov 2026 17:26:47 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "국토부 \"공공주택 착공 관리 다소 미흡…실제 공사 착수 철저히\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104156600003",
-      "pubDate": "Wed, 4 Nov 2026 17:24:42 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "프로티나, 73억원 제3자배정 유상증자",
-      "link": "https://www.yna.co.kr/view/AKR20261104158300008",
-      "pubDate": "Wed, 4 Nov 2026 17:23:32 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "SK㈜, SK에코플랜트 주식 공개매수…상장 대신 완전자회사 편입",
-      "link": "https://www.yna.co.kr/view/AKR20261104151900003",
-      "pubDate": "Wed, 4 Nov 2026 17:13:41 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "하림, 3분기 영업이익 53억원…전년 대비 71% 감소",
-      "link": "https://www.yna.co.kr/view/AKR20261104154900030",
-      "pubDate": "Wed, 4 Nov 2026 17:11:23 +0900",
       "source": "연합뉴스"
     }
   ]
