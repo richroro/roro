@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T02:02:29.664303+09:00",
+  "updatedAt": "2026-11-05T07:31:44.907642+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 53265.93,
-      "change": 1479.21,
-      "changePercent": 2.86,
+      "price": 53356.12,
+      "change": 1569.4,
+      "changePercent": 3.03,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25872.23,
-      "change": 500.22,
-      "changePercent": 1.97,
+      "price": 25736.51,
+      "change": 364.5,
+      "changePercent": 1.44,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1341.49,
-      "change": -1.33,
-      "changePercent": -0.1,
+      "price": 1340.8,
+      "change": -2.02,
+      "changePercent": -0.15,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,35 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 353.82,
-      "change": 21.92,
-      "changePercent": 6.6,
+      "price": 349.51,
+      "change": 17.61,
+      "changePercent": 5.31,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 384.79,
-      "change": -13.71,
-      "changePercent": -3.44,
+      "price": 385.19,
+      "change": -13.31,
+      "changePercent": -3.34,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 203.66,
-      "change": -3.03,
-      "changePercent": -1.47,
+      "price": 200.13,
+      "change": -6.56,
+      "changePercent": -3.17,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "외국인 몰려오자 새 간판·객실층엔 스파…특급호텔 공간 다시 짠다 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202611029899i",
+      "pubDate": "Thu, 05 Nov 2026 07:00:04 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "\"레임덕이 화난 오리 된다\"…트럼프 참패에도 대미투자 셈법 복잡",
       "link": "https://www.hankyung.com/article/202611056810i",
@@ -166,69 +172,63 @@
       "source": "한국경제"
     },
     {
-      "title": "10만원 내고 '조물조물'…요즘 외국인들 푹 빠졌다는데 [현장+]",
-      "link": "https://www.hankyung.com/article/202611045374g",
-      "pubDate": "Wed, 04 Nov 2026 20:22:09 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "코트라 \"미국 관세정책 유지 전망…쟁점법안 거부권 가능성\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104185300003",
-      "pubDate": "Wed, 4 Nov 2026 23:48:59 +0900",
+      "title": "[르포] \"또다시 지옥철?\"…신규택지 주민들 '先교통대책' 한목소리",
+      "link": "https://www.yna.co.kr/view/AKR20261104106800065",
+      "pubDate": "Thu, 5 Nov 2026 07:17:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "李대통령, '대통령 집값 발언 강남만 맞았다' 보도에 \"가짜뉴스\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261104050951001",
-      "pubDate": "Wed, 4 Nov 2026 22:28:23 +0900",
+      "title": "[우분투칼럼] 아프리카와 개발협력(18): 아름다운 남아프리카공화국의 불평등",
+      "link": "https://www.yna.co.kr/view/AKR20261023127600898",
+      "pubDate": "Thu, 5 Nov 2026 07:00:04 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "대통령이 힘 실은 공공재개발…\"인센티브로 사업성·속도 제고\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104176100003",
-      "pubDate": "Wed, 4 Nov 2026 19:44:39 +0900",
+      "title": "LH 지방 미분양 매입, 올해 1차 신청분 86%가 탈락",
+      "link": "https://www.yna.co.kr/view/AKR20261104177900003",
+      "pubDate": "Thu, 5 Nov 2026 06:01:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "오세훈 \"李, 공공개발 만능론 버려야…서울주택공급 90%가 민간\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104174200004",
-      "pubDate": "Wed, 4 Nov 2026 19:24:53 +0900",
+      "title": "사과·감귤 출하량 늘어 가격하락 전망…연말 과일값 부담 덜 듯",
+      "link": "https://www.yna.co.kr/view/AKR20261104145500030",
+      "pubDate": "Thu, 5 Nov 2026 06:00:07 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "한국, 아시아지배구조협회 기업지배구조 순위 5위…3단계 올라",
-      "link": "https://www.yna.co.kr/view/AKR20261104168200002",
-      "pubDate": "Wed, 4 Nov 2026 18:50:49 +0900",
+      "title": "서울 유·초·특수교사 임용시험 7일 실시…'스마트안경' 검사",
+      "link": "https://www.yna.co.kr/view/AKR20261104130900530",
+      "pubDate": "Thu, 5 Nov 2026 06:00:06 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "정책금융기관 글로벌 스케일업 협력펀드 위탁운용사 3곳 선정",
-      "link": "https://www.yna.co.kr/view/AKR20261104167500002",
-      "pubDate": "Wed, 4 Nov 2026 18:21:04 +0900",
+      "title": "[인터뷰] 남기훈 람다256 CTO \"바이낸스 탈취 자금, 지금도 세탁 중\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104160600002",
+      "pubDate": "Thu, 5 Nov 2026 05:55:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "위성락, 방글라 총리 특사 접견…경제·방산협력 강화방안 논의",
-      "link": "https://www.yna.co.kr/view/AKR20261104165300001",
-      "pubDate": "Wed, 4 Nov 2026 18:20:21 +0900",
+      "title": "[인터뷰] 체이널리시스 총괄 \"북한, 해킹 한번에 수십년치 무역대금\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104139800002",
+      "pubDate": "Thu, 5 Nov 2026 05:55:01 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261104154100011",
-      "pubDate": "Wed, 4 Nov 2026 18:00:00 +0900",
+      "title": "외국인 발길, 명동 넘어 골목·시장으로…서울 상권지도 바뀐다",
+      "link": "https://www.yna.co.kr/view/AKR20261104152300004",
+      "pubDate": "Thu, 5 Nov 2026 05:55:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "다우기술 \"중앙일보 주식 1천900억원어치 취득…지분율 34.4%\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104162300008",
-      "pubDate": "Wed, 4 Nov 2026 17:47:01 +0900",
+      "title": "'3천억' 공익신고기금에 예정처 \"재원 일반회계 의존…재검토\"",
+      "link": "https://www.yna.co.kr/view/AKR20261104169900002",
+      "pubDate": "Thu, 5 Nov 2026 05:53:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "사람인 \"중앙일보 주식 714억원어치 취득…지분율 12.9%\"",
-      "link": "https://www.yna.co.kr/view/AKR20261104161600008",
-      "pubDate": "Wed, 4 Nov 2026 17:42:33 +0900",
+      "title": "한국 올해 성장률 눈높이 계속 오른다…해외IB 8곳 평균 3.7%",
+      "link": "https://www.yna.co.kr/view/AKR20261104163600002",
+      "pubDate": "Thu, 5 Nov 2026 05:51:00 +0900",
       "source": "연합뉴스"
     }
   ]
