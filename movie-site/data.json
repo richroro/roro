@@ -1,98 +1,98 @@
 {
-  "date": "2026-11-03",
-  "updated": "2026-11-04T06:25:41+00:00",
+  "date": "2026-11-04",
+  "updated": "2026-11-05T06:49:09+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
     {
       "rank": 1,
-      "title": "하트 오브 비스트",
-      "open": "2026-10-28",
-      "share": 23.0,
-      "audience": 17395,
-      "total": 253812,
-      "screens": 833
+      "title": "최종면접",
+      "open": "2026-11-04",
+      "share": 23.2,
+      "audience": 26700,
+      "total": 42574,
+      "screens": 972
     },
     {
       "rank": 2,
-      "title": "극장판 치이카와: 인어 섬의 비밀",
-      "open": "2026-09-30",
-      "share": 20.5,
-      "audience": 14560,
-      "total": 2613565,
-      "screens": 784
+      "title": "하트 오브 비스트",
+      "open": "2026-10-28",
+      "share": 14.9,
+      "audience": 17230,
+      "total": 271042,
+      "screens": 806
     },
     {
       "rank": 3,
-      "title": "수능, 출제의 비밀",
-      "open": "2026-10-28",
-      "share": 6.6,
-      "audience": 5353,
-      "total": 81967,
-      "screens": 551
+      "title": "극장판 치이카와: 인어 섬의 비밀",
+      "open": "2026-09-30",
+      "share": 12.5,
+      "audience": 13962,
+      "total": 2627527,
+      "screens": 754
     },
     {
       "rank": 4,
-      "title": "암살자(들)",
-      "open": "2026-09-23",
-      "share": 5.9,
-      "audience": 4437,
-      "total": 3457554,
-      "screens": 509
+      "title": "극장판 마법소녀 마도카☆마기카〈발푸르기스의 회천〉",
+      "open": "2026-11-04",
+      "share": 13.8,
+      "audience": 13393,
+      "total": 13393,
+      "screens": 143
     },
     {
       "rank": 5,
-      "title": "진격의 거인: 홍련의 화살",
-      "open": "2015-01-28",
-      "share": 6.4,
-      "audience": 3996,
-      "total": 80393,
-      "screens": 195
+      "title": "수능, 출제의 비밀",
+      "open": "2026-10-28",
+      "share": 4.1,
+      "audience": 5351,
+      "total": 87318,
+      "screens": 454
     },
     {
       "rank": 6,
-      "title": "타짜: 벨제붑의 노래",
-      "open": "2026-09-23",
-      "share": 4.2,
-      "audience": 2944,
-      "total": 2061976,
-      "screens": 406
+      "title": "와일드 호스 나인",
+      "open": "2026-11-04",
+      "share": 3.5,
+      "audience": 3893,
+      "total": 4456,
+      "screens": 304
     },
     {
       "rank": 7,
-      "title": "클레이페이스",
-      "open": "2026-10-21",
-      "share": 3.4,
-      "audience": 2351,
-      "total": 120336,
-      "screens": 360
+      "title": "낮과 밤은 서로에게",
+      "open": "2026-11-04",
+      "share": 2.8,
+      "audience": 3445,
+      "total": 4368,
+      "screens": 262
     },
     {
       "rank": 8,
-      "title": "오디세이",
-      "open": "2026-08-05",
-      "share": 2.7,
-      "audience": 1890,
-      "total": 12339006,
-      "screens": 211
+      "title": "암살자(들)",
+      "open": "2026-09-23",
+      "share": 2.6,
+      "audience": 3251,
+      "total": 3460789,
+      "screens": 433
     },
     {
       "rank": 9,
-      "title": "실낙원",
-      "open": "2026-10-21",
-      "share": 2.3,
-      "audience": 1846,
-      "total": 154879,
-      "screens": 395
+      "title": "타짜: 벨제붑의 노래",
+      "open": "2026-09-23",
+      "share": 1.9,
+      "audience": 2117,
+      "total": 2064093,
+      "screens": 316
     },
     {
       "rank": 10,
       "title": "여전히 찬란하게",
       "open": "2026-10-21",
-      "share": 1.8,
-      "audience": 1620,
-      "total": 64082,
-      "screens": 228
+      "share": 1.1,
+      "audience": 1387,
+      "total": 65469,
+      "screens": 95
     }
   ]
 }
