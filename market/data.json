@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T21:08:29.339253+09:00",
+  "updatedAt": "2026-11-06T05:34:28.785061+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -20,17 +20,17 @@
     {
       "symbol": "^DJI",
       "name": "다우존스",
-      "price": 53356.12,
-      "change": 1569.42,
-      "changePercent": 3.03,
+      "price": 51661.9,
+      "change": -1694.22,
+      "changePercent": -3.18,
       "currency": "USD"
     },
     {
       "symbol": "^IXIC",
       "name": "나스닥",
-      "price": 25736.51,
-      "change": 364.5,
-      "changePercent": 1.44,
+      "price": 24452.52,
+      "change": -1284.0,
+      "changePercent": -4.99,
       "currency": "USD"
     }
   ],
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1343.89,
-      "change": 3.26,
-      "changePercent": 0.24,
+      "price": 1355.98,
+      "change": 15.35,
+      "changePercent": 1.14,
       "currency": "KRW"
     }
   ],
@@ -88,29 +88,71 @@
     {
       "symbol": "AAPL",
       "name": "Apple",
-      "price": 349.51,
-      "change": 17.61,
-      "changePercent": 5.31,
+      "price": 346.26,
+      "change": -3.25,
+      "changePercent": -0.93,
       "currency": "USD"
     },
     {
       "symbol": "TSLA",
       "name": "Tesla",
-      "price": 385.19,
-      "change": -13.31,
-      "changePercent": -3.34,
+      "price": 343.55,
+      "change": -41.64,
+      "changePercent": -10.81,
       "currency": "USD"
     },
     {
       "symbol": "NVDA",
       "name": "NVIDIA",
-      "price": 200.13,
-      "change": -6.56,
-      "changePercent": -3.17,
+      "price": 183.29,
+      "change": -16.84,
+      "changePercent": -8.41,
       "currency": "USD"
     }
   ],
   "news": [
+    {
+      "title": "연말 랠리 전망에도 기술주 대탈출…애플만 선방[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202611069553i",
+      "pubDate": "Fri, 06 Nov 2026 00:29:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "엔비디아 H200칩 60만개 홍콩에 적재…中당국 수입승인 또 보류",
+      "link": "https://www.hankyung.com/article/202611059474i",
+      "pubDate": "Fri, 06 Nov 2026 00:14:21 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "美가 수출막은 블랙웰칩…中문샷AI,유럽서 웃돈주고 빌리려했다",
+      "link": "https://www.hankyung.com/article/202611059543i",
+      "pubDate": "Fri, 06 Nov 2026 00:04:03 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "돈 쏟아부은 AI, 효과 나타나나?…美 생산성 1년만에 최대 증가",
+      "link": "https://www.hankyung.com/article/202611059502i",
+      "pubDate": "Thu, 05 Nov 2026 23:21:20 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "英 물가 치솟자…기준금리 연 4%로 인상",
+      "link": "https://www.hankyung.com/article/2026110594621",
+      "pubDate": "Thu, 05 Nov 2026 23:06:46 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"美 데이터센터, 향후 45% 건설 차질\"…빅테크, 해외건설 카드 검토",
+      "link": "https://www.hankyung.com/article/202611059422i",
+      "pubDate": "Thu, 05 Nov 2026 22:21:16 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"한 병에 30만원인데 줄까지 섰다\"…서울 호텔서 벌어진 진풍경 [영상]",
+      "link": "https://www.hankyung.com/article/202611057808g",
+      "pubDate": "Thu, 05 Nov 2026 22:00:04 +0900",
+      "source": "한국경제"
+    },
     {
       "title": "트럼프보다 세게 나온다…블루웨이브에 중국 '긴장'",
       "link": "https://www.hankyung.com/article/202611059325i",
@@ -130,46 +172,40 @@
       "source": "한국경제"
     },
     {
-      "title": "최태원 \"2100조 투자, 이렇게 해도되나 싶었지만…\"",
-      "link": "https://www.hankyung.com/article/2026110591741",
-      "pubDate": "Thu, 05 Nov 2026 18:24:21 +0900",
-      "source": "한국경제"
+      "title": "'금리동결 반대' 연준 위원 \"긴축 필요…작고 잦은 조정 선호\"",
+      "link": "https://www.yna.co.kr/view/AKR20261106006000072",
+      "pubDate": "Fri, 6 Nov 2026 04:57:16 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "국민은행, 신보·기보와 청년창업 지원",
-      "link": "https://www.hankyung.com/article/2026110591721",
-      "pubDate": "Thu, 05 Nov 2026 18:24:00 +0900",
-      "source": "한국경제"
+      "title": "영국, 3년만에 금리 인상…BOE 총재 \"추가 인상도 가능\"(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261105179053085",
+      "pubDate": "Fri, 6 Nov 2026 01:04:14 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "한진칼 최대주주 된 호반…진짜 '단순투자' 맞나",
-      "link": "https://www.hankyung.com/article/2026110591541",
-      "pubDate": "Thu, 05 Nov 2026 18:11:41 +0900",
-      "source": "한국경제"
+      "title": "삼성바이오 노조, 오늘부터 부분파업 돌입",
+      "link": "https://www.yna.co.kr/view/AKR20261105153700017",
+      "pubDate": "Fri, 6 Nov 2026 00:01:00 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "[포토] 삼성E&A, UAE서 에너지 혁신기술 공개",
-      "link": "https://www.hankyung.com/article/2026110591591",
-      "pubDate": "Thu, 05 Nov 2026 18:09:59 +0900",
-      "source": "한국경제"
+      "title": "서초구, 내주 반포현대 재초환 사전통지…\"가구당 평균 2억대\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261105097251004",
+      "pubDate": "Thu, 5 Nov 2026 21:58:32 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "직원 늘려야 회사 큰다고?…AI 시대 달라진 '성공 공식'은 [글로벌인재포럼 2026]",
-      "link": "https://www.hankyung.com/article/202611059204i",
-      "pubDate": "Thu, 05 Nov 2026 18:09:50 +0900",
-      "source": "한국경제"
+      "title": "영국, 3년만에 금리 인상…BOE 총재 \"추가 인상도 가능\"(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20261105179052085",
+      "pubDate": "Thu, 5 Nov 2026 21:52:40 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "미래기술에 14년간 1.2조 투입…삼성, 연구비 지원 결실 맺다",
-      "link": "https://www.hankyung.com/article/2026110591551",
-      "pubDate": "Thu, 05 Nov 2026 18:09:08 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "부친 복귀 무산·사위 퇴사…'깨끗한나라'에 무슨 일이",
-      "link": "https://www.hankyung.com/article/2026110591611",
-      "pubDate": "Thu, 05 Nov 2026 18:08:23 +0900",
-      "source": "한국경제"
+      "title": "중기부, 신임 소상공인정책실장에 조경원 창업정책관 발탁",
+      "link": "https://www.yna.co.kr/view/AKR20261105179300030",
+      "pubDate": "Thu, 5 Nov 2026 21:20:04 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "우상호 \"원주는 KT와 AI 데이터센터 협의…드론기업 유치 추진\"",
@@ -193,42 +229,6 @@
       "title": "1조2천억 규모, 나주 인공태양 연구시설 예타 통과",
       "link": "https://www.yna.co.kr/view/AKR20261105147000054",
       "pubDate": "Thu, 5 Nov 2026 18:00:02 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-      "link": "https://www.yna.co.kr/view/AKR20261105155400011",
-      "pubDate": "Thu, 5 Nov 2026 18:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "강원 농촌 활력 촉진 지구 지정 실적 저조…이양 권한 4.4% 그쳐",
-      "link": "https://www.yna.co.kr/view/AKR20261105162300062",
-      "pubDate": "Thu, 5 Nov 2026 17:53:26 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "특구 딥테크 스타트업 챌린지 대상에 크라이오에이치앤아이",
-      "link": "https://www.yna.co.kr/view/AKR20261105161000017",
-      "pubDate": "Thu, 5 Nov 2026 17:43:18 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "장동현 SK 부회장, SK에코플랜트 대표 사임",
-      "link": "https://www.yna.co.kr/view/AKR20261105161900003",
-      "pubDate": "Thu, 5 Nov 2026 17:40:17 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "강원 4-H 성과공유회 원주서 열려…200여명 참석",
-      "link": "https://www.yna.co.kr/view/AKR20261105159700062",
-      "pubDate": "Thu, 5 Nov 2026 17:31:09 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "쿠팡·공정위 '자료제출명령' 놓고 법정공방 계속…효력정지심문",
-      "link": "https://www.yna.co.kr/view/AKR20261105156500004",
-      "pubDate": "Thu, 5 Nov 2026 17:25:11 +0900",
       "source": "연합뉴스"
     }
   ]
