@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T01:16:33.880211+09:00",
+  "updatedAt": "2026-11-08T05:46:40.761574+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -172,6 +172,12 @@
       "source": "한국경제"
     },
     {
+      "title": "[美선거 산업여파] ② 자동차 관세 부담 지속될 듯…전기차는 기대",
+      "link": "https://www.yna.co.kr/view/AKR20261106181800003",
+      "pubDate": "Sun, 8 Nov 2026 05:31:21 +0900",
+      "source": "연합뉴스"
+    },
+    {
       "title": "세계식량가격지수 하락 전환…곡물·육류·유제품 내려",
       "link": "https://www.yna.co.kr/view/AKR20261107034800030",
       "pubDate": "Sat, 7 Nov 2026 14:52:59 +0900",
@@ -223,12 +229,6 @@
       "title": "[바이오사이언스] 신약 경쟁 치열한데…정부 R&D 투자 2년째 감소",
       "link": "https://www.yna.co.kr/view/AKR20261106161400017",
       "pubDate": "Sat, 7 Nov 2026 10:00:05 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "성남시, 내년 장애인 252명에 공공일자리 제공",
-      "link": "https://www.yna.co.kr/view/AKR20261106164400061",
-      "pubDate": "Sat, 7 Nov 2026 10:00:04 +0900",
       "source": "연합뉴스"
     }
   ]
