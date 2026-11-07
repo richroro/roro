@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T18:54:03.766999+09:00",
+  "updatedAt": "2026-11-08T01:16:33.880211+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51285.73,
-      "change": -237.37,
+      "change": -237.33,
       "changePercent": -0.46,
       "currency": "USD"
     },
@@ -112,6 +112,30 @@
   ],
   "news": [
     {
+      "title": "내일 한국 오기로 했는데…젠슨 황 장녀 방한 돌연 취소",
+      "link": "https://www.hankyung.com/article/2026110724057",
+      "pubDate": "Sat, 07 Nov 2026 21:38:06 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "로또 1등 14명 '대박'…1인당 20억씩 받는다",
+      "link": "https://www.hankyung.com/article/2026110723997",
+      "pubDate": "Sat, 07 Nov 2026 21:15:24 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "어쩐지 2030 많이 보이더라…'신세계百 강남점' 갔다가 깜짝 [류은혁의 유통기한]",
+      "link": "https://www.hankyung.com/article/202611072089i",
+      "pubDate": "Sat, 07 Nov 2026 20:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "“치이카와 보러 왔다가 햄버거까지”…세계 매출 톱5 비결 [현장+]",
+      "link": "https://www.hankyung.com/article/202611072240i",
+      "pubDate": "Sat, 07 Nov 2026 19:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
       "title": "400억 쏟았는데 가동도 못 한다…경남 '풍력 시험장' 어쩌나",
       "link": "https://www.hankyung.com/article/2026110722857",
       "pubDate": "Sat, 07 Nov 2026 17:06:26 +0900",
@@ -145,30 +169,6 @@
       "title": "세금 면제에 5년 비자까지…금융패권 다투는 홍콩·싱가포르 [차이나 워치]",
       "link": "https://www.hankyung.com/article/202611061835i",
       "pubDate": "Sat, 07 Nov 2026 09:05:01 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "매장 3만개 밍밍헌망, 왜 잘나가던 PB를 줄였나",
-      "link": "https://www.hankyung.com/article/202610031795i",
-      "pubDate": "Sat, 07 Nov 2026 09:00:11 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "바이낸스 해킹은 비트코인 해킹이 아니다 [김민승의 ₿피셜]",
-      "link": "https://www.hankyung.com/article/202611069859i",
-      "pubDate": "Sat, 07 Nov 2026 09:00:06 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"대기업 회장님도 쓴대\"…요즘 입소문 났다는 '이 골프채' [권용훈의 직업불만족(族)]",
-      "link": "https://www.hankyung.com/article/202610292649i",
-      "pubDate": "Sat, 07 Nov 2026 06:00:04 +0900",
-      "source": "한국경제"
-    },
-    {
-      "title": "\"이젠 밖에서 입어도 되겠네\"…요즘 뜨는 '겨울 필수템' [트렌드+]",
-      "link": "https://www.hankyung.com/article/202611060918g",
-      "pubDate": "Fri, 06 Nov 2026 21:00:01 +0900",
       "source": "한국경제"
     },
     {
