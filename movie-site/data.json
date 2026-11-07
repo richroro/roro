@@ -1,98 +1,98 @@
 {
-  "date": "2026-11-05",
-  "updated": "2026-11-06T06:49:52+00:00",
+  "date": "2026-11-06",
+  "updated": "2026-11-07T05:59:36+00:00",
   "source": "영화진흥위원회 영화관입장권 통합전산망",
   "sourceUrl": "https://www.kobis.or.kr/kobis/business/stat/boxs/findDailyBoxOfficeList.do",
   "rows": [
     {
       "rank": 1,
-      "title": "명탐정 코난: 30호 살인 사건",
-      "open": "2026-11-05",
-      "share": 22.2,
-      "audience": 25379,
-      "total": 28165,
-      "screens": 317
+      "title": "최종면접",
+      "open": "2026-11-04",
+      "share": 17.8,
+      "audience": 22751,
+      "total": 85071,
+      "screens": 957
     },
     {
       "rank": 2,
-      "title": "최종면접",
-      "open": "2026-11-04",
-      "share": 16.4,
-      "audience": 19746,
-      "total": 62320,
-      "screens": 961
+      "title": "하트 오브 비스트",
+      "open": "2026-10-28",
+      "share": 15.5,
+      "audience": 20172,
+      "total": 309256,
+      "screens": 820
     },
     {
       "rank": 3,
-      "title": "하트 오브 비스트",
-      "open": "2026-10-28",
-      "share": 15.2,
-      "audience": 18042,
-      "total": 289084,
-      "screens": 788
+      "title": "극장판 치이카와: 인어 섬의 비밀",
+      "open": "2026-09-30",
+      "share": 15.1,
+      "audience": 18453,
+      "total": 2658247,
+      "screens": 666
     },
     {
       "rank": 4,
-      "title": "극장판 치이카와: 인어 섬의 비밀",
-      "open": "2026-09-30",
-      "share": 10.9,
-      "audience": 12268,
-      "total": 2639794,
-      "screens": 692
+      "title": "명탐정 코난: 30호 살인 사건",
+      "open": "2026-11-05",
+      "share": 14.6,
+      "audience": 18203,
+      "total": 46368,
+      "screens": 306
     },
     {
       "rank": 5,
       "title": "극장판 마법소녀 마도카☆마기카〈발푸르기스의 회천〉",
       "open": "2026-11-04",
-      "share": 4.9,
-      "audience": 4857,
-      "total": 18250,
-      "screens": 138
+      "share": 5.5,
+      "audience": 5924,
+      "total": 24174,
+      "screens": 158
     },
     {
       "rank": 6,
       "title": "수능, 출제의 비밀",
       "open": "2026-10-28",
-      "share": 3.3,
-      "audience": 4503,
-      "total": 91821,
-      "screens": 417
+      "share": 2.4,
+      "audience": 3637,
+      "total": 95458,
+      "screens": 370
     },
     {
       "rank": 7,
-      "title": "암살자(들)",
-      "open": "2026-09-23",
-      "share": 2.9,
-      "audience": 3349,
-      "total": 3464138,
-      "screens": 396
+      "title": "와일드 호스 나인",
+      "open": "2026-11-04",
+      "share": 2.7,
+      "audience": 3210,
+      "total": 10491,
+      "screens": 302
     },
     {
       "rank": 8,
-      "title": "와일드 호스 나인",
-      "open": "2026-11-04",
-      "share": 2.5,
-      "audience": 2825,
-      "total": 7281,
-      "screens": 287
+      "title": "암살자(들)",
+      "open": "2026-09-23",
+      "share": 2.4,
+      "audience": 3087,
+      "total": 3467225,
+      "screens": 406
     },
     {
       "rank": 9,
-      "title": "낮과 밤은 서로에게",
-      "open": "2026-11-04",
-      "share": 1.7,
-      "audience": 2126,
-      "total": 6494,
-      "screens": 239
+      "title": "모자 쓴 고양이",
+      "open": "2026-11-06",
+      "share": 1.4,
+      "audience": 2176,
+      "total": 4366,
+      "screens": 330
     },
     {
       "rank": 10,
-      "title": "타짜: 벨제붑의 노래",
-      "open": "2026-09-23",
-      "share": 1.7,
-      "audience": 1903,
-      "total": 2065996,
-      "screens": 290
+      "title": "욕쟁이 할머니",
+      "open": "2026-11-04",
+      "share": 1.4,
+      "audience": 2109,
+      "total": 6408,
+      "screens": 81
     }
   ]
 }
