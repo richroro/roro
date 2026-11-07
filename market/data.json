@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T11:39:33.871044+09:00",
+  "updatedAt": "2026-11-07T18:54:03.766999+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -21,7 +21,7 @@
       "symbol": "^DJI",
       "name": "다우존스",
       "price": 51285.73,
-      "change": -237.33,
+      "change": -237.37,
       "changePercent": -0.46,
       "currency": "USD"
     },
@@ -112,7 +112,31 @@
   ],
   "news": [
     {
-      "title": "\"사지마\" 말리는데도 산다…요즘 SNS 뒤집어놓은 '이 가게' [권용훈의 트렌드워치]",
+      "title": "400억 쏟았는데 가동도 못 한다…경남 '풍력 시험장' 어쩌나",
+      "link": "https://www.hankyung.com/article/2026110722857",
+      "pubDate": "Sat, 07 Nov 2026 17:06:26 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "홍대는 K뷰티, 성수는 북쪽으로…스타벅스로 알아본 상권 변화 [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202611060905i",
+      "pubDate": "Sat, 07 Nov 2026 17:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"존박이 랩으로 주문했더니\"…맥도날드가 진짜 만든 '이것' [김소연의 얼굴전략]",
+      "link": "https://www.hankyung.com/article/202611060608g",
+      "pubDate": "Sat, 07 Nov 2026 13:00:01 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "전기공사 견적, 현장에서 스마트폰으로…전기공사협회 '내손사' 선보인다",
+      "link": "https://www.hankyung.com/article/202611072158i",
+      "pubDate": "Sat, 07 Nov 2026 12:37:40 +0900",
+      "source": "한국경제"
+    },
+    {
+      "title": "\"사지 마\" 말리는데도 산다…요즘 SNS 뒤집어놓은 '이 가게' [권용훈의 트렌드워치]",
       "link": "https://www.hankyung.com/article/202611069848i",
       "pubDate": "Sat, 07 Nov 2026 10:00:01 +0900",
       "source": "한국경제"
@@ -148,28 +172,34 @@
       "source": "한국경제"
     },
     {
-      "title": "머스크, 태극기 사진 올리며 \"테슬라 코리아\"…무슨 일이",
-      "link": "https://www.hankyung.com/article/202611061772i",
-      "pubDate": "Fri, 06 Nov 2026 20:51:49 +0900",
-      "source": "한국경제"
+      "title": "세계식량가격지수 하락 전환…곡물·육류·유제품 내려",
+      "link": "https://www.yna.co.kr/view/AKR20261107034800030",
+      "pubDate": "Sat, 7 Nov 2026 14:52:59 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "기아 3조 투자…\"광주공장 미래차 전환\"",
-      "link": "https://www.hankyung.com/article/2026110617211",
-      "pubDate": "Fri, 06 Nov 2026 19:48:20 +0900",
-      "source": "한국경제"
+      "title": "농식품부, 우리술 품평회 수상작 국내외 판로 확대 지원",
+      "link": "https://www.yna.co.kr/view/AKR20261106142200030",
+      "pubDate": "Sat, 7 Nov 2026 13:00:01 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "퇴근하자마자 가도 '텅텅'…중고가 95만원까지 뛴 '레어템' [덕질 경제학]",
-      "link": "https://www.hankyung.com/article/202611061041H",
-      "pubDate": "Fri, 06 Nov 2026 19:29:01 +0900",
-      "source": "한국경제"
+      "title": "미래에셋증권도 3만9천여명 정보유출…당국에 전날 밤 신고(종합2보)",
+      "link": "https://www.yna.co.kr/view/AKR20261107014453008",
+      "pubDate": "Sat, 7 Nov 2026 12:47:45 +0900",
+      "source": "연합뉴스"
     },
     {
-      "title": "\"한국 소비자 차별대우 안돼\"…공정위, 해외보다 가격 비싸면 제재",
-      "link": "https://www.hankyung.com/article/2026110615881",
-      "pubDate": "Fri, 06 Nov 2026 18:03:25 +0900",
-      "source": "한국경제"
+      "title": "경남도·창원시, 전국 최초로 중국에 단감 수출",
+      "link": "https://www.yna.co.kr/view/AKR20261107029500052",
+      "pubDate": "Sat, 7 Nov 2026 12:03:49 +0900",
+      "source": "연합뉴스"
+    },
+    {
+      "title": "송미령 장관, '푸드위크 코리아' 방문…\"K푸드 지속 성장 지원\"",
+      "link": "https://www.yna.co.kr/view/AKR20261107027400030",
+      "pubDate": "Sat, 7 Nov 2026 12:00:01 +0900",
+      "source": "연합뉴스"
     },
     {
       "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
@@ -199,36 +229,6 @@
       "title": "성남시, 내년 장애인 252명에 공공일자리 제공",
       "link": "https://www.yna.co.kr/view/AKR20261106164400061",
       "pubDate": "Sat, 7 Nov 2026 10:00:04 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "[다음주 경제] 금융권 가계대출 다시 늘었나",
-      "link": "https://www.yna.co.kr/view/AKR20261107017800002",
-      "pubDate": "Sat, 7 Nov 2026 09:02:25 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "금융연 \"금융회사 대주주 심사, 평판·전문성까지 살펴야\"",
-      "link": "https://www.yna.co.kr/view/AKR20261106166300002",
-      "pubDate": "Sat, 7 Nov 2026 09:00:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "해킹 대책 문제없나…미래에셋증권도 3만9천여명 정보유출(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261107014452008",
-      "pubDate": "Sat, 7 Nov 2026 08:35:34 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "부산 화장품 수출 9월까지 3억달러…작년보다 1.5배 증가",
-      "link": "https://www.yna.co.kr/view/AKR20261106030800051",
-      "pubDate": "Sat, 7 Nov 2026 08:30:01 +0900",
-      "source": "연합뉴스"
-    },
-    {
-      "title": "철도역 입점 매장 음식값, 한번 올릴때 평균 12.5% 올렸다",
-      "link": "https://www.yna.co.kr/view/AKR20261106149100063",
-      "pubDate": "Sat, 7 Nov 2026 08:00:03 +0900",
       "source": "연합뉴스"
     }
   ]
