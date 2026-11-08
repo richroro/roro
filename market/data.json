@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T04:28:28.739815+09:00",
+  "updatedAt": "2026-11-09T08:36:43.983351+09:00",
   "indices": [
     {
       "symbol": "^KS11",
@@ -38,9 +38,9 @@
     {
       "symbol": "KRW=X",
       "name": "USD/KRW",
-      "price": 1363.37,
-      "change": 6.69,
-      "changePercent": 0.49,
+      "price": 1362.54,
+      "change": 5.86,
+      "changePercent": 0.43,
       "currency": "KRW"
     }
   ],
@@ -112,123 +112,123 @@
   ],
   "news": [
     {
-      "title": "\"창구 출금만 됩니다\"…불편해도 돈 숨기는 직장인들",
-      "link": "https://www.hankyung.com/article/202611082882i",
-      "pubDate": "Sun, 08 Nov 2026 23:24:13 +0900",
+      "title": "금요일 밤 택시비 더 비싸지나…'요일별 할증' 도입 추진",
+      "link": "https://www.hankyung.com/article/2026110937737",
+      "pubDate": "Mon, 09 Nov 2026 08:22:24 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"비자·마스터카드서 수수료 독립\"…한국형 '터치 결제' 나온다",
-      "link": "https://www.hankyung.com/article/2026110833851",
-      "pubDate": "Sun, 08 Nov 2026 19:54:30 +0900",
+      "title": "젠슨 황 불륜 인정…엔비디아, 중국 스파이 연루 의혹 독립 조사",
+      "link": "https://www.hankyung.com/article/202611093752i",
+      "pubDate": "Mon, 09 Nov 2026 08:22:20 +0900",
       "source": "한국경제"
     },
     {
-      "title": "\"투자보다 생존\" 월급 줄 돈 빌리는 기업 급증",
-      "link": "https://www.hankyung.com/article/2026110832801",
-      "pubDate": "Sun, 08 Nov 2026 18:16:28 +0900",
+      "title": "머스크 밀어주던 텍사스의 변심…민주당, 특혜 중단 예고",
+      "link": "https://www.hankyung.com/article/202611093766i",
+      "pubDate": "Mon, 09 Nov 2026 08:21:59 +0900",
       "source": "한국경제"
     },
     {
-      "title": "삼성전자, 보유 현금 200조원 첫 돌파",
-      "link": "https://www.hankyung.com/article/2026110833367",
-      "pubDate": "Sun, 08 Nov 2026 18:14:23 +0900",
+      "title": "[밤 사이 해외뉴스 영상 ]민주당 승리에 'AI 규제 먹구름'… 나스닥 시가총액 하루 새 2.5조 달러 증발",
+      "link": "https://www.hankyung.com/article/202611093708i",
+      "pubDate": "Mon, 09 Nov 2026 08:05:59 +0900",
       "source": "한국경제"
     },
     {
-      "title": "개인 2만명 모아 앱으로 태양광 투자한다",
-      "link": "https://www.hankyung.com/article/2026110832591",
-      "pubDate": "Sun, 08 Nov 2026 18:12:11 +0900",
+      "title": "\"한강라면·치맥 밀렸나\"…오세훈도 한강서 즐긴 '뜻밖의 메뉴' [권용훈의 트렌드워치]",
+      "link": "https://www.hankyung.com/article/202611061379i",
+      "pubDate": "Mon, 09 Nov 2026 08:00:19 +0900",
       "source": "한국경제"
     },
     {
-      "title": "中企 일터 혁신 컨설팅…노란봉투법 해법 찾는다",
-      "link": "https://www.hankyung.com/article/2026110832601",
-      "pubDate": "Sun, 08 Nov 2026 18:11:14 +0900",
+      "title": "'블루웨이브'에 주목받는 한화솔루션…美 태양광 시장 훈풍",
+      "link": "https://www.hankyung.com/article/202611072243i",
+      "pubDate": "Mon, 09 Nov 2026 08:00:06 +0900",
       "source": "한국경제"
     },
     {
-      "title": "피부과 화장품 노린 해외 자본…2000억원에 메디안스 인수",
-      "link": "https://www.hankyung.com/article/2026110832611",
-      "pubDate": "Sun, 08 Nov 2026 18:10:53 +0900",
+      "title": "[밤 사이 해외뉴스]선거 참패 후 몰린 트럼프… 이란 전쟁 '종전 vs 재공격' 참모진 충돌",
+      "link": "https://www.hankyung.com/article/202611093675i",
+      "pubDate": "Mon, 09 Nov 2026 07:59:40 +0900",
       "source": "한국경제"
     },
     {
-      "title": "농심, 라면 年 62억개 생산해 글로벌 공략",
-      "link": "https://www.hankyung.com/article/2026110832661",
-      "pubDate": "Sun, 08 Nov 2026 18:10:06 +0900",
+      "title": "\"10개 다 해당됩니다\"…8090년생 추억 소환한 게시물",
+      "link": "https://www.hankyung.com/article/2026110936677",
+      "pubDate": "Mon, 09 Nov 2026 07:58:02 +0900",
       "source": "한국경제"
     },
     {
-      "title": "카카오뱅크, 자선 마라톤 기부금 전달",
-      "link": "https://www.hankyung.com/article/2026110832251",
-      "pubDate": "Sun, 08 Nov 2026 17:55:59 +0900",
+      "title": "AI 투자심리 꺾이자 주석 급락…현물 프리미엄 급등",
+      "link": "https://www.hankyung.com/article/202611093653i",
+      "pubDate": "Mon, 09 Nov 2026 07:53:47 +0900",
       "source": "한국경제"
     },
     {
-      "title": "우리은행, 대한천일은행 학술대회…韓전통 복식부기 회계장부 주목",
-      "link": "https://www.hankyung.com/article/2026110832261",
-      "pubDate": "Sun, 08 Nov 2026 17:55:42 +0900",
+      "title": "\"팔수록 밑지는 장사\"…'세계의 공장' 中서 결국 비명 터졌다 [차이나 워치]",
+      "link": "https://www.hankyung.com/article/202611072238i",
+      "pubDate": "Mon, 09 Nov 2026 07:49:01 +0900",
       "source": "한국경제"
     },
     {
-      "title": "與 \"정부에 '실거주 구분 없이 종부세 공제 14억' 강력히 요구\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20261108048252001",
-      "pubDate": "Sun, 8 Nov 2026 21:24:39 +0900",
+      "title": "황선웅 부산경제진흥원장 \"지역경제 성장·청년 일자리 지원\"",
+      "link": "https://www.yna.co.kr/view/AKR20261106102600051",
+      "pubDate": "Mon, 9 Nov 2026 08:30:00 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "與 \"정부에 '실거주 구분 없이 종부세 공제 14억' 강력히 요구\"",
-      "link": "https://www.yna.co.kr/view/AKR20261108048251001",
-      "pubDate": "Sun, 8 Nov 2026 19:50:12 +0900",
+      "title": "키움증권, 롯데쇼핑 목표가↓…\"국내증시 하락에 자산효과 악화\"",
+      "link": "https://www.yna.co.kr/view/AKR20261109019200008",
+      "pubDate": "Mon, 9 Nov 2026 08:28:29 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "LH \"공공이 개발사업 시행하면 속도 빨라지고 부정부패 줄어\"",
-      "link": "https://www.yna.co.kr/view/AKR20261108031800003",
-      "pubDate": "Sun, 8 Nov 2026 15:18:44 +0900",
+      "title": "식약처, 내년 2월 브라질서 K뷰티 행사…참가기업 모집",
+      "link": "https://www.yna.co.kr/view/AKR20261109018600017",
+      "pubDate": "Mon, 9 Nov 2026 08:17:36 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
-      "link": "https://www.yna.co.kr/view/AKR20261108028500011",
-      "pubDate": "Sun, 8 Nov 2026 15:00:02 +0900",
+      "title": "인크루트, 창립 28주년…AI 기반 채용 전환 본격화",
+      "link": "https://www.yna.co.kr/view/AKR20261109017900003",
+      "pubDate": "Mon, 9 Nov 2026 08:15:39 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "중기중앙회, 2027년 신입직원 26명 공모…직무역량평가 도입",
-      "link": "https://www.yna.co.kr/view/AKR20261106141900030",
-      "pubDate": "Sun, 8 Nov 2026 12:00:09 +0900",
+      "title": "한투증권, 성광벤드 목표가↓…\"3분기 실적 컨센서스 하회\"",
+      "link": "https://www.yna.co.kr/view/AKR20261109017400008",
+      "pubDate": "Mon, 9 Nov 2026 08:09:34 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "고용보험 부정수급 자진신고하면 추가징수 면제…제보시 포상금",
-      "link": "https://www.yna.co.kr/view/AKR20261106164300530",
-      "pubDate": "Sun, 8 Nov 2026 12:00:07 +0900",
+      "title": "프랜차이즈 창업박람회 부산 12일 개막…100여 개 브랜드 참가",
+      "link": "https://www.yna.co.kr/view/AKR20261109015100051",
+      "pubDate": "Mon, 9 Nov 2026 08:06:08 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "농심, 부산 녹산 공장 가동…연간 수출 공급능력 12억개로 확대",
-      "link": "https://www.yna.co.kr/view/AKR20261107030900030",
-      "pubDate": "Sun, 8 Nov 2026 12:00:06 +0900",
+      "title": "부산 기술창업기업 뉴라이즌, 신용보증기금 '혁신아이콘' 선정",
+      "link": "https://www.yna.co.kr/view/AKR20261109015000051",
+      "pubDate": "Mon, 9 Nov 2026 08:02:44 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[르포] 당일 튀긴 신라면 짊어진 '라면 거북이'…구미라면축제 '펄펄'",
-      "link": "https://www.yna.co.kr/view/AKR20261107030300030",
-      "pubDate": "Sun, 8 Nov 2026 12:00:05 +0900",
+      "title": "[AI픽] 식약처, 의약품 심사에 AI 도입…내달 민원인용 기능 공개",
+      "link": "https://www.yna.co.kr/view/AKR20261106175100017",
+      "pubDate": "Mon, 9 Nov 2026 08:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "[게시판] 금감원, 9∼12일 '국방 재정 담당자 금융연수'",
-      "link": "https://www.yna.co.kr/view/AKR20261107025300002",
-      "pubDate": "Sun, 8 Nov 2026 12:00:05 +0900",
+      "title": "[인터뷰] 이윤희 삼성운용 채권본부장 \"빨라진 금리 하락…전략 재점검\"",
+      "link": "https://www.yna.co.kr/view/AKR20261107023100008",
+      "pubDate": "Mon, 9 Nov 2026 08:00:03 +0900",
       "source": "연합뉴스"
     },
     {
-      "title": "금감원, 내년 1월말까지 증권사 신용공여 담보비율유지의무 면제",
-      "link": "https://www.yna.co.kr/view/AKR20261107033900002",
-      "pubDate": "Sun, 8 Nov 2026 12:00:04 +0900",
+      "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
+      "link": "https://www.yna.co.kr/view/AKR20261109009600011",
+      "pubDate": "Mon, 9 Nov 2026 07:30:00 +0900",
       "source": "연합뉴스"
     }
   ]
