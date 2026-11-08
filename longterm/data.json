@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-08T01:30:32.244732+09:00",
+ "updatedAt": "2026-11-08T10:28:10.411141+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -3503,7 +3503,7 @@
    },
    "valuation": {
     "per": 21.88,
-    "forwardPer": 20.17,
+    "forwardPer": 20.18,
     "psr": 7.02,
     "peg": 2.94,
     "margin": 32.38,
@@ -3658,7 +3658,7 @@
    },
    "valuation": {
     "per": 34.31,
-    "forwardPer": 24.68,
+    "forwardPer": 24.65,
     "pbr": 22.05,
     "psr": 17.18,
     "peg": 1.91,
@@ -6242,6 +6242,36 @@
  ],
  "news": [
   {
+   "title": "“미국 물가부터 옵션 만기까지”…다음 주 증시 변수, 미리 대비하려면",
+   "link": "https://www.mk.co.kr/news/stock/12201573",
+   "pubDate": "Sun, 08 Nov 2026 08:08:16 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "AI에 웃던 헤지펀드도 ‘백기’…10여년 만에 최대 투자 축소",
+   "link": "https://www.chosun.com/economy/int_economy/2026/11/08/GF254BNVAZFATDIHDPRBU3ZHNY/",
+   "pubDate": "Sun, 08 Nov 2026 01:09:46 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "삼성전자 보유 현금 200조원 첫 돌파…주주환원에 최대 110조원 투입 전망",
+   "link": "https://www.chosun.com/economy/tech_it/2026/11/08/GJRGCMRTMY3DQYRUGA2TOODFMQ/",
+   "pubDate": "Sun, 08 Nov 2026 00:25:10 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "[주간증시전망] ‘블루 웨이브’ 여파 지속… 美 물가·코어위브 실적 ‘주목’",
+   "link": "https://www.chosun.com/economy/stock-finance/2026/11/08/HAYWKMJTMVQTMZRZGA4WGMBSMQ/",
+   "pubDate": "Sat, 07 Nov 2026 21:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "힐링사업 파트너와 투자자문사… LG 前 CEO들의 수상한 동행",
+   "link": "https://www.chosun.com/economy/2026/11/08/JVZNVEVQ2NHBVPTVTEH4G4PD54/",
+   "pubDate": "Sat, 07 Nov 2026 20:00:00 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“코스피에 정말 질렸다”…실망한 개미들 일주일 새 2조 5000억 쓸어담은 ‘이것’",
    "link": "https://www.mk.co.kr/news/economy/12201494",
    "pubDate": "Sat, 07 Nov 2026 18:02:27 +09:00",
@@ -6266,34 +6296,10 @@
    "source": "조선일보"
   },
   {
-   "title": "한미약품-삼성증권, 바이오벤처 투자유치 행사 27일 개최",
-   "link": "https://www.chosun.com/economy/science/2026/11/07/GFSTAMJWG42DKZRZMRSDMNLBGI/",
-   "pubDate": "Sat, 07 Nov 2026 01:02:56 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "증시 폭락에 트럼프 “멍청한 민주당 때문…이들에 투표한 스스로를 탓해야”",
    "link": "https://www.mk.co.kr/news/stock/12200996",
    "pubDate": "Fri, 06 Nov 2026 22:27:45 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "새 스팩 쏟아지는데… 짝 못 찾은 5곳, 이달 줄줄이 ‘상장폐지’ 수순",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/07/GM2DKNDFHBQTOODFGE4DONRQGI/",
-   "pubDate": "Fri, 06 Nov 2026 21:00:01 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[인터뷰] 부천 공장에 1조4000억원 투자한 美 온세미… 하산 엘 코우리 CEO “AI 시대 전력반도체 중요성 커져”",
-   "link": "https://www.chosun.com/economy/tech_it/2026/11/07/MM2GCNZZG44DKYRZMMYTQNTCGA/",
-   "pubDate": "Fri, 06 Nov 2026 21:00:01 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "국민연금 한 달 49만원 받는 80세, 나이 들어 가장 큰 후회는…",
-   "link": "https://www.chosun.com/economy/startup_story/2026/11/07/MFMQSRXGTJCIFD6JADMYWW4E64/",
-   "pubDate": "Fri, 06 Nov 2026 20:30:00 +0000",
-   "source": "조선일보"
   },
   {
    "title": "“트럼프 힘 빠지면 우린 힘 난다”…주가상승률·PER 돋보이는 종목들 [플러스 관심종목]",
@@ -6338,18 +6344,6 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "코스피, AI 쇼크… 장중 5000 붕괴",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/07/27CXDOBX5BDJPIXAPSTMSQTBNU/",
-   "pubDate": "Fri, 06 Nov 2026 15:40:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "‘블루 쓰나미’에 무너진 나스닥… 하루새 시총 3355조원, 사상 최대 증발",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/07/K34VNEVPFJGWZFZLITH34OS7SA/",
-   "pubDate": "Fri, 06 Nov 2026 15:38:00 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "[속보] ‘검은 금요일’ 코스피, 6% 급락…장중 ‘5천피’ 무너졌다 간신히 사수",
    "link": "https://www.mk.co.kr/news/stock/12200494",
    "pubDate": "Fri, 06 Nov 2026 15:37:31 +09:00",
@@ -6374,15 +6368,21 @@
    "source": "매일경제 증권"
   },
   {
-   "title": "美 10월 일자리 16만5000개 ‘깜짝 증가’… 연준 금리 인상 가능성에 무게 실리나",
-   "link": "https://www.chosun.com/economy/int_economy/2026/11/06/37MXHMUDSFDLLMOFLRMFPT45YE/",
-   "pubDate": "Fri, 06 Nov 2026 13:38:26 +0000",
-   "source": "조선일보"
-  },
-  {
    "title": "“코스피 폭락, 이제 시작일까 두렵다”…5000선 붕괴에 개미 아우성",
    "link": "https://www.mk.co.kr/news/stock/12200375",
    "pubDate": "Fri, 06 Nov 2026 13:23:11 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "코스피 급락에 증권가 “과도한 반응”…데이터센터 리스크 제한적 판단",
+   "link": "https://www.mk.co.kr/news/stock/12200372",
+   "pubDate": "Fri, 06 Nov 2026 13:16:08 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "[속보] 증시 급락에 신용융자 담보비율 유지 의무 3개월 면제…9일부터 시행",
+   "link": "https://www.mk.co.kr/news/stock/12200359",
+   "pubDate": "Fri, 06 Nov 2026 11:44:52 +09:00",
    "source": "매일경제 증권"
   }
  ]
