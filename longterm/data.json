@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-08T10:28:10.411141+09:00",
+ "updatedAt": "2026-11-09T01:43:58.286079+09:00",
  "items": [
   {
    "symbol": "^GSPC",
@@ -4588,7 +4588,7 @@
     "position": 10.0
    },
    "valuation": {
-    "forwardPer": 5.03,
+    "forwardPer": 5.05,
     "psr": 0.33,
     "peg": 0.42,
     "roe": 11.6,
@@ -5045,13 +5045,12 @@
     "position": 5.1
    },
    "valuation": {
-    "forwardPer": 11.28,
-    "psr": 0.38,
+    "forwardPer": 11.59,
+    "psr": 0.35,
     "peg": 1.13,
-    "roe": -5.71,
-    "margin": -3.16,
+    "roe": -8.3,
+    "margin": 0.0,
     "marketCap": 18159824273408,
-    "beta": 1.46,
     "payout": 291.18,
     "avgYield5y": 0.79
    },
@@ -5196,7 +5195,7 @@
     "position": 3.5
    },
    "valuation": {
-    "forwardPer": 9.52,
+    "forwardPer": 9.53,
     "psr": 0.28,
     "peg": 0.9,
     "roe": 2.21,
@@ -5803,7 +5802,7 @@
     "position": 82.8
    },
    "valuation": {
-    "forwardPer": 13.73,
+    "forwardPer": 13.7,
     "psr": 2.84,
     "peg": 3.72,
     "roe": 15.17,
@@ -6242,33 +6241,93 @@
  ],
  "news": [
   {
+   "title": "강방천·곽상준이 말하는 성공투자 원칙...매경플러스 특강에서 직접 들어보세요",
+   "link": "https://www.mk.co.kr/news/stock/12201873",
+   "pubDate": "Sun, 08 Nov 2026 17:37:48 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "\"AI 투자 쏠림 과했다 … 옥석가리기 시작\"",
+   "link": "https://www.mk.co.kr/news/stock/12201819",
+   "pubDate": "Sun, 08 Nov 2026 17:28:25 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "IMM '컨티뉴펀드' 국내외 큰손들 눈독…에어퍼스트에 출자",
+   "link": "https://www.mk.co.kr/news/stock/12201816",
+   "pubDate": "Sun, 08 Nov 2026 17:28:24 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "美 필리지수 반등 성공 … K증시도 진정될까",
+   "link": "https://www.mk.co.kr/news/stock/12201814",
+   "pubDate": "Sun, 08 Nov 2026 17:26:28 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "SK에코 상장 접자 … SK디스커버리 4200억 차익",
+   "link": "https://www.mk.co.kr/news/stock/12201812",
+   "pubDate": "Sun, 08 Nov 2026 17:26:27 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "증시 급락에 ETF 시총 반년만에 400조 아래로",
+   "link": "https://www.mk.co.kr/news/stock/12201811",
+   "pubDate": "Sun, 08 Nov 2026 17:26:26 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "폭락장 속 나홀로 플러스…파킹 ETF에 한달새 2조2천억 몰렸다 [이번주 찜할 ETF]",
+   "link": "https://www.mk.co.kr/news/business/12201802",
+   "pubDate": "Sun, 08 Nov 2026 17:20:00 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "노후 연금부터 바이오 투자, 숙면의 기술까지",
+   "link": "https://www.chosun.com/economy/money/2026/11/09/CKDQRNBKRVADJNDQTOKYBHFKBA/",
+   "pubDate": "Sun, 08 Nov 2026 15:36:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "AI에 웃던 헤지펀드도 백기… 10여년 만에 최대 투자 축소",
+   "link": "https://www.chosun.com/economy/int_economy/2026/11/09/KEECSCXJLFCYTH2XGLI34XYVKU/",
+   "pubDate": "Sun, 08 Nov 2026 15:32:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "증시 급락에… 상장사 3분의 1, 주가 연중 최저",
+   "link": "https://www.chosun.com/economy/money/2026/11/09/W34VRUG42ZBHPJQHZY53L67AQU/",
+   "pubDate": "Sun, 08 Nov 2026 15:32:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "은퇴 후 생활비·연금… ‘Wa뱅크’ 앱으로 편하게 분석·관리",
+   "link": "https://www.chosun.com/economy/industry-company/2026/11/09/SN42OS26DFGLVNNABZZWAOAV5E/",
+   "pubDate": "Sun, 08 Nov 2026 15:30:00 +0000",
+   "source": "조선일보"
+  },
+  {
+   "title": "한미 증시 하락에…ETF 시가총액 400조원 붕괴",
+   "link": "https://www.mk.co.kr/news/stock/12201692",
+   "pubDate": "Sun, 08 Nov 2026 15:00:17 +09:00",
+   "source": "매일경제 증권"
+  },
+  {
+   "title": "당정 “소방 필수투자에 2조원 지원 검토…지방정부 재정 부담 완화”",
+   "link": "https://www.chosun.com/economy/economy_general/2026/11/08/GQZTOMJTHBTDMMLCMFSDEOBUMY/",
+   "pubDate": "Sun, 08 Nov 2026 09:48:43 +0000",
+   "source": "조선일보"
+  },
+  {
    "title": "“미국 물가부터 옵션 만기까지”…다음 주 증시 변수, 미리 대비하려면",
    "link": "https://www.mk.co.kr/news/stock/12201573",
    "pubDate": "Sun, 08 Nov 2026 08:08:16 +09:00",
    "source": "매일경제 증권"
   },
   {
-   "title": "AI에 웃던 헤지펀드도 ‘백기’…10여년 만에 최대 투자 축소",
-   "link": "https://www.chosun.com/economy/int_economy/2026/11/08/GF254BNVAZFATDIHDPRBU3ZHNY/",
-   "pubDate": "Sun, 08 Nov 2026 01:09:46 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "삼성전자 보유 현금 200조원 첫 돌파…주주환원에 최대 110조원 투입 전망",
-   "link": "https://www.chosun.com/economy/tech_it/2026/11/08/GJRGCMRTMY3DQYRUGA2TOODFMQ/",
-   "pubDate": "Sun, 08 Nov 2026 00:25:10 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "[주간증시전망] ‘블루 웨이브’ 여파 지속… 美 물가·코어위브 실적 ‘주목’",
-   "link": "https://www.chosun.com/economy/stock-finance/2026/11/08/HAYWKMJTMVQTMZRZGA4WGMBSMQ/",
-   "pubDate": "Sat, 07 Nov 2026 21:00:00 +0000",
-   "source": "조선일보"
-  },
-  {
-   "title": "힐링사업 파트너와 투자자문사… LG 前 CEO들의 수상한 동행",
-   "link": "https://www.chosun.com/economy/2026/11/08/JVZNVEVQ2NHBVPTVTEH4G4PD54/",
-   "pubDate": "Sat, 07 Nov 2026 20:00:00 +0000",
+   "title": "상장 신고서 낸 앤스로픽, AI주 폭락에 기업가치 반토막?",
+   "link": "https://www.chosun.com/economy/tech_it/2026/11/08/EIANOOFHWBGVVO4UNL3H2F3D3Q/",
+   "pubDate": "Sun, 08 Nov 2026 07:13:24 +0000",
    "source": "조선일보"
   },
   {
@@ -6288,12 +6347,6 @@
    "link": "https://www.mk.co.kr/news/business/12200478",
    "pubDate": "Sat, 07 Nov 2026 11:01:00 +09:00",
    "source": "매일경제 증권"
-  },
-  {
-   "title": "아이엠지티, 美서 췌장암 임상 첫 환자 등록…확증시험",
-   "link": "https://www.chosun.com/economy/science/2026/11/07/MUYWEODFGJSWEYTDMJQWCMZSGA/",
-   "pubDate": "Sat, 07 Nov 2026 08:54:38 +0000",
-   "source": "조선일보"
   },
   {
    "title": "증시 폭락에 트럼프 “멍청한 민주당 때문…이들에 투표한 스스로를 탓해야”",
@@ -6329,60 +6382,6 @@
    "title": "개장 3분만에 멈춰선 코스피 … 9·11 버금가는 충격",
    "link": "https://www.mk.co.kr/news/stock/12200705",
    "pubDate": "Fri, 06 Nov 2026 17:39:39 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "이찬진 \"퇴직연금 계열사 밀어주기 안돼\"",
-   "link": "https://www.mk.co.kr/news/stock/12200683",
-   "pubDate": "Fri, 06 Nov 2026 17:35:38 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "‘일본 공적연금’ GPIF, 올해 3분기에 45조원 손실",
-   "link": "https://www.mk.co.kr/news/stock/12200504",
-   "pubDate": "Fri, 06 Nov 2026 15:50:28 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[속보] ‘검은 금요일’ 코스피, 6% 급락…장중 ‘5천피’ 무너졌다 간신히 사수",
-   "link": "https://www.mk.co.kr/news/stock/12200494",
-   "pubDate": "Fri, 06 Nov 2026 15:37:31 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "오늘부터 무려 1500억원 태운다…카카오가 자사주 조기 소각하는 이유",
-   "link": "https://www.mk.co.kr/news/stock/12200442",
-   "pubDate": "Fri, 06 Nov 2026 14:55:31 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "IBK투자증권, 달러·엔화 투자 문 넓힌다…외화 신탁 3종 출시",
-   "link": "https://www.mk.co.kr/news/stock/12200434",
-   "pubDate": "Fri, 06 Nov 2026 14:49:45 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“코스피 폭락 와중에 이건 10% 뛰었네”…급락장 거슬러 오른 종목은",
-   "link": "https://www.mk.co.kr/news/stock/12200384",
-   "pubDate": "Fri, 06 Nov 2026 13:46:45 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "“코스피 폭락, 이제 시작일까 두렵다”…5000선 붕괴에 개미 아우성",
-   "link": "https://www.mk.co.kr/news/stock/12200375",
-   "pubDate": "Fri, 06 Nov 2026 13:23:11 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "코스피 급락에 증권가 “과도한 반응”…데이터센터 리스크 제한적 판단",
-   "link": "https://www.mk.co.kr/news/stock/12200372",
-   "pubDate": "Fri, 06 Nov 2026 13:16:08 +09:00",
-   "source": "매일경제 증권"
-  },
-  {
-   "title": "[속보] 증시 급락에 신용융자 담보비율 유지 의무 3개월 면제…9일부터 시행",
-   "link": "https://www.mk.co.kr/news/stock/12200359",
-   "pubDate": "Fri, 06 Nov 2026 11:44:52 +09:00",
    "source": "매일경제 증권"
   }
  ]
